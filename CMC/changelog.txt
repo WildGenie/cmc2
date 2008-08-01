@@ -1,0 +1,526 @@
+
+ToDo
+' faulty Hardware (!) - 'select * from win32_pnpentity where ConfigManagerErrorCode <>0' 
+' enum subkeys error when no subkeys - write test value?
+
+====================================================================================================
+11/07/2008
+feature:  added gpupdate code.
+
+06/07/2008
+bugfix:   threw an error when rdp connection attempted to 2000 server - was checking for tsenabled
+          using win32_terminalServices - now will use reg check.
+bugfix:   scheduling a task during summertime would be an hour late - added daylightsaving check.
+
+23/06/2008
+feature:  netdom join domain code modified
+                1. add dns suffix to prevent network problems.
+                2. options to set default logon screen appearance.
+                3. reboot parameter removed from netdom command and added independently at the end.
+
+22/06/2008
+change:   psexec download link changed to "http://live.sysinternals.com/tools/psexec.exe"
+
+23/11/2007
+bugfix:   addPrinterForCurrent now uses win32.registry not wmi due to win2000 sp4 errors with hku.
+
+11/11/2007
+feature:  added msg.exe message utility - test
+code:     msg routine uses stdin/stdout info.
+feature:  added video controller information link.
+feature:  added sound device information link.
+bugfix:   default alt password now entered encrypted in settings.
+bugfix:   install vnc not working due to 'cmd /k' being erroneously left in previously. not sure since when.
+
+09/11/2007
+bugfix:   removed 'PartOfDomain' query from win32_computersystem as not supported in 2k. Now interpreted from domainrole.
+
+06/11/2007
+bugfix:   minor
+code:     added wmi deletelocalprinter method for testing
+
+05/11/2007
+bugfix:   process_selected changed threw error after deleting process - added check.
+bugfix:   ping then mouse over ie_text threw error - added 'pc = new pc' to ping
+bugfix:   deploy - check destination exists
+bugfix:   deploy failed when credentials eneter as ...@...
+code:     added encrypt class for encryption of saved default password. Default password stored in
+		  %userprofile%\localsettings\appdata\c..m..c..\...version..\user.config.
+
+30/10/2007  ** v2.6.00.3010 **
+feature:  additional cpu information available via linklabel
+feature:  alt credentials can now be entered as <user>@<domain>
+feature:  common startup folder items can be deleted.
+code:     max history increased to 99 - default 40
+bugfix:   simplified computername text - changed (again)
+feature:  proxy displayed when mouse-over ieversion textbox.
+code:     when process terminated - grid row removed rather than redrawing grid.
+code:     re-added autoit dll for regedit.
+
+24/10/2007
+bugfix:   Modified Sendkeys code for regedit to catch 'Select Computer' pop up.
+feature:  Added Set Default Printer code.
+
+22/10/2007
+bugfix:   since adding deploy tab, test tab hiding incorrectly set.
+feature:  network also displays nic name.
+
+19/10/2007
+bugfix:   removed threading from progress bar code - progress bar was only appearing for first operation.
+bugfix:   deploy source changed from listbox to textbox - to allow direct editing.
+
+11/10/2007
+bugfix:   refresh startup items datagrid after deletion.
+feature:  folder copy with progress bar added.
+
+10/10/2007
+feature:  Deploy now allows folder or file deployment. Also added 'run visible' and close on exit options.
+
+08/10/2007  ** v2.5.08 **
+feature:  Software now uses datagridview, not dictionary object. Improves speed and also includes
+          live show/hide updates.
+bugfix:   typing in new computername was causing textbox validation problems so only first letter was
+          enetered in computername.textbox. Seems to be resolved by re-focussing/selecting textbox.
+code:     separated map_drive code into API and WMI functions.
+
+05/10/2007
+bugfix:   connection-wide impersonation causes problems accessing files on local machine where
+          alt user does not have permission. modified to instantiate impersonation only where req'd.
+
+04/10/2007
+bugfix:   Deploy filecopy failed unless folder already existed. now creates folder if required.
+feature:  deploy - added file copy progress bar using api code.
+code:     tabselect uses tab name rather than tab position to select accept_button.
+
+03/10/2007
+code:     changed deploy to use multiple files rather than folder.
+
+30/09/2007
+feature:  added deploy tab. Simplifies software deployment. Option to load/save app package info to xml file.
+code:     re-ordered tabs.
+
+23/09/2007
+bugfix:   modified getuser() code to check for any runnng screensaver - not just logon.scr
+feature:  option to use wmi or vbreg to enumerate software.
+feature:  option to use wmi or api to enumerate processes.
+feature:  option to not require remote user to accept incoming vnc connection. cleared each use.
+bugfix:   improved code to hide updates.
+
+14/09/2007
+code:     added impersonation class. used to improve speed of software enumeration - using vb registry
+          key instead of wmi reg enumeration. Tested on server - from 8.5s down to 1.6s
+feature:  screenshot using lsgrab - currently on test tab only.
+
+31/07/2007
+bugfix:   wmi alternate credentials were no longer working. Added call to SetupWMIConnectionOptions()
+          from within wmiconnect() routine.
+
+22/07/2007
+code:     vnc cmd and reg files created/deleted in code.
+code:     added option to use windows registry editor
+
+18/07/2007
+code:     vnc in use prevents clearing/closing form or changing target computer.
+code:     vnc_clear sub added to remove previous installations.
+
+17/07/2007  ** v2.5.02 **
+bugfix:   tab order corrected
+feature:  vnc modified to use realvnc v4 - prompts user for connection.
+bugfix:   pc.hostname and pc.operatingsystem were incorrectly assigned - caused no rdp for 2k
+          server and log file error for ip/hostname assignment
+
+10/07/2007
+code:     modified registry section to use 'remote registry editor' if exists.
+feature:  added icons and keyboard shortcuts to menu items
+
+05/03/2007  ** v2.5.00 **
+bugfix:   added clearboxes instruction following power event
+
+04/03/2007
+feature:  added Schedule Task option to new process area - required optional time value on scheduledjob
+
+02/03/2007
+bugfix:   added ConnectionExists boolean value to catch error from toolbar when connection not established.
+
+06/02/2007
+bugfix:   fixed a number of minor errors + trapped error with latest nwk code.
+
+22/01/2007
+code:     registry functions now included/rewritten as part of wmiconnection class - wbemconnectionclass removed
+bugfix:   drivesinuse has own code to include all drives - not just logical drives.
+
+14/01/2007
+bugfix:   makestatic using wmi created but errors as connection lost - createscript sub added
+          to create vbscript to execute on remote machine.
+
+08/01/2007
+code:     setting dns servers now uses existing wmi connection. removed unused auto button.
+code:     enable dhcp now uses existing wmi connection.
+code:     added API call for activating external window - replaces autoitx dll
+
+07/01/2007
+code:     power options now use existing wmi connection, all options from menu.
+code:     User now obtained from explorer process owner properties.
+
+05/01/2007
+code:     rdp enable/disable now a wmi function (not reg) - integrated into os check.
+
+02/02/2007
+bugfix:   schedulelocaltime only worked for xp (win32_localtime) added win32_OS code for 2k.
+feature:  switch between ie version and proxy settings - also set proxy button added.
+
+01/01/2007
+bugfix:   removed Year, Month and Day from scheduled job.
+feature:  display proxy (if available) by clicking label.
+bugfix:   proxy display added for win2k sp4
+code:     name only added to history list if ping successful.
+
+20/12/2006
+code:     classes added for pc & cmcuser
+
+17/12/2006
+feature:  added scheduledjob function to allow interactive processes without psexec.
+code:     removed remoteexec class, replaced with simpler wmi function using existing connection.
+code:     service controls (stop start restart) run in separate thread.
+
+11/12/2006
+code:     wmi connection now handled by new class (wmiConnection) - replaces
+			wmiconnectionoptions class and wmiconnect function.
+
+05/12/2006
+feature:  application can be started from command line: 'cmc.exe /?' for info
+
+03/12/2006 v 2.4.91
+code:     renamed WBEM Reg functions for consistency
+feature   added sid button to view users sid
+feature   if no one logged on, mouse over username shows last user name
+code:     send message button no longer returns you to os tab
+
+30/11/2006
+bugfix:   resolved issue of nw ip not matching resolved ip
+code:     ip_listbox replaced by label_ip (reverted)
+code:     delete (local)printer code now part of wbem class to use same connection
+code:     get sid now ignores all builtin users (network/system...)
+bugfix:   various in sid/nwk printers/mapped drives
+feature:  dns domain search order now listbox to allow > 2
+code:     zenworks uses ip wherever possible for more reliable performance
+
+29/11/2006
+feature:  add network printer for current user
+feature:  delete network printer for all or current user/s
+bugfix:   added self deleting code to msgbox popup (c:\msg.vbs)
+code:     added psexecfile string constant to locate psexec.exe
+
+28/11/2006
+code:     added ping class to check whether online
+bugfix:   mapped drives/network printers now check for w2ksp4 & use alternate method
+
+27/11/2006
+code:     added GetSID function to simplift printers/mapped drives
+code:     isProcessRunning function added to replace part of GetUser
+feature:  Label_User backcolor changes to indicate screensaver status
+
+26/11/2006
+code:     RemoteExec now has own class - testing in progress
+feature:  Configured option to download and unzip pstools - testing
+code:     WBEMConnect class now handles initial Wbem connection and all registry functions
+
+24/11/2006
+code:     Removed many wmi connection sections - now all use initial connection
+code:     added wmiconnectionoptions class to minimise code duplication
+change:   processes now enumerated from wmi
+feature:  process details includes process path
+
+22/11/2006
+feature:  added map network drive function
+feature:  added delete network drive function
+
+21/11/2006
+code:     telnet now requires only one exit cmd
+code:     ad userupdate_button disabled until text entered
+feature:  option to save altuser credentials
+
+20/11/2006
+bugfix:   numerous
+change:   removed checkboxes for hw, nw, sv, pr, sw - now rely on my.settings
+feature:  added delete menu option to delete local printers
+feature:  added Go menu for easier navigation
+
+19/11/2006
+change:   computername textbox changed to combobox and history rewritten
+bugfix:   replace " char in message text
+
+18/11/2006
+change:   VNC(install) runs in new thread
+code:     oShell replaced with inbuilt Shell command
+feature:  AcceptButton set per selected tab
+code:     Network Printers & MappedDrives Code rewritten - 
+			{get users SID then read reg, rather than reading reg and checking sid
+			 for all reg values}
+
+17/11/2006		v.2.4.6
+code:     Nwk Printer and Mapped Drives now use OpenRemoteBaseKey method
+feature:  Add Share & Remove share options added
+
+16/11/2006
+bugfix:   zenworks connection when ip address entered fixed
+bugfix:   Unable to make wmi query on HKEY_USERS when W2K sp4 (ms error)
+
+14/11/2006
+bugfix:   could not ping/connect after wrong credentials used.
+feature:  add (local) printer wizard button.
+feature:  print server properties button added
+feature:  printer properties button added.
+
+13/11/2006
+feature:  add network printer button - install nwk ptr for all users
+
+12/11/2006
+feature:  printers tab displays locally installed printers
+feature:  display a users mapped network drives.
+
+9/11/2006		v.2.4.4
+bugfix:   refresh svc_datagrid after menu selection (unsightly)
+feature:  Added delete button for startup commands (reg delete)
+feature:  re-enabled 'New' menu
+
+
+8/11/2006
+bugfix:   remove WinVNC regkey from Registry Run section after vnc install
+feature:  Added modify button for startup commands (reg write)
+
+7/10/2006
+feature:  added StartUp Tab - details programs that run at start up.
+bugfix:   try added to - HW code: If InStr(hwItem("Manufacturer").ToString, "Dell") <> 0
+bugfix:   modified Zenworks code to check valid ip address.
+Code:     added DeleteRegValue routine
+
+6/10/2006
+change:   new icon.
+bugfix:   errored when run without admin rights - form load reg set.
+
+3/11/2006
+feature:  added service description panel.
+buxfix:   adbutton.enabled lost when changed getUsercode.
+
+2/11/2006
+feature:  re-enabled multi-instance application (ended due to logging errors).
+bugfix:   cursor.default after ping fail.
+feature:  join domain - added reboot option.
+feature:  IP Address changed to listbox to deal with multiple ip addresses.
+
+30/10/2006
+code:    added processKillWMI as main process kill method
+		  - tsKill available as alternative.
+		  
+29/10/2006
+code:    added test tab - enabled for any user 'forman'.
+code:    testing rce.exe - psexec alternative.
+
+27/10/2006
+bugfix:  modified processdatagrid column widths.
+code:    added IsValidIPAddress function.
+code:    added Pwd2Dec Function (vnc testing).
+
+25/10/2006		v 2.3.7
+feature: added preview button to popupmsg
+change:  FormCleared boolean added to minimise ClearBoxes() use
+
+24/10/2006		v 2.3.6
+feature: added history menu to store last 10 computers accessed.
+change:  replaced GetUser code with wmi version.
+change:  using tskill rather than pskill.
+change:  processes now in datagrid - from listbox.
+change:  processes now use System.Diagnostics.Process instead of WMI.
+
+20/10/2006
+feature: added wscript msgbox popup to netsend page
+code:    added global oShell declaration
+feature: shut down menu group added - tidied power code
+
+18/10/2006
+code:    added options.Timeout = New TimeSpan(0, 0, 10) to GetOS sub
+            - offers only limited improvement.
+
+17/10/2006		v 2.2.9
+bugfix:  added Err.Number = 0 to end od AD User.
+bugfix:  not online check failing in mainsub: corrected.
+change:  netsend form integrated into new tab: tools2
+code:    netsend sub called as new thread.
+
+16/10/2006
+feature: added Telnet connection menu item.
+code:    tidied up code to minimise duplicated routines.
+bugfix:  aduser clear function created
+bugfix:  added FormClosing event procedure.
+bugfix:  Added Processes & Software to Save/Append output file.
+feature: Added Net Send function (and form)
+feature: Services Datagrid now updates only affected service - no reset.
+
+15/10/2006		v 2.2.3
+code:    services context menu completed.
+feature: rewrote service controls and added service startmode changing.
+code:    removed service control buttons.
+feature: improved service datagrid layout & formatting.
+feature: settings now use My.Settings - not registry,
+feature: Menu option to turn off multithreading added.
+
+14/10/2006
+code:    userform deleted - AD User tab added to main form.
+feature: added regwritestring,regwritedword,regreaddword subs
+bugfix:  dns suffix network settings now use RegWrite String
+code:    replaced numerous altusername... with me.altusername,me.altpassword
+feature: added services context menu.
+
+12/10/2006		v 2.2
+code:    userform improved: profile & groups.
+code:    tightened rule for enabling aduser button.
+feature: added ad user form open from menu.
+feature: userform can run independently.
+
+11/10/2006		v 2.1.20.1110
+code:    ad button and vb script removed
+code:    ad user profile all loads in userform
+
+10/10/2006		v 2.1.19.1010
+code:    computername.text replaced with me.sComputer throughout.
+code:    icon modified.
+feature: Support any install path:
+	      {Chr(34) & my.application.info.directorypath &}
+
+07/10/2006
+bugfix:  Me.sComputer = trim(computername.text)
+code:    new icon used
+feature: userform - ad profile details added
+
+06/10/2006		v 2.1.17.0610
+feature: Clear Log menu option added.
+code:    Removed qAll checkbox.
+
+04/10/2006
+bugfix:  trim computername.text as space causes errors.
+bugfix:  add logged on user to log file.
+
+03/10/2006
+code:    added system.servicecontrol reference
+	     updated stop/start/restart code.
+feature: added 'view log' menu option.
+code:    moved 'enable RDP' to menu.
+feature: added me.cursor... code.
+
+
+02/10/2006		v 2.1.15.0210
+code:    made 'single instance' to prevent log file access error.
+	     (disabled 'New' menu option)
+feature: added google search to process details.
+bugfix:  re-enable Go button when password changed.
+
+01/10/2006		v 2.1.14.0110
+code:    added System.GC.Collect() to clear routine.
+	     {Garbage Collector}
+feature: added event logging.
+feature: added tools menu...
+	       added all mmc shortcuts
+	       remote assistance launcher
+
+30/09/2006
+bugfix:  Try Catch added to Form Load objSysInfo section else
+         errors on load for non-domain computer.
+code:    Removed opacity option (problems with sendkey)
+
+13/07/2006
+feature: ad button added {runs aduser.vbs to return user info in messagebox.
+	     checks if label_user contains strDomain}
+Form Load runs...
+		Dim objSysInfo As Object = CreateObject("ADSystemInfo")
+        Dim strDNSDomain As String = objSysInfo.DomainDNSName
+        Dim strDomain As String = objSysInfo.DomainShortName
+
+12/07/2006
+added console menu option (rdp)
+added 'toolstrip always enabled' option (needs tuning)
+software update button does not now check qsoftware
+nw ipaddress color does not now change if qnw not selected
+
+03/07/2006
+Added tooltips for computername, shares, hardware button.
+
+28/06/2006
+Default settings changed
+
+22/06/2006
+version label updated from file ver at load
+
+13/06/2006
+static ip button enabled full time to allow changing
+an existing static address. Also makestatic now runs as
+a separate thread (due to connectivity loss following
+change of ip address).
+
+12/06/2006   v2.1.9.1206
+primary dns suffix disabled until text changed
+Gobutton re enabled when altuser checked (if compname<>"")
+
+7/6/2006
+multithreading experimenting begins...
+password to join domain cleared at clearboxes
+
+05/06/2006	v2.1.07.0506
+Regedit using reg3x.dll now checks for existing regedit window.
+	{oAutoIt.WinExists(...) = 1
+	 oAutoIt.WinActivate(....)}
+Double clicking on share opens share.
+
+03/06/2006
+domaintojoin.text populated from pref (formdomain).
+zenavailable public boolean value removed.
+	{zen button enabled at form1.load}
+
+31/05/2006
+Clear..() now disables dhcp & static button.
+Default Opacity set to 100%.
+Zen icon transparent colour fixed.
+join domain command fixed.
+
+30/05/2006
+Added IE Version / replaced windows dir.
+menubar backcolour changed
+#Region sections added to code.
+GetSuffix Sub changed to ReadRegString Function.
+***  VERSION 2  ***
+Added Append to File menu option
+	{duplicates Save option}
+Disk Drive info improved
+	{was collecting C: info to textbox.
+	Now ComboBox populates with all fixed disks (type 3)}
+Added error code for local connection with alt credentials.
+
+29/05/2006
+Included HW, NW & SVC options in GetOS()
+	{removes the need to cycle through connection options
+	 for each section.
+	 Standalone (update) sections still use connection options.}
+Regedit Function improved
+	{registers & unregisters regx3.dll to for improved Sendkey support}
+
+28/05/2006
+Added MenuStrip with the following items:
+	{File/New - opens another cmc window.
+	 File/Save - saves OS,HW,NW,SVC info to file.
+	 File/Exit - clears and exits.
+	 Options/Always on top - keeps form on top(removed checkbox).
+	 Options/Settings - opens config dialog
+	 Help/About - About tab to front.}
+	 
+27/05/2006
+Added Tools/Join Domain option
+Re-arranged NW tab layout
+Always on top checkbox added.
+Settings opened/saved from/to registry
+
+26/05/2006
+Added Network Tab
+Toolstrip added
+	{Individual tool buttons replaced by ToolStrip1.
+	 icons replaced. supports pop up info so
+	 removed mouse enter/leave code for old buttons.}
