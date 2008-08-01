@@ -35,10 +35,14 @@
     <SignAssembly>false</SignAssembly>
     <ManifestCertificateThumbprint>277417641D6C2AF34A32DC6B1AA1A49D2ECE84D5</ManifestCertificateThumbprint>
     <ManifestKeyFile>CMC_TemporaryKey.pfx</ManifestKeyFile>
-    <SccProjectName>SAK</SccProjectName>
-    <SccLocalPath>SAK</SccLocalPath>
-    <SccAuxPath>SAK</SccAuxPath>
-    <SccProvider>SAK</SccProvider>
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
     <PublishUrl>\\server\desktop\cmc\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Unc</InstallFrom>
