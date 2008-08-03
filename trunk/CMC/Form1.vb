@@ -506,6 +506,8 @@ Public Class Form1
     Friend WithEvents Col3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents gpoDebugMode As System.Windows.Forms.Label
     Friend WithEvents btn_GetSiteOrg As System.Windows.Forms.Button
+    Friend WithEvents gpoDebugCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -529,9 +531,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -947,6 +949,7 @@ Public Class Form1
         Me.test = New System.Windows.Forms.TabPage
         Me.gpo_btn = New System.Windows.Forms.Button
         Me.GroupBox10 = New System.Windows.Forms.GroupBox
+        Me.btn_GetSiteOrg = New System.Windows.Forms.Button
         Me.Label42 = New System.Windows.Forms.Label
         Me.Label39 = New System.Windows.Forms.Label
         Me.setSiteOrg = New System.Windows.Forms.Button
@@ -968,6 +971,7 @@ Public Class Form1
         Me.copy = New System.Windows.Forms.CheckBox
         Me.exec = New System.Windows.Forms.Button
         Me.gpo = New System.Windows.Forms.TabPage
+        Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
         Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gprefresh = New System.Windows.Forms.Button
         Me.scriptDataGrid = New System.Windows.Forms.DataGridView
@@ -996,7 +1000,7 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.btn_GetSiteOrg = New System.Windows.Forms.Button
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -3311,22 +3315,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle8
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle11
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3740,8 +3744,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle12
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -5326,6 +5330,15 @@ Public Class Form1
         Me.GroupBox10.TabStop = False
         Me.GroupBox10.Text = "registry settings"
         '
+        'btn_GetSiteOrg
+        '
+        Me.btn_GetSiteOrg.Location = New System.Drawing.Point(138, 24)
+        Me.btn_GetSiteOrg.Name = "btn_GetSiteOrg"
+        Me.btn_GetSiteOrg.Size = New System.Drawing.Size(35, 19)
+        Me.btn_GetSiteOrg.TabIndex = 106
+        Me.btn_GetSiteOrg.Text = "Get"
+        Me.btn_GetSiteOrg.UseVisualStyleBackColor = True
+        '
         'Label42
         '
         Me.Label42.AutoSize = True
@@ -5518,6 +5531,8 @@ Public Class Form1
         '
         'gpo
         '
+        Me.gpo.Controls.Add(Me.gpoDebugCombo)
+        Me.gpo.Controls.Add(Me.LinkLabel3)
         Me.gpo.Controls.Add(Me.gpoDebugMode)
         Me.gpo.Controls.Add(Me.gprefresh)
         Me.gpo.Controls.Add(Me.scriptDataGrid)
@@ -5530,14 +5545,24 @@ Public Class Form1
         Me.gpo.Text = "group policy"
         Me.gpo.UseVisualStyleBackColor = True
         '
+        'gpoDebugCombo
+        '
+        Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpoDebugCombo.FormattingEnabled = True
+        Me.gpoDebugCombo.Items.AddRange(New Object() {"None", "Normal", "Verbose", "Logfile", "Debugger", "Normal|Logfile", "Verbose|Logfile", "Debug|Verbose|Logfile"})
+        Me.gpoDebugCombo.Location = New System.Drawing.Point(243, 30)
+        Me.gpoDebugCombo.Name = "gpoDebugCombo"
+        Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 21)
+        Me.gpoDebugCombo.TabIndex = 5
+        '
         'gpoDebugMode
         '
         Me.gpoDebugMode.AutoSize = True
-        Me.gpoDebugMode.Location = New System.Drawing.Point(151, 11)
+        Me.gpoDebugMode.Location = New System.Drawing.Point(240, 16)
         Me.gpoDebugMode.Name = "gpoDebugMode"
-        Me.gpoDebugMode.Size = New System.Drawing.Size(69, 13)
+        Me.gpoDebugMode.Size = New System.Drawing.Size(98, 13)
         Me.gpoDebugMode.TabIndex = 4
-        Me.gpoDebugMode.Text = "DebugMode:"
+        Me.gpoDebugMode.Text = "GPO Debug Mode:"
         '
         'gprefresh
         '
@@ -5729,14 +5754,17 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
-        'btn_GetSiteOrg
+        'LinkLabel3
         '
-        Me.btn_GetSiteOrg.Location = New System.Drawing.Point(138, 24)
-        Me.btn_GetSiteOrg.Name = "btn_GetSiteOrg"
-        Me.btn_GetSiteOrg.Size = New System.Drawing.Size(35, 19)
-        Me.btn_GetSiteOrg.TabIndex = 106
-        Me.btn_GetSiteOrg.Text = "Get"
-        Me.btn_GetSiteOrg.UseVisualStyleBackColor = True
+        Me.LinkLabel3.AutoSize = True
+        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
+        Me.LinkLabel3.Location = New System.Drawing.Point(318, 50)
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.Size = New System.Drawing.Size(46, 13)
+        Me.LinkLabel3.TabIndex = 6
+        Me.LinkLabel3.TabStop = True
+        Me.LinkLabel3.Text = "view log"
         '
         'Form1
         '
@@ -11997,6 +12025,9 @@ Public Class Form1
                 Me.AcceptButton = aboutOK
             Case "test"
                 Me.AcceptButton = Nothing
+            Case "test"
+                Me.AcceptButton = Nothing
+                gpoDebugCombo.SelectedText = GPODebugSetting
             Case Else
                 Me.AcceptButton = GO_Button
         End Select
@@ -12877,6 +12908,7 @@ Public Class Form1
     End Sub
 
 #End Region
+
     ' If System.Diagnostics.Debugger.IsAttached the (is running in ide)
 
     Private Sub Impersonation_Template()
@@ -13101,6 +13133,7 @@ Public Class Form1
         openfolder(scriptPath)
     End Sub
     Private Sub EditToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditToolStripMenuItem.Click
+
         Dim scripteditor As String = Registry.ClassesRoot.OpenSubKey("VBSFile\Shell\Edit\Command").GetValue("")
 
         Dim p As New Process
@@ -13109,6 +13142,7 @@ Public Class Form1
         psi.Arguments = Me.scriptPath & "\" & Me.script
         p.StartInfo = psi
         p.Start()
+
     End Sub
 
 
@@ -13182,11 +13216,48 @@ Public Class Form1
         End Set
     End Property
 
+    ' Get gpo debug setting when GPO tab activated.
+    Private Sub gpo_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles gpo.Paint
+        If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
+            gpoDebugCombo.Text = String.Empty
+            gpoDebugCombo.SelectedText = GPODebugSetting
+        End If
+    End Sub
+    Private Sub gpoDebugCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gpoDebugCombo.SelectedIndexChanged
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            Dim NewDebug As String = gpoDebugCombo.SelectedItem
+            GPODebugSetting = NewDebug
+            gpoDebugCombo.Text = GPODebugSetting
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+    ' Open existing gpo debug file
+    Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Dim logfilepath As String = "\\" & PC.Name & "\" & Replace(PC.SystemDirectory, ":", "$") & "\Debug\UserMode\Userenv.log"
+        If System.IO.File.Exists(logfilepath) Then
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = "Notepad.exe"
+            psi.Arguments = logfilepath
+            p.StartInfo = psi
+            p.Start()
+        Else
+            MsgBox("Debug file not found")
+        End If
+    End Sub
+
+
     Private Sub Sub_Version2()
         ' cmc2
         ' subversion setup
         ' tortoisesvn
     End Sub
+
+
+
 
 
 End Class

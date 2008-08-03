@@ -4,6 +4,12 @@ ToDo
 ' enum subkeys error when no subkeys - write test value?
 
 ====================================================================================================
+
+01/08/2008
+code:     uploaded to cmc2 subversion repository.
+feature:  get/set gpo debugging setting & open file if exists.
+
+
 11/07/2008
 feature:  added gpupdate code.
 
