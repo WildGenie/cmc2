@@ -494,7 +494,7 @@ Public Class Form1
     Friend WithEvents OnlyUserToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents gpo_btn As System.Windows.Forms.Button
     Friend WithEvents gpo As System.Windows.Forms.TabPage
-    Friend WithEvents scriptDataGrid As System.Windows.Forms.DataGridView
+    Friend WithEvents GPODataGrid As System.Windows.Forms.DataGridView
     Friend WithEvents btn_startupscripts As System.Windows.Forms.Button
     Friend WithEvents gprefresh As System.Windows.Forms.Button
     Friend WithEvents gpoContextMenu As System.Windows.Forms.ContextMenuStrip
@@ -508,6 +508,7 @@ Public Class Form1
     Friend WithEvents btn_GetSiteOrg As System.Windows.Forms.Button
     Friend WithEvents gpoDebugCombo As System.Windows.Forms.ComboBox
     Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
+    Friend WithEvents btn_gpo_policies As System.Windows.Forms.Button
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -531,9 +532,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle11 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle12 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -972,9 +973,10 @@ Public Class Form1
         Me.exec = New System.Windows.Forms.Button
         Me.gpo = New System.Windows.Forms.TabPage
         Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
         Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gprefresh = New System.Windows.Forms.Button
-        Me.scriptDataGrid = New System.Windows.Forms.DataGridView
+        Me.GPODataGrid = New System.Windows.Forms.DataGridView
         Me.col0 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.col1 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.col2 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1000,7 +1002,7 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
+        Me.btn_gpo_policies = New System.Windows.Forms.Button
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1052,7 +1054,7 @@ Public Class Form1
         Me.GroupBox10.SuspendLayout()
         Me.GroupBox9.SuspendLayout()
         Me.gpo.SuspendLayout()
-        CType(Me.scriptDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.GPODataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
         Me.SuspendLayout()
@@ -3315,22 +3317,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle8.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle8.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle11
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3744,8 +3746,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle12
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -5531,11 +5533,12 @@ Public Class Form1
         '
         'gpo
         '
+        Me.gpo.Controls.Add(Me.btn_gpo_policies)
         Me.gpo.Controls.Add(Me.gpoDebugCombo)
         Me.gpo.Controls.Add(Me.LinkLabel3)
         Me.gpo.Controls.Add(Me.gpoDebugMode)
         Me.gpo.Controls.Add(Me.gprefresh)
-        Me.gpo.Controls.Add(Me.scriptDataGrid)
+        Me.gpo.Controls.Add(Me.GPODataGrid)
         Me.gpo.Controls.Add(Me.btn_startupscripts)
         Me.gpo.Location = New System.Drawing.Point(4, 22)
         Me.gpo.Name = "gpo"
@@ -5553,7 +5556,19 @@ Public Class Form1
         Me.gpoDebugCombo.Location = New System.Drawing.Point(243, 30)
         Me.gpoDebugCombo.Name = "gpoDebugCombo"
         Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 21)
-        Me.gpoDebugCombo.TabIndex = 5
+        Me.gpoDebugCombo.TabIndex = 3
+        '
+        'LinkLabel3
+        '
+        Me.LinkLabel3.AutoSize = True
+        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
+        Me.LinkLabel3.Location = New System.Drawing.Point(318, 50)
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.Size = New System.Drawing.Size(46, 13)
+        Me.LinkLabel3.TabIndex = 4
+        Me.LinkLabel3.TabStop = True
+        Me.LinkLabel3.Text = "view log"
         '
         'gpoDebugMode
         '
@@ -5561,7 +5576,7 @@ Public Class Form1
         Me.gpoDebugMode.Location = New System.Drawing.Point(240, 16)
         Me.gpoDebugMode.Name = "gpoDebugMode"
         Me.gpoDebugMode.Size = New System.Drawing.Size(98, 13)
-        Me.gpoDebugMode.TabIndex = 4
+        Me.gpoDebugMode.TabIndex = 100
         Me.gpoDebugMode.Text = "GPO Debug Mode:"
         '
         'gprefresh
@@ -5569,24 +5584,25 @@ Public Class Form1
         Me.gprefresh.Location = New System.Drawing.Point(10, 6)
         Me.gprefresh.Name = "gprefresh"
         Me.gprefresh.Size = New System.Drawing.Size(115, 23)
-        Me.gprefresh.TabIndex = 3
+        Me.gprefresh.TabIndex = 0
         Me.gprefresh.Text = "Refresh Group Policy"
         Me.gprefresh.UseVisualStyleBackColor = True
         '
-        'scriptDataGrid
+        'GPODataGrid
         '
-        Me.scriptDataGrid.BackgroundColor = System.Drawing.Color.White
-        Me.scriptDataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.scriptDataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col0, Me.col1, Me.col2, Me.Col3})
-        Me.scriptDataGrid.Location = New System.Drawing.Point(7, 66)
-        Me.scriptDataGrid.Name = "scriptDataGrid"
-        Me.scriptDataGrid.RowHeadersVisible = False
-        Me.scriptDataGrid.RowTemplate.Height = 19
-        Me.scriptDataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.scriptDataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.scriptDataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.scriptDataGrid.Size = New System.Drawing.Size(357, 167)
-        Me.scriptDataGrid.TabIndex = 2
+        Me.GPODataGrid.BackgroundColor = System.Drawing.Color.White
+        Me.GPODataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GPODataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col0, Me.col1, Me.col2, Me.Col3})
+        Me.GPODataGrid.Location = New System.Drawing.Point(7, 66)
+        Me.GPODataGrid.Name = "GPODataGrid"
+        Me.GPODataGrid.RowHeadersVisible = False
+        Me.GPODataGrid.RowTemplate.Height = 19
+        Me.GPODataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.GPODataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.GPODataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.GPODataGrid.Size = New System.Drawing.Size(357, 167)
+        Me.GPODataGrid.TabIndex = 2
+        Me.GPODataGrid.TabStop = False
         '
         'col0
         '
@@ -5613,11 +5629,11 @@ Public Class Form1
         '
         'btn_startupscripts
         '
-        Me.btn_startupscripts.Location = New System.Drawing.Point(7, 40)
+        Me.btn_startupscripts.Location = New System.Drawing.Point(102, 41)
         Me.btn_startupscripts.Name = "btn_startupscripts"
-        Me.btn_startupscripts.Size = New System.Drawing.Size(58, 22)
-        Me.btn_startupscripts.TabIndex = 1
-        Me.btn_startupscripts.Text = "scripts"
+        Me.btn_startupscripts.Size = New System.Drawing.Size(91, 22)
+        Me.btn_startupscripts.TabIndex = 2
+        Me.btn_startupscripts.Text = "applied scripts"
         Me.btn_startupscripts.UseVisualStyleBackColor = True
         '
         'printermenu
@@ -5754,17 +5770,14 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
-        'LinkLabel3
+        'btn_gpo_policies
         '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
-        Me.LinkLabel3.Location = New System.Drawing.Point(318, 50)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(46, 13)
-        Me.LinkLabel3.TabIndex = 6
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "view log"
+        Me.btn_gpo_policies.Location = New System.Drawing.Point(8, 41)
+        Me.btn_gpo_policies.Name = "btn_gpo_policies"
+        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
+        Me.btn_gpo_policies.TabIndex = 1
+        Me.btn_gpo_policies.Text = "applied policies"
+        Me.btn_gpo_policies.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -5884,7 +5897,7 @@ Public Class Form1
         Me.GroupBox9.PerformLayout()
         Me.gpo.ResumeLayout(False)
         Me.gpo.PerformLayout()
-        CType(Me.scriptDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.GPODataGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
@@ -12125,7 +12138,7 @@ Public Class Form1
             org.Text = ""
 
             ' gpo tab
-            scriptDataGrid.Rows.Clear()
+            GPODataGrid.Rows.Clear()
 
             If AltUserCheckBox.Checked Then _
                 Shell("net use \\" & PC.Name & "\ipc$ /delete /y", 0, False)
@@ -12995,20 +13008,53 @@ Public Class Form1
     'GPOs applied to the currently logged on user are stored in the following registry path:
     'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
     '-----------------------------------------------------------------------------------
+    Protected Friend GPOGridType As String
+    Private Shared gpos As ArrayList = New ArrayList
+    Protected Friend gpoName As String
+    Protected Friend gpoDSPath As String
+    Protected Friend scriptPath As String
+    Protected Friend script As String
 
+    Private Sub btn_gpo_policies_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_policies.Click
+
+        GPOGridType = "policy"
+
+        GPODataGrid.Columns(0).HeaderText = "policy"
+        GPODataGrid.Columns(0).Width = 280
+        GPODataGrid.Columns(1).HeaderText = "type"
+        GPODataGrid.Columns(1).Width = 50
+        GPODataGrid.Columns(1).Visible = True
+        GPODataGrid.Columns(2).HeaderText = "dsPath"
+        GPODataGrid.Columns(2).Width = 50
+        GPODataGrid.Columns(2).Visible = False
+
+        GPODataGrid.Rows.Clear()
+        gpos.Clear()
+
+        If PC.OSVersionNumeric > 5 Then
+            EnumGPOPolicies("Machine")
+            If Not PC.CurrentUserSID Is Nothing Then
+                EnumGPOPolicies("User")
+            End If
+        Else
+            MsgBox("currently only implemented for xp/2003 clients")
+        End If
+    End Sub
     Private Sub btn_startupscripts_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_startupscripts.Click
 
-        scriptDataGrid.Columns(0).HeaderText = "script"
-        scriptDataGrid.Columns(0).Width = 130
-        scriptDataGrid.Columns(1).HeaderText = "parent policy"
-        scriptDataGrid.Columns(1).Width = 150
-        scriptDataGrid.Columns(2).HeaderText = "type"
-        scriptDataGrid.Columns(2).Width = 50
-        scriptDataGrid.Columns(3).HeaderText = "path"
-        scriptDataGrid.Columns(3).Width = 100
-        scriptDataGrid.Columns(3).Visible = True
+        GPOGridType = "script"
 
-        scriptDataGrid.Rows.Clear()
+        GPODataGrid.Columns(0).HeaderText = "script"
+        GPODataGrid.Columns(0).Width = 130
+        GPODataGrid.Columns(1).HeaderText = "parent policy"
+        GPODataGrid.Columns(1).Width = 150
+        GPODataGrid.Columns(2).HeaderText = "type"
+        GPODataGrid.Columns(2).Width = 50
+        GPODataGrid.Columns(3).HeaderText = "path"
+        GPODataGrid.Columns(3).Width = 100
+        GPODataGrid.Columns(3).Visible = True
+
+        GPODataGrid.Rows.Clear()
 
         If PC.OSVersionNumeric > 5 Then
             EnumGPOScripts("startup")
@@ -13021,8 +13067,42 @@ Public Class Form1
             MsgBox("currently only implemented for xp/2003 clients")
         End If
 
-        gpoDebugMode.Text = GPODebugSetting
+        'gpoDebugMode.Text = GPODebugSetting
 
+    End Sub
+
+    Private Sub EnumGPOPolicies(ByVal sBaseKey As String)
+        Dim basekey As String
+        Dim hive As RegistryHive
+        Select Case LCase(sBaseKey)
+            Case "machine"
+                basekey = "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
+                hive = RegistryHive.LocalMachine
+            Case "user"
+                basekey = PC.CurrentUserSID & "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
+                hive = RegistryHive.Users
+            Case Else
+                Exit Sub
+        End Select
+
+        Dim BaseReg As RegistryKey
+        Try
+            BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
+            Dim iLen As Integer = BaseReg.GetSubKeyNames.Length - 1
+            Dim arrGPO(iLen) As String
+            For Each SidSubKey As String In BaseReg.GetSubKeyNames
+                For Each gposubkey As String In BaseReg.OpenSubKey(SidSubKey).GetSubKeyNames
+                    Dim gpoDSPath As String = LCase(BaseReg.OpenSubKey(SidSubKey).OpenSubKey(gposubkey, False).GetValue("DSPath"))
+                    Dim gpoName As String = BaseReg.OpenSubKey(SidSubKey).OpenSubKey(gposubkey, False).GetValue("DisplayName")
+                    If Not gpos.Contains(LCase(gpoName)) Then
+                        gpos.Add(LCase(gpoName))
+                        GPODataGrid.Rows.Add(gpoName, LCase(sBaseKey), Replace(Replace(gpoDSPath, "cn=machine,", ""), "cn=user,", ""))
+                    End If
+                Next
+            Next
+        Catch ex As NullReferenceException
+            ' key not found
+        End Try
     End Sub
 
     Private Sub EnumGPOScripts(ByVal sBaseKey As String)
@@ -13064,7 +13144,7 @@ Public Class Form1
                     Else
                         scriptFullPath = scriptFolder
                     End If
-                    scriptDataGrid.Rows.Add(scriptName, gponame, LCase(sBaseKey), scriptFullPath)
+                    GPODataGrid.Rows.Add(scriptName, gponame, LCase(sBaseKey), scriptFullPath)
                 Next
             Next
         Catch ex As NullReferenceException
@@ -13118,50 +13198,62 @@ Public Class Form1
         'scriptDataGrid.Rows.Add(scriptName, gponame, LCase(sBaseKey), scriptFullPath)
 
     End Sub
-    Private Sub EnumGPOPolicies()
-        Dim Machine_History_Key As String = "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
-        Dim User_History_Key As String = "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
-
-    End Sub
 
 
     ' gpo script context menu
-    Protected Friend scriptPath As String
-    Protected Friend script As String
-    Private Sub scriptDataGrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles scriptDataGrid.MouseDown
 
+
+
+    ' GPO Datagrid context menu
+    Private Sub GPODataGrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GPODataGrid.MouseDown
         If e.Button = Windows.Forms.MouseButtons.Right Then
             Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
             If hti.Type = DataGridViewHitTestType.Cell Then
+                GPODataGrid.ClearSelection()
+                GPODataGrid(hti.ColumnIndex, hti.RowIndex).Selected = True
 
-                scriptDataGrid.ClearSelection()
-                scriptDataGrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+                If GPOGridType = "policy" Then
+                    script_openContainer.Visible = False
+                    Me.gpoName = GPODataGrid(0, hti.RowIndex).Value
+                    Me.gpoDSPath = GPODataGrid(2, hti.RowIndex).Value
+                ElseIf GPOGridType = "script" Then
+                    script_openContainer.Visible = True
+                    Me.script = GPODataGrid(0, hti.RowIndex).Value
+                    Me.scriptPath = GPODataGrid(3, hti.RowIndex).Value
+                End If
 
-                Me.script = scriptDataGrid(0, hti.RowIndex).Value
-                Me.scriptPath = scriptDataGrid(3, hti.RowIndex).Value
-
-                gpoContextMenu.Show(scriptDataGrid, New Point(e.X, e.Y))
-                'Else
-                'ptrproperties.Enabled = False
-                'ptsvrproperties.Enabled = False
-                'SetPrinterAsDefaultToolStripMenuItem.Enabled = False
+                gpoContextMenu.Show(GPODataGrid, New Point(e.X, e.Y))
             End If
         End If
-
     End Sub
+
+
+
     Private Sub script_openContainer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles script_openContainer.Click
         openfolder(scriptPath)
     End Sub
     Private Sub EditToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditToolStripMenuItem.Click
 
-        Dim scripteditor As String = Registry.ClassesRoot.OpenSubKey("VBSFile\Shell\Edit\Command").GetValue("")
+        If GPOGridType = "policy" Then
+            MsgBox("gpedit.msc " & "/gpobject:" & Chr(34) & gpoDSPath & Chr(34))
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = "gpedit.msc"
+            psi.Arguments = "/gpobject:" & Chr(34) & gpoDSPath & Chr(34)
+            p.StartInfo = psi
+            p.Start()
 
-        Dim p As New Process
-        Dim psi As ProcessStartInfo = New ProcessStartInfo
-        psi.FileName = Trim(Replace(scripteditor, "%1", ""))
-        psi.Arguments = Me.scriptPath & "\" & Me.script
-        p.StartInfo = psi
-        p.Start()
+        ElseIf GPOGridType = "script" Then
+
+            Dim scripteditor As String = Registry.ClassesRoot.OpenSubKey("VBSFile\Shell\Edit\Command").GetValue("")
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = Trim(Replace(scripteditor, "%1", ""))
+            psi.Arguments = Me.scriptPath & "\" & Me.script
+            p.StartInfo = psi
+            p.Start()
+
+        End If
 
     End Sub
 
@@ -13236,6 +13328,8 @@ Public Class Form1
         End Set
     End Property
 
+
+
     ' Get gpo debug setting when GPO tab activated.
     Private Sub gpo_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles gpo.Paint
         If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
@@ -13275,8 +13369,6 @@ Public Class Form1
         ' subversion setup
         ' tortoisesvn
     End Sub
-
-
 
 
 
