@@ -12965,12 +12965,32 @@ Public Class Form1
     '-----------------------------------------------------------------------------------
     '    TO DO
     '-----------------------------------------------------------------------------------
+    ' Edit LOCAL Group Policy
+    ' gpedit.msc /gpcomputer:"myComputer"
+    
+    '
     ' Directly Edit a GPO...
-    ' gpedit.msc /gpobject:”LDAP://CN={GUID of the GPO},CN=Policies,CN=System,DC=xDerwentSharedServices,DC=NHS,DC=UK
+    ' gpedit.msc /gpobject:"LDAP://CN={GUID of the GPO},CN=Policies,CN=System,DC=xDerwentSharedServices,DC=NHS,DC=UK"
+    ' gpedit.msc /gpobject: & DSPATH   ....see below.....
+    ' *** strip out CN=Machine, from beginning of DSPATH
     '-----------------------------------------------------------------------------------
     'Each time GPOs are processed, a record of all of the GPOs applied to the user or computer is written to the registry.
     'GPOs applied to the local computer are stored in the following registry path:
     'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
+    '   \{unknown_guid}\0,1,2...
+    '        DisplayName - REG_SZ
+    '        DSPATH
+    '        GPOName = {policy_guid}
+    '        GPOLink - 0= No link information
+                '1= The GPO is linked to a machine (local)
+                '2= The GPO is linked to a Site
+                '3= The GPO is linked to a Domain
+                '4= The GPO is linked to an Organizational Unit 
+    '         Version - REG_DWORD ???
+ 
+     '   \{unknown_guid}\0,1,2...
+    
+    
 
     'GPOs applied to the currently logged on user are stored in the following registry path:
     'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
