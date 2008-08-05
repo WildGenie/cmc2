@@ -500,15 +500,17 @@ Public Class Form1
     Friend WithEvents gpoContextMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents script_openContainer As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents EditToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents col0 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents col2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Col3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents gpoDebugMode As System.Windows.Forms.Label
     Friend WithEvents btn_GetSiteOrg As System.Windows.Forms.Button
     Friend WithEvents gpoDebugCombo As System.Windows.Forms.ComboBox
     Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
     Friend WithEvents btn_gpo_policies As System.Windows.Forms.Button
+    Friend WithEvents btn_gpo_rsop As System.Windows.Forms.Button
+    Friend WithEvents col0 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col1 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents col2 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents Col3 As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents GroupPolicyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -532,9 +534,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle28 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle31 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle32 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -972,15 +974,12 @@ Public Class Form1
         Me.copy = New System.Windows.Forms.CheckBox
         Me.exec = New System.Windows.Forms.Button
         Me.gpo = New System.Windows.Forms.TabPage
+        Me.btn_gpo_policies = New System.Windows.Forms.Button
         Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
         Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
         Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gprefresh = New System.Windows.Forms.Button
         Me.GPODataGrid = New System.Windows.Forms.DataGridView
-        Me.col0 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.col1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.col2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Col3 = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.btn_startupscripts = New System.Windows.Forms.Button
         Me.printermenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ptrproperties = New System.Windows.Forms.ToolStripMenuItem
@@ -1002,7 +1001,12 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.btn_gpo_policies = New System.Windows.Forms.Button
+        Me.btn_gpo_rsop = New System.Windows.Forms.Button
+        Me.col0 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.col1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.col2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Col3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.GroupPolicyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1863,7 +1867,7 @@ Public Class Form1
         '
         'GoToolStripMenuItem
         '
-        Me.GoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OperatingSystemToolStripMenuItem, Me.NetworkToolStripMenuItem, Me.ServicesToolStripMenuItem1, Me.ProcessesToolStripMenuItem, Me.PrintersToolStripMenuItem, Me.MappedDrivesToolStripMenuItem, Me.SoftwareToolStripMenuItem, Me.DeployToolStripMenuItem, Me.MessageToolStripMenuItem, Me.StartupToolStripMenuItem, Me.ADUserToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.TestToolStripMenuItem})
+        Me.GoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OperatingSystemToolStripMenuItem, Me.NetworkToolStripMenuItem, Me.ServicesToolStripMenuItem1, Me.ProcessesToolStripMenuItem, Me.PrintersToolStripMenuItem, Me.MappedDrivesToolStripMenuItem, Me.SoftwareToolStripMenuItem, Me.DeployToolStripMenuItem, Me.ADUserToolStripMenuItem, Me.GroupPolicyToolStripMenuItem, Me.MessageToolStripMenuItem, Me.StartupToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.TestToolStripMenuItem})
         Me.GoToolStripMenuItem.Name = "GoToolStripMenuItem"
         Me.GoToolStripMenuItem.Size = New System.Drawing.Size(32, 20)
         Me.GoToolStripMenuItem.Text = "Go"
@@ -3317,22 +3321,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle28.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle28.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle28.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle28.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle28.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle28.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle28.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle28
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle31.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle31
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3746,8 +3750,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle32.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle32
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -4660,14 +4664,14 @@ Public Class Form1
         Me.Tabholder1.Controls.Add(Me.printers)
         Me.Tabholder1.Controls.Add(Me.software)
         Me.Tabholder1.Controls.Add(Me.deploy)
+        Me.Tabholder1.Controls.Add(Me.aduser)
+        Me.Tabholder1.Controls.Add(Me.gpo)
         Me.Tabholder1.Controls.Add(Me.message)
         Me.Tabholder1.Controls.Add(Me.startup)
-        Me.Tabholder1.Controls.Add(Me.aduser)
         Me.Tabholder1.Controls.Add(Me.tools)
         Me.Tabholder1.Controls.Add(Me.options)
         Me.Tabholder1.Controls.Add(Me.about)
         Me.Tabholder1.Controls.Add(Me.test)
-        Me.Tabholder1.Controls.Add(Me.gpo)
         Me.Tabholder1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tabholder1.ItemSize = New System.Drawing.Size(58, 18)
         Me.Tabholder1.Location = New System.Drawing.Point(4, 83)
@@ -4776,7 +4780,7 @@ Public Class Form1
         Me.mappeddrivesGroupBox.Size = New System.Drawing.Size(349, 119)
         Me.mappeddrivesGroupBox.TabIndex = 5
         Me.mappeddrivesGroupBox.TabStop = False
-        Me.mappeddrivesGroupBox.Text = "mapped drives"
+        Me.mappeddrivesGroupBox.Text = "persistent mapped drives"
         '
         'deletemappeddrive
         '
@@ -5533,6 +5537,7 @@ Public Class Form1
         '
         'gpo
         '
+        Me.gpo.Controls.Add(Me.btn_gpo_rsop)
         Me.gpo.Controls.Add(Me.btn_gpo_policies)
         Me.gpo.Controls.Add(Me.gpoDebugCombo)
         Me.gpo.Controls.Add(Me.LinkLabel3)
@@ -5545,27 +5550,38 @@ Public Class Form1
         Me.gpo.Padding = New System.Windows.Forms.Padding(3)
         Me.gpo.Size = New System.Drawing.Size(370, 238)
         Me.gpo.TabIndex = 16
-        Me.gpo.Text = "group policy"
+        Me.gpo.Text = "Group Policy"
         Me.gpo.UseVisualStyleBackColor = True
+        '
+        'btn_gpo_policies
+        '
+        Me.btn_gpo_policies.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_gpo_policies.Location = New System.Drawing.Point(8, 41)
+        Me.btn_gpo_policies.Name = "btn_gpo_policies"
+        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
+        Me.btn_gpo_policies.TabIndex = 1
+        Me.btn_gpo_policies.Text = "applied policies"
+        Me.btn_gpo_policies.UseVisualStyleBackColor = True
         '
         'gpoDebugCombo
         '
-        Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gpoDebugCombo.FormattingEnabled = True
         Me.gpoDebugCombo.Items.AddRange(New Object() {"None", "Normal", "Verbose", "Logfile", "Debugger", "Normal|Logfile", "Verbose|Logfile", "Debug|Verbose|Logfile"})
-        Me.gpoDebugCombo.Location = New System.Drawing.Point(243, 30)
+        Me.gpoDebugCombo.Location = New System.Drawing.Point(7, 13)
         Me.gpoDebugCombo.Name = "gpoDebugCombo"
-        Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 21)
+        Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 20)
         Me.gpoDebugCombo.TabIndex = 3
         '
         'LinkLabel3
         '
         Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel3.ForeColor = System.Drawing.Color.Black
         Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
-        Me.LinkLabel3.Location = New System.Drawing.Point(318, 50)
+        Me.LinkLabel3.Location = New System.Drawing.Point(97, 3)
         Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(46, 13)
+        Me.LinkLabel3.Size = New System.Drawing.Size(33, 9)
         Me.LinkLabel3.TabIndex = 4
         Me.LinkLabel3.TabStop = True
         Me.LinkLabel3.Text = "view log"
@@ -5573,28 +5589,36 @@ Public Class Form1
         'gpoDebugMode
         '
         Me.gpoDebugMode.AutoSize = True
-        Me.gpoDebugMode.Location = New System.Drawing.Point(240, 16)
+        Me.gpoDebugMode.Location = New System.Drawing.Point(4, 0)
         Me.gpoDebugMode.Name = "gpoDebugMode"
-        Me.gpoDebugMode.Size = New System.Drawing.Size(98, 13)
+        Me.gpoDebugMode.Size = New System.Drawing.Size(86, 13)
         Me.gpoDebugMode.TabIndex = 100
-        Me.gpoDebugMode.Text = "GPO Debug Mode:"
+        Me.gpoDebugMode.Text = "set debug mode:"
         '
         'gprefresh
         '
-        Me.gprefresh.Location = New System.Drawing.Point(10, 6)
+        Me.gprefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gprefresh.Location = New System.Drawing.Point(306, 2)
         Me.gprefresh.Name = "gprefresh"
-        Me.gprefresh.Size = New System.Drawing.Size(115, 23)
+        Me.gprefresh.Size = New System.Drawing.Size(60, 22)
         Me.gprefresh.TabIndex = 0
-        Me.gprefresh.Text = "Refresh Group Policy"
+        Me.gprefresh.Text = "gpupdate"
         Me.gprefresh.UseVisualStyleBackColor = True
         '
         'GPODataGrid
         '
+        Me.GPODataGrid.AllowUserToAddRows = False
+        Me.GPODataGrid.AllowUserToDeleteRows = False
+        Me.GPODataGrid.AllowUserToResizeRows = False
         Me.GPODataGrid.BackgroundColor = System.Drawing.Color.White
+        Me.GPODataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.GPODataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.GPODataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GPODataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col0, Me.col1, Me.col2, Me.Col3})
         Me.GPODataGrid.Location = New System.Drawing.Point(7, 66)
+        Me.GPODataGrid.MultiSelect = False
         Me.GPODataGrid.Name = "GPODataGrid"
+        Me.GPODataGrid.ReadOnly = True
         Me.GPODataGrid.RowHeadersVisible = False
         Me.GPODataGrid.RowTemplate.Height = 19
         Me.GPODataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -5603,33 +5627,12 @@ Public Class Form1
         Me.GPODataGrid.Size = New System.Drawing.Size(357, 167)
         Me.GPODataGrid.TabIndex = 2
         Me.GPODataGrid.TabStop = False
-        '
-        'col0
-        '
-        Me.col0.HeaderText = ""
-        Me.col0.Name = "col0"
-        '
-        'col1
-        '
-        Me.col1.HeaderText = ""
-        Me.col1.Name = "col1"
-        '
-        'col2
-        '
-        Me.col2.HeaderText = ""
-        Me.col2.Name = "col2"
-        Me.col2.ReadOnly = True
-        '
-        'Col3
-        '
-        Me.Col3.HeaderText = ""
-        Me.Col3.Name = "Col3"
-        Me.Col3.ReadOnly = True
-        Me.Col3.Visible = False
+        Me.ToolTip1.SetToolTip(Me.GPODataGrid, "Right click for menu")
         '
         'btn_startupscripts
         '
-        Me.btn_startupscripts.Location = New System.Drawing.Point(102, 41)
+        Me.btn_startupscripts.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_startupscripts.Location = New System.Drawing.Point(108, 41)
         Me.btn_startupscripts.Name = "btn_startupscripts"
         Me.btn_startupscripts.Size = New System.Drawing.Size(91, 22)
         Me.btn_startupscripts.TabIndex = 2
@@ -5770,14 +5773,47 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
-        'btn_gpo_policies
+        'btn_gpo_rsop
         '
-        Me.btn_gpo_policies.Location = New System.Drawing.Point(8, 41)
-        Me.btn_gpo_policies.Name = "btn_gpo_policies"
-        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
-        Me.btn_gpo_policies.TabIndex = 1
-        Me.btn_gpo_policies.Text = "applied policies"
-        Me.btn_gpo_policies.UseVisualStyleBackColor = True
+        Me.btn_gpo_rsop.Location = New System.Drawing.Point(306, 25)
+        Me.btn_gpo_rsop.Name = "btn_gpo_rsop"
+        Me.btn_gpo_rsop.Size = New System.Drawing.Size(60, 20)
+        Me.btn_gpo_rsop.TabIndex = 101
+        Me.btn_gpo_rsop.Text = "view rsop"
+        Me.btn_gpo_rsop.UseVisualStyleBackColor = True
+        '
+        'col0
+        '
+        Me.col0.HeaderText = ""
+        Me.col0.Name = "col0"
+        Me.col0.ReadOnly = True
+        Me.col0.Width = 400
+        '
+        'col1
+        '
+        Me.col1.HeaderText = ""
+        Me.col1.Name = "col1"
+        Me.col1.ReadOnly = True
+        '
+        'col2
+        '
+        Me.col2.HeaderText = ""
+        Me.col2.Name = "col2"
+        Me.col2.ReadOnly = True
+        '
+        'Col3
+        '
+        Me.Col3.HeaderText = ""
+        Me.Col3.Name = "Col3"
+        Me.Col3.ReadOnly = True
+        Me.Col3.Visible = False
+        '
+        'GroupPolicyToolStripMenuItem
+        '
+        Me.GroupPolicyToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page
+        Me.GroupPolicyToolStripMenuItem.Name = "GroupPolicyToolStripMenuItem"
+        Me.GroupPolicyToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.GroupPolicyToolStripMenuItem.Text = "Group Policy"
         '
         'Form1
         '
@@ -6483,7 +6519,7 @@ Public Class Form1
             OnlyUserToolStripMenuItem.Enabled = True
 
             WriteLog(PC.Name & " - logged on user: " & Label_User.Text)
-            mappeddrivesGroupBox.Text = "mapped drives (" & LCase(PC.CurrentUser) & ")"
+            mappeddrivesGroupBox.Text = "persistent mapped drives (" & LCase(PC.CurrentUser) & ")"
             mappeddrivesGroupBox.Enabled = True
             PC.LastLogon = ""
         Else
@@ -9515,6 +9551,492 @@ Public Class Form1
 
 #End Region
 
+#Region "Group Policy"
+
+    ' TO DO # Edit LOCAL Group Policy : gpedit.msc /gpcomputer:"myComputer"
+
+    Protected Friend GPOGridType As String
+    Private Shared gpos As ArrayList = New ArrayList
+    Protected Friend gpoName As String
+    Protected Friend gpoDSPath As String
+    Protected Friend scriptPath As String
+    Protected Friend script As String
+
+    Private Sub btn_gpo_policies_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_policies.Click
+
+        GPOGridType = "policy"
+
+        GPODataGrid.Columns(0).HeaderText = "policy (right click for options)"
+        GPODataGrid.Columns(0).Width = 290
+        GPODataGrid.Columns(1).HeaderText = "type"
+        GPODataGrid.Columns(1).Width = 70
+        GPODataGrid.Columns(1).Visible = True
+        GPODataGrid.Columns(2).HeaderText = "dsPath"
+        GPODataGrid.Columns(2).Width = 50
+        GPODataGrid.Columns(2).Visible = False
+        GPODataGrid.Columns(3).Visible = False
+
+        GPODataGrid.Rows.Clear()
+
+        ' impersonate here
+        If PC.CurrentUser <> "" Then
+            If AltUserCheckBox.Checked Then
+                Dim impersonator As New Impersonation
+                If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+                    EnumGPOPolicies("Machine")
+                    If Not PC.CurrentUserSID Is Nothing Then
+                        gpos.Clear()
+                        EnumGPOPolicies("User")
+                    End If
+                    impersonator.undoImpersonation()
+                End If
+            Else
+                EnumGPOPolicies("Machine")
+                If Not PC.CurrentUserSID Is Nothing Then
+                    gpos.Clear()
+                    EnumGPOPolicies("User")
+                End If
+            End If
+        End If
+
+    End Sub
+    Private Sub btn_startupscripts_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_startupscripts.Click
+
+        GPOGridType = "script"
+        GPODataGrid.Rows.Clear()
+
+        If PC.OSVersionNumeric > 5 Then
+
+            GPODataGrid.Columns(0).HeaderText = "script (right click for options)"
+            GPODataGrid.Columns(0).Width = 150
+            GPODataGrid.Columns(1).HeaderText = "parent policy"
+            GPODataGrid.Columns(1).Width = 150
+            GPODataGrid.Columns(1).Visible = True
+            GPODataGrid.Columns(2).HeaderText = "type"
+            GPODataGrid.Columns(2).Width = 70
+            GPODataGrid.Columns(2).Visible = True
+            GPODataGrid.Columns(3).HeaderText = "path"
+            GPODataGrid.Columns(3).Width = 100
+            GPODataGrid.Columns(3).Visible = False
+
+
+            ' impersonate here
+            If PC.CurrentUser <> "" Then
+                If AltUserCheckBox.Checked Then
+                    Dim impersonator As New Impersonation
+                    If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+                        EnumGPOScripts("startup")
+                        EnumGPOScripts("shutdown")
+                        If Not PC.CurrentUserSID Is Nothing AndAlso PC.CurrentUserSID <> "" Then
+                            EnumGPOScripts("Logon")
+                            EnumGPOScripts("Logoff")
+                        End If
+                        impersonator.undoImpersonation()
+                    End If
+                Else
+                    EnumGPOScripts("startup")
+                    EnumGPOScripts("shutdown")
+                    If Not PC.CurrentUserSID Is Nothing AndAlso PC.CurrentUserSID <> "" Then
+                        EnumGPOScripts("Logon")
+                        EnumGPOScripts("Logoff")
+                    End If
+                End If
+            End If
+
+        Else
+            GPODataGrid.Columns(0).HeaderText = "script (right click for options)"
+            GPODataGrid.Columns(0).Width = 290
+            GPODataGrid.Columns(1).HeaderText = "parent policy"
+            GPODataGrid.Columns(1).Width = 150
+            GPODataGrid.Columns(1).Visible = False
+            GPODataGrid.Columns(2).HeaderText = "type"
+            GPODataGrid.Columns(2).Width = 80
+            GPODataGrid.Columns(2).Visible = True
+            GPODataGrid.Columns(3).HeaderText = "path"
+            GPODataGrid.Columns(3).Width = 100
+            GPODataGrid.Columns(3).Visible = False
+
+
+            ' impersonate here
+            If PC.CurrentUser <> "" Then
+                If AltUserCheckBox.Checked Then
+                    Dim impersonator As New Impersonation
+                    If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+                        EnumGPOScripts_2K("startup")
+                        EnumGPOScripts_2K("shutdown")
+                        If Not PC.CurrentUserSID Is Nothing AndAlso PC.CurrentUserSID <> "" Then
+                            EnumGPOScripts_2K("Logon")
+                            EnumGPOScripts_2K("Logoff")
+                        End If
+                        impersonator.undoImpersonation()
+                    End If
+                Else
+                    EnumGPOScripts_2K("startup")
+                    EnumGPOScripts_2K("shutdown")
+                    If Not PC.CurrentUserSID Is Nothing AndAlso PC.CurrentUserSID <> "" Then
+                        EnumGPOScripts_2K("Logon")
+                        EnumGPOScripts_2K("Logoff")
+                    End If
+                End If
+            End If
+
+        End If
+
+    End Sub
+
+    Private Sub EnumGPOPolicies(ByVal sBaseKey As String)
+        'Each time GPOs are processed, a record of all of the GPOs applied to the user or computer is written to the registry.
+        'GPOs applied to the local computer are stored in the following registry path:
+        'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
+        'GPOs applied to the currently logged on user are stored in the following registry path:
+        'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
+
+        Dim basekey As String
+        Dim hive As RegistryHive
+        Select Case LCase(sBaseKey)
+            Case "machine"
+                basekey = "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
+                hive = RegistryHive.LocalMachine
+            Case "user"
+                basekey = PC.CurrentUserSID & "\Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
+                hive = RegistryHive.Users
+            Case Else
+                Exit Sub
+        End Select
+
+        Dim BaseReg As RegistryKey
+        Try
+            BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
+            Dim iLen As Integer = BaseReg.GetSubKeyNames.Length - 1
+            Dim arrGPO(iLen) As String
+            For Each SidSubKey As String In BaseReg.GetSubKeyNames
+                For Each gposubkey As String In BaseReg.OpenSubKey(SidSubKey).GetSubKeyNames
+                    Dim gpoDSPath As String = LCase(BaseReg.OpenSubKey(SidSubKey).OpenSubKey(gposubkey, False).GetValue("DSPath"))
+                    Dim gpoName As String = BaseReg.OpenSubKey(SidSubKey).OpenSubKey(gposubkey, False).GetValue("DisplayName")
+                    If Not gpos.Contains(LCase(gpoName)) Then
+                        gpoDSPath = Replace(Replace(Replace(gpoDSPath, "cn=machine,", ""), "cn=user,", ""), "ldap:", "LDAP:")
+                        gpos.Add(LCase(gpoName))
+                        GPODataGrid.Rows.Add(gpoName, LCase(sBaseKey), gpoDSPath)
+                    End If
+                Next
+            Next
+        Catch ex As NullReferenceException
+            ' key not found
+        End Try
+    End Sub
+
+    Private Sub EnumGPOScripts(ByVal sBaseKey As String)
+
+        Dim basekey As String
+        Dim hive As RegistryHive
+        Select Case LCase(sBaseKey)
+            Case "startup"
+                basekey = "Software\Policies\Microsoft\Windows\System\Scripts\Startup"
+                hive = RegistryHive.LocalMachine
+            Case "shutdown"
+                basekey = "Software\Policies\Microsoft\Windows\System\Scripts\Shutdown"
+                hive = RegistryHive.LocalMachine
+            Case "logon"
+                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts\Logon"
+                hive = RegistryHive.Users
+            Case "logoff"
+                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts\Logoff"
+                hive = RegistryHive.Users
+            Case Else
+                Exit Sub
+        End Select
+
+        Dim BaseReg As RegistryKey
+        Try
+            BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
+            Dim iLen As Integer = BaseReg.GetSubKeyNames.Length - 1
+            Dim arrGPO(iLen) As String
+            For Each subStartupKey As String In BaseReg.GetSubKeyNames
+                Dim gponame As String = BaseReg.OpenSubKey(subStartupKey, False).GetValue("DisplayName")
+                Dim gpoPath As String = BaseReg.OpenSubKey(subStartupKey, False).GetValue("FileSysPath")
+                Dim scriptlist As String = ""
+                For Each scriptsubkey As String In BaseReg.OpenSubKey(subStartupKey).GetSubKeyNames
+                    Dim scriptFullPath As String = BaseReg.OpenSubKey(subStartupKey).OpenSubKey(scriptsubkey, False).GetValue("Script")
+                    Dim scriptName As String = scriptFullPath.Substring(scriptFullPath.LastIndexOf("\") + 1)
+                    Dim scriptFolder As String = gpoPath & "\Scripts\" & sBaseKey
+                    If InStr(scriptFullPath, "\") > 0 Then
+                        scriptFullPath = scriptFullPath.Substring(0, scriptFullPath.LastIndexOf("\"))
+                    Else
+                        scriptFullPath = scriptFolder
+                    End If
+                    GPODataGrid.Rows.Add(scriptName, gponame, LCase(sBaseKey), scriptFullPath)
+                Next
+            Next
+        Catch ex As NullReferenceException
+            ' key not found
+        End Try
+
+    End Sub
+    Private Sub EnumGPOScripts_2K(ByVal sBaseKey As String)
+
+        Dim basekey As String
+        Dim hive As RegistryHive
+        Select Case LCase(sBaseKey)
+            Case "startup"
+                basekey = "Software\Policies\Microsoft\Windows\System\Scripts"
+                hive = RegistryHive.LocalMachine
+            Case "shutdown"
+                basekey = "Software\Policies\Microsoft\Windows\System\Scripts"
+                hive = RegistryHive.LocalMachine
+            Case "logon"
+                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts"
+                hive = RegistryHive.Users
+            Case "logoff"
+                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts"
+                hive = RegistryHive.Users
+            Case Else
+                Exit Sub
+        End Select
+
+        Dim BaseReg As RegistryKey
+        BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
+        Dim startupscripts As String = BaseReg.GetValue(sBaseKey)
+
+        Dim flagcheck As Boolean = False ' use to identify whether ini in correct section
+
+        Dim arrStartupscripts() As String = Split(startupscripts, ";")
+        For i As Integer = 0 To UBound(arrStartupscripts)
+            Dim sIniFile As String = arrStartupscripts(i) & "\scripts.ini"
+            If System.IO.File.Exists(sIniFile) Then
+                Dim sr As StreamReader = System.IO.File.OpenText(sIniFile)
+                Do While sr.EndOfStream = False
+                    Dim tmp As String = sr.ReadLine()
+
+                    If tmp.ToLower.Contains("[") Then
+                        If tmp.ToLower = "[" & sBaseKey.ToLower & "]" Then
+                            flagcheck = True
+                        Else
+                            flagcheck = False
+                        End If
+                    End If
+
+                    If flagcheck Then
+                        If Mid(tmp, 2, 8) = "CmdLine=" AndAlso tmp.Length > 10 Then
+                            Dim scriptName As String
+                            Dim scriptFullPath As String
+                            scriptName = Mid(tmp, 10, tmp.Length - 9)
+                            If InStr(scriptName, "\") Then
+                                scriptFullPath = scriptName.Substring(0, scriptName.LastIndexOf("\"))
+                                scriptName = Mid(scriptName, scriptName.LastIndexOf("\") + 2)
+                            Else
+                                scriptFullPath = arrStartupscripts(i) & "\" & sBaseKey
+                            End If
+
+                            GPODataGrid.Rows.Add(scriptName, "", LCase(sBaseKey), scriptFullPath)
+                        End If
+                    End If
+                Loop
+            End If
+        Next
+
+
+    End Sub
+
+
+    ' GPO Datagrid context menu
+    Private Sub GPODataGrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GPODataGrid.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                GPODataGrid.ClearSelection()
+                GPODataGrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                If GPOGridType = "policy" Then
+                    script_openContainer.Visible = False
+                    Me.gpoName = GPODataGrid(0, hti.RowIndex).Value
+                    Me.gpoDSPath = GPODataGrid(2, hti.RowIndex).Value
+                ElseIf GPOGridType = "script" Then
+                    script_openContainer.Visible = True
+                    Me.script = GPODataGrid(0, hti.RowIndex).Value
+                    Me.scriptPath = GPODataGrid(3, hti.RowIndex).Value
+                End If
+
+                gpoContextMenu.Show(GPODataGrid, New Point(e.X, e.Y))
+            End If
+        End If
+    End Sub
+    Private Sub script_openContainer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles script_openContainer.Click
+        openfolder(scriptPath)
+    End Sub
+    Private Sub EditToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditToolStripMenuItem.Click
+
+        If GPOGridType = "policy" Then
+
+            ' gpedit.msc /gpobject:"LDAP://CN={GUID of the GPO},CN=Policies,CN=System,DC=xDerwentSharedServices,DC=NHS,DC=UK"
+            ' gpedit.msc /gpobject: & DSPATH   ....see below.....
+            ' *** strip out CN=Machine, from beginning of DSPATH
+            ' *** 'LDAP' MUST be in UPPER CASE
+
+            'MsgBox("gpedit.msc " & "/gpobject:" & chr(34) & gpoDSPath & chr(34))
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = "gpedit.msc"
+            psi.Arguments = "/gpobject:" & Chr(34) & gpoDSPath & Chr(34)
+            p.StartInfo = psi
+            p.Start()
+
+        ElseIf GPOGridType = "script" Then
+
+            Dim scripteditor As String = Registry.ClassesRoot.OpenSubKey("VBSFile\Shell\Edit\Command").GetValue("")
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = Trim(Replace(scripteditor, "%1", ""))
+            psi.Arguments = Me.scriptPath & "\" & Me.script
+            p.StartInfo = psi
+            p.Start()
+
+        End If
+
+    End Sub
+
+    Private Sub btn_gpo_rsop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_rsop.Click
+        GpoRsop()
+    End Sub
+    Private Sub GpoRsop()
+        On Error Resume Next
+        Dim GPMC As Object = CreateObject("GPMgmt.GPM")
+        If Err.Number = 0 Then
+            Dim Constants As Object = GPMC.GetConstants()
+            Dim RSOP As Object = GPMC.GetRSOP(Constants.RSOPModeLogging, "", 0)
+            RSOP.LoggingComputer = PC.Name
+            RSOP.LoggingUser = PC.CurrentUser
+            RSOP.CreateQueryResults()
+            RSOP.GenerateReportToFile(Constants.ReportHTML, "C:\RSOP_" & PC.Name & ".html")
+            Dim p As New ProcessStartInfo
+            p.FileName = "iexplore.exe"
+            p.Arguments = "C:\RSOP_" & PC.Name & ".html"
+            Process.Start(p)
+        Else
+            If MsgBox("To run an RSOP report, you need the Microsoft Group" & vbCr & "Policy Management snap-in to be installed." & vbCr & vbCr & "Do you want to open the download page now?", vbYesNo + MsgBoxStyle.Exclamation, "Download Required Component") = vbYes Then
+                Dim psi As New ProcessStartInfo()
+                With psi
+                    .FileName = "iexplore"
+                    .Arguments = "-new http://www.microsoft.com/downloads/details.aspx?FamilyId=0A6D4C24-8CBD-4B35-9272-DD3CBFC81887&displaylang=en"
+                    '.Arguments = "-new http://download.microsoft.com/download/a/d/b/adb5177d-01a7-4f04-bfcc-cb7cea8b5bb7/gpmc.msi"
+                End With
+                Process.Start(psi)
+            End If
+        End If
+    End Sub
+
+    Private Property GPODebugSetting() As String
+        'NONE 0x00000000 [0]
+        'NORMAL 0x00000001 [1]
+        'VERBOSE 0x00000002 [2]
+        'LOGFILE 0x00010000
+        'DEBUGGER 0x00020000
+        'The default value is NORMAL|LOGFILE (0x00010001). [65537]
+
+        'You can combine these values. For example, you can combine VERBOSE 0x00000002 and LOGFILE 0x00010000 to get 0x00010002. 
+        'Therefore, if UserEnvDebugLevel is given a value of 0x00010002, LOGFILE and VERBOSE are both turned on. 
+        'Combining these values is the same as using an OR statement.
+        '0x00010000 OR 0x00000002 = 0x00010002
+        'Note If you set UserEnvDebugLevel to 0x00030002, the most verbose details are logged in the Userenv.log file.
+
+        'The log file is written to the %Systemroot%\Debug\UserMode\Userenv.log file
+        Get
+            If Not ConnectionExists Then
+                Return ""
+            End If
+            Dim sDebug As String = "None"
+            Dim i As Integer = RegistryKey.OpenRemoteBaseKey _
+                        (RegistryHive.LocalMachine, PC.Name). _
+                        OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon"). _
+                        GetValue("UserEnvDebugLevel", 0)
+            Select Case i
+                Case 0
+                    sDebug = "None"
+                Case 1
+                    sDebug = "Normal"
+                Case 2
+                    sDebug = "Verbose"
+                Case 65536
+                    sDebug = "Logfile"
+                Case 131072
+                    sDebug = "Debugger"
+                Case 65537
+                    sDebug = "Normal|Logfile" ' [default setting]
+                Case 65538
+                    sDebug = "Verbose|Logfile"
+                Case 196610
+                    sDebug = "Debug|Verbose|Logfile"
+            End Select
+            Return sDebug
+        End Get
+        Set(ByVal value As String)
+
+            Dim sDebug As Integer
+            Select Case value
+                Case "None"
+                    sDebug = 0
+                Case "Normal"
+                    sDebug = 1
+                Case "Verbose"
+                    sDebug = 2
+                Case "Logfile"
+                    sDebug = 65536
+                Case "Debugger"
+                    sDebug = 131072
+                Case "Normal|Logfile"
+                    sDebug = 65537 ' [default setting]
+                Case "Verbose|Logfile"
+                    sDebug = 65538
+                Case "Debug|Verbose|Logfile"
+                    sDebug = 196610
+            End Select
+
+            RegistryKey.OpenRemoteBaseKey _
+                                    (RegistryHive.LocalMachine, PC.Name). _
+                                    OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon", True). _
+                                    SetValue("UserEnvDebugLevel", sDebug, RegistryValueKind.DWord)
+        End Set
+    End Property
+
+    ' Get gpo debug setting when GPO tab activated.
+    Private Sub gpo_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles gpo.Paint
+        If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
+            gpoDebugCombo.Text = String.Empty
+            gpoDebugCombo.SelectedText = GPODebugSetting
+        End If
+    End Sub
+    Private Sub gpoDebugCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gpoDebugCombo.SelectedIndexChanged
+        Me.Cursor = Cursors.WaitCursor
+        Try
+            Dim NewDebug As String = gpoDebugCombo.SelectedItem
+            GPODebugSetting = NewDebug
+            gpoDebugCombo.Text = GPODebugSetting
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+        Me.Cursor = Cursors.Default
+    End Sub
+    ' Open existing gpo debug file
+    Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+        Dim logfilepath As String = "\\" & PC.Name & "\" & Replace(PC.SystemDirectory, ":", "$") & "\Debug\UserMode\Userenv.log"
+        If System.IO.File.Exists(logfilepath) Then
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = "Notepad.exe"
+            psi.Arguments = logfilepath
+            p.StartInfo = psi
+            p.Start()
+        Else
+            MsgBox("Debug file not found")
+        End If
+    End Sub
+
+    Sub GPO_Tab_Clear()
+        GPODataGrid.Rows.Clear()
+        gpoDebugCombo.Text = ""
+    End Sub
+
+#End Region
+
 #Region "Message"
 
     ' message text box
@@ -10803,6 +11325,9 @@ Public Class Form1
     Private Sub SharedFoldersToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SharedFoldersToolStripMenuItem.Click
         MMC_Snap_in("fsmgmt")
     End Sub
+    Private Sub RSOPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RSOPReportToolStripMenuItem.Click
+        GpoRsop()
+    End Sub
     Private Sub MSinfoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MSinfoToolStripMenuItem.Click
         Dim s As String = Registry.LocalMachine.OpenSubKey("SOFTWARE\Microsoft\Shared Tools\MSINFO").GetValue("Path", "")
         If File.Exists(s) Then
@@ -12038,7 +12563,7 @@ Public Class Form1
                 Me.AcceptButton = aboutOK
             Case "test"
                 Me.AcceptButton = Nothing
-            Case "test"
+            Case "gpo"
                 Me.AcceptButton = Nothing
                 gpoDebugCombo.SelectedText = GPODebugSetting
             Case Else
@@ -12112,6 +12637,9 @@ Public Class Form1
             ' Printers
             ClearPrinters()
 
+            ' gpo tab
+            GPO_Tab_Clear()
+
             ' Deploy Tab
             _to.Text = ""
 
@@ -12137,8 +12665,7 @@ Public Class Form1
             sitename.Text = ""
             org.Text = ""
 
-            ' gpo tab
-            GPODataGrid.Rows.Clear()
+            
 
             If AltUserCheckBox.Checked Then _
                 Shell("net use \\" & PC.Name & "\ipc$ /delete /y", 0, False)
@@ -12506,6 +13033,56 @@ Public Class Form1
     Private Sub Button2_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button2.Click
         ListEventLog()
     End Sub
+
+
+    Private Sub btn_AddDomAdmins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_AddGroup.Click
+
+        AddtoLocalGroup("Administrators", groupToAdd.Text)
+
+    End Sub
+    Private Sub AddtoLocalGroup(ByVal sLocalGroup As String, ByVal sDomainGroup As String)
+
+        Const ADS_SECURE_AUTHENTICATION As Integer = &H1
+        Const ADS_USE_ENCRYPTION As Integer = &H2
+
+        sDomainGroup = Replace(sDomainGroup, "\", "/")
+
+        Me.Cursor = Cursors.WaitCursor
+
+        ' Bind to the local Administrators group with alternate credentials.
+        Dim objNS As Object = GetObject("WinNT:")
+        Dim objLocalAdmins As Object = objNS.OpenDSObject("WinNT://" & PC.Name _
+            & "/" & sLocalGroup & ",group", Me.sAltUsername, Me.sAltPassword, _
+            ADS_SECURE_AUTHENTICATION Or ADS_USE_ENCRYPTION)
+
+        ' Bind to domain group.
+        'Dim objDomainGroup As Object = GetObject("WinNT://District/Domain Admins,group")
+        Dim objDomainGroup As Object = GetObject("WinNT://" & sDomainGroup & ",group")
+
+        ' Check if already a member.
+        Try
+            ' Add the domain group to the local group.
+            objLocalAdmins.Add(objDomainGroup.AdsPath)
+        Catch ex As Exception
+            MsgBox(ex.Message)
+        End Try
+
+        Me.Cursor = Cursors.Default
+
+    End Sub
+
+    Private Sub btn_GetSiteOrg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_GetSiteOrg.Click
+        sitename.Text = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Site")
+        org.Text = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Org")
+    End Sub
+    Private Sub setSiteOrg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles setSiteOrg.Click
+        Me.Cursor = Cursors.WaitCursor
+        wmi.RegistrySetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Site", sitename.Text)
+        wmi.RegistrySetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Org", org.Text)
+        Me.Cursor = Cursors.Default
+    End Sub
+
+
 
     Friend Sub ProcessExited(ByVal sender As Object, ByVal e As System.EventArgs)
         Dim myProcess As Process = DirectCast(sender, Process)
@@ -12886,40 +13463,6 @@ Public Class Form1
     '    GetDescriptorBlockFromEDID = strResult
     'End Function
 
-    Private Sub RSOPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RSOPReportToolStripMenuItem.Click
-        On Error Resume Next
-        Dim GPMC As Object = CreateObject("GPMgmt.GPM")
-        If Err.Number = 0 Then
-            Dim Constants As Object = GPMC.GetConstants()
-            Dim RSOP As Object = GPMC.GetRSOP(Constants.RSOPModeLogging, "", 0)
-            RSOP.LoggingComputer = PC.Name
-            RSOP.LoggingUser = PC.CurrentUser
-            RSOP.CreateQueryResults()
-            RSOP.GenerateReportToFile(Constants.ReportHTML, "c:\reports\" & PC.Name & "_rsop.html")
-        Else
-            If MsgBox("To run an RSOP report, you need the Microsoft Group" & vbCr & "Policy Management snap-in to be installed." & vbCr & vbCr & "Do you want to open the download page now?", vbYesNo + MsgBoxStyle.Exclamation, "Download Required Component") = vbYes Then
-                Dim psi As New ProcessStartInfo()
-                With psi
-                    .FileName = "iexplore"
-                    .Arguments = "-new http://www.microsoft.com/downloads/details.aspx?FamilyId=0A6D4C24-8CBD-4B35-9272-DD3CBFC81887&displaylang=en"
-                    '.Arguments = "-new http://download.microsoft.com/download/a/d/b/adb5177d-01a7-4f04-bfcc-cb7cea8b5bb7/gpmc.msi"
-                End With
-                Process.Start(psi)
-            End If
-        End If
-    End Sub
-
-    Private Sub btn_GetSiteOrg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_GetSiteOrg.Click
-        sitename.Text = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Site")
-        org.Text = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Org")
-    End Sub
-    Private Sub setSiteOrg_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles setSiteOrg.Click
-        Me.Cursor = Cursors.WaitCursor
-        wmi.RegistrySetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Site", sitename.Text)
-        wmi.RegistrySetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\DHIS", "Org", org.Text)
-        Me.Cursor = Cursors.Default
-    End Sub
-
 #End Region
 
     ' If System.Diagnostics.Debugger.IsAttached the (is running in ide)
@@ -12936,440 +13479,6 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
-
-    Private Sub btn_AddDomAdmins_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_AddGroup.Click
-
-        AddtoLocalGroup("Administrators", groupToAdd.Text)
-
-    End Sub
-    Private Sub AddtoLocalGroup(ByVal sLocalGroup As String, ByVal sDomainGroup As String)
-
-        Const ADS_SECURE_AUTHENTICATION As Integer = &H1
-        Const ADS_USE_ENCRYPTION As Integer = &H2
-
-        sDomainGroup = Replace(sDomainGroup, "\", "/")
-
-        Me.Cursor = Cursors.WaitCursor
-
-        ' Bind to the local Administrators group with alternate credentials.
-        Dim objNS As Object = GetObject("WinNT:")
-        Dim objLocalAdmins As Object = objNS.OpenDSObject("WinNT://" & PC.Name _
-            & "/" & sLocalGroup & ",group", Me.sAltUsername, Me.sAltPassword, _
-            ADS_SECURE_AUTHENTICATION Or ADS_USE_ENCRYPTION)
-
-        ' Bind to domain group.
-        'Dim objDomainGroup As Object = GetObject("WinNT://District/Domain Admins,group")
-        Dim objDomainGroup As Object = GetObject("WinNT://" & sDomainGroup & ",group")
-
-        ' Check if already a member.
-        Try
-            ' Add the domain group to the local group.
-            objLocalAdmins.Add(objDomainGroup.AdsPath)
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-
-        Me.Cursor = Cursors.Default
-
-    End Sub
-
-    '-----------------------------------------------------------------------------------
-    '    Group Policy
-    '-----------------------------------------------------------------------------------
-    '    TO DO
-    '-----------------------------------------------------------------------------------
-    ' Edit LOCAL Group Policy
-    ' gpedit.msc /gpcomputer:"myComputer"
-    
-    '
-    ' Directly Edit a GPO...
-    ' gpedit.msc /gpobject:"LDAP://CN={GUID of the GPO},CN=Policies,CN=System,DC=xDerwentSharedServices,DC=NHS,DC=UK"
-    ' gpedit.msc /gpobject: & DSPATH   ....see below.....
-    ' *** strip out CN=Machine, from beginning of DSPATH
-    '-----------------------------------------------------------------------------------
-    'Each time GPOs are processed, a record of all of the GPOs applied to the user or computer is written to the registry.
-    'GPOs applied to the local computer are stored in the following registry path:
-    'HKEY_LOCAL_MACHINE\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
-    '   \{unknown_guid}\0,1,2...
-    '        DisplayName - REG_SZ
-    '        DSPATH
-    '        GPOName = {policy_guid}
-    '        GPOLink - 0= No link information
-                '1= The GPO is linked to a machine (local)
-                '2= The GPO is linked to a Site
-                '3= The GPO is linked to a Domain
-                '4= The GPO is linked to an Organizational Unit 
-    '         Version - REG_DWORD ???
- 
-     '   \{unknown_guid}\0,1,2...
-    
-    
-
-    'GPOs applied to the currently logged on user are stored in the following registry path:
-    'HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Group Policy\History
-    '-----------------------------------------------------------------------------------
-    Protected Friend GPOGridType As String
-    Private Shared gpos As ArrayList = New ArrayList
-    Protected Friend gpoName As String
-    Protected Friend gpoDSPath As String
-    Protected Friend scriptPath As String
-    Protected Friend script As String
-
-    Private Sub btn_gpo_policies_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_policies.Click
-
-        GPOGridType = "policy"
-
-        GPODataGrid.Columns(0).HeaderText = "policy"
-        GPODataGrid.Columns(0).Width = 280
-        GPODataGrid.Columns(1).HeaderText = "type"
-        GPODataGrid.Columns(1).Width = 50
-        GPODataGrid.Columns(1).Visible = True
-        GPODataGrid.Columns(2).HeaderText = "dsPath"
-        GPODataGrid.Columns(2).Width = 50
-        GPODataGrid.Columns(2).Visible = False
-
-        GPODataGrid.Rows.Clear()
-        gpos.Clear()
-
-        If PC.OSVersionNumeric > 5 Then
-            EnumGPOPolicies("Machine")
-            If Not PC.CurrentUserSID Is Nothing Then
-                EnumGPOPolicies("User")
-            End If
-        Else
-            MsgBox("currently only implemented for xp/2003 clients")
-        End If
-    End Sub
-    Private Sub btn_startupscripts_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_startupscripts.Click
-
-        GPOGridType = "script"
-
-        GPODataGrid.Columns(0).HeaderText = "script"
-        GPODataGrid.Columns(0).Width = 130
-        GPODataGrid.Columns(1).HeaderText = "parent policy"
-        GPODataGrid.Columns(1).Width = 150
-        GPODataGrid.Columns(2).HeaderText = "type"
-        GPODataGrid.Columns(2).Width = 50
-        GPODataGrid.Columns(3).HeaderText = "path"
-        GPODataGrid.Columns(3).Width = 100
-        GPODataGrid.Columns(3).Visible = True
-
-        GPODataGrid.Rows.Clear()
-
-        If PC.OSVersionNumeric > 5 Then
-            EnumGPOScripts("startup")
-            EnumGPOScripts("shutdown")
-            If Not PC.CurrentUserSID Is Nothing Then
-                EnumGPOScripts("Logon")
-                EnumGPOScripts("Logoff")
-            End If
-        Else
-            MsgBox("currently only implemented for xp/2003 clients")
-        End If
-
-        'gpoDebugMode.Text = GPODebugSetting
-
-    End Sub
-
-    Private Sub EnumGPOPolicies(ByVal sBaseKey As String)
-        Dim basekey As String
-        Dim hive As RegistryHive
-        Select Case LCase(sBaseKey)
-            Case "machine"
-                basekey = "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
-                hive = RegistryHive.LocalMachine
-            Case "user"
-                basekey = PC.CurrentUserSID & "Software\Microsoft\Windows\CurrentVersion\Group Policy\History"
-                hive = RegistryHive.Users
-            Case Else
-                Exit Sub
-        End Select
-
-        Dim BaseReg As RegistryKey
-        Try
-            BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
-            Dim iLen As Integer = BaseReg.GetSubKeyNames.Length - 1
-            Dim arrGPO(iLen) As String
-            For Each SidSubKey As String In BaseReg.GetSubKeyNames
-                For Each gposubkey As String In BaseReg.OpenSubKey(SidSubKey).GetSubKeyNames
-                    Dim gpoDSPath As String = LCase(BaseReg.OpenSubKey(SidSubKey).OpenSubKey(gposubkey, False).GetValue("DSPath"))
-                    Dim gpoName As String = BaseReg.OpenSubKey(SidSubKey).OpenSubKey(gposubkey, False).GetValue("DisplayName")
-                    If Not gpos.Contains(LCase(gpoName)) Then
-                        gpos.Add(LCase(gpoName))
-                        GPODataGrid.Rows.Add(gpoName, LCase(sBaseKey), Replace(Replace(gpoDSPath, "cn=machine,", ""), "cn=user,", ""))
-                    End If
-                Next
-            Next
-        Catch ex As NullReferenceException
-            ' key not found
-        End Try
-    End Sub
-
-    Private Sub EnumGPOScripts(ByVal sBaseKey As String)
-
-        Dim basekey As String
-        Dim hive As RegistryHive
-        Select Case LCase(sBaseKey)
-            Case "startup"
-                basekey = "Software\Policies\Microsoft\Windows\System\Scripts\Startup"
-                hive = RegistryHive.LocalMachine
-            Case "shutdown"
-                basekey = "Software\Policies\Microsoft\Windows\System\Scripts\Shutdown"
-                hive = RegistryHive.LocalMachine
-            Case "logon"
-                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts\Logon"
-                hive = RegistryHive.Users
-            Case "logoff"
-                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts\Logoff"
-                hive = RegistryHive.Users
-            Case Else
-                Exit Sub
-        End Select
-
-        Dim BaseReg As RegistryKey
-        Try
-            BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
-            Dim iLen As Integer = BaseReg.GetSubKeyNames.Length - 1
-            Dim arrGPO(iLen) As String
-            For Each subStartupKey As String In BaseReg.GetSubKeyNames
-                Dim gponame As String = BaseReg.OpenSubKey(subStartupKey, False).GetValue("DisplayName")
-                Dim gpoPath As String = BaseReg.OpenSubKey(subStartupKey, False).GetValue("FileSysPath")
-                Dim scriptlist As String = ""
-                For Each scriptsubkey As String In BaseReg.OpenSubKey(subStartupKey).GetSubKeyNames
-                    Dim scriptFullPath As String = BaseReg.OpenSubKey(subStartupKey).OpenSubKey(scriptsubkey, False).GetValue("Script")
-                    Dim scriptName As String = scriptFullPath.Substring(scriptFullPath.LastIndexOf("\") + 1)
-                    Dim scriptFolder As String = gpoPath & "\Scripts\" & sBaseKey
-                    If InStr(scriptFullPath, "\") > 0 Then
-                        scriptFullPath = scriptFullPath.Substring(0, scriptFullPath.LastIndexOf("\"))
-                    Else
-                        scriptFullPath = scriptFolder
-                    End If
-                    GPODataGrid.Rows.Add(scriptName, gponame, LCase(sBaseKey), scriptFullPath)
-                Next
-            Next
-        Catch ex As NullReferenceException
-            ' key not found
-        End Try
-
-    End Sub
-    Private Sub EnumGPOScripts_2K(ByVal sBaseKey As String)
-
-        Dim basekey As String
-        Dim hive As RegistryHive
-        Select Case LCase(sBaseKey)
-            Case "startup"
-                basekey = "Software\Policies\Microsoft\Windows\System\Scripts"
-                hive = RegistryHive.LocalMachine
-            Case "shutdown"
-                basekey = "Software\Policies\Microsoft\Windows\System\Scripts"
-                hive = RegistryHive.LocalMachine
-            Case "logon"
-                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts"
-                hive = RegistryHive.Users
-            Case "logoff"
-                basekey = PC.CurrentUserSID & "\Software\Policies\Microsoft\Windows\System\Scripts"
-                hive = RegistryHive.Users
-            Case Else
-                Exit Sub
-        End Select
-
-        '            Win2000(scripts)
-        'HKLM\software\policies\microsoft\windows\system\scripts
-        'shutdown REG_SZ ; separated
-        'startup REG_SZ ; separated
-
-        'HKU\<SID>\software\policies\microsoft\windows\system\scripts
-        'Logoff REG_SZ ; separated
-        'Logon REG_SZ ; separated
-
-        'shutdown()
-        '\\xDerwentSharedServices.nhs.uk\SysVol\xDerwentSharedServices.nhs.uk\Policies\{E386E7A3-FBA2-4BAD-9774-ECFB780F2FD2}\Machine\Scripts
-
-        '        startup
-        '\\xDerwentSharedServices.nhs.uk\SysVol\xDerwentSharedServices.nhs.uk\Policies\{CCEE5ED4-5A5A-4981-8FDF-D86D72A394C0}\Machine\Scripts
-        '\xDerwentSharedServices.nhs.uk\SysVol\xDerwentSharedServices.nhs.uk\Policies\{D2E4CB83-1D01-4992-B427-82EB9E37007F}\Machine\Scripts
-        '\\xDerwentSharedServices.nhs.uk\SysVol\xDerwentSharedServices.nhs.uk\Policies\{4EC61B3E-68E0-47C3-A68E-DF68DF7148A4}\Machine\Scripts
-
-        Dim BaseReg As RegistryKey
-        BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
-        Dim gpoPath As String = BaseReg.GetValue(sBaseKey)
-
-
-        'scriptDataGrid.Rows.Add(scriptName, gponame, LCase(sBaseKey), scriptFullPath)
-
-    End Sub
-
-
-    ' gpo script context menu
-
-
-
-    ' GPO Datagrid context menu
-    Private Sub GPODataGrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles GPODataGrid.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
-            If hti.Type = DataGridViewHitTestType.Cell Then
-                GPODataGrid.ClearSelection()
-                GPODataGrid(hti.ColumnIndex, hti.RowIndex).Selected = True
-
-                If GPOGridType = "policy" Then
-                    script_openContainer.Visible = False
-                    Me.gpoName = GPODataGrid(0, hti.RowIndex).Value
-                    Me.gpoDSPath = GPODataGrid(2, hti.RowIndex).Value
-                ElseIf GPOGridType = "script" Then
-                    script_openContainer.Visible = True
-                    Me.script = GPODataGrid(0, hti.RowIndex).Value
-                    Me.scriptPath = GPODataGrid(3, hti.RowIndex).Value
-                End If
-
-                gpoContextMenu.Show(GPODataGrid, New Point(e.X, e.Y))
-            End If
-        End If
-    End Sub
-
-
-
-    Private Sub script_openContainer_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles script_openContainer.Click
-        openfolder(scriptPath)
-    End Sub
-    Private Sub EditToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles EditToolStripMenuItem.Click
-
-        If GPOGridType = "policy" Then
-            MsgBox("gpedit.msc " & "/gpobject:" & Chr(34) & gpoDSPath & Chr(34))
-            Dim p As New Process
-            Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.FileName = "gpedit.msc"
-            psi.Arguments = "/gpobject:" & Chr(34) & gpoDSPath & Chr(34)
-            p.StartInfo = psi
-            p.Start()
-
-        ElseIf GPOGridType = "script" Then
-
-            Dim scripteditor As String = Registry.ClassesRoot.OpenSubKey("VBSFile\Shell\Edit\Command").GetValue("")
-            Dim p As New Process
-            Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.FileName = Trim(Replace(scripteditor, "%1", ""))
-            psi.Arguments = Me.scriptPath & "\" & Me.script
-            p.StartInfo = psi
-            p.Start()
-
-        End If
-
-    End Sub
-
-
-    Private Property GPODebugSetting() As String
-        'NONE 0x00000000 [0]
-        'NORMAL 0x00000001 [1]
-        'VERBOSE 0x00000002 [2]
-        'LOGFILE 0x00010000
-        'DEBUGGER 0x00020000
-        'The default value is NORMAL|LOGFILE (0x00010001). [65537]
-
-        'You can combine these values. For example, you can combine VERBOSE 0x00000002 and LOGFILE 0x00010000 to get 0x00010002. 
-        'Therefore, if UserEnvDebugLevel is given a value of 0x00010002, LOGFILE and VERBOSE are both turned on. 
-        'Combining these values is the same as using an OR statement.
-        '0x00010000 OR 0x00000002 = 0x00010002
-        'Note If you set UserEnvDebugLevel to 0x00030002, the most verbose details are logged in the Userenv.log file.
-
-        'The log file is written to the %Systemroot%\Debug\UserMode\Userenv.log file
-        Get
-            Dim sDebug As String = "None"
-            Dim i As Integer = RegistryKey.OpenRemoteBaseKey _
-                        (RegistryHive.LocalMachine, PC.Name). _
-                        OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon"). _
-                        GetValue("UserEnvDebugLevel", 0)
-            Select Case i
-                Case 0
-                    sDebug = "None"
-                Case 1
-                    sDebug = "Normal"
-                Case 2
-                    sDebug = "Verbose"
-                Case 65536
-                    sDebug = "Logfile"
-                Case 131072
-                    sDebug = "Debugger"
-                Case 65537
-                    sDebug = "Normal|Logfile" ' [default setting]
-                Case 65538
-                    sDebug = "Verbose|Logfile"
-                Case 196610
-                    sDebug = "Debug|Verbose|Logfile"
-            End Select
-            Return sDebug
-        End Get
-        Set(ByVal value As String)
-
-            Dim sDebug As Integer
-            Select Case value
-                Case "None"
-                    sDebug = 0
-                Case "Normal"
-                    sDebug = 1
-                Case "Verbose"
-                    sDebug = 2
-                Case "Logfile"
-                    sDebug = 65536
-                Case "Debugger"
-                    sDebug = 131072
-                Case "Normal|Logfile"
-                    sDebug = 65537 ' [default setting]
-                Case "Verbose|Logfile"
-                    sDebug = 65538
-                Case "Debug|Verbose|Logfile"
-                    sDebug = 196610
-            End Select
-
-            RegistryKey.OpenRemoteBaseKey _
-                                    (RegistryHive.LocalMachine, PC.Name). _
-                                    OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon", True). _
-                                    SetValue("UserEnvDebugLevel", sDebug, RegistryValueKind.DWord)
-        End Set
-    End Property
-
-
-
-    ' Get gpo debug setting when GPO tab activated.
-    Private Sub gpo_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles gpo.Paint
-        If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
-            gpoDebugCombo.Text = String.Empty
-            gpoDebugCombo.SelectedText = GPODebugSetting
-        End If
-    End Sub
-    Private Sub gpoDebugCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gpoDebugCombo.SelectedIndexChanged
-        Me.Cursor = Cursors.WaitCursor
-        Try
-            Dim NewDebug As String = gpoDebugCombo.SelectedItem
-            GPODebugSetting = NewDebug
-            gpoDebugCombo.Text = GPODebugSetting
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-        Me.Cursor = Cursors.Default
-    End Sub
-    ' Open existing gpo debug file
-    Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
-        Dim logfilepath As String = "\\" & PC.Name & "\" & Replace(PC.SystemDirectory, ":", "$") & "\Debug\UserMode\Userenv.log"
-        If System.IO.File.Exists(logfilepath) Then
-            Dim p As New Process
-            Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.FileName = "Notepad.exe"
-            psi.Arguments = logfilepath
-            p.StartInfo = psi
-            p.Start()
-        Else
-            MsgBox("Debug file not found")
-        End If
-    End Sub
-
-
-    Private Sub Sub_Version2()
-        ' cmc2
-        ' subversion setup
-        ' tortoisesvn
-    End Sub
-
 
 
 End Class
