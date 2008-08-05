@@ -4,6 +4,7 @@ Imports System.Threading
 Imports System.Net
 Imports System.IO
 Imports Microsoft.Win32
+Imports System.DirectoryServices
 
 
 Public Class Form1
@@ -511,7 +512,7 @@ Public Class Form1
     Friend WithEvents col2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Col3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupPolicyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Button5 As System.Windows.Forms.Button
+    Friend WithEvents btn_adNew As System.Windows.Forms.Button
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -535,9 +536,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -727,6 +728,7 @@ Public Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.aduser = New System.Windows.Forms.TabPage
         Me.adpanel = New System.Windows.Forms.Panel
+        Me.btn_adNew = New System.Windows.Forms.Button
         Me.PasswordGroupBox = New System.Windows.Forms.GroupBox
         Me.forcepasswordchange = New System.Windows.Forms.CheckBox
         Me.Label29 = New System.Windows.Forms.Label
@@ -1008,7 +1010,6 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.Button5 = New System.Windows.Forms.Button
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2713,7 +2714,7 @@ Public Class Form1
         '
         'adpanel
         '
-        Me.adpanel.Controls.Add(Me.Button5)
+        Me.adpanel.Controls.Add(Me.btn_adNew)
         Me.adpanel.Controls.Add(Me.PasswordGroupBox)
         Me.adpanel.Controls.Add(Me.Label28)
         Me.adpanel.Controls.Add(Me.FQDN)
@@ -2730,6 +2731,15 @@ Public Class Form1
         Me.adpanel.Name = "adpanel"
         Me.adpanel.Size = New System.Drawing.Size(367, 235)
         Me.adpanel.TabIndex = 31
+        '
+        'btn_adNew
+        '
+        Me.btn_adNew.Location = New System.Drawing.Point(134, 50)
+        Me.btn_adNew.Name = "btn_adNew"
+        Me.btn_adNew.Size = New System.Drawing.Size(10, 10)
+        Me.btn_adNew.TabIndex = 31
+        Me.btn_adNew.Text = "nw"
+        Me.btn_adNew.UseVisualStyleBackColor = True
         '
         'PasswordGroupBox
         '
@@ -3333,22 +3343,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3762,8 +3772,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -5820,15 +5830,6 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
-        'Button5
-        '
-        Me.Button5.Location = New System.Drawing.Point(275, 101)
-        Me.Button5.Name = "Button5"
-        Me.Button5.Size = New System.Drawing.Size(75, 23)
-        Me.Button5.TabIndex = 31
-        Me.Button5.Text = "Button5"
-        Me.Button5.UseVisualStyleBackColor = True
-        '
         'Form1
         '
         Me.AccessibleName = "computer management console"
@@ -6019,20 +6020,20 @@ Public Class Form1
         ' Specify form settings for testing..
         If InStr(LCase(cmcUser.username), "forman") Then
             TestToolStripMenuItem.Visible = True
-            'get_processes_by_wmi_checkbox.Visible = True
-            'sw_use_wmi_checkbox.Visible = True
             SetPrinterAsDefaultToolStripMenuItem.Visible = True
+            btn_adNew.Visible = True
         Else
             TestToolStripMenuItem.Visible = False
             Tabholder1.TabPages.RemoveAt(14)
             sw_use_wmi_checkbox.Visible = False
+            btn_adNew.Visible = False
         End If
 
-            If cmcUser.Computer_ADMember Then
-                adpanel.Enabled = True
-            Else
-                adpanel.Enabled = False
-            End If
+        If cmcUser.Computer_ADMember Then
+            adpanel.Enabled = True
+        Else
+            adpanel.Enabled = False
+        End If
 
 
         ' Get computername as startup argument
@@ -9410,6 +9411,7 @@ Public Class Form1
 
 #End Region
 
+
 #Region "AD User"
 
     Private Sub samaccountname_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles samaccountname.TextChanged
@@ -9444,97 +9446,68 @@ Public Class Form1
 
     End Sub
 
-    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button5.Click
-        Dim ds As String = GetUserFQDN(samaccountname.Text)
-        MsgBox(ds)
-        aduserprofile_new(ds)
-    End Sub
-    Private Function GetUserFQDN(ByVal user As String) As String
 
-        Dim FQDN As String = String.Empty
+    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_adNew.Click
 
-        Dim SLSearchPath As String = String.Empty
-        Dim Username As String = Me.sAltUsername
-        Dim Password As String = Me.sAltPassword
+        Dim strUser As String = "peter forman"
 
-        If InStr(user, "\") = 0 Then
-            SLSearchPath = "LDAP://dc=xderwentsharedservices,dc=nhs,dc=uk"
-        Else
-            If user.ToUpper.StartsWith("CHCS_ND\") Then
-                SLSearchPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
-            ElseIf user.ToUpper.StartsWith("DISTRICT\") Then
-                SLSearchPath = "LDAP://dc=xderwentsharedservices,dc=nhs,dc=uk"
-            End If
-            user = Mid(user, InStr(user, "\") + 1)
-            MsgBox(user)
-        End If
-
-        'Dim UserInfo As String
-
-        'Get the user details from active directory
-        Dim ds As New DirectoryServices.DirectorySearcher( _
-        New DirectoryServices.DirectoryEntry(SLSearchPath, Username, Password), _
-                         "(&(objectCategory=User)(sAMAccountName=" & user & "))", _
-                         New String() {"displayName", "telephoneNumber", "mail"}, _
-                         DirectoryServices.SearchScope.Subtree)
-
-        Dim sr As DirectoryServices.SearchResult = ds.FindOne()
-        If Not sr Is Nothing Then
-            FQDN = sr.Path
-        End If
-
-        Return FQDN
-    End Function
-    Sub RunVBScript()
-        ' Included a COM reference to "Microsoft Script Control" (MSScriptControl)
-        Dim host As New MSScriptControl.ScriptControlClass
-        host.Language = "VBScript"
-        host.AddCode("Sub main" & vbCr & "Msgbox(""Hello"")" & vbCr & "End Sub")
-        host.Run("main")
-    End Sub
+        Dim username As String = "Forman\test_user"
+        Dim password As String = "Password1"
 
 
-    Private Sub aduserprofile_new(ByVal ADsPath As String)
+        Dim adsPath As String = "LDAP://server/CN=Users,dc=home,DC=peterforman,DC=net"
+        Dim searchRoot As DirectoryEntry = Nothing
+        Dim ds As DirectorySearcher = Nothing
+        Dim src As SearchResultCollection = Nothing
 
-        Dim objUser As Object = GetObject(ADsPath)
+        Using (searchRoot)
+            searchRoot = New DirectoryEntry( _
+                adsPath, _
+                username, _
+                password, _
+                AuthenticationTypes.Secure _
+                )
 
-        '====  Fully Qualified Domain Name  ========================
+            Dim attribs() As String = New String() {"distinguishedName", "sAMAccountName", "name", "mail", "telephoneNumber", "physicalDeliveryOfficeName", "profilePath", "homeDirectory", "homePath"}
+            Using (ds)
+                ds = New DirectorySearcher( _
+                    searchRoot, _
+                    "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))", _
+                    attribs _
+                    )
 
-        'FQDN.Text = strUserFQDN
+                ds.SearchScope = SearchScope.Subtree
+                Using (src)
+                    src = ds.FindAll()
+                    MsgBox("Returning " & src.Count)
+                    For Each sr As SearchResult In src
+                        For Each s As String In attribs
+                            If sr.Properties.Contains(s) Then
+                                MsgBox(s & ": " & sr.Properties(s)(0))
+                            End If
+                        Next
+                    Next
+                End Using
+            End Using
+        End Using
 
-        '====  PROFILE   ===========================================
 
-        objUser.GetInfo()
-
-        samaccountname.Text = objUser.Get("sAMAccountName")
-        'givenname.Text = objUser.Get("givenName")
-        'sn.Text = objUser.Get("sn")
-        '.Add("UserPrincipleName", objUser.Get("userPrincipalName"))
+        'samaccountname.Text = objUser.Get("sAMAccountName")
+        ''givenname.Text = objUser.Get("givenName")
+        ''sn.Text = objUser.Get("sn")
+        ''.Add("UserPrincipleName", objUser.Get("userPrincipalName"))
         'mail.Text = objUser.Get("mail")
-        telephonenumber.Text = objUser.Get("telephoneNumber")
-        TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
-        TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
-        TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
-        'adusergrid.Rows.Add("Script Path", objUser.Get("scriptPath"))
-        profilepath.Text = objUser.Get("profilePath")
-        homedirectory.Text = objUser.Get("homeDirectory")
-        homedrive.Text = objUser.Get("homeDrive")
-
-
-        ''====  GROUP MEMBERSHIP   ==================================
-
-        Dim strgroup As String
-        Dim objgroup As Object
-        For Each strgroup In objUser.memberOf
-            objgroup = GetObject("LDAP://" & strgroup)
-            adGroupsListBox.Items.Add(objgroup.CN)
-        Next
-
-        Cursor = Cursors.Default
-        Err.Number = 0
-
+        'telephonenumber.Text = objUser.Get("telephoneNumber")
+        'TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
+        'TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
+        'TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+        ''adusergrid.Rows.Add("Script Path", objUser.Get("scriptPath"))
+        'profilepath.Text = objUser.Get("profilePath")
+        'homedirectory.Text = objUser.Get("homeDirectory")
+        'homedrive.Text = objUser.Get("homeDrive")
 
     End Sub
+
     Private Sub aduserprofile(ByVal strNTName As String)
 
         If InStr(strNTName, "\") = 0 Then
