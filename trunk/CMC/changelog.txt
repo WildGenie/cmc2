@@ -4,6 +4,10 @@ ToDo
 ' enum subkeys error when no subkeys - write test value?
 
 ====================================================================================================
+05/08/2008
+feature:  Group Policy tab added to live setup.
+feature:  gpo policy enumeration added.
+feature:  gpo script enumeration added for windows 2000 machines.
 
 01/08/2008
 code:     uploaded to cmc2 subversion repository.
