@@ -540,9 +540,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -2072,7 +2072,7 @@ Public Class Form1
         Me.AboutToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.information
         Me.AboutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'SaveFileDialog1
@@ -3418,22 +3418,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle7
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3847,8 +3847,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle8
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -9767,10 +9767,16 @@ Public Class Form1
         txtCompany.Text = strOrg
 
         ' ts properties cannot be enumerated above...
-        Dim objUser As Object = GetObject("LDAP://" & strUserDN)
-        TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
-        TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
-        TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+        Try
+            Dim objUser As Object = GetObject("LDAP://" & strUserDN)
+            TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
+            TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
+            TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+        Catch ex As Exception
+            MsgBox("Unable to enumerate terminal" & vbCr & "services information for " & strUser & vbCr & vbCr & ex.Message)
+            btn_EnumGroups.Enabled = False
+        End Try
+        
 
         'Dim strgroup As String
         'Dim objgroup As Object
@@ -10027,10 +10033,10 @@ Public Class Form1
 
         If PC.OSVersionNumeric > 5 Then
 
-            GPODataGrid.Columns(0).HeaderText = "script (right click for options)"
-            GPODataGrid.Columns(0).Width = 150
+            GPODataGrid.Columns(0).HeaderText = "script (right click for menu)"
+            GPODataGrid.Columns(0).Width = 160
             GPODataGrid.Columns(1).HeaderText = "parent policy"
-            GPODataGrid.Columns(1).Width = 150
+            GPODataGrid.Columns(1).Width = 140
             GPODataGrid.Columns(1).Visible = True
             GPODataGrid.Columns(2).HeaderText = "type"
             GPODataGrid.Columns(2).Width = 70
@@ -10064,7 +10070,7 @@ Public Class Form1
 
 
         Else
-            GPODataGrid.Columns(0).HeaderText = "script (right click for options)"
+            GPODataGrid.Columns(0).HeaderText = "script (right click for menu)"
             GPODataGrid.Columns(0).Width = 290
             GPODataGrid.Columns(1).HeaderText = "parent policy"
             GPODataGrid.Columns(1).Width = 150
@@ -12236,9 +12242,10 @@ Public Class Form1
 
             VNC_INSTALL_RUNNING = True
             Me.ControlBox = False
-            computername.Enabled = False
+            'computername.Enabled = False
 
             WriteLog(strcomputer & " - vnc - installing service")
+
             If AltUserCheckBox.Checked Then
                 vncuser = " -u " & Me.sAltUsername
                 vncpass = " -p " & Me.sAltPassword
@@ -12276,12 +12283,28 @@ Public Class Form1
                 RemoteExec(strcomputer, "c:\winvnc\winvnc.cmd")
             End If
 
+            Dim count As Integer = 0
+            Dim svc_ok As Boolean = True
             Do While IsProcessRunning("winvnc4.exe") = False
                 System.Threading.Thread.Sleep(1000)
+                count += 1
+                If count = 15 Then
+                    svc_ok = False
+                    Exit Do
+                End If
             Loop
 
+            If svc_ok = False Then
+                If IsProcessRunning("winvnc4.exe") = False Then
+                    Panel2.Text = "Error starting VNC service."
+                    Me.Cursor = Cursors.Default
+                    VNC_INSTALL_RUNNING = False
+                    Me.ControlBox = True
+                    Exit Sub
+                End If
+            End If
 
-            System.Threading.Thread.Sleep(1000)
+            System.Threading.Thread.Sleep(2000)
 
             If vnc_queryconnect Then
                 Panel2.Text = "VNC INSTALLED - Waiting for user to accept connection..."
@@ -12328,7 +12351,7 @@ Public Class Form1
             Me.Cursor = Cursors.Default
             VNC_INSTALL_RUNNING = False
             Me.ControlBox = True
-            computername.Enabled = True
+            'computername.Enabled = True
         End If
 
     End Sub
