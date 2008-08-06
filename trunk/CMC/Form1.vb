@@ -6032,7 +6032,7 @@ Public Class Form1
         If cmcUser.Computer_ADMember Then
             adpanel.Enabled = True
         Else
-            adpanel.Enabled = False
+            'adpanel.Enabled = False
         End If
 
 
@@ -9455,58 +9455,158 @@ Public Class Form1
         Dim password As String = "Password1"
 
 
-        Dim adsPath As String = "LDAP://server/CN=Users,dc=home,DC=peterforman,DC=net"
-        Dim searchRoot As DirectoryEntry = Nothing
-        Dim ds As DirectorySearcher = Nothing
-        Dim src As SearchResultCollection = Nothing
+        'Dim adsPath As String = "LDAP://server/CN=Users,dc=home,DC=peterforman,DC=net"
+        'Dim searchRoot As DirectoryEntry = Nothing
+        'Dim ds As DirectorySearcher = Nothing
+        'Dim src As SearchResultCollection = Nothing
 
-        Using (searchRoot)
-            searchRoot = New DirectoryEntry( _
-                adsPath, _
-                username, _
-                password, _
-                AuthenticationTypes.Secure _
-                )
+        'Using (searchRoot)
+        '    searchRoot = New DirectoryEntry( _
+        '        adsPath, _
+        '        username, _
+        '        password, _
+        '        AuthenticationTypes.Secure _
+        '        )
 
-            Dim attribs() As String = New String() {"distinguishedName", "sAMAccountName", "name", "mail", "telephoneNumber", "physicalDeliveryOfficeName", "profilePath", "homeDirectory", "homePath"}
-            Using (ds)
-                ds = New DirectorySearcher( _
-                    searchRoot, _
-                    "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))", _
-                    attribs _
-                    )
+        '    Dim attribs() As String = New String() {"distinguishedName", _
+        '                                            "sAMAccountName", _
+        '                                            "name", _
+        '                                            "mail", _
+        '                                            "telephoneNumber", _
+        '                                            "physicalDeliveryOfficeName", _
+        '                                            "profilePath", _
+        '                                            "homeDirectory", _
+        '                                            "homePath"}
+        '    Using (ds)
+        '        ds = New DirectorySearcher( _
+        '            searchRoot, _
+        '            "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))", _
+        '            attribs _
+        '            )
 
-                ds.SearchScope = SearchScope.Subtree
-                Using (src)
-                    src = ds.FindAll()
-                    MsgBox("Returning " & src.Count)
-                    For Each sr As SearchResult In src
-                        For Each s As String In attribs
-                            If sr.Properties.Contains(s) Then
-                                MsgBox(s & ": " & sr.Properties(s)(0))
-                            End If
-                        Next
+        '        ds.SearchScope = SearchScope.Subtree
+        '        Using (src)
+        '            src = ds.FindAll()
+        '            MsgBox("Returning " & src.Count)
+        '            For Each sr As SearchResult In src
+        '                For Each s As String In attribs
+        '                    If sr.Properties.Contains(s) Then
+        '                        MsgBox(s & ": " & sr.Properties(s)(0))
+        '                    End If
+        '                Next
+        '            Next
+        '        End Using
+        '    End Using
+        'End Using
+
+
+
+        '----------------------------
+        'Dim rootDSE As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE", _
+        '                                                    Nothing, _
+        '                                                    Nothing, _
+        '                                                    AuthenticationTypes.Secure)
+
+        'Dim bindTest As Object
+        'Dim domainPath As String
+        'Try
+        '    bindTest = rootDSE.NativeObject
+        '    domainPath = rootDSE.Properties("defaultNamingContext")(0)
+        'Catch ex As System.Runtime.InteropServices.COMException
+        '    ' no domain 
+        'End Try
+
+        '----------------------------
+
+        If samaccountname.Text.Contains("\") Then
+            Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
+            strUser = samaccountname.Text.Substring(samaccountname.Text.LastIndexOf("\") + 1)
+
+            Exit Sub
+        End If
+
+        Dim strUserDN As String = String.Empty
+        Dim strDisplayName As String = String.Empty
+        Dim strName As String = String.Empty
+        Dim strMail As String = String.Empty
+        Dim strTel As String = String.Empty
+        Dim strOffice As String = String.Empty
+        Dim strProfPath As String = String.Empty
+        Dim strHomeDir As String = String.Empty
+        Dim strHomeDrv As String = String.Empty
+        Dim strTSProf As String = String.Empty
+        Dim strTSHomeDir As String = String.Empty
+        Dim strTSHomeDrv As String = String.Empty
+
+        'Dim strDefaultDomain As String = NewMainform.objRootLDAP.Properties.Item("DefaultNamingContext").Value.ToString
+        Using DirEntry As New DirectoryEntry("LDAP://server/dc=home,DC=peterforman,DC=net")
+            Using DirSearch As New DirectorySearcher(DirEntry)
+
+                With DirSearch
+                    .PropertiesToLoad.Add("distinguishedName")
+                    .PropertiesToLoad.Add("sAMAccountName")
+                    .PropertiesToLoad.Add("displayName")
+                    .PropertiesToLoad.Add("mail")
+                    .PropertiesToLoad.Add("telephoneNumber")
+                    .PropertiesToLoad.Add("physicalDeliveryOfficeName")
+                    .PropertiesToLoad.Add("profilePath")
+                    .PropertiesToLoad.Add("homeDirectory")
+                    .PropertiesToLoad.Add("homeDrive")
+                    .PropertiesToLoad.Add("terminalServicesProfilePath")
+                    .PropertiesToLoad.Add("terminalServicesHomeDirectory")
+                    .PropertiesToLoad.Add("terminalServicesHomeDrive")
+                    .Filter = "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))"
+                End With
+
+                If DirSearch.FindAll.Count = 0 Then
+                    MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Else
+                    For Each sResultSet As SearchResult In DirSearch.FindAll()
+                        strUserDN = Me.GetProperty(sResultSet, "DistinguishedName")
+                        strDisplayName = Me.GetProperty(sResultSet, "displayName")
+                        strName = Me.GetProperty(sResultSet, "sAMAccountName")
+                        strMail = Me.GetProperty(sResultSet, "mail")
+                        strTel = Me.GetProperty(sResultSet, "telephoneNumber")
+                        strOffice = Me.GetProperty(sResultSet, "physicalDeliveryOfficeName")
+                        strProfPath = Me.GetProperty(sResultSet, "profilePath")
+                        strHomeDir = Me.GetProperty(sResultSet, "homeDirectory")
+                        strHomeDrv = Me.GetProperty(sResultSet, "homeDrive")
+                        strTSProf = Me.GetProperty(sResultSet, "terminalServicesProfilePath")
+                        strTSHomeDir = Me.GetProperty(sResultSet, "terminalServicesHomeDirectory")
+                        strTSHomeDrv = Me.GetProperty(sResultSet, "terminalServicesHomeDrive")
+                        'MsgBox(strUserDN & vbCr & strDisplayName & vbCr & strName & vbCr & strMail & vbCr & strTel)
                     Next
-                End Using
+                End If
             End Using
         End Using
 
 
-        'samaccountname.Text = objUser.Get("sAMAccountName")
+        samaccountname.Text = strName
         ''givenname.Text = objUser.Get("givenName")
         ''sn.Text = objUser.Get("sn")
         ''.Add("UserPrincipleName", objUser.Get("userPrincipalName"))
-        'mail.Text = objUser.Get("mail")
-        'telephonenumber.Text = objUser.Get("telephoneNumber")
-        'TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
-        'TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
-        'TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+        mail.Text = strMail
+        telephonenumber.Text = strTel
+        TerminalServicesProfilePath.Text = strTSProf
+        TerminalServicesHomeDirectory.Text = strTSHomeDir
+        TerminalServicesHomeDrive.Text = strTSHomeDrv
         ''adusergrid.Rows.Add("Script Path", objUser.Get("scriptPath"))
-        'profilepath.Text = objUser.Get("profilePath")
-        'homedirectory.Text = objUser.Get("homeDirectory")
-        'homedrive.Text = objUser.Get("homeDrive")
+        profilepath.Text = strProfPath
+        homedirectory.Text = strHomeDir
+        homedrive.Text = strHomeDrv
 
     End Sub
+    Public Function GetProperty(ByVal srSearchResult As SearchResult, ByVal strPropertyName As String) As String
+        Dim retval As String
+        'Returns a property from a search result.
+        If srSearchResult.Properties.Contains(strPropertyName) Then
+            retval = srSearchResult.Properties(strPropertyName)(0).ToString()
+        Else
+            retval = String.Empty
+        End If
+        Return retval
+    End Function
+
 
     Private Sub aduserprofile(ByVal strNTName As String)
 
