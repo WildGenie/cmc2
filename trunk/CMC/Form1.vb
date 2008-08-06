@@ -155,7 +155,6 @@ Public Class Form1
     Friend WithEvents NetSendTextBox As System.Windows.Forms.TextBox
     Friend WithEvents Label31 As System.Windows.Forms.Label
     Friend WithEvents aduser As System.Windows.Forms.TabPage
-    Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents PasswordGroupBox As System.Windows.Forms.GroupBox
     Friend WithEvents forcepasswordchange As System.Windows.Forms.CheckBox
     Friend WithEvents Label29 As System.Windows.Forms.Label
@@ -166,7 +165,6 @@ Public Class Form1
     Friend WithEvents samaccountname As System.Windows.Forms.TextBox
     Friend WithEvents mail As System.Windows.Forms.TextBox
     Friend WithEvents Label27 As System.Windows.Forms.Label
-    Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents Label25 As System.Windows.Forms.Label
     Friend WithEvents adGroupsListBox As System.Windows.Forms.ListBox
     Friend WithEvents profileGroupBox As System.Windows.Forms.GroupBox
@@ -512,7 +510,13 @@ Public Class Form1
     Friend WithEvents col2 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Col3 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents GroupPolicyToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents btn_adNew As System.Windows.Forms.Button
+    Friend WithEvents txtCompany As System.Windows.Forms.TextBox
+    Friend WithEvents txtOffice As System.Windows.Forms.TextBox
+    Friend WithEvents Label53 As System.Windows.Forms.Label
+    Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents Label54 As System.Windows.Forms.Label
+    Friend WithEvents btn_dsa As System.Windows.Forms.Button
+    Friend WithEvents btn_EnumGroups As System.Windows.Forms.Button
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -536,9 +540,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -728,19 +732,24 @@ Public Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.aduser = New System.Windows.Forms.TabPage
         Me.adpanel = New System.Windows.Forms.Panel
-        Me.btn_adNew = New System.Windows.Forms.Button
+        Me.btn_EnumGroups = New System.Windows.Forms.Button
+        Me.btn_dsa = New System.Windows.Forms.Button
+        Me.telephonenumber = New System.Windows.Forms.TextBox
+        Me.txtCompany = New System.Windows.Forms.TextBox
+        Me.Label54 = New System.Windows.Forms.Label
+        Me.txtOffice = New System.Windows.Forms.TextBox
+        Me.Label53 = New System.Windows.Forms.Label
+        Me.mail = New System.Windows.Forms.TextBox
+        Me.Label26 = New System.Windows.Forms.Label
         Me.PasswordGroupBox = New System.Windows.Forms.GroupBox
         Me.forcepasswordchange = New System.Windows.Forms.CheckBox
         Me.Label29 = New System.Windows.Forms.Label
         Me.resetpassword = New System.Windows.Forms.Button
         Me.password1 = New System.Windows.Forms.TextBox
         Me.password2 = New System.Windows.Forms.TextBox
-        Me.Label28 = New System.Windows.Forms.Label
         Me.FQDN = New System.Windows.Forms.TextBox
         Me.samaccountname = New System.Windows.Forms.TextBox
-        Me.mail = New System.Windows.Forms.TextBox
         Me.Label27 = New System.Windows.Forms.Label
-        Me.Label26 = New System.Windows.Forms.Label
         Me.Label25 = New System.Windows.Forms.Label
         Me.adGroupsListBox = New System.Windows.Forms.ListBox
         Me.profileGroupBox = New System.Windows.Forms.GroupBox
@@ -755,7 +764,6 @@ Public Class Form1
         Me.Label22 = New System.Windows.Forms.Label
         Me.Label24 = New System.Windows.Forms.Label
         Me.userupdate_button = New System.Windows.Forms.Button
-        Me.telephonenumber = New System.Windows.Forms.TextBox
         Me.tools = New System.Windows.Forms.TabPage
         Me.joinGroupbox = New System.Windows.Forms.GroupBox
         Me.domainlogon = New System.Windows.Forms.CheckBox
@@ -915,6 +923,19 @@ Public Class Form1
         Me.Label50 = New System.Windows.Forms.Label
         Me.MappedDrivesButton = New System.Windows.Forms.Button
         Me.printerRefresh = New System.Windows.Forms.Button
+        Me.gpo = New System.Windows.Forms.TabPage
+        Me.btn_gpo_rsop = New System.Windows.Forms.Button
+        Me.btn_gpo_policies = New System.Windows.Forms.Button
+        Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
+        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
+        Me.gpoDebugMode = New System.Windows.Forms.Label
+        Me.gprefresh = New System.Windows.Forms.Button
+        Me.GPODataGrid = New System.Windows.Forms.DataGridView
+        Me.col0 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.col1 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.col2 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.Col3 = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.btn_startupscripts = New System.Windows.Forms.Button
         Me.deploy = New System.Windows.Forms.TabPage
         Me.file_folder = New System.Windows.Forms.TextBox
         Me.folder_radio = New System.Windows.Forms.RadioButton
@@ -936,19 +957,6 @@ Public Class Form1
         Me.Label43 = New System.Windows.Forms.Label
         Me._to = New System.Windows.Forms.TextBox
         Me.AppGo_Button = New System.Windows.Forms.Button
-        Me.gpo = New System.Windows.Forms.TabPage
-        Me.btn_gpo_rsop = New System.Windows.Forms.Button
-        Me.btn_gpo_policies = New System.Windows.Forms.Button
-        Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
-        Me.gpoDebugMode = New System.Windows.Forms.Label
-        Me.gprefresh = New System.Windows.Forms.Button
-        Me.GPODataGrid = New System.Windows.Forms.DataGridView
-        Me.col0 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.col1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.col2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Col3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.btn_startupscripts = New System.Windows.Forms.Button
         Me.startup = New System.Windows.Forms.TabPage
         Me.startupApplyButton = New System.Windows.Forms.Button
         Me.startupModifyButton = New System.Windows.Forms.Button
@@ -1054,9 +1062,9 @@ Public Class Form1
         Me.printers.SuspendLayout()
         CType(Me.printerGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.mappeddrivesGroupBox.SuspendLayout()
-        Me.deploy.SuspendLayout()
         Me.gpo.SuspendLayout()
         CType(Me.GPODataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.deploy.SuspendLayout()
         Me.startup.SuspendLayout()
         CType(Me.startupDataGrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.test.SuspendLayout()
@@ -2714,32 +2722,126 @@ Public Class Form1
         '
         'adpanel
         '
-        Me.adpanel.Controls.Add(Me.btn_adNew)
+        Me.adpanel.Controls.Add(Me.btn_EnumGroups)
+        Me.adpanel.Controls.Add(Me.btn_dsa)
+        Me.adpanel.Controls.Add(Me.telephonenumber)
+        Me.adpanel.Controls.Add(Me.txtCompany)
+        Me.adpanel.Controls.Add(Me.Label54)
+        Me.adpanel.Controls.Add(Me.txtOffice)
+        Me.adpanel.Controls.Add(Me.Label53)
+        Me.adpanel.Controls.Add(Me.mail)
+        Me.adpanel.Controls.Add(Me.Label26)
         Me.adpanel.Controls.Add(Me.PasswordGroupBox)
-        Me.adpanel.Controls.Add(Me.Label28)
         Me.adpanel.Controls.Add(Me.FQDN)
         Me.adpanel.Controls.Add(Me.samaccountname)
-        Me.adpanel.Controls.Add(Me.mail)
         Me.adpanel.Controls.Add(Me.Label27)
-        Me.adpanel.Controls.Add(Me.Label26)
         Me.adpanel.Controls.Add(Me.Label25)
         Me.adpanel.Controls.Add(Me.adGroupsListBox)
         Me.adpanel.Controls.Add(Me.profileGroupBox)
         Me.adpanel.Controls.Add(Me.userupdate_button)
-        Me.adpanel.Controls.Add(Me.telephonenumber)
         Me.adpanel.Location = New System.Drawing.Point(2, 2)
         Me.adpanel.Name = "adpanel"
         Me.adpanel.Size = New System.Drawing.Size(367, 235)
         Me.adpanel.TabIndex = 31
         '
-        'btn_adNew
+        'btn_EnumGroups
         '
-        Me.btn_adNew.Location = New System.Drawing.Point(134, 50)
-        Me.btn_adNew.Name = "btn_adNew"
-        Me.btn_adNew.Size = New System.Drawing.Size(10, 10)
-        Me.btn_adNew.TabIndex = 31
-        Me.btn_adNew.Text = "nw"
-        Me.btn_adNew.UseVisualStyleBackColor = True
+        Me.btn_EnumGroups.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.btn_EnumGroups.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_EnumGroups.Location = New System.Drawing.Point(5, 137)
+        Me.btn_EnumGroups.Name = "btn_EnumGroups"
+        Me.btn_EnumGroups.Size = New System.Drawing.Size(55, 18)
+        Me.btn_EnumGroups.TabIndex = 38
+        Me.btn_EnumGroups.Text = "Groups"
+        Me.btn_EnumGroups.UseVisualStyleBackColor = True
+        '
+        'btn_dsa
+        '
+        Me.btn_dsa.Enabled = False
+        Me.btn_dsa.FlatAppearance.BorderSize = 0
+        Me.btn_dsa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_dsa.Image = Global.CMC.My.Resources.Resources.book_open
+        Me.btn_dsa.Location = New System.Drawing.Point(171, 32)
+        Me.btn_dsa.Name = "btn_dsa"
+        Me.btn_dsa.Size = New System.Drawing.Size(20, 20)
+        Me.btn_dsa.TabIndex = 37
+        Me.btn_dsa.UseVisualStyleBackColor = True
+        '
+        'telephonenumber
+        '
+        Me.telephonenumber.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.telephonenumber.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.telephonenumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.telephonenumber.Location = New System.Drawing.Point(98, 116)
+        Me.telephonenumber.Name = "telephonenumber"
+        Me.telephonenumber.ReadOnly = True
+        Me.telephonenumber.Size = New System.Drawing.Size(75, 18)
+        Me.telephonenumber.TabIndex = 19
+        Me.ToolTip1.SetToolTip(Me.telephonenumber, "Telephone")
+        '
+        'txtCompany
+        '
+        Me.txtCompany.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.txtCompany.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtCompany.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtCompany.Location = New System.Drawing.Point(5, 87)
+        Me.txtCompany.Name = "txtCompany"
+        Me.txtCompany.ReadOnly = True
+        Me.txtCompany.Size = New System.Drawing.Size(168, 18)
+        Me.txtCompany.TabIndex = 33
+        Me.ToolTip1.SetToolTip(Me.txtCompany, "Company")
+        '
+        'Label54
+        '
+        Me.Label54.AutoSize = True
+        Me.Label54.Location = New System.Drawing.Point(95, 104)
+        Me.Label54.Name = "Label54"
+        Me.Label54.Size = New System.Drawing.Size(54, 13)
+        Me.Label54.TabIndex = 36
+        Me.Label54.Text = "telephone"
+        '
+        'txtOffice
+        '
+        Me.txtOffice.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.txtOffice.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.txtOffice.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtOffice.Location = New System.Drawing.Point(5, 116)
+        Me.txtOffice.Name = "txtOffice"
+        Me.txtOffice.ReadOnly = True
+        Me.txtOffice.Size = New System.Drawing.Size(90, 18)
+        Me.txtOffice.TabIndex = 32
+        Me.ToolTip1.SetToolTip(Me.txtOffice, "Office")
+        '
+        'Label53
+        '
+        Me.Label53.AutoSize = True
+        Me.Label53.Location = New System.Drawing.Point(3, 104)
+        Me.Label53.Name = "Label53"
+        Me.Label53.Size = New System.Drawing.Size(32, 13)
+        Me.Label53.TabIndex = 35
+        Me.Label53.Text = "office"
+        '
+        'mail
+        '
+        Me.mail.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.mail.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.mail.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mail.Location = New System.Drawing.Point(5, 60)
+        Me.mail.Name = "mail"
+        Me.mail.ReadOnly = True
+        Me.mail.Size = New System.Drawing.Size(168, 18)
+        Me.mail.TabIndex = 20
+        Me.ToolTip1.SetToolTip(Me.mail, "email address")
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label26.Location = New System.Drawing.Point(3, 75)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(49, 13)
+        Me.Label26.TabIndex = 34
+        Me.Label26.Text = "company"
         '
         'PasswordGroupBox
         '
@@ -2749,9 +2851,9 @@ Public Class Form1
         Me.PasswordGroupBox.Controls.Add(Me.password1)
         Me.PasswordGroupBox.Controls.Add(Me.password2)
         Me.PasswordGroupBox.ForeColor = System.Drawing.Color.SteelBlue
-        Me.PasswordGroupBox.Location = New System.Drawing.Point(219, 23)
+        Me.PasswordGroupBox.Location = New System.Drawing.Point(199, 23)
         Me.PasswordGroupBox.Name = "PasswordGroupBox"
-        Me.PasswordGroupBox.Size = New System.Drawing.Size(142, 65)
+        Me.PasswordGroupBox.Size = New System.Drawing.Size(163, 68)
         Me.PasswordGroupBox.TabIndex = 29
         Me.PasswordGroupBox.TabStop = False
         Me.PasswordGroupBox.Text = "password"
@@ -2761,7 +2863,7 @@ Public Class Form1
         Me.forcepasswordchange.AutoSize = True
         Me.forcepasswordchange.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.forcepasswordchange.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.forcepasswordchange.Location = New System.Drawing.Point(76, 37)
+        Me.forcepasswordchange.Location = New System.Drawing.Point(90, 40)
         Me.forcepasswordchange.Name = "forcepasswordchange"
         Me.forcepasswordchange.Size = New System.Drawing.Size(64, 16)
         Me.forcepasswordchange.TabIndex = 20
@@ -2774,7 +2876,7 @@ Public Class Form1
         Me.Label29.AutoSize = True
         Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label29.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label29.Location = New System.Drawing.Point(92, 48)
+        Me.Label29.Location = New System.Drawing.Point(107, 52)
         Me.Label29.Name = "Label29"
         Me.Label29.Size = New System.Drawing.Size(47, 12)
         Me.Label29.TabIndex = 21
@@ -2784,9 +2886,9 @@ Public Class Form1
         '
         Me.resetpassword.Enabled = False
         Me.resetpassword.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.resetpassword.Location = New System.Drawing.Point(94, 11)
+        Me.resetpassword.Location = New System.Drawing.Point(90, 14)
         Me.resetpassword.Name = "resetpassword"
-        Me.resetpassword.Size = New System.Drawing.Size(42, 23)
+        Me.resetpassword.Size = New System.Drawing.Size(64, 23)
         Me.resetpassword.TabIndex = 19
         Me.resetpassword.Text = "reset"
         Me.ToolTip1.SetToolTip(Me.resetpassword, "reset users password")
@@ -2797,7 +2899,7 @@ Public Class Form1
         Me.password1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.password1.Location = New System.Drawing.Point(6, 18)
         Me.password1.Name = "password1"
-        Me.password1.Size = New System.Drawing.Size(66, 19)
+        Me.password1.Size = New System.Drawing.Size(78, 19)
         Me.password1.TabIndex = 17
         Me.password1.UseSystemPasswordChar = True
         '
@@ -2807,22 +2909,14 @@ Public Class Form1
         Me.password2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.password2.Location = New System.Drawing.Point(6, 38)
         Me.password2.Name = "password2"
-        Me.password2.Size = New System.Drawing.Size(66, 19)
+        Me.password2.Size = New System.Drawing.Size(78, 19)
         Me.password2.TabIndex = 18
         Me.password2.UseSystemPasswordChar = True
         '
-        'Label28
-        '
-        Me.Label28.AutoSize = True
-        Me.Label28.Location = New System.Drawing.Point(194, 114)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(39, 13)
-        Me.Label28.TabIndex = 30
-        Me.Label28.Text = "groups"
-        '
         'FQDN
         '
-        Me.FQDN.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FQDN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.FQDN.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FQDN.ForeColor = System.Drawing.Color.MidnightBlue
         Me.FQDN.Location = New System.Drawing.Point(2, 2)
         Me.FQDN.Name = "FQDN"
@@ -2836,18 +2930,8 @@ Public Class Form1
         Me.samaccountname.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.samaccountname.Location = New System.Drawing.Point(5, 31)
         Me.samaccountname.Name = "samaccountname"
-        Me.samaccountname.Size = New System.Drawing.Size(93, 18)
+        Me.samaccountname.Size = New System.Drawing.Size(127, 18)
         Me.samaccountname.TabIndex = 18
-        '
-        'mail
-        '
-        Me.mail.BackColor = System.Drawing.SystemColors.Window
-        Me.mail.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mail.Location = New System.Drawing.Point(5, 60)
-        Me.mail.Name = "mail"
-        Me.mail.ReadOnly = True
-        Me.mail.Size = New System.Drawing.Size(208, 18)
-        Me.mail.TabIndex = 20
         '
         'Label27
         '
@@ -2857,15 +2941,6 @@ Public Class Form1
         Me.Label27.Size = New System.Drawing.Size(31, 13)
         Me.Label27.TabIndex = 27
         Me.Label27.Text = "email"
-        '
-        'Label26
-        '
-        Me.Label26.AutoSize = True
-        Me.Label26.Location = New System.Drawing.Point(139, 19)
-        Me.Label26.Name = "Label26"
-        Me.Label26.Size = New System.Drawing.Size(54, 13)
-        Me.Label26.TabIndex = 26
-        Me.Label26.Text = "telephone"
         '
         'Label25
         '
@@ -2878,12 +2953,14 @@ Public Class Form1
         '
         'adGroupsListBox
         '
+        Me.adGroupsListBox.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.adGroupsListBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.adGroupsListBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.adGroupsListBox.FormattingEnabled = True
         Me.adGroupsListBox.ItemHeight = 12
-        Me.adGroupsListBox.Location = New System.Drawing.Point(194, 130)
+        Me.adGroupsListBox.Location = New System.Drawing.Point(4, 157)
         Me.adGroupsListBox.Name = "adGroupsListBox"
-        Me.adGroupsListBox.Size = New System.Drawing.Size(166, 100)
+        Me.adGroupsListBox.Size = New System.Drawing.Size(169, 74)
         Me.adGroupsListBox.Sorted = True
         Me.adGroupsListBox.TabIndex = 24
         '
@@ -2899,19 +2976,21 @@ Public Class Form1
         Me.profileGroupBox.Controls.Add(Me.Label20)
         Me.profileGroupBox.Controls.Add(Me.Label22)
         Me.profileGroupBox.Controls.Add(Me.Label24)
+        Me.profileGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.profileGroupBox.ForeColor = System.Drawing.Color.SteelBlue
-        Me.profileGroupBox.Location = New System.Drawing.Point(5, 101)
+        Me.profileGroupBox.Location = New System.Drawing.Point(183, 96)
         Me.profileGroupBox.Name = "profileGroupBox"
-        Me.profileGroupBox.Size = New System.Drawing.Size(185, 131)
+        Me.profileGroupBox.Size = New System.Drawing.Size(179, 134)
         Me.profileGroupBox.TabIndex = 21
         Me.profileGroupBox.TabStop = False
         Me.profileGroupBox.Text = "profile"
         '
         'TerminalServicesHomeDrive
         '
-        Me.TerminalServicesHomeDrive.BackColor = System.Drawing.SystemColors.Window
+        Me.TerminalServicesHomeDrive.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TerminalServicesHomeDrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TerminalServicesHomeDrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TerminalServicesHomeDrive.Location = New System.Drawing.Point(4, 85)
+        Me.TerminalServicesHomeDrive.Location = New System.Drawing.Point(4, 83)
         Me.TerminalServicesHomeDrive.Name = "TerminalServicesHomeDrive"
         Me.TerminalServicesHomeDrive.ReadOnly = True
         Me.TerminalServicesHomeDrive.Size = New System.Drawing.Size(21, 18)
@@ -2919,38 +2998,42 @@ Public Class Form1
         '
         'TerminalServicesHomeDirectory
         '
-        Me.TerminalServicesHomeDirectory.BackColor = System.Drawing.SystemColors.Window
+        Me.TerminalServicesHomeDirectory.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TerminalServicesHomeDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TerminalServicesHomeDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TerminalServicesHomeDirectory.Location = New System.Drawing.Point(28, 85)
+        Me.TerminalServicesHomeDirectory.Location = New System.Drawing.Point(28, 83)
         Me.TerminalServicesHomeDirectory.Name = "TerminalServicesHomeDirectory"
         Me.TerminalServicesHomeDirectory.ReadOnly = True
-        Me.TerminalServicesHomeDirectory.Size = New System.Drawing.Size(151, 18)
+        Me.TerminalServicesHomeDirectory.Size = New System.Drawing.Size(146, 18)
         Me.TerminalServicesHomeDirectory.TabIndex = 1
         Me.ToolTip1.SetToolTip(Me.TerminalServicesHomeDirectory, "double click to open")
         '
         'profilepath
         '
-        Me.profilepath.BackColor = System.Drawing.SystemColors.Window
+        Me.profilepath.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.profilepath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.profilepath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.profilepath.Location = New System.Drawing.Point(4, 54)
         Me.profilepath.Name = "profilepath"
         Me.profilepath.ReadOnly = True
-        Me.profilepath.Size = New System.Drawing.Size(175, 18)
+        Me.profilepath.Size = New System.Drawing.Size(170, 18)
         Me.profilepath.TabIndex = 3
         '
         'homedirectory
         '
-        Me.homedirectory.BackColor = System.Drawing.SystemColors.Window
+        Me.homedirectory.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.homedirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.homedirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.homedirectory.Location = New System.Drawing.Point(29, 25)
         Me.homedirectory.Name = "homedirectory"
         Me.homedirectory.ReadOnly = True
-        Me.homedirectory.Size = New System.Drawing.Size(150, 18)
+        Me.homedirectory.Size = New System.Drawing.Size(145, 18)
         Me.homedirectory.TabIndex = 2
         '
         'homedrive
         '
-        Me.homedrive.BackColor = System.Drawing.SystemColors.Window
+        Me.homedrive.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.homedrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.homedrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.homedrive.Location = New System.Drawing.Point(4, 25)
         Me.homedrive.Name = "homedrive"
@@ -2960,12 +3043,13 @@ Public Class Form1
         '
         'TerminalServicesProfilePath
         '
-        Me.TerminalServicesProfilePath.BackColor = System.Drawing.SystemColors.Window
+        Me.TerminalServicesProfilePath.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TerminalServicesProfilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.TerminalServicesProfilePath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TerminalServicesProfilePath.Location = New System.Drawing.Point(4, 115)
+        Me.TerminalServicesProfilePath.Location = New System.Drawing.Point(4, 111)
         Me.TerminalServicesProfilePath.Name = "TerminalServicesProfilePath"
         Me.TerminalServicesProfilePath.ReadOnly = True
-        Me.TerminalServicesProfilePath.Size = New System.Drawing.Size(175, 18)
+        Me.TerminalServicesProfilePath.Size = New System.Drawing.Size(170, 18)
         Me.TerminalServicesProfilePath.TabIndex = 4
         Me.ToolTip1.SetToolTip(Me.TerminalServicesProfilePath, "double click to open")
         '
@@ -2983,7 +3067,7 @@ Public Class Form1
         '
         Me.Label20.AutoSize = True
         Me.Label20.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label20.Location = New System.Drawing.Point(1, 103)
+        Me.Label20.Location = New System.Drawing.Point(1, 99)
         Me.Label20.Name = "Label20"
         Me.Label20.Size = New System.Drawing.Size(144, 13)
         Me.Label20.TabIndex = 3
@@ -2993,7 +3077,7 @@ Public Class Form1
         '
         Me.Label22.AutoSize = True
         Me.Label22.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label22.Location = New System.Drawing.Point(1, 73)
+        Me.Label22.Location = New System.Drawing.Point(1, 71)
         Me.Label22.Name = "Label22"
         Me.Label22.Size = New System.Drawing.Size(136, 13)
         Me.Label22.TabIndex = 0
@@ -3012,22 +3096,13 @@ Public Class Form1
         'userupdate_button
         '
         Me.userupdate_button.Enabled = False
-        Me.userupdate_button.Location = New System.Drawing.Point(104, 28)
+        Me.userupdate_button.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.userupdate_button.Location = New System.Drawing.Point(138, 27)
         Me.userupdate_button.Name = "userupdate_button"
         Me.userupdate_button.Size = New System.Drawing.Size(30, 26)
         Me.userupdate_button.TabIndex = 23
         Me.userupdate_button.Text = "go"
         Me.userupdate_button.UseVisualStyleBackColor = True
-        '
-        'telephonenumber
-        '
-        Me.telephonenumber.BackColor = System.Drawing.SystemColors.Window
-        Me.telephonenumber.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.telephonenumber.Location = New System.Drawing.Point(141, 32)
-        Me.telephonenumber.Name = "telephonenumber"
-        Me.telephonenumber.ReadOnly = True
-        Me.telephonenumber.Size = New System.Drawing.Size(72, 18)
-        Me.telephonenumber.TabIndex = 19
         '
         'tools
         '
@@ -3343,22 +3418,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle3.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle3.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle3
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle7
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3772,8 +3847,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle8.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -4685,9 +4760,9 @@ Public Class Form1
         Me.Tabholder1.Controls.Add(Me.processes)
         Me.Tabholder1.Controls.Add(Me.printers)
         Me.Tabholder1.Controls.Add(Me.software)
-        Me.Tabholder1.Controls.Add(Me.deploy)
         Me.Tabholder1.Controls.Add(Me.aduser)
         Me.Tabholder1.Controls.Add(Me.gpo)
+        Me.Tabholder1.Controls.Add(Me.deploy)
         Me.Tabholder1.Controls.Add(Me.message)
         Me.Tabholder1.Controls.Add(Me.startup)
         Me.Tabholder1.Controls.Add(Me.tools)
@@ -4887,6 +4962,145 @@ Public Class Form1
         Me.printerRefresh.TabIndex = 0
         Me.printerRefresh.Text = "refresh"
         Me.printerRefresh.UseVisualStyleBackColor = True
+        '
+        'gpo
+        '
+        Me.gpo.Controls.Add(Me.btn_gpo_rsop)
+        Me.gpo.Controls.Add(Me.btn_gpo_policies)
+        Me.gpo.Controls.Add(Me.gpoDebugCombo)
+        Me.gpo.Controls.Add(Me.LinkLabel3)
+        Me.gpo.Controls.Add(Me.gpoDebugMode)
+        Me.gpo.Controls.Add(Me.gprefresh)
+        Me.gpo.Controls.Add(Me.GPODataGrid)
+        Me.gpo.Controls.Add(Me.btn_startupscripts)
+        Me.gpo.Location = New System.Drawing.Point(4, 22)
+        Me.gpo.Name = "gpo"
+        Me.gpo.Padding = New System.Windows.Forms.Padding(3)
+        Me.gpo.Size = New System.Drawing.Size(370, 238)
+        Me.gpo.TabIndex = 16
+        Me.gpo.Text = "Group Policy"
+        Me.gpo.UseVisualStyleBackColor = True
+        '
+        'btn_gpo_rsop
+        '
+        Me.btn_gpo_rsop.Location = New System.Drawing.Point(306, 25)
+        Me.btn_gpo_rsop.Name = "btn_gpo_rsop"
+        Me.btn_gpo_rsop.Size = New System.Drawing.Size(60, 20)
+        Me.btn_gpo_rsop.TabIndex = 8
+        Me.btn_gpo_rsop.Text = "view rsop"
+        Me.btn_gpo_rsop.UseVisualStyleBackColor = True
+        '
+        'btn_gpo_policies
+        '
+        Me.btn_gpo_policies.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_gpo_policies.Location = New System.Drawing.Point(8, 41)
+        Me.btn_gpo_policies.Name = "btn_gpo_policies"
+        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
+        Me.btn_gpo_policies.TabIndex = 1
+        Me.btn_gpo_policies.Text = "applied policies"
+        Me.btn_gpo_policies.UseVisualStyleBackColor = True
+        '
+        'gpoDebugCombo
+        '
+        Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpoDebugCombo.FormattingEnabled = True
+        Me.gpoDebugCombo.Items.AddRange(New Object() {"None", "Normal", "Verbose", "Logfile", "Debugger", "Normal|Logfile", "Verbose|Logfile", "Debug|Verbose|Logfile"})
+        Me.gpoDebugCombo.Location = New System.Drawing.Point(7, 13)
+        Me.gpoDebugCombo.Name = "gpoDebugCombo"
+        Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 20)
+        Me.gpoDebugCombo.TabIndex = 5
+        '
+        'LinkLabel3
+        '
+        Me.LinkLabel3.AutoSize = True
+        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LinkLabel3.ForeColor = System.Drawing.Color.Black
+        Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
+        Me.LinkLabel3.Location = New System.Drawing.Point(97, 3)
+        Me.LinkLabel3.Name = "LinkLabel3"
+        Me.LinkLabel3.Size = New System.Drawing.Size(33, 9)
+        Me.LinkLabel3.TabIndex = 6
+        Me.LinkLabel3.TabStop = True
+        Me.LinkLabel3.Text = "view log"
+        '
+        'gpoDebugMode
+        '
+        Me.gpoDebugMode.AutoSize = True
+        Me.gpoDebugMode.Location = New System.Drawing.Point(4, 0)
+        Me.gpoDebugMode.Name = "gpoDebugMode"
+        Me.gpoDebugMode.Size = New System.Drawing.Size(86, 13)
+        Me.gpoDebugMode.TabIndex = 100
+        Me.gpoDebugMode.Text = "set debug mode:"
+        '
+        'gprefresh
+        '
+        Me.gprefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gprefresh.Location = New System.Drawing.Point(306, 2)
+        Me.gprefresh.Name = "gprefresh"
+        Me.gprefresh.Size = New System.Drawing.Size(60, 22)
+        Me.gprefresh.TabIndex = 7
+        Me.gprefresh.Text = "gpupdate"
+        Me.gprefresh.UseVisualStyleBackColor = True
+        '
+        'GPODataGrid
+        '
+        Me.GPODataGrid.AllowUserToAddRows = False
+        Me.GPODataGrid.AllowUserToDeleteRows = False
+        Me.GPODataGrid.AllowUserToResizeRows = False
+        Me.GPODataGrid.BackgroundColor = System.Drawing.Color.White
+        Me.GPODataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.GPODataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
+        Me.GPODataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.GPODataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col0, Me.col1, Me.col2, Me.Col3})
+        Me.GPODataGrid.Location = New System.Drawing.Point(7, 66)
+        Me.GPODataGrid.MultiSelect = False
+        Me.GPODataGrid.Name = "GPODataGrid"
+        Me.GPODataGrid.ReadOnly = True
+        Me.GPODataGrid.RowHeadersVisible = False
+        Me.GPODataGrid.RowTemplate.Height = 19
+        Me.GPODataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.GPODataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.GPODataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
+        Me.GPODataGrid.Size = New System.Drawing.Size(357, 167)
+        Me.GPODataGrid.TabIndex = 2
+        Me.GPODataGrid.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.GPODataGrid, "Right click for menu")
+        '
+        'col0
+        '
+        Me.col0.HeaderText = ""
+        Me.col0.Name = "col0"
+        Me.col0.ReadOnly = True
+        Me.col0.Width = 400
+        '
+        'col1
+        '
+        Me.col1.HeaderText = ""
+        Me.col1.Name = "col1"
+        Me.col1.ReadOnly = True
+        '
+        'col2
+        '
+        Me.col2.HeaderText = ""
+        Me.col2.Name = "col2"
+        Me.col2.ReadOnly = True
+        '
+        'Col3
+        '
+        Me.Col3.HeaderText = ""
+        Me.Col3.Name = "Col3"
+        Me.Col3.ReadOnly = True
+        Me.Col3.Visible = False
+        '
+        'btn_startupscripts
+        '
+        Me.btn_startupscripts.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_startupscripts.Location = New System.Drawing.Point(108, 41)
+        Me.btn_startupscripts.Name = "btn_startupscripts"
+        Me.btn_startupscripts.Size = New System.Drawing.Size(91, 22)
+        Me.btn_startupscripts.TabIndex = 2
+        Me.btn_startupscripts.Text = "applied scripts"
+        Me.btn_startupscripts.UseVisualStyleBackColor = True
         '
         'deploy
         '
@@ -5126,145 +5340,6 @@ Public Class Form1
         Me.AppGo_Button.Text = "Go"
         Me.ToolTip1.SetToolTip(Me.AppGo_Button, "copy files and run command")
         Me.AppGo_Button.UseVisualStyleBackColor = True
-        '
-        'gpo
-        '
-        Me.gpo.Controls.Add(Me.btn_gpo_rsop)
-        Me.gpo.Controls.Add(Me.btn_gpo_policies)
-        Me.gpo.Controls.Add(Me.gpoDebugCombo)
-        Me.gpo.Controls.Add(Me.LinkLabel3)
-        Me.gpo.Controls.Add(Me.gpoDebugMode)
-        Me.gpo.Controls.Add(Me.gprefresh)
-        Me.gpo.Controls.Add(Me.GPODataGrid)
-        Me.gpo.Controls.Add(Me.btn_startupscripts)
-        Me.gpo.Location = New System.Drawing.Point(4, 22)
-        Me.gpo.Name = "gpo"
-        Me.gpo.Padding = New System.Windows.Forms.Padding(3)
-        Me.gpo.Size = New System.Drawing.Size(370, 238)
-        Me.gpo.TabIndex = 16
-        Me.gpo.Text = "Group Policy"
-        Me.gpo.UseVisualStyleBackColor = True
-        '
-        'btn_gpo_rsop
-        '
-        Me.btn_gpo_rsop.Location = New System.Drawing.Point(306, 25)
-        Me.btn_gpo_rsop.Name = "btn_gpo_rsop"
-        Me.btn_gpo_rsop.Size = New System.Drawing.Size(60, 20)
-        Me.btn_gpo_rsop.TabIndex = 8
-        Me.btn_gpo_rsop.Text = "view rsop"
-        Me.btn_gpo_rsop.UseVisualStyleBackColor = True
-        '
-        'btn_gpo_policies
-        '
-        Me.btn_gpo_policies.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_gpo_policies.Location = New System.Drawing.Point(8, 41)
-        Me.btn_gpo_policies.Name = "btn_gpo_policies"
-        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
-        Me.btn_gpo_policies.TabIndex = 1
-        Me.btn_gpo_policies.Text = "applied policies"
-        Me.btn_gpo_policies.UseVisualStyleBackColor = True
-        '
-        'gpoDebugCombo
-        '
-        Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gpoDebugCombo.FormattingEnabled = True
-        Me.gpoDebugCombo.Items.AddRange(New Object() {"None", "Normal", "Verbose", "Logfile", "Debugger", "Normal|Logfile", "Verbose|Logfile", "Debug|Verbose|Logfile"})
-        Me.gpoDebugCombo.Location = New System.Drawing.Point(7, 13)
-        Me.gpoDebugCombo.Name = "gpoDebugCombo"
-        Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 20)
-        Me.gpoDebugCombo.TabIndex = 5
-        '
-        'LinkLabel3
-        '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel3.ForeColor = System.Drawing.Color.Black
-        Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
-        Me.LinkLabel3.Location = New System.Drawing.Point(97, 3)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(33, 9)
-        Me.LinkLabel3.TabIndex = 6
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "view log"
-        '
-        'gpoDebugMode
-        '
-        Me.gpoDebugMode.AutoSize = True
-        Me.gpoDebugMode.Location = New System.Drawing.Point(4, 0)
-        Me.gpoDebugMode.Name = "gpoDebugMode"
-        Me.gpoDebugMode.Size = New System.Drawing.Size(86, 13)
-        Me.gpoDebugMode.TabIndex = 100
-        Me.gpoDebugMode.Text = "set debug mode:"
-        '
-        'gprefresh
-        '
-        Me.gprefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gprefresh.Location = New System.Drawing.Point(306, 2)
-        Me.gprefresh.Name = "gprefresh"
-        Me.gprefresh.Size = New System.Drawing.Size(60, 22)
-        Me.gprefresh.TabIndex = 7
-        Me.gprefresh.Text = "gpupdate"
-        Me.gprefresh.UseVisualStyleBackColor = True
-        '
-        'GPODataGrid
-        '
-        Me.GPODataGrid.AllowUserToAddRows = False
-        Me.GPODataGrid.AllowUserToDeleteRows = False
-        Me.GPODataGrid.AllowUserToResizeRows = False
-        Me.GPODataGrid.BackgroundColor = System.Drawing.Color.White
-        Me.GPODataGrid.BorderStyle = System.Windows.Forms.BorderStyle.None
-        Me.GPODataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.GPODataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.GPODataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col0, Me.col1, Me.col2, Me.Col3})
-        Me.GPODataGrid.Location = New System.Drawing.Point(7, 66)
-        Me.GPODataGrid.MultiSelect = False
-        Me.GPODataGrid.Name = "GPODataGrid"
-        Me.GPODataGrid.ReadOnly = True
-        Me.GPODataGrid.RowHeadersVisible = False
-        Me.GPODataGrid.RowTemplate.Height = 19
-        Me.GPODataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.GPODataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.GPODataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.GPODataGrid.Size = New System.Drawing.Size(357, 167)
-        Me.GPODataGrid.TabIndex = 2
-        Me.GPODataGrid.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.GPODataGrid, "Right click for menu")
-        '
-        'col0
-        '
-        Me.col0.HeaderText = ""
-        Me.col0.Name = "col0"
-        Me.col0.ReadOnly = True
-        Me.col0.Width = 400
-        '
-        'col1
-        '
-        Me.col1.HeaderText = ""
-        Me.col1.Name = "col1"
-        Me.col1.ReadOnly = True
-        '
-        'col2
-        '
-        Me.col2.HeaderText = ""
-        Me.col2.Name = "col2"
-        Me.col2.ReadOnly = True
-        '
-        'Col3
-        '
-        Me.Col3.HeaderText = ""
-        Me.Col3.Name = "Col3"
-        Me.Col3.ReadOnly = True
-        Me.Col3.Visible = False
-        '
-        'btn_startupscripts
-        '
-        Me.btn_startupscripts.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_startupscripts.Location = New System.Drawing.Point(108, 41)
-        Me.btn_startupscripts.Name = "btn_startupscripts"
-        Me.btn_startupscripts.Size = New System.Drawing.Size(91, 22)
-        Me.btn_startupscripts.TabIndex = 2
-        Me.btn_startupscripts.Text = "applied scripts"
-        Me.btn_startupscripts.UseVisualStyleBackColor = True
         '
         'startup
         '
@@ -5935,11 +6010,11 @@ Public Class Form1
         CType(Me.printerGrid, System.ComponentModel.ISupportInitialize).EndInit()
         Me.mappeddrivesGroupBox.ResumeLayout(False)
         Me.mappeddrivesGroupBox.PerformLayout()
-        Me.deploy.ResumeLayout(False)
-        Me.deploy.PerformLayout()
         Me.gpo.ResumeLayout(False)
         Me.gpo.PerformLayout()
         CType(Me.GPODataGrid, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.deploy.ResumeLayout(False)
+        Me.deploy.PerformLayout()
         Me.startup.ResumeLayout(False)
         Me.startup.PerformLayout()
         CType(Me.startupDataGrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -6021,19 +6096,17 @@ Public Class Form1
         If InStr(LCase(cmcUser.username), "forman") Then
             TestToolStripMenuItem.Visible = True
             SetPrinterAsDefaultToolStripMenuItem.Visible = True
-            btn_adNew.Visible = True
         Else
             TestToolStripMenuItem.Visible = False
             Tabholder1.TabPages.RemoveAt(14)
             sw_use_wmi_checkbox.Visible = False
-            btn_adNew.Visible = False
         End If
 
-        If cmcUser.Computer_ADMember Then
-            adpanel.Enabled = True
-        Else
-            'adpanel.Enabled = False
-        End If
+        'If cmcUser.Computer_ADMember Then
+        '    adpanel.Enabled = True
+        'Else
+        '    adpanel.Enabled = False
+        'End If
 
 
         ' Get computername as startup argument
@@ -6575,15 +6648,12 @@ Public Class Form1
         End If
 
         ' enable adbutton if domain matches
-        If LCase(PC.CurrentUserDomain) = LCase(cmcUser.userdomain) And cmcUser.dnsdomain <> "" Then
-            adbutton.Enabled = True
-            samaccountname.Text = PC.CurrentUser
-        End If
-
-        '#chcs
-        If LCase(PC.CurrentUserDomain) = "chcs_nd" Then
-            adbutton.Enabled = True
-            samaccountname.Text = PC.CurrentUser
+        'If LCase(PC.CurrentUserDomain) = LCase(cmcUser.userdomain) And cmcUser.dnsdomain <> "" Then
+        adbutton.Enabled = True
+        If PC.CurrentUserDomain.ToLower <> "" Then
+            If PC.CurrentUserDomain.ToLower <> PC.Name.ToLower Then
+                samaccountname.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
+            End If
         End If
 
     End Sub
@@ -9411,7 +9481,6 @@ Public Class Form1
 
 #End Region
 
-
 #Region "AD User"
 
     Private Sub samaccountname_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles samaccountname.TextChanged
@@ -9420,18 +9489,26 @@ Public Class Form1
         Else
             userupdate_button.Enabled = False
         End If
+        If samaccountname.Text.Contains("\") Then
+            btn_dsa.Enabled = True
+        Else
+            btn_dsa.Enabled = False
+        End If
     End Sub
+    ' front screen button
     Private Sub adbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles adbutton.Click
 
         Me.Cursor = Cursors.WaitCursor
 
         ClearADUser()
-        aduserprofile(Label_User.Text)
+
         Tabholder1.SelectTab(aduser)
+        ADUserProfile2(Label_User.Text)
 
         Me.Cursor = Cursors.Default
 
     End Sub
+    ' Go button
     Private Sub userupdate_button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles userupdate_button.Click
 
         Me.Cursor = Cursors.WaitCursor
@@ -9439,98 +9516,66 @@ Public Class Form1
         Dim tempADuser As String = Trim(samaccountname.Text)
         ClearADUser()
         samaccountname.Text = tempADuser
-        aduserprofile(tempADuser)
-        'aduserprofile_new(tempADuser)
+        ADUserProfile2(tempADuser)
+        'aduserprofile(tempADuser)
 
         Me.Cursor = Cursors.Default
 
     End Sub
 
 
-    Private Sub Button5_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_adNew.Click
+    Private Sub Button5_Click()
 
-        Dim strUser As String = "peter forman"
+        Dim strUser As String = samaccountname.Text
+        Dim strLDAPPath As String = String.Empty
 
-        Dim username As String = "Forman\test_user"
-        Dim password As String = "Password1"
-
-
-        'Dim adsPath As String = "LDAP://server/CN=Users,dc=home,DC=peterforman,DC=net"
-        'Dim searchRoot As DirectoryEntry = Nothing
-        'Dim ds As DirectorySearcher = Nothing
-        'Dim src As SearchResultCollection = Nothing
-
-        'Using (searchRoot)
-        '    searchRoot = New DirectoryEntry( _
-        '        adsPath, _
-        '        username, _
-        '        password, _
-        '        AuthenticationTypes.Secure _
-        '        )
-
-        '    Dim attribs() As String = New String() {"distinguishedName", _
-        '                                            "sAMAccountName", _
-        '                                            "name", _
-        '                                            "mail", _
-        '                                            "telephoneNumber", _
-        '                                            "physicalDeliveryOfficeName", _
-        '                                            "profilePath", _
-        '                                            "homeDirectory", _
-        '                                            "homePath"}
-        '    Using (ds)
-        '        ds = New DirectorySearcher( _
-        '            searchRoot, _
-        '            "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))", _
-        '            attribs _
-        '            )
-
-        '        ds.SearchScope = SearchScope.Subtree
-        '        Using (src)
-        '            src = ds.FindAll()
-        '            MsgBox("Returning " & src.Count)
-        '            For Each sr As SearchResult In src
-        '                For Each s As String In attribs
-        '                    If sr.Properties.Contains(s) Then
-        '                        MsgBox(s & ": " & sr.Properties(s)(0))
-        '                    End If
-        '                Next
-        '            Next
-        '        End Using
-        '    End Using
-        'End Using
-
-
-
-        '----------------------------
-        'Dim rootDSE As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE", _
-        '                                                    Nothing, _
-        '                                                    Nothing, _
-        '                                                    AuthenticationTypes.Secure)
-
-        'Dim bindTest As Object
-        'Dim domainPath As String
-        'Try
-        '    bindTest = rootDSE.NativeObject
-        '    domainPath = rootDSE.Properties("defaultNamingContext")(0)
-        'Catch ex As System.Runtime.InteropServices.COMException
-        '    ' no domain 
-        'End Try
-
-        '----------------------------
+        ClearADUser()
+        samaccountname.Text = strUser
 
         If samaccountname.Text.Contains("\") Then
             Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
             strUser = samaccountname.Text.Substring(samaccountname.Text.LastIndexOf("\") + 1)
+            Select Case strNTdomain.ToLower
+                Case "district"
+                    strLDAPPath = "LDAP://ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
+                Case "chcs_nd"
+                    strLDAPPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
+                Case "tsha"
+                    strLDAPPath = "LDAP://OHDOM01/ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
+                Case "forman"
+                    strLDAPPath = "LDAP://server/dc=home,DC=peterforman,DC=net"
+            End Select
+        Else
+            ' determine local dns domain
+            Dim rootDSE As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE", _
+                                                                Nothing, _
+                                                                Nothing, _
+                                                                AuthenticationTypes.Secure)
+            Dim bindTest As Object
+            Dim domainPath As String = String.Empty
+            Try
+                bindTest = rootDSE.NativeObject
+                domainPath = rootDSE.Properties("defaultNamingContext")(0)
+                strLDAPPath = "LDAP://" & domainPath
+                strUser = samaccountname.Text
+            Catch ex As System.Runtime.InteropServices.COMException
+                MsgBox("unable to determine default naming context for domain")
+            End Try
+        End If
 
+        If strLDAPPath = String.Empty Then
+            MsgBox("Unknown domain.")
             Exit Sub
         End If
 
+
         Dim strUserDN As String = String.Empty
         Dim strDisplayName As String = String.Empty
-        Dim strName As String = String.Empty
+        'Dim strName As String = String.Empty
         Dim strMail As String = String.Empty
         Dim strTel As String = String.Empty
         Dim strOffice As String = String.Empty
+        Dim strOrg As String = String.Empty
         Dim strProfPath As String = String.Empty
         Dim strHomeDir As String = String.Empty
         Dim strHomeDrv As String = String.Empty
@@ -9539,16 +9584,17 @@ Public Class Form1
         Dim strTSHomeDrv As String = String.Empty
 
         'Dim strDefaultDomain As String = NewMainform.objRootLDAP.Properties.Item("DefaultNamingContext").Value.ToString
-        Using DirEntry As New DirectoryEntry("LDAP://server/dc=home,DC=peterforman,DC=net")
+        Using DirEntry As New DirectoryEntry(strLDAPPath)
             Using DirSearch As New DirectorySearcher(DirEntry)
 
                 With DirSearch
                     .PropertiesToLoad.Add("distinguishedName")
-                    .PropertiesToLoad.Add("sAMAccountName")
+                    '.PropertiesToLoad.Add("sAMAccountName")
                     .PropertiesToLoad.Add("displayName")
                     .PropertiesToLoad.Add("mail")
                     .PropertiesToLoad.Add("telephoneNumber")
                     .PropertiesToLoad.Add("physicalDeliveryOfficeName")
+                    .PropertiesToLoad.Add("company")
                     .PropertiesToLoad.Add("profilePath")
                     .PropertiesToLoad.Add("homeDirectory")
                     .PropertiesToLoad.Add("homeDrive")
@@ -9564,37 +9610,167 @@ Public Class Form1
                     For Each sResultSet As SearchResult In DirSearch.FindAll()
                         strUserDN = Me.GetProperty(sResultSet, "DistinguishedName")
                         strDisplayName = Me.GetProperty(sResultSet, "displayName")
-                        strName = Me.GetProperty(sResultSet, "sAMAccountName")
+                        'strName = Me.GetProperty(sResultSet, "sAMAccountName")
                         strMail = Me.GetProperty(sResultSet, "mail")
                         strTel = Me.GetProperty(sResultSet, "telephoneNumber")
                         strOffice = Me.GetProperty(sResultSet, "physicalDeliveryOfficeName")
+                        strOrg = Me.GetProperty(sResultSet, "company")
                         strProfPath = Me.GetProperty(sResultSet, "profilePath")
                         strHomeDir = Me.GetProperty(sResultSet, "homeDirectory")
                         strHomeDrv = Me.GetProperty(sResultSet, "homeDrive")
-                        strTSProf = Me.GetProperty(sResultSet, "terminalServicesProfilePath")
-                        strTSHomeDir = Me.GetProperty(sResultSet, "terminalServicesHomeDirectory")
-                        strTSHomeDrv = Me.GetProperty(sResultSet, "terminalServicesHomeDrive")
-                        'MsgBox(strUserDN & vbCr & strDisplayName & vbCr & strName & vbCr & strMail & vbCr & strTel)
                     Next
                 End If
             End Using
         End Using
 
-
-        samaccountname.Text = strName
-        ''givenname.Text = objUser.Get("givenName")
-        ''sn.Text = objUser.Get("sn")
-        ''.Add("UserPrincipleName", objUser.Get("userPrincipalName"))
+        FQDN.Text = strUserDN
+        'samaccountname.Text = strName
         mail.Text = strMail
         telephonenumber.Text = strTel
-        TerminalServicesProfilePath.Text = strTSProf
-        TerminalServicesHomeDirectory.Text = strTSHomeDir
-        TerminalServicesHomeDrive.Text = strTSHomeDrv
-        ''adusergrid.Rows.Add("Script Path", objUser.Get("scriptPath"))
         profilepath.Text = strProfPath
         homedirectory.Text = strHomeDir
         homedrive.Text = strHomeDrv
+        txtOffice.Text = strOffice
+        txtCompany.Text = strOrg
 
+        ' ts properties cannot be enumerated above...
+        Dim objUser As Object = GetObject("LDAP://" & strUserDN)
+        TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
+        TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
+        TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+
+        Dim strgroup As String
+        Dim objgroup As Object
+        For Each strgroup In objUser.memberOf
+            objgroup = GetObject("LDAP://" & strgroup)
+            adGroupsListBox.Items.Add(objgroup.CN)
+        Next
+
+
+    End Sub
+
+    Private Sub ADUserProfile2(ByVal strUser As String)
+        'Dim strUser As String = samaccountname.Text
+        Dim strLDAPPath As String = String.Empty
+
+        ClearADUser()
+        samaccountname.Text = strUser
+
+        If samaccountname.Text.Contains("\") Then
+            Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
+            strUser = samaccountname.Text.Substring(samaccountname.Text.LastIndexOf("\") + 1)
+            Select Case strNTdomain.ToLower
+                Case "district"
+                    strLDAPPath = "LDAP://ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
+                Case "chcs_nd"
+                    strLDAPPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
+                Case "tsha"
+                    strLDAPPath = "LDAP://OHDOM01/ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
+                Case "forman"
+                    strLDAPPath = "LDAP://server/dc=home,DC=peterforman,DC=net"
+                Case Else
+                    'MsgBox("Unknown domain: " & strNTdomain)
+            End Select
+        Else
+            ' determine local dns domain
+            Dim rootDSE As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE", _
+                                                                Nothing, _
+                                                                Nothing, _
+                                                                AuthenticationTypes.Secure)
+            Dim bindTest As Object
+            Dim domainPath As String = String.Empty
+            Try
+                bindTest = rootDSE.NativeObject
+                domainPath = rootDSE.Properties("defaultNamingContext")(0)
+                strLDAPPath = "LDAP://" & domainPath
+                strUser = samaccountname.Text
+            Catch ex As System.Runtime.InteropServices.COMException
+                MsgBox("unable to determine default naming context for domain")
+            End Try
+        End If
+
+        If strLDAPPath = String.Empty Then
+            MsgBox("Unknown domain.")
+            Exit Sub
+        End If
+
+
+        Dim strUserDN As String = String.Empty
+        Dim strDisplayName As String = String.Empty
+        'Dim strName As String = String.Empty
+        Dim strMail As String = String.Empty
+        Dim strTel As String = String.Empty
+        Dim strOffice As String = String.Empty
+        Dim strOrg As String = String.Empty
+        Dim strProfPath As String = String.Empty
+        Dim strHomeDir As String = String.Empty
+        Dim strHomeDrv As String = String.Empty
+        Dim strTSProf As String = String.Empty
+        Dim strTSHomeDir As String = String.Empty
+        Dim strTSHomeDrv As String = String.Empty
+
+        'Dim strDefaultDomain As String = NewMainform.objRootLDAP.Properties.Item("DefaultNamingContext").Value.ToString
+        Using DirEntry As New DirectoryEntry(strLDAPPath)
+            Using DirSearch As New DirectorySearcher(DirEntry)
+
+                With DirSearch
+                    .PropertiesToLoad.Add("distinguishedName")
+                    '.PropertiesToLoad.Add("sAMAccountName")
+                    .PropertiesToLoad.Add("displayName")
+                    .PropertiesToLoad.Add("mail")
+                    .PropertiesToLoad.Add("telephoneNumber")
+                    .PropertiesToLoad.Add("physicalDeliveryOfficeName")
+                    .PropertiesToLoad.Add("company")
+                    .PropertiesToLoad.Add("profilePath")
+                    .PropertiesToLoad.Add("homeDirectory")
+                    .PropertiesToLoad.Add("homeDrive")
+                    .PropertiesToLoad.Add("terminalServicesProfilePath")
+                    .PropertiesToLoad.Add("terminalServicesHomeDirectory")
+                    .PropertiesToLoad.Add("terminalServicesHomeDrive")
+                    .Filter = "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))"
+                End With
+
+                If DirSearch.FindAll.Count = 0 Then
+                    MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                Else
+                    For Each sResultSet As SearchResult In DirSearch.FindAll()
+                        strUserDN = Me.GetProperty(sResultSet, "DistinguishedName")
+                        strDisplayName = Me.GetProperty(sResultSet, "displayName")
+                        'strName = Me.GetProperty(sResultSet, "sAMAccountName")
+                        strMail = Me.GetProperty(sResultSet, "mail")
+                        strTel = Me.GetProperty(sResultSet, "telephoneNumber")
+                        strOffice = Me.GetProperty(sResultSet, "physicalDeliveryOfficeName")
+                        strOrg = Me.GetProperty(sResultSet, "company")
+                        strProfPath = Me.GetProperty(sResultSet, "profilePath")
+                        strHomeDir = Me.GetProperty(sResultSet, "homeDirectory")
+                        strHomeDrv = Me.GetProperty(sResultSet, "homeDrive")
+                    Next
+                End If
+            End Using
+        End Using
+
+        FQDN.Text = strUserDN
+        'samaccountname.Text = strName
+        mail.Text = strMail
+        telephonenumber.Text = strTel
+        profilepath.Text = strProfPath
+        homedirectory.Text = strHomeDir
+        homedrive.Text = strHomeDrv
+        txtOffice.Text = strOffice
+        txtCompany.Text = strOrg
+
+        ' ts properties cannot be enumerated above...
+        Dim objUser As Object = GetObject("LDAP://" & strUserDN)
+        TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
+        TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
+        TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+
+        'Dim strgroup As String
+        'Dim objgroup As Object
+        'For Each strgroup In objUser.memberOf
+        '    objgroup = GetObject("LDAP://" & strgroup)
+        '    adGroupsListBox.Items.Add(objgroup.CN)
+        'Next
     End Sub
     Public Function GetProperty(ByVal srSearchResult As SearchResult, ByVal strPropertyName As String) As String
         Dim retval As String
@@ -9606,7 +9782,43 @@ Public Class Form1
         End If
         Return retval
     End Function
+    Private Sub btn_EnumGroups_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_EnumGroups.Click
 
+        If FQDN.Text.ToLower.Contains("cn=") Then
+            adGroupsListBox.Items.Clear()
+
+            Dim objUser As Object = GetObject("LDAP://" & FQDN.Text)
+
+            Dim strgroup As String
+            Dim objgroup As Object
+
+            Try
+                For Each strgroup In objUser.memberOf
+                    objgroup = GetObject("LDAP://" & strgroup)
+                    adGroupsListBox.Items.Add(objgroup.CN)
+                Next
+            Catch ex As System.Exception
+                If ex.Message.Contains("ActiveX") Then
+                    ' may be only one group
+                    Try
+                        objgroup = GetObject("LDAP://" & objUser.memberOf.ToString)
+                        adGroupsListBox.Items.Add(objgroup.CN)
+                    Catch ex2 As Exception
+                        MsgBox("Error enumerating group membership." & vbCr & ex2.Message)
+                    End Try
+                    
+                End If
+            End Try
+
+        End If
+    End Sub
+    Private Sub FQDN_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FQDN.TextChanged
+        If FQDN.Text.ToLower.Contains("cn=") Then
+            btn_EnumGroups.Enabled = True
+        Else
+            btn_EnumGroups.Enabled = False
+        End If
+    End Sub
 
     Private Sub aduserprofile(ByVal strNTName As String)
 
@@ -9681,6 +9893,8 @@ Public Class Form1
         profilepath.Text = ""
         homedirectory.Text = ""
         homedrive.Text = ""
+        txtOffice.Text = ""
+        txtCompany.Text = ""
 
         adGroupsListBox.Items.Clear()
 
@@ -9732,6 +9946,22 @@ Public Class Form1
             objUser.SetInfo() ' ok_btn equiv
         End If
 
+    End Sub
+
+    ' TO DO: add as users and computers shortcut (dsc.msc /domain='domainname')
+    Private Sub btn_dsa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_dsa.Click
+        If samaccountname.Text.Contains("\") Then
+            Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
+            Dim dsaPath As String = "c:\windows\system32\dsa.msc"
+            If File.Exists(dsaPath) Then
+                Dim p As New Process
+                Dim psi As ProcessStartInfo = New ProcessStartInfo
+                psi.FileName = dsaPath
+                psi.Arguments = "/domain=" & strNTdomain
+                p.StartInfo = psi
+                p.Start()
+            End If
+        End If
     End Sub
 
 #End Region
@@ -12748,7 +12978,10 @@ Public Class Form1
                 Me.AcceptButton = Nothing
             Case "gpo"
                 Me.AcceptButton = Nothing
-                gpoDebugCombo.SelectedText = GPODebugSetting
+                If gpoDebugCombo.Text = String.Empty Then
+                    gpoDebugCombo.SelectedText = GPODebugSetting
+                End If
+
             Case Else
                 Me.AcceptButton = GO_Button
         End Select
@@ -13662,7 +13895,6 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
-
 
 
 
