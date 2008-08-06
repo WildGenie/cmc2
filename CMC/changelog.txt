@@ -4,6 +4,13 @@ ToDo
 ' enum subkeys error when no subkeys - write test value?
 
 ====================================================================================================
+
+06/08/2008
+code:     AD User information now using directory services rather than NT name translation.
+code:     AD User info - groups now enumerated separately from account info.
+feature:  AD User info now working on multiple domains - requires DsPath for domain.
+feature:  AD user info - added shortcut to launch AD Users & Computers pointing at relevant domain.
+
 05/08/2008
 feature:  Group Policy tab added to live setup.
 feature:  gpo policy enumeration added.
