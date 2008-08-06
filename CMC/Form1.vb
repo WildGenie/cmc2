@@ -6649,10 +6649,14 @@ Public Class Form1
 
         ' enable adbutton if domain matches
         'If LCase(PC.CurrentUserDomain) = LCase(cmcUser.userdomain) And cmcUser.dnsdomain <> "" Then
-        adbutton.Enabled = True
-        If PC.CurrentUserDomain.ToLower <> "" Then
-            If PC.CurrentUserDomain.ToLower <> PC.Name.ToLower Then
-                samaccountname.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
+        If Label_User.Text = "no one is logged on" Then
+            adbutton.Enabled = False
+        Else
+            If PC.CurrentUserDomain.ToLower <> "" Then
+                If PC.CurrentUserDomain.ToLower <> PC.Name.ToLower Then
+                    adbutton.Enabled = True
+                    samaccountname.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
+                End If
             End If
         End If
 
@@ -9498,9 +9502,12 @@ Public Class Form1
     ' front screen button
     Private Sub adbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles adbutton.Click
 
-        Me.Cursor = Cursors.WaitCursor
 
         ClearADUser()
+        Tabholder1.SelectTab(aduser)
+        Tabholder1.Refresh()
+
+        Me.Cursor = Cursors.WaitCursor
 
         Tabholder1.SelectTab(aduser)
         ADUserProfile2(Label_User.Text)
