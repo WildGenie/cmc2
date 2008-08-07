@@ -272,37 +272,37 @@
   <ItemGroup>
     <PublishFile Include="changelog.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="en-GB\CMC.resources">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
       <FileType>Satellite</FileType>
     </PublishFile>
     <PublishFile Include="My Project\Application.myapp">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\files\netdom.exe">
       <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
       <Group>system</Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Auto</PublishState>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
