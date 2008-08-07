@@ -10,6 +10,8 @@ code:     AD User information now using directory services rather than NT name t
 code:     AD User info - groups now enumerated separately from account info.
 feature:  AD User info now working on multiple domains - requires DsPath for domain.
 feature:  AD user info - added shortcut to launch AD Users & Computers pointing at relevant domain.
+code:     AltUser/Password settings stored in registry rather than my.settings to prevent losing
+          settings on upgrade.
 
 05/08/2008
 feature:  Group Policy tab added to live setup.
