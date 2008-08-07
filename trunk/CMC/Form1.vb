@@ -133,13 +133,11 @@ Public Class Form1
     Friend WithEvents PrefCancel As System.Windows.Forms.Button
     Friend WithEvents Save_Button As System.Windows.Forms.Button
     Friend WithEvents Label33 As System.Windows.Forms.Label
-    Friend WithEvents defDM As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox7 As System.Windows.Forms.GroupBox
     Friend WithEvents defHW As System.Windows.Forms.CheckBox
     Friend WithEvents defNW As System.Windows.Forms.CheckBox
     Friend WithEvents defPR As System.Windows.Forms.CheckBox
     Friend WithEvents defSV As System.Windows.Forms.CheckBox
-    Friend WithEvents Label34 As System.Windows.Forms.Label
     Friend WithEvents about As System.Windows.Forms.TabPage
     Friend WithEvents GroupBox4 As System.Windows.Forms.GroupBox
     Friend WithEvents LinkLabel2 As System.Windows.Forms.LinkLabel
@@ -516,9 +514,10 @@ Public Class Form1
     Friend WithEvents btn_dsa As System.Windows.Forms.Button
     Friend WithEvents btn_EnumGroups As System.Windows.Forms.Button
     Friend WithEvents gpupdateChoice As System.Windows.Forms.ComboBox
-    Friend WithEvents Label28 As System.Windows.Forms.Label
-    Friend WithEvents viewDebugFile As System.Windows.Forms.Label
     Friend WithEvents Label55 As System.Windows.Forms.Label
+    Friend WithEvents lbl_rsop As System.Windows.Forms.LinkLabel
+    Friend WithEvents lbl_debug As System.Windows.Forms.LinkLabel
+    Friend WithEvents lbl_localgpo As System.Windows.Forms.LinkLabel
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -542,9 +541,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -693,13 +692,11 @@ Public Class Form1
         Me.PrefCancel = New System.Windows.Forms.Button
         Me.Save_Button = New System.Windows.Forms.Button
         Me.Label33 = New System.Windows.Forms.Label
-        Me.defDM = New System.Windows.Forms.TextBox
         Me.GroupBox7 = New System.Windows.Forms.GroupBox
         Me.defHW = New System.Windows.Forms.CheckBox
         Me.defNW = New System.Windows.Forms.CheckBox
         Me.defPR = New System.Windows.Forms.CheckBox
         Me.defSV = New System.Windows.Forms.CheckBox
-        Me.Label34 = New System.Windows.Forms.Label
         Me.about = New System.Windows.Forms.TabPage
         Me.GroupBox4 = New System.Windows.Forms.GroupBox
         Me.aboutOK = New System.Windows.Forms.Button
@@ -926,12 +923,12 @@ Public Class Form1
         Me.MappedDrivesButton = New System.Windows.Forms.Button
         Me.printerRefresh = New System.Windows.Forms.Button
         Me.gpo = New System.Windows.Forms.TabPage
+        Me.lbl_rsop = New System.Windows.Forms.LinkLabel
         Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
-        Me.viewDebugFile = New System.Windows.Forms.Label
-        Me.Label28 = New System.Windows.Forms.Label
+        Me.Label55 = New System.Windows.Forms.Label
+        Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gpupdateChoice = New System.Windows.Forms.ComboBox
         Me.btn_gpo_policies = New System.Windows.Forms.Button
-        Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gprefresh = New System.Windows.Forms.Button
         Me.GPODataGrid = New System.Windows.Forms.DataGridView
         Me.col0 = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -1021,7 +1018,8 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.Label55 = New System.Windows.Forms.Label
+        Me.lbl_debug = New System.Windows.Forms.LinkLabel
+        Me.lbl_localgpo = New System.Windows.Forms.LinkLabel
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2095,9 +2093,7 @@ Public Class Form1
         Me.options.Controls.Add(Me.PrefCancel)
         Me.options.Controls.Add(Me.Save_Button)
         Me.options.Controls.Add(Me.Label33)
-        Me.options.Controls.Add(Me.defDM)
         Me.options.Controls.Add(Me.GroupBox7)
-        Me.options.Controls.Add(Me.Label34)
         Me.options.Location = New System.Drawing.Point(4, 22)
         Me.options.Name = "options"
         Me.options.Padding = New System.Windows.Forms.Padding(3)
@@ -2111,7 +2107,7 @@ Public Class Form1
         Me.GroupBox13.Controls.Add(Me.psexecbrowse)
         Me.GroupBox13.Controls.Add(Me.downloadpsexec)
         Me.GroupBox13.Controls.Add(Me.psexecpath)
-        Me.GroupBox13.Location = New System.Drawing.Point(10, 72)
+        Me.GroupBox13.Location = New System.Drawing.Point(10, 81)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(186, 60)
         Me.GroupBox13.TabIndex = 31
@@ -2151,9 +2147,9 @@ Public Class Form1
         Me.GroupBox12.Controls.Add(Me.SettingAltPass)
         Me.GroupBox12.Controls.Add(Me.SettingAltUser)
         Me.GroupBox12.Controls.Add(Me.Label52)
-        Me.GroupBox12.Location = New System.Drawing.Point(217, 69)
+        Me.GroupBox12.Location = New System.Drawing.Point(217, 65)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(145, 80)
+        Me.GroupBox12.Size = New System.Drawing.Size(145, 76)
         Me.GroupBox12.TabIndex = 26
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "alt user"
@@ -2162,7 +2158,7 @@ Public Class Form1
         '
         Me.SettingAltPass.BackColor = System.Drawing.Color.WhiteSmoke
         Me.SettingAltPass.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.SettingAltPass.Location = New System.Drawing.Point(18, 47)
+        Me.SettingAltPass.Location = New System.Drawing.Point(36, 49)
         Me.SettingAltPass.Name = "SettingAltPass"
         Me.SettingAltPass.Size = New System.Drawing.Size(95, 19)
         Me.SettingAltPass.TabIndex = 9
@@ -2172,7 +2168,7 @@ Public Class Form1
         '
         Me.SettingAltUser.BackColor = System.Drawing.Color.WhiteSmoke
         Me.SettingAltUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.SettingAltUser.Location = New System.Drawing.Point(18, 27)
+        Me.SettingAltUser.Location = New System.Drawing.Point(36, 29)
         Me.SettingAltUser.Name = "SettingAltUser"
         Me.SettingAltUser.Size = New System.Drawing.Size(95, 18)
         Me.SettingAltUser.TabIndex = 8
@@ -2183,7 +2179,7 @@ Public Class Form1
         Me.Label52.AutoSize = True
         Me.Label52.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label52.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label52.Location = New System.Drawing.Point(7, 13)
+        Me.Label52.Location = New System.Drawing.Point(7, 15)
         Me.Label52.Name = "Label52"
         Me.Label52.Size = New System.Drawing.Size(127, 12)
         Me.Label52.TabIndex = 9
@@ -2194,7 +2190,7 @@ Public Class Form1
         Me.GroupBox11.Controls.Add(Me.historyclearbutton)
         Me.GroupBox11.Controls.Add(Me.Label36)
         Me.GroupBox11.Controls.Add(Me.historylimitselect)
-        Me.GroupBox11.Location = New System.Drawing.Point(217, 8)
+        Me.GroupBox11.Location = New System.Drawing.Point(217, 3)
         Me.GroupBox11.Name = "GroupBox11"
         Me.GroupBox11.Size = New System.Drawing.Size(145, 61)
         Me.GroupBox11.TabIndex = 25
@@ -2232,7 +2228,7 @@ Public Class Form1
         'sLogFilePath
         '
         Me.sLogFilePath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.sLogFilePath.Location = New System.Drawing.Point(10, 187)
+        Me.sLogFilePath.Location = New System.Drawing.Point(10, 215)
         Me.sLogFilePath.Name = "sLogFilePath"
         Me.sLogFilePath.Size = New System.Drawing.Size(184, 18)
         Me.sLogFilePath.TabIndex = 19
@@ -2262,19 +2258,11 @@ Public Class Form1
         Me.Label33.AutoSize = True
         Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label33.ForeColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Label33.Location = New System.Drawing.Point(7, 172)
+        Me.Label33.Location = New System.Drawing.Point(7, 201)
         Me.Label33.Name = "Label33"
         Me.Label33.Size = New System.Drawing.Size(151, 13)
         Me.Label33.TabIndex = 21
         Me.Label33.Text = "logfile location (requires restart)"
-        '
-        'defDM
-        '
-        Me.defDM.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.defDM.Location = New System.Drawing.Point(10, 149)
-        Me.defDM.Name = "defDM"
-        Me.defDM.Size = New System.Drawing.Size(184, 18)
-        Me.defDM.TabIndex = 18
         '
         'GroupBox7
         '
@@ -2283,7 +2271,7 @@ Public Class Form1
         Me.GroupBox7.Controls.Add(Me.defPR)
         Me.GroupBox7.Controls.Add(Me.defSV)
         Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox7.Location = New System.Drawing.Point(10, 6)
+        Me.GroupBox7.Location = New System.Drawing.Point(10, 3)
         Me.GroupBox7.Name = "GroupBox7"
         Me.GroupBox7.Size = New System.Drawing.Size(186, 63)
         Me.GroupBox7.TabIndex = 20
@@ -2337,17 +2325,6 @@ Public Class Form1
         Me.defSV.TabIndex = 2
         Me.defSV.Text = "services"
         Me.defSV.UseVisualStyleBackColor = True
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.ForeColor = System.Drawing.SystemColors.ActiveCaption
-        Me.Label34.Location = New System.Drawing.Point(9, 136)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(96, 13)
-        Me.Label34.TabIndex = 19
-        Me.Label34.Text = "default dns domain"
         '
         'about
         '
@@ -3422,22 +3399,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3851,8 +3828,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -4969,11 +4946,12 @@ Public Class Form1
         '
         'gpo
         '
+        Me.gpo.Controls.Add(Me.lbl_localgpo)
         Me.gpo.Controls.Add(Me.gpoDebugCombo)
+        Me.gpo.Controls.Add(Me.lbl_debug)
+        Me.gpo.Controls.Add(Me.lbl_rsop)
         Me.gpo.Controls.Add(Me.Label55)
         Me.gpo.Controls.Add(Me.gpoDebugMode)
-        Me.gpo.Controls.Add(Me.viewDebugFile)
-        Me.gpo.Controls.Add(Me.Label28)
         Me.gpo.Controls.Add(Me.gpupdateChoice)
         Me.gpo.Controls.Add(Me.btn_gpo_policies)
         Me.gpo.Controls.Add(Me.gprefresh)
@@ -4987,6 +4965,17 @@ Public Class Form1
         Me.gpo.Text = "Group Policy"
         Me.gpo.UseVisualStyleBackColor = True
         '
+        'lbl_rsop
+        '
+        Me.lbl_rsop.AutoSize = True
+        Me.lbl_rsop.LinkColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbl_rsop.Location = New System.Drawing.Point(6, 12)
+        Me.lbl_rsop.Name = "lbl_rsop"
+        Me.lbl_rsop.Size = New System.Drawing.Size(89, 13)
+        Me.lbl_rsop.TabIndex = 105
+        Me.lbl_rsop.TabStop = True
+        Me.lbl_rsop.Text = "create rsop report"
+        '
         'gpoDebugCombo
         '
         Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -4997,25 +4986,23 @@ Public Class Form1
         Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 20)
         Me.gpoDebugCombo.TabIndex = 3
         '
-        'viewDebugFile
+        'Label55
         '
-        Me.viewDebugFile.AutoSize = True
-        Me.viewDebugFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.viewDebugFile.Location = New System.Drawing.Point(241, 48)
-        Me.viewDebugFile.Name = "viewDebugFile"
-        Me.viewDebugFile.Size = New System.Drawing.Size(78, 13)
-        Me.viewDebugFile.TabIndex = 4
-        Me.viewDebugFile.Text = "view debug file"
+        Me.Label55.AutoSize = True
+        Me.Label55.Location = New System.Drawing.Point(176, 29)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(42, 13)
+        Me.Label55.TabIndex = 104
+        Me.Label55.Text = "set gpo"
         '
-        'Label28
+        'gpoDebugMode
         '
-        Me.Label28.AutoSize = True
-        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label28.Location = New System.Drawing.Point(12, 11)
-        Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(89, 13)
-        Me.Label28.TabIndex = 7
-        Me.Label28.Text = "create rsop report"
+        Me.gpoDebugMode.AutoSize = True
+        Me.gpoDebugMode.Location = New System.Drawing.Point(176, 37)
+        Me.gpoDebugMode.Name = "gpoDebugMode"
+        Me.gpoDebugMode.Size = New System.Drawing.Size(69, 13)
+        Me.gpoDebugMode.TabIndex = 100
+        Me.gpoDebugMode.Text = "debug mode:"
         '
         'gpupdateChoice
         '
@@ -5036,15 +5023,6 @@ Public Class Form1
         Me.btn_gpo_policies.TabIndex = 5
         Me.btn_gpo_policies.Text = "applied policies"
         Me.btn_gpo_policies.UseVisualStyleBackColor = True
-        '
-        'gpoDebugMode
-        '
-        Me.gpoDebugMode.AutoSize = True
-        Me.gpoDebugMode.Location = New System.Drawing.Point(176, 37)
-        Me.gpoDebugMode.Name = "gpoDebugMode"
-        Me.gpoDebugMode.Size = New System.Drawing.Size(69, 13)
-        Me.gpoDebugMode.TabIndex = 100
-        Me.gpoDebugMode.Text = "debug mode:"
         '
         'gprefresh
         '
@@ -5919,14 +5897,28 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
-        'Label55
+        'lbl_debug
         '
-        Me.Label55.AutoSize = True
-        Me.Label55.Location = New System.Drawing.Point(176, 29)
-        Me.Label55.Name = "Label55"
-        Me.Label55.Size = New System.Drawing.Size(42, 13)
-        Me.Label55.TabIndex = 104
-        Me.Label55.Text = "set gpo"
+        Me.lbl_debug.AutoSize = True
+        Me.lbl_debug.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_debug.LinkColor = System.Drawing.Color.Gray
+        Me.lbl_debug.Location = New System.Drawing.Point(240, 49)
+        Me.lbl_debug.Name = "lbl_debug"
+        Me.lbl_debug.Size = New System.Drawing.Size(67, 12)
+        Me.lbl_debug.TabIndex = 106
+        Me.lbl_debug.TabStop = True
+        Me.lbl_debug.Text = "view debug file"
+        '
+        'lbl_localgpo
+        '
+        Me.lbl_localgpo.AutoSize = True
+        Me.lbl_localgpo.LinkColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbl_localgpo.Location = New System.Drawing.Point(6, 29)
+        Me.lbl_localgpo.Name = "lbl_localgpo"
+        Me.lbl_localgpo.Size = New System.Drawing.Size(87, 13)
+        Me.lbl_localgpo.TabIndex = 107
+        Me.lbl_localgpo.TabStop = True
+        Me.lbl_localgpo.Text = "local group policy"
         '
         'Form1
         '
@@ -6063,50 +6055,34 @@ Public Class Form1
     ' Load Application and get settings
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        ' Version
+        Me.version.Text = String.Format("Version {0}", My.Application.Info.Version.ToString)
+
+        ' allow cross thread calls
+        Control.CheckForIllegalCrossThreadCalls = False
+
+        ' Load History
+        LoadHistory()
+
+        ' load settings
+        LoadSettings()
+
         ' Log File
-            If Trim(My.Settings.logfilepath) = "" Then
-                Try
-                    LogFilePath = My.Application.Info.DirectoryPath & "\cmc_log.txt"
-                Catch ex As Exception
-                    LogFilePath = Environment.ExpandEnvironmentVariables("%userprofile%") & "\cmc\cmc_log.txt"
-                End Try
-                My.Settings.logfilepath = LogFilePath
-            Else
-                LogFilePath = My.Settings.logfilepath
-            End If
+        LogFilePath = sLogFilePath.Text
 
-            If System.IO.File.Exists(LogFilePath) Then
-                TraceLog = System.IO.File.AppendText(LogFilePath)
-                TraceLog.Close()
-            Else
-                TraceLog = System.IO.File.CreateText(LogFilePath)
-                TraceLog.Close()
-            End If
+        If System.IO.File.Exists(LogFilePath) Then
+            TraceLog = System.IO.File.AppendText(LogFilePath)
+            TraceLog.Close()
+        Else
+            TraceLog = System.IO.File.CreateText(LogFilePath)
+            TraceLog.Close()
+        End If
 
 
-            ' Version
-            Me.version.Text = String.Format("Version {0}", My.Application.Info.Version.ToString)
-
-
-            ' allow cross thread calls
-            Control.CheckForIllegalCrossThreadCalls = False
-
-
-            ' Load History
-            LoadHistory()
-
-            ' load settings
-            LoadSettings()
-
-
-            Me.AcceptButton = GO_Button
-            FormCleared = True
-
-
-            ' Check whether ZENworks tool should be enabled
-            If My.Computer.FileSystem.FileExists("c://novell//consoleone//1.2//bin//desktop4.exe") Then
-                zenToolStripButton.Enabled = True
-            End If
+        ' Check whether ZENworks tool should be enabled
+        If My.Computer.FileSystem.FileExists("c://novell//consoleone//1.2//bin//desktop4.exe") Then
+            zenToolStripButton.Enabled = True
+        End If
 
 
         ' Get CMC user details
@@ -6151,8 +6127,11 @@ Public Class Form1
                         Main()
                 End Select
             Next
-
         End If
+
+
+        Me.AcceptButton = GO_Button
+        FormCleared = True
 
 
     End Sub
@@ -6180,17 +6159,7 @@ Public Class Form1
             defPR.Checked = False
         End If
 
-        If My.Settings.defdomain = "" Then
-            defDM.Text = cmcUser.dnsdomain
-            domaintojoin.Text = cmcUser.dnsdomain
-        Else
-            defDM.Text = My.Settings.defdomain
-            domaintojoin.Text = My.Settings.defdomain
-        End If
 
-        sLogFilePath.Text = My.Settings.logfilepath
-
-        historylimitselect.Value = My.Settings.HistorySize
 
         ' psexec.exe location
         psexecpath.Text = My.Settings.psexecpath
@@ -6215,18 +6184,98 @@ Public Class Form1
             End If
         End If
 
-        ' Default Alt User Credentials 
-        If String.IsNullOrEmpty(My.Settings.defAltUser) Then
-            My.Settings.defAltUser = "Administrator"
-        End If
-        SettingAltUser.Text = My.Settings.defAltUser
 
-        If String.IsNullOrEmpty(My.Settings.defAltPass) Then
-            My.Settings.defAltUser = "to/0Po8O6rOkIx0Rp/F98A=="
+
+        ' Ensure default alt username and password exist.
+
+        Dim rKey As RegistryKey = Registry.CurrentUser.OpenSubKey("software\Forman")
+        If rKey Is Nothing Then
+            ' App regkey does not exist, so create key.
+            Registry.CurrentUser.OpenSubKey("Software", True).CreateSubKey("Forman")
         End If
-        SettingAltPass.Text = EncryptText.DecryptText(My.Settings.defAltPass)
+
+
+
+        ' check individual values exist
+
+        Dim rUser As String = String.Empty
+        Dim rPass As String = String.Empty
+        Dim rLog As String = String.Empty
+        Dim rHist As Integer = Nothing
+
+
+        ' Alt Username
+        rUser = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("Alt1")
+        If rUser Is Nothing Then
+            ' value does not exist
+            Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("Alt1", EncryptText.EncryptText("Administrator"), RegistryValueKind.String)
+        End If
+        SettingAltUser.Text = EncryptText.DecryptText(Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("Alt1"))
+
+
+        ' Alt Password
+        rPass = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("Alt2")
+        If rPass Is Nothing Then
+            ' value does not exist
+            Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("Alt2", "to/0Po8O6rOkIx0Rp/F98A==", RegistryValueKind.String)
+        End If
+        SettingAltPass.Text = EncryptText.DecryptText(Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("Alt2"))
+
+
+        ' LogFile Path
+        rLog = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("LogFile")
+        If rLog Is Nothing Then
+            ' value does not exist
+            Dim Path As String = Environment.ExpandEnvironmentVariables("%appdata%") & "\CMC\cmc_log.txt"
+            If Not Directory.Exists(Environment.ExpandEnvironmentVariables("%appdata%") & "\CMC") Then
+                Directory.CreateDirectory(Environment.ExpandEnvironmentVariables("%appdata%") & "\CMC")
+            End If
+            Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("LogFile", Path, RegistryValueKind.String)
+        End If
+        sLogFilePath.Text = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("LogFile")
+
+
+        ' history size
+        rHist = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("HistorySize", 1)
+        If rHist = 1 Then
+            ' assume value does not exist
+            Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("HistorySize", 99, RegistryValueKind.DWord)
+        End If
+        historylimitselect.Value = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("HistorySize")
+
 
     End Sub
+    ''' <summary>
+    ''' Function to read a value from the Registry
+    ''' </summary>
+    ''' <param name="MainKey">RegistryKey -> One of the 6 main level keys you want to write to</param>
+    ''' <param name="sKey">String -> Sub key you want to read</param>
+    ''' <param name="sKeyName">String -> Name of the value you want to read</param>
+    ''' <param name="oNameValue">Object -> The value to be read</param>
+    ''' <returns>True (Succeeded)/False (Failed)</returns>
+    ''' <remarks>Created 23JUN05 - Peter Forman</remarks>
+    Public Function ReadRegistryValue(ByVal MainKey As RegistryKey, ByVal sKey As String, ByVal sKeyName As String, _
+                                      ByRef oNameValue As Object) As String
+        Dim rkKey As RegistryKey
+        Dim Value As New String("")
+        Try
+            'open the given subkey
+            rkKey = MainKey.OpenSubKey(sKey, True)
+            'check to see if the subkey exists
+            If rkKey Is Nothing Then 'it doesnt exist
+                'throw an exception
+                Throw New Exception("The Registry SubKey provided doesnt exist!")
+            End If
+            'get the value
+            oNameValue = rkKey.GetValue(sKeyName)
+            Value = oNameValue.ToString
+        Catch ex As Exception
+            MessageBox.Show(ex.Message, "Error: Reading Registry Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
+        End Try
+        Return Value
+    End Function
+
+
 
     ' Computername Changed Code
     Private Sub computername_TextChanged1(ByVal sender As Object, ByVal e As System.EventArgs) Handles computername.TextChanged
@@ -6241,8 +6290,8 @@ Public Class Form1
             altPassword_TextBox.Enabled = True
             altusername_TextBox.BackColor = Color.PaleGoldenrod
             altPassword_TextBox.BackColor = Color.PaleGoldenrod
-            altusername_TextBox.Text = My.Settings.defAltUser
-            altPassword_TextBox.Text = EncryptText.DecryptText(My.Settings.defAltPass)
+            altusername_TextBox.Text = SettingAltUser.Text
+            altPassword_TextBox.Text = EncryptText.DecryptText(SettingAltPass.Text)
             If GO_Button.Text <> "" Then GO_Button.Enabled = True
         Else
             altusername_TextBox.Text = "username"
@@ -7500,7 +7549,7 @@ Public Class Form1
         primdnssetbutton.Enabled = True
     End Sub
     Private Sub suffix_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles suffix.DoubleClick
-        suffix.Text = My.Settings.defdomain
+        suffix.Text = cmcUser.dnsdomain
     End Sub
     Private Sub staticbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles staticbutton.Click
 
@@ -7640,10 +7689,12 @@ Public Class Form1
         End If
     End Sub
     Private Sub macaddress_MouseDoubleClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles macaddress.MouseDoubleClick
-        If InStr(macaddress.Text, ":") Then
-            macaddress.Text = Replace(PC.MacAddress, ":", "")
-        Else
-            macaddress.Text = PC.MacAddress
+        If ConnectionExists Then
+            If InStr(macaddress.Text, ":") Then
+                macaddress.Text = Replace(PC.MacAddress, ":", "")
+            Else
+                macaddress.Text = PC.MacAddress
+            End If
         End If
     End Sub
     Private Sub ClearNetwork()
@@ -9457,7 +9508,7 @@ Public Class Form1
         joinbutton.Enabled = True
     End Sub
     Private Sub domaintojoin_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles domaintojoin.DoubleClick
-        domaintojoin.Text = My.Settings.defdomain
+        domaintojoin.Text = cmcUser.dnsdomain
     End Sub
 
     Public Sub runcommand(ByVal commandtorun As String, Optional ByVal WindowStyle As AppWinStyle = AppWinStyle.NormalFocus)
@@ -9995,8 +10046,6 @@ Public Class Form1
 
 #Region "Group Policy"
 
-    ' TO DO # Edit LOCAL Group Policy : gpedit.msc /gpcomputer:"myComputer"
-
     Protected Friend GPOGridType As String
     Private Shared gpos As ArrayList = New ArrayList
     Protected Friend gpoName As String
@@ -10335,7 +10384,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub CreateRSOPReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label28.Click
+    Private Sub lbl_rsop_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lbl_rsop.LinkClicked
         GpoRsop()
     End Sub
     Private Sub GpoRsop()
@@ -10457,7 +10506,7 @@ Public Class Form1
         Me.Cursor = Cursors.Default
     End Sub
     ' Open existing gpo debug file
-    Private Sub viewDebugFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles viewDebugFile.Click
+    Private Sub lbl_debug_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lbl_debug.LinkClicked
         Dim logfilepath As String = "\\" & PC.Name & "\" & Replace(PC.SystemDirectory, ":", "$") & "\Debug\UserMode\Userenv.log"
         If System.IO.File.Exists(logfilepath) Then
             Dim p As New Process
@@ -10469,6 +10518,16 @@ Public Class Form1
         Else
             MsgBox("Debug file not found")
         End If
+    End Sub
+
+    Private Sub lbl_localgpo_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lbl_localgpo.LinkClicked
+        ' gpedit.msc /gpcomputer:"myComputer"
+        Dim p As New Process
+        Dim psi As ProcessStartInfo = New ProcessStartInfo
+        psi.FileName = "gpedit.msc"
+        psi.Arguments = "/gpcomputer:" & Chr(34) & PC.Name & Chr(34)
+        p.StartInfo = psi
+        p.Start()
     End Sub
 
     Sub GPO_Tab_Clear()
@@ -11302,20 +11361,20 @@ Public Class Form1
             My.Settings.pr = False
         End If
 
-        My.Settings.defdomain = defDM.Text
-        My.Settings.logfilepath = sLogFilePath.Text
 
         ' History
-        My.Settings.HistorySize = historylimitselect.Value
         If historylimitselect.Value = 0 Then
             computername.Items.Clear()
             computername.AutoCompleteCustomSource.Clear()
         End If
+        Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("HistorySize", historylimitselect.Value, RegistryValueKind.DWord)
 
 
         ' Alt User Credentials
-        My.Settings.defAltUser = SettingAltUser.Text
-        My.Settings.defAltPass = EncryptText.EncryptText(SettingAltPass.Text)
+        Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("Alt1", EncryptText.EncryptText(SettingAltUser.Text), RegistryValueKind.String)
+        Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("Alt2", EncryptText.EncryptText(SettingAltPass.Text), RegistryValueKind.String)
+        'LogFile
+        Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("LogFile", sLogFilePath.Text, RegistryValueKind.String)
 
         ' psexec
         If System.IO.File.Exists(psexecpath.Text) And InStr(LCase(psexecpath.Text), "psexec.exe") Then
@@ -11372,6 +11431,9 @@ Public Class Form1
     End Sub
 
     Private Sub PrefCancel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrefCancel.Click
+        ' reset pref text boxes to previous (unchanged) values.
+        LoadSettings()
+        ' reset view to front tab
         Tabholder1.SelectTab(iTabIndex)
     End Sub
     Private Sub aboutOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles aboutOK.Click
@@ -13253,7 +13315,7 @@ Public Class Form1
         With viewlogProc.StartInfo
             .CreateNoWindow = True
             .FileName = "notepad.exe"
-            .Arguments = My.Settings.logfilepath
+            .Arguments = sLogFilePath.Text
             .UseShellExecute = False
             .WindowStyle = ProcessWindowStyle.Hidden
             .RedirectStandardOutput = True
@@ -13285,7 +13347,7 @@ Public Class Form1
 
     ' History
     Private Sub LoadHistory()
-        If My.Settings.HistorySize <> 0 Then
+        If historylimitselect.Value <> 0 Then
             computername.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.Suggest
             computername.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
             computername.MaxDropDownItems = 9
@@ -13303,9 +13365,9 @@ Public Class Form1
         End If
     End Sub
     Private Sub SaveHistory()
-        If My.Settings.HistorySize <> 0 Then
+        If historylimitselect.Value <> 0 Then
             Dim i, limit As Integer
-            Dim maxcount As Integer = My.Settings.HistorySize
+            Dim maxcount As Integer = historylimitselect.Value
             Dim historystring As String = Nothing
 
             If computername.Items.Count > maxcount Then
@@ -13325,7 +13387,7 @@ Public Class Form1
     Private Sub AddToHistory(ByVal strComputer As String)
 
         ' if history turned on...
-        If My.Settings.HistorySize <> 0 Then
+        If historylimitselect.Value <> 0 Then
 
             ' see if entry already exists in list
             Try
@@ -13967,8 +14029,6 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
-
-
 
 
 End Class

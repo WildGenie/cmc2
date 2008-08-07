@@ -56,18 +56,6 @@ Namespace My
         
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property logfilepath() As String
-            Get
-                Return CType(Me("logfilepath"),String)
-            End Get
-            Set
-                Me("logfilepath") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("False")>  _
         Public Property hw() As Boolean
             Get
@@ -117,60 +105,12 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property defdomain() As String
-            Get
-                Return CType(Me("defdomain"),String)
-            End Get
-            Set
-                Me("defdomain") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property HistoryList() As String
             Get
                 Return CType(Me("HistoryList"),String)
             End Get
             Set
                 Me("HistoryList") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("99")>  _
-        Public Property HistorySize() As Integer
-            Get
-                Return CType(Me("HistorySize"),Integer)
-            End Get
-            Set
-                Me("HistorySize") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("administrator")>  _
-        Public Property defAltUser() As String
-            Get
-                Return CType(Me("defAltUser"),String)
-            End Get
-            Set
-                Me("defAltUser") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("to/0Po8O6rOkIx0Rp/F98A==")>  _
-        Public Property defAltPass() As String
-            Get
-                Return CType(Me("defAltPass"),String)
-            End Get
-            Set
-                Me("defAltPass") = value
             End Set
         End Property
         
