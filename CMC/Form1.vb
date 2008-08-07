@@ -502,9 +502,7 @@ Public Class Form1
     Friend WithEvents gpoDebugMode As System.Windows.Forms.Label
     Friend WithEvents btn_GetSiteOrg As System.Windows.Forms.Button
     Friend WithEvents gpoDebugCombo As System.Windows.Forms.ComboBox
-    Friend WithEvents LinkLabel3 As System.Windows.Forms.LinkLabel
     Friend WithEvents btn_gpo_policies As System.Windows.Forms.Button
-    Friend WithEvents btn_gpo_rsop As System.Windows.Forms.Button
     Friend WithEvents col0 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents col2 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -517,6 +515,10 @@ Public Class Form1
     Friend WithEvents Label54 As System.Windows.Forms.Label
     Friend WithEvents btn_dsa As System.Windows.Forms.Button
     Friend WithEvents btn_EnumGroups As System.Windows.Forms.Button
+    Friend WithEvents gpupdateChoice As System.Windows.Forms.ComboBox
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents viewDebugFile As System.Windows.Forms.Label
+    Friend WithEvents Label55 As System.Windows.Forms.Label
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -540,9 +542,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -924,10 +926,11 @@ Public Class Form1
         Me.MappedDrivesButton = New System.Windows.Forms.Button
         Me.printerRefresh = New System.Windows.Forms.Button
         Me.gpo = New System.Windows.Forms.TabPage
-        Me.btn_gpo_rsop = New System.Windows.Forms.Button
-        Me.btn_gpo_policies = New System.Windows.Forms.Button
         Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
-        Me.LinkLabel3 = New System.Windows.Forms.LinkLabel
+        Me.viewDebugFile = New System.Windows.Forms.Label
+        Me.Label28 = New System.Windows.Forms.Label
+        Me.gpupdateChoice = New System.Windows.Forms.ComboBox
+        Me.btn_gpo_policies = New System.Windows.Forms.Button
         Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gprefresh = New System.Windows.Forms.Button
         Me.GPODataGrid = New System.Windows.Forms.DataGridView
@@ -1018,6 +1021,7 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.Label55 = New System.Windows.Forms.Label
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -2072,7 +2076,7 @@ Public Class Form1
         Me.AboutToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.information
         Me.AboutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'SaveFileDialog1
@@ -3418,22 +3422,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3847,8 +3851,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -4965,11 +4969,13 @@ Public Class Form1
         '
         'gpo
         '
-        Me.gpo.Controls.Add(Me.btn_gpo_rsop)
-        Me.gpo.Controls.Add(Me.btn_gpo_policies)
         Me.gpo.Controls.Add(Me.gpoDebugCombo)
-        Me.gpo.Controls.Add(Me.LinkLabel3)
+        Me.gpo.Controls.Add(Me.Label55)
         Me.gpo.Controls.Add(Me.gpoDebugMode)
+        Me.gpo.Controls.Add(Me.viewDebugFile)
+        Me.gpo.Controls.Add(Me.Label28)
+        Me.gpo.Controls.Add(Me.gpupdateChoice)
+        Me.gpo.Controls.Add(Me.btn_gpo_policies)
         Me.gpo.Controls.Add(Me.gprefresh)
         Me.gpo.Controls.Add(Me.GPODataGrid)
         Me.gpo.Controls.Add(Me.btn_startupscripts)
@@ -4981,64 +4987,72 @@ Public Class Form1
         Me.gpo.Text = "Group Policy"
         Me.gpo.UseVisualStyleBackColor = True
         '
-        'btn_gpo_rsop
-        '
-        Me.btn_gpo_rsop.Location = New System.Drawing.Point(306, 25)
-        Me.btn_gpo_rsop.Name = "btn_gpo_rsop"
-        Me.btn_gpo_rsop.Size = New System.Drawing.Size(60, 20)
-        Me.btn_gpo_rsop.TabIndex = 8
-        Me.btn_gpo_rsop.Text = "view rsop"
-        Me.btn_gpo_rsop.UseVisualStyleBackColor = True
-        '
-        'btn_gpo_policies
-        '
-        Me.btn_gpo_policies.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_gpo_policies.Location = New System.Drawing.Point(8, 41)
-        Me.btn_gpo_policies.Name = "btn_gpo_policies"
-        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
-        Me.btn_gpo_policies.TabIndex = 1
-        Me.btn_gpo_policies.Text = "applied policies"
-        Me.btn_gpo_policies.UseVisualStyleBackColor = True
-        '
         'gpoDebugCombo
         '
         Me.gpoDebugCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.gpoDebugCombo.FormattingEnabled = True
         Me.gpoDebugCombo.Items.AddRange(New Object() {"None", "Normal", "Verbose", "Logfile", "Debugger", "Normal|Logfile", "Verbose|Logfile", "Debug|Verbose|Logfile"})
-        Me.gpoDebugCombo.Location = New System.Drawing.Point(7, 13)
+        Me.gpoDebugCombo.Location = New System.Drawing.Point(243, 30)
         Me.gpoDebugCombo.Name = "gpoDebugCombo"
         Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 20)
-        Me.gpoDebugCombo.TabIndex = 5
+        Me.gpoDebugCombo.TabIndex = 3
         '
-        'LinkLabel3
+        'viewDebugFile
         '
-        Me.LinkLabel3.AutoSize = True
-        Me.LinkLabel3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LinkLabel3.ForeColor = System.Drawing.Color.Black
-        Me.LinkLabel3.LinkColor = System.Drawing.Color.Navy
-        Me.LinkLabel3.Location = New System.Drawing.Point(97, 3)
-        Me.LinkLabel3.Name = "LinkLabel3"
-        Me.LinkLabel3.Size = New System.Drawing.Size(33, 9)
-        Me.LinkLabel3.TabIndex = 6
-        Me.LinkLabel3.TabStop = True
-        Me.LinkLabel3.Text = "view log"
+        Me.viewDebugFile.AutoSize = True
+        Me.viewDebugFile.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.viewDebugFile.Location = New System.Drawing.Point(241, 48)
+        Me.viewDebugFile.Name = "viewDebugFile"
+        Me.viewDebugFile.Size = New System.Drawing.Size(78, 13)
+        Me.viewDebugFile.TabIndex = 4
+        Me.viewDebugFile.Text = "view debug file"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Underline, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label28.Location = New System.Drawing.Point(12, 11)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(89, 13)
+        Me.Label28.TabIndex = 7
+        Me.Label28.Text = "create rsop report"
+        '
+        'gpupdateChoice
+        '
+        Me.gpupdateChoice.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.gpupdateChoice.FormattingEnabled = True
+        Me.gpupdateChoice.Items.AddRange(New Object() {"Machine Only", "User Only", "Machine and User"})
+        Me.gpupdateChoice.Location = New System.Drawing.Point(243, 4)
+        Me.gpupdateChoice.Name = "gpupdateChoice"
+        Me.gpupdateChoice.Size = New System.Drawing.Size(121, 20)
+        Me.gpupdateChoice.TabIndex = 2
+        '
+        'btn_gpo_policies
+        '
+        Me.btn_gpo_policies.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.btn_gpo_policies.Location = New System.Drawing.Point(6, 59)
+        Me.btn_gpo_policies.Name = "btn_gpo_policies"
+        Me.btn_gpo_policies.Size = New System.Drawing.Size(94, 22)
+        Me.btn_gpo_policies.TabIndex = 5
+        Me.btn_gpo_policies.Text = "applied policies"
+        Me.btn_gpo_policies.UseVisualStyleBackColor = True
         '
         'gpoDebugMode
         '
         Me.gpoDebugMode.AutoSize = True
-        Me.gpoDebugMode.Location = New System.Drawing.Point(4, 0)
+        Me.gpoDebugMode.Location = New System.Drawing.Point(176, 37)
         Me.gpoDebugMode.Name = "gpoDebugMode"
-        Me.gpoDebugMode.Size = New System.Drawing.Size(86, 13)
+        Me.gpoDebugMode.Size = New System.Drawing.Size(69, 13)
         Me.gpoDebugMode.TabIndex = 100
-        Me.gpoDebugMode.Text = "set debug mode:"
+        Me.gpoDebugMode.Text = "debug mode:"
         '
         'gprefresh
         '
         Me.gprefresh.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.gprefresh.Location = New System.Drawing.Point(306, 2)
+        Me.gprefresh.Location = New System.Drawing.Point(179, 3)
         Me.gprefresh.Name = "gprefresh"
         Me.gprefresh.Size = New System.Drawing.Size(60, 22)
-        Me.gprefresh.TabIndex = 7
+        Me.gprefresh.TabIndex = 1
         Me.gprefresh.Text = "gpupdate"
         Me.gprefresh.UseVisualStyleBackColor = True
         '
@@ -5052,7 +5066,7 @@ Public Class Form1
         Me.GPODataGrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.GPODataGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.GPODataGrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.col0, Me.col1, Me.col2, Me.Col3})
-        Me.GPODataGrid.Location = New System.Drawing.Point(7, 66)
+        Me.GPODataGrid.Location = New System.Drawing.Point(7, 82)
         Me.GPODataGrid.MultiSelect = False
         Me.GPODataGrid.Name = "GPODataGrid"
         Me.GPODataGrid.ReadOnly = True
@@ -5061,7 +5075,7 @@ Public Class Form1
         Me.GPODataGrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.GPODataGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.GPODataGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.GPODataGrid.Size = New System.Drawing.Size(357, 167)
+        Me.GPODataGrid.Size = New System.Drawing.Size(357, 151)
         Me.GPODataGrid.TabIndex = 2
         Me.GPODataGrid.TabStop = False
         Me.ToolTip1.SetToolTip(Me.GPODataGrid, "Right click for menu")
@@ -5095,10 +5109,10 @@ Public Class Form1
         'btn_startupscripts
         '
         Me.btn_startupscripts.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_startupscripts.Location = New System.Drawing.Point(108, 41)
+        Me.btn_startupscripts.Location = New System.Drawing.Point(106, 59)
         Me.btn_startupscripts.Name = "btn_startupscripts"
         Me.btn_startupscripts.Size = New System.Drawing.Size(91, 22)
-        Me.btn_startupscripts.TabIndex = 2
+        Me.btn_startupscripts.TabIndex = 6
         Me.btn_startupscripts.Text = "applied scripts"
         Me.btn_startupscripts.UseVisualStyleBackColor = True
         '
@@ -5905,6 +5919,15 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
+        'Label55
+        '
+        Me.Label55.AutoSize = True
+        Me.Label55.Location = New System.Drawing.Point(176, 29)
+        Me.Label55.Name = "Label55"
+        Me.Label55.Size = New System.Drawing.Size(42, 13)
+        Me.Label55.TabIndex = 104
+        Me.Label55.Text = "set gpo"
+        '
         'Form1
         '
         Me.AccessibleName = "computer management console"
@@ -6102,12 +6125,6 @@ Public Class Form1
             sw_use_wmi_checkbox.Visible = False
         End If
 
-        'If cmcUser.Computer_ADMember Then
-        '    adpanel.Enabled = True
-        'Else
-        '    adpanel.Enabled = False
-        'End If
-
 
         ' Get computername as startup argument
         '        cmc.exe \\computer </u:username> </p:password> </r>
@@ -6199,30 +6216,22 @@ Public Class Form1
         End If
 
         ' Default Alt User Credentials 
+        If String.IsNullOrEmpty(My.Settings.defAltUser) Then
+            My.Settings.defAltUser = "Administrator"
+        End If
         SettingAltUser.Text = My.Settings.defAltUser
 
-        'SettingAltPass.Text = My.Settings.defAltPass
+        If String.IsNullOrEmpty(My.Settings.defAltPass) Then
+            My.Settings.defAltUser = "to/0Po8O6rOkIx0Rp/F98A=="
+        End If
         SettingAltPass.Text = EncryptText.DecryptText(My.Settings.defAltPass)
-
 
     End Sub
 
     ' Computername Changed Code
     Private Sub computername_TextChanged1(ByVal sender As Object, ByVal e As System.EventArgs) Handles computername.TextChanged
         If Not FormCleared Then ClearBoxes()
-        'If Trim(computername.Text) <> "" Then
-        'GO_Button.Enabled = True
-        'computername.Focus
-        'computername.Select(15, 0)
-        'Else
-        '    GO_Button.Enabled = False
-        'End If
     End Sub
-    'Private Sub computername_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles computername.SelectedIndexChanged
-    '    ClearBoxes()
-    '    'computername.Select(15, 0)
-    'End Sub
-
 
     ' Alternative Credentials
     Private Sub AltUserCheckBox_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AltUserCheckBox.CheckedChanged
@@ -6254,9 +6263,8 @@ Public Class Form1
         CheckAltUserCredentials()
     End Sub
     Private Sub altPassword_TextBox_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles altPassword_TextBox.TextChanged
-        'If PC.Name <> "" Then
+
         GO_Button.Enabled = True
-        'End If
         notification_label.Text = ""
         CheckAltUserCredentials()
 
@@ -6299,8 +6307,6 @@ Public Class Form1
         FormCleared = False
         GO_Button.Enabled = False
 
-        '------------------------------
-
         If PingClass.TryPing(Trim(computername.Text)) Then
             PC = New pc
             PC.Name = Trim(computername.Text)
@@ -6325,6 +6331,7 @@ Public Class Form1
     ' GO BUTTON....
     Private Sub GO_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GO_Button.Click
         computername.Text = Trim(computername.Text.ToLower)
+        Me.Refresh()
         Main()
     End Sub
     Private Sub Main()
@@ -6343,16 +6350,8 @@ Public Class Form1
         PC = New pc
         PC.Name = computername.Text
 
-        ' deselect text & position cursor at end of name
-        ' ### commented out 03/11/2007
-        'computername.Select(15, 0)
-
-        '=================================================================
-
         ' set account credentials to be used
         CheckAltUserCredentials()
-
-        '=================================================================
 
         ' Check computer is online (pingable)
         If Not PingClass.TryPing(PC.Name) Then
@@ -9657,7 +9656,8 @@ Public Class Form1
     End Sub
 
     Private Sub ADUserProfile2(ByVal strUser As String)
-        'Dim strUser As String = samaccountname.Text
+
+        Dim currentdomain As String = Me.cmcUser.userdomain.ToLower
         Dim strLDAPPath As String = String.Empty
 
         ClearADUser()
@@ -9668,11 +9668,24 @@ Public Class Form1
             strUser = samaccountname.Text.Substring(samaccountname.Text.LastIndexOf("\") + 1)
             Select Case strNTdomain.ToLower
                 Case "district"
-                    strLDAPPath = "LDAP://ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
+                    If currentdomain = "district" Then
+                        strLDAPPath = "LDAP://ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
+                    Else
+                        strLDAPPath = "LDAP://LHDOM01/ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
+                    End If
                 Case "chcs_nd"
-                    strLDAPPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
+                    If currentdomain = "chcs_nd" Then
+                        strLDAPPath = "LDAP://dc=nderby,dc=nhs,dc=uk"
+                    Else
+                        strLDAPPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
+                    End If
                 Case "tsha"
-                    strLDAPPath = "LDAP://OHDOM01/ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
+                    If currentdomain = "tsha" Then
+                        strLDAPPath = "LDAP://ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
+                    Else
+                        strLDAPPath = "LDAP://OHDOM01/ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
+                    End If
+
                 Case "forman"
                     strLDAPPath = "LDAP://server/dc=home,DC=peterforman,DC=net"
                 Case Else
@@ -9693,6 +9706,7 @@ Public Class Form1
                 strUser = samaccountname.Text
             Catch ex As System.Runtime.InteropServices.COMException
                 MsgBox("unable to determine default naming context for domain")
+                Exit Sub
             End Try
         End If
 
@@ -9776,7 +9790,7 @@ Public Class Form1
             MsgBox("Unable to enumerate terminal" & vbCr & "services information for " & strUser & vbCr & vbCr & ex.Message)
             btn_EnumGroups.Enabled = False
         End Try
-        
+
 
         'Dim strgroup As String
         'Dim objgroup As Object
@@ -10317,7 +10331,7 @@ Public Class Form1
 
     End Sub
 
-    Private Sub btn_gpo_rsop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_rsop.Click
+    Private Sub CreateRSOPReport_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label28.Click
         GpoRsop()
     End Sub
     Private Sub GpoRsop()
@@ -10439,7 +10453,7 @@ Public Class Form1
         Me.Cursor = Cursors.Default
     End Sub
     ' Open existing gpo debug file
-    Private Sub LinkLabel3_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel3.LinkClicked
+    Private Sub viewDebugFile_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles viewDebugFile.Click
         Dim logfilepath As String = "\\" & PC.Name & "\" & Replace(PC.SystemDirectory, ":", "$") & "\Debug\UserMode\Userenv.log"
         If System.IO.File.Exists(logfilepath) Then
             Dim p As New Process
@@ -12230,6 +12244,7 @@ Public Class Form1
     Private Sub RunVNC(ByVal strcomputer As String, ByVal vncinstall As Boolean, Optional ByVal vnc_queryconnect As Boolean = True)
 
         Dim vncuser, vncpass As String
+        Dim vncDeleteThread As New System.Threading.Thread(AddressOf VNC_Delete_Files)
 
         If vncinstall = False Then
             Shell(Chr(34) & My.Application.Info.DirectoryPath & "\files\vncviewer.exe" & Chr(34) & " " & strcomputer, 0, False)
@@ -12273,6 +12288,11 @@ Public Class Form1
                 Exit Sub
             End If
 
+
+            If Not File.Exists(PC.Name & "\c$\winvnc\winvnc4.exe") Then
+                ' do check...
+            End If
+
             Panel2.Text = "starting vnc service..."
 
             ' Run install cmd on remote computer
@@ -12297,6 +12317,17 @@ Public Class Form1
             If svc_ok = False Then
                 If IsProcessRunning("winvnc4.exe") = False Then
                     Panel2.Text = "Error starting VNC service."
+                    ' Delete remote VNC files
+                    Shell("cmd /c rmDir \\" & strcomputer & "\c$\winvnc /S /Q", 0, True)
+                    Panel2.Text = "vnc service removed"
+                    WriteLog(strcomputer & " - vnc - uninstalled")
+
+                    ' remove WinVNC Reg Entry
+                    wmi.RegistryDeleteKeyRecursive(PC.Name, RegistryHive.LocalMachine, "Software\RealVNC")
+
+                    ' delete local files
+                    vncdeleteThread.Start()
+
                     Me.Cursor = Cursors.Default
                     VNC_INSTALL_RUNNING = False
                     Me.ControlBox = True
@@ -12325,6 +12356,8 @@ Public Class Form1
             ' Wait for 1 Second after vnc viewer closed
             System.Threading.Thread.Sleep(800)
 
+
+
             ' Stop WINVNC service
             Shell("sc \\" & strcomputer & " stop winvnc4", 0, True)
             Panel2.Text = "vnc service stopped..."
@@ -12333,6 +12366,8 @@ Public Class Form1
 
             ' Remove WINVNC service
             Shell("sc \\" & strcomputer & " delete winvnc4", 0, True)
+
+
 
 
             ' Delete remote VNC files
@@ -12344,7 +12379,7 @@ Public Class Form1
             wmi.RegistryDeleteKeyRecursive(PC.Name, RegistryHive.LocalMachine, "Software\RealVNC")
 
             ' delete local files
-            Dim vncdeleteThread As New System.Threading.Thread(AddressOf VNC_Delete_Files)
+            'Dim vncdeleteThread As New System.Threading.Thread(AddressOf VNC_Delete_Files)
             vncdeleteThread.Start()
 
             ' reset Cursor
@@ -12393,11 +12428,12 @@ Public Class Form1
     Private Sub VNC_Create_Files(Optional ByVal vnc_queryconnect As Boolean = True)
 
         Dim queryconnect As String
-        'If vnc_queryconnect_CheckBox.Checked Then queryconnect = Chr(34) & "QueryConnect" & Chr(34) & "=dword:00000000"
+        Dim queryconnectInt As String = "1"
         If vnc_queryconnect Then
             queryconnect = Chr(34) & "QueryConnect" & Chr(34) & "=dword:00000001"
         Else
             queryconnect = Chr(34) & "QueryConnect" & Chr(34) & "=dword:00000000"
+            queryconnectInt = "0"
         End If
 
 
@@ -12405,7 +12441,8 @@ Public Class Form1
         Dim writer As New System.IO.StreamWriter(VNC_CMD_FILENAME, False)
         writer.WriteLine("regedit /s c:\winvnc\winvnc.reg")
         writer.WriteLine("c:\winvnc\winvnc4.exe -register")
-        writer.WriteLine("c:\winvnc\winvnc4.exe -start QueryConnect=1")
+        writer.WriteLine("ping -n 2 127.0.0.1")
+        writer.WriteLine("c:\winvnc\winvnc4.exe -start QueryConnect=" & queryconnectInt)
         writer.Close()
 
         Dim VNC_REG_FILENAME As String = My.Application.Info.DirectoryPath & "\files\winvnc\winvnc.reg"
@@ -13009,6 +13046,7 @@ Public Class Form1
             Case "gpo"
                 Me.AcceptButton = Nothing
                 If gpoDebugCombo.Text = String.Empty Then
+                    gpupdateChoice.SelectedIndex = 2
                     gpoDebugCombo.SelectedText = GPODebugSetting
                 End If
 
@@ -13925,6 +13963,7 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
+
 
 
 

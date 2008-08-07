@@ -18,12 +18,30 @@ Public Class cmcUser
         End Get
     End Property
 
+    ''' <summary>
+    ''' Get the NT domain name of the current application user.
+    ''' (returns 'no domain found' if not domain member.)
+    ''' </summary>
+    ''' <returns>domain name as string</returns>
     Public ReadOnly Property userdomain() As String
         Get
             Try
                 Return ADSystemInfo.DomainShortName
             Catch ex As Exception
                 Return "no domain found"
+            End Try
+        End Get
+    End Property
+
+    ''' <summary>
+    ''' Returns the name of the server used to authenticate the current application users session.
+    ''' </summary>
+    Public ReadOnly Property LogonServer() As String
+        Get
+            Try
+                Return Environment.ExpandEnvironmentVariables("%LogonServer%").Replace("\\", "")
+            Catch ex As Exception
+                Return ""
             End Try
         End Get
     End Property
