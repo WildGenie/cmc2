@@ -10232,45 +10232,49 @@ Public Class Form1
 
         Dim BaseReg As RegistryKey
         BaseReg = RegistryKey.OpenRemoteBaseKey(hive, PC.Name).OpenSubKey(basekey)
-        Dim startupscripts As String = BaseReg.GetValue(sBaseKey)
 
-        Dim flagcheck As Boolean = False ' use to identify whether ini in correct section
+        Try
+            Dim startupscripts As String = BaseReg.GetValue(sBaseKey)
 
-        Dim arrStartupscripts() As String = Split(startupscripts, ";")
-        For i As Integer = 0 To UBound(arrStartupscripts)
-            Dim sIniFile As String = arrStartupscripts(i) & "\scripts.ini"
-            If System.IO.File.Exists(sIniFile) Then
-                Dim sr As StreamReader = System.IO.File.OpenText(sIniFile)
-                Do While sr.EndOfStream = False
-                    Dim tmp As String = sr.ReadLine()
+            Dim flagcheck As Boolean = False ' use to identify whether ini in correct section
 
-                    If tmp.ToLower.Contains("[") Then
-                        If tmp.ToLower = "[" & sBaseKey.ToLower & "]" Then
-                            flagcheck = True
-                        Else
-                            flagcheck = False
-                        End If
-                    End If
+            Dim arrStartupscripts() As String = Split(startupscripts, ";")
+            For i As Integer = 0 To UBound(arrStartupscripts)
+                Dim sIniFile As String = arrStartupscripts(i) & "\scripts.ini"
+                If System.IO.File.Exists(sIniFile) Then
+                    Dim sr As StreamReader = System.IO.File.OpenText(sIniFile)
+                    Do While sr.EndOfStream = False
+                        Dim tmp As String = sr.ReadLine()
 
-                    If flagcheck Then
-                        If Mid(tmp, 2, 8) = "CmdLine=" AndAlso tmp.Length > 10 Then
-                            Dim scriptName As String
-                            Dim scriptFullPath As String
-                            scriptName = Mid(tmp, 10, tmp.Length - 9)
-                            If InStr(scriptName, "\") Then
-                                scriptFullPath = scriptName.Substring(0, scriptName.LastIndexOf("\"))
-                                scriptName = Mid(scriptName, scriptName.LastIndexOf("\") + 2)
+                        If tmp.ToLower.Contains("[") Then
+                            If tmp.ToLower = "[" & sBaseKey.ToLower & "]" Then
+                                flagcheck = True
                             Else
-                                scriptFullPath = arrStartupscripts(i) & "\" & sBaseKey
+                                flagcheck = False
                             End If
-
-                            GPODataGrid.Rows.Add(scriptName, "", LCase(sBaseKey), scriptFullPath)
                         End If
-                    End If
-                Loop
-            End If
-        Next
 
+                        If flagcheck Then
+                            If Mid(tmp, 2, 8) = "CmdLine=" AndAlso tmp.Length > 10 Then
+                                Dim scriptName As String
+                                Dim scriptFullPath As String
+                                scriptName = Mid(tmp, 10, tmp.Length - 9)
+                                If InStr(scriptName, "\") Then
+                                    scriptFullPath = scriptName.Substring(0, scriptName.LastIndexOf("\"))
+                                    scriptName = Mid(scriptName, scriptName.LastIndexOf("\") + 2)
+                                Else
+                                    scriptFullPath = arrStartupscripts(i) & "\" & sBaseKey
+                                End If
+
+                                GPODataGrid.Rows.Add(scriptName, "", LCase(sBaseKey), scriptFullPath)
+                            End If
+                        End If
+                    Loop
+                End If
+            Next
+        Catch ex As System.NullReferenceException
+            GPODataGrid.Rows.Add("cannot enumerate")
+        End Try
 
     End Sub
 
