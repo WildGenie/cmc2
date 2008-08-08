@@ -384,9 +384,6 @@ Public Class Form1
     Friend WithEvents addmappeddrive_path As System.Windows.Forms.TextBox
     Friend WithEvents addmappeddrive_button As System.Windows.Forms.Button
     Friend WithEvents deletemappeddrive As System.Windows.Forms.Button
-    Friend WithEvents pr_name As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents pr_id As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents executablepath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents processpath As System.Windows.Forms.TextBox
     Friend WithEvents GoogleLookupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddPrinterButton As System.Windows.Forms.Button
@@ -518,6 +515,13 @@ Public Class Form1
     Friend WithEvents lbl_rsop As System.Windows.Forms.LinkLabel
     Friend WithEvents lbl_debug As System.Windows.Forms.LinkLabel
     Friend WithEvents lbl_localgpo As System.Windows.Forms.LinkLabel
+    Friend WithEvents pr_name As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents pr_id As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents executablepath As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents mem As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents mnuProcKill As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuProcGoogle As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ProcContextMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -541,9 +545,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -810,6 +814,7 @@ Public Class Form1
         Me.pr_name = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.pr_id = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.executablepath = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.mem = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ProcessRefresh = New System.Windows.Forms.Button
         Me.ProcessGroupBox = New System.Windows.Forms.GroupBox
         Me.processpath = New System.Windows.Forms.TextBox
@@ -923,8 +928,10 @@ Public Class Form1
         Me.MappedDrivesButton = New System.Windows.Forms.Button
         Me.printerRefresh = New System.Windows.Forms.Button
         Me.gpo = New System.Windows.Forms.TabPage
-        Me.lbl_rsop = New System.Windows.Forms.LinkLabel
+        Me.lbl_localgpo = New System.Windows.Forms.LinkLabel
         Me.gpoDebugCombo = New System.Windows.Forms.ComboBox
+        Me.lbl_debug = New System.Windows.Forms.LinkLabel
+        Me.lbl_rsop = New System.Windows.Forms.LinkLabel
         Me.Label55 = New System.Windows.Forms.Label
         Me.gpoDebugMode = New System.Windows.Forms.Label
         Me.gpupdateChoice = New System.Windows.Forms.ComboBox
@@ -1018,8 +1025,9 @@ Public Class Form1
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
         Me.EditToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.lbl_debug = New System.Windows.Forms.LinkLabel
-        Me.lbl_localgpo = New System.Windows.Forms.LinkLabel
+        Me.mnuProcKill = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuProcGoogle = New System.Windows.Forms.ToolStripMenuItem
+        Me.ProcContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1074,6 +1082,7 @@ Public Class Form1
         Me.GroupBox9.SuspendLayout()
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
+        Me.ProcContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -3399,22 +3408,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3571,7 +3580,7 @@ Public Class Form1
         Me.processgrid.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.processgrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.processgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.processgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pr_name, Me.pr_id, Me.executablepath})
+        Me.processgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pr_name, Me.pr_id, Me.executablepath, Me.mem})
         Me.processgrid.GridColor = System.Drawing.SystemColors.Window
         Me.processgrid.Location = New System.Drawing.Point(6, 9)
         Me.processgrid.MultiSelect = False
@@ -3611,6 +3620,14 @@ Public Class Form1
         Me.executablepath.Name = "executablepath"
         Me.executablepath.ReadOnly = True
         Me.executablepath.Visible = False
+        '
+        'mem
+        '
+        Me.mem.HeaderText = "memory"
+        Me.mem.Name = "mem"
+        Me.mem.ReadOnly = True
+        Me.mem.Visible = False
+        Me.mem.Width = 50
         '
         'ProcessRefresh
         '
@@ -3828,8 +3845,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -4965,16 +4982,16 @@ Public Class Form1
         Me.gpo.Text = "Group Policy"
         Me.gpo.UseVisualStyleBackColor = True
         '
-        'lbl_rsop
+        'lbl_localgpo
         '
-        Me.lbl_rsop.AutoSize = True
-        Me.lbl_rsop.LinkColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.lbl_rsop.Location = New System.Drawing.Point(6, 12)
-        Me.lbl_rsop.Name = "lbl_rsop"
-        Me.lbl_rsop.Size = New System.Drawing.Size(89, 13)
-        Me.lbl_rsop.TabIndex = 105
-        Me.lbl_rsop.TabStop = True
-        Me.lbl_rsop.Text = "create rsop report"
+        Me.lbl_localgpo.AutoSize = True
+        Me.lbl_localgpo.LinkColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbl_localgpo.Location = New System.Drawing.Point(6, 29)
+        Me.lbl_localgpo.Name = "lbl_localgpo"
+        Me.lbl_localgpo.Size = New System.Drawing.Size(87, 13)
+        Me.lbl_localgpo.TabIndex = 107
+        Me.lbl_localgpo.TabStop = True
+        Me.lbl_localgpo.Text = "local group policy"
         '
         'gpoDebugCombo
         '
@@ -4985,6 +5002,29 @@ Public Class Form1
         Me.gpoDebugCombo.Name = "gpoDebugCombo"
         Me.gpoDebugCombo.Size = New System.Drawing.Size(121, 20)
         Me.gpoDebugCombo.TabIndex = 3
+        '
+        'lbl_debug
+        '
+        Me.lbl_debug.AutoSize = True
+        Me.lbl_debug.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lbl_debug.LinkColor = System.Drawing.Color.Gray
+        Me.lbl_debug.Location = New System.Drawing.Point(240, 49)
+        Me.lbl_debug.Name = "lbl_debug"
+        Me.lbl_debug.Size = New System.Drawing.Size(67, 12)
+        Me.lbl_debug.TabIndex = 106
+        Me.lbl_debug.TabStop = True
+        Me.lbl_debug.Text = "view debug file"
+        '
+        'lbl_rsop
+        '
+        Me.lbl_rsop.AutoSize = True
+        Me.lbl_rsop.LinkColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
+        Me.lbl_rsop.Location = New System.Drawing.Point(6, 12)
+        Me.lbl_rsop.Name = "lbl_rsop"
+        Me.lbl_rsop.Size = New System.Drawing.Size(89, 13)
+        Me.lbl_rsop.TabIndex = 105
+        Me.lbl_rsop.TabStop = True
+        Me.lbl_rsop.Text = "create rsop report"
         '
         'Label55
         '
@@ -5897,28 +5937,25 @@ Public Class Form1
         Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
-        'lbl_debug
+        'mnuProcKill
         '
-        Me.lbl_debug.AutoSize = True
-        Me.lbl_debug.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.lbl_debug.LinkColor = System.Drawing.Color.Gray
-        Me.lbl_debug.Location = New System.Drawing.Point(240, 49)
-        Me.lbl_debug.Name = "lbl_debug"
-        Me.lbl_debug.Size = New System.Drawing.Size(67, 12)
-        Me.lbl_debug.TabIndex = 106
-        Me.lbl_debug.TabStop = True
-        Me.lbl_debug.Text = "view debug file"
+        Me.mnuProcKill.Image = Global.CMC.My.Resources.Resources.cancel
+        Me.mnuProcKill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuProcKill.Name = "mnuProcKill"
+        Me.mnuProcKill.Size = New System.Drawing.Size(137, 22)
+        Me.mnuProcKill.Text = "Kill Process"
         '
-        'lbl_localgpo
+        'mnuProcGoogle
         '
-        Me.lbl_localgpo.AutoSize = True
-        Me.lbl_localgpo.LinkColor = System.Drawing.Color.FromArgb(CType(CType(0, Byte), Integer), CType(CType(0, Byte), Integer), CType(CType(64, Byte), Integer))
-        Me.lbl_localgpo.Location = New System.Drawing.Point(6, 29)
-        Me.lbl_localgpo.Name = "lbl_localgpo"
-        Me.lbl_localgpo.Size = New System.Drawing.Size(87, 13)
-        Me.lbl_localgpo.TabIndex = 107
-        Me.lbl_localgpo.TabStop = True
-        Me.lbl_localgpo.Text = "local group policy"
+        Me.mnuProcGoogle.Name = "mnuProcGoogle"
+        Me.mnuProcGoogle.Size = New System.Drawing.Size(137, 22)
+        Me.mnuProcGoogle.Text = "Google..."
+        '
+        'ProcContextMenu
+        '
+        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcKill, Me.mnuProcGoogle})
+        Me.ProcContextMenu.Name = "ProcContextMenu"
+        Me.ProcContextMenu.Size = New System.Drawing.Size(138, 48)
         '
         'Form1
         '
@@ -6041,6 +6078,7 @@ Public Class Form1
         Me.GroupBox9.PerformLayout()
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
+        Me.ProcContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -8159,7 +8197,7 @@ Public Class Form1
 
         Try
             Dim queryCollection As ManagementObjectCollection
-            queryCollection = wmi.wmiQuery("SELECT Name, ProcessID, ExecutablePath FROM Win32_Process")
+            queryCollection = wmi.wmiQuery("SELECT Name, ProcessID, ExecutablePath, WorkingSetSize FROM Win32_Process")
 
             Dim path As String
             Dim m As ManagementObject
@@ -8169,7 +8207,7 @@ Public Class Form1
                 Else
                     path = m("ExecutablePath").ToString
                 End If
-                processgrid.Rows.Add(m("Name").ToString, m("ProcessID").ToString, path)
+                processgrid.Rows.Add(m("Name").ToString, m("ProcessID").ToString, path, CLng(m("ProcessID")) / 1024)
             Next
         Catch ex As Exception
             Panel2.Text = "error getting processes"
@@ -8182,7 +8220,7 @@ Public Class Form1
         Try
             Dim ps As System.Diagnostics.Process
             For Each ps In System.Diagnostics.Process.GetProcesses(PC.Name)
-                processgrid.Rows.Add(ps.ProcessName, ps.Id, "")
+                processgrid.Rows.Add(ps.ProcessName, ps.Id, "", ps.WorkingSet64 / 1024)
             Next ps
         Catch ex As Exception
             MsgBox(ex.Message)
@@ -8351,21 +8389,36 @@ Public Class Form1
         End If
 
     End Sub
-    ' Private Sub processgrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles processgrid.MouseDown
 
-    'If e.Button = Windows.Forms.MouseButtons.Left Then
-    '    Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+    Protected Friend pGrid_Name As String
+    Protected Friend pGrid_ID As String
+    Protected Friend pGrid_Path As String
+    Protected Friend pGrid_Mem As String
 
-    '    If hti.Type = DataGridViewHitTestType.Cell Then
-    '        processgrid.ClearSelection()
-    '        processgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
-    '        processname.Text = processgrid(0, hti.RowIndex).Value
-    '        processpath.Text = processgrid(2, hti.RowIndex).Value
-    '        processid.Text = processgrid(1, hti.RowIndex).Value
-    '    End If
-    'End If
 
-    'End Sub
+    Private Sub processgrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles processgrid.MouseDown
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                ' ensure only current item selected
+                processgrid.ClearSelection()
+                processgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.pGrid_Name = processgrid(0, hti.RowIndex).Value
+                Me.pGrid_ID = processgrid(1, hti.RowIndex).Value
+                Me.pGrid_Path = processgrid(2, hti.RowIndex).Value
+                Me.pGrid_Mem = processgrid(3, hti.RowIndex).Value
+
+                mnuProcKill.Text = "Kill Process: " & Me.pGrid_ID & " [" & Me.pGrid_Name & "]"
+                mnuProcGoogle.Text = "Google for " & Me.pGrid_Name
+                'mnuProcInfo.Text = Me.pGrid_Name & vbCr & Me.pGrid_Path & vbCr & "Memory: " & Me.pGrid_Mem & " Kb"
+
+                ProcContextMenu.Show(processgrid, New Point(e.X, e.Y))
+            End If
+        End If
+
+    End Sub
     Private Sub GoogleButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GoogleButton.Click
         On Error Resume Next
         If processname.Text <> "" Then
@@ -9884,7 +9937,7 @@ Public Class Form1
                     Catch ex2 As Exception
                         MsgBox("Error enumerating group membership." & vbCr & ex2.Message)
                     End Try
-                    
+
                 End If
             End Try
 
@@ -10792,7 +10845,7 @@ Public Class Form1
 
     End Sub
 
-    
+
 #End Region
 
 #Region "StartUp"
@@ -10822,7 +10875,7 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(ex.Message)
         End Try
-        
+
 
     End Sub
     Private Sub startupDataGrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles startupDataGrid.MouseDown
@@ -12392,7 +12445,7 @@ Public Class Form1
                     wmi.RegistryDeleteKeyRecursive(PC.Name, RegistryHive.LocalMachine, "Software\RealVNC")
 
                     ' delete local files
-                    vncdeleteThread.Start()
+                    vncDeleteThread.Start()
 
                     Me.Cursor = Cursors.Default
                     VNC_INSTALL_RUNNING = False
@@ -12446,7 +12499,7 @@ Public Class Form1
 
             ' delete local files
             'Dim vncdeleteThread As New System.Threading.Thread(AddressOf VNC_Delete_Files)
-            vncdeleteThread.Start()
+            vncDeleteThread.Start()
 
             ' reset Cursor
             Me.Cursor = Cursors.Default
@@ -13215,7 +13268,7 @@ Public Class Form1
             sitename.Text = ""
             org.Text = ""
 
-            
+
 
             If AltUserCheckBox.Checked Then _
                 Shell("net use \\" & PC.Name & "\ipc$ /delete /y", 0, False)
@@ -13471,7 +13524,7 @@ Public Class Form1
 
         Dim myProcess As Process = New Process()
         Dim s As String
-        
+
         myProcess.StartInfo.FileName = "cmd.exe"
         myProcess.StartInfo.UseShellExecute = False
         myProcess.StartInfo.CreateNoWindow = True
