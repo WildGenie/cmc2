@@ -194,6 +194,7 @@
     <None Include="Resources\bullet_go.png" />
     <None Include="Resources\0029.ico" />
     <None Include="Resources\book_open.png" />
+    <None Include="Resources\cancel.png" />
     <Content Include="Resources\files\netdom.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
