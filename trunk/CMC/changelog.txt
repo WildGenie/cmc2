@@ -5,12 +5,24 @@ ToDo
 
 ====================================================================================================
 
+move history to appdat file
+check domain/dc for creating rsop report.
+check rsop file exists before launching process.
+wait cursor for ad user and gpo
+tidy static/dhcp buttons
+add process owner option to process menu
+software to context menu style
+
+08/08/2008
+feature:  Process datagrid now uses context menu, and added memory usage.
+bugfix:   numerous minor fixes.
+
 06/08/2008
 code:     AD User information now using directory services rather than NT name translation.
 code:     AD User info - groups now enumerated separately from account info.
 feature:  AD User info now working on multiple domains - requires DsPath for domain.
 feature:  AD user info - added shortcut to launch AD Users & Computers pointing at relevant domain.
-code:     AltUser/Password settings stored in registry rather than my.settings to prevent losing
+code:     AltUser/AltPassword settings stored in registry rather than my.settings to prevent losing
           settings on upgrade.
 
 05/08/2008

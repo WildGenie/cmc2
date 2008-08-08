@@ -210,16 +210,10 @@ Public Class Form1
     Friend WithEvents ShowUpdates As System.Windows.Forms.CheckBox
     Private WithEvents processes As System.Windows.Forms.TabPage
     Friend WithEvents ProcessRefresh As System.Windows.Forms.Button
-    Friend WithEvents ProcessGroupBox As System.Windows.Forms.GroupBox
-    Friend WithEvents GoogleButton As System.Windows.Forms.Button
-    Friend WithEvents ProcessKill As System.Windows.Forms.Button
-    Friend WithEvents processid As System.Windows.Forms.TextBox
-    Friend WithEvents processname As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents RunNewProcess As System.Windows.Forms.Button
     Friend WithEvents interactive As System.Windows.Forms.CheckBox
     Friend WithEvents newprocess As System.Windows.Forms.TextBox
-    Friend WithEvents Label7 As System.Windows.Forms.Label
     Private WithEvents services As System.Windows.Forms.TabPage
     Friend WithEvents svc_datagrid As System.Windows.Forms.DataGridView
     Friend WithEvents Label30 As System.Windows.Forms.Label
@@ -298,7 +292,6 @@ Public Class Form1
     Friend WithEvents processgrid As System.Windows.Forms.DataGridView
     Friend WithEvents previewbutton As System.Windows.Forms.Button
     Friend WithEvents test As System.Windows.Forms.TabPage
-    Friend WithEvents wmiKill As System.Windows.Forms.Button
     Friend WithEvents netdomreboot As System.Windows.Forms.CheckBox
     Friend WithEvents column1 As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -384,7 +377,6 @@ Public Class Form1
     Friend WithEvents addmappeddrive_path As System.Windows.Forms.TextBox
     Friend WithEvents addmappeddrive_button As System.Windows.Forms.Button
     Friend WithEvents deletemappeddrive As System.Windows.Forms.Button
-    Friend WithEvents processpath As System.Windows.Forms.TextBox
     Friend WithEvents GoogleLookupToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents AddPrinterButton As System.Windows.Forms.Button
     Friend WithEvents addptr4all As System.Windows.Forms.CheckBox
@@ -515,13 +507,17 @@ Public Class Form1
     Friend WithEvents lbl_rsop As System.Windows.Forms.LinkLabel
     Friend WithEvents lbl_debug As System.Windows.Forms.LinkLabel
     Friend WithEvents lbl_localgpo As System.Windows.Forms.LinkLabel
+    Friend WithEvents mnuProcKill As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuProcGoogle As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ProcContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents mnuCopyPath As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents procMenuHeader As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator24 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents pr_name As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pr_id As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents executablepath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents mem As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents mnuProcKill As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents mnuProcGoogle As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ProcContextMenu As System.Windows.Forms.ContextMenuStrip
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -545,9 +541,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle10 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -809,6 +805,7 @@ Public Class Form1
         Me.swurl = New System.Windows.Forms.LinkLabel
         Me.ShowUpdates = New System.Windows.Forms.CheckBox
         Me.processes = New System.Windows.Forms.TabPage
+        Me.Label7 = New System.Windows.Forms.Label
         Me.get_processes_by_wmi_checkbox = New System.Windows.Forms.CheckBox
         Me.processgrid = New System.Windows.Forms.DataGridView
         Me.pr_name = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -816,13 +813,6 @@ Public Class Form1
         Me.executablepath = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.mem = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ProcessRefresh = New System.Windows.Forms.Button
-        Me.ProcessGroupBox = New System.Windows.Forms.GroupBox
-        Me.processpath = New System.Windows.Forms.TextBox
-        Me.wmiKill = New System.Windows.Forms.Button
-        Me.GoogleButton = New System.Windows.Forms.Button
-        Me.ProcessKill = New System.Windows.Forms.Button
-        Me.processid = New System.Windows.Forms.TextBox
-        Me.processname = New System.Windows.Forms.TextBox
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.ScheduleButton = New System.Windows.Forms.Button
         Me.ScheduleTime = New System.Windows.Forms.TextBox
@@ -830,7 +820,6 @@ Public Class Form1
         Me.RunNewProcess = New System.Windows.Forms.Button
         Me.interactive = New System.Windows.Forms.CheckBox
         Me.newprocess = New System.Windows.Forms.TextBox
-        Me.Label7 = New System.Windows.Forms.Label
         Me.Label41 = New System.Windows.Forms.Label
         Me.services = New System.Windows.Forms.TabPage
         Me.svc_datagrid = New System.Windows.Forms.DataGridView
@@ -1028,6 +1017,9 @@ Public Class Form1
         Me.mnuProcKill = New System.Windows.Forms.ToolStripMenuItem
         Me.mnuProcGoogle = New System.Windows.Forms.ToolStripMenuItem
         Me.ProcContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.procMenuHeader = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator
+        Me.mnuCopyPath = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1058,7 +1050,6 @@ Public Class Form1
         Me.GroupBox2.SuspendLayout()
         Me.processes.SuspendLayout()
         CType(Me.processgrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.ProcessGroupBox.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.services.SuspendLayout()
         CType(Me.svc_datagrid, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1224,8 +1215,8 @@ Public Class Form1
         'Label11
         '
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.Label11.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.Label11.Location = New System.Drawing.Point(5, 23)
+        Me.Label11.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label11.Location = New System.Drawing.Point(5, 24)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(128, 16)
         Me.Label11.TabIndex = 35
@@ -1233,7 +1224,7 @@ Public Class Form1
         '
         'GO_Button
         '
-        Me.GO_Button.Location = New System.Drawing.Point(142, 36)
+        Me.GO_Button.Location = New System.Drawing.Point(142, 37)
         Me.GO_Button.Name = "GO_Button"
         Me.GO_Button.Size = New System.Drawing.Size(32, 24)
         Me.GO_Button.TabIndex = 2
@@ -1244,7 +1235,7 @@ Public Class Form1
         '
         Me.AltUserCheckBox.CheckAlign = System.Drawing.ContentAlignment.BottomRight
         Me.AltUserCheckBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.AltUserCheckBox.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.AltUserCheckBox.ForeColor = System.Drawing.Color.RoyalBlue
         Me.AltUserCheckBox.Location = New System.Drawing.Point(268, 24)
         Me.AltUserCheckBox.Name = "AltUserCheckBox"
         Me.AltUserCheckBox.Size = New System.Drawing.Size(98, 15)
@@ -1254,7 +1245,7 @@ Public Class Form1
         '
         'altusername_TextBox
         '
-        Me.altusername_TextBox.BackColor = System.Drawing.Color.MintCream
+        Me.altusername_TextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.altusername_TextBox.Enabled = False
         Me.altusername_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
         Me.altusername_TextBox.Location = New System.Drawing.Point(264, 41)
@@ -1313,7 +1304,7 @@ Public Class Form1
         'PingButton
         '
         Me.PingButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
-        Me.PingButton.Location = New System.Drawing.Point(178, 40)
+        Me.PingButton.Location = New System.Drawing.Point(178, 41)
         Me.PingButton.Name = "PingButton"
         Me.PingButton.Size = New System.Drawing.Size(29, 18)
         Me.PingButton.TabIndex = 3
@@ -1323,7 +1314,7 @@ Public Class Form1
         '
         'altPassword_TextBox
         '
-        Me.altPassword_TextBox.BackColor = System.Drawing.Color.MintCream
+        Me.altPassword_TextBox.BackColor = System.Drawing.Color.WhiteSmoke
         Me.altPassword_TextBox.Enabled = False
         Me.altPassword_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.altPassword_TextBox.Location = New System.Drawing.Point(264, 60)
@@ -2291,7 +2282,7 @@ Public Class Form1
         '
         Me.defHW.AutoSize = True
         Me.defHW.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.defHW.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.defHW.ForeColor = System.Drawing.Color.RoyalBlue
         Me.defHW.Location = New System.Drawing.Point(9, 18)
         Me.defHW.Name = "defHW"
         Me.defHW.Size = New System.Drawing.Size(70, 17)
@@ -2303,7 +2294,7 @@ Public Class Form1
         '
         Me.defNW.AutoSize = True
         Me.defNW.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.defNW.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.defNW.ForeColor = System.Drawing.Color.RoyalBlue
         Me.defNW.Location = New System.Drawing.Point(9, 41)
         Me.defNW.Name = "defNW"
         Me.defNW.Size = New System.Drawing.Size(63, 17)
@@ -2315,7 +2306,7 @@ Public Class Form1
         '
         Me.defPR.AutoSize = True
         Me.defPR.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.defPR.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.defPR.ForeColor = System.Drawing.Color.RoyalBlue
         Me.defPR.Location = New System.Drawing.Point(96, 41)
         Me.defPR.Name = "defPR"
         Me.defPR.Size = New System.Drawing.Size(73, 17)
@@ -2327,7 +2318,7 @@ Public Class Form1
         '
         Me.defSV.AutoSize = True
         Me.defSV.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.defSV.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.defSV.ForeColor = System.Drawing.Color.RoyalBlue
         Me.defSV.Location = New System.Drawing.Point(96, 18)
         Me.defSV.Name = "defSV"
         Me.defSV.Size = New System.Drawing.Size(64, 17)
@@ -2476,7 +2467,7 @@ Public Class Form1
         'msg_radio
         '
         Me.msg_radio.AutoSize = True
-        Me.msg_radio.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.msg_radio.ForeColor = System.Drawing.Color.RoyalBlue
         Me.msg_radio.Location = New System.Drawing.Point(198, 13)
         Me.msg_radio.Name = "msg_radio"
         Me.msg_radio.Size = New System.Drawing.Size(67, 17)
@@ -2511,7 +2502,7 @@ Public Class Form1
         '
         Me.modallabel.AutoSize = True
         Me.modallabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.modallabel.ForeColor = System.Drawing.Color.SteelBlue
+        Me.modallabel.ForeColor = System.Drawing.Color.RoyalBlue
         Me.modallabel.Location = New System.Drawing.Point(271, 7)
         Me.modallabel.Name = "modallabel"
         Me.modallabel.Size = New System.Drawing.Size(30, 12)
@@ -2639,7 +2630,7 @@ Public Class Form1
         '
         Me.msgboxradio.AutoSize = True
         Me.msgboxradio.Checked = True
-        Me.msgboxradio.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.msgboxradio.ForeColor = System.Drawing.Color.RoyalBlue
         Me.msgboxradio.Location = New System.Drawing.Point(54, 13)
         Me.msgboxradio.Name = "msgboxradio"
         Me.msgboxradio.Size = New System.Drawing.Size(63, 17)
@@ -2652,7 +2643,7 @@ Public Class Form1
         'netsendradio
         '
         Me.netsendradio.AutoSize = True
-        Me.netsendradio.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.netsendradio.ForeColor = System.Drawing.Color.RoyalBlue
         Me.netsendradio.Location = New System.Drawing.Point(123, 13)
         Me.netsendradio.Name = "netsendradio"
         Me.netsendradio.Size = New System.Drawing.Size(69, 17)
@@ -2664,7 +2655,7 @@ Public Class Form1
         'Label35
         '
         Me.Label35.AutoSize = True
-        Me.Label35.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label35.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label35.Location = New System.Drawing.Point(17, 215)
         Me.Label35.Name = "Label35"
         Me.Label35.Size = New System.Drawing.Size(172, 13)
@@ -2755,6 +2746,7 @@ Public Class Form1
         Me.btn_dsa.Name = "btn_dsa"
         Me.btn_dsa.Size = New System.Drawing.Size(20, 20)
         Me.btn_dsa.TabIndex = 37
+        Me.ToolTip1.SetToolTip(Me.btn_dsa, "AD Users & Computers")
         Me.btn_dsa.UseVisualStyleBackColor = True
         '
         'telephonenumber
@@ -2840,7 +2832,7 @@ Public Class Form1
         Me.PasswordGroupBox.Controls.Add(Me.resetpassword)
         Me.PasswordGroupBox.Controls.Add(Me.password1)
         Me.PasswordGroupBox.Controls.Add(Me.password2)
-        Me.PasswordGroupBox.ForeColor = System.Drawing.Color.SteelBlue
+        Me.PasswordGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
         Me.PasswordGroupBox.Location = New System.Drawing.Point(199, 23)
         Me.PasswordGroupBox.Name = "PasswordGroupBox"
         Me.PasswordGroupBox.Size = New System.Drawing.Size(163, 68)
@@ -2916,7 +2908,7 @@ Public Class Form1
         '
         'samaccountname
         '
-        Me.samaccountname.BackColor = System.Drawing.Color.Khaki
+        Me.samaccountname.BackColor = System.Drawing.Color.LightSkyBlue
         Me.samaccountname.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.samaccountname.Location = New System.Drawing.Point(5, 31)
         Me.samaccountname.Name = "samaccountname"
@@ -2967,7 +2959,7 @@ Public Class Form1
         Me.profileGroupBox.Controls.Add(Me.Label22)
         Me.profileGroupBox.Controls.Add(Me.Label24)
         Me.profileGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.profileGroupBox.ForeColor = System.Drawing.Color.SteelBlue
+        Me.profileGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
         Me.profileGroupBox.Location = New System.Drawing.Point(183, 96)
         Me.profileGroupBox.Name = "profileGroupBox"
         Me.profileGroupBox.Size = New System.Drawing.Size(179, 134)
@@ -3134,7 +3126,7 @@ Public Class Form1
         '
         Me.domainlogon.AutoSize = True
         Me.domainlogon.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.domainlogon.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.domainlogon.ForeColor = System.Drawing.Color.RoyalBlue
         Me.domainlogon.Location = New System.Drawing.Point(7, 68)
         Me.domainlogon.Name = "domainlogon"
         Me.domainlogon.Size = New System.Drawing.Size(159, 16)
@@ -3146,7 +3138,7 @@ Public Class Form1
         '
         Me.netdomreboot.AutoSize = True
         Me.netdomreboot.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.netdomreboot.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.netdomreboot.ForeColor = System.Drawing.Color.RoyalBlue
         Me.netdomreboot.Location = New System.Drawing.Point(7, 90)
         Me.netdomreboot.Name = "netdomreboot"
         Me.netdomreboot.Size = New System.Drawing.Size(97, 16)
@@ -3288,7 +3280,7 @@ Public Class Form1
         'domaccountlabel
         '
         Me.domaccountlabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.domaccountlabel.ForeColor = System.Drawing.Color.SteelBlue
+        Me.domaccountlabel.ForeColor = System.Drawing.Color.RoyalBlue
         Me.domaccountlabel.Location = New System.Drawing.Point(1, 92)
         Me.domaccountlabel.Name = "domaccountlabel"
         Me.domaccountlabel.Size = New System.Drawing.Size(69, 12)
@@ -3344,7 +3336,7 @@ Public Class Form1
         'Label10
         '
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.Label10.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label10.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label10.Location = New System.Drawing.Point(90, 51)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(59, 16)
@@ -3354,7 +3346,7 @@ Public Class Form1
         'Label9
         '
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.Label9.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label9.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label9.Location = New System.Drawing.Point(2, 51)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(61, 16)
@@ -3408,22 +3400,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle6.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle6.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle6
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
+        DataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle9
         Me.sgrid.RowTemplate.Height = 12
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
@@ -3534,7 +3526,7 @@ Public Class Form1
         'ShowUpdates
         '
         Me.ShowUpdates.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.ShowUpdates.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.ShowUpdates.ForeColor = System.Drawing.Color.RoyalBlue
         Me.ShowUpdates.Location = New System.Drawing.Point(2, 5)
         Me.ShowUpdates.Name = "ShowUpdates"
         Me.ShowUpdates.Size = New System.Drawing.Size(130, 16)
@@ -3544,10 +3536,10 @@ Public Class Form1
         'processes
         '
         Me.processes.BackColor = System.Drawing.Color.Transparent
+        Me.processes.Controls.Add(Me.Label7)
         Me.processes.Controls.Add(Me.get_processes_by_wmi_checkbox)
         Me.processes.Controls.Add(Me.processgrid)
         Me.processes.Controls.Add(Me.ProcessRefresh)
-        Me.processes.Controls.Add(Me.ProcessGroupBox)
         Me.processes.Controls.Add(Me.GroupBox1)
         Me.processes.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.processes.Location = New System.Drawing.Point(4, 22)
@@ -3557,13 +3549,23 @@ Public Class Form1
         Me.processes.Text = "Processes"
         Me.processes.UseVisualStyleBackColor = True
         '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.Label7.Location = New System.Drawing.Point(1, 3)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(93, 13)
+        Me.Label7.TabIndex = 15
+        Me.Label7.Text = "right click for menu"
+        '
         'get_processes_by_wmi_checkbox
         '
         Me.get_processes_by_wmi_checkbox.AutoSize = True
         Me.get_processes_by_wmi_checkbox.Checked = True
         Me.get_processes_by_wmi_checkbox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.get_processes_by_wmi_checkbox.ForeColor = System.Drawing.Color.Gray
-        Me.get_processes_by_wmi_checkbox.Location = New System.Drawing.Point(186, 3)
+        Me.get_processes_by_wmi_checkbox.Location = New System.Drawing.Point(206, 3)
         Me.get_processes_by_wmi_checkbox.Name = "get_processes_by_wmi_checkbox"
         Me.get_processes_by_wmi_checkbox.Size = New System.Drawing.Size(44, 17)
         Me.get_processes_by_wmi_checkbox.TabIndex = 14
@@ -3575,14 +3577,13 @@ Public Class Form1
         '
         Me.processgrid.AllowUserToAddRows = False
         Me.processgrid.AllowUserToDeleteRows = False
-        Me.processgrid.AllowUserToResizeColumns = False
         Me.processgrid.AllowUserToResizeRows = False
         Me.processgrid.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.processgrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.processgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.processgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pr_name, Me.pr_id, Me.executablepath, Me.mem})
         Me.processgrid.GridColor = System.Drawing.SystemColors.Window
-        Me.processgrid.Location = New System.Drawing.Point(6, 9)
+        Me.processgrid.Location = New System.Drawing.Point(0, 21)
         Me.processgrid.MultiSelect = False
         Me.processgrid.Name = "processgrid"
         Me.processgrid.ReadOnly = True
@@ -3590,136 +3591,54 @@ Public Class Form1
         Me.processgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.processgrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.processgrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
-        Me.processgrid.RowTemplate.Height = 14
+        Me.processgrid.RowTemplate.Height = 16
         Me.processgrid.RowTemplate.ReadOnly = True
         Me.processgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.processgrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.processgrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
         Me.processgrid.ShowEditingIcon = False
-        Me.processgrid.Size = New System.Drawing.Size(174, 222)
+        Me.processgrid.Size = New System.Drawing.Size(368, 155)
         Me.processgrid.TabIndex = 13
         Me.processgrid.TabStop = False
         '
         'pr_name
         '
         Me.pr_name.Frozen = True
-        Me.pr_name.HeaderText = "name"
+        Me.pr_name.HeaderText = "Name"
         Me.pr_name.Name = "pr_name"
         Me.pr_name.ReadOnly = True
+        Me.pr_name.Width = 90
         '
         'pr_id
         '
-        Me.pr_id.HeaderText = "id"
+        Me.pr_id.HeaderText = "PID"
         Me.pr_id.Name = "pr_id"
         Me.pr_id.ReadOnly = True
-        Me.pr_id.Width = 70
+        Me.pr_id.Width = 39
         '
         'executablepath
         '
         Me.executablepath.HeaderText = "Path"
         Me.executablepath.Name = "executablepath"
         Me.executablepath.ReadOnly = True
-        Me.executablepath.Visible = False
+        Me.executablepath.Width = 177
         '
         'mem
         '
-        Me.mem.HeaderText = "memory"
+        Me.mem.HeaderText = "Mem(kb)"
         Me.mem.Name = "mem"
         Me.mem.ReadOnly = True
-        Me.mem.Visible = False
-        Me.mem.Width = 50
+        Me.mem.Width = 60
         '
         'ProcessRefresh
         '
         Me.ProcessRefresh.Enabled = False
         Me.ProcessRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.ProcessRefresh.Location = New System.Drawing.Point(319, 3)
+        Me.ProcessRefresh.Location = New System.Drawing.Point(321, 0)
         Me.ProcessRefresh.Name = "ProcessRefresh"
         Me.ProcessRefresh.Size = New System.Drawing.Size(48, 20)
         Me.ProcessRefresh.TabIndex = 9
         Me.ProcessRefresh.Text = "refresh"
-        '
-        'ProcessGroupBox
-        '
-        Me.ProcessGroupBox.Controls.Add(Me.processpath)
-        Me.ProcessGroupBox.Controls.Add(Me.wmiKill)
-        Me.ProcessGroupBox.Controls.Add(Me.GoogleButton)
-        Me.ProcessGroupBox.Controls.Add(Me.ProcessKill)
-        Me.ProcessGroupBox.Controls.Add(Me.processid)
-        Me.ProcessGroupBox.Controls.Add(Me.processname)
-        Me.ProcessGroupBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.ProcessGroupBox.Location = New System.Drawing.Point(186, 19)
-        Me.ProcessGroupBox.Name = "ProcessGroupBox"
-        Me.ProcessGroupBox.Size = New System.Drawing.Size(176, 100)
-        Me.ProcessGroupBox.TabIndex = 12
-        Me.ProcessGroupBox.TabStop = False
-        Me.ProcessGroupBox.Text = "Process Details"
-        '
-        'processpath
-        '
-        Me.processpath.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.processpath.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.processpath.Location = New System.Drawing.Point(6, 44)
-        Me.processpath.Name = "processpath"
-        Me.processpath.ReadOnly = True
-        Me.processpath.Size = New System.Drawing.Size(165, 18)
-        Me.processpath.TabIndex = 8
-        '
-        'wmiKill
-        '
-        Me.wmiKill.Location = New System.Drawing.Point(70, 66)
-        Me.wmiKill.Name = "wmiKill"
-        Me.wmiKill.Size = New System.Drawing.Size(48, 26)
-        Me.wmiKill.TabIndex = 7
-        Me.wmiKill.TabStop = False
-        Me.wmiKill.Text = "Kill"
-        Me.ToolTip1.SetToolTip(Me.wmiKill, "terminate the selected process")
-        Me.wmiKill.UseVisualStyleBackColor = True
-        '
-        'GoogleButton
-        '
-        Me.GoogleButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
-        Me.GoogleButton.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.GoogleButton.Location = New System.Drawing.Point(129, 18)
-        Me.GoogleButton.Name = "GoogleButton"
-        Me.GoogleButton.Size = New System.Drawing.Size(42, 20)
-        Me.GoogleButton.TabIndex = 6
-        Me.GoogleButton.TabStop = False
-        Me.GoogleButton.Text = "Google"
-        Me.ToolTip1.SetToolTip(Me.GoogleButton, "find information for selected process")
-        Me.GoogleButton.UseVisualStyleBackColor = False
-        '
-        'ProcessKill
-        '
-        Me.ProcessKill.Location = New System.Drawing.Point(128, 69)
-        Me.ProcessKill.Name = "ProcessKill"
-        Me.ProcessKill.Size = New System.Drawing.Size(43, 20)
-        Me.ProcessKill.TabIndex = 5
-        Me.ProcessKill.TabStop = False
-        Me.ProcessKill.Text = "tsKill"
-        Me.ToolTip1.SetToolTip(Me.ProcessKill, "alternate method of terminating selected process")
-        '
-        'processid
-        '
-        Me.processid.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.processid.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.processid.Location = New System.Drawing.Point(6, 70)
-        Me.processid.Name = "processid"
-        Me.processid.ReadOnly = True
-        Me.processid.Size = New System.Drawing.Size(56, 19)
-        Me.processid.TabIndex = 2
-        Me.processid.TabStop = False
-        '
-        'processname
-        '
-        Me.processname.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.processname.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!)
-        Me.processname.Location = New System.Drawing.Point(6, 18)
-        Me.processname.Name = "processname"
-        Me.processname.ReadOnly = True
-        Me.processname.Size = New System.Drawing.Size(120, 20)
-        Me.processname.TabIndex = 1
-        Me.processname.TabStop = False
         '
         'GroupBox1
         '
@@ -3729,12 +3648,12 @@ Public Class Form1
         Me.GroupBox1.Controls.Add(Me.RunNewProcess)
         Me.GroupBox1.Controls.Add(Me.interactive)
         Me.GroupBox1.Controls.Add(Me.newprocess)
-        Me.GroupBox1.Controls.Add(Me.Label7)
         Me.GroupBox1.Controls.Add(Me.Label41)
         Me.GroupBox1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.GroupBox1.Location = New System.Drawing.Point(186, 122)
+        Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.GroupBox1.Location = New System.Drawing.Point(5, 180)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(176, 109)
+        Me.GroupBox1.Size = New System.Drawing.Size(361, 54)
         Me.GroupBox1.TabIndex = 10
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Create New Process"
@@ -3742,7 +3661,8 @@ Public Class Form1
         'ScheduleButton
         '
         Me.ScheduleButton.Enabled = False
-        Me.ScheduleButton.Location = New System.Drawing.Point(111, 62)
+        Me.ScheduleButton.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.ScheduleButton.Location = New System.Drawing.Point(298, 9)
         Me.ScheduleButton.Name = "ScheduleButton"
         Me.ScheduleButton.Size = New System.Drawing.Size(57, 20)
         Me.ScheduleButton.TabIndex = 91
@@ -3752,7 +3672,7 @@ Public Class Form1
         '
         'ScheduleTime
         '
-        Me.ScheduleTime.Location = New System.Drawing.Point(133, 84)
+        Me.ScheduleTime.Location = New System.Drawing.Point(320, 31)
         Me.ScheduleTime.Name = "ScheduleTime"
         Me.ScheduleTime.Size = New System.Drawing.Size(35, 19)
         Me.ScheduleTime.TabIndex = 90
@@ -3761,7 +3681,8 @@ Public Class Form1
         'Label40
         '
         Me.Label40.AutoSize = True
-        Me.Label40.Location = New System.Drawing.Point(108, 86)
+        Me.Label40.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label40.Location = New System.Drawing.Point(297, 31)
         Me.Label40.Name = "Label40"
         Me.Label40.Size = New System.Drawing.Size(26, 13)
         Me.Label40.TabIndex = 89
@@ -3769,16 +3690,18 @@ Public Class Form1
         '
         'RunNewProcess
         '
-        Me.RunNewProcess.Location = New System.Drawing.Point(7, 65)
+        Me.RunNewProcess.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.RunNewProcess.Location = New System.Drawing.Point(223, 9)
         Me.RunNewProcess.Name = "RunNewProcess"
-        Me.RunNewProcess.Size = New System.Drawing.Size(58, 40)
+        Me.RunNewProcess.Size = New System.Drawing.Size(58, 41)
         Me.RunNewProcess.TabIndex = 4
         Me.RunNewProcess.Text = "run now"
         '
         'interactive
         '
         Me.interactive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.interactive.Location = New System.Drawing.Point(8, 47)
+        Me.interactive.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.interactive.Location = New System.Drawing.Point(6, 35)
         Me.interactive.Name = "interactive"
         Me.interactive.Size = New System.Drawing.Size(85, 16)
         Me.interactive.TabIndex = 2
@@ -3789,25 +3712,17 @@ Public Class Form1
         'newprocess
         '
         Me.newprocess.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.newprocess.Location = New System.Drawing.Point(8, 28)
+        Me.newprocess.Location = New System.Drawing.Point(6, 16)
         Me.newprocess.Name = "newprocess"
-        Me.newprocess.Size = New System.Drawing.Size(160, 18)
+        Me.newprocess.Size = New System.Drawing.Size(205, 18)
         Me.newprocess.TabIndex = 1
         Me.newprocess.TabStop = False
-        '
-        'Label7
-        '
-        Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.Label7.Location = New System.Drawing.Point(8, 13)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(160, 16)
-        Me.Label7.TabIndex = 0
-        Me.Label7.Text = "command to run"
         '
         'Label41
         '
         Me.Label41.AutoSize = True
-        Me.Label41.Location = New System.Drawing.Point(75, 77)
+        Me.Label41.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label41.Location = New System.Drawing.Point(281, 23)
         Me.Label41.Name = "Label41"
         Me.Label41.Size = New System.Drawing.Size(16, 13)
         Me.Label41.TabIndex = 92
@@ -3845,8 +3760,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle10.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle10
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.Khaki
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.SteelBlue
         Me.svc_datagrid.RowTemplate.Height = 16
@@ -3910,7 +3825,7 @@ Public Class Form1
         '
         Me.Label30.AutoSize = True
         Me.Label30.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label30.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.Label30.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label30.Location = New System.Drawing.Point(1, 4)
         Me.Label30.Name = "Label30"
         Me.Label30.Size = New System.Drawing.Size(127, 13)
@@ -4363,7 +4278,7 @@ Public Class Form1
         'ie
         '
         Me.ie.BackColor = System.Drawing.SystemColors.Window
-        Me.ie.Location = New System.Drawing.Point(92, 74)
+        Me.ie.Location = New System.Drawing.Point(92, 71)
         Me.ie.Name = "ie"
         Me.ie.Size = New System.Drawing.Size(112, 19)
         Me.ie.TabIndex = 62
@@ -4373,7 +4288,7 @@ Public Class Form1
         '
         Me.proxyset.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.proxyset.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.proxyset.Location = New System.Drawing.Point(63, 74)
+        Me.proxyset.Location = New System.Drawing.Point(63, 71)
         Me.proxyset.Name = "proxyset"
         Me.proxyset.Size = New System.Drawing.Size(26, 19)
         Me.proxyset.TabIndex = 68
@@ -4385,7 +4300,7 @@ Public Class Form1
         '
         Me.Label_IP.BackColor = System.Drawing.SystemColors.Window
         Me.Label_IP.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_IP.Location = New System.Drawing.Point(268, 7)
+        Me.Label_IP.Location = New System.Drawing.Point(268, 4)
         Me.Label_IP.Name = "Label_IP"
         Me.Label_IP.ReadOnly = True
         Me.Label_IP.Size = New System.Drawing.Size(96, 19)
@@ -4395,23 +4310,25 @@ Public Class Form1
         'adbutton
         '
         Me.adbutton.Enabled = False
+        Me.adbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.adbutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.adbutton.Location = New System.Drawing.Point(268, 95)
+        Me.adbutton.Image = Global.CMC.My.Resources.Resources.folder_user
+        Me.adbutton.Location = New System.Drawing.Point(269, 97)
         Me.adbutton.Name = "adbutton"
-        Me.adbutton.Size = New System.Drawing.Size(50, 20)
+        Me.adbutton.Size = New System.Drawing.Size(22, 22)
         Me.adbutton.TabIndex = 65
-        Me.adbutton.Text = "ad profile"
+        Me.ToolTip1.SetToolTip(Me.adbutton, "AD User Profile")
         Me.adbutton.UseVisualStyleBackColor = True
         '
         'ielabel
         '
         Me.ielabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.ielabel.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.ielabel.Location = New System.Drawing.Point(3, 76)
+        Me.ielabel.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.ielabel.Location = New System.Drawing.Point(3, 73)
         Me.ielabel.Name = "ielabel"
         Me.ielabel.Size = New System.Drawing.Size(55, 16)
         Me.ielabel.TabIndex = 63
-        Me.ielabel.Text = "IE Version"
+        Me.ielabel.Text = "ie version"
         Me.ToolTip1.SetToolTip(Me.ielabel, "click to toggle version/proxy")
         '
         'HWButton
@@ -4618,7 +4535,7 @@ Public Class Form1
         '
         Me.Label_User.BackColor = System.Drawing.SystemColors.Window
         Me.Label_User.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_User.Location = New System.Drawing.Point(92, 96)
+        Me.Label_User.Location = New System.Drawing.Point(92, 98)
         Me.Label_User.Name = "Label_User"
         Me.Label_User.ReadOnly = True
         Me.Label_User.Size = New System.Drawing.Size(175, 19)
@@ -4629,7 +4546,7 @@ Public Class Form1
         '
         Me.Label_Boot.BackColor = System.Drawing.SystemColors.Window
         Me.Label_Boot.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_Boot.Location = New System.Drawing.Point(268, 74)
+        Me.Label_Boot.Location = New System.Drawing.Point(268, 71)
         Me.Label_Boot.Name = "Label_Boot"
         Me.Label_Boot.ReadOnly = True
         Me.Label_Boot.Size = New System.Drawing.Size(96, 19)
@@ -4640,7 +4557,7 @@ Public Class Form1
         '
         Me.Label_Ver.BackColor = System.Drawing.SystemColors.Window
         Me.Label_Ver.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_Ver.Location = New System.Drawing.Point(268, 52)
+        Me.Label_Ver.Location = New System.Drawing.Point(268, 49)
         Me.Label_Ver.Name = "Label_Ver"
         Me.Label_Ver.ReadOnly = True
         Me.Label_Ver.Size = New System.Drawing.Size(96, 19)
@@ -4651,7 +4568,7 @@ Public Class Form1
         '
         Me.Label_SP.BackColor = System.Drawing.SystemColors.Window
         Me.Label_SP.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_SP.Location = New System.Drawing.Point(92, 52)
+        Me.Label_SP.Location = New System.Drawing.Point(92, 49)
         Me.Label_SP.Name = "Label_SP"
         Me.Label_SP.ReadOnly = True
         Me.Label_SP.Size = New System.Drawing.Size(112, 19)
@@ -4662,7 +4579,7 @@ Public Class Form1
         '
         Me.Label_OS.BackColor = System.Drawing.SystemColors.Window
         Me.Label_OS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_OS.Location = New System.Drawing.Point(92, 30)
+        Me.Label_OS.Location = New System.Drawing.Point(92, 27)
         Me.Label_OS.Name = "Label_OS"
         Me.Label_OS.ReadOnly = True
         Me.Label_OS.Size = New System.Drawing.Size(272, 19)
@@ -4673,7 +4590,7 @@ Public Class Form1
         '
         Me.Label_Name.BackColor = System.Drawing.SystemColors.Window
         Me.Label_Name.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_Name.Location = New System.Drawing.Point(92, 8)
+        Me.Label_Name.Location = New System.Drawing.Point(92, 5)
         Me.Label_Name.Name = "Label_Name"
         Me.Label_Name.ReadOnly = True
         Me.Label_Name.Size = New System.Drawing.Size(112, 19)
@@ -4683,72 +4600,72 @@ Public Class Form1
         'LabelIP
         '
         Me.LabelIP.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelIP.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelIP.Location = New System.Drawing.Point(211, 11)
+        Me.LabelIP.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelIP.Location = New System.Drawing.Point(211, 8)
         Me.LabelIP.Name = "LabelIP"
         Me.LabelIP.Size = New System.Drawing.Size(64, 16)
         Me.LabelIP.TabIndex = 41
-        Me.LabelIP.Text = "IP Address"
+        Me.LabelIP.Text = "ip address"
         '
         'LabelName
         '
         Me.LabelName.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelName.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelName.Location = New System.Drawing.Point(2, 10)
+        Me.LabelName.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelName.Location = New System.Drawing.Point(2, 7)
         Me.LabelName.Name = "LabelName"
-        Me.LabelName.Size = New System.Drawing.Size(96, 16)
+        Me.LabelName.Size = New System.Drawing.Size(84, 16)
         Me.LabelName.TabIndex = 39
-        Me.LabelName.Text = "Hostname"
+        Me.LabelName.Text = "hostname"
         '
         'LabelUser
         '
         Me.LabelUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelUser.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelUser.Location = New System.Drawing.Point(2, 99)
+        Me.LabelUser.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelUser.Location = New System.Drawing.Point(28, 100)
         Me.LabelUser.Name = "LabelUser"
         Me.LabelUser.Size = New System.Drawing.Size(72, 16)
         Me.LabelUser.TabIndex = 36
-        Me.LabelUser.Text = "Current User"
+        Me.LabelUser.Text = "current user"
         '
         'LabelSP
         '
         Me.LabelSP.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelSP.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelSP.Location = New System.Drawing.Point(2, 54)
+        Me.LabelSP.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelSP.Location = New System.Drawing.Point(2, 51)
         Me.LabelSP.Name = "LabelSP"
-        Me.LabelSP.Size = New System.Drawing.Size(96, 16)
+        Me.LabelSP.Size = New System.Drawing.Size(87, 16)
         Me.LabelSP.TabIndex = 33
-        Me.LabelSP.Text = "Service Pack"
+        Me.LabelSP.Text = "service pack"
         '
         'LabelV
         '
         Me.LabelV.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelV.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelV.Location = New System.Drawing.Point(211, 55)
+        Me.LabelV.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelV.Location = New System.Drawing.Point(211, 52)
         Me.LabelV.Name = "LabelV"
         Me.LabelV.Size = New System.Drawing.Size(48, 16)
         Me.LabelV.TabIndex = 32
-        Me.LabelV.Text = "Version"
+        Me.LabelV.Text = "version"
         '
         'LabelBoot
         '
         Me.LabelBoot.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelBoot.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelBoot.Location = New System.Drawing.Point(211, 76)
+        Me.LabelBoot.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelBoot.Location = New System.Drawing.Point(211, 73)
         Me.LabelBoot.Name = "LabelBoot"
         Me.LabelBoot.Size = New System.Drawing.Size(56, 16)
         Me.LabelBoot.TabIndex = 31
-        Me.LabelBoot.Text = "Last Boot"
+        Me.LabelBoot.Text = "last boot"
         '
         'LabelOS
         '
         Me.LabelOS.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.LabelOS.ForeColor = System.Drawing.Color.MidnightBlue
-        Me.LabelOS.Location = New System.Drawing.Point(1, 31)
+        Me.LabelOS.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.LabelOS.Location = New System.Drawing.Point(1, 28)
         Me.LabelOS.Name = "LabelOS"
-        Me.LabelOS.Size = New System.Drawing.Size(96, 16)
+        Me.LabelOS.Size = New System.Drawing.Size(97, 16)
         Me.LabelOS.TabIndex = 30
-        Me.LabelOS.Text = "Operating System"
+        Me.LabelOS.Text = "operating system"
         '
         'Tabholder1
         '
@@ -4795,7 +4712,7 @@ Public Class Form1
         '
         Me.addptr4all.AutoSize = True
         Me.addptr4all.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addptr4all.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.addptr4all.ForeColor = System.Drawing.Color.RoyalBlue
         Me.addptr4all.Location = New System.Drawing.Point(204, 90)
         Me.addptr4all.Name = "addptr4all"
         Me.addptr4all.Size = New System.Drawing.Size(88, 16)
@@ -4930,7 +4847,7 @@ Public Class Form1
         '
         Me.Label50.AutoSize = True
         Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label50.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.Label50.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label50.Location = New System.Drawing.Point(38, 101)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(205, 12)
@@ -5269,7 +5186,7 @@ Public Class Form1
         '
         Me.Label51.AutoSize = True
         Me.Label51.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.Label51.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.Label51.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label51.Location = New System.Drawing.Point(19, 180)
         Me.Label51.Name = "Label51"
         Me.Label51.Size = New System.Drawing.Size(208, 12)
@@ -5280,7 +5197,7 @@ Public Class Form1
         '
         Me.Label49.AutoSize = True
         Me.Label49.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.Label49.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.Label49.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label49.Location = New System.Drawing.Point(19, 170)
         Me.Label49.Name = "Label49"
         Me.Label49.Size = New System.Drawing.Size(233, 12)
@@ -5428,7 +5345,7 @@ Public Class Form1
         'Label48
         '
         Me.Label48.AutoSize = True
-        Me.Label48.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label48.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label48.Location = New System.Drawing.Point(3, 200)
         Me.Label48.Name = "Label48"
         Me.Label48.Size = New System.Drawing.Size(67, 13)
@@ -5438,7 +5355,7 @@ Public Class Form1
         'Label47
         '
         Me.Label47.AutoSize = True
-        Me.Label47.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label47.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label47.Location = New System.Drawing.Point(3, 132)
         Me.Label47.Name = "Label47"
         Me.Label47.Size = New System.Drawing.Size(93, 13)
@@ -5458,7 +5375,7 @@ Public Class Form1
         'Label46
         '
         Me.Label46.AutoSize = True
-        Me.Label46.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label46.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label46.Location = New System.Drawing.Point(4, 167)
         Me.Label46.Name = "Label46"
         Me.Label46.Size = New System.Drawing.Size(52, 13)
@@ -5468,7 +5385,7 @@ Public Class Form1
         'Label45
         '
         Me.Label45.AutoSize = True
-        Me.Label45.ForeColor = System.Drawing.Color.SteelBlue
+        Me.Label45.ForeColor = System.Drawing.Color.RoyalBlue
         Me.Label45.Location = New System.Drawing.Point(216, 6)
         Me.Label45.Name = "Label45"
         Me.Label45.Size = New System.Drawing.Size(145, 13)
@@ -5893,10 +5810,10 @@ Public Class Form1
         '
         'computername
         '
-        Me.computername.BackColor = System.Drawing.Color.Khaki
+        Me.computername.BackColor = System.Drawing.Color.LightSkyBlue
         Me.computername.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.computername.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!)
-        Me.computername.Location = New System.Drawing.Point(8, 36)
+        Me.computername.Location = New System.Drawing.Point(8, 37)
         Me.computername.MaxDropDownItems = 12
         Me.computername.Name = "computername"
         Me.computername.Size = New System.Drawing.Size(130, 24)
@@ -5942,20 +5859,37 @@ Public Class Form1
         Me.mnuProcKill.Image = Global.CMC.My.Resources.Resources.cancel
         Me.mnuProcKill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuProcKill.Name = "mnuProcKill"
-        Me.mnuProcKill.Size = New System.Drawing.Size(137, 22)
-        Me.mnuProcKill.Text = "Kill Process"
+        Me.mnuProcKill.Size = New System.Drawing.Size(136, 22)
+        Me.mnuProcKill.Text = "kill process"
         '
         'mnuProcGoogle
         '
         Me.mnuProcGoogle.Name = "mnuProcGoogle"
-        Me.mnuProcGoogle.Size = New System.Drawing.Size(137, 22)
-        Me.mnuProcGoogle.Text = "Google..."
+        Me.mnuProcGoogle.Size = New System.Drawing.Size(136, 22)
+        Me.mnuProcGoogle.Text = "google..."
         '
         'ProcContextMenu
         '
-        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuProcKill, Me.mnuProcGoogle})
+        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.procMenuHeader, Me.ToolStripSeparator24, Me.mnuProcKill, Me.mnuProcGoogle, Me.mnuCopyPath})
         Me.ProcContextMenu.Name = "ProcContextMenu"
-        Me.ProcContextMenu.Size = New System.Drawing.Size(138, 48)
+        Me.ProcContextMenu.Size = New System.Drawing.Size(137, 98)
+        '
+        'procMenuHeader
+        '
+        Me.procMenuHeader.ForeColor = System.Drawing.Color.SteelBlue
+        Me.procMenuHeader.Name = "procMenuHeader"
+        Me.procMenuHeader.Size = New System.Drawing.Size(136, 22)
+        '
+        'ToolStripSeparator24
+        '
+        Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
+        Me.ToolStripSeparator24.Size = New System.Drawing.Size(133, 6)
+        '
+        'mnuCopyPath
+        '
+        Me.mnuCopyPath.Name = "mnuCopyPath"
+        Me.mnuCopyPath.Size = New System.Drawing.Size(136, 22)
+        Me.mnuCopyPath.Text = "copy path"
         '
         'Form1
         '
@@ -6038,8 +5972,6 @@ Public Class Form1
         Me.processes.ResumeLayout(False)
         Me.processes.PerformLayout()
         CType(Me.processgrid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.ProcessGroupBox.ResumeLayout(False)
-        Me.ProcessGroupBox.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.services.ResumeLayout(False)
@@ -6099,11 +6031,11 @@ Public Class Form1
         ' allow cross thread calls
         Control.CheckForIllegalCrossThreadCalls = False
 
-        ' Load History
-        LoadHistory()
-
         ' load settings
         LoadSettings()
+
+        ' Load History
+        LoadHistory()
 
         ' Log File
         LogFilePath = sLogFilePath.Text
@@ -6281,7 +6213,6 @@ Public Class Form1
         End If
         historylimitselect.Value = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("HistorySize")
 
-
     End Sub
     ''' <summary>
     ''' Function to read a value from the Registry
@@ -6291,7 +6222,7 @@ Public Class Form1
     ''' <param name="sKeyName">String -> Name of the value you want to read</param>
     ''' <param name="oNameValue">Object -> The value to be read</param>
     ''' <returns>True (Succeeded)/False (Failed)</returns>
-    ''' <remarks>Created 23JUN05 - Peter Forman</remarks>
+    ''' <remarks>Created 23 Jun 05 - Peter Forman</remarks>
     Public Function ReadRegistryValue(ByVal MainKey As RegistryKey, ByVal sKey As String, ByVal sKeyName As String, _
                                       ByRef oNameValue As Object) As String
         Dim rkKey As RegistryKey
@@ -6313,8 +6244,6 @@ Public Class Form1
         Return Value
     End Function
 
-
-
     ' Computername Changed Code
     Private Sub computername_TextChanged1(ByVal sender As Object, ByVal e As System.EventArgs) Handles computername.TextChanged
         If Not FormCleared Then ClearBoxes()
@@ -6326,10 +6255,11 @@ Public Class Form1
             altPassword_TextBox.UseSystemPasswordChar = True
             altusername_TextBox.Enabled = True
             altPassword_TextBox.Enabled = True
-            altusername_TextBox.BackColor = Color.PaleGoldenrod
-            altPassword_TextBox.BackColor = Color.PaleGoldenrod
+            altPassword_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold)
+            altusername_TextBox.BackColor = Color.AliceBlue
+            altPassword_TextBox.BackColor = Color.AliceBlue
             altusername_TextBox.Text = SettingAltUser.Text
-            altPassword_TextBox.Text = EncryptText.DecryptText(SettingAltPass.Text)
+            altPassword_TextBox.Text = SettingAltPass.Text
             If GO_Button.Text <> "" Then GO_Button.Enabled = True
         Else
             altusername_TextBox.Text = "username"
@@ -6337,6 +6267,7 @@ Public Class Form1
             altPassword_TextBox.UseSystemPasswordChar = False
             altusername_TextBox.Enabled = False
             altPassword_TextBox.Enabled = False
+            altPassword_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular)
             altusername_TextBox.BackColor = Color.WhiteSmoke
             altPassword_TextBox.BackColor = Color.WhiteSmoke
         End If
@@ -6683,6 +6614,12 @@ Public Class Form1
         If IsProcessRunning("explorer.exe") Then
             If PC.OSVersionNumeric > 5 Then
                 Label_User.Text = ProcessOwner("explorer.exe")
+                ' check for error
+                If Label_User.Text = "\" Then
+                    PC.CurrentUser = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultUserName")
+                    PC.CurrentUserDomain = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultDomainName")
+                    Label_User.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
+                End If
             Else
                 PC.CurrentUser = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultUserName")
                 PC.CurrentUserDomain = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultDomainName")
@@ -6693,7 +6630,7 @@ Public Class Form1
             OnlyUserToolStripMenuItem.Enabled = True
 
             WriteLog(PC.Name & " - logged on user: " & Label_User.Text)
-            mappeddrivesGroupBox.Text = "persistent mapped drives (" & LCase(PC.CurrentUser) & ")"
+            mappeddrivesGroupBox.Text = "persistent mapped drives  [" & LCase(PC.CurrentUser) & "]"
             mappeddrivesGroupBox.Enabled = True
             PC.LastLogon = ""
         Else
@@ -6707,9 +6644,21 @@ Public Class Form1
             WriteLog(PC.Name & " - no one logged on")
             mappeddrivesGroupBox.Text = "persistent mapped drives"
             mappeddrivesGroupBox.Enabled = False
-            ielabel.ForeColor = Color.MidnightBlue
-            PC.LastLogon = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultDomainName") _
-                & "\" & wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultUserName")
+            ielabel.ForeColor = System.Drawing.SystemColors.ControlText
+
+            ' Read last user logon from registry
+            Dim lDomain As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultDomainName")
+            Dim lUser As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultUserName")
+            If lUser.Contains("\") Then
+                PC.LastLogon = lUser
+            Else
+                If String.IsNullOrEmpty(lDomain) = False AndAlso String.IsNullOrEmpty(lUser) Then
+                    PC.LastLogon = lDomain & "\" & lUser
+                    'Else
+                    '    PC.LastLogon = "unknown"
+                End If
+            End If
+
         End If
 
         ' check for running screensaver
@@ -6738,7 +6687,7 @@ Public Class Form1
         If Label_User.Text = "no one is logged on" Then
             adbutton.Enabled = False
         Else
-            If PC.CurrentUserDomain.ToLower <> "" Then
+            If Not String.IsNullOrEmpty(PC.CurrentUserDomain) Then
                 If PC.CurrentUserDomain.ToLower <> PC.Name.ToLower Then
                     adbutton.Enabled = True
                     samaccountname.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
@@ -6750,7 +6699,7 @@ Public Class Form1
     Private Sub getIE()
         Try
             PC.IEVersion = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, "Software\Microsoft\Internet Explorer", "Version")
-            If ielabel.Text = "IE Version" Then ie.Text = PC.IEVersion
+            If ielabel.Text.ToLower = "ie version" Then ie.Text = PC.IEVersion
         Catch ex As Exception
             WriteLog(PC.Name & " - error retrieving ie information: " & ex.Message)
         End Try
@@ -6784,19 +6733,19 @@ Public Class Form1
 
         On Error Resume Next
         'If PC.IEProxy = "" Then Exit Sub
-        If ielabel.Text = "IE Version" Then
-            ielabel.Text = "Proxy"
+        If ielabel.Text = "ie version" Then
+            ielabel.Text = "proxy"
             ie.Text = PC.IEProxy
             proxyset.Visible = True
-        ElseIf ielabel.Text = "Proxy" Then
-            ielabel.Text = "IE Version"
+        ElseIf ielabel.Text.ToLower = "proxy" Then
+            ielabel.Text = "ie version"
             ie.Text = PC.IEVersion
             proxyset.Visible = False
         End If
     End Sub
     Private Sub ie_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles ie.MouseEnter
         If PC.Name = Nothing OrElse PC.IEProxy = "" Then Exit Sub
-        If ielabel.Text = "IE Version" Then ie.Text = PC.IEProxy
+        If ielabel.Text.ToLower = "ie version" Then ie.Text = PC.IEProxy
     End Sub
     Private Sub ie_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles ie.MouseLeave
         If PC.Name = Nothing OrElse PC.IEProxy = "" Then Exit Sub
@@ -6825,12 +6774,12 @@ Public Class Form1
                 ielabel.ForeColor = Color.DodgerBlue
             Else
                 PC.IEProxy = ""
-                ielabel.ForeColor = Color.MidnightBlue
+                ielabel.ForeColor = System.Drawing.SystemColors.ControlText
             End If
 
         Catch ex As Exception
             PC.IEProxy = ""
-            ielabel.ForeColor = Color.Blue
+            ielabel.ForeColor = System.Drawing.SystemColors.ControlText
             Exit Sub
         End Try
 
@@ -7036,7 +6985,7 @@ Public Class Form1
         Label_Ver.Text = ""
         Label_Boot.Text = ""
         ie.Text = ""
-        ielabel.ForeColor = System.Drawing.Color.MidnightBlue
+        ielabel.ForeColor = System.Drawing.SystemColors.ControlText
         proxyset.Visible = False
         ListBox_Shares.Items.Clear()
         Label_IP.Text = ""
@@ -8205,9 +8154,9 @@ Public Class Form1
                 If m("ExecutablePath") = Nothing Then
                     path = ""
                 Else
-                    path = m("ExecutablePath").ToString
+                    path = m("ExecutablePath").ToString.ToLower
                 End If
-                processgrid.Rows.Add(m("Name").ToString, m("ProcessID").ToString, path, CLng(m("ProcessID")) / 1024)
+                processgrid.Rows.Add(m("Name").ToString.ToLower, m("ProcessID").ToString, path, CInt(m("WorkingSetSize")) / 1024)
             Next
         Catch ex As Exception
             Panel2.Text = "error getting processes"
@@ -8228,27 +8177,96 @@ Public Class Form1
 
     End Sub
 
-    Private Sub wmiKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles wmiKill.Click
+    'Private Function GetProcessInfo(ByVal Property_Name As String, ByVal pID As String) As String
+    '    Dim result As String = String.Empty
+    '    Try
+    '        Dim queryCollection As ManagementObjectCollection
+    '        queryCollection = wmi.wmiQuery("SELECT ProcessID, " & Property_Name & " FROM Win32_Process WHERE ProcessID = '" & pID & "'")
+    '        Dim m As ManagementObject
+    '        For Each m In queryCollection
+    '            result = m(Property_Name).ToString
+    '        Next
+    '    Catch ex As Exception
+    '        Return result
+    '    End Try
+    '    Return result
+    'End Function
+
+    Protected Friend pGrid_Name As String
+    Protected Friend pGrid_ID As String
+    Protected Friend pGrid_Path As String
+    Protected Friend pGrid_Mem As String
+
+    Private Sub processgrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles processgrid.MouseDown
+
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                ' ensure only current item selected
+                processgrid.ClearSelection()
+                processgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.pGrid_Name = processgrid(0, hti.RowIndex).Value
+                Me.pGrid_ID = processgrid(1, hti.RowIndex).Value
+                Me.pGrid_Path = processgrid(2, hti.RowIndex).Value
+                Me.pGrid_Mem = processgrid(3, hti.RowIndex).Value
+
+                procMenuHeader.Text = Me.pGrid_Name
+                mnuProcKill.Text = "kill process  [" & Me.pGrid_ID & "]"
+                mnuProcGoogle.Text = "google lookup"
+
+                If Me.pGrid_Name = "system" OrElse Me.pGrid_Name = "csrss.exe" OrElse Me.pGrid_Name = "system idle process" Then
+                    mnuProcKill.Enabled = False
+                    mnuProcGoogle.Enabled = False
+                Else
+                    mnuProcKill.Enabled = True
+                    mnuProcGoogle.Enabled = True
+                End If
+
+                If String.IsNullOrEmpty(Me.pGrid_Path) Then
+                    mnuCopyPath.Enabled = False
+                Else
+                    mnuCopyPath.Enabled = True
+                End If
+
+                ProcContextMenu.Show(processgrid, New Point(e.X, e.Y))
+            End If
+        End If
+
+    End Sub
+
+    Private Sub mnuProcKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuProcKill.Click
         Me.Cursor = Cursors.WaitCursor
         If WMI_Kill() Then
             For i As Integer = 0 To processgrid.RowCount - 1
-                If InStr(LCase(processgrid(1, i).Value), processid.Text) Then
+                If InStr(LCase(processgrid(1, i).Value), Me.pGrid_ID) Then
                     processgrid.Rows(i).Visible = False
                 End If
             Next
-            processname.Text = ""
-            processpath.Text = ""
-            processid.Text = ""
+            'processname.Text = ""
+            'processpath.Text = ""
+            'processid.Text = ""
         End If
 
         Me.Cursor = Cursors.Default
     End Sub
+    Private Sub mnuProcGoogle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuProcGoogle.Click
+        On Error Resume Next
+        If Me.pGrid_Name <> "" Then
+            System.Diagnostics.Process.Start("http://www.google.com/search?q=" & Me.pGrid_Name)
+        End If
+    End Sub
+    Private Sub mnuCopyPath_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuCopyPath.Click
+        ' copy path to clipboard
+        My.Computer.Clipboard.SetText(Me.pGrid_Path)
+    End Sub
+
     Private Function WMI_Kill() As Boolean
 
         Try
             Dim queryCollection As ManagementObjectCollection
             Dim m As ManagementObject
-            queryCollection = wmi.wmiQuery("SELECT * FROM Win32_Process WHERE Handle = '" & processid.Text & "'")
+            queryCollection = wmi.wmiQuery("SELECT * FROM Win32_Process WHERE Handle = '" & pGrid_ID & "'")
 
             If queryCollection.Count = 1 Then
                 For Each m In queryCollection
@@ -8268,19 +8286,8 @@ Public Class Form1
         End Try
 
     End Function
-    Private Sub ProcessKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcessKill.Click
-        WriteLog(PC.Name & " - Process (ts)kill: " & processname.Text)
-        Shell("tskill " & processid.Text & " /server:" & PC.Name, 0, True, 10)
-        GetProcesses()
-    End Sub
 
-    Private Sub wmiKill_MouseEnter1(ByVal sender As Object, ByVal e As System.EventArgs) Handles wmiKill.MouseEnter
-        wmiKill.BackColor = Color.Tomato
-    End Sub
-    Private Sub wmiKill_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles wmiKill.MouseLeave
-        wmiKill.BackColor = Color.Transparent
-    End Sub
-
+    ' Create New process
     Private Sub RunNewProcess_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RunNewProcess.Click
         Me.Cursor = Cursors.WaitCursor
 
@@ -8326,10 +8333,6 @@ Public Class Form1
     End Sub
     Private Sub ScheduleButton_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ScheduleButton.Click
         If Trim(newprocess.Text) = "" Then Exit Sub
-        'Dim cmdline As String = "at \\" & PC.Name & " " & ScheduleTime.Text & " "
-        'If interactive.Checked Then cmdline = cmdline & "/INTERACTIVE "
-        'cmdline = cmdline & Trim(newprocess.Text)
-        'Shell(cmdline, AppWinStyle.Hide, False)
 
         Dim rtn As Integer = ScheduleJob(PC.Name, Trim(newprocess.Text), interactive.Checked, ScheduleTime.Text)
         If rtn = 0 Then
@@ -8352,80 +8355,6 @@ Public Class Form1
             ScheduleButton.Enabled = False
         End If
     End Sub
-
-    Private Function GetProcessInfo(ByVal Property_Name As String, ByVal pID As String) As String
-        Dim result As String = String.Empty
-        Try
-            Dim queryCollection As ManagementObjectCollection
-            queryCollection = wmi.wmiQuery("SELECT ProcessID, " & Property_Name & " FROM Win32_Process WHERE ProcessID = '" & pID & "'")
-            Dim m As ManagementObject
-            For Each m In queryCollection
-                result = m(Property_Name).ToString
-            Next
-        Catch ex As Exception
-            Return result
-        End Try
-        Return result
-    End Function
-    Private Sub processgrid_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles processgrid.SelectionChanged
-        ' check for selected item before continuing
-        If processgrid.SelectedRows.Count = 0 Then Exit Sub
-
-        Dim p_name As String = processgrid(0, processgrid.CurrentCell.RowIndex).Value
-        Dim p_id As String = processgrid(1, processgrid.CurrentCell.RowIndex).Value
-        Dim p_path As String = processgrid(2, processgrid.CurrentCell.RowIndex).Value
-        If p_path = "" Then p_path = GetProcessInfo("ExecutablePath", p_id)
-
-        processname.Text = p_name
-        processpath.Text = p_path
-        processid.Text = p_id
-
-        If InStr(LCase(p_name), "csrss") OrElse InStr(LCase(p_name), "system idle") OrElse (LCase(p_name) = "system") Then
-            wmiKill.Enabled = False
-            ProcessKill.Enabled = False
-        Else
-            wmiKill.Enabled = True
-            ProcessKill.Enabled = True
-        End If
-
-    End Sub
-
-    Protected Friend pGrid_Name As String
-    Protected Friend pGrid_ID As String
-    Protected Friend pGrid_Path As String
-    Protected Friend pGrid_Mem As String
-
-
-    Private Sub processgrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles processgrid.MouseDown
-
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
-            If hti.Type = DataGridViewHitTestType.Cell Then
-                ' ensure only current item selected
-                processgrid.ClearSelection()
-                processgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
-
-                Me.pGrid_Name = processgrid(0, hti.RowIndex).Value
-                Me.pGrid_ID = processgrid(1, hti.RowIndex).Value
-                Me.pGrid_Path = processgrid(2, hti.RowIndex).Value
-                Me.pGrid_Mem = processgrid(3, hti.RowIndex).Value
-
-                mnuProcKill.Text = "Kill Process: " & Me.pGrid_ID & " [" & Me.pGrid_Name & "]"
-                mnuProcGoogle.Text = "Google for " & Me.pGrid_Name
-                'mnuProcInfo.Text = Me.pGrid_Name & vbCr & Me.pGrid_Path & vbCr & "Memory: " & Me.pGrid_Mem & " Kb"
-
-                ProcContextMenu.Show(processgrid, New Point(e.X, e.Y))
-            End If
-        End If
-
-    End Sub
-    Private Sub GoogleButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GoogleButton.Click
-        On Error Resume Next
-        If processname.Text <> "" Then
-            System.Diagnostics.Process.Start("http://www.google.com/search?q=" & processname.Text)
-        End If
-    End Sub
-
 #End Region
 
 #Region "SOFTWARE"
@@ -9397,7 +9326,7 @@ Public Class Form1
     Private Sub ClearPrinters()
         printerGrid.Rows.Clear()
         mappings.Items.Clear()
-        mappeddrivesGroupBox.Text = "mapped drives"
+        mappeddrivesGroupBox.Text = "persistent mapped drives"
         addthisprinter.Text = "\\server\printer"
         AddPrinterButton.Enabled = False
         addptr.Enabled = False
@@ -12141,6 +12070,7 @@ Public Class Form1
         Next
 
         Return PC.CurrentUserDomain & "\" & PC.CurrentUser
+
     End Function
     ' Gets SID for given accountname - SIDS: http://support.microsoft.com/kb/163846
     Public Function GetSID(ByVal Username As String) As String
@@ -12364,6 +12294,10 @@ Public Class Form1
 
         Dim vncuser, vncpass As String
         Dim vncDeleteThread As New System.Threading.Thread(AddressOf VNC_Delete_Files)
+
+        If vnc_queryconnect Then
+            If PC.CurrentUser = "" Then vnc_queryconnect = False
+        End If
 
         If vncinstall = False Then
             Shell(Chr(34) & My.Application.Info.DirectoryPath & "\files\vncviewer.exe" & Chr(34) & " " & strcomputer, 0, False)
@@ -13225,11 +13159,15 @@ Public Class Form1
             servicedescription.Text = ""
 
             ' Process Tab
-            processname.Text = ""
-            processid.Text = ""
+            'processname.Text = ""
+            'processid.Text = ""
             newprocess.Text = ""
             processgrid.Rows.Clear()
-            processpath.Text = ""
+            ' processpath.Text = ""
+            Me.pGrid_ID = ""
+            Me.pGrid_Mem = ""
+            Me.pGrid_Name = ""
+            Me.pGrid_Path = ""
 
             ' Software tab
             swurl.Text = ""
@@ -13281,9 +13219,6 @@ Public Class Form1
                 PC.Clear()
             Catch ex As Exception
             End Try
-
-
-
 
         End If
 
@@ -13337,10 +13272,7 @@ Public Class Form1
 
         ' Release mapped ipc share
         Shell("net use \\" & PC.Name & "\ipc$ /delete /y", 0, False)
-        'Try
         '    My.Computer.Registry.SetValue("HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer", "NoRecentDocsNetHood", "0", Microsoft.Win32.RegistryValueKind.DWord)
-        'Catch
-        'End Try
         System.GC.Collect()
         End
 
@@ -13416,6 +13348,8 @@ Public Class Form1
             historylimitselect.Minimum = 0
             historylimitselect.Maximum = 99
         End If
+
+
     End Sub
     Private Sub SaveHistory()
         If historylimitselect.Value <> 0 Then
@@ -14082,6 +14016,7 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
+
 
 
 End Class
