@@ -5,16 +5,18 @@ ToDo
 
 ====================================================================================================
 
-move history to appdat file
 check domain/dc for creating rsop report.
 check rsop file exists before launching process.
 wait cursor for ad user and gpo
 tidy static/dhcp buttons
 add process owner option to process menu
 software to context menu style
+Option to add domains
+
 
 08/08/2008
 feature:  Process datagrid now uses context menu, and added memory usage.
+code:     History list stored in registry - not my.settings.
 bugfix:   numerous minor fixes.
 
 06/08/2008

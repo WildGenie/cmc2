@@ -105,18 +105,6 @@ Namespace My
         <Global.System.Configuration.UserScopedSettingAttribute(),  _
          Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
          Global.System.Configuration.DefaultSettingValueAttribute("")>  _
-        Public Property HistoryList() As String
-            Get
-                Return CType(Me("HistoryList"),String)
-            End Get
-            Set
-                Me("HistoryList") = value
-            End Set
-        End Property
-        
-        <Global.System.Configuration.UserScopedSettingAttribute(),  _
-         Global.System.Diagnostics.DebuggerNonUserCodeAttribute(),  _
-         Global.System.Configuration.DefaultSettingValueAttribute("")>  _
         Public Property psexecpath() As String
             Get
                 Return CType(Me("psexecpath"),String)
