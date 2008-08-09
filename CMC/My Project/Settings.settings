@@ -14,9 +14,6 @@
     <Setting Name="pr" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="HistoryList" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="psexecpath" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>

@@ -45,7 +45,6 @@ Public Class pc
     ''' <summary>
     ''' Gets the domain role of the Server or Workstation.
     ''' </summary>
-    ''' <value></value>
     ''' <returns>domain role as a string</returns>
     ''' <remarks></remarks>
     Public Property DomainRole() As String
@@ -53,19 +52,14 @@ Public Class pc
             Select Case _DomainRoleCode
                 Case 0
                     Return "Standalone Workstation"
-                    'strmember = "Workgroup"
                 Case 1
                     Return "Member Workstation"
-                    'strmember = "Domain"
                 Case 2
                     Return "Standalone Server"
-                    'strmember = "Workgroup"
                 Case 3
                     Return "Member Server"
-                    'strmember = "Domain"
                 Case Else
                     Return "Domain Controller"
-                    'strmember = "PDC/BDC of Domain"
             End Select
         End Get
         Set(ByVal value As String)
@@ -77,7 +71,7 @@ Public Class pc
     ''' Gets a boolean value indicating whether the computer is a member of a domain
     ''' </summary>
     ''' <value></value>
-    ''' <returns></returns>
+    ''' <returns>True/False</returns>
     ''' <remarks></remarks>
     Public Property DomainMember() As Boolean
         Get
@@ -105,8 +99,7 @@ Public Class pc
         End Set
     End Property
 
-    ''' <summary>
-    ''' Gets or Sets the name of the domain of which the computer is a member.
+    ''' <summary>Identifies the dns name of the domain of which the computer is a member.
     ''' </summary>
     ''' <value></value>
     ''' <returns></returns>
@@ -164,7 +157,7 @@ Public Class pc
     Public Property CurrentUserSID() As String
         Get
             If m_SID = Nothing Then
-                Return "" '(Form1.GetSID(CurrentUser))
+                Return ""
             Else
                 Return m_SID
             End If
