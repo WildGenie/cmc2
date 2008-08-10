@@ -199,7 +199,7 @@ Public Class CustomDomainInfo
     ''' Optional username to use when querying AD. Returns Nothing if empty
     ''' </summary>
     ''' <value></value>
-    ''' <returns>username as string, or Nothing if empty</returns>
+    ''' <returns>Decrypted username as string, or Nothing if empty</returns>
     ''' <remarks></remarks>
     Public Property Username() As String
         Get
@@ -226,7 +226,7 @@ Public Class CustomDomainInfo
     ''' Optional password to use when querying AD. Returns Nothing if empty
     ''' </summary>
     ''' <value></value>
-    ''' <returns>password as string, or Nothing if empty</returns>
+    ''' <returns>Decrypted password as string, or Nothing if empty</returns>
     ''' <remarks></remarks>
     Public Property Password() As String
         Get

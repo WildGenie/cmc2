@@ -129,11 +129,17 @@ Public Class pc
                 Case "4.0"
                     Return "NT"
                 Case "5.0"
-                    Return "Windows 2000"
+                    If _DomainRoleCode >= 2 Then
+                        Return "Windows 2000 Server"
+                    Else
+                        Return "Windows 2000"
+                    End If
                 Case "5.1"
                     Return "Windows XP"
                 Case "5.2"
-                    Return "Windows 2003"
+                    Return "Windows 2003 Server"
+                Case "6.0"
+                    Return "Windows Vista"
                 Case Else
                     Return "Unknown"
             End Select

@@ -22,18 +22,19 @@ Partial Class AddDomainInfo
     'Do not modify it using the code editor.
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(AddDomainInfo))
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
         Me.OK_Button = New System.Windows.Forms.Button
         Me.Cancel_Button = New System.Windows.Forms.Button
         Me.TextBox1 = New System.Windows.Forms.TextBox
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
-        Me.lblNotValidated = New System.Windows.Forms.Label
         Me.txtDC = New System.Windows.Forms.TextBox
         Me.Label1 = New System.Windows.Forms.Label
         Me.txtDNS = New System.Windows.Forms.TextBox
         Me.lblDNS = New System.Windows.Forms.Label
         Me.lblDomain = New System.Windows.Forms.Label
         Me.txtDomain = New System.Windows.Forms.TextBox
+        Me.lblNotValidated = New System.Windows.Forms.Label
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.Label4 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
@@ -110,17 +111,6 @@ Partial Class AddDomainInfo
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Add Domain"
         '
-        'lblNotValidated
-        '
-        Me.lblNotValidated.AutoSize = True
-        Me.lblNotValidated.ForeColor = System.Drawing.Color.Red
-        Me.lblNotValidated.Location = New System.Drawing.Point(56, 361)
-        Me.lblNotValidated.Name = "lblNotValidated"
-        Me.lblNotValidated.Size = New System.Drawing.Size(202, 13)
-        Me.lblNotValidated.TabIndex = 13
-        Me.lblNotValidated.Text = "Ensure all mandatory fields are completed"
-        Me.lblNotValidated.Visible = False
-        '
         'txtDC
         '
         Me.txtDC.Location = New System.Drawing.Point(133, 48)
@@ -169,6 +159,17 @@ Partial Class AddDomainInfo
         Me.txtDomain.Name = "txtDomain"
         Me.txtDomain.Size = New System.Drawing.Size(115, 20)
         Me.txtDomain.TabIndex = 0
+        '
+        'lblNotValidated
+        '
+        Me.lblNotValidated.AutoSize = True
+        Me.lblNotValidated.ForeColor = System.Drawing.Color.Red
+        Me.lblNotValidated.Location = New System.Drawing.Point(56, 361)
+        Me.lblNotValidated.Name = "lblNotValidated"
+        Me.lblNotValidated.Size = New System.Drawing.Size(202, 13)
+        Me.lblNotValidated.TabIndex = 13
+        Me.lblNotValidated.Text = "Ensure all mandatory fields are completed"
+        Me.lblNotValidated.Visible = False
         '
         'GroupBox2
         '
@@ -250,7 +251,7 @@ Partial Class AddDomainInfo
         Me.Label5.TabIndex = 12
         Me.Label5.Text = "aDSPath"
         '
-        'Dlg_AddDomainInfo
+        'AddDomainInfo
         '
         Me.AcceptButton = Me.OK_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -265,9 +266,10 @@ Partial Class AddDomainInfo
         Me.Controls.Add(Me.TextBox1)
         Me.Controls.Add(Me.TableLayoutPanel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MaximizeBox = False
         Me.MinimizeBox = False
-        Me.Name = "Dlg_AddDomainInfo"
+        Me.Name = "AddDomainInfo"
         Me.ShowInTaskbar = False
         Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Add Domain Information"

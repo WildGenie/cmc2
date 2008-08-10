@@ -5,13 +5,12 @@ ToDo
 
 ====================================================================================================
 
-check domain/dc for creating rsop report.
-check rsop file exists before launching process.
-wait cursor for ad user and gpo
-tidy static/dhcp buttons
-add process owner option to process menu
-software to context menu style
-Option to add domains
+10/08/2008
+feature:  Added CustomDomainInfo class and form. Add and edit custom domains from options dropdown.
+feature:  Dbl clicking process gives additional (owner) information.
+feature:  Software grid changed to full size grid in line with other tabs. added context menu and
+          properties dialog box.
+feature:  implemented software uninstall. (remote process, silent)
 
 
 08/08/2008

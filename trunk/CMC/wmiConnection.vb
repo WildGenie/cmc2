@@ -17,12 +17,12 @@ Public Class wmiConnection
             .Impersonation = System.Management.ImpersonationLevel.Impersonate
             .Timeout = New TimeSpan(0, 0, 10)
 
-            If Environment.OSVersion.ToString.LastIndexOf("5.1.2600") <> -1 Then
-                ' Windows XP
-                .Authentication = System.Management.AuthenticationLevel.Packet
-            Else
+            If Environment.OSVersion.ToString.LastIndexOf("5.0.2195") <> -1 Then
                 ' Windows 2000
                 .Authentication = System.Management.AuthenticationLevel.Connect
+            Else
+                ' Windows XP
+                .Authentication = System.Management.AuthenticationLevel.Packet
             End If
 
             If Form1.AltUserCheckBox.Checked Then
