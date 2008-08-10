@@ -201,9 +201,6 @@ Public Class Form1
     Friend WithEvents RenameArea As System.Windows.Forms.Button
     Friend WithEvents pingcontinuous As System.Windows.Forms.CheckBox
     Friend WithEvents software As System.Windows.Forms.TabPage
-    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
-    Friend WithEvents SWLabel As System.Windows.Forms.Label
-    Friend WithEvents swurl As System.Windows.Forms.LinkLabel
     Friend WithEvents software_button As System.Windows.Forms.Button
     Friend WithEvents ShowUpdates As System.Windows.Forms.CheckBox
     Private WithEvents processes As System.Windows.Forms.TabPage
@@ -428,13 +425,6 @@ Public Class Form1
     Friend WithEvents ProgressBar1 As System.Windows.Forms.ProgressBar
     Friend WithEvents deploy_clear_link As System.Windows.Forms.LinkLabel
     Friend WithEvents sgrid As System.Windows.Forms.DataGridView
-    Friend WithEvents swname As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents swver As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents swpub As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents swdate As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents swloc As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents swunins As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents sw_url As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents SetPrinterAsDefaultToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents close_on_finish As System.Windows.Forms.CheckBox
     Friend WithEvents run_visible As System.Windows.Forms.CheckBox
@@ -443,7 +433,6 @@ Public Class Form1
     Friend WithEvents file_folder As System.Windows.Forms.TextBox
     Friend WithEvents ToolStripSeparator19 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ToolStripSeparator20 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents Label38 As System.Windows.Forms.Label
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents cpu_info_lbl As System.Windows.Forms.LinkLabel
     Friend WithEvents Button2 As System.Windows.Forms.Button
@@ -455,7 +444,6 @@ Public Class Form1
     Friend WithEvents testbox As System.Windows.Forms.TextBox
     Friend WithEvents Button4 As System.Windows.Forms.Button
     Friend WithEvents cmdtorun As System.Windows.Forms.TextBox
-    Friend WithEvents RSOPReportToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents MSinfoToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents btn_AddGroup As System.Windows.Forms.Button
     Friend WithEvents setSiteOrg As System.Windows.Forms.Button
@@ -508,12 +496,26 @@ Public Class Form1
     Friend WithEvents mnuCopyPath As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents procMenuHeader As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator24 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents tsGroupBox As System.Windows.Forms.GroupBox
+    Friend WithEvents DomainCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents mnuProcOwner As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pr_name As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pr_id As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents executablepath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents mem As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents btnDomains As System.Windows.Forms.Button
-    Friend WithEvents btnAddDomain As System.Windows.Forms.Button
+    Friend WithEvents pDescription As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swname As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swver As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swpub As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swdate As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swloc As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swunins As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents sw_url As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents swContextmenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents mnuSwName As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator23 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents mnuSwProps As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents mnuSwUninst As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -637,7 +639,6 @@ Public Class Form1
         Me.BothComputerAndUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OnlyComputerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OnlyUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RSOPReportToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator17 = New System.Windows.Forms.ToolStripSeparator
         Me.MSinfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator
@@ -672,7 +673,7 @@ Public Class Form1
         Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog
         Me.options = New System.Windows.Forms.TabPage
-        Me.btnDomains = New System.Windows.Forms.Button
+        Me.DomainCombo = New System.Windows.Forms.ComboBox
         Me.GroupBox13 = New System.Windows.Forms.GroupBox
         Me.psexecbrowse = New System.Windows.Forms.Button
         Me.downloadpsexec = New System.Windows.Forms.Button
@@ -722,6 +723,18 @@ Public Class Form1
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.aduser = New System.Windows.Forms.TabPage
         Me.adpanel = New System.Windows.Forms.Panel
+        Me.profileGroupBox = New System.Windows.Forms.GroupBox
+        Me.profilepath = New System.Windows.Forms.TextBox
+        Me.homedirectory = New System.Windows.Forms.TextBox
+        Me.homedrive = New System.Windows.Forms.TextBox
+        Me.Label23 = New System.Windows.Forms.Label
+        Me.Label24 = New System.Windows.Forms.Label
+        Me.tsGroupBox = New System.Windows.Forms.GroupBox
+        Me.TerminalServicesHomeDirectory = New System.Windows.Forms.TextBox
+        Me.TerminalServicesHomeDrive = New System.Windows.Forms.TextBox
+        Me.Label20 = New System.Windows.Forms.Label
+        Me.TerminalServicesProfilePath = New System.Windows.Forms.TextBox
+        Me.Label22 = New System.Windows.Forms.Label
         Me.btn_EnumGroups = New System.Windows.Forms.Button
         Me.btn_dsa = New System.Windows.Forms.Button
         Me.telephonenumber = New System.Windows.Forms.TextBox
@@ -731,29 +744,18 @@ Public Class Form1
         Me.Label53 = New System.Windows.Forms.Label
         Me.mail = New System.Windows.Forms.TextBox
         Me.Label26 = New System.Windows.Forms.Label
-        Me.PasswordGroupBox = New System.Windows.Forms.GroupBox
-        Me.forcepasswordchange = New System.Windows.Forms.CheckBox
-        Me.Label29 = New System.Windows.Forms.Label
-        Me.resetpassword = New System.Windows.Forms.Button
-        Me.password1 = New System.Windows.Forms.TextBox
-        Me.password2 = New System.Windows.Forms.TextBox
         Me.FQDN = New System.Windows.Forms.TextBox
         Me.samaccountname = New System.Windows.Forms.TextBox
         Me.Label27 = New System.Windows.Forms.Label
         Me.Label25 = New System.Windows.Forms.Label
         Me.adGroupsListBox = New System.Windows.Forms.ListBox
-        Me.profileGroupBox = New System.Windows.Forms.GroupBox
-        Me.TerminalServicesHomeDrive = New System.Windows.Forms.TextBox
-        Me.TerminalServicesHomeDirectory = New System.Windows.Forms.TextBox
-        Me.profilepath = New System.Windows.Forms.TextBox
-        Me.homedirectory = New System.Windows.Forms.TextBox
-        Me.homedrive = New System.Windows.Forms.TextBox
-        Me.TerminalServicesProfilePath = New System.Windows.Forms.TextBox
-        Me.Label23 = New System.Windows.Forms.Label
-        Me.Label20 = New System.Windows.Forms.Label
-        Me.Label22 = New System.Windows.Forms.Label
-        Me.Label24 = New System.Windows.Forms.Label
         Me.userupdate_button = New System.Windows.Forms.Button
+        Me.PasswordGroupBox = New System.Windows.Forms.GroupBox
+        Me.Label29 = New System.Windows.Forms.Label
+        Me.forcepasswordchange = New System.Windows.Forms.CheckBox
+        Me.resetpassword = New System.Windows.Forms.Button
+        Me.password1 = New System.Windows.Forms.TextBox
+        Me.password2 = New System.Windows.Forms.TextBox
         Me.tools = New System.Windows.Forms.TabPage
         Me.joinGroupbox = New System.Windows.Forms.GroupBox
         Me.domainlogon = New System.Windows.Forms.CheckBox
@@ -791,9 +793,6 @@ Public Class Form1
         Me.sw_url = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.sw_use_wmi_checkbox = New System.Windows.Forms.CheckBox
         Me.software_button = New System.Windows.Forms.Button
-        Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.SWLabel = New System.Windows.Forms.Label
-        Me.swurl = New System.Windows.Forms.LinkLabel
         Me.ShowUpdates = New System.Windows.Forms.CheckBox
         Me.processes = New System.Windows.Forms.TabPage
         Me.Label7 = New System.Windows.Forms.Label
@@ -803,6 +802,7 @@ Public Class Form1
         Me.pr_id = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.executablepath = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.mem = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.pDescription = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.ProcessRefresh = New System.Windows.Forms.Button
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.ScheduleButton = New System.Windows.Forms.Button
@@ -840,7 +840,6 @@ Public Class Form1
         Me.suffix = New System.Windows.Forms.TextBox
         Me.GroupBox5 = New System.Windows.Forms.GroupBox
         Me.dhcpbutton = New System.Windows.Forms.Button
-        Me.Label38 = New System.Windows.Forms.Label
         Me.dhcp = New System.Windows.Forms.TextBox
         Me.Label6 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
@@ -1008,10 +1007,15 @@ Public Class Form1
         Me.mnuProcGoogle = New System.Windows.Forms.ToolStripMenuItem
         Me.ProcContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.procMenuHeader = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuProcOwner = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator
         Me.mnuProcKill = New System.Windows.Forms.ToolStripMenuItem
         Me.mnuCopyPath = New System.Windows.Forms.ToolStripMenuItem
-        Me.btnAddDomain = New System.Windows.Forms.Button
+        Me.swContextmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.mnuSwName = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator
+        Me.mnuSwProps = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuSwUninst = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1030,14 +1034,14 @@ Public Class Form1
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.aduser.SuspendLayout()
         Me.adpanel.SuspendLayout()
-        Me.PasswordGroupBox.SuspendLayout()
         Me.profileGroupBox.SuspendLayout()
+        Me.tsGroupBox.SuspendLayout()
+        Me.PasswordGroupBox.SuspendLayout()
         Me.tools.SuspendLayout()
         Me.joinGroupbox.SuspendLayout()
         Me.RenameGroupBox.SuspendLayout()
         Me.software.SuspendLayout()
         CType(Me.sgrid, System.ComponentModel.ISupportInitialize).BeginInit()
-        Me.GroupBox2.SuspendLayout()
         Me.processes.SuspendLayout()
         CType(Me.processgrid, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox1.SuspendLayout()
@@ -1064,6 +1068,7 @@ Public Class Form1
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
         Me.ProcContextMenu.SuspendLayout()
+        Me.swContextmenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -1112,94 +1117,94 @@ Public Class Form1
         '
         Me.svccontextmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.svcname, Me.ToolStripSeparator5, Me.svcstop, Me.svcstart, Me.svcrestart, Me.ToolStripSeparator6, Me.startmode, Me.ToolStripSeparator7, Me.GoogleLookupToolStripMenuItem, Me.DeleteServiceToolStripMenuItem, Me.ToolStripSeparator8, Me.RefreshMenu})
         Me.svccontextmenu.Name = "svccontextmenu"
-        Me.svccontextmenu.Size = New System.Drawing.Size(153, 204)
+        Me.svccontextmenu.Size = New System.Drawing.Size(152, 204)
         '
         'svcname
         '
         Me.svcname.Font = New System.Drawing.Font("Tahoma", 7.5!)
         Me.svcname.ForeColor = System.Drawing.Color.SteelBlue
         Me.svcname.Name = "svcname"
-        Me.svcname.Size = New System.Drawing.Size(152, 22)
+        Me.svcname.Size = New System.Drawing.Size(151, 22)
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(148, 6)
         '
         'svcstop
         '
         Me.svcstop.Name = "svcstop"
-        Me.svcstop.Size = New System.Drawing.Size(152, 22)
+        Me.svcstop.Size = New System.Drawing.Size(151, 22)
         Me.svcstop.Text = "stop..."
         '
         'svcstart
         '
         Me.svcstart.Name = "svcstart"
-        Me.svcstart.Size = New System.Drawing.Size(152, 22)
+        Me.svcstart.Size = New System.Drawing.Size(151, 22)
         Me.svcstart.Text = "start..."
         '
         'svcrestart
         '
         Me.svcrestart.Name = "svcrestart"
-        Me.svcrestart.Size = New System.Drawing.Size(152, 22)
+        Me.svcrestart.Size = New System.Drawing.Size(151, 22)
         Me.svcrestart.Text = "restart..."
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(148, 6)
         '
         'startmode
         '
         Me.startmode.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutomaticMenu, Me.ManualMenu, Me.DisabledMenu})
         Me.startmode.Name = "startmode"
-        Me.startmode.Size = New System.Drawing.Size(152, 22)
+        Me.startmode.Size = New System.Drawing.Size(151, 22)
         Me.startmode.Text = "start mode..."
         '
         'AutomaticMenu
         '
         Me.AutomaticMenu.Name = "AutomaticMenu"
-        Me.AutomaticMenu.Size = New System.Drawing.Size(132, 22)
+        Me.AutomaticMenu.Size = New System.Drawing.Size(128, 22)
         Me.AutomaticMenu.Text = "automatic"
         '
         'ManualMenu
         '
         Me.ManualMenu.Name = "ManualMenu"
-        Me.ManualMenu.Size = New System.Drawing.Size(132, 22)
+        Me.ManualMenu.Size = New System.Drawing.Size(128, 22)
         Me.ManualMenu.Text = "manual"
         '
         'DisabledMenu
         '
         Me.DisabledMenu.Name = "DisabledMenu"
-        Me.DisabledMenu.Size = New System.Drawing.Size(132, 22)
+        Me.DisabledMenu.Size = New System.Drawing.Size(128, 22)
         Me.DisabledMenu.Text = "disabled"
         '
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(148, 6)
         '
         'GoogleLookupToolStripMenuItem
         '
         Me.GoogleLookupToolStripMenuItem.Name = "GoogleLookupToolStripMenuItem"
-        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.GoogleLookupToolStripMenuItem.Text = "google lookup"
         '
         'DeleteServiceToolStripMenuItem
         '
         Me.DeleteServiceToolStripMenuItem.Name = "DeleteServiceToolStripMenuItem"
-        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.DeleteServiceToolStripMenuItem.Text = "delete service"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(148, 6)
         '
         'RefreshMenu
         '
         Me.RefreshMenu.Name = "RefreshMenu"
-        Me.RefreshMenu.Size = New System.Drawing.Size(152, 22)
+        Me.RefreshMenu.Size = New System.Drawing.Size(151, 22)
         Me.RefreshMenu.Text = "refresh"
         '
         'Label11
@@ -1471,7 +1476,7 @@ Public Class Form1
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.ClearToolStripMenuItem, Me.ToolStripSeparator3, Me.SaveToolStripMenuItem, Me.AppendToolStripMenuItem, Me.toolStripSeparator4, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
         'NewToolStripMenuItem
@@ -1480,20 +1485,20 @@ Public Class Form1
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'ClearToolStripMenuItem
         '
         Me.ClearToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_form
         Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ClearToolStripMenuItem.Text = "Clear"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(186, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(177, 6)
         '
         'SaveToolStripMenuItem
         '
@@ -1502,7 +1507,7 @@ Public Class Form1
         Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
         Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SaveToolStripMenuItem.Text = "Save to file..."
         '
         'AppendToolStripMenuItem
@@ -1510,27 +1515,27 @@ Public Class Form1
         Me.AppendToolStripMenuItem.Enabled = False
         Me.AppendToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_save
         Me.AppendToolStripMenuItem.Name = "AppendToolStripMenuItem"
-        Me.AppendToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.AppendToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.AppendToolStripMenuItem.Text = "Append to file..."
         '
         'toolStripSeparator4
         '
         Me.toolStripSeparator4.Name = "toolStripSeparator4"
-        Me.toolStripSeparator4.Size = New System.Drawing.Size(186, 6)
+        Me.toolStripSeparator4.Size = New System.Drawing.Size(177, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.door_out
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(189, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MicrosoftMMCToolStripMenuItem, Me.RemoteControlToolStripMenuItem, Me.ToolStripSeparator18, Me.PrintersMenuItem, Me.MappedDrivesMenu, Me.StartUpProgramsMenuItem, Me.ToolStripSeparator13, Me.ShutDownMenu, Me.ToolStripSeparator14, Me.TelnetMenu, Me.NetSendMenu, Me.ToolStripSeparator11, Me.RemRegMenuItem, Me.WindRegMenuItem, Me.ToolStripSeparator22, Me.GPUpdateToolStripMenuItem, Me.RSOPReportToolStripMenuItem, Me.ToolStripSeparator17, Me.MSinfoToolStripMenuItem, Me.ToolStripSeparator21, Me.ADUserInfoToolStripMenuItem})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MicrosoftMMCToolStripMenuItem, Me.RemoteControlToolStripMenuItem, Me.ToolStripSeparator18, Me.PrintersMenuItem, Me.MappedDrivesMenu, Me.StartUpProgramsMenuItem, Me.ToolStripSeparator13, Me.ShutDownMenu, Me.ToolStripSeparator14, Me.TelnetMenu, Me.NetSendMenu, Me.ToolStripSeparator11, Me.RemRegMenuItem, Me.WindRegMenuItem, Me.ToolStripSeparator22, Me.GPUpdateToolStripMenuItem, Me.ToolStripSeparator17, Me.MSinfoToolStripMenuItem, Me.ToolStripSeparator21, Me.ADUserInfoToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
         '
         'MicrosoftMMCToolStripMenuItem
@@ -1546,35 +1551,35 @@ Public Class Form1
         '
         Me.ComputerManagementToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.wrench
         Me.ComputerManagementToolStripMenuItem.Name = "ComputerManagementToolStripMenuItem"
-        Me.ComputerManagementToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.ComputerManagementToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.ComputerManagementToolStripMenuItem.Text = "Computer Management"
         '
         'EventViewerToolStripMenuItem
         '
         Me.EventViewerToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_error
         Me.EventViewerToolStripMenuItem.Name = "EventViewerToolStripMenuItem"
-        Me.EventViewerToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.EventViewerToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.EventViewerToolStripMenuItem.Text = "Event Viewer"
         '
         'LocalUsersAndGroupsToolStripMenuItem
         '
         Me.LocalUsersAndGroupsToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.group
         Me.LocalUsersAndGroupsToolStripMenuItem.Name = "LocalUsersAndGroupsToolStripMenuItem"
-        Me.LocalUsersAndGroupsToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.LocalUsersAndGroupsToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.LocalUsersAndGroupsToolStripMenuItem.Text = "Local Users and Groups"
         '
         'ServicesToolStripMenuItem
         '
         Me.ServicesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.table
         Me.ServicesToolStripMenuItem.Name = "ServicesToolStripMenuItem"
-        Me.ServicesToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.ServicesToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.ServicesToolStripMenuItem.Text = "Services"
         '
         'SharedFoldersToolStripMenuItem
         '
         Me.SharedFoldersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.folder_user
         Me.SharedFoldersToolStripMenuItem.Name = "SharedFoldersToolStripMenuItem"
-        Me.SharedFoldersToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
+        Me.SharedFoldersToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
         Me.SharedFoldersToolStripMenuItem.Text = "Shared Folders"
         '
         'RemoteControlToolStripMenuItem
@@ -1591,33 +1596,33 @@ Public Class Form1
         Me.RemoteDesktopToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteDesktopConnectionToolStripMenuItem, Me.RDPConsoleToolStripMenuItem, Me.EnableRDPToolStripMenuItem, Me.DisableRDPToolStripMenuItem})
         Me.RemoteDesktopToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.monitor
         Me.RemoteDesktopToolStripMenuItem.Name = "RemoteDesktopToolStripMenuItem"
-        Me.RemoteDesktopToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.RemoteDesktopToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.RemoteDesktopToolStripMenuItem.Text = "Remote Desktop"
         '
         'RemoteDesktopConnectionToolStripMenuItem
         '
         Me.RemoteDesktopConnectionToolStripMenuItem.Name = "RemoteDesktopConnectionToolStripMenuItem"
-        Me.RemoteDesktopConnectionToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.RemoteDesktopConnectionToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.RemoteDesktopConnectionToolStripMenuItem.Text = "RDP Connection"
         '
         'RDPConsoleToolStripMenuItem
         '
         Me.RDPConsoleToolStripMenuItem.Name = "RDPConsoleToolStripMenuItem"
-        Me.RDPConsoleToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.RDPConsoleToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.RDPConsoleToolStripMenuItem.Text = "RDP (Console)"
         '
         'EnableRDPToolStripMenuItem
         '
         Me.EnableRDPToolStripMenuItem.Enabled = False
         Me.EnableRDPToolStripMenuItem.Name = "EnableRDPToolStripMenuItem"
-        Me.EnableRDPToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.EnableRDPToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.EnableRDPToolStripMenuItem.Text = "Enable RDP"
         '
         'DisableRDPToolStripMenuItem
         '
         Me.DisableRDPToolStripMenuItem.Enabled = False
         Me.DisableRDPToolStripMenuItem.Name = "DisableRDPToolStripMenuItem"
-        Me.DisableRDPToolStripMenuItem.Size = New System.Drawing.Size(162, 22)
+        Me.DisableRDPToolStripMenuItem.Size = New System.Drawing.Size(161, 22)
         Me.DisableRDPToolStripMenuItem.Text = "Disable RDP"
         '
         'VNCToolStripMenuItem
@@ -1625,39 +1630,39 @@ Public Class Form1
         Me.VNCToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConnectOnlyToolStripMenuItem, Me.InstallAndConnectToolStripMenuItem, Me.InstallAndConnectNoUserPromptToolStripMenuItem})
         Me.VNCToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.monitor_go
         Me.VNCToolStripMenuItem.Name = "VNCToolStripMenuItem"
-        Me.VNCToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.VNCToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.VNCToolStripMenuItem.Text = "VNC"
         '
         'ConnectOnlyToolStripMenuItem
         '
         Me.ConnectOnlyToolStripMenuItem.Name = "ConnectOnlyToolStripMenuItem"
-        Me.ConnectOnlyToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.ConnectOnlyToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.ConnectOnlyToolStripMenuItem.Text = "Connect Only"
         '
         'InstallAndConnectToolStripMenuItem
         '
         Me.InstallAndConnectToolStripMenuItem.Name = "InstallAndConnectToolStripMenuItem"
-        Me.InstallAndConnectToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.InstallAndConnectToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.InstallAndConnectToolStripMenuItem.Text = "Install and Connect"
         '
         'InstallAndConnectNoUserPromptToolStripMenuItem
         '
         Me.InstallAndConnectNoUserPromptToolStripMenuItem.Name = "InstallAndConnectNoUserPromptToolStripMenuItem"
-        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Size = New System.Drawing.Size(263, 22)
+        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Size = New System.Drawing.Size(272, 22)
         Me.InstallAndConnectNoUserPromptToolStripMenuItem.Text = "Install and Connect - No User Prompt"
         '
         'ZenworksToolStripMenuItem
         '
         Me.ZenworksToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.picture_key
         Me.ZenworksToolStripMenuItem.Name = "ZenworksToolStripMenuItem"
-        Me.ZenworksToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.ZenworksToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.ZenworksToolStripMenuItem.Text = "Zenworks"
         '
         'RemoteAssistanceToolStripMenuItem
         '
         Me.RemoteAssistanceToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.keyboard
         Me.RemoteAssistanceToolStripMenuItem.Name = "RemoteAssistanceToolStripMenuItem"
-        Me.RemoteAssistanceToolStripMenuItem.Size = New System.Drawing.Size(176, 22)
+        Me.RemoteAssistanceToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.RemoteAssistanceToolStripMenuItem.Text = "Remote Assistance"
         '
         'ToolStripSeparator18
@@ -1678,14 +1683,14 @@ Public Class Form1
         '
         Me.ViewPrintersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.printer
         Me.ViewPrintersToolStripMenuItem.Name = "ViewPrintersToolStripMenuItem"
-        Me.ViewPrintersToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.ViewPrintersToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.ViewPrintersToolStripMenuItem.Text = "View Printers"
         '
         'PrintServerPropertiesToolStripMenuItem
         '
         Me.PrintServerPropertiesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.server
         Me.PrintServerPropertiesToolStripMenuItem.Name = "PrintServerPropertiesToolStripMenuItem"
-        Me.PrintServerPropertiesToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.PrintServerPropertiesToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.PrintServerPropertiesToolStripMenuItem.Text = "Print Server Properties"
         '
         'MappedDrivesMenu
@@ -1721,43 +1726,43 @@ Public Class Form1
         'LogOffToolStripMenuItem
         '
         Me.LogOffToolStripMenuItem.Name = "LogOffToolStripMenuItem"
-        Me.LogOffToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.LogOffToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.LogOffToolStripMenuItem.Text = "Log Off"
         '
         'TurnOffToolStripMenuItem
         '
         Me.TurnOffToolStripMenuItem.Name = "TurnOffToolStripMenuItem"
-        Me.TurnOffToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.TurnOffToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.TurnOffToolStripMenuItem.Text = "Shutdown"
         '
         'RestartToolStripMenuItem
         '
         Me.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem"
-        Me.RestartToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.RestartToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.RestartToolStripMenuItem.Text = "Reboot"
         '
         'ForceLogoffToolStripMenuItem
         '
         Me.ForceLogoffToolStripMenuItem.Name = "ForceLogoffToolStripMenuItem"
-        Me.ForceLogoffToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ForceLogoffToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.ForceLogoffToolStripMenuItem.Text = "Force Logoff"
         '
         'ForceRebootToolStripMenuItem
         '
         Me.ForceRebootToolStripMenuItem.Name = "ForceRebootToolStripMenuItem"
-        Me.ForceRebootToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ForceRebootToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.ForceRebootToolStripMenuItem.Text = "Force Reboot"
         '
         'PowerDownToolStripMenuItem
         '
         Me.PowerDownToolStripMenuItem.Name = "PowerDownToolStripMenuItem"
-        Me.PowerDownToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.PowerDownToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.PowerDownToolStripMenuItem.Text = "Power Down"
         '
         'ForcePowerDownToolStripMenuItem
         '
         Me.ForcePowerDownToolStripMenuItem.Name = "ForcePowerDownToolStripMenuItem"
-        Me.ForcePowerDownToolStripMenuItem.Size = New System.Drawing.Size(175, 22)
+        Me.ForcePowerDownToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
         Me.ForcePowerDownToolStripMenuItem.Text = "Force Power Down"
         '
         'ToolStripSeparator14
@@ -1821,28 +1826,21 @@ Public Class Form1
         '
         Me.BothComputerAndUserToolStripMenuItem.Enabled = False
         Me.BothComputerAndUserToolStripMenuItem.Name = "BothComputerAndUserToolStripMenuItem"
-        Me.BothComputerAndUserToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.BothComputerAndUserToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.BothComputerAndUserToolStripMenuItem.Text = "Both: Computer and User"
         '
         'OnlyComputerToolStripMenuItem
         '
         Me.OnlyComputerToolStripMenuItem.Name = "OnlyComputerToolStripMenuItem"
-        Me.OnlyComputerToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.OnlyComputerToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.OnlyComputerToolStripMenuItem.Text = "Only: Computer"
         '
         'OnlyUserToolStripMenuItem
         '
         Me.OnlyUserToolStripMenuItem.Enabled = False
         Me.OnlyUserToolStripMenuItem.Name = "OnlyUserToolStripMenuItem"
-        Me.OnlyUserToolStripMenuItem.Size = New System.Drawing.Size(207, 22)
+        Me.OnlyUserToolStripMenuItem.Size = New System.Drawing.Size(208, 22)
         Me.OnlyUserToolStripMenuItem.Text = "Only: User"
-        '
-        'RSOPReportToolStripMenuItem
-        '
-        Me.RSOPReportToolStripMenuItem.Enabled = False
-        Me.RSOPReportToolStripMenuItem.Name = "RSOPReportToolStripMenuItem"
-        Me.RSOPReportToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.RSOPReportToolStripMenuItem.Text = "RSOP report"
         '
         'ToolStripSeparator17
         '
@@ -1873,104 +1871,104 @@ Public Class Form1
         '
         Me.GoToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OperatingSystemToolStripMenuItem, Me.NetworkToolStripMenuItem, Me.ServicesToolStripMenuItem1, Me.ProcessesToolStripMenuItem, Me.PrintersToolStripMenuItem, Me.MappedDrivesToolStripMenuItem, Me.SoftwareToolStripMenuItem, Me.DeployToolStripMenuItem, Me.ADUserToolStripMenuItem, Me.GroupPolicyToolStripMenuItem, Me.MessageToolStripMenuItem, Me.StartupToolStripMenuItem, Me.ToolsToolStripMenuItem1, Me.TestToolStripMenuItem})
         Me.GoToolStripMenuItem.Name = "GoToolStripMenuItem"
-        Me.GoToolStripMenuItem.Size = New System.Drawing.Size(32, 20)
+        Me.GoToolStripMenuItem.Size = New System.Drawing.Size(34, 20)
         Me.GoToolStripMenuItem.Text = "Go"
         '
         'OperatingSystemToolStripMenuItem
         '
         Me.OperatingSystemToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.computer
         Me.OperatingSystemToolStripMenuItem.Name = "OperatingSystemToolStripMenuItem"
-        Me.OperatingSystemToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.OperatingSystemToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.OperatingSystemToolStripMenuItem.Text = "Operating System"
         '
         'NetworkToolStripMenuItem
         '
         Me.NetworkToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.computer_link
         Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
-        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.NetworkToolStripMenuItem.Text = "Network"
         '
         'ServicesToolStripMenuItem1
         '
         Me.ServicesToolStripMenuItem1.Image = Global.CMC.My.Resources.Resources.table
         Me.ServicesToolStripMenuItem1.Name = "ServicesToolStripMenuItem1"
-        Me.ServicesToolStripMenuItem1.Size = New System.Drawing.Size(171, 22)
+        Me.ServicesToolStripMenuItem1.Size = New System.Drawing.Size(168, 22)
         Me.ServicesToolStripMenuItem1.Text = "Services"
         '
         'ProcessesToolStripMenuItem
         '
         Me.ProcessesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.table_gear
         Me.ProcessesToolStripMenuItem.Name = "ProcessesToolStripMenuItem"
-        Me.ProcessesToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ProcessesToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ProcessesToolStripMenuItem.Text = "Processes"
         '
         'PrintersToolStripMenuItem
         '
         Me.PrintersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.printer
         Me.PrintersToolStripMenuItem.Name = "PrintersToolStripMenuItem"
-        Me.PrintersToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.PrintersToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.PrintersToolStripMenuItem.Text = "Printers"
         '
         'MappedDrivesToolStripMenuItem
         '
         Me.MappedDrivesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.drive_network
         Me.MappedDrivesToolStripMenuItem.Name = "MappedDrivesToolStripMenuItem"
-        Me.MappedDrivesToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.MappedDrivesToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.MappedDrivesToolStripMenuItem.Text = "Mapped Drives"
         '
         'SoftwareToolStripMenuItem
         '
         Me.SoftwareToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.package_green
         Me.SoftwareToolStripMenuItem.Name = "SoftwareToolStripMenuItem"
-        Me.SoftwareToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.SoftwareToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.SoftwareToolStripMenuItem.Text = "Software"
         '
         'DeployToolStripMenuItem
         '
         Me.DeployToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_get
         Me.DeployToolStripMenuItem.Name = "DeployToolStripMenuItem"
-        Me.DeployToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.DeployToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.DeployToolStripMenuItem.Text = "Deploy"
         '
         'ADUserToolStripMenuItem
         '
         Me.ADUserToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.group_key
         Me.ADUserToolStripMenuItem.Name = "ADUserToolStripMenuItem"
-        Me.ADUserToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ADUserToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.ADUserToolStripMenuItem.Text = "AD User"
         '
         'GroupPolicyToolStripMenuItem
         '
         Me.GroupPolicyToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page
         Me.GroupPolicyToolStripMenuItem.Name = "GroupPolicyToolStripMenuItem"
-        Me.GroupPolicyToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.GroupPolicyToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.GroupPolicyToolStripMenuItem.Text = "Group Policy"
         '
         'MessageToolStripMenuItem
         '
         Me.MessageToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.comment
         Me.MessageToolStripMenuItem.Name = "MessageToolStripMenuItem"
-        Me.MessageToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.MessageToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.MessageToolStripMenuItem.Text = "Message"
         '
         'StartupToolStripMenuItem
         '
         Me.StartupToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_cascade
         Me.StartupToolStripMenuItem.Name = "StartupToolStripMenuItem"
-        Me.StartupToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.StartupToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.StartupToolStripMenuItem.Text = "Startup"
         '
         'ToolsToolStripMenuItem1
         '
         Me.ToolsToolStripMenuItem1.Image = Global.CMC.My.Resources.Resources.wrench_orange
         Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
-        Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(171, 22)
+        Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(168, 22)
         Me.ToolsToolStripMenuItem1.Text = "Tools"
         '
         'TestToolStripMenuItem
         '
         Me.TestToolStripMenuItem.Name = "TestToolStripMenuItem"
-        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(168, 22)
         Me.TestToolStripMenuItem.Text = "Test"
         Me.TestToolStripMenuItem.Visible = False
         '
@@ -1978,20 +1976,20 @@ Public Class Form1
         '
         Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.Prefs_Menu, Me.ToolStripSeparator9, Me.AlwaysOnTopToolStripMenuItem, Me.MultiThreadMenuItem, Me.ToolbarEnabled, Me.ToolStripSeparator10, Me.ViewLogToolStripMenuItem, Me.ClearLogToolStripMenuItem, Me.ToolStripSeparator15, Me.ClearHistoryToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
         'Prefs_Menu
         '
         Me.Prefs_Menu.Image = Global.CMC.My.Resources.Resources.wrench
         Me.Prefs_Menu.Name = "Prefs_Menu"
-        Me.Prefs_Menu.Size = New System.Drawing.Size(204, 22)
+        Me.Prefs_Menu.Size = New System.Drawing.Size(198, 22)
         Me.Prefs_Menu.Text = "Preferences"
         '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
-        Me.ToolStripSeparator9.Size = New System.Drawing.Size(201, 6)
+        Me.ToolStripSeparator9.Size = New System.Drawing.Size(195, 6)
         '
         'AlwaysOnTopToolStripMenuItem
         '
@@ -2001,7 +1999,7 @@ Public Class Form1
         Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
         Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.AlwaysOnTopToolStripMenuItem.Text = "Always on top"
         Me.AlwaysOnTopToolStripMenuItem.ToolTipText = "remain visible when window focus lost"
         '
@@ -2009,7 +2007,7 @@ Public Class Form1
         '
         Me.MultiThreadMenuItem.Image = Global.CMC.My.Resources.Resources.arrow_join
         Me.MultiThreadMenuItem.Name = "MultiThreadMenuItem"
-        Me.MultiThreadMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.MultiThreadMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.MultiThreadMenuItem.Text = "No Multithread"
         '
         'ToolbarEnabled
@@ -2017,13 +2015,13 @@ Public Class Form1
         Me.ToolbarEnabled.CheckOnClick = True
         Me.ToolbarEnabled.Image = Global.CMC.My.Resources.Resources.application_view_tile
         Me.ToolbarEnabled.Name = "ToolbarEnabled"
-        Me.ToolbarEnabled.Size = New System.Drawing.Size(204, 22)
+        Me.ToolbarEnabled.Size = New System.Drawing.Size(198, 22)
         Me.ToolbarEnabled.Text = "Toolbar always enabled"
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
-        Me.ToolStripSeparator10.Size = New System.Drawing.Size(201, 6)
+        Me.ToolStripSeparator10.Size = New System.Drawing.Size(195, 6)
         '
         'ViewLogToolStripMenuItem
         '
@@ -2031,33 +2029,33 @@ Public Class Form1
         Me.ViewLogToolStripMenuItem.Name = "ViewLogToolStripMenuItem"
         Me.ViewLogToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.ViewLogToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ViewLogToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.ViewLogToolStripMenuItem.Text = "View Log"
         '
         'ClearLogToolStripMenuItem
         '
         Me.ClearLogToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_delete
         Me.ClearLogToolStripMenuItem.Name = "ClearLogToolStripMenuItem"
-        Me.ClearLogToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ClearLogToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.ClearLogToolStripMenuItem.Text = "Clear Log"
         '
         'ToolStripSeparator15
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
-        Me.ToolStripSeparator15.Size = New System.Drawing.Size(201, 6)
+        Me.ToolStripSeparator15.Size = New System.Drawing.Size(195, 6)
         '
         'ClearHistoryToolStripMenuItem
         '
         Me.ClearHistoryToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_lightning
         Me.ClearHistoryToolStripMenuItem.Name = "ClearHistoryToolStripMenuItem"
-        Me.ClearHistoryToolStripMenuItem.Size = New System.Drawing.Size(204, 22)
+        Me.ClearHistoryToolStripMenuItem.Size = New System.Drawing.Size(198, 22)
         Me.ClearHistoryToolStripMenuItem.Text = "Clear History"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
         'AboutToolStripMenuItem
@@ -2065,7 +2063,7 @@ Public Class Form1
         Me.AboutToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.information
         Me.AboutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'SaveFileDialog1
@@ -2077,8 +2075,7 @@ Public Class Form1
         '
         'options
         '
-        Me.options.Controls.Add(Me.btnAddDomain)
-        Me.options.Controls.Add(Me.btnDomains)
+        Me.options.Controls.Add(Me.DomainCombo)
         Me.options.Controls.Add(Me.GroupBox13)
         Me.options.Controls.Add(Me.GroupBox12)
         Me.options.Controls.Add(Me.PrefCancel)
@@ -2092,21 +2089,22 @@ Public Class Form1
         Me.options.Text = "Options"
         Me.options.UseVisualStyleBackColor = True
         '
-        'btnDomains
+        'DomainCombo
         '
-        Me.btnDomains.Location = New System.Drawing.Point(230, 88)
-        Me.btnDomains.Name = "btnDomains"
-        Me.btnDomains.Size = New System.Drawing.Size(75, 23)
-        Me.btnDomains.TabIndex = 32
-        Me.btnDomains.Text = "Domains"
-        Me.btnDomains.UseVisualStyleBackColor = True
+        Me.DomainCombo.FormattingEnabled = True
+        Me.DomainCombo.Items.AddRange(New Object() {" (edit custom domains)"})
+        Me.DomainCombo.Location = New System.Drawing.Point(224, 97)
+        Me.DomainCombo.Name = "DomainCombo"
+        Me.DomainCombo.Size = New System.Drawing.Size(134, 21)
+        Me.DomainCombo.TabIndex = 34
+        Me.DomainCombo.Text = "(edit custom domains)"
         '
         'GroupBox13
         '
         Me.GroupBox13.Controls.Add(Me.psexecbrowse)
         Me.GroupBox13.Controls.Add(Me.downloadpsexec)
         Me.GroupBox13.Controls.Add(Me.psexecpath)
-        Me.GroupBox13.Location = New System.Drawing.Point(6, 6)
+        Me.GroupBox13.Location = New System.Drawing.Point(7, 193)
         Me.GroupBox13.Name = "GroupBox13"
         Me.GroupBox13.Size = New System.Drawing.Size(212, 39)
         Me.GroupBox13.TabIndex = 31
@@ -2146,9 +2144,9 @@ Public Class Form1
         Me.GroupBox12.Controls.Add(Me.SettingAltPass)
         Me.GroupBox12.Controls.Add(Me.SettingAltUser)
         Me.GroupBox12.Controls.Add(Me.Label52)
-        Me.GroupBox12.Location = New System.Drawing.Point(224, 6)
+        Me.GroupBox12.Location = New System.Drawing.Point(216, 6)
         Me.GroupBox12.Name = "GroupBox12"
-        Me.GroupBox12.Size = New System.Drawing.Size(142, 76)
+        Me.GroupBox12.Size = New System.Drawing.Size(148, 76)
         Me.GroupBox12.TabIndex = 26
         Me.GroupBox12.TabStop = False
         Me.GroupBox12.Text = "alt user"
@@ -2211,9 +2209,9 @@ Public Class Form1
         Me.GroupBox7.Controls.Add(Me.defPR)
         Me.GroupBox7.Controls.Add(Me.defSV)
         Me.GroupBox7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.GroupBox7.Location = New System.Drawing.Point(6, 51)
+        Me.GroupBox7.Location = New System.Drawing.Point(7, 6)
         Me.GroupBox7.Name = "GroupBox7"
-        Me.GroupBox7.Size = New System.Drawing.Size(213, 57)
+        Me.GroupBox7.Size = New System.Drawing.Size(192, 76)
         Me.GroupBox7.TabIndex = 20
         Me.GroupBox7.TabStop = False
         Me.GroupBox7.Text = "default tab selections"
@@ -2223,7 +2221,7 @@ Public Class Form1
         Me.defHW.AutoSize = True
         Me.defHW.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.defHW.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.defHW.Location = New System.Drawing.Point(28, 18)
+        Me.defHW.Location = New System.Drawing.Point(28, 24)
         Me.defHW.Name = "defHW"
         Me.defHW.Size = New System.Drawing.Size(70, 17)
         Me.defHW.TabIndex = 1
@@ -2235,7 +2233,7 @@ Public Class Form1
         Me.defNW.AutoSize = True
         Me.defNW.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.defNW.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.defNW.Location = New System.Drawing.Point(28, 36)
+        Me.defNW.Location = New System.Drawing.Point(28, 42)
         Me.defNW.Name = "defNW"
         Me.defNW.Size = New System.Drawing.Size(63, 17)
         Me.defNW.TabIndex = 3
@@ -2247,7 +2245,7 @@ Public Class Form1
         Me.defPR.AutoSize = True
         Me.defPR.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.defPR.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.defPR.Location = New System.Drawing.Point(115, 36)
+        Me.defPR.Location = New System.Drawing.Point(115, 42)
         Me.defPR.Name = "defPR"
         Me.defPR.Size = New System.Drawing.Size(73, 17)
         Me.defPR.TabIndex = 4
@@ -2259,7 +2257,7 @@ Public Class Form1
         Me.defSV.AutoSize = True
         Me.defSV.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.defSV.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.defSV.Location = New System.Drawing.Point(115, 18)
+        Me.defSV.Location = New System.Drawing.Point(115, 24)
         Me.defSV.Name = "defSV"
         Me.defSV.Size = New System.Drawing.Size(64, 17)
         Me.defSV.TabIndex = 2
@@ -2643,6 +2641,8 @@ Public Class Form1
         '
         'adpanel
         '
+        Me.adpanel.Controls.Add(Me.profileGroupBox)
+        Me.adpanel.Controls.Add(Me.tsGroupBox)
         Me.adpanel.Controls.Add(Me.btn_EnumGroups)
         Me.adpanel.Controls.Add(Me.btn_dsa)
         Me.adpanel.Controls.Add(Me.telephonenumber)
@@ -2652,18 +2652,156 @@ Public Class Form1
         Me.adpanel.Controls.Add(Me.Label53)
         Me.adpanel.Controls.Add(Me.mail)
         Me.adpanel.Controls.Add(Me.Label26)
-        Me.adpanel.Controls.Add(Me.PasswordGroupBox)
         Me.adpanel.Controls.Add(Me.FQDN)
         Me.adpanel.Controls.Add(Me.samaccountname)
         Me.adpanel.Controls.Add(Me.Label27)
         Me.adpanel.Controls.Add(Me.Label25)
         Me.adpanel.Controls.Add(Me.adGroupsListBox)
-        Me.adpanel.Controls.Add(Me.profileGroupBox)
         Me.adpanel.Controls.Add(Me.userupdate_button)
+        Me.adpanel.Controls.Add(Me.PasswordGroupBox)
         Me.adpanel.Location = New System.Drawing.Point(2, 2)
         Me.adpanel.Name = "adpanel"
         Me.adpanel.Size = New System.Drawing.Size(367, 235)
         Me.adpanel.TabIndex = 31
+        '
+        'profileGroupBox
+        '
+        Me.profileGroupBox.Controls.Add(Me.profilepath)
+        Me.profileGroupBox.Controls.Add(Me.homedirectory)
+        Me.profileGroupBox.Controls.Add(Me.homedrive)
+        Me.profileGroupBox.Controls.Add(Me.Label23)
+        Me.profileGroupBox.Controls.Add(Me.Label24)
+        Me.profileGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.profileGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.profileGroupBox.Location = New System.Drawing.Point(183, 81)
+        Me.profileGroupBox.Name = "profileGroupBox"
+        Me.profileGroupBox.Size = New System.Drawing.Size(179, 76)
+        Me.profileGroupBox.TabIndex = 21
+        Me.profileGroupBox.TabStop = False
+        Me.profileGroupBox.Text = "profile"
+        '
+        'profilepath
+        '
+        Me.profilepath.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.profilepath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.profilepath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.profilepath.Location = New System.Drawing.Point(4, 54)
+        Me.profilepath.Name = "profilepath"
+        Me.profilepath.ReadOnly = True
+        Me.profilepath.Size = New System.Drawing.Size(170, 18)
+        Me.profilepath.TabIndex = 3
+        '
+        'homedirectory
+        '
+        Me.homedirectory.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.homedirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.homedirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.homedirectory.Location = New System.Drawing.Point(29, 25)
+        Me.homedirectory.Name = "homedirectory"
+        Me.homedirectory.ReadOnly = True
+        Me.homedirectory.Size = New System.Drawing.Size(145, 18)
+        Me.homedirectory.TabIndex = 2
+        '
+        'homedrive
+        '
+        Me.homedrive.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.homedrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.homedrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.homedrive.Location = New System.Drawing.Point(4, 25)
+        Me.homedrive.Name = "homedrive"
+        Me.homedrive.ReadOnly = True
+        Me.homedrive.Size = New System.Drawing.Size(22, 18)
+        Me.homedrive.TabIndex = 1
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label23.Location = New System.Drawing.Point(1, 42)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(59, 13)
+        Me.Label23.TabIndex = 4
+        Me.Label23.Text = "profile path"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label24.Location = New System.Drawing.Point(1, 13)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(75, 13)
+        Me.Label24.TabIndex = 0
+        Me.Label24.Text = "home directory"
+        '
+        'tsGroupBox
+        '
+        Me.tsGroupBox.Controls.Add(Me.TerminalServicesHomeDirectory)
+        Me.tsGroupBox.Controls.Add(Me.TerminalServicesHomeDrive)
+        Me.tsGroupBox.Controls.Add(Me.Label20)
+        Me.tsGroupBox.Controls.Add(Me.TerminalServicesProfilePath)
+        Me.tsGroupBox.Controls.Add(Me.Label22)
+        Me.tsGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.tsGroupBox.Location = New System.Drawing.Point(183, 156)
+        Me.tsGroupBox.Name = "tsGroupBox"
+        Me.tsGroupBox.Size = New System.Drawing.Size(179, 76)
+        Me.tsGroupBox.TabIndex = 39
+        Me.tsGroupBox.TabStop = False
+        Me.tsGroupBox.Text = "terminal services profile"
+        '
+        'TerminalServicesHomeDirectory
+        '
+        Me.TerminalServicesHomeDirectory.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TerminalServicesHomeDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TerminalServicesHomeDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TerminalServicesHomeDirectory.Location = New System.Drawing.Point(29, 24)
+        Me.TerminalServicesHomeDirectory.Name = "TerminalServicesHomeDirectory"
+        Me.TerminalServicesHomeDirectory.ReadOnly = True
+        Me.TerminalServicesHomeDirectory.Size = New System.Drawing.Size(146, 18)
+        Me.TerminalServicesHomeDirectory.TabIndex = 1
+        Me.ToolTip1.SetToolTip(Me.TerminalServicesHomeDirectory, "double click to open")
+        '
+        'TerminalServicesHomeDrive
+        '
+        Me.TerminalServicesHomeDrive.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TerminalServicesHomeDrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TerminalServicesHomeDrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TerminalServicesHomeDrive.Location = New System.Drawing.Point(5, 24)
+        Me.TerminalServicesHomeDrive.Name = "TerminalServicesHomeDrive"
+        Me.TerminalServicesHomeDrive.ReadOnly = True
+        Me.TerminalServicesHomeDrive.Size = New System.Drawing.Size(21, 18)
+        Me.TerminalServicesHomeDrive.TabIndex = 2
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label20.Location = New System.Drawing.Point(2, 41)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(64, 13)
+        Me.Label20.TabIndex = 3
+        Me.Label20.Text = "profile folder"
+        '
+        'TerminalServicesProfilePath
+        '
+        Me.TerminalServicesProfilePath.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.TerminalServicesProfilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.TerminalServicesProfilePath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TerminalServicesProfilePath.Location = New System.Drawing.Point(5, 54)
+        Me.TerminalServicesProfilePath.Name = "TerminalServicesProfilePath"
+        Me.TerminalServicesProfilePath.ReadOnly = True
+        Me.TerminalServicesProfilePath.Size = New System.Drawing.Size(170, 18)
+        Me.TerminalServicesProfilePath.TabIndex = 4
+        Me.ToolTip1.SetToolTip(Me.TerminalServicesProfilePath, "double click to open")
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label22.Location = New System.Drawing.Point(2, 12)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(56, 13)
+        Me.Label22.TabIndex = 0
+        Me.Label22.Text = "user folder"
         '
         'btn_EnumGroups
         '
@@ -2682,7 +2820,7 @@ Public Class Form1
         Me.btn_dsa.FlatAppearance.BorderSize = 0
         Me.btn_dsa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.btn_dsa.Image = Global.CMC.My.Resources.Resources.book_open
-        Me.btn_dsa.Location = New System.Drawing.Point(171, 32)
+        Me.btn_dsa.Location = New System.Drawing.Point(171, 28)
         Me.btn_dsa.Name = "btn_dsa"
         Me.btn_dsa.Size = New System.Drawing.Size(20, 20)
         Me.btn_dsa.TabIndex = 37
@@ -2765,92 +2903,22 @@ Public Class Form1
         Me.Label26.TabIndex = 34
         Me.Label26.Text = "company"
         '
-        'PasswordGroupBox
-        '
-        Me.PasswordGroupBox.Controls.Add(Me.forcepasswordchange)
-        Me.PasswordGroupBox.Controls.Add(Me.Label29)
-        Me.PasswordGroupBox.Controls.Add(Me.resetpassword)
-        Me.PasswordGroupBox.Controls.Add(Me.password1)
-        Me.PasswordGroupBox.Controls.Add(Me.password2)
-        Me.PasswordGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.PasswordGroupBox.Location = New System.Drawing.Point(199, 23)
-        Me.PasswordGroupBox.Name = "PasswordGroupBox"
-        Me.PasswordGroupBox.Size = New System.Drawing.Size(163, 68)
-        Me.PasswordGroupBox.TabIndex = 29
-        Me.PasswordGroupBox.TabStop = False
-        Me.PasswordGroupBox.Text = "password"
-        '
-        'forcepasswordchange
-        '
-        Me.forcepasswordchange.AutoSize = True
-        Me.forcepasswordchange.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.forcepasswordchange.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.forcepasswordchange.Location = New System.Drawing.Point(90, 40)
-        Me.forcepasswordchange.Name = "forcepasswordchange"
-        Me.forcepasswordchange.Size = New System.Drawing.Size(64, 16)
-        Me.forcepasswordchange.TabIndex = 20
-        Me.forcepasswordchange.Text = "change at"
-        Me.ToolTip1.SetToolTip(Me.forcepasswordchange, "force user to change password at next logon")
-        Me.forcepasswordchange.UseVisualStyleBackColor = True
-        '
-        'Label29
-        '
-        Me.Label29.AutoSize = True
-        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label29.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label29.Location = New System.Drawing.Point(107, 52)
-        Me.Label29.Name = "Label29"
-        Me.Label29.Size = New System.Drawing.Size(47, 12)
-        Me.Label29.TabIndex = 21
-        Me.Label29.Text = "next logon"
-        '
-        'resetpassword
-        '
-        Me.resetpassword.Enabled = False
-        Me.resetpassword.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.resetpassword.Location = New System.Drawing.Point(90, 14)
-        Me.resetpassword.Name = "resetpassword"
-        Me.resetpassword.Size = New System.Drawing.Size(64, 23)
-        Me.resetpassword.TabIndex = 19
-        Me.resetpassword.Text = "reset"
-        Me.ToolTip1.SetToolTip(Me.resetpassword, "reset users password")
-        Me.resetpassword.UseVisualStyleBackColor = True
-        '
-        'password1
-        '
-        Me.password1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.password1.Location = New System.Drawing.Point(6, 18)
-        Me.password1.Name = "password1"
-        Me.password1.Size = New System.Drawing.Size(78, 19)
-        Me.password1.TabIndex = 17
-        Me.password1.UseSystemPasswordChar = True
-        '
-        'password2
-        '
-        Me.password2.Enabled = False
-        Me.password2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.password2.Location = New System.Drawing.Point(6, 38)
-        Me.password2.Name = "password2"
-        Me.password2.Size = New System.Drawing.Size(78, 19)
-        Me.password2.TabIndex = 18
-        Me.password2.UseSystemPasswordChar = True
-        '
         'FQDN
         '
-        Me.FQDN.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.FQDN.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FQDN.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.FQDN.ForeColor = System.Drawing.Color.MidnightBlue
+        Me.FQDN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.FQDN.Location = New System.Drawing.Point(2, 2)
         Me.FQDN.Name = "FQDN"
         Me.FQDN.ReadOnly = True
-        Me.FQDN.Size = New System.Drawing.Size(363, 17)
+        Me.FQDN.Size = New System.Drawing.Size(363, 10)
         Me.FQDN.TabIndex = 28
         '
         'samaccountname
         '
         Me.samaccountname.BackColor = System.Drawing.Color.PaleGoldenrod
         Me.samaccountname.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.samaccountname.Location = New System.Drawing.Point(5, 31)
+        Me.samaccountname.Location = New System.Drawing.Point(5, 27)
         Me.samaccountname.Name = "samaccountname"
         Me.samaccountname.Size = New System.Drawing.Size(127, 18)
         Me.samaccountname.TabIndex = 18
@@ -2867,7 +2935,7 @@ Public Class Form1
         'Label25
         '
         Me.Label25.AutoSize = True
-        Me.Label25.Location = New System.Drawing.Point(5, 18)
+        Me.Label25.Location = New System.Drawing.Point(5, 14)
         Me.Label25.Name = "Label25"
         Me.Label25.Size = New System.Drawing.Size(73, 13)
         Me.Label25.TabIndex = 25
@@ -2886,145 +2954,86 @@ Public Class Form1
         Me.adGroupsListBox.Sorted = True
         Me.adGroupsListBox.TabIndex = 24
         '
-        'profileGroupBox
-        '
-        Me.profileGroupBox.Controls.Add(Me.TerminalServicesHomeDrive)
-        Me.profileGroupBox.Controls.Add(Me.TerminalServicesHomeDirectory)
-        Me.profileGroupBox.Controls.Add(Me.profilepath)
-        Me.profileGroupBox.Controls.Add(Me.homedirectory)
-        Me.profileGroupBox.Controls.Add(Me.homedrive)
-        Me.profileGroupBox.Controls.Add(Me.TerminalServicesProfilePath)
-        Me.profileGroupBox.Controls.Add(Me.Label23)
-        Me.profileGroupBox.Controls.Add(Me.Label20)
-        Me.profileGroupBox.Controls.Add(Me.Label22)
-        Me.profileGroupBox.Controls.Add(Me.Label24)
-        Me.profileGroupBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.profileGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.profileGroupBox.Location = New System.Drawing.Point(183, 96)
-        Me.profileGroupBox.Name = "profileGroupBox"
-        Me.profileGroupBox.Size = New System.Drawing.Size(179, 134)
-        Me.profileGroupBox.TabIndex = 21
-        Me.profileGroupBox.TabStop = False
-        Me.profileGroupBox.Text = "profile"
-        '
-        'TerminalServicesHomeDrive
-        '
-        Me.TerminalServicesHomeDrive.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.TerminalServicesHomeDrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TerminalServicesHomeDrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TerminalServicesHomeDrive.Location = New System.Drawing.Point(4, 83)
-        Me.TerminalServicesHomeDrive.Name = "TerminalServicesHomeDrive"
-        Me.TerminalServicesHomeDrive.ReadOnly = True
-        Me.TerminalServicesHomeDrive.Size = New System.Drawing.Size(21, 18)
-        Me.TerminalServicesHomeDrive.TabIndex = 2
-        '
-        'TerminalServicesHomeDirectory
-        '
-        Me.TerminalServicesHomeDirectory.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.TerminalServicesHomeDirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TerminalServicesHomeDirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TerminalServicesHomeDirectory.Location = New System.Drawing.Point(28, 83)
-        Me.TerminalServicesHomeDirectory.Name = "TerminalServicesHomeDirectory"
-        Me.TerminalServicesHomeDirectory.ReadOnly = True
-        Me.TerminalServicesHomeDirectory.Size = New System.Drawing.Size(146, 18)
-        Me.TerminalServicesHomeDirectory.TabIndex = 1
-        Me.ToolTip1.SetToolTip(Me.TerminalServicesHomeDirectory, "double click to open")
-        '
-        'profilepath
-        '
-        Me.profilepath.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.profilepath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.profilepath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.profilepath.Location = New System.Drawing.Point(4, 54)
-        Me.profilepath.Name = "profilepath"
-        Me.profilepath.ReadOnly = True
-        Me.profilepath.Size = New System.Drawing.Size(170, 18)
-        Me.profilepath.TabIndex = 3
-        '
-        'homedirectory
-        '
-        Me.homedirectory.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.homedirectory.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.homedirectory.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.homedirectory.Location = New System.Drawing.Point(29, 25)
-        Me.homedirectory.Name = "homedirectory"
-        Me.homedirectory.ReadOnly = True
-        Me.homedirectory.Size = New System.Drawing.Size(145, 18)
-        Me.homedirectory.TabIndex = 2
-        '
-        'homedrive
-        '
-        Me.homedrive.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.homedrive.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.homedrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.homedrive.Location = New System.Drawing.Point(4, 25)
-        Me.homedrive.Name = "homedrive"
-        Me.homedrive.ReadOnly = True
-        Me.homedrive.Size = New System.Drawing.Size(22, 18)
-        Me.homedrive.TabIndex = 1
-        '
-        'TerminalServicesProfilePath
-        '
-        Me.TerminalServicesProfilePath.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.TerminalServicesProfilePath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.TerminalServicesProfilePath.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TerminalServicesProfilePath.Location = New System.Drawing.Point(4, 111)
-        Me.TerminalServicesProfilePath.Name = "TerminalServicesProfilePath"
-        Me.TerminalServicesProfilePath.ReadOnly = True
-        Me.TerminalServicesProfilePath.Size = New System.Drawing.Size(170, 18)
-        Me.TerminalServicesProfilePath.TabIndex = 4
-        Me.ToolTip1.SetToolTip(Me.TerminalServicesProfilePath, "double click to open")
-        '
-        'Label23
-        '
-        Me.Label23.AutoSize = True
-        Me.Label23.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label23.Location = New System.Drawing.Point(1, 42)
-        Me.Label23.Name = "Label23"
-        Me.Label23.Size = New System.Drawing.Size(59, 13)
-        Me.Label23.TabIndex = 4
-        Me.Label23.Text = "profile path"
-        '
-        'Label20
-        '
-        Me.Label20.AutoSize = True
-        Me.Label20.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label20.Location = New System.Drawing.Point(1, 99)
-        Me.Label20.Name = "Label20"
-        Me.Label20.Size = New System.Drawing.Size(144, 13)
-        Me.Label20.TabIndex = 3
-        Me.Label20.Text = "terminal services profile folder"
-        '
-        'Label22
-        '
-        Me.Label22.AutoSize = True
-        Me.Label22.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label22.Location = New System.Drawing.Point(1, 71)
-        Me.Label22.Name = "Label22"
-        Me.Label22.Size = New System.Drawing.Size(136, 13)
-        Me.Label22.TabIndex = 0
-        Me.Label22.Text = "terminal services user folder"
-        '
-        'Label24
-        '
-        Me.Label24.AutoSize = True
-        Me.Label24.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label24.Location = New System.Drawing.Point(1, 12)
-        Me.Label24.Name = "Label24"
-        Me.Label24.Size = New System.Drawing.Size(75, 13)
-        Me.Label24.TabIndex = 0
-        Me.Label24.Text = "home directory"
-        '
         'userupdate_button
         '
         Me.userupdate_button.Enabled = False
         Me.userupdate_button.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.userupdate_button.Location = New System.Drawing.Point(138, 27)
+        Me.userupdate_button.Location = New System.Drawing.Point(138, 23)
         Me.userupdate_button.Name = "userupdate_button"
         Me.userupdate_button.Size = New System.Drawing.Size(30, 26)
         Me.userupdate_button.TabIndex = 23
         Me.userupdate_button.Text = "go"
         Me.userupdate_button.UseVisualStyleBackColor = True
+        '
+        'PasswordGroupBox
+        '
+        Me.PasswordGroupBox.Controls.Add(Me.Label29)
+        Me.PasswordGroupBox.Controls.Add(Me.forcepasswordchange)
+        Me.PasswordGroupBox.Controls.Add(Me.resetpassword)
+        Me.PasswordGroupBox.Controls.Add(Me.password1)
+        Me.PasswordGroupBox.Controls.Add(Me.password2)
+        Me.PasswordGroupBox.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.PasswordGroupBox.Location = New System.Drawing.Point(199, 13)
+        Me.PasswordGroupBox.Name = "PasswordGroupBox"
+        Me.PasswordGroupBox.Size = New System.Drawing.Size(163, 64)
+        Me.PasswordGroupBox.TabIndex = 29
+        Me.PasswordGroupBox.TabStop = False
+        Me.PasswordGroupBox.Text = "password"
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label29.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label29.Location = New System.Drawing.Point(106, 47)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(47, 12)
+        Me.Label29.TabIndex = 21
+        Me.Label29.Text = "next logon"
+        '
+        'forcepasswordchange
+        '
+        Me.forcepasswordchange.AutoSize = True
+        Me.forcepasswordchange.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.forcepasswordchange.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.forcepasswordchange.Location = New System.Drawing.Point(90, 34)
+        Me.forcepasswordchange.Name = "forcepasswordchange"
+        Me.forcepasswordchange.Size = New System.Drawing.Size(64, 16)
+        Me.forcepasswordchange.TabIndex = 20
+        Me.forcepasswordchange.Text = "change at"
+        Me.ToolTip1.SetToolTip(Me.forcepasswordchange, "force user to change password at next logon")
+        Me.forcepasswordchange.UseVisualStyleBackColor = True
+        '
+        'resetpassword
+        '
+        Me.resetpassword.Enabled = False
+        Me.resetpassword.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.resetpassword.Location = New System.Drawing.Point(90, 12)
+        Me.resetpassword.Name = "resetpassword"
+        Me.resetpassword.Size = New System.Drawing.Size(64, 23)
+        Me.resetpassword.TabIndex = 19
+        Me.resetpassword.Text = "reset"
+        Me.ToolTip1.SetToolTip(Me.resetpassword, "reset users password")
+        Me.resetpassword.UseVisualStyleBackColor = True
+        '
+        'password1
+        '
+        Me.password1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.password1.Location = New System.Drawing.Point(6, 16)
+        Me.password1.Name = "password1"
+        Me.password1.Size = New System.Drawing.Size(78, 19)
+        Me.password1.TabIndex = 17
+        Me.password1.UseSystemPasswordChar = True
+        '
+        'password2
+        '
+        Me.password2.Enabled = False
+        Me.password2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.password2.Location = New System.Drawing.Point(6, 36)
+        Me.password2.Name = "password2"
+        Me.password2.Size = New System.Drawing.Size(78, 19)
+        Me.password2.TabIndex = 18
+        Me.password2.UseSystemPasswordChar = True
         '
         'tools
         '
@@ -3321,7 +3330,6 @@ Public Class Form1
         Me.software.Controls.Add(Me.sgrid)
         Me.software.Controls.Add(Me.sw_use_wmi_checkbox)
         Me.software.Controls.Add(Me.software_button)
-        Me.software.Controls.Add(Me.GroupBox2)
         Me.software.Controls.Add(Me.ShowUpdates)
         Me.software.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.software.Location = New System.Drawing.Point(4, 22)
@@ -3335,6 +3343,8 @@ Public Class Form1
         '
         Me.sgrid.AllowUserToAddRows = False
         Me.sgrid.AllowUserToDeleteRows = False
+        Me.sgrid.AllowUserToResizeColumns = False
+        Me.sgrid.AllowUserToResizeRows = False
         Me.sgrid.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.sgrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
@@ -3356,12 +3366,13 @@ Public Class Form1
         Me.sgrid.RowHeadersVisible = False
         DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
         Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
-        Me.sgrid.RowTemplate.Height = 12
+        Me.sgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.sgrid.RowTemplate.Height = 18
         Me.sgrid.RowTemplate.ReadOnly = True
         Me.sgrid.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.[False]
         Me.sgrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.sgrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.sgrid.Size = New System.Drawing.Size(174, 210)
+        Me.sgrid.Size = New System.Drawing.Size(365, 212)
         Me.sgrid.TabIndex = 59
         '
         'swname
@@ -3369,7 +3380,8 @@ Public Class Form1
         Me.swname.HeaderText = "swname"
         Me.swname.Name = "swname"
         Me.swname.ReadOnly = True
-        Me.swname.Width = 171
+        Me.swname.ToolTipText = "Double click for info"
+        Me.swname.Width = 400
         '
         'swver
         '
@@ -3435,34 +3447,6 @@ Public Class Form1
         Me.software_button.TabIndex = 50
         Me.software_button.Text = "refresh"
         '
-        'GroupBox2
-        '
-        Me.GroupBox2.Controls.Add(Me.SWLabel)
-        Me.GroupBox2.Controls.Add(Me.swurl)
-        Me.GroupBox2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.GroupBox2.Location = New System.Drawing.Point(181, 17)
-        Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(184, 216)
-        Me.GroupBox2.TabIndex = 57
-        Me.GroupBox2.TabStop = False
-        Me.GroupBox2.Text = "Software Details"
-        '
-        'SWLabel
-        '
-        Me.SWLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.SWLabel.Location = New System.Drawing.Point(8, 16)
-        Me.SWLabel.Name = "SWLabel"
-        Me.SWLabel.Size = New System.Drawing.Size(168, 168)
-        Me.SWLabel.TabIndex = 53
-        '
-        'swurl
-        '
-        Me.swurl.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.swurl.Location = New System.Drawing.Point(8, 188)
-        Me.swurl.Name = "swurl"
-        Me.swurl.Size = New System.Drawing.Size(168, 24)
-        Me.swurl.TabIndex = 56
-        '
         'ShowUpdates
         '
         Me.ShowUpdates.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
@@ -3521,7 +3505,7 @@ Public Class Form1
         Me.processgrid.BackgroundColor = System.Drawing.Color.WhiteSmoke
         Me.processgrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
         Me.processgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.processgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pr_name, Me.pr_id, Me.executablepath, Me.mem})
+        Me.processgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.pr_name, Me.pr_id, Me.executablepath, Me.mem, Me.pDescription})
         Me.processgrid.GridColor = System.Drawing.SystemColors.Window
         Me.processgrid.Location = New System.Drawing.Point(0, 21)
         Me.processgrid.MultiSelect = False
@@ -3569,6 +3553,13 @@ Public Class Form1
         Me.mem.Name = "mem"
         Me.mem.ReadOnly = True
         Me.mem.Width = 60
+        '
+        'pDescription
+        '
+        Me.pDescription.HeaderText = "Description"
+        Me.pDescription.Name = "pDescription"
+        Me.pDescription.ReadOnly = True
+        Me.pDescription.Visible = False
         '
         'ProcessRefresh
         '
@@ -3979,7 +3970,6 @@ Public Class Form1
         'GroupBox5
         '
         Me.GroupBox5.Controls.Add(Me.dhcpbutton)
-        Me.GroupBox5.Controls.Add(Me.Label38)
         Me.GroupBox5.Controls.Add(Me.dhcp)
         Me.GroupBox5.Controls.Add(Me.Label6)
         Me.GroupBox5.Controls.Add(Me.Label4)
@@ -3998,26 +3988,16 @@ Public Class Form1
         '
         'dhcpbutton
         '
-        Me.dhcpbutton.Enabled = False
         Me.dhcpbutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.dhcpbutton.Location = New System.Drawing.Point(74, 114)
+        Me.dhcpbutton.Location = New System.Drawing.Point(14, 112)
         Me.dhcpbutton.Name = "dhcpbutton"
-        Me.dhcpbutton.Size = New System.Drawing.Size(37, 21)
+        Me.dhcpbutton.Size = New System.Drawing.Size(63, 21)
         Me.dhcpbutton.TabIndex = 14
         Me.dhcpbutton.TabStop = False
-        Me.dhcpbutton.Text = "dhcp"
+        Me.dhcpbutton.Text = "enable dhcp"
         Me.ToolTip1.SetToolTip(Me.dhcpbutton, "change to configuration by dhcp")
         Me.dhcpbutton.UseVisualStyleBackColor = True
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.ForeColor = System.Drawing.Color.DimGray
-        Me.Label38.Location = New System.Drawing.Point(1, 118)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(76, 13)
-        Me.Label38.TabIndex = 21
-        Me.Label38.Text = "change config:"
+        Me.dhcpbutton.Visible = False
         '
         'dhcp
         '
@@ -4062,16 +4042,16 @@ Public Class Form1
         '
         'staticbutton
         '
-        Me.staticbutton.Enabled = False
         Me.staticbutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.staticbutton.Location = New System.Drawing.Point(113, 114)
+        Me.staticbutton.Location = New System.Drawing.Point(82, 112)
         Me.staticbutton.Name = "staticbutton"
-        Me.staticbutton.Size = New System.Drawing.Size(38, 21)
+        Me.staticbutton.Size = New System.Drawing.Size(62, 21)
         Me.staticbutton.TabIndex = 15
         Me.staticbutton.TabStop = False
-        Me.staticbutton.Text = "static"
-        Me.ToolTip1.SetToolTip(Me.staticbutton, "change to static configuration")
+        Me.staticbutton.Text = "make static"
+        Me.ToolTip1.SetToolTip(Me.staticbutton, "change to static ip configuration")
         Me.staticbutton.UseVisualStyleBackColor = True
+        Me.staticbutton.Visible = False
         '
         'gateway
         '
@@ -5664,51 +5644,51 @@ Public Class Form1
         '
         Me.printermenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ptrproperties, Me.ptsvrproperties, Me.ToolStripSeparator12, Me.SetPrinterAsDefaultToolStripMenuItem, Me.ToolStripSeparator20, Me.addptr, Me.DeletePrinterMenu, Me.DeleteNetworkPrinterMenu, Me.ToolStripSeparator16, Me.ptrrefresh, Me.ToolStripSeparator19})
         Me.printermenu.Name = "printermenu"
-        Me.printermenu.Size = New System.Drawing.Size(194, 182)
+        Me.printermenu.Size = New System.Drawing.Size(191, 182)
         '
         'ptrproperties
         '
         Me.ptrproperties.Enabled = False
         Me.ptrproperties.Name = "ptrproperties"
-        Me.ptrproperties.Size = New System.Drawing.Size(193, 22)
+        Me.ptrproperties.Size = New System.Drawing.Size(190, 22)
         Me.ptrproperties.Text = "printer properties..."
         '
         'ptsvrproperties
         '
         Me.ptsvrproperties.Enabled = False
         Me.ptsvrproperties.Name = "ptsvrproperties"
-        Me.ptsvrproperties.Size = New System.Drawing.Size(193, 22)
+        Me.ptsvrproperties.Size = New System.Drawing.Size(190, 22)
         Me.ptsvrproperties.Text = "print server properties"
         '
         'ToolStripSeparator12
         '
         Me.ToolStripSeparator12.Name = "ToolStripSeparator12"
-        Me.ToolStripSeparator12.Size = New System.Drawing.Size(190, 6)
+        Me.ToolStripSeparator12.Size = New System.Drawing.Size(187, 6)
         '
         'SetPrinterAsDefaultToolStripMenuItem
         '
         Me.SetPrinterAsDefaultToolStripMenuItem.Name = "SetPrinterAsDefaultToolStripMenuItem"
-        Me.SetPrinterAsDefaultToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.SetPrinterAsDefaultToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.SetPrinterAsDefaultToolStripMenuItem.Text = "set printer as default"
         Me.SetPrinterAsDefaultToolStripMenuItem.Visible = False
         '
         'ToolStripSeparator20
         '
         Me.ToolStripSeparator20.Name = "ToolStripSeparator20"
-        Me.ToolStripSeparator20.Size = New System.Drawing.Size(190, 6)
+        Me.ToolStripSeparator20.Size = New System.Drawing.Size(187, 6)
         '
         'addptr
         '
         Me.addptr.Enabled = False
         Me.addptr.Name = "addptr"
-        Me.addptr.Size = New System.Drawing.Size(193, 22)
+        Me.addptr.Size = New System.Drawing.Size(190, 22)
         Me.addptr.Text = "add local printer"
         '
         'DeletePrinterMenu
         '
         Me.DeletePrinterMenu.Enabled = False
         Me.DeletePrinterMenu.Name = "DeletePrinterMenu"
-        Me.DeletePrinterMenu.Size = New System.Drawing.Size(193, 22)
+        Me.DeletePrinterMenu.Size = New System.Drawing.Size(190, 22)
         Me.DeletePrinterMenu.Text = "delete local printer"
         '
         'DeleteNetworkPrinterMenu
@@ -5716,37 +5696,37 @@ Public Class Form1
         Me.DeleteNetworkPrinterMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ForThisUserToolStripMenuItem, Me.ForAllUsersToolStripMenuItem})
         Me.DeleteNetworkPrinterMenu.Enabled = False
         Me.DeleteNetworkPrinterMenu.Name = "DeleteNetworkPrinterMenu"
-        Me.DeleteNetworkPrinterMenu.Size = New System.Drawing.Size(193, 22)
+        Me.DeleteNetworkPrinterMenu.Size = New System.Drawing.Size(190, 22)
         Me.DeleteNetworkPrinterMenu.Text = "delete network printer"
         '
         'ForThisUserToolStripMenuItem
         '
         Me.ForThisUserToolStripMenuItem.Name = "ForThisUserToolStripMenuItem"
-        Me.ForThisUserToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.ForThisUserToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.ForThisUserToolStripMenuItem.Text = "for this user"
         '
         'ForAllUsersToolStripMenuItem
         '
         Me.ForAllUsersToolStripMenuItem.Name = "ForAllUsersToolStripMenuItem"
-        Me.ForAllUsersToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
+        Me.ForAllUsersToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.ForAllUsersToolStripMenuItem.Text = "for all users"
         '
         'ToolStripSeparator16
         '
         Me.ToolStripSeparator16.Name = "ToolStripSeparator16"
-        Me.ToolStripSeparator16.Size = New System.Drawing.Size(190, 6)
+        Me.ToolStripSeparator16.Size = New System.Drawing.Size(187, 6)
         '
         'ptrrefresh
         '
         Me.ptrrefresh.Enabled = False
         Me.ptrrefresh.Name = "ptrrefresh"
-        Me.ptrrefresh.Size = New System.Drawing.Size(193, 22)
+        Me.ptrrefresh.Size = New System.Drawing.Size(190, 22)
         Me.ptrrefresh.Text = "refresh"
         '
         'ToolStripSeparator19
         '
         Me.ToolStripSeparator19.Name = "ToolStripSeparator19"
-        Me.ToolStripSeparator19.Size = New System.Drawing.Size(190, 6)
+        Me.ToolStripSeparator19.Size = New System.Drawing.Size(187, 6)
         '
         'computername
         '
@@ -5780,65 +5760,91 @@ Public Class Form1
         '
         Me.gpoContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.script_openContainer, Me.EditToolStripMenuItem})
         Me.gpoContextMenu.Name = "gpoContextMenu"
-        Me.gpoContextMenu.Size = New System.Drawing.Size(195, 48)
+        Me.gpoContextMenu.Size = New System.Drawing.Size(198, 48)
         '
         'script_openContainer
         '
         Me.script_openContainer.Name = "script_openContainer"
-        Me.script_openContainer.Size = New System.Drawing.Size(194, 22)
+        Me.script_openContainer.Size = New System.Drawing.Size(197, 22)
         Me.script_openContainer.Text = "Open containing folder"
         '
         'EditToolStripMenuItem
         '
         Me.EditToolStripMenuItem.Name = "EditToolStripMenuItem"
-        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(194, 22)
+        Me.EditToolStripMenuItem.Size = New System.Drawing.Size(197, 22)
         Me.EditToolStripMenuItem.Text = "Edit"
         '
         'mnuProcGoogle
         '
         Me.mnuProcGoogle.Name = "mnuProcGoogle"
-        Me.mnuProcGoogle.Size = New System.Drawing.Size(136, 22)
+        Me.mnuProcGoogle.Size = New System.Drawing.Size(132, 22)
         Me.mnuProcGoogle.Text = "google..."
         '
         'ProcContextMenu
         '
-        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.procMenuHeader, Me.ToolStripSeparator24, Me.mnuProcKill, Me.mnuProcGoogle, Me.mnuCopyPath})
+        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.procMenuHeader, Me.mnuProcOwner, Me.ToolStripSeparator24, Me.mnuProcKill, Me.mnuProcGoogle, Me.mnuCopyPath})
         Me.ProcContextMenu.Name = "ProcContextMenu"
-        Me.ProcContextMenu.Size = New System.Drawing.Size(137, 98)
+        Me.ProcContextMenu.Size = New System.Drawing.Size(133, 120)
         '
         'procMenuHeader
         '
         Me.procMenuHeader.ForeColor = System.Drawing.Color.SteelBlue
         Me.procMenuHeader.Name = "procMenuHeader"
-        Me.procMenuHeader.Size = New System.Drawing.Size(136, 22)
+        Me.procMenuHeader.Size = New System.Drawing.Size(132, 22)
+        '
+        'mnuProcOwner
+        '
+        Me.mnuProcOwner.Name = "mnuProcOwner"
+        Me.mnuProcOwner.Size = New System.Drawing.Size(132, 22)
+        Me.mnuProcOwner.Text = "owner"
         '
         'ToolStripSeparator24
         '
         Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
-        Me.ToolStripSeparator24.Size = New System.Drawing.Size(133, 6)
+        Me.ToolStripSeparator24.Size = New System.Drawing.Size(129, 6)
         '
         'mnuProcKill
         '
         Me.mnuProcKill.Image = Global.CMC.My.Resources.Resources.cancel
         Me.mnuProcKill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
         Me.mnuProcKill.Name = "mnuProcKill"
-        Me.mnuProcKill.Size = New System.Drawing.Size(136, 22)
+        Me.mnuProcKill.Size = New System.Drawing.Size(132, 22)
         Me.mnuProcKill.Text = "kill process"
         '
         'mnuCopyPath
         '
         Me.mnuCopyPath.Name = "mnuCopyPath"
-        Me.mnuCopyPath.Size = New System.Drawing.Size(136, 22)
+        Me.mnuCopyPath.Size = New System.Drawing.Size(132, 22)
         Me.mnuCopyPath.Text = "copy path"
         '
-        'btnAddDomain
+        'swContextmenu
         '
-        Me.btnAddDomain.Location = New System.Drawing.Point(230, 117)
-        Me.btnAddDomain.Name = "btnAddDomain"
-        Me.btnAddDomain.Size = New System.Drawing.Size(75, 23)
-        Me.btnAddDomain.TabIndex = 33
-        Me.btnAddDomain.Text = "Add Domain"
-        Me.btnAddDomain.UseVisualStyleBackColor = True
+        Me.swContextmenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.mnuSwName, Me.ToolStripSeparator23, Me.mnuSwProps, Me.mnuSwUninst})
+        Me.swContextmenu.Name = "swContextmenu"
+        Me.swContextmenu.Size = New System.Drawing.Size(128, 76)
+        '
+        'mnuSwName
+        '
+        Me.mnuSwName.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.mnuSwName.Name = "mnuSwName"
+        Me.mnuSwName.Size = New System.Drawing.Size(127, 22)
+        '
+        'ToolStripSeparator23
+        '
+        Me.ToolStripSeparator23.Name = "ToolStripSeparator23"
+        Me.ToolStripSeparator23.Size = New System.Drawing.Size(124, 6)
+        '
+        'mnuSwProps
+        '
+        Me.mnuSwProps.Name = "mnuSwProps"
+        Me.mnuSwProps.Size = New System.Drawing.Size(127, 22)
+        Me.mnuSwProps.Text = "Properties"
+        '
+        'mnuSwUninst
+        '
+        Me.mnuSwUninst.Name = "mnuSwUninst"
+        Me.mnuSwUninst.Size = New System.Drawing.Size(127, 22)
+        Me.mnuSwUninst.Text = "Uninstall"
         '
         'Form1
         '
@@ -5901,10 +5907,12 @@ Public Class Form1
         Me.aduser.ResumeLayout(False)
         Me.adpanel.ResumeLayout(False)
         Me.adpanel.PerformLayout()
-        Me.PasswordGroupBox.ResumeLayout(False)
-        Me.PasswordGroupBox.PerformLayout()
         Me.profileGroupBox.ResumeLayout(False)
         Me.profileGroupBox.PerformLayout()
+        Me.tsGroupBox.ResumeLayout(False)
+        Me.tsGroupBox.PerformLayout()
+        Me.PasswordGroupBox.ResumeLayout(False)
+        Me.PasswordGroupBox.PerformLayout()
         Me.tools.ResumeLayout(False)
         Me.joinGroupbox.ResumeLayout(False)
         Me.joinGroupbox.PerformLayout()
@@ -5913,7 +5921,6 @@ Public Class Form1
         Me.software.ResumeLayout(False)
         Me.software.PerformLayout()
         CType(Me.sgrid, System.ComponentModel.ISupportInitialize).EndInit()
-        Me.GroupBox2.ResumeLayout(False)
         Me.processes.ResumeLayout(False)
         Me.processes.PerformLayout()
         CType(Me.processgrid, System.ComponentModel.ISupportInitialize).EndInit()
@@ -5956,13 +5963,11 @@ Public Class Form1
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
         Me.ProcContextMenu.ResumeLayout(False)
+        Me.swContextmenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    'Public Shared Sub Main()
-    '    Application.Run(New Form1)
-    'End Sub
 
 #End Region
 
@@ -6148,35 +6153,6 @@ Public Class Form1
 
 
     End Sub
-    ''' <summary>
-    ''' Function to read a value from the Registry
-    ''' </summary>
-    ''' <param name="MainKey">RegistryKey -> One of the 6 main level keys you want to write to</param>
-    ''' <param name="sKey">String -> Sub key you want to read</param>
-    ''' <param name="sKeyName">String -> Name of the value you want to read</param>
-    ''' <param name="oNameValue">Object -> The value to be read</param>
-    ''' <returns>True (Succeeded)/False (Failed)</returns>
-    ''' <remarks>Created 23 Jun 05 - Peter Forman</remarks>
-    Public Function ReadRegistryValue(ByVal MainKey As RegistryKey, ByVal sKey As String, ByVal sKeyName As String, _
-                                      ByRef oNameValue As Object) As String
-        Dim rkKey As RegistryKey
-        Dim Value As New String("")
-        Try
-            'open the given subkey
-            rkKey = MainKey.OpenSubKey(sKey, True)
-            'check to see if the subkey exists
-            If rkKey Is Nothing Then 'it doesnt exist
-                'throw an exception
-                Throw New Exception("The Registry SubKey provided doesnt exist!")
-            End If
-            'get the value
-            oNameValue = rkKey.GetValue(sKeyName)
-            Value = oNameValue.ToString
-        Catch ex As Exception
-            MessageBox.Show(ex.Message, "Error: Reading Registry Value", MessageBoxButtons.OK, MessageBoxIcon.Error)
-        End Try
-        Return Value
-    End Function
 
     ' Computername Changed Code
     Private Sub computername_TextChanged1(ByVal sender As Object, ByVal e As System.EventArgs) Handles computername.TextChanged
@@ -7270,21 +7246,6 @@ Public Class Form1
 
         hostname.Text = PC.Hostname
         domain.Text = PC.DomainName
-        'If Trim(domain.Text) = "" Then
-        '    Dim tDomain As String = Nothing
-        '    tDomain = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, _
-        '        "System\CurrentControlSet\Services\Tcpip\Parameters", "Domain")
-        '    If tDomain.Length = 0 Then
-        '        domainlabel.Text = "workgroup;"
-        '        tDomain = "unknown"
-        '    Else
-        '        domainlabel.Text = "domain;"
-        '        PC.DomainMember = True
-        '        PC.DomainRole = 1
-        '    End If
-        '    domain.Text = tDomain
-        'End If
-
 
         Dim m As ManagementObject
         Dim queryCollection As ManagementObjectCollection
@@ -7310,17 +7271,17 @@ Public Class Form1
 
                 If m("DHCPEnabled") = True Then
                     dhcp.Text = "DHCP Server : " & m("DHCPServer")
-                    dhcpbutton.Enabled = False
-                    staticbutton.Enabled = True
+                    dhcpbutton.Visible = False
+                    staticbutton.Visible = True
                 Else
                     dhcp.Text = "Static Configuration"
-                    dhcpbutton.Enabled = True
-                    staticbutton.Enabled = False
+                    dhcpbutton.Visible = True
+                    staticbutton.Visible = False
                 End If
             Catch
                 dhcp.Text = ""
-                dhcpbutton.Enabled = False
-                staticbutton.Enabled = False
+                dhcpbutton.Visible = False
+                staticbutton.Visible = False
             End Try
 
 
@@ -7645,8 +7606,8 @@ Public Class Form1
         sfxlist.Items.Clear()
         sfx_add_button.Enabled = False
         sfx_delete.Enabled = False
-        dhcpbutton.Enabled = False
-        staticbutton.Enabled = False
+        dhcpbutton.Visible = False
+        staticbutton.Visible = False
         staticdnsbutton.Enabled = False
         primdnssetbutton.Enabled = False
         dnssearchbutton.Enabled = False
@@ -8059,11 +8020,14 @@ Public Class Form1
 #Region "PROCESSES"
 
     Private Sub ProcessRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcessRefresh.Click
+        Panel2.Text = "enumerating running processes..."
+        Me.Cursor = Cursors.WaitCursor
         GetProcesses()
+        Panel2.Text = "ready"
+        Me.Cursor = Cursors.Default
     End Sub
     Private Sub GetProcesses()
 
-        Me.Cursor = Cursors.WaitCursor
         processgrid.Rows.Clear()
 
         If get_processes_by_wmi_checkbox.Checked Then
@@ -8085,14 +8049,14 @@ Public Class Form1
         processgrid.Sort(pr_name, ComponentModel.ListSortDirection.Ascending)
         processgrid.ClearSelection()
         processgrid.Focus()
-        Me.Cursor = Cursors.Default
+
 
     End Sub
     Private Sub GetProcesses_WMI()
 
         Try
             Dim queryCollection As ManagementObjectCollection
-            queryCollection = wmi.wmiQuery("SELECT Name, ProcessID, ExecutablePath, WorkingSetSize FROM Win32_Process")
+            queryCollection = wmi.wmiQuery("SELECT Description,Name, ProcessID, ExecutablePath, WorkingSetSize FROM Win32_Process")
 
             Dim path As String
             Dim m As ManagementObject
@@ -8102,7 +8066,7 @@ Public Class Form1
                 Else
                     path = m("ExecutablePath").ToString.ToLower
                 End If
-                processgrid.Rows.Add(m("Name").ToString.ToLower, m("ProcessID").ToString, path, CInt(m("WorkingSetSize")) / 1024)
+                processgrid.Rows.Add(m("Name").ToString.ToLower, m("ProcessID").ToString, path, CInt(m("WorkingSetSize")) / 1024, m("Description").ToString)
             Next
         Catch ex As Exception
             Panel2.Text = "error getting processes"
@@ -8142,6 +8106,17 @@ Public Class Form1
     Protected Friend pGrid_ID As String
     Protected Friend pGrid_Path As String
     Protected Friend pGrid_Mem As String
+    'Protected Friend pGrid_Desc As String
+
+    Private Sub processgrid_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles processgrid.DoubleClick
+        MsgBox("Process Information:" & vbCr & vbCr & _
+               "Name: " & Me.pGrid_Name & vbCr & _
+               "PId: " & Me.pGrid_ID & vbCr & _
+               "Path: " & Me.pGrid_Path & vbCr & _
+               "Memory (Kb): " & Me.pGrid_Mem & vbCr & _
+               "Owner : " & ProcessOwnerById(Me.pGrid_ID) _
+               )
+    End Sub
 
     Private Sub processgrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles processgrid.MouseDown
 
@@ -8156,10 +8131,12 @@ Public Class Form1
                 Me.pGrid_ID = processgrid(1, hti.RowIndex).Value
                 Me.pGrid_Path = processgrid(2, hti.RowIndex).Value
                 Me.pGrid_Mem = processgrid(3, hti.RowIndex).Value
+                'Me.pGrid_Desc = processgrid(4, hti.RowIndex).Value
 
                 procMenuHeader.Text = Me.pGrid_Name
                 mnuProcKill.Text = "kill process  [" & Me.pGrid_ID & "]"
                 mnuProcGoogle.Text = "google lookup"
+                mnuProcOwner.Text = "owner: " & ProcessOwnerById(Me.pGrid_ID)
 
                 If Me.pGrid_Name = "system" OrElse Me.pGrid_Name = "csrss.exe" OrElse Me.pGrid_Name = "system idle process" Then
                     mnuProcKill.Enabled = False
@@ -8177,9 +8154,44 @@ Public Class Form1
 
                 ProcContextMenu.Show(processgrid, New Point(e.X, e.Y))
             End If
+        Else
+
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                ' ensure only current item selected
+                processgrid.ClearSelection()
+                processgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.pGrid_Name = processgrid(0, hti.RowIndex).Value
+                Me.pGrid_ID = processgrid(1, hti.RowIndex).Value
+                Me.pGrid_Path = processgrid(2, hti.RowIndex).Value
+                Me.pGrid_Mem = processgrid(3, hti.RowIndex).Value
+                'Me.pGrid_Desc = processgrid(4, hti.RowIndex).Value
+
+            End If
         End If
 
     End Sub
+    Private Function ProcessOwnerById(ByVal ProcessID As Integer) As String
+        On Error Resume Next
+        Dim domain As String = ""
+        Dim user As String = ""
+
+        Dim m As ManagementObject
+        Dim queryCollection As ManagementObjectCollection
+        queryCollection = wmi.wmiQuery _
+            ("SELECT * FROM Win32_Process WHERE ProcessID = '" & ProcessID & "'")
+
+        For Each m In queryCollection
+            Dim s(1) As String
+            m.InvokeMethod("GetOwner", CType(s, Object()))
+            user = s(0)
+            domain = s(1)
+        Next
+
+        Return domain & "\" & user
+
+    End Function
 
     Private Sub mnuProcKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuProcKill.Click
         Me.Cursor = Cursors.WaitCursor
@@ -8322,7 +8334,7 @@ Public Class Form1
 
 
         Tabholder1.SelectedTab.Refresh()
-        Panel2.Text = "software enumeration complete."
+        Panel2.Text = "ready."
 
     End Sub
     Private Sub Enum_Software()
@@ -8349,7 +8361,6 @@ Public Class Form1
 
 
     End Sub
-
 
     Public Sub Software_WMI()
 
@@ -8451,23 +8462,122 @@ Public Class Form1
         Panel2.Text = totaltime
     End Sub
 
-    Private Sub sgrid_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles sgrid.SelectionChanged
-        SWLabel.Text = ""
-        swurl.Text = ""
+    Protected Friend swGrid_Name As String
+    Protected Friend swGrid_version As String
+    Protected Friend swGrid_Date As String
+    Protected Friend swGrid_Pub As String
+    Protected Friend swGrid_Location As String
+    Protected Friend swGrid_Uninst As String
+    Protected Friend swGrid_URL As String
 
-        On Error Resume Next
-        SWLabel.Text = "Version: " & sgrid(1, sgrid.CurrentCell.RowIndex).Value & vbCrLf & vbCrLf & _
-                        "Publisher:" & sgrid(2, sgrid.CurrentCell.RowIndex).Value & vbCrLf & vbCrLf & _
-                        "Date:" & sgrid(3, sgrid.CurrentCell.RowIndex).Value & vbCrLf & vbCrLf & _
-                        "Location:" & sgrid(4, sgrid.CurrentCell.RowIndex).Value & vbCrLf & vbCrLf & _
-                        "Uninstall:" & sgrid(5, sgrid.CurrentCell.RowIndex).Value
-        If Not String.IsNullOrEmpty(sgrid(6, sgrid.CurrentCell.RowIndex).Value) Then swurl.Text = sgrid(6, sgrid.CurrentCell.RowIndex).Value
+    Private Sub sgrid_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles sgrid.DoubleClick
+        OpenSoftwarePropertiesDialog()
+    End Sub
+    ''' <summary>
+    ''' Open the SwInfo Form (Dialog) and populate with selected software info.
+    ''' </summary>
+    ''' <remarks></remarks>
+    Private Sub OpenSoftwarePropertiesDialog()
+        Dim sw As New SwInfo
 
-        sgrid.Refresh()
+        ' manually position form (@ center parent) as not working.
+        Dim X, Y As Integer
+        X = Me.Location.X
+        Y = Me.Location.Y
+        sw.Location = New Drawing.Point(X + 20, Y - 10)
+        sw.StartPosition = FormStartPosition.Manual
+
+
+
+        sw.Text = swGrid_Name & " Properties"
+        sw.swHostname.Text = PC.Name
+        sw.swOS.Text = PC.OperatingSystem.Replace("(R)", "")
+        sw.swname.Text = swGrid_Name
+        sw.swdate.Text = swGrid_Date
+        sw.swpath.Text = swGrid_Location
+        sw.swpub.Text = Me.swGrid_Pub
+        sw.swuninst.Text = Me.swGrid_Uninst
+        If String.IsNullOrEmpty(Me.swGrid_URL) Then
+            sw.swURL.Text = ""
+        Else
+            sw.swURL.Text = Me.swGrid_URL
+        End If
+        sw.swver.Text = Me.swGrid_version
+        sw.swuninst.Text = Me.swGrid_Uninst
+
+        If String.IsNullOrEmpty(Me.swGrid_Uninst) Then
+            sw.btnUninstall.Enabled = False
+        Else
+            sw.btnUninstall.Enabled = True
+        End If
+
+        sw.Show()
+    End Sub
+    Private Sub mnuSwProps_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuSwProps.Click
+        OpenSoftwarePropertiesDialog()
+    End Sub
+    Private Sub mnuSwUninst_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuSwUninst.Click
+        UninstallSoftware(PC.Name, swGrid_Uninst)
+    End Sub
+    ''' <summary>
+    ''' Launch remote process to silently uninstall software.
+    ''' </summary>
+    ''' <param name="Computer"></param>
+    ''' <param name="UninstallString"></param>
+    ''' <remarks></remarks>
+    Public Sub UninstallSoftware(ByVal Computer As String, ByVal UninstallString As String)
+        'MsgBox("This feature is not yet implemented." & vbCr & _
+        '       "Please be patient (or ask nicely if" & vbCrLf & _
+        '       "you are particularly desparate).", MsgBoxStyle.Information, "Your patience is appreciated")
+
+        'Exit Sub
+
+        If UninstallString.ToLower.StartsWith("msiexec") Then
+            UninstallString = "msiexec /x " & UninstallString.Substring(UninstallString.IndexOf("{")) & " /qn"
+        End If
+
+
+        RemoteExec(Computer, UninstallString, False)
 
     End Sub
-    Private Sub swurl_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles swurl.LinkClicked
-        System.Diagnostics.Process.Start(swurl.Text)
+    Private Sub sgrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles sgrid.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                ' ensure only current item selected
+                sgrid.ClearSelection()
+                sgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.swGrid_Name = sgrid(0, hti.RowIndex).Value
+                Me.swGrid_version = sgrid(1, hti.RowIndex).Value
+                Me.swGrid_Pub = sgrid(2, hti.RowIndex).Value
+                Me.swGrid_Date = sgrid(3, hti.RowIndex).Value
+                Me.swGrid_Location = sgrid(4, hti.RowIndex).Value
+                Me.swGrid_Uninst = sgrid(5, hti.RowIndex).Value
+                Me.swGrid_URL = sgrid(6, hti.RowIndex).Value
+
+                Me.mnuSwName.Text = Me.swGrid_Name
+
+                swContextmenu.Show(sgrid, New Point(e.X, e.Y))
+            End If
+        Else
+
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+
+                sgrid.ClearSelection()
+                sgrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.swGrid_Name = sgrid(0, hti.RowIndex).Value
+                Me.swGrid_version = sgrid(1, hti.RowIndex).Value
+                Me.swGrid_Pub = sgrid(2, hti.RowIndex).Value
+                Me.swGrid_Date = sgrid(3, hti.RowIndex).Value
+                Me.swGrid_Location = sgrid(4, hti.RowIndex).Value
+                Me.swGrid_Uninst = sgrid(5, hti.RowIndex).Value
+                Me.swGrid_URL = sgrid(6, hti.RowIndex).Value
+
+            End If
+        End If
     End Sub
 
     Private Sub ShowUpdates_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShowUpdates.CheckedChanged
@@ -9480,8 +9590,9 @@ Public Class Form1
     ' front screen button
     Private Sub adbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles adbutton.Click
 
-
+        Panel2.Text = "Searching for account..."
         ClearADUser()
+        samaccountname.Text = Label_User.Text
         Tabholder1.SelectTab(aduser)
         Tabholder1.Refresh()
 
@@ -9491,347 +9602,224 @@ Public Class Form1
         ADUserProfile2(Label_User.Text)
 
         Me.Cursor = Cursors.Default
+        Panel2.Text = "ready"
 
     End Sub
     ' Go button
     Private Sub userupdate_button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles userupdate_button.Click
-
         Me.Cursor = Cursors.WaitCursor
-
+        Panel2.Text = "Searching for account..."
         Dim tempADuser As String = Trim(samaccountname.Text)
         ClearADUser()
         samaccountname.Text = tempADuser
         ADUserProfile2(tempADuser)
-        'aduserprofile(tempADuser)
-
+        Panel2.Text = "ready"
         Me.Cursor = Cursors.Default
-
     End Sub
 
+    ''' <summary>
+    ''' Determine the default naming context for the domain.
+    ''' </summary>
+    ''' <returns>aDSPath / empty string</returns>
+    ''' <remarks></remarks>
+    Private Function GetLocalRootLDAP() As String
 
-    Private Sub Button5_Click()
-
-        Dim strUser As String = samaccountname.Text
         Dim strLDAPPath As String = String.Empty
+        Dim rootDSE As DirectoryEntry = _
+            New DirectoryEntry("LDAP://RootDSE", Nothing, Nothing,AuthenticationTypes.Secure)
 
-        ClearADUser()
-        samaccountname.Text = strUser
+        Dim bindTest As Object
+        Dim domainPath As String = String.Empty
+        Try
+            bindTest = rootDSE.NativeObject
+            domainPath = rootDSE.Properties("defaultNamingContext")(0)
+            strLDAPPath = "LDAP://" & domainPath
+        Catch ex As System.Runtime.InteropServices.COMException
+            strLDAPPath = ""
+        End Try
+        Return strLDAPPath
 
-        If samaccountname.Text.Contains("\") Then
-            Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
-            strUser = samaccountname.Text.Substring(samaccountname.Text.LastIndexOf("\") + 1)
-            Select Case strNTdomain.ToLower
-                Case "district"
-                    strLDAPPath = "LDAP://ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
-                Case "chcs_nd"
-                    strLDAPPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
-                Case "tsha"
-                    strLDAPPath = "LDAP://OHDOM01/ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
-                Case "forman"
-                    strLDAPPath = "LDAP://server/dc=home,DC=peterforman,DC=net"
-            End Select
-        Else
-            ' determine local dns domain
-            Dim rootDSE As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE", _
-                                                                Nothing, _
-                                                                Nothing, _
-                                                                AuthenticationTypes.Secure)
-            Dim bindTest As Object
-            Dim domainPath As String = String.Empty
-            Try
-                bindTest = rootDSE.NativeObject
-                domainPath = rootDSE.Properties("defaultNamingContext")(0)
-                strLDAPPath = "LDAP://" & domainPath
-                strUser = samaccountname.Text
-            Catch ex As System.Runtime.InteropServices.COMException
-                MsgBox("unable to determine default naming context for domain")
-            End Try
-        End If
-
-        If strLDAPPath = String.Empty Then
-            MsgBox("Unknown domain.")
-            Exit Sub
-        End If
-
-
-        Dim strUserDN As String = String.Empty
-        Dim strDisplayName As String = String.Empty
-        'Dim strName As String = String.Empty
-        Dim strMail As String = String.Empty
-        Dim strTel As String = String.Empty
-        Dim strOffice As String = String.Empty
-        Dim strOrg As String = String.Empty
-        Dim strProfPath As String = String.Empty
-        Dim strHomeDir As String = String.Empty
-        Dim strHomeDrv As String = String.Empty
-        Dim strTSProf As String = String.Empty
-        Dim strTSHomeDir As String = String.Empty
-        Dim strTSHomeDrv As String = String.Empty
-
-        'Dim strDefaultDomain As String = NewMainform.objRootLDAP.Properties.Item("DefaultNamingContext").Value.ToString
-        Using DirEntry As New DirectoryEntry(strLDAPPath)
-            Using DirSearch As New DirectorySearcher(DirEntry)
-
-                With DirSearch
-                    .PropertiesToLoad.Add("distinguishedName")
-                    '.PropertiesToLoad.Add("sAMAccountName")
-                    .PropertiesToLoad.Add("displayName")
-                    .PropertiesToLoad.Add("mail")
-                    .PropertiesToLoad.Add("telephoneNumber")
-                    .PropertiesToLoad.Add("physicalDeliveryOfficeName")
-                    .PropertiesToLoad.Add("company")
-                    .PropertiesToLoad.Add("profilePath")
-                    .PropertiesToLoad.Add("homeDirectory")
-                    .PropertiesToLoad.Add("homeDrive")
-                    .PropertiesToLoad.Add("terminalServicesProfilePath")
-                    .PropertiesToLoad.Add("terminalServicesHomeDirectory")
-                    .PropertiesToLoad.Add("terminalServicesHomeDrive")
-                    .Filter = "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))"
-                End With
-
-                If DirSearch.FindAll.Count = 0 Then
-                    MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Else
-                    For Each sResultSet As SearchResult In DirSearch.FindAll()
-                        strUserDN = Me.GetProperty(sResultSet, "DistinguishedName")
-                        strDisplayName = Me.GetProperty(sResultSet, "displayName")
-                        'strName = Me.GetProperty(sResultSet, "sAMAccountName")
-                        strMail = Me.GetProperty(sResultSet, "mail")
-                        strTel = Me.GetProperty(sResultSet, "telephoneNumber")
-                        strOffice = Me.GetProperty(sResultSet, "physicalDeliveryOfficeName")
-                        strOrg = Me.GetProperty(sResultSet, "company")
-                        strProfPath = Me.GetProperty(sResultSet, "profilePath")
-                        strHomeDir = Me.GetProperty(sResultSet, "homeDirectory")
-                        strHomeDrv = Me.GetProperty(sResultSet, "homeDrive")
-                    Next
-                End If
-            End Using
-        End Using
-
-        FQDN.Text = strUserDN
-        'samaccountname.Text = strName
-        mail.Text = strMail
-        telephonenumber.Text = strTel
-        profilepath.Text = strProfPath
-        homedirectory.Text = strHomeDir
-        homedrive.Text = strHomeDrv
-        txtOffice.Text = strOffice
-        txtCompany.Text = strOrg
-
-        ' ts properties cannot be enumerated above...
-        Dim objUser As Object = GetObject("LDAP://" & strUserDN)
-        TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
-        TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
-        TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
-
-        Dim strgroup As String
-        Dim objgroup As Object
-        For Each strgroup In objUser.memberOf
-            objgroup = GetObject("LDAP://" & strgroup)
-            adGroupsListBox.Items.Add(objgroup.CN)
-        Next
-
-
-    End Sub
-
+    End Function
     Private Sub ADUserProfile2(ByVal strUser As String)
 
-
-        Dim currentdomain As String = Me.cmcUser.userdomain.ToLower
-        Dim strLDAPPath As String = String.Empty
-
-        Dim username As String = Nothing
+        Dim LDAPPath As String = String.Empty
+        Dim username As String = Nothing ' or DOMAIN\username
         Dim password As String = Nothing
 
-        ClearADUser()
-        samaccountname.Text = strUser
+        ' Identify the target users Netbios domain and username
+        Dim sUsername As String
+        Dim sUserNTDomain As String
 
-
-
-        ' if targetuser includes domain [that is not local pc] then
-        '     if targetusers domain = my domain then
-        '         if custom entry exists for my domain then
-        '             use custom entry
-        '         else
-        '             determine local LDAP root
-        '         end if
-        '     else (not on my domain)
-        '         if custom entry exists for my domain then
-        '             use custom LDAP entry
-        '         else
-        '             if want to add domain
-        '                 use custom LDAP entry
-        '             else
-        '                 exit  =====>>
-        '             end if
-        '         end if
-        '     end if
-        ' Else  (targetuser has no specified doamin)
-        '     determine local LDAP root
-        ' End If
-
-
-
-        If samaccountname.Text.Contains("\") Then
-            Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
-            strUser = samaccountname.Text.Substring(samaccountname.Text.LastIndexOf("\") + 1)
-            MsgBox(cmcUser.userdomain.ToLower)
-            If cmcUser.userdomain.ToLower = strNTdomain.ToLower Then
-
-            End If
-
-            ' "district"
-            '           strLDAPPath = "LDAP://LHDOM01/ou=people,dc=xderwentsharedservices,dc=nhs,dc=uk"
-            ' "chcs_nd"
-            '           strLDAPPath = "LDAP://NED/dc=nderby,dc=nhs,dc=uk"
-            ' "tsha"
-            '           strLDAPPath = "LDAP://OHDOM01/ou=nhs east midlands,dc=xtsha,dc=nhs,dc=uk"
-
-
-            ' check for custom domain entry
-            Dim cd As New CustomDomainInfo
-            If cd.Found(strNTdomain) Then
-                strLDAPPath = cd.DSPath
+        If strUser.Contains("\") Then
+            sUsername = strUser.Substring(strUser.LastIndexOf("\") + 1)
+            sUserNTDomain = strUser.Substring(0, strUser.LastIndexOf("\"))
+        Else ' assume on my domain...
+            sUsername = strUser
+            If cmcUser.User_ADMember Then
+                sUserNTDomain = cmcUser.userdomain
             Else
-                cd = Nothing
+                MsgBox("Unable to determine the target users domain." & vbCr & vbCr & _
+                       "Please enter the username in the form" & vbCr & _
+                       "  <domain>\<username>", _
+                       MsgBoxStyle.Information + MsgBoxStyle.OkOnly, "Unknown Domain")
+                Exit Sub
+            End If
+        End If
 
-                If MsgBox("Unable to communicate with domain [" & strNTdomain & "]" & vbCr & vbCr & _
-                  "Do you want to enter connection information?", MsgBoxStyle.YesNoCancel, "CMC - Unknown Domain") = vbYes Then
-                    Dim fmDom As New FmDomains
-                    fmDom.ShowDialog()
-                    If fmDom.DialogResult = Windows.Forms.DialogResult.OK Then
 
-                        cd = New CustomDomainInfo
-                        If cd.Found(strNTdomain) Then
-                            strLDAPPath = cd.DSPath
+        ' Get aDSPath for domain
+        Dim cd As New CustomDomainInfo
+
+        '     if user on my domain
+        If sUserNTDomain.ToLower = cmcUser.userdomain.ToLower Then
+            ' check for custom entry
+            If cd.Found(sUserNTDomain) Then
+                LDAPPath = cd.DSPath
+                If Not String.IsNullOrEmpty(cd.Username) Then
+                    username = cd.NTDomainName & "\" & cd.Username
+                    password = cd.Password
+                End If
+            Else
+                Dim ldap As String = GetLocalRootLDAP()
+                If Not String.IsNullOrEmpty(ldap) Then
+                    LDAPPath = ldap
+                Else
+                    ' could not determine local aDSPath - request custom info...
+                    If MsgBox("Unable to communicate with domain [" & sUserNTDomain & "]" & vbCr & vbCr & _
+                                      "Do you want to enter connection information?", MsgBoxStyle.YesNoCancel, "CMC - Unknown Domain") = vbYes Then
+                        Dim di As New AddDomainInfo
+                        di.ShowDialog()
+                        If di.DialogResult = Windows.Forms.DialogResult.OK Then
+                            cd = New CustomDomainInfo
+                            If cd.Found(sUserNTDomain) Then
+                                LDAPPath = cd.DSPath
+                                If Not String.IsNullOrEmpty(cd.Username) Then
+                                    username = cd.NTDomainName & "\" & cd.Username
+                                    password = cd.Password
+                                End If
+                            End If
+                        Else
+                            Exit Sub
                         End If
-
                     Else
                         Exit Sub
                     End If
                 End If
-
             End If
+        Else ' not on my domain...
+            If cd.Found(sUserNTDomain) Then
+                LDAPPath = cd.DSPath
+                If Not String.IsNullOrEmpty(cd.Username) Then
+                    username = cd.NTDomainName & "\" & cd.Username
+                    password = cd.Password
+                End If
+            Else
+                cd = Nothing
+                If MsgBox("Unable to communicate with domain [" & sUserNTDomain & "]" & vbCr & vbCr & _
+                  "Do you want to enter connection information?", MsgBoxStyle.YesNoCancel, "CMC - Unknown Domain") = vbYes Then
+                    Dim di As New AddDomainInfo
+                    di.ShowDialog()
+                    If di.DialogResult = Windows.Forms.DialogResult.OK Then
+                        cd = New CustomDomainInfo
+                        If cd.Found(sUserNTDomain) Then
+                            LDAPPath = cd.DSPath
+                            If Not String.IsNullOrEmpty(cd.Username) Then
+                                username = cd.NTDomainName & "\" & cd.Username
+                                password = cd.Password
+                            End If
+                        End If
+                    Else
+                        Exit Sub
+                    End If
+                End If
+            End If
+        End If
 
-            'End Select
+        Panel2.Text = "searching " & LDAPPath & "..."
+        GetUserProperties(sUsername, LDAPPath, username, password)
+        Panel2.Text = "ready"
 
-        Else
-            ' determine local dns domain
-            Dim rootDSE As DirectoryEntry = New DirectoryEntry("LDAP://RootDSE", _
-                                                                username, _
-                                                                password, _
-                                                                AuthenticationTypes.Secure)
+    End Sub
 
-            Dim bindTest As Object
-            Dim domainPath As String = String.Empty
+    ''' <summary>
+    ''' Retrieves AD user account properties from selected domain and
+    ''' populates AD User tab with results.
+    ''' </summary>
+    ''' <param name="sAMAccountName"></param>
+    ''' <param name="LDAPPath"></param>
+    ''' <param name="adusername"></param>
+    ''' <param name="adpassword"></param>
+    ''' <remarks></remarks>
+    Private Sub GetUserProperties(ByVal sAMAccountName As String, ByVal LDAPPath As String, ByVal adusername As String, ByVal adpassword As String)
+
+        Dim ad As New AD
+        Using DirSearch As New DirectorySearcher(ad.GetDirectoryEntry(LDAPPath, adusername, adpassword, AuthenticationTypes.Secure))
+
+            With DirSearch
+                .PropertiesToLoad.Add("distinguishedName")
+                .PropertiesToLoad.Add("mail")
+                .PropertiesToLoad.Add("telephoneNumber")
+                .PropertiesToLoad.Add("physicalDeliveryOfficeName")
+                .PropertiesToLoad.Add("company")
+                .PropertiesToLoad.Add("profilePath")
+                .PropertiesToLoad.Add("homeDirectory")
+                .PropertiesToLoad.Add("homeDrive")
+                .PropertiesToLoad.Add("terminalServicesProfilePath")
+                .PropertiesToLoad.Add("terminalServicesHomeDirectory")
+                .PropertiesToLoad.Add("terminalServicesHomeDrive")
+                .PropertiesToLoad.Add("memberOf")
+
+                .Filter = "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & sAMAccountName & "))"
+            End With
+
+            Dim RecordCount As Integer = 0
             Try
-                bindTest = rootDSE.NativeObject
-                domainPath = rootDSE.Properties("defaultNamingContext")(0)
-                strLDAPPath = "LDAP://" & domainPath
-                strUser = samaccountname.Text
-            Catch ex As System.Runtime.InteropServices.COMException
-                MsgBox("unable to determine default naming context for domain")
-                Exit Sub
-            End Try
-        End If
-
-
-
-        If strLDAPPath = String.Empty Then
-            MsgBox("Unknown domain.")
-            Exit Sub
-        Else
-            Panel2.Text = "searching " & strLDAPPath & "..."
-        End If
-
-
-        Dim strUserDN As String = String.Empty
-        Dim strDisplayName As String = String.Empty
-        'Dim strName As String = String.Empty
-        Dim strMail As String = String.Empty
-        Dim strTel As String = String.Empty
-        Dim strOffice As String = String.Empty
-        Dim strOrg As String = String.Empty
-        Dim strProfPath As String = String.Empty
-        Dim strHomeDir As String = String.Empty
-        Dim strHomeDrv As String = String.Empty
-        Dim strTSProf As String = String.Empty
-        Dim strTSHomeDir As String = String.Empty
-        Dim strTSHomeDrv As String = String.Empty
-
-        'Dim strDefaultDomain As String = NewMainform.objRootLDAP.Properties.Item("DefaultNamingContext").Value.ToString
-        Using DirEntry As New DirectoryEntry(strLDAPPath)
-
-            Using DirSearch As New DirectorySearcher(DirEntry)
-
-                With DirSearch
-                    .PropertiesToLoad.Add("distinguishedName")
-                    '.PropertiesToLoad.Add("sAMAccountName")
-                    .PropertiesToLoad.Add("displayName")
-                    .PropertiesToLoad.Add("mail")
-                    .PropertiesToLoad.Add("telephoneNumber")
-                    .PropertiesToLoad.Add("physicalDeliveryOfficeName")
-                    .PropertiesToLoad.Add("company")
-                    .PropertiesToLoad.Add("profilePath")
-                    .PropertiesToLoad.Add("homeDirectory")
-                    .PropertiesToLoad.Add("homeDrive")
-                    .PropertiesToLoad.Add("terminalServicesProfilePath")
-                    .PropertiesToLoad.Add("terminalServicesHomeDirectory")
-                    .PropertiesToLoad.Add("terminalServicesHomeDrive")
-                    .Filter = "(&(objectClass=user)(objectCategory=person)(sAMAccountName=" & strUser & "))"
-                End With
-
+                RecordCount = DirSearch.FindAll.Count
                 If DirSearch.FindAll.Count = 0 Then
                     MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
-                Else
-                    For Each sResultSet As SearchResult In DirSearch.FindAll()
-                        strUserDN = Me.GetProperty(sResultSet, "DistinguishedName")
-                        strDisplayName = Me.GetProperty(sResultSet, "displayName")
-                        'strName = Me.GetProperty(sResultSet, "sAMAccountName")
-                        strMail = Me.GetProperty(sResultSet, "mail")
-                        strTel = Me.GetProperty(sResultSet, "telephoneNumber")
-                        strOffice = Me.GetProperty(sResultSet, "physicalDeliveryOfficeName")
-                        strOrg = Me.GetProperty(sResultSet, "company")
-                        strProfPath = Me.GetProperty(sResultSet, "profilePath")
-                        strHomeDir = Me.GetProperty(sResultSet, "homeDirectory")
-                        strHomeDrv = Me.GetProperty(sResultSet, "homeDrive")
-                    Next
+                    Exit Sub
                 End If
-            End Using
-        End Using
+            Catch ex As System.Runtime.InteropServices.COMException
+                'If ex.Message = "The specified domain either does not exist or could not be contacted." Then
+                MsgBox(ex.Message)
+                Exit Sub
+                'End If
+            End Try
 
-        FQDN.Text = strUserDN
-        'samaccountname.Text = strName
-        mail.Text = strMail
-        telephonenumber.Text = strTel
-        profilepath.Text = strProfPath
-        homedirectory.Text = strHomeDir
-        homedrive.Text = strHomeDrv
-        txtOffice.Text = strOffice
-        txtCompany.Text = strOrg
+            For Each sResultSet As SearchResult In DirSearch.FindAll()
+                FQDN.Text = Me.GetProperty(sResultSet, "DistinguishedName")
+                mail.Text = Me.GetProperty(sResultSet, "mail")
+                telephonenumber.Text = Me.GetProperty(sResultSet, "telephoneNumber")
+                txtOffice.Text = Me.GetProperty(sResultSet, "physicalDeliveryOfficeName")
+                txtCompany.Text = Me.GetProperty(sResultSet, "company")
+                profilepath.Text = Me.GetProperty(sResultSet, "profilePath")
+                homedirectory.Text = Me.GetProperty(sResultSet, "homeDirectory")
+                homedrive.Text = Me.GetProperty(sResultSet, "homeDrive")
+
+                Dim GroupCount As Integer = sResultSet.Properties("memberOf").Count
+                For i As Integer = 0 To GroupCount - 1
+                    Dim dn As String = CType(sResultSet.Properties("memberOf")(i), String)
+                    Dim dnStripped As String = dn.Substring(3, dn.IndexOf(",") - 3)
+                    adGroupsListBox.Items.Add(dnStripped)
+                Next
+            Next
+
+        End Using
 
         Me.Refresh()
         Panel2.Text = "enumerating terminal services settings"
         ' ts properties cannot be enumerated above...
         Try
-            Dim objUser As Object = GetObject("LDAP://" & strUserDN)
+            Dim objUser As Object = GetObject("LDAP://" & FQDN.Text)
             TerminalServicesProfilePath.Text = objUser.TerminalServicesProfilePath
             TerminalServicesHomeDirectory.Text = objUser.TerminalServicesHomeDirectory
             TerminalServicesHomeDrive.Text = objUser.TerminalServicesHomeDrive
+            tsGroupBox.Enabled = True
         Catch ex As Exception
-            MsgBox("Unable to enumerate terminal" & vbCr & "services information for " & strUser & vbCr & vbCr & ex.Message)
+            'MsgBox("Unable to enumerate terminal" & vbCr & "services information for " & strUser & vbCr & vbCr & ex.Message)
+            tsGroupBox.Enabled = False
             btn_EnumGroups.Enabled = False
         End Try
-
-
-        'Dim strgroup As String
-        'Dim objgroup As Object
-        'For Each strgroup In objUser.memberOf
-        '    objgroup = GetObject("LDAP://" & strgroup)
-        '    adGroupsListBox.Items.Add(objgroup.CN)
-        'Next
-
-        Panel2.Text = "ready"
     End Sub
     Public Function GetProperty(ByVal srSearchResult As SearchResult, ByVal strPropertyName As String) As String
         Dim retval As String
@@ -9877,8 +9865,10 @@ Public Class Form1
     Private Sub FQDN_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FQDN.TextChanged
         If FQDN.Text.ToLower.Contains("cn=") Then
             btn_EnumGroups.Enabled = True
+            tsGroupBox.Enabled = True
         Else
             btn_EnumGroups.Enabled = False
+            tsGroupBox.Enabled = False
         End If
     End Sub
 
@@ -10010,7 +10000,7 @@ Public Class Form1
 
     End Sub
 
-    ' TO DO: add as users and computers shortcut (dsc.msc /domain='domainname')
+    ' users and computers shortcut (dsc.msc /domain='domainname')
     Private Sub btn_dsa_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_dsa.Click
         If samaccountname.Text.Contains("\") Then
             Dim strNTdomain As String = samaccountname.Text.Substring(0, samaccountname.Text.LastIndexOf("\"))
@@ -10038,6 +10028,9 @@ Public Class Form1
     Protected Friend script As String
 
     Private Sub btn_gpo_policies_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_policies.Click
+
+        Me.Cursor = Cursors.WaitCursor
+        Panel2.Text = "Enumerating applied group policies..."
 
         GPOGridType = "policy"
 
@@ -10072,8 +10065,13 @@ Public Class Form1
             End If
         End If
 
+        Me.Cursor = Cursors.Default
+        Panel2.Text = "ready"
     End Sub
     Private Sub btn_startupscripts_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_startupscripts.Click
+
+        Panel2.Text = "Enumerating scripts applied from GPOs..."
+        Me.Cursor = Cursors.WaitCursor
 
         GPOGridType = "script"
         GPODataGrid.Rows.Clear()
@@ -10152,6 +10150,8 @@ Public Class Form1
             End If
         End If
 
+        Me.Cursor = Cursors.Default
+        Panel2.Text = "ready"
     End Sub
 
     Private Sub EnumGPOPolicies(ByVal sBaseKey As String)
@@ -10373,20 +10373,47 @@ Public Class Form1
     End Sub
     Private Sub GpoRsop()
         On Error Resume Next
+
+        Dim bValid As Boolean = True
+        If Not PC.DomainMember Then
+            bValid = False
+        ElseIf PC.DomainName.ToLower <> cmcUser.dnsdomain.ToLower Then
+            bValid = False
+        End If
+
+        If Not bValid Then
+            MsgBox("Resultant set of policy reports can only" & vbCr & _
+                "generated for computers on the same domain as this computer.", _
+                MsgBoxStyle.Information, "RSOP")
+            Exit Sub
+        End If
+
         Dim GPMC As Object = CreateObject("GPMgmt.GPM")
         If Err.Number = 0 Then
+            Dim path As String = Environment.ExpandEnvironmentVariables("%appdata%") & "\cmc\rsop" & PC.Name & ".html"
             Dim Constants As Object = GPMC.GetConstants()
-            Dim RSOP As Object = GPMC.GetRSOP(Constants.RSOPModeLogging, "", 0)
+            Dim RSOP As Object = GPMC.GetRSOP(Constants.RSOPModeLogging, "server", 1)
             RSOP.LoggingComputer = PC.Name
             RSOP.LoggingUser = PC.CurrentUser
             RSOP.CreateQueryResults()
-            RSOP.GenerateReportToFile(Constants.ReportHTML, "C:\RSOP_" & PC.Name & ".html")
+            RSOP.GenerateReportToFile(Constants.ReportHTML, Path)
             Dim p As New ProcessStartInfo
+
+            Dim count As Integer = 0
+            Do While File.Exists(Path) = False
+                Shell("cmd /c ping -n 1 127.0.0.1", AppWinStyle.Hide, True)
+                count = count + 1
+                If count >= 5 Then Exit Do
+            Loop
+
             p.FileName = "iexplore.exe"
-            p.Arguments = "C:\RSOP_" & PC.Name & ".html"
+            p.Arguments = path
             Process.Start(p)
         Else
-            If MsgBox("To run an RSOP report, you need the Microsoft Group" & vbCr & "Policy Management snap-in to be installed." & vbCr & vbCr & "Do you want to open the download page now?", vbYesNo + MsgBoxStyle.Exclamation, "Download Required Component") = vbYes Then
+            If MsgBox("To create an RSOP report, you need the Microsoft Group" & vbCr & _
+                      "Policy Management snap-in to be installed." & vbCr & vbCr & _
+                      "Do you want to open the download page now?", _
+                      vbYesNo + MsgBoxStyle.Exclamation, "Download Required Component") = vbYes Then
                 Dim psi As New ProcessStartInfo()
                 With psi
                     .FileName = "iexplore"
@@ -11409,6 +11436,57 @@ Public Class Form1
     Private Sub aboutOK_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles aboutOK.Click
         Tabholder1.SelectTab(os)
     End Sub
+
+    Private Sub DomainCombo_Opened(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DomainCombo.DropDown
+        DomainCombo.Items.Clear()
+        DomainCombo.Items.Add(" (Add New...)")
+        For i As Integer = 0 To 9
+            Dim valuename As String = "Domain" & CStr(i)
+            Dim rk As String = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue(valuename, Nothing)
+            If Not rk Is Nothing Then
+                Dim dominfo() As String = Split(rk, ";")
+                DomainCombo.Items.Add(dominfo(0))
+            End If
+        Next
+    End Sub
+    Private Sub DomainCombo_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DomainCombo.SelectedIndexChanged
+        If DomainCombo.Text = " (Add New...)" Then
+            Dim di As New AddDomainInfo
+            di.ShowDialog()
+
+            Me.DomainCombo.Items.Clear()
+            Me.DomainCombo.Items.AddRange(New Object() {" (edit custom domains)"})
+            Me.DomainCombo.SelectedIndex = 0
+
+        Else
+            For i As Integer = 0 To 9
+                Dim valuename As String = "Domain" & CStr(i)
+                Dim rk As String = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue(valuename, Nothing)
+                If Not rk Is Nothing Then
+                    Dim dominfo() As String = Split(rk, ";")
+                    If dominfo(0).ToUpper = DomainCombo.Text.ToUpper Then
+
+                        Dim di As New AddDomainInfo
+                        di.OK_Button.Text = "Save"
+
+                        Dim user As String = dominfo(3)
+                        If Not String.IsNullOrEmpty(user) Then user = EncryptText.DecryptText(user)
+                        Dim pass As String = dominfo(4)
+                        If Not String.IsNullOrEmpty(pass) Then pass = EncryptText.DecryptText(pass)
+
+                        di.txtDomain.Text = dominfo(0)
+                        di.txtDNS.Text = dominfo(1)
+                        di.txtDC.Text = dominfo(2)
+                        di.txtUser.Text = user
+                        di.txtPass.Text = pass
+                        di.ShowDialog()
+
+                    End If
+                End If
+            Next
+        End If
+    End Sub
+
 #End Region
 
 
@@ -11798,7 +11876,7 @@ Public Class Form1
     Private Sub SharedFoldersToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SharedFoldersToolStripMenuItem.Click
         MMC_Snap_in("fsmgmt")
     End Sub
-    Private Sub RSOPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RSOPReportToolStripMenuItem.Click
+    Private Sub RSOPReportToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         GpoRsop()
     End Sub
     Private Sub MSinfoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MSinfoToolStripMenuItem.Click
@@ -13080,6 +13158,7 @@ Public Class Form1
                 Me.AcceptButton = Nothing
             Case "options"
                 Me.AcceptButton = Save_Button
+                Me.DomainCombo.SelectedIndex = 0
             Case "about"
                 Me.AcceptButton = aboutOK
             Case "test"
@@ -13114,7 +13193,6 @@ Public Class Form1
             GPUpdateToolStripMenuItem.Enabled = False
             BothComputerAndUserToolStripMenuItem.Enabled = False
             OnlyUserToolStripMenuItem.Enabled = False
-            RSOPReportToolStripMenuItem.Enabled = False
             NetSendMenu.Enabled = False
             PrintersMenuItem.Enabled = False
             StartUpProgramsMenuItem.Enabled = False
@@ -13158,8 +13236,6 @@ Public Class Form1
             Me.pGrid_Path = ""
 
             ' Software tab
-            swurl.Text = ""
-            SWLabel.Text = ""
             sgrid.Rows.Clear()
 
 
@@ -13237,7 +13313,6 @@ Public Class Form1
         MicrosoftMMCToolStripMenuItem.Enabled = True
         RemoteControlToolStripMenuItem.Enabled = True
         TelnetMenu.Enabled = True
-        RSOPReportToolStripMenuItem.Enabled = True
         WindRegMenuItem.Enabled = True
         RemRegMenuItem.Enabled = True
         NetSendMenu.Enabled = True
@@ -13994,16 +14069,6 @@ Public Class Form1
     End Sub
 
 
-
-    Private Sub btnDomains_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnDomains.Click
-        Dim domainform As New FmDomains
-        domainform.ShowDialog()
-    End Sub
-
-    Private Sub btnAddDomain_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddDomain.Click
-        Dim di As New AddDomainInfo
-        di.ShowDialog()
-    End Sub
 End Class
 
 
