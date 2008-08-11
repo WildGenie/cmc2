@@ -6569,7 +6569,7 @@ Public Class Form1
             If lUser.Contains("\") Then
                 PC.LastLogon = lUser
             Else
-                If String.IsNullOrEmpty(lDomain) = False AndAlso String.IsNullOrEmpty(lUser) Then
+                If String.IsNullOrEmpty(lDomain) = False AndAlso String.IsNullOrEmpty(lUser) = False Then
                     PC.LastLogon = lDomain & "\" & lUser
                     'Else
                     '    PC.LastLogon = "unknown"
@@ -6671,7 +6671,7 @@ Public Class Form1
     End Sub
     Private Sub ie_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles ie.MouseLeave
         If PC.Name = Nothing OrElse PC.IEProxy = "" Then Exit Sub
-        If ielabel.Text = "IE Version" Then
+        If ielabel.Text = "ie version" Then
             ie.Text = PC.IEVersion
         End If
     End Sub
@@ -9686,7 +9686,7 @@ Public Class Form1
                 Else
                     ' could not determine local aDSPath - request custom info...
                     If MsgBox("Unable to communicate with domain [" & sUserNTDomain & "]" & vbCr & vbCr & _
-                                      "Do you want to enter connection information?", MsgBoxStyle.YesNoCancel, "CMC - Unknown Domain") = vbYes Then
+                                      "Do you want to enter connection information?", MsgBoxStyle.YesNo, "CMC - Unknown Domain") = vbYes Then
                         Dim di As New AddDomainInfo
                         di.ShowDialog()
                         If di.DialogResult = Windows.Forms.DialogResult.OK Then
@@ -9716,7 +9716,7 @@ Public Class Form1
             Else
                 cd = Nothing
                 If MsgBox("Unable to communicate with domain [" & sUserNTDomain & "]" & vbCr & vbCr & _
-                  "Do you want to enter connection information?", MsgBoxStyle.YesNoCancel, "CMC - Unknown Domain") = vbYes Then
+                  "Do you want to enter connection information?", MsgBoxStyle.YesNo, "CMC - Unknown Domain") = vbYes Then
                     Dim di As New AddDomainInfo
                     di.ShowDialog()
                     If di.DialogResult = Windows.Forms.DialogResult.OK Then
