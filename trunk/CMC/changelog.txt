@@ -6,6 +6,10 @@ ToDo
 ====================================================================================================
 currrentuser\Software\Sysinternals\PsExec EulaAccepted DWORD 1
 
+11/08/2008
+feature:  service datagrid simplified + dbl click (or contextmenu\properties) opens service
+          properties dialog box with startup mode and control buttons.
+
 10/08/2008
 feature:  Added CustomDomainInfo class and form. Add and edit custom domains from options dropdown.
 feature:  Dbl clicking process gives additional (owner) information.
