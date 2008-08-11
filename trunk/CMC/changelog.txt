@@ -4,6 +4,7 @@ ToDo
 ' enum subkeys error when no subkeys - write test value?
 
 ====================================================================================================
+currrentuser\Software\Sysinternals\PsExec EulaAccepted DWORD 1
 
 10/08/2008
 feature:  Added CustomDomainInfo class and form. Add and edit custom domains from options dropdown.
