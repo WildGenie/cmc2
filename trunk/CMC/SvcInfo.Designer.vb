@@ -26,12 +26,11 @@ Partial Class SvcInfo
         Me.OK_Button = New System.Windows.Forms.Button
         Me.Cancel_Button = New System.Windows.Forms.Button
         Me.gbGeneral = New System.Windows.Forms.GroupBox
+        Me.lblSvcAccount = New System.Windows.Forms.Label
+        Me.Label7 = New System.Windows.Forms.Label
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.txtDescription = New System.Windows.Forms.TextBox
         Me.svcStartupCombo = New System.Windows.Forms.ComboBox
-        Me.lblSvcPath = New System.Windows.Forms.Label
-        Me.lblSvcCaption = New System.Windows.Forms.Label
-        Me.lblSvcName = New System.Windows.Forms.Label
         Me.Label5 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.Label3 = New System.Windows.Forms.Label
@@ -44,8 +43,9 @@ Partial Class SvcInfo
         Me.btnSvcStart = New System.Windows.Forms.Button
         Me.lblSvcStatus = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.lblSvcAccount = New System.Windows.Forms.Label
+        Me.txtSvcName = New System.Windows.Forms.TextBox
+        Me.txtSvcCaption = New System.Windows.Forms.TextBox
+        Me.txtSvcPath = New System.Windows.Forms.TextBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbGeneral.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -88,14 +88,14 @@ Partial Class SvcInfo
         '
         'gbGeneral
         '
+        Me.gbGeneral.Controls.Add(Me.txtSvcPath)
+        Me.gbGeneral.Controls.Add(Me.txtSvcCaption)
+        Me.gbGeneral.Controls.Add(Me.txtSvcName)
         Me.gbGeneral.Controls.Add(Me.lblSvcAccount)
         Me.gbGeneral.Controls.Add(Me.Label7)
         Me.gbGeneral.Controls.Add(Me.PictureBox1)
         Me.gbGeneral.Controls.Add(Me.txtDescription)
         Me.gbGeneral.Controls.Add(Me.svcStartupCombo)
-        Me.gbGeneral.Controls.Add(Me.lblSvcPath)
-        Me.gbGeneral.Controls.Add(Me.lblSvcCaption)
-        Me.gbGeneral.Controls.Add(Me.lblSvcName)
         Me.gbGeneral.Controls.Add(Me.Label5)
         Me.gbGeneral.Controls.Add(Me.Label4)
         Me.gbGeneral.Controls.Add(Me.Label3)
@@ -107,6 +107,25 @@ Partial Class SvcInfo
         Me.gbGeneral.TabIndex = 1
         Me.gbGeneral.TabStop = False
         Me.gbGeneral.Text = "General"
+        '
+        'lblSvcAccount
+        '
+        Me.lblSvcAccount.AutoSize = True
+        Me.lblSvcAccount.Location = New System.Drawing.Point(95, 218)
+        Me.lblSvcAccount.Name = "lblSvcAccount"
+        Me.lblSvcAccount.Size = New System.Drawing.Size(76, 13)
+        Me.lblSvcAccount.TabIndex = 11
+        Me.lblSvcAccount.Text = "lblSvcAccount"
+        '
+        'Label7
+        '
+        Me.Label7.AutoSize = True
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label7.Location = New System.Drawing.Point(13, 218)
+        Me.Label7.Name = "Label7"
+        Me.Label7.Size = New System.Drawing.Size(47, 13)
+        Me.Label7.TabIndex = 10
+        Me.Label7.Text = "Account"
         '
         'PictureBox1
         '
@@ -130,43 +149,16 @@ Partial Class SvcInfo
         '
         Me.svcStartupCombo.FormattingEnabled = True
         Me.svcStartupCombo.Items.AddRange(New Object() {"Automatic", "Manual", "Disabled"})
-        Me.svcStartupCombo.Location = New System.Drawing.Point(98, 245)
+        Me.svcStartupCombo.Location = New System.Drawing.Point(98, 247)
         Me.svcStartupCombo.Name = "svcStartupCombo"
         Me.svcStartupCombo.Size = New System.Drawing.Size(203, 21)
         Me.svcStartupCombo.TabIndex = 8
-        '
-        'lblSvcPath
-        '
-        Me.lblSvcPath.AutoSize = True
-        Me.lblSvcPath.Location = New System.Drawing.Point(19, 184)
-        Me.lblSvcPath.Name = "lblSvcPath"
-        Me.lblSvcPath.Size = New System.Drawing.Size(58, 13)
-        Me.lblSvcPath.TabIndex = 7
-        Me.lblSvcPath.Text = "lblSvcPath"
-        '
-        'lblSvcCaption
-        '
-        Me.lblSvcCaption.AutoSize = True
-        Me.lblSvcCaption.Location = New System.Drawing.Point(95, 62)
-        Me.lblSvcCaption.Name = "lblSvcCaption"
-        Me.lblSvcCaption.Size = New System.Drawing.Size(72, 13)
-        Me.lblSvcCaption.TabIndex = 6
-        Me.lblSvcCaption.Text = "lblSvcCaption"
-        '
-        'lblSvcName
-        '
-        Me.lblSvcName.AutoSize = True
-        Me.lblSvcName.Location = New System.Drawing.Point(95, 31)
-        Me.lblSvcName.Name = "lblSvcName"
-        Me.lblSvcName.Size = New System.Drawing.Size(64, 13)
-        Me.lblSvcName.TabIndex = 5
-        Me.lblSvcName.Text = "lblSvcName"
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label5.Location = New System.Drawing.Point(13, 248)
+        Me.Label5.Location = New System.Drawing.Point(13, 250)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(68, 13)
         Me.Label5.TabIndex = 4
@@ -188,9 +180,9 @@ Partial Class SvcInfo
         Me.Label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label3.Location = New System.Drawing.Point(13, 94)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(60, 13)
+        Me.Label3.Size = New System.Drawing.Size(63, 13)
         Me.Label3.TabIndex = 2
-        Me.Label3.Text = "Description"
+        Me.Label3.Text = "Description:"
         '
         'Label2
         '
@@ -198,9 +190,9 @@ Partial Class SvcInfo
         Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label2.Location = New System.Drawing.Point(13, 62)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(72, 13)
+        Me.Label2.Size = New System.Drawing.Size(75, 13)
         Me.Label2.TabIndex = 1
-        Me.Label2.Text = "Display Name"
+        Me.Label2.Text = "Display Name:"
         '
         'Label1
         '
@@ -208,9 +200,9 @@ Partial Class SvcInfo
         Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label1.Location = New System.Drawing.Point(13, 31)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(74, 13)
+        Me.Label1.Size = New System.Drawing.Size(77, 13)
         Me.Label1.TabIndex = 0
-        Me.Label1.Text = "Service Name"
+        Me.Label1.Text = "Service Name:"
         '
         'gbSvcStatus
         '
@@ -278,28 +270,33 @@ Partial Class SvcInfo
         Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
         Me.Label6.Location = New System.Drawing.Point(16, 28)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(76, 13)
+        Me.Label6.Size = New System.Drawing.Size(79, 13)
         Me.Label6.TabIndex = 0
-        Me.Label6.Text = "Service Status"
+        Me.Label6.Text = "Service Status:"
         '
-        'Label7
+        'txtSvcName
         '
-        Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.Label7.Location = New System.Drawing.Point(13, 213)
-        Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(47, 13)
-        Me.Label7.TabIndex = 10
-        Me.Label7.Text = "Account"
+        Me.txtSvcName.Location = New System.Drawing.Point(98, 28)
+        Me.txtSvcName.Name = "txtSvcName"
+        Me.txtSvcName.ReadOnly = True
+        Me.txtSvcName.Size = New System.Drawing.Size(225, 20)
+        Me.txtSvcName.TabIndex = 12
         '
-        'lblSvcAccount
+        'txtSvcCaption
         '
-        Me.lblSvcAccount.AutoSize = True
-        Me.lblSvcAccount.Location = New System.Drawing.Point(95, 213)
-        Me.lblSvcAccount.Name = "lblSvcAccount"
-        Me.lblSvcAccount.Size = New System.Drawing.Size(76, 13)
-        Me.lblSvcAccount.TabIndex = 11
-        Me.lblSvcAccount.Text = "lblSvcAccount"
+        Me.txtSvcCaption.Location = New System.Drawing.Point(98, 59)
+        Me.txtSvcCaption.Name = "txtSvcCaption"
+        Me.txtSvcCaption.ReadOnly = True
+        Me.txtSvcCaption.Size = New System.Drawing.Size(260, 20)
+        Me.txtSvcCaption.TabIndex = 13
+        '
+        'txtSvcPath
+        '
+        Me.txtSvcPath.Location = New System.Drawing.Point(16, 185)
+        Me.txtSvcPath.Name = "txtSvcPath"
+        Me.txtSvcPath.ReadOnly = True
+        Me.txtSvcPath.Size = New System.Drawing.Size(342, 20)
+        Me.txtSvcPath.TabIndex = 14
         '
         'SvcInfo
         '
@@ -332,15 +329,12 @@ Partial Class SvcInfo
     Friend WithEvents Cancel_Button As System.Windows.Forms.Button
     Friend WithEvents gbGeneral As System.Windows.Forms.GroupBox
     Friend WithEvents gbSvcStatus As System.Windows.Forms.GroupBox
-    Friend WithEvents lblSvcCaption As System.Windows.Forms.Label
-    Friend WithEvents lblSvcName As System.Windows.Forms.Label
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents Label3 As System.Windows.Forms.Label
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents svcStartupCombo As System.Windows.Forms.ComboBox
-    Friend WithEvents lblSvcPath As System.Windows.Forms.Label
     Friend WithEvents txtDescription As System.Windows.Forms.TextBox
     Friend WithEvents btnSvcResume As System.Windows.Forms.Button
     Friend WithEvents btnSvcPause As System.Windows.Forms.Button
@@ -351,5 +345,8 @@ Partial Class SvcInfo
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
     Friend WithEvents lblSvcAccount As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
+    Friend WithEvents txtSvcPath As System.Windows.Forms.TextBox
+    Friend WithEvents txtSvcCaption As System.Windows.Forms.TextBox
+    Friend WithEvents txtSvcName As System.Windows.Forms.TextBox
 
 End Class
