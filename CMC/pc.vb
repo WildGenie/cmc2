@@ -87,8 +87,12 @@ Public Class pc
                         Return False
                     Case 3
                         Return True
-                    Case Else
+                    Case 4
                         Return True
+                    Case 5
+                        Return True
+                    Case Else
+                        Return False
                 End Select
             Else
                 Return Nothing
