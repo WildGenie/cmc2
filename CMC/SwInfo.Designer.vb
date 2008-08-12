@@ -66,7 +66,6 @@ Partial Class SwInfo
         '
         'swOS
         '
-        Me.swOS.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swOS.Location = New System.Drawing.Point(122, 54)
         Me.swOS.Name = "swOS"
         Me.swOS.ReadOnly = True
@@ -75,7 +74,7 @@ Partial Class SwInfo
         '
         'swHostname
         '
-        Me.swHostname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.swHostname.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper
         Me.swHostname.Location = New System.Drawing.Point(122, 19)
         Me.swHostname.Name = "swHostname"
         Me.swHostname.ReadOnly = True
@@ -127,7 +126,6 @@ Partial Class SwInfo
         '
         'swuninst
         '
-        Me.swuninst.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swuninst.Location = New System.Drawing.Point(122, 18)
         Me.swuninst.Multiline = True
         Me.swuninst.Name = "swuninst"
@@ -179,7 +177,6 @@ Partial Class SwInfo
         '
         'swpath
         '
-        Me.swpath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swpath.Location = New System.Drawing.Point(122, 153)
         Me.swpath.Name = "swpath"
         Me.swpath.ReadOnly = True
@@ -188,7 +185,6 @@ Partial Class SwInfo
         '
         'swdate
         '
-        Me.swdate.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swdate.Location = New System.Drawing.Point(122, 121)
         Me.swdate.Name = "swdate"
         Me.swdate.ReadOnly = True
@@ -197,7 +193,6 @@ Partial Class SwInfo
         '
         'swver
         '
-        Me.swver.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swver.Location = New System.Drawing.Point(122, 89)
         Me.swver.Name = "swver"
         Me.swver.ReadOnly = True
@@ -206,7 +201,6 @@ Partial Class SwInfo
         '
         'swpub
         '
-        Me.swpub.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swpub.Location = New System.Drawing.Point(122, 57)
         Me.swpub.Name = "swpub"
         Me.swpub.ReadOnly = True
@@ -215,7 +209,6 @@ Partial Class SwInfo
         '
         'swname
         '
-        Me.swname.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.swname.Location = New System.Drawing.Point(122, 25)
         Me.swname.Name = "swname"
         Me.swname.ReadOnly = True

@@ -19,7 +19,7 @@ Public Class SvcInfo
 
         ' set start mode if changed...
         If Not InitialStartupMode = svcStartupCombo.Text Then
-            Form1.Service_ChangeStartMode(Me.lblSvcName.Text, svcStartupCombo.Text)
+            Form1.Service_ChangeStartMode(Me.txtSvcName.Text, svcStartupCombo.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
         End If
 
@@ -38,11 +38,11 @@ Public Class SvcInfo
     End Sub
 
     Private Sub btnSvcStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSvcStart.Click
-        Form1.StartService(Me.lblSvcName.Text)
+        Form1.StartService(Me.txtSvcName.Text)
         Dim count As Integer
         Me.Cursor = Cursors.AppStarting
         Do While Me.lblSvcStatus.Text <> "Running"
-            Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.lblSvcName.Text)
+            Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
             System.Threading.Thread.Sleep(1000)
             If count >= 15 Then Exit Do
@@ -52,11 +52,11 @@ Public Class SvcInfo
     End Sub
 
     Private Sub btnSvcStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSvcStop.Click
-        Form1.StopService(Me.lblSvcName.Text)
+        Form1.StopService(Me.txtSvcName.Text)
         Dim count As Integer
         Me.Cursor = Cursors.AppStarting
         Do While Me.lblSvcStatus.Text <> "Stopped"
-            Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.lblSvcName.Text)
+            Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
             System.Threading.Thread.Sleep(1000)
             If count >= 10 Then Exit Do
