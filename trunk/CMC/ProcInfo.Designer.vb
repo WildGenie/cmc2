@@ -54,9 +54,11 @@ Partial Class ProcInfo
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbProcResources.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -105,7 +107,7 @@ Partial Class ProcInfo
         '
         Me.lblNoProcess.AutoSize = True
         Me.lblNoProcess.ForeColor = System.Drawing.Color.Red
-        Me.lblNoProcess.Location = New System.Drawing.Point(109, 18)
+        Me.lblNoProcess.Location = New System.Drawing.Point(100, 16)
         Me.lblNoProcess.Name = "lblNoProcess"
         Me.lblNoProcess.Size = New System.Drawing.Size(45, 13)
         Me.lblNoProcess.TabIndex = 9
@@ -192,6 +194,7 @@ Partial Class ProcInfo
         '
         'gbProcResources
         '
+        Me.gbProcResources.Controls.Add(Me.PictureBox1)
         Me.gbProcResources.Controls.Add(Me.txtPeakWorkingSet)
         Me.gbProcResources.Controls.Add(Me.txtWorkingSet)
         Me.gbProcResources.Controls.Add(Me.Label13)
@@ -350,6 +353,16 @@ Partial Class ProcInfo
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.stats_info
+        Me.PictureBox1.Location = New System.Drawing.Point(7, 127)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(38, 37)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 19
+        Me.PictureBox1.TabStop = False
+        '
         'ProcInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -373,6 +386,7 @@ Partial Class ProcInfo
         Me.GroupBox1.PerformLayout()
         Me.gbProcResources.ResumeLayout(False)
         Me.gbProcResources.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -407,5 +421,6 @@ Partial Class ProcInfo
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents lblNoProcess As System.Windows.Forms.Label
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 
 End Class
