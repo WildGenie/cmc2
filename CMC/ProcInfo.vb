@@ -1,52 +1,64 @@
 Imports System.Windows.Forms
+Imports System.management
 
 Public Class ProcInfo
 
-    Dim pstat As New System.Threading.Thread(AddressOf Me.Caller_GetProcessStats)
-    Dim Timer1 As New Timer
-
-    Private Sub OK_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OK_Button.Click
-        pstat.Join()
-        Me.DialogResult = System.Windows.Forms.DialogResult.OK
-        Me.Close()
-    End Sub
-
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
-        pstat.Join()
+        Timer1.Stop()
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
 
     Private Sub ProcInfo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ' get the owner of the process
         Me.txtProcOwner.Text = Form1.ProcessOwnerById(Me.txtProcPid.Text)
 
-        pstat.Start()
+        ' time first run of process stat enumeration
+        Dim start, totaltime As Double
+        start = Microsoft.VisualBasic.DateAndTime.Timer
+
+        GetProcessStats()
+
+        totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 4)
+
+        ' determine refresh rate according to initial time taken to process
+        If totaltime < 0.3 Then
+            Timer1.Interval = 1000
+        ElseIf totaltime < 0.75 Then
+            Timer1.Interval = 2000
+        Else
+            Timer1.Interval = totaltime * 3
+        End If
+        Me.lblTick.Text = "Refresh Rate: " & (Timer1.Interval / 1000).ToString & " s"
+
+        Timer1.Start()
     End Sub
 
-    Private Sub Caller_GetProcessStats()
+    Private Sub timer1_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
+        GetProcessStats()
+    End Sub
 
-        '    Dim timersetting As Integer = 5000
-        '    Timer1.Interval = timersetting
-        '    Timer1.Start()
+    Private Sub GetProcessStats()
+
+        Try
+            Dim queryCollection As ManagementObjectCollection
+            queryCollection = Form1.wmi.wmiQuery _
+               ("SELECT HandleCount, WorkingSetSize, PeakWorkingSetSize,PageFileUsage,UserModeTime, KernelModeTime FROM Win32_Process WHERE ProcessID='" & CInt(Me.txtProcPid.Text) & "'")
+            Dim m As ManagementObject
+            For Each m In queryCollection
+                Me.txtHandleCount.Text = CStr(m("HandleCount"))
+                Me.txtWorkingSet.Text = CStr(CInt(m("WorkingSetSize") / 1024)) ' b?  
+                Me.txtPeakWorkingSet.Text = CStr(m("PeakWorkingSetSize") / 1024) ' K
+                Me.txtPageFile.Text = CStr(m("PageFileUsage")) ' K
+                Me.txtCPUTime.Text = CStr(CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000)) ' 100ns unit - to convert to mins / 600,000,000
+            Next
+        Catch ex As Exception
+            MsgBox("An error occurred retrieving process statistics" & vbCr & ex.Message)
+        End Try
 
     End Sub
 
-
-    'Private Sub Timer1_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-
-
-    '    Me.txtProcPid.Text = Now.ToLongTimeString.ToString()
-
-
-    'End Sub
-
-    'Private Sub GetProcessStats()
-    '    If bScanning = False Then
-    '        'RunPingTest()
-    '    Else
-    '        MsgBox("scan already in progress", MsgBoxStyle.SystemModal + MsgBoxStyle.OkOnly, "online alert")
-    '    End If
-    'End Sub
 End Class
 
 
