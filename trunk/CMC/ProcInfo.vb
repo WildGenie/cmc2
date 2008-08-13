@@ -28,7 +28,7 @@ Public Class ProcInfo
         ElseIf totaltime < 0.75 Then
             Timer1.Interval = 2000
         Else
-            Timer1.Interval = totaltime * 3
+            Timer1.Interval = totaltime * 3000
         End If
         Me.lblTick.Text = "Refresh Rate: " & (Timer1.Interval / 1000).ToString & " s"
 
@@ -46,15 +46,35 @@ Public Class ProcInfo
             queryCollection = Form1.wmi.wmiQuery _
                ("SELECT HandleCount, WorkingSetSize, PeakWorkingSetSize,PageFileUsage,UserModeTime, KernelModeTime FROM Win32_Process WHERE ProcessID='" & CInt(Me.txtProcPid.Text) & "'")
             Dim m As ManagementObject
-            For Each m In queryCollection
-                Me.txtHandleCount.Text = CStr(m("HandleCount"))
-                Me.txtWorkingSet.Text = CStr(CInt(m("WorkingSetSize") / 1024)) ' b?  
-                Me.txtPeakWorkingSet.Text = CStr(m("PeakWorkingSetSize") / 1024) ' K
-                Me.txtPageFile.Text = CStr(m("PageFileUsage")) ' K
-                Me.txtCPUTime.Text = CStr(CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000)) ' 100ns unit - to convert to mins / 600,000,000
-            Next
+            If queryCollection.Count = 0 Then
+                Timer1.Stop()
+                Timer1.Enabled = False
+                Me.txtHandleCount.Text = ""
+                Me.txtWorkingSet.Text = ""
+                Me.txtPeakWorkingSet.Text = ""
+                Me.txtPageFile.Text = ""
+                Me.txtCPUTime.Text = ""
+                Me.lblNoProcess.Text = "Process Not Found"
+                Me.lblNoProcess.Visible = True
+            Else
+                For Each m In queryCollection
+                    Me.txtHandleCount.Text = CStr(m("HandleCount"))
+                    Me.txtWorkingSet.Text = CStr(CInt(m("WorkingSetSize") / 1024)) ' b?  
+                    Me.txtPeakWorkingSet.Text = CStr(m("PeakWorkingSetSize") / 1024) ' K
+                    Me.txtPageFile.Text = CStr(m("PageFileUsage") / 1024) ' K
+                    Me.txtCPUTime.Text = CStr(CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000)) ' 100ns unit - to convert to mins / 600,000,000
+                Next
+            End If
         Catch ex As Exception
-            MsgBox("An error occurred retrieving process statistics" & vbCr & ex.Message)
+            Timer1.Stop()
+            Timer1.Enabled = False
+            Me.txtHandleCount.Text = ""
+            Me.txtWorkingSet.Text = ""
+            Me.txtPeakWorkingSet.Text = ""
+            Me.txtPageFile.Text = ""
+            Me.txtCPUTime.Text = ""
+            Me.lblNoProcess.Text = "Error retrieving process information"
+            Me.lblNoProcess.Visible = True
         End Try
 
     End Sub

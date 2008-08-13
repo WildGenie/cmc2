@@ -539,9 +539,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle7 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle8 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle9 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -3367,22 +3367,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle7.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle7.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle7.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle7.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle7
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle8
         Me.sgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -3695,8 +3695,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle9.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle9
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -5758,7 +5758,7 @@ Public Class Form1
         '
         'computername
         '
-        Me.computername.BackColor = System.Drawing.Color.PaleGoldenrod
+        Me.computername.BackColor = System.Drawing.Color.LightSkyBlue
         Me.computername.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.computername.ForeColor = System.Drawing.Color.Black
         Me.computername.Location = New System.Drawing.Point(8, 37)
@@ -6145,7 +6145,7 @@ Public Class Form1
             ' App regkey does not exist, so create key.
             Registry.CurrentUser.OpenSubKey("Software", True).CreateSubKey("Forman")
             ' create default history size now as this is the only time it will be set
-            Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("MaxHistoryItems", 40, RegistryValueKind.DWord)
+            Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("HistorySize", 40, RegistryValueKind.DWord)
         End If
 
 
@@ -6200,8 +6200,8 @@ Public Class Form1
             altusername_TextBox.Enabled = True
             altPassword_TextBox.Enabled = True
             altPassword_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular)
-            altusername_TextBox.BackColor = Color.AliceBlue
-            altPassword_TextBox.BackColor = Color.AliceBlue
+            altusername_TextBox.BackColor = Color.LightSkyBlue 'Color.PaleGoldenrod
+            altPassword_TextBox.BackColor = Color.LightSkyBlue 'Color.PaleGoldenrod
             altusername_TextBox.Text = SettingAltUser.Text
             altPassword_TextBox.Text = SettingAltPass.Text
             If GO_Button.Text <> "" Then GO_Button.Enabled = True
@@ -6452,7 +6452,14 @@ Public Class Form1
         '===============  Finished  ======================================
 
         totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 4)
+
         AddToHistory(PC.Name)
+        Me.SaveHistory()
+        ' re-select new entry & refresh
+        computername.Text = PC.Name
+        computername.Refresh()
+        GO_Button.Focus()
+
         WriteLog(PC.Name & " - connection time: " & totaltime.ToString)
         GO_Button.Enabled = True
         SaveToolStripMenuItem.Enabled = True
@@ -6714,7 +6721,7 @@ Public Class Form1
         If PC.CurrentUserSID = "" Then
             'WriteLog(PC.Name & " - NO SID - Calling GetSID")
             PC.CurrentUserSID = GetSID(PC.CurrentUser)
-            ielabel.Text = "IE Version"
+            ielabel.Text = "ie version"
             proxyset.Visible = False
             Exit Sub
         End If
@@ -13616,7 +13623,7 @@ Public Class Form1
     Private Sub CMC_CLOSE()
 
         ' Save History Items
-        SaveHistory()
+        'SaveHistory()
 
         ' Release mapped ipc share
         Shell("net use \\" & PC.Name & "\ipc$ /delete /y", 0, False)
@@ -13697,7 +13704,7 @@ Public Class Form1
     End Sub
     Private Sub SaveHistory()
 
-        Dim limit As Integer = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("MaxHistoryItems", 40)
+        Dim limit As Integer = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("HistorySize", 40)
 
         Dim i As Integer = 0
         Dim historyList As New ArrayList
@@ -13731,13 +13738,7 @@ Public Class Form1
         ' reload autocomplete source
         computername.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.CustomSource
 
-        ' re-select new entry & refresh
-        computername.Text = strComputer
-        computername.Refresh()
-        GO_Button.Focus()
-
     End Sub
-
 
 #End Region
 

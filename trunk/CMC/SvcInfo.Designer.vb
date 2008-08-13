@@ -26,6 +26,9 @@ Partial Class SvcInfo
         Me.OK_Button = New System.Windows.Forms.Button
         Me.Cancel_Button = New System.Windows.Forms.Button
         Me.gbGeneral = New System.Windows.Forms.GroupBox
+        Me.txtSvcPath = New System.Windows.Forms.TextBox
+        Me.txtSvcCaption = New System.Windows.Forms.TextBox
+        Me.txtSvcName = New System.Windows.Forms.TextBox
         Me.lblSvcAccount = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
@@ -43,9 +46,6 @@ Partial Class SvcInfo
         Me.btnSvcStart = New System.Windows.Forms.Button
         Me.lblSvcStatus = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
-        Me.txtSvcName = New System.Windows.Forms.TextBox
-        Me.txtSvcCaption = New System.Windows.Forms.TextBox
-        Me.txtSvcPath = New System.Windows.Forms.TextBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbGeneral.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -108,14 +108,38 @@ Partial Class SvcInfo
         Me.gbGeneral.TabStop = False
         Me.gbGeneral.Text = "General"
         '
+        'txtSvcPath
+        '
+        Me.txtSvcPath.Location = New System.Drawing.Point(16, 185)
+        Me.txtSvcPath.Name = "txtSvcPath"
+        Me.txtSvcPath.ReadOnly = True
+        Me.txtSvcPath.Size = New System.Drawing.Size(342, 20)
+        Me.txtSvcPath.TabIndex = 14
+        '
+        'txtSvcCaption
+        '
+        Me.txtSvcCaption.Location = New System.Drawing.Point(98, 59)
+        Me.txtSvcCaption.Name = "txtSvcCaption"
+        Me.txtSvcCaption.ReadOnly = True
+        Me.txtSvcCaption.Size = New System.Drawing.Size(260, 20)
+        Me.txtSvcCaption.TabIndex = 13
+        '
+        'txtSvcName
+        '
+        Me.txtSvcName.Location = New System.Drawing.Point(98, 28)
+        Me.txtSvcName.Name = "txtSvcName"
+        Me.txtSvcName.ReadOnly = True
+        Me.txtSvcName.Size = New System.Drawing.Size(225, 20)
+        Me.txtSvcName.TabIndex = 12
+        '
         'lblSvcAccount
         '
         Me.lblSvcAccount.AutoSize = True
         Me.lblSvcAccount.Location = New System.Drawing.Point(95, 218)
         Me.lblSvcAccount.Name = "lblSvcAccount"
-        Me.lblSvcAccount.Size = New System.Drawing.Size(76, 13)
+        Me.lblSvcAccount.Size = New System.Drawing.Size(10, 13)
         Me.lblSvcAccount.TabIndex = 11
-        Me.lblSvcAccount.Text = "lblSvcAccount"
+        Me.lblSvcAccount.Text = " "
         '
         'Label7
         '
@@ -273,30 +297,6 @@ Partial Class SvcInfo
         Me.Label6.Size = New System.Drawing.Size(79, 13)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Service Status:"
-        '
-        'txtSvcName
-        '
-        Me.txtSvcName.Location = New System.Drawing.Point(98, 28)
-        Me.txtSvcName.Name = "txtSvcName"
-        Me.txtSvcName.ReadOnly = True
-        Me.txtSvcName.Size = New System.Drawing.Size(225, 20)
-        Me.txtSvcName.TabIndex = 12
-        '
-        'txtSvcCaption
-        '
-        Me.txtSvcCaption.Location = New System.Drawing.Point(98, 59)
-        Me.txtSvcCaption.Name = "txtSvcCaption"
-        Me.txtSvcCaption.ReadOnly = True
-        Me.txtSvcCaption.Size = New System.Drawing.Size(260, 20)
-        Me.txtSvcCaption.TabIndex = 13
-        '
-        'txtSvcPath
-        '
-        Me.txtSvcPath.Location = New System.Drawing.Point(16, 185)
-        Me.txtSvcPath.Name = "txtSvcPath"
-        Me.txtSvcPath.ReadOnly = True
-        Me.txtSvcPath.Size = New System.Drawing.Size(342, 20)
-        Me.txtSvcPath.TabIndex = 14
         '
         'SvcInfo
         '
