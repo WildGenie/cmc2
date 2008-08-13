@@ -145,7 +145,6 @@ Partial Class SwInfo
         '
         'GroupBox2
         '
-        Me.GroupBox2.Controls.Add(Me.swURL)
         Me.GroupBox2.Controls.Add(Me.swpath)
         Me.GroupBox2.Controls.Add(Me.swdate)
         Me.GroupBox2.Controls.Add(Me.swver)
@@ -157,6 +156,7 @@ Partial Class SwInfo
         Me.GroupBox2.Controls.Add(Me.Label11)
         Me.GroupBox2.Controls.Add(Me.Label12)
         Me.GroupBox2.Controls.Add(Me.Label13)
+        Me.GroupBox2.Controls.Add(Me.swURL)
         Me.GroupBox2.ForeColor = System.Drawing.Color.RoyalBlue
         Me.GroupBox2.Location = New System.Drawing.Point(16, 133)
         Me.GroupBox2.Name = "GroupBox2"
@@ -281,9 +281,9 @@ Partial Class SwInfo
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(359, 456)
+        Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbUninst)
         Me.Controls.Add(Me.GroupBox1)
-        Me.Controls.Add(Me.GroupBox2)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.Name = "SwInfo"

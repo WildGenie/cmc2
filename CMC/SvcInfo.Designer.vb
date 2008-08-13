@@ -284,9 +284,9 @@ Partial Class SvcInfo
         Me.lblSvcStatus.AutoSize = True
         Me.lblSvcStatus.Location = New System.Drawing.Point(99, 28)
         Me.lblSvcStatus.Name = "lblSvcStatus"
-        Me.lblSvcStatus.Size = New System.Drawing.Size(66, 13)
+        Me.lblSvcStatus.Size = New System.Drawing.Size(10, 13)
         Me.lblSvcStatus.TabIndex = 1
-        Me.lblSvcStatus.Text = "lblSvcStatus"
+        Me.lblSvcStatus.Text = " "
         '
         'Label6
         '
@@ -300,7 +300,7 @@ Partial Class SvcInfo
         '
         'SvcInfo
         '
-        Me.AcceptButton = Me.OK_Button
+        Me.AcceptButton = Me.Cancel_Button
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button

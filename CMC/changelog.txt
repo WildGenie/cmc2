@@ -6,6 +6,12 @@ ToDo
 ====================================================================================================
 currrentuser\Software\Sysinternals\PsExec EulaAccepted DWORD 1
 
+13/08/2008
+feature:  Process information now displayed on new dialog form. Includes continuously updated 
+          memory, cpu and handle count information.
+bugfix:   sheduling process from process tab now includes fix for daylight saving.
+change:   all datagrids now selected in lightskyblue (prev khaki).
+
 11/08/2008
 feature:  service datagrid simplified + dbl click (or contextmenu\properties) opens service
           properties dialog box with startup mode and control buttons.

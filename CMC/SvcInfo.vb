@@ -59,7 +59,7 @@ Public Class SvcInfo
             Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
             System.Threading.Thread.Sleep(1000)
-            If count >= 10 Then Exit Do
+            If count >= 15 Then Exit Do
         Loop
         ButtonsEnable()
         Me.Cursor = Cursors.Default

@@ -58,11 +58,11 @@ Public Class ProcInfo
                 Me.lblNoProcess.Visible = True
             Else
                 For Each m In queryCollection
-                    Me.txtHandleCount.Text = CStr(m("HandleCount"))
-                    Me.txtWorkingSet.Text = CStr(CInt(m("WorkingSetSize") / 1024)) ' b?  
-                    Me.txtPeakWorkingSet.Text = CStr(m("PeakWorkingSetSize") / 1024) ' K
-                    Me.txtPageFile.Text = CStr(m("PageFileUsage") / 1024) ' K
-                    Me.txtCPUTime.Text = CStr(CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000)) ' 100ns unit - to convert to mins / 600,000,000
+                    Me.txtHandleCount.Text = m("HandleCount")
+                    Me.txtWorkingSet.Text = CInt(m("WorkingSetSize") / 1024)  ' b?  
+                    Me.txtPeakWorkingSet.Text = m("PeakWorkingSetSize") ' K
+                    Me.txtPageFile.Text = m("PageFileUsage") ' K
+                    Me.txtCPUTime.Text = CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000) ' 100ns unit - to convert to mins / 600,000,000
                 Next
             End If
         Catch ex As Exception
