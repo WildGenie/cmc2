@@ -67,6 +67,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property _stop() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("stop", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property application_add() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("application_add", resourceCulture)
@@ -305,9 +312,23 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property pause() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("pause", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property picture_key() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("picture_key", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property play() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("play", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

@@ -7680,10 +7680,15 @@ Public Class Form1
     Dim sGridPath As String
     Dim sGridAccount As String
 
-    Public Sub GetSVClist()
-
+    Private Sub refreshsvc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles refreshsvc.Click
         svc_datagrid.Rows.Clear()
+        svc_datagrid.Cursor = Cursors.AppStarting
         Panel2.Text = "getting services..."
+        GetSVClist()
+        svc_datagrid.Cursor = Cursors.Default
+        Panel2.Text = "ready"
+    End Sub
+    Public Sub GetSVClist()
 
         Try
             Dim queryCollection As ManagementObjectCollection
@@ -7709,8 +7714,6 @@ Public Class Form1
         Catch ex As Exception
             MsgBox("An error occurred: " & ex.Message)
         End Try
-
-        Panel2.Text = "ready"
 
     End Sub
     Public Sub UpdateSelectedService(ByVal Row As Integer)
@@ -7779,9 +7782,6 @@ Public Class Form1
         Return serviceState
 
     End Function
-    Private Sub refreshsvc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles refreshsvc.Click
-        GetSVClist()
-    End Sub
 
     ' Service Controls
     Private Overloads Sub StopService()
@@ -8273,11 +8273,13 @@ Public Class Form1
     Protected Friend pGrid_Path As String
 
     Private Sub ProcessRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcessRefresh.Click
-        Panel2.Text = "enumerating running processes..."
-        Me.Cursor = Cursors.WaitCursor
+        Me.Panel2.Text = "enumerating running processes..."
+        Me.processgrid.Cursor = Cursors.AppStarting
+
         GetProcesses()
-        Panel2.Text = "ready"
-        Me.Cursor = Cursors.Default
+
+        Me.Panel2.Text = "ready"
+        Me.processgrid.Cursor = Cursors.Default
     End Sub
     Private Sub GetProcesses()
 
@@ -8595,20 +8597,13 @@ Public Class Form1
 
     Private Sub software_button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles software_button.Click
 
+        sgrid.Rows.Clear()
         Panel2.Text = "getting installed software..."
         Me.sgrid.Cursor = Cursors.AppStarting
 
-        'Dim swThread As New System.Threading.Thread(AddressOf Enum_Software)
-        'swThread.Start()
-        Enum_Software()
-        'Me.sgrid.PerformLayout()
-
-        'Dim Software_worker As BackgroundWorker = New BackgroundWorker()
-        'AddHandler Software_worker.DoWork, New DoWorkEventHandler(AddressOf Enum_Software)
-        'AddHandler Software_worker.RunWorkerCompleted, New RunWorkerCompletedEventHandler(AddressOf Software_Worker_RunWorkerCompleted)
-        ''Me.background_Workers += 1
-        'Software_worker.RunWorkerAsync()
-
+        Dim swThread As New System.Threading.Thread(AddressOf Enum_Software)
+        swThread.Start()
+        'Enum_Software()
 
         Tabholder1.SelectedTab.Refresh()
         Me.sgrid.Cursor = Cursors.Default
@@ -8645,8 +8640,6 @@ Public Class Form1
         Dim swstart, totaltime As Double
         swstart = Microsoft.VisualBasic.DateAndTime.Timer
 
-        sgrid.Rows.Clear()
-
         Dim strkeypath, strvaluename, strsubpath As String
         Dim strvalue As String = Nothing
         Dim objsubkey, objDictSoft As Object
@@ -8662,7 +8655,6 @@ Public Class Form1
 
 
         On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
 
         strkeypath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
         arrSubkeys = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath)
@@ -8677,7 +8669,7 @@ Public Class Form1
             uninstallstring = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "QuietUninstallString")
             urlinfoabout = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "URLInfoAbout")
 
-            If Not String.IsNullOrEmpty(strvalue) Then 'If Trim(strvalue) <> "" And Software_ListBox.Items.Contains(strvalue) = False Then
+            If Not String.IsNullOrEmpty(strvalue) Then
                 sgrid.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallstring, urlinfoabout)
             End If
         Next
@@ -8685,15 +8677,12 @@ Public Class Form1
         sgrid.Sort(swname, ComponentModel.ListSortDirection.Ascending)
 
         totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - swstart, 4)
-        Me.Cursor = Cursors.Default
         Panel2.Text = totaltime
     End Sub
     Private Sub Software_API()
 
         Dim swstart, totaltime As Double
         swstart = Microsoft.VisualBasic.DateAndTime.Timer
-
-        sgrid.Rows.Clear()
 
         Dim strkeypath, strsubpath As String
         Dim strvalue As String = Nothing
@@ -8709,7 +8698,6 @@ Public Class Form1
         Dim strsoftstream As String
 
         On Error Resume Next
-        Me.Cursor = Cursors.WaitCursor
 
         strkeypath = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
 
@@ -8735,8 +8723,6 @@ Public Class Form1
         sgrid.Sort(swname, ComponentModel.ListSortDirection.Ascending)
 
         totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - swstart, 4)
-
-        Me.Cursor = Cursors.Default
         Panel2.Text = totaltime
     End Sub
 
@@ -10312,7 +10298,7 @@ Public Class Form1
     Private Sub btn_gpo_policies_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_gpo_policies.Click
 
         'if pc.name
-        Me.Cursor = Cursors.WaitCursor
+        Me.GPODataGrid.Cursor = Cursors.AppStarting
         Panel2.Text = "Enumerating applied group policies..."
 
         GPOGridType = "policy"
@@ -10348,13 +10334,13 @@ Public Class Form1
             End If
         End If
 
-        Me.Cursor = Cursors.Default
+        Me.GPODataGrid.Cursor = Cursors.Default
         Panel2.Text = "ready"
     End Sub
     Private Sub btn_startupscripts_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_startupscripts.Click
 
         Panel2.Text = "Enumerating scripts applied from GPOs..."
-        Me.Cursor = Cursors.WaitCursor
+        Me.GPODataGrid.Cursor = Cursors.WaitCursor
 
         GPOGridType = "script"
         GPODataGrid.Rows.Clear()
@@ -10433,7 +10419,7 @@ Public Class Form1
             End If
         End If
 
-        Me.Cursor = Cursors.Default
+        Me.GPODataGrid.Cursor = Cursors.Default
         Panel2.Text = "ready"
     End Sub
 
