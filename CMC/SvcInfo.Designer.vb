@@ -31,6 +31,7 @@ Partial Class SvcInfo
         Me.txtSvcName = New System.Windows.Forms.TextBox
         Me.lblSvcAccount = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.txtDescription = New System.Windows.Forms.TextBox
         Me.svcStartupCombo = New System.Windows.Forms.ComboBox
         Me.Label5 = New System.Windows.Forms.Label
@@ -39,19 +40,18 @@ Partial Class SvcInfo
         Me.Label2 = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
         Me.gbSvcStatus = New System.Windows.Forms.GroupBox
+        Me.picSvcStatus = New System.Windows.Forms.PictureBox
         Me.btnSvcResume = New System.Windows.Forms.Button
         Me.btnSvcPause = New System.Windows.Forms.Button
         Me.btnSvcStop = New System.Windows.Forms.Button
         Me.btnSvcStart = New System.Windows.Forms.Button
         Me.lblSvcStatus = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
-        Me.picSvcStatus = New System.Windows.Forms.PictureBox
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbGeneral.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSvcStatus.SuspendLayout()
         CType(Me.picSvcStatus, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -146,12 +146,21 @@ Partial Class SvcInfo
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label7.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label7.Location = New System.Drawing.Point(13, 218)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(47, 13)
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Account"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.gear
+        Me.PictureBox1.Location = New System.Drawing.Point(331, 10)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(34, 34)
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
         '
         'txtDescription
         '
@@ -174,7 +183,7 @@ Partial Class SvcInfo
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label5.Location = New System.Drawing.Point(13, 250)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(68, 13)
@@ -184,7 +193,7 @@ Partial Class SvcInfo
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label4.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label4.Location = New System.Drawing.Point(13, 169)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(99, 13)
@@ -194,7 +203,7 @@ Partial Class SvcInfo
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label3.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label3.Location = New System.Drawing.Point(13, 94)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(63, 13)
@@ -204,7 +213,7 @@ Partial Class SvcInfo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label2.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label2.Location = New System.Drawing.Point(13, 62)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(75, 13)
@@ -214,7 +223,7 @@ Partial Class SvcInfo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label1.Location = New System.Drawing.Point(13, 31)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(77, 13)
@@ -236,6 +245,15 @@ Partial Class SvcInfo
         Me.gbSvcStatus.TabIndex = 2
         Me.gbSvcStatus.TabStop = False
         Me.gbSvcStatus.Text = "Status"
+        '
+        'picSvcStatus
+        '
+        Me.picSvcStatus.Image = Global.CMC.My.Resources.Resources._stop
+        Me.picSvcStatus.Location = New System.Drawing.Point(311, 11)
+        Me.picSvcStatus.Name = "picSvcStatus"
+        Me.picSvcStatus.Size = New System.Drawing.Size(32, 32)
+        Me.picSvcStatus.TabIndex = 6
+        Me.picSvcStatus.TabStop = False
         '
         'btnSvcResume
         '
@@ -285,30 +303,12 @@ Partial Class SvcInfo
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlDarkDark
+        Me.Label6.ForeColor = System.Drawing.SystemColors.ControlText
         Me.Label6.Location = New System.Drawing.Point(16, 28)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(79, 13)
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Service Status:"
-        '
-        'picSvcStatus
-        '
-        Me.picSvcStatus.Image = Global.CMC.My.Resources.Resources._stop
-        Me.picSvcStatus.Location = New System.Drawing.Point(311, 11)
-        Me.picSvcStatus.Name = "picSvcStatus"
-        Me.picSvcStatus.Size = New System.Drawing.Size(32, 32)
-        Me.picSvcStatus.TabIndex = 6
-        Me.picSvcStatus.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.gear
-        Me.PictureBox1.Location = New System.Drawing.Point(331, 10)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(34, 34)
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
         '
         'SvcInfo
         '
@@ -330,10 +330,10 @@ Partial Class SvcInfo
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.gbGeneral.ResumeLayout(False)
         Me.gbGeneral.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbSvcStatus.ResumeLayout(False)
         Me.gbSvcStatus.PerformLayout()
         CType(Me.picSvcStatus, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

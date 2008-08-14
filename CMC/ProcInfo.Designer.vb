@@ -38,6 +38,7 @@ Partial Class ProcInfo
         Me.Label10 = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
         Me.gbProcResources = New System.Windows.Forms.GroupBox
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.txtPeakWorkingSet = New System.Windows.Forms.TextBox
         Me.txtWorkingSet = New System.Windows.Forms.TextBox
         Me.Label13 = New System.Windows.Forms.Label
@@ -54,7 +55,6 @@ Partial Class ProcInfo
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbProcResources.SuspendLayout()
@@ -185,7 +185,7 @@ Partial Class ProcInfo
         'Label7
         '
         Me.Label7.AutoSize = True
-        Me.Label7.Location = New System.Drawing.Point(70, 18)
+        Me.Label7.Location = New System.Drawing.Point(70, 120)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(75, 13)
         Me.Label7.TabIndex = 3
@@ -203,12 +203,12 @@ Partial Class ProcInfo
         Me.gbProcResources.Controls.Add(Me.txtPageFile)
         Me.gbProcResources.Controls.Add(Me.Label11)
         Me.gbProcResources.Controls.Add(Me.Label2)
+        Me.gbProcResources.Controls.Add(Me.txtHandleCount)
+        Me.gbProcResources.Controls.Add(Me.Label7)
         Me.gbProcResources.Controls.Add(Me.Label4)
         Me.gbProcResources.Controls.Add(Me.Label5)
-        Me.gbProcResources.Controls.Add(Me.txtHandleCount)
         Me.gbProcResources.Controls.Add(Me.Label3)
         Me.gbProcResources.Controls.Add(Me.Label1)
-        Me.gbProcResources.Controls.Add(Me.Label7)
         Me.gbProcResources.Location = New System.Drawing.Point(12, 231)
         Me.gbProcResources.Name = "gbProcResources"
         Me.gbProcResources.Size = New System.Drawing.Size(337, 170)
@@ -216,10 +216,20 @@ Partial Class ProcInfo
         Me.gbProcResources.TabStop = False
         Me.gbProcResources.Text = "Performance"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.stats_info
+        Me.PictureBox1.Location = New System.Drawing.Point(7, 127)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(38, 37)
+        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
+        Me.PictureBox1.TabIndex = 19
+        Me.PictureBox1.TabStop = False
+        '
         'txtPeakWorkingSet
         '
         Me.txtPeakWorkingSet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtPeakWorkingSet.Location = New System.Drawing.Point(196, 78)
+        Me.txtPeakWorkingSet.Location = New System.Drawing.Point(196, 52)
         Me.txtPeakWorkingSet.Name = "txtPeakWorkingSet"
         Me.txtPeakWorkingSet.ReadOnly = True
         Me.txtPeakWorkingSet.Size = New System.Drawing.Size(100, 20)
@@ -228,7 +238,7 @@ Partial Class ProcInfo
         'txtWorkingSet
         '
         Me.txtWorkingSet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtWorkingSet.Location = New System.Drawing.Point(196, 55)
+        Me.txtWorkingSet.Location = New System.Drawing.Point(196, 29)
         Me.txtWorkingSet.Name = "txtWorkingSet"
         Me.txtWorkingSet.ReadOnly = True
         Me.txtWorkingSet.Size = New System.Drawing.Size(100, 20)
@@ -237,7 +247,7 @@ Partial Class ProcInfo
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(295, 58)
+        Me.Label13.Location = New System.Drawing.Point(302, 32)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(13, 13)
         Me.Label13.TabIndex = 18
@@ -246,7 +256,7 @@ Partial Class ProcInfo
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(295, 81)
+        Me.Label12.Location = New System.Drawing.Point(302, 55)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(13, 13)
         Me.Label12.TabIndex = 17
@@ -255,7 +265,7 @@ Partial Class ProcInfo
         'txtCPUTime
         '
         Me.txtCPUTime.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtCPUTime.Location = New System.Drawing.Point(196, 143)
+        Me.txtCPUTime.Location = New System.Drawing.Point(196, 140)
         Me.txtCPUTime.Name = "txtCPUTime"
         Me.txtCPUTime.ReadOnly = True
         Me.txtCPUTime.Size = New System.Drawing.Size(100, 20)
@@ -264,7 +274,7 @@ Partial Class ProcInfo
         'txtPageFile
         '
         Me.txtPageFile.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtPageFile.Location = New System.Drawing.Point(196, 120)
+        Me.txtPageFile.Location = New System.Drawing.Point(196, 75)
         Me.txtPageFile.Name = "txtPageFile"
         Me.txtPageFile.ReadOnly = True
         Me.txtPageFile.Size = New System.Drawing.Size(100, 20)
@@ -273,7 +283,7 @@ Partial Class ProcInfo
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(295, 125)
+        Me.Label11.Location = New System.Drawing.Point(302, 78)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(13, 13)
         Me.Label11.TabIndex = 16
@@ -282,7 +292,7 @@ Partial Class ProcInfo
         'Label2
         '
         Me.Label2.AutoSize = True
-        Me.Label2.Location = New System.Drawing.Point(295, 147)
+        Me.Label2.Location = New System.Drawing.Point(302, 143)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(12, 13)
         Me.Label2.TabIndex = 15
@@ -291,7 +301,7 @@ Partial Class ProcInfo
         'Label4
         '
         Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(70, 146)
+        Me.Label4.Location = New System.Drawing.Point(70, 143)
         Me.Label4.Name = "Label4"
         Me.Label4.Size = New System.Drawing.Size(58, 13)
         Me.Label4.TabIndex = 12
@@ -301,7 +311,7 @@ Partial Class ProcInfo
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(70, 58)
+        Me.Label5.Location = New System.Drawing.Point(70, 32)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(103, 13)
         Me.Label5.TabIndex = 13
@@ -311,7 +321,7 @@ Partial Class ProcInfo
         'txtHandleCount
         '
         Me.txtHandleCount.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtHandleCount.Location = New System.Drawing.Point(196, 15)
+        Me.txtHandleCount.Location = New System.Drawing.Point(196, 117)
         Me.txtHandleCount.Name = "txtHandleCount"
         Me.txtHandleCount.ReadOnly = True
         Me.txtHandleCount.Size = New System.Drawing.Size(100, 20)
@@ -320,7 +330,7 @@ Partial Class ProcInfo
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(69, 123)
+        Me.Label3.Location = New System.Drawing.Point(69, 78)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(85, 13)
         Me.Label3.TabIndex = 6
@@ -330,7 +340,7 @@ Partial Class ProcInfo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(69, 81)
+        Me.Label1.Location = New System.Drawing.Point(69, 55)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(94, 13)
         Me.Label1.TabIndex = 4
@@ -352,16 +362,6 @@ Partial Class ProcInfo
         Me.lblTick.Size = New System.Drawing.Size(45, 13)
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.stats_info
-        Me.PictureBox1.Location = New System.Drawing.Point(7, 127)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(38, 37)
-        Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
-        Me.PictureBox1.TabIndex = 19
-        Me.PictureBox1.TabStop = False
         '
         'ProcInfo
         '
