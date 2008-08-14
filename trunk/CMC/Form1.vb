@@ -472,7 +472,6 @@ Public Class Form1
     Friend WithEvents Label26 As System.Windows.Forms.Label
     Friend WithEvents Label54 As System.Windows.Forms.Label
     Friend WithEvents btn_dsa As System.Windows.Forms.Button
-    Friend WithEvents btn_EnumGroups As System.Windows.Forms.Button
     Friend WithEvents gpupdateChoice As System.Windows.Forms.ComboBox
     Friend WithEvents Label55 As System.Windows.Forms.Label
     Friend WithEvents lbl_rsop As System.Windows.Forms.LinkLabel
@@ -737,7 +736,6 @@ Public Class Form1
         Me.Label20 = New System.Windows.Forms.Label
         Me.TerminalServicesProfilePath = New System.Windows.Forms.TextBox
         Me.Label22 = New System.Windows.Forms.Label
-        Me.btn_EnumGroups = New System.Windows.Forms.Button
         Me.btn_dsa = New System.Windows.Forms.Button
         Me.telephonenumber = New System.Windows.Forms.TextBox
         Me.txtCompany = New System.Windows.Forms.TextBox
@@ -2660,7 +2658,6 @@ Public Class Form1
         '
         Me.adpanel.Controls.Add(Me.profileGroupBox)
         Me.adpanel.Controls.Add(Me.tsGroupBox)
-        Me.adpanel.Controls.Add(Me.btn_EnumGroups)
         Me.adpanel.Controls.Add(Me.btn_dsa)
         Me.adpanel.Controls.Add(Me.telephonenumber)
         Me.adpanel.Controls.Add(Me.txtCompany)
@@ -2820,17 +2817,6 @@ Public Class Form1
         Me.Label22.TabIndex = 0
         Me.Label22.Text = "user folder"
         '
-        'btn_EnumGroups
-        '
-        Me.btn_EnumGroups.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.btn_EnumGroups.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btn_EnumGroups.Location = New System.Drawing.Point(5, 137)
-        Me.btn_EnumGroups.Name = "btn_EnumGroups"
-        Me.btn_EnumGroups.Size = New System.Drawing.Size(55, 18)
-        Me.btn_EnumGroups.TabIndex = 38
-        Me.btn_EnumGroups.Text = "Groups"
-        Me.btn_EnumGroups.UseVisualStyleBackColor = True
-        '
         'btn_dsa
         '
         Me.btn_dsa.Enabled = False
@@ -2925,11 +2911,12 @@ Public Class Form1
         Me.FQDN.BorderStyle = System.Windows.Forms.BorderStyle.None
         Me.FQDN.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FQDN.ForeColor = System.Drawing.SystemColors.ControlDarkDark
-        Me.FQDN.Location = New System.Drawing.Point(2, 2)
+        Me.FQDN.Location = New System.Drawing.Point(2, 4)
         Me.FQDN.Name = "FQDN"
         Me.FQDN.ReadOnly = True
         Me.FQDN.Size = New System.Drawing.Size(363, 10)
         Me.FQDN.TabIndex = 28
+        Me.FQDN.Visible = False
         '
         'samaccountname
         '
@@ -2965,9 +2952,9 @@ Public Class Form1
         Me.adGroupsListBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.adGroupsListBox.FormattingEnabled = True
         Me.adGroupsListBox.ItemHeight = 12
-        Me.adGroupsListBox.Location = New System.Drawing.Point(4, 157)
+        Me.adGroupsListBox.Location = New System.Drawing.Point(4, 141)
         Me.adGroupsListBox.Name = "adGroupsListBox"
-        Me.adGroupsListBox.Size = New System.Drawing.Size(169, 74)
+        Me.adGroupsListBox.Size = New System.Drawing.Size(169, 86)
         Me.adGroupsListBox.Sorted = True
         Me.adGroupsListBox.TabIndex = 24
         '
@@ -3505,8 +3492,6 @@ Public Class Form1
         'get_processes_by_wmi_checkbox
         '
         Me.get_processes_by_wmi_checkbox.AutoSize = True
-        Me.get_processes_by_wmi_checkbox.Checked = True
-        Me.get_processes_by_wmi_checkbox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.get_processes_by_wmi_checkbox.ForeColor = System.Drawing.Color.Gray
         Me.get_processes_by_wmi_checkbox.Location = New System.Drawing.Point(206, 3)
         Me.get_processes_by_wmi_checkbox.Name = "get_processes_by_wmi_checkbox"
@@ -8285,21 +8270,21 @@ Public Class Form1
 
         processgrid.Rows.Clear()
 
-        If get_processes_by_wmi_checkbox.Checked Then
-            GetProcesses_WMI()
-        Else
-            If AltUserCheckBox.Checked Then
-                Dim impersonator As New Impersonation
-                If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
-                    GetProcesses_API()
-                    impersonator.undoImpersonation()
-                Else
-                    GetProcesses_WMI()
-                End If
-            Else
-                GetProcesses_API()
-            End If
-        End If
+        'If get_processes_by_wmi_checkbox.Checked Then
+        GetProcesses_WMI()
+        'Else
+        '    If AltUserCheckBox.Checked Then
+        '        Dim impersonator As New Impersonation
+        '        If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+        '            GetProcesses_API()
+        '            impersonator.undoImpersonation()
+        '        Else
+        '            GetProcesses_WMI()
+        '        End If
+        '    Else
+        '        GetProcesses_API()
+        '    End If
+        'End If
 
         processgrid.Sort(pr_name, ComponentModel.ListSortDirection.Ascending)
         processgrid.ClearSelection()
@@ -10084,7 +10069,6 @@ Public Class Form1
         Catch ex As Exception
             'MsgBox("Unable to enumerate terminal" & vbCr & "services information for " & strUser & vbCr & vbCr & ex.Message)
             tsGroupBox.Enabled = False
-            btn_EnumGroups.Enabled = False
         End Try
     End Sub
     Public Function GetProperty(ByVal srSearchResult As SearchResult, ByVal strPropertyName As String) As String
@@ -10098,7 +10082,7 @@ Public Class Form1
         Return retval
     End Function
 
-    Private Sub btn_EnumGroups_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btn_EnumGroups.Click
+    Private Sub btn_EnumGroups_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
 
         If FQDN.Text.ToLower.Contains("cn=") Then
             adGroupsListBox.Items.Clear()
@@ -10130,10 +10114,8 @@ Public Class Form1
     End Sub
     Private Sub FQDN_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles FQDN.TextChanged
         If FQDN.Text.ToLower.Contains("cn=") Then
-            btn_EnumGroups.Enabled = True
             tsGroupBox.Enabled = True
         Else
-            btn_EnumGroups.Enabled = False
             tsGroupBox.Enabled = False
         End If
     End Sub
@@ -10214,7 +10196,6 @@ Public Class Form1
         txtOffice.Text = ""
         txtCompany.Text = ""
         tsGroupBox.Enabled = True
-        btn_EnumGroups.Enabled = True
 
         adGroupsListBox.Items.Clear()
 
@@ -14392,8 +14373,6 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
-
-
 
 End Class
 
