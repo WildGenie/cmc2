@@ -77,31 +77,37 @@ Public Class SvcInfo
                 If CanStop Then Me.btnSvcStop.Enabled = True
                 Me.btnSvcPause.Enabled = CanPause
                 Me.btnSvcResume.Enabled = False
+                Me.picSvcStatus.Image = My.Resources.play
             Case "Start Pending"
                 Me.btnSvcStart.Enabled = True
                 Me.btnSvcStop.Enabled = False
                 Me.btnSvcPause.Enabled = False
                 Me.btnSvcResume.Enabled = False
+                Me.picSvcStatus.Image = Nothing
             Case "Stopped"
                 Me.btnSvcStart.Enabled = True
                 Me.btnSvcStop.Enabled = False
                 Me.btnSvcPause.Enabled = False
                 Me.btnSvcResume.Enabled = False
+                Me.picSvcStatus.Image = My.Resources._stop
             Case "Stop Pending"
                 Me.btnSvcStart.Enabled = False
                 Me.btnSvcStop.Enabled = True
                 Me.btnSvcPause.Enabled = False
                 Me.btnSvcResume.Enabled = False
+                Me.picSvcStatus.Image = Nothing
             Case "Paused"
                 Me.btnSvcStart.Enabled = False
                 If CanStop Then Me.btnSvcStop.Enabled = True
                 Me.btnSvcPause.Enabled = False
                 Me.btnSvcResume.Enabled = True
+                Me.picSvcStatus.Image = My.Resources.pause
             Case Else
                 Me.btnSvcStart.Enabled = False
                 Me.btnSvcStop.Enabled = False
                 Me.btnSvcPause.Enabled = False
                 Me.btnSvcResume.Enabled = False
+                Me.picSvcStatus.Image = Nothing
         End Select
         '"Stopped"
         '"Start Pending"
