@@ -8261,14 +8261,18 @@ Public Class Form1
         Me.Panel2.Text = "enumerating running processes..."
         Me.processgrid.Cursor = Cursors.AppStarting
 
-        GetProcesses()
+        Me.processgrid.Rows.Clear()
+        Me.GetProcesses_WMI()
+        Me.processgrid.Sort(pr_name, ComponentModel.ListSortDirection.Ascending)
+        Me.processgrid.ClearSelection()
+        Me.processgrid.Focus()
 
         Me.Panel2.Text = "ready"
         Me.processgrid.Cursor = Cursors.Default
     End Sub
     Private Sub GetProcesses()
 
-        processgrid.Rows.Clear()
+
 
         'If get_processes_by_wmi_checkbox.Checked Then
         GetProcesses_WMI()
@@ -8298,19 +8302,13 @@ Public Class Form1
             Dim queryCollection As ManagementObjectCollection
             queryCollection = wmi.wmiQuery("SELECT Name, ProcessID, ExecutablePath FROM Win32_Process")
 
-            Dim path As String
             Dim m As ManagementObject
             For Each m In queryCollection
-                If m("ExecutablePath") = Nothing Then
-                    path = ""
-                Else
-                    path = m("ExecutablePath").ToString.ToLower
-                End If
-                processgrid.Rows.Add(m("Name").ToString, m("ProcessID").ToString, path)
+                processgrid.Rows.Add(m("Name").ToString, m("ProcessID").ToString, CStr(m("ExecutablePath")))
             Next
         Catch ex As Exception
             Panel2.Text = "error getting processes"
-            WriteLog(PC.Name & " - wmi process error: " & Err.Description)
+            WriteLog(PC.Name & " - wmi process enumeration error: " & Err.Description)
         End Try
 
     End Sub
