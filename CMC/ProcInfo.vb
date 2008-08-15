@@ -13,6 +13,7 @@ Public Class ProcInfo
 
         ' get the owner of the process
         Me.txtProcOwner.Text = Form1.ProcessOwnerById(Me.txtProcPid.Text)
+        If Me.txtProcOwner.Text = "\" Then Me.txtProcOwner.Text = ""
 
         ' time first run of process stat enumeration
         Dim start, totaltime As Double
