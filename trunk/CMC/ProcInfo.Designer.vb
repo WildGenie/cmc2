@@ -47,14 +47,18 @@ Partial Class ProcInfo
         Me.txtPageFile = New System.Windows.Forms.TextBox
         Me.Label11 = New System.Windows.Forms.Label
         Me.Label2 = New System.Windows.Forms.Label
+        Me.txtHandleCount = New System.Windows.Forms.TextBox
         Me.Label4 = New System.Windows.Forms.Label
         Me.Label5 = New System.Windows.Forms.Label
-        Me.txtHandleCount = New System.Windows.Forms.TextBox
         Me.Label3 = New System.Windows.Forms.Label
         Me.Label1 = New System.Windows.Forms.Label
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
+        Me.wmiCheckbox = New System.Windows.Forms.CheckBox
+        Me.txtPeakPageFile = New System.Windows.Forms.TextBox
+        Me.Label14 = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbProcResources.SuspendLayout()
@@ -194,6 +198,10 @@ Partial Class ProcInfo
         '
         'gbProcResources
         '
+        Me.gbProcResources.Controls.Add(Me.Label15)
+        Me.gbProcResources.Controls.Add(Me.Label14)
+        Me.gbProcResources.Controls.Add(Me.txtPeakPageFile)
+        Me.gbProcResources.Controls.Add(Me.wmiCheckbox)
         Me.gbProcResources.Controls.Add(Me.PictureBox1)
         Me.gbProcResources.Controls.Add(Me.txtPeakWorkingSet)
         Me.gbProcResources.Controls.Add(Me.txtWorkingSet)
@@ -229,7 +237,7 @@ Partial Class ProcInfo
         'txtPeakWorkingSet
         '
         Me.txtPeakWorkingSet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtPeakWorkingSet.Location = New System.Drawing.Point(196, 52)
+        Me.txtPeakWorkingSet.Location = New System.Drawing.Point(196, 34)
         Me.txtPeakWorkingSet.Name = "txtPeakWorkingSet"
         Me.txtPeakWorkingSet.ReadOnly = True
         Me.txtPeakWorkingSet.Size = New System.Drawing.Size(100, 20)
@@ -238,7 +246,7 @@ Partial Class ProcInfo
         'txtWorkingSet
         '
         Me.txtWorkingSet.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtWorkingSet.Location = New System.Drawing.Point(196, 29)
+        Me.txtWorkingSet.Location = New System.Drawing.Point(196, 11)
         Me.txtWorkingSet.Name = "txtWorkingSet"
         Me.txtWorkingSet.ReadOnly = True
         Me.txtWorkingSet.Size = New System.Drawing.Size(100, 20)
@@ -247,7 +255,7 @@ Partial Class ProcInfo
         'Label13
         '
         Me.Label13.AutoSize = True
-        Me.Label13.Location = New System.Drawing.Point(302, 32)
+        Me.Label13.Location = New System.Drawing.Point(302, 14)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(13, 13)
         Me.Label13.TabIndex = 18
@@ -256,7 +264,7 @@ Partial Class ProcInfo
         'Label12
         '
         Me.Label12.AutoSize = True
-        Me.Label12.Location = New System.Drawing.Point(302, 55)
+        Me.Label12.Location = New System.Drawing.Point(302, 37)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(13, 13)
         Me.Label12.TabIndex = 17
@@ -274,7 +282,7 @@ Partial Class ProcInfo
         'txtPageFile
         '
         Me.txtPageFile.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtPageFile.Location = New System.Drawing.Point(196, 75)
+        Me.txtPageFile.Location = New System.Drawing.Point(196, 57)
         Me.txtPageFile.Name = "txtPageFile"
         Me.txtPageFile.ReadOnly = True
         Me.txtPageFile.Size = New System.Drawing.Size(100, 20)
@@ -283,7 +291,7 @@ Partial Class ProcInfo
         'Label11
         '
         Me.Label11.AutoSize = True
-        Me.Label11.Location = New System.Drawing.Point(302, 78)
+        Me.Label11.Location = New System.Drawing.Point(302, 60)
         Me.Label11.Name = "Label11"
         Me.Label11.Size = New System.Drawing.Size(13, 13)
         Me.Label11.TabIndex = 16
@@ -298,6 +306,15 @@ Partial Class ProcInfo
         Me.Label2.TabIndex = 15
         Me.Label2.Text = "s"
         '
+        'txtHandleCount
+        '
+        Me.txtHandleCount.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.txtHandleCount.Location = New System.Drawing.Point(196, 117)
+        Me.txtHandleCount.Name = "txtHandleCount"
+        Me.txtHandleCount.ReadOnly = True
+        Me.txtHandleCount.Size = New System.Drawing.Size(100, 20)
+        Me.txtHandleCount.TabIndex = 7
+        '
         'Label4
         '
         Me.Label4.AutoSize = True
@@ -311,26 +328,17 @@ Partial Class ProcInfo
         'Label5
         '
         Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(70, 32)
+        Me.Label5.Location = New System.Drawing.Point(70, 14)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(103, 13)
         Me.Label5.TabIndex = 13
         Me.Label5.Text = "Current WorkingSet:"
         Me.ToolTip1.SetToolTip(Me.Label5, "Amount of physical memory the process is using.")
         '
-        'txtHandleCount
-        '
-        Me.txtHandleCount.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.txtHandleCount.Location = New System.Drawing.Point(196, 117)
-        Me.txtHandleCount.Name = "txtHandleCount"
-        Me.txtHandleCount.ReadOnly = True
-        Me.txtHandleCount.Size = New System.Drawing.Size(100, 20)
-        Me.txtHandleCount.TabIndex = 7
-        '
         'Label3
         '
         Me.Label3.AutoSize = True
-        Me.Label3.Location = New System.Drawing.Point(69, 78)
+        Me.Label3.Location = New System.Drawing.Point(69, 60)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(85, 13)
         Me.Label3.TabIndex = 6
@@ -340,7 +348,7 @@ Partial Class ProcInfo
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(69, 55)
+        Me.Label1.Location = New System.Drawing.Point(69, 37)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(94, 13)
         Me.Label1.TabIndex = 4
@@ -362,6 +370,47 @@ Partial Class ProcInfo
         Me.lblTick.Size = New System.Drawing.Size(45, 13)
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
+        '
+        'wmiCheckbox
+        '
+        Me.wmiCheckbox.AutoSize = True
+        Me.wmiCheckbox.Checked = True
+        Me.wmiCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.wmiCheckbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.wmiCheckbox.ForeColor = System.Drawing.SystemColors.ControlDark
+        Me.wmiCheckbox.Location = New System.Drawing.Point(7, 104)
+        Me.wmiCheckbox.Name = "wmiCheckbox"
+        Me.wmiCheckbox.Size = New System.Drawing.Size(44, 17)
+        Me.wmiCheckbox.TabIndex = 20
+        Me.wmiCheckbox.Text = "wmi"
+        Me.wmiCheckbox.UseVisualStyleBackColor = True
+        Me.wmiCheckbox.Visible = False
+        '
+        'txtPeakPageFile
+        '
+        Me.txtPeakPageFile.Location = New System.Drawing.Point(196, 81)
+        Me.txtPeakPageFile.Name = "txtPeakPageFile"
+        Me.txtPeakPageFile.ReadOnly = True
+        Me.txtPeakPageFile.Size = New System.Drawing.Size(100, 20)
+        Me.txtPeakPageFile.TabIndex = 21
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(69, 84)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(110, 13)
+        Me.Label14.TabIndex = 22
+        Me.Label14.Text = "Peak PageFile Usage"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(302, 84)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(13, 13)
+        Me.Label15.TabIndex = 23
+        Me.Label15.Text = "k"
         '
         'ProcInfo
         '
@@ -422,5 +471,9 @@ Partial Class ProcInfo
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents lblNoProcess As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
+    Friend WithEvents wmiCheckbox As System.Windows.Forms.CheckBox
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label14 As System.Windows.Forms.Label
+    Friend WithEvents txtPeakPageFile As System.Windows.Forms.TextBox
 
 End Class

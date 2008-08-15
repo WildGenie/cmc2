@@ -7104,6 +7104,11 @@ Public Class Form1
                 "Revision: " & m("Revision") & vbCrLf & _
                 "SocketDesignation: " & m("SocketDesignation") & vbCrLf & _
                 "Version: " & m("Version") & vbCrLf & vbCrLf
+                'If m("NumberOfCores") > 1 Then
+                '    output = m("NumberOfCores") & " Cores" & vbCr & vbCr & output
+                '    Exit For
+                'End If
+                'MsgBox(m("NumberOfCores"))
             Next
             MsgBox(output, MsgBoxStyle.Information, "Processor Information")
         Catch

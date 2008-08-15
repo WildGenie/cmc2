@@ -11,6 +11,8 @@ Public Class ProcInfo
 
     Private Sub ProcInfo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        If System.Diagnostics.Debugger.IsAttached Then Me.wmiCheckbox.Visible = True
+
         ' get the owner of the process
         Me.txtProcOwner.Text = Form1.ProcessOwnerById(Me.txtProcPid.Text)
         If Me.txtProcOwner.Text = "\" Then Me.txtProcOwner.Text = ""
@@ -37,7 +39,12 @@ Public Class ProcInfo
     End Sub
 
     Private Sub timer1_tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Timer1.Tick
-        GetProcessStats()
+        If wmiCheckbox.Checked Then
+            GetProcessStats()
+        Else
+            GetProcessStats_Vb()
+        End If
+
     End Sub
 
     Private Sub GetProcessStats()
@@ -45,7 +52,7 @@ Public Class ProcInfo
         Try
             Dim queryCollection As ManagementObjectCollection
             queryCollection = Form1.wmi.wmiQuery _
-               ("SELECT HandleCount, WorkingSetSize, PeakWorkingSetSize,PageFileUsage,UserModeTime, KernelModeTime FROM Win32_Process WHERE ProcessID='" & CInt(Me.txtProcPid.Text) & "'")
+               ("SELECT HandleCount, WorkingSetSize, PeakWorkingSetSize,PageFileUsage,PeakPageFileUsage,UserModeTime, KernelModeTime FROM Win32_Process WHERE ProcessID='" & CInt(Me.txtProcPid.Text) & "'")
             Dim m As ManagementObject
             If queryCollection.Count = 0 Then
                 Timer1.Stop()
@@ -55,14 +62,16 @@ Public Class ProcInfo
                 Me.txtPeakWorkingSet.Text = ""
                 Me.txtPageFile.Text = ""
                 Me.txtCPUTime.Text = ""
+                Me.txtPeakPageFile.Text = ""
                 Me.lblNoProcess.Text = "Process Not Found"
                 Me.lblNoProcess.Visible = True
             Else
                 For Each m In queryCollection
                     Me.txtHandleCount.Text = m("HandleCount")
                     Me.txtWorkingSet.Text = CInt(m("WorkingSetSize") / 1024)  ' b?  
-                    Me.txtPeakWorkingSet.Text = m("PeakWorkingSetSize") ' K
-                    Me.txtPageFile.Text = m("PageFileUsage") ' K
+                    Me.txtPeakWorkingSet.Text = m("PeakWorkingSetSize") / 1024 ' K
+                    Me.txtPageFile.Text = m("PageFileUsage") / 1024 ' K
+                    Me.txtPeakPageFile.Text = m("PeakPageFileUsage") / 1024
                     Me.txtCPUTime.Text = CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000) ' 100ns unit - to convert to mins / 600,000,000
                 Next
             End If
@@ -74,10 +83,22 @@ Public Class ProcInfo
             Me.txtPeakWorkingSet.Text = ""
             Me.txtPageFile.Text = ""
             Me.txtCPUTime.Text = ""
+            Me.txtPeakPageFile.Text = ""
             Me.lblNoProcess.Text = "Error retrieving process information"
             Me.lblNoProcess.Visible = True
         End Try
 
+    End Sub
+
+    Private Sub GetProcessStats_Vb()
+
+        
+        Me.txtHandleCount.Text = Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).HandleCount
+        Me.txtWorkingSet.Text = CInt(Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).WorkingSet64 / 1024)
+        Me.txtPeakWorkingSet.Text = CInt(Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).PeakWorkingSet64 / 1024)
+        Me.txtPageFile.Text = CInt(Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).PagedMemorySize64 / 1024)
+        Me.txtPeakPageFile.Text = CInt(Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).PeakPagedMemorySize64 / 1024)
+        'Me.txtCPUTime.Text = Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).TotalProcessorTime.TotalSeconds 'CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000)
     End Sub
 
 End Class
