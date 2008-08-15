@@ -20,6 +20,8 @@ Public Class pc
     Private _DomainRoleCode As Integer
     Private _DomainMember As Boolean
     Private _DomainName As String
+    Private _64b As Boolean
+
 
     ''' <summary>
     ''' Gets the Time when the computer was last booted.
@@ -29,7 +31,7 @@ Public Class pc
     ''' <remarks></remarks>
     Public Property LastBootTime() As String
         Get
-            If m_lastboottime = "" Then
+            If m_LastBootTime = "" Then
                 Return ""
             Else
                 Return Mid(m_LastBootTime, 7, 2) & "/" & Mid(m_LastBootTime, 5, 2) & "/" & _
@@ -110,14 +112,14 @@ Public Class pc
     ''' <remarks></remarks>
     Public Property DomainName() As String
         Get
-            If Not String.IsNullOrEmpty(_Domainname) Then
-                Return _Domainname
+            If Not String.IsNullOrEmpty(_DomainName) Then
+                Return _DomainName
             Else
                 Return String.Empty
             End If
         End Get
         Set(ByVal value As String)
-            _Domainname = value
+            _DomainName = value
         End Set
     End Property
 
@@ -162,6 +164,25 @@ Public Class pc
             On Error Resume Next
             Return Double.Parse(Mid(OSVersion, 1, 3))
         End Get
+    End Property
+
+    ''' <summary>
+    ''' Determines whether OS is 32bit or 64bit from osversion string
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public Property x64() As Boolean
+        Get
+            If InStr(OperatingSystem, "x64") Then
+                Return True
+            Else
+                Return False
+            End If
+        End Get
+        Set(ByVal value As Boolean)
+            _64b = value
+        End Set
     End Property
 
     Public Property CurrentUserSID() As String
