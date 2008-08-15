@@ -8176,6 +8176,7 @@ Public Class Form1
                         & UCase(Me.sGridName) & " ?") = MsgBoxResult.Yes Then
 
             RemoveService()
+            Me.svc_datagrid.Rows.Clear()
             GetSVClist()
 
             WriteLog(PC.Name & " - delete service: " & Me.sGridName)

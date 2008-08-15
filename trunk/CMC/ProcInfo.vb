@@ -3,6 +3,8 @@ Imports System.management
 
 Public Class ProcInfo
 
+    Private KBDivider As Integer
+
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Timer1.Stop()
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
@@ -12,6 +14,14 @@ Public Class ProcInfo
     Private Sub ProcInfo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         If System.Diagnostics.Debugger.IsAttached Then Me.wmiCheckbox.Visible = True
+
+        ' wmi provider appears to change unit for some items from bytes to kb (or something)
+        ' so had to add custom divisor for some items.
+        If Form1.PC.x64 Then
+            KBDivider = 1
+        Else
+            KBDivider = 1024
+        End If
 
         ' get the owner of the process
         Me.txtProcOwner.Text = Form1.ProcessOwnerById(Me.txtProcPid.Text)
@@ -69,9 +79,9 @@ Public Class ProcInfo
                 For Each m In queryCollection
                     Me.txtHandleCount.Text = m("HandleCount")
                     Me.txtWorkingSet.Text = CInt(m("WorkingSetSize") / 1024)  ' b?  
-                    Me.txtPeakWorkingSet.Text = m("PeakWorkingSetSize") / 1024 ' K
-                    Me.txtPageFile.Text = m("PageFileUsage") / 1024 ' K
-                    Me.txtPeakPageFile.Text = m("PeakPageFileUsage") / 1024
+                    Me.txtPeakWorkingSet.Text = CInt(m("PeakWorkingSetSize") / KBDivider) ' K
+                    Me.txtPageFile.Text = CInt(m("PageFileUsage") / KBDivider) ' K
+                    Me.txtPeakPageFile.Text = CInt(m("PeakPageFileUsage") / KBDivider)
                     Me.txtCPUTime.Text = CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000) ' 100ns unit - to convert to mins / 600,000,000
                 Next
             End If
@@ -92,7 +102,7 @@ Public Class ProcInfo
 
     Private Sub GetProcessStats_Vb()
 
-        
+
         Me.txtHandleCount.Text = Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).HandleCount
         Me.txtWorkingSet.Text = CInt(Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).WorkingSet64 / 1024)
         Me.txtPeakWorkingSet.Text = CInt(Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).PeakWorkingSet64 / 1024)
