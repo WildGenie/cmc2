@@ -46,12 +46,10 @@ Public Class AddDomainInfo
         End If
 
     End Sub
-
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click
         Me.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.Close()
     End Sub
-
 
     Protected Friend dnsPart As String = ""
     Protected Friend dcPart As String = ""
@@ -311,6 +309,38 @@ Public Class CustomDomainInfo
 
         Return bFound
 
+    End Function
+
+    Public Function GetCustomDomains() As Array
+
+        ' count custom domains
+        Dim domaincount As Integer = 0
+        For i As Integer = 0 To 9
+            Dim valuename As String = "Domain" & CStr(i)
+            Dim rk As String = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue(valuename, Nothing)
+            If Not rk Is Nothing Then
+                domaincount = domaincount + 1
+            End If
+        Next
+
+        ' add custom domains to array
+        Dim domains(domaincount - 1, 4) As String
+        domaincount = 0
+        For i As Integer = 0 To 9
+            Dim valuename As String = "Domain" & CStr(i)
+            Dim rk As String = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue(valuename, Nothing)
+            If Not rk Is Nothing Then
+                Dim dominfo() As String = Split(rk, ";")
+                domains(domaincount, 0) = UCase(dominfo(0))
+                domains(domaincount, 1) = dominfo(1)
+                domains(domaincount, 2) = dominfo(2)
+                domains(domaincount, 3) = dominfo(3)
+                domains(domaincount, 4) = dominfo(4)
+                domaincount = domaincount + 1
+            End If
+        Next
+
+        Return domains
     End Function
 
     ''' <summary>
