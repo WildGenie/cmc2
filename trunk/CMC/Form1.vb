@@ -449,7 +449,6 @@ Public Class Form1
     Friend WithEvents BothComputerAndUserToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OnlyComputerToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OnlyUserToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents gpo_btn As System.Windows.Forms.Button
     Friend WithEvents gpo As System.Windows.Forms.TabPage
     Friend WithEvents GPODataGrid As System.Windows.Forms.DataGridView
     Friend WithEvents btn_startupscripts As System.Windows.Forms.Button
@@ -515,6 +514,7 @@ Public Class Form1
     Friend WithEvents executablepath As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents PropertiesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents btnTestAdMgnt As System.Windows.Forms.Button
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -962,7 +962,6 @@ Public Class Form1
         Me.startupLocation = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.startupUser = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.test = New System.Windows.Forms.TabPage
-        Me.gpo_btn = New System.Windows.Forms.Button
         Me.GroupBox10 = New System.Windows.Forms.GroupBox
         Me.btn_GetSiteOrg = New System.Windows.Forms.Button
         Me.Label42 = New System.Windows.Forms.Label
@@ -1018,6 +1017,7 @@ Public Class Form1
         Me.ToolStripSeparator23 = New System.Windows.Forms.ToolStripSeparator
         Me.mnuSwProps = New System.Windows.Forms.ToolStripMenuItem
         Me.mnuSwUninst = New System.Windows.Forms.ToolStripMenuItem
+        Me.btnTestAdMgnt = New System.Windows.Forms.Button
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -5415,7 +5415,7 @@ Public Class Form1
         '
         'test
         '
-        Me.test.Controls.Add(Me.gpo_btn)
+        Me.test.Controls.Add(Me.btnTestAdMgnt)
         Me.test.Controls.Add(Me.GroupBox10)
         Me.test.Controls.Add(Me.groupToAdd)
         Me.test.Controls.Add(Me.btn_AddGroup)
@@ -5434,15 +5434,6 @@ Public Class Form1
         Me.test.TabIndex = 12
         Me.test.Text = "test"
         Me.test.UseVisualStyleBackColor = True
-        '
-        'gpo_btn
-        '
-        Me.gpo_btn.Location = New System.Drawing.Point(193, 113)
-        Me.gpo_btn.Name = "gpo_btn"
-        Me.gpo_btn.Size = New System.Drawing.Size(75, 23)
-        Me.gpo_btn.TabIndex = 106
-        Me.gpo_btn.Text = "gpo"
-        Me.gpo_btn.UseVisualStyleBackColor = True
         '
         'GroupBox10
         '
@@ -5869,6 +5860,15 @@ Public Class Form1
         Me.mnuSwUninst.Name = "mnuSwUninst"
         Me.mnuSwUninst.Size = New System.Drawing.Size(127, 22)
         Me.mnuSwUninst.Text = "Uninstall"
+        '
+        'btnTestAdMgnt
+        '
+        Me.btnTestAdMgnt.Location = New System.Drawing.Point(185, 109)
+        Me.btnTestAdMgnt.Name = "btnTestAdMgnt"
+        Me.btnTestAdMgnt.Size = New System.Drawing.Size(75, 23)
+        Me.btnTestAdMgnt.TabIndex = 106
+        Me.btnTestAdMgnt.Text = "admgmt"
+        Me.btnTestAdMgnt.UseVisualStyleBackColor = True
         '
         'Form1
         '
@@ -14361,6 +14361,13 @@ Public Class Form1
     '    GetDescriptorBlockFromEDID = strResult
     'End Function
 
+    Private Sub btnTestAdMgnt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTestAdMgnt.Click
+        'Dim adm As New ADmgmt
+        'adm.LoadDomains()
+
+        ADmgmt.Show()
+    End Sub
+
 #End Region
 
     ' If System.Diagnostics.Debugger.IsAttached the (is running in ide)
@@ -14377,6 +14384,7 @@ Public Class Form1
             ' Run Routine Here WITHOUT impersonation
         End If
     End Sub
+
 
 End Class
 

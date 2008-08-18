@@ -112,6 +112,7 @@
       <Name>System</Name>
     </Reference>
     <Reference Include="System.Configuration.Install" />
+    <Reference Include="System.Data" />
     <Reference Include="System.Design" />
     <Reference Include="System.DirectoryServices" />
     <Reference Include="System.Drawing">
@@ -134,6 +135,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AD.vb" />
+    <Compile Include="ADmgmt.Designer.vb">
+      <DependentUpon>ADmgmt.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ADmgmt.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="appdeploy.Designer.vb">
       <DependentUpon>appdeploy.vb</DependentUpon>
     </Compile>
@@ -223,6 +230,10 @@
     <Content Include="Resources\files\netdom.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <EmbeddedResource Include="ADmgmt.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ADmgmt.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="appdeploy.resx">
       <SubType>Designer</SubType>
       <DependentUpon>appdeploy.vb</DependentUpon>

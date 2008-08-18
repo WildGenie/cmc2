@@ -39,6 +39,37 @@ Public Class cmcUser
         End Get
     End Property
 
+    'Caption: FORMAN
+    'Description: FORMAN
+    'DnsForestName: home.peterforman.net
+    'DomainControllerAddress: \\192.168.247.1
+    'DomainControllerName: \\SERVER
+    'DomainGuid: {5920A411-E5E9-44C0-BFE8-BA1E951C3050}
+    'DomainName: FORMAN
+
+    ''' <summary>
+    ''' Return NetBIOS name of the computer domain.
+    ''' Uses Win32_NTDomain Class
+    ''' </summary>
+    ''' <value></value>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Public ReadOnly Property ComputerNetBIOSDomain() As String
+        Get
+            Try
+                Dim DomainName As String = String.Empty
+                Dim objSearcher As New Management.ManagementObjectSearcher("SELECT DomainName FROM Win32_NTDomain")
+                Dim objDomain As Management.ManagementObject
+                For Each objDomain In objSearcher.Get()
+                    DomainName = objDomain("DomainName").ToString()
+                Next objDomain
+                Return DomainName
+            Catch ex As Exception
+                Return ""
+            End Try
+        End Get
+    End Property
+
     ''' <summary>
     ''' Returns the name of the server used to authenticate the current application users session.
     ''' </summary>

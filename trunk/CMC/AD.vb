@@ -41,7 +41,6 @@ Public Class AD
             Dim objDomain As Domain = Domain.GetDomain(objContext)
             ldapPath = objDomain.Name
         Catch ex As Exception
-            'ldapPath = ex.Message.ToString()
             ldapPath = String.Empty
         End Try
 

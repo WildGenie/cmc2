@@ -38,6 +38,10 @@ Partial Class ProcInfo
         Me.Label10 = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
         Me.gbProcResources = New System.Windows.Forms.GroupBox
+        Me.Label15 = New System.Windows.Forms.Label
+        Me.Label14 = New System.Windows.Forms.Label
+        Me.txtPeakPageFile = New System.Windows.Forms.TextBox
+        Me.wmiCheckbox = New System.Windows.Forms.CheckBox
         Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.txtPeakWorkingSet = New System.Windows.Forms.TextBox
         Me.txtWorkingSet = New System.Windows.Forms.TextBox
@@ -55,10 +59,6 @@ Partial Class ProcInfo
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
-        Me.wmiCheckbox = New System.Windows.Forms.CheckBox
-        Me.txtPeakPageFile = New System.Windows.Forms.TextBox
-        Me.Label14 = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbProcResources.SuspendLayout()
@@ -224,6 +224,47 @@ Partial Class ProcInfo
         Me.gbProcResources.TabStop = False
         Me.gbProcResources.Text = "Performance"
         '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(302, 84)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(13, 13)
+        Me.Label15.TabIndex = 23
+        Me.Label15.Text = "k"
+        '
+        'Label14
+        '
+        Me.Label14.AutoSize = True
+        Me.Label14.Location = New System.Drawing.Point(69, 84)
+        Me.Label14.Name = "Label14"
+        Me.Label14.Size = New System.Drawing.Size(110, 13)
+        Me.Label14.TabIndex = 22
+        Me.Label14.Text = "Peak PageFile Usage"
+        '
+        'txtPeakPageFile
+        '
+        Me.txtPeakPageFile.Location = New System.Drawing.Point(196, 81)
+        Me.txtPeakPageFile.Name = "txtPeakPageFile"
+        Me.txtPeakPageFile.ReadOnly = True
+        Me.txtPeakPageFile.Size = New System.Drawing.Size(100, 20)
+        Me.txtPeakPageFile.TabIndex = 21
+        '
+        'wmiCheckbox
+        '
+        Me.wmiCheckbox.AutoSize = True
+        Me.wmiCheckbox.Checked = True
+        Me.wmiCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.wmiCheckbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.wmiCheckbox.ForeColor = System.Drawing.SystemColors.ControlDark
+        Me.wmiCheckbox.Location = New System.Drawing.Point(7, 104)
+        Me.wmiCheckbox.Name = "wmiCheckbox"
+        Me.wmiCheckbox.Size = New System.Drawing.Size(44, 17)
+        Me.wmiCheckbox.TabIndex = 20
+        Me.wmiCheckbox.Text = "wmi"
+        Me.wmiCheckbox.UseVisualStyleBackColor = True
+        Me.wmiCheckbox.Visible = False
+        '
         'PictureBox1
         '
         Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.stats_info
@@ -370,47 +411,6 @@ Partial Class ProcInfo
         Me.lblTick.Size = New System.Drawing.Size(45, 13)
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
-        '
-        'wmiCheckbox
-        '
-        Me.wmiCheckbox.AutoSize = True
-        Me.wmiCheckbox.Checked = True
-        Me.wmiCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.wmiCheckbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.wmiCheckbox.ForeColor = System.Drawing.SystemColors.ControlDark
-        Me.wmiCheckbox.Location = New System.Drawing.Point(7, 104)
-        Me.wmiCheckbox.Name = "wmiCheckbox"
-        Me.wmiCheckbox.Size = New System.Drawing.Size(44, 17)
-        Me.wmiCheckbox.TabIndex = 20
-        Me.wmiCheckbox.Text = "wmi"
-        Me.wmiCheckbox.UseVisualStyleBackColor = True
-        Me.wmiCheckbox.Visible = False
-        '
-        'txtPeakPageFile
-        '
-        Me.txtPeakPageFile.Location = New System.Drawing.Point(196, 81)
-        Me.txtPeakPageFile.Name = "txtPeakPageFile"
-        Me.txtPeakPageFile.ReadOnly = True
-        Me.txtPeakPageFile.Size = New System.Drawing.Size(100, 20)
-        Me.txtPeakPageFile.TabIndex = 21
-        '
-        'Label14
-        '
-        Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(69, 84)
-        Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(110, 13)
-        Me.Label14.TabIndex = 22
-        Me.Label14.Text = "Peak PageFile Usage"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(302, 84)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(13, 13)
-        Me.Label15.TabIndex = 23
-        Me.Label15.Text = "k"
         '
         'ProcInfo
         '
