@@ -14,6 +14,7 @@ Public Class ADmgmt
     Private _LDAPPath As String
     Private _ADUsername As String
     Private _ADPassword As String
+    Private de As DirectoryEntry
 
     Public Enum ADAccountOptions
         UF_TEMP_DUPLICATE_ACCOUNT = 256
@@ -133,6 +134,7 @@ Public Class ADmgmt
                         Me._ADPassword = Nothing
                     End If
                     lbldomain.Text = Me._LDAPPath
+                    de = GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure)
                 End If
             Next
 
@@ -163,21 +165,13 @@ Public Class ADmgmt
 
         UserTabs_Clear()
 
-        GetUserDetails(Me.SearchResults.SelectedItem.ToString)
+        If Me.radioUsers.Checked Then
+            GetUserDetails(Me.SearchResults.SelectedItem.ToString)
+        ElseIf Me.radioGroups.Checked Then
+            'GetADGroupUsers(Me.SearchResults.SelectedItem.ToString)
+            GroupMembers(Me.SearchResults.SelectedItem.ToString)
+        End If
 
-        'Dim ad As New AD
-        'Using DirSearch As New DirectorySearcher(ad.GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure))
-        '    With DirSearch
-        '        .PropertiesToLoad.Add("distinguishedName")
-        '        .PropertiesToLoad.Add("displayName")
-        '        .PropertiesToLoad.Add("sAMAccountName")
-        '        .Filter = "(&(objectClass=user)(objectCategory=person)(anr=" & Me.txtSearch.Text & "))"
-        '    End With
-        '    Dim RecordCount As Integer = 0
-        '    For Each sResultSet As SearchResult In DirSearch.FindAll()
-        '        Me.SearchResults.Items.Add(Me.GetProperty(sResultSet, "sAMAccountName"))
-        '    Next
-        'End Using
     End Sub
 
     Private Sub UserTabs_Clear()
@@ -194,6 +188,10 @@ Public Class ADmgmt
         Me.txtTitle.Text = String.Empty
         Me.txtDepartment.Text = String.Empty
         Me.txtCompany.Text = String.Empty
+
+        Me.btnSave.Enabled = False
+
+        Me.lbMemberOf.Items.Clear()
     End Sub
 
     ''' <summary>
@@ -202,8 +200,7 @@ Public Class ADmgmt
     ''' <remarks></remarks>
     Private Sub SearchUser()
 
-        Dim ad As New AD
-        Using DirSearch As New DirectorySearcher(ad.GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure))
+        Using DirSearch As New DirectorySearcher(de) 'GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure))
 
             With DirSearch
                 '.PropertiesToLoad.Add("distinguishedName")
@@ -232,20 +229,19 @@ Public Class ADmgmt
             Next
 
         End Using
+
     End Sub
     ''' <summary>
     ''' Return list of groups from ANR group query.
     ''' </summary>
     ''' <remarks></remarks>
     Private Sub SearchGroup()
-        Dim ad As New AD
-        Using DirSearch As New DirectorySearcher(ad.GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure))
+
+        Using DirSearch As New DirectorySearcher(de)
 
             With DirSearch
                 '.PropertiesToLoad.Add("distinguishedName")
-                '.PropertiesToLoad.Add("displayName")
                 .PropertiesToLoad.Add("CN")
-
                 .Filter = "(&(objectClass=group)(anr=" & Me.txtSearch.Text & "))"
             End With
 
@@ -278,8 +274,8 @@ Public Class ADmgmt
     ''' <remarks></remarks>
     Private Sub GetUserDetails(ByVal sAccountName As String)
 
-        Dim entry As New DirectoryServices.DirectoryEntry(Me._LDAPPath)
-        Dim Searcher As New System.DirectoryServices.DirectorySearcher(entry)
+        'Dim entry As New DirectoryServices.DirectoryEntry(Me._LDAPPath)
+        Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
         Dim result As System.DirectoryServices.SearchResult
         Searcher.Filter = "(sAMAccountName= " & sAccountName & ")"
 
@@ -299,7 +295,44 @@ Public Class ADmgmt
         Me.txtDepartment.Text = Me.GetProperty(result, "department")
         Me.txtCompany.Text = Me.GetProperty(result, "company")
 
+
+        For Each gp As String In GetGroups(sAccountName)
+            lbMemberOf.Items.Add(gp)
+        Next
+
     End Sub
+
+    Private Sub GroupMembers(ByVal groupName As String)
+        ' To see the members in a group, you actually need to look at
+        ' the member attribute of a group object, not its children as
+        ' groups aren't container objects in AD (only containers have children). 
+
+        Dim ldapPath As String
+
+        Using DirSearch As New DirectorySearcher(de)
+
+            DirSearch.PropertiesToLoad.Add("distinguishedName")
+            DirSearch.Filter = "(&(objectClass=group)(CN=" & groupName & "))"
+            Dim result As System.DirectoryServices.SearchResult = DirSearch.FindOne()
+            ldapPath = Me.GetProperty(result, "distinguishedName")
+
+        End Using
+
+        Dim myGroup As DirectoryEntry
+        'instanciate myGroup to a valid group object in AD using its distinguished name.... 
+        myGroup = New DirectoryEntry("LDAP://server/" & ldapPath)
+        Dim members As PropertyValueCollection
+        members = myGroup.Properties("member")
+        Dim member As Object
+        For Each member In members
+            Me.listBoxMembers.Items.Add(member.ToString)
+        Next
+
+    End Sub
+
+
+
+
 
     ''' <summary>
     ''' Return property value from a search result.
@@ -346,97 +379,150 @@ Public Class ADmgmt
 
     'http://www.codeproject.com/KB/system/active_directory_in_vbnet.aspx
 
+
     ''' <summary>
-    ''' Method used to create an entry to the AD.
+    ''' Method used to create an AD entry.
+    ''' Replace the path, username, and password.
     ''' </summary>
-    ''' <returns> A DirectoryEntry </returns>
-    ''' <remarks></remarks>
-    Public Shared Function GetDirectoryEntry() As DirectoryEntry
-        Dim dirEntry As DirectoryEntry = New DirectoryEntry()
-        dirEntry.Path = "LDAP://192.168.1.1/CN=Users;DC=Yourdomain"
-        dirEntry.Username = "yourdomain\sampleuser"
-        dirEntry.Password = "samplepassword"
-        Return dirEntry
+    ''' <param name="aDSPath"></param>
+    ''' <param name="DomainUser"></param>
+    ''' <param name="Password"></param>
+    ''' <param name="authenticationType"></param>
+    ''' <returns>DirectoryEntry</returns>
+    ''' <remarks>DomainUser should be in the form: DOMAIN\Username (or NOTHING)</remarks>
+    Private Function GetDirectoryEntry( _
+                       ByVal aDSPath As String, _
+                       ByVal DomainUser As String, _
+                       ByVal Password As String, _
+                       Optional ByVal authenticationType As DirectoryServices.AuthenticationTypes = AuthenticationTypes.Secure) _
+                                        As DirectoryEntry
+        Dim de As New DirectoryEntry()
+        de.Path = aDSPath
+        de.Username = DomainUser
+        de.Password = Password
+        Return de
     End Function
+
+    ''' <summary>
+    ''' Method that updates user's properties
+    ''' </summary>
+    ''' <param name="userLogin">sAMAccountName of the user to update</param>
+    Public Sub UpdateUserAccountProperties(ByVal userLogin As String)
+
+        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
+        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
+        Searcher.SearchScope = SearchScope.Subtree
+
+        Dim searchResults As SearchResult = Searcher.FindOne()
+
+        If Not searchResults Is Nothing Then
+            Dim dirEntryResults As New DirectoryEntry(searchResults.Path)
+
+            ' Set the new property values for the specified user
+            SetADProperty(dirEntryResults, "givenName", Me.txtFirstName.Text)
+            SetADProperty(dirEntryResults, "initials", Me.txtInitials.Text)
+            SetADProperty(dirEntryResults, "sn", Me.txtLastName.Text)
+            SetADProperty(dirEntryResults, "displayName", Me.txtDisplayName.Text)
+            SetADProperty(dirEntryResults, "description", Me.txtDescription.Text)
+            SetADProperty(dirEntryResults, "physicalDeliveryOfficeName", Me.txtOffice.Text)
+            SetADProperty(dirEntryResults, "telephoneNumber", Me.txtTelephone.Text)
+            SetADProperty(dirEntryResults, "mail", Me.txtEmail.Text)
+            SetADProperty(dirEntryResults, "title", Me.txtTitle.Text)
+            SetADProperty(dirEntryResults, "department", Me.txtDepartment.Text)
+            SetADProperty(dirEntryResults, "company", Me.txtCompany.Text)
+
+            ' Commit the changes
+            dirEntryResults.CommitChanges()
+            dirEntryResults.Close()
+        End If
+
+    End Sub
 
     ''' <summary>
     ''' Helper method that sets properties for AD users.
     ''' </summary>
-    ''' <param name="de">DirectoryEntry to use</param>
+    ''' <param name="entry">DirectoryEntry to use</param>
     ''' <param name="pName">Property name to set</param>
     ''' <param name="pValue">Value of property to set</param>
-    Public Shared Sub SetADProperty(ByVal de As DirectoryEntry, ByVal pName As String, ByVal pValue As String)
-        'First make sure the property value isnt "nothing"
-        If Not pValue Is Nothing Then
+    Public Shared Sub SetADProperty(ByVal entry As DirectoryEntry, ByVal pName As String, ByVal pValue As String)
+
+        If Not String.IsNullOrEmpty(pValue) Then
+
             'Check to see if the DirectoryEntry contains this property already
-            If de.Properties.Contains(pName) Then 'The DE contains this property
+            If entry.Properties.Contains(pName) Then
                 'Update the properties value
-                de.Properties(pName)(0) = pValue
-            Else    'Property doesnt exist
+                entry.Properties(pName)(0) = pValue
+            Else
                 'Add the property and set it's value
-                de.Properties(pName).Add(pValue)
+                entry.Properties(pName).Add(pValue)
             End If
+        Else
+            entry.Properties(pName).Clear()
         End If
+
     End Sub
 
     ''' <summary>
     ''' Method to set a user's password
     ''' </summary>
-    ''' <param name="dEntry">DirectoryEntry to use</param>
+    ''' <param name="entry">DirectoryEntry to use</param>
     ''' <param name="sPassword">Password for the new user</param>
-    Private Shared Sub SetPassword(ByVal dEntry As DirectoryEntry, ByVal sPassword As String)
+    Private Shared Sub SetPassword(ByVal Entry As DirectoryEntry, ByVal sPassword As String)
         Dim oPassword As Object() = New Object() {sPassword}
-        Dim ret As Object = dEntry.Invoke("SetPassword", oPassword)
-        dEntry.CommitChanges()
+        Dim ret As Object = Entry.Invoke("SetPassword", oPassword)
+        Entry.CommitChanges()
     End Sub
 
     ''' <summary>
     ''' Method to enable a user account in the AD.
     ''' </summary>
-    ''' <param name="de"></param>
-    Private Shared Sub EnableAccount(ByVal de As DirectoryEntry)
+    ''' <param name="entry"></param>
+    Private Sub Enable_Account(ByVal entry As DirectoryEntry)
         'UF_DONT_EXPIRE_PASSWD 0x10000
         Dim exp As Integer = CInt(de.Properties("userAccountControl").Value)
-        de.Properties("userAccountControl").Value = exp Or &H1
-        de.CommitChanges()
+        entry.Properties("userAccountControl").Value = exp Or &H1
+        entry.CommitChanges()
         'UF_ACCOUNTDISABLE 0x0002
         Dim val As Integer = CInt(de.Properties("userAccountControl").Value)
-        de.Properties("userAccountControl").Value = val And Not &H2
-        de.CommitChanges()
+        entry.Properties("userAccountControl").Value = val And Not &H2
+        entry.CommitChanges()
     End Sub
 
     ''' <summary>
     ''' Method to add a user to a group
     ''' </summary>
-    ''' <param name="de">DirectoryEntry to use</param>
+    ''' <param name="entry">DirectoryEntry to use</param>
     ''' <param name="deUser">User DirectoryEntry to use</param>
     ''' <param name="GroupName">Group Name to add user to</param>
-    Public Shared Sub AddUserToGroup(ByVal de As DirectoryEntry, _
-    ByVal deUser As DirectoryEntry, ByVal GroupName As String)
+    Public Shared Sub AddUserToGroup(ByVal entry As DirectoryEntry, _
+                                     ByVal deUser As DirectoryEntry, _
+                                     ByVal GroupName As String)
+
         Dim deSearch As DirectorySearcher = New DirectorySearcher()
-        deSearch.SearchRoot = de
+        deSearch.SearchRoot = entry
         deSearch.Filter = "(&(objectClass=group) (cn=" & GroupName & "))"
         Dim results As SearchResultCollection = deSearch.FindAll()
         Dim isGroupMember As Boolean = False
         If results.Count > 0 Then
+
             Dim group As New DirectoryEntry(results(0).Path)
             Dim members As Object = group.Invoke("Members", Nothing)
             For Each member As Object In CType(members, IEnumerable)
                 Dim x As DirectoryEntry = New DirectoryEntry(member)
                 Dim name As String = x.Name
-                If name <> deUser.Name Then
-                    isGroupMember = False
-                Else
+                If name = deUser.Name Then
                     isGroupMember = True
                     Exit For
                 End If
-            Next member
+            Next
+
             If (Not isGroupMember) Then
                 group.Invoke("Add", New Object() {deUser.Path.ToString()})
             End If
             group.Close()
+
         End If
-        Return
+
     End Sub
 
     ''' <summary>
@@ -445,75 +531,40 @@ Public Class ADmgmt
     ''' </summary>
     ''' <param name="sLogin">Login of the user to disable</param>
     Public Sub DisableAccount(ByVal sLogin As String)
-        ''   1. Search the Active Directory for the desired user
-        'Dim dirEntry As DirectoryEntry = GetDirectoryEntry()
-        'Dim dirSearcher As DirectorySearcher = New DirectorySearcher(dirEntry)
-        'dirSearcher.Filter = "(&(objectCategory=Person)(objectClass=user)(SAMAccountName=" & sLogin & "))"
-        'dirSearcher.SearchScope = SearchScope.Subtree
-        'Dim results As SearchResult = dirSearcher.FindOne()
-        ''   2. Check returned results
-        'If Not results Is Nothing Then
-        '    '   2a. User was returned
-        '    Dim dirEntryResults As DirectoryEntry = GetDirectoryEntry(results.Path)
-        '    Dim iVal As Integer = _
-        '        CInt(dirEntryResults.Properties("userAccountControl").Value)
-        '    '   3. Disable the users account
-        '    dirEntryResults.Properties("userAccountControl").Value = iVal Or &H2
-        '    '   4. Hide users email from all Exchange Mailing Lists
-        '    dirEntryResults.Properties("msExchHideFromAddressLists").Value = "TRUE"
-        '    dirEntryResults.CommitChanges()
-        '    dirEntryResults.Close()
-        'End If
-        'dirEntry.Close()
+
+        ' Search the Active Directory for the desired user
+        Dim dirSearcher As DirectorySearcher = New DirectorySearcher(de)
+        dirSearcher.Filter = "(&(objectCategory=Person)(objectClass=user)(SAMAccountName=" & sLogin & "))"
+        dirSearcher.SearchScope = SearchScope.Subtree
+        Dim results As SearchResult = dirSearcher.FindOne()
+
+        ' Check returned results
+        If Not results Is Nothing Then  ' User was returned
+            Dim dirEntryResults As DirectoryEntry = GetDirectoryEntry(results.Path, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure)
+            Dim iVal As Integer = CInt(dirEntryResults.Properties("userAccountControl").Value)
+            ' Disable the users account
+            dirEntryResults.Properties("userAccountControl").Value = iVal Or &H2
+            ' Hide users email from all Exchange Mailing Lists
+            dirEntryResults.Properties("msExchHideFromAddressLists").Value = "TRUE"
+            dirEntryResults.CommitChanges()
+            dirEntryResults.Close()
+        End If
     End Sub
 
-    ''' <summary>
-    ''' Method that updates user's properties
-    ''' </summary>
-    ''' <param name="userLogin">Login of the user to update</param>
-    ''' <param name="userDepartment">New department of the specified user</param>
-    ''' <param name="userTitle">New title of the specified user</param>
-    ''' <param name="userPhoneExt">New phone extension of the specified user</param>
-    Public Sub UpdateUserADAccount(ByVal userLogin As String, ByVal userDepartment As String, ByVal userTitle As String, ByVal userPhoneExt As String)
-        'Dim dirEntry As DirectoryEntry = GetDirectoryEntry()
-        'Dim dirSearcher As DirectorySearcher = New DirectorySearcher(dirEntry)
-        '   1. Search the Active Directory for the speied user
-        'dirSearcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
-        'dirSearcher.SearchScope = SearchScope.Subtree
-        'Dim searchResults As SearchResult = dirSearcher.FindOne()
-        'If Not searchResults Is Nothing Then
-        '    Dim dirEntryResults As New DirectoryEntry(searchResults.Path)
-        '    The properties listed here may be different then the 
-        '    properties in your Active Directory so they may need to be 
-        '    changed according to your network
-        '       2. Set the new property values for the specified user
-        '    SetProperty(dirEntryResults, "department", userDepartment)
-        '    SetProperty(dirEntryResults, "title", userTitle)
-        '    SetProperty(dirEntryResults, "phone", userPhoneExt)
-        '       3. Commit the changes
-        '    dirEntryResults.CommitChanges()
-        '       4. Close & Cleanup
-        '    dirEntryResults.Close()
-        'End If
 
-        '   Close & Cleanup
-        'dirEntry.Close()
-    End Sub
 
     ''' <summary>
     ''' Function to return all the groups the user is a member od
     ''' </summary>
-    ''' <param name="_path">Path to bind to the AD</param>
-    ''' <param name="username">Username of the user</param>
-    ''' <param name="password">password of the user</param>
-    Private Function GetGroups(ByVal _path As String, ByVal username As String, _
-                     ByVal password As String) As Collection
+    ''' <param name="LogonName">Users logon name</param>
+    Private Function GetGroups(ByVal LogonName As String) As Collection
+
         Dim Groups As New Collection
-        Dim dirEntry As New _
-            System.DirectoryServices.DirectoryEntry(_path, username, password)
-        Dim dirSearcher As New DirectorySearcher(dirEntry)
-        dirSearcher.Filter = String.Format("(sAMAccountName={0}))", username)
+        'Dim dirEntry As New System.DirectoryServices.DirectoryEntry(_path, username, password)
+        Dim dirSearcher As New DirectorySearcher(de) '(dirEntry)
+        dirSearcher.Filter = "(sAMAccountName= " & LogonName & ")"  'String.Format("(sAMAccountName={0}))", LogonName)
         dirSearcher.PropertiesToLoad.Add("memberOf")
+
         Dim propCount As Integer
         Try
             Dim dirSearchResults As SearchResult = dirSearcher.FindOne()
@@ -570,7 +621,6 @@ Public Class ADmgmt
         End If
     End Function
 
-
     ''' <summary>
     ''' This will perform the removal of a user from the specified group
     ''' </summary>
@@ -596,43 +646,139 @@ Public Class ADmgmt
         'oUser.Close()
     End Sub
 
-    'Private Shared Function GetDirectoryObject(byval domainReference as string,ByVal UserName As String, ByVal Password As String) As DirectoryEntry
-    'Dim oDE As DirectoryEntry
+    ''' <summary>
+    ''' Method to enable a user account.
+    ''' </summary>
+    ''' <param name="entry"></param>
+    Private Shared Sub EnableAccount(ByVal entry As DirectoryEntry)
+        'UF_DONT_EXPIRE_PASSWD 0x10000
+        Dim exp As Integer = CInt(entry.Properties("userAccountControl").Value)
+        entry.Properties("userAccountControl").Value = exp Or &H1
+        entry.CommitChanges()
+        'UF_ACCOUNTDISABLE 0x0002
+        Dim val As Integer = CInt(entry.Properties("userAccountControl").Value)
+        entry.Properties("userAccountControl").Value = val And Not &H2
+        entry.CommitChanges()
+    End Sub
 
-    'oDE = New DirectoryEntry(ADFullPath + DomainReference, UserName, Password, AuthenticationTypes.Secure)
+    ''' <summary>
+    ''' Method that calls and starts a WSHControl.vbs
+    ''' </summary>
+    ''' <param name="userAlias"></param>
+    Public Sub GenerateMailBox(ByVal userAlias As String)
+        Dim mailargs As StringBuilder = New StringBuilder()
+        mailargs.Append("WSHControl.vbs")
+        mailargs.Append(" ")
+        mailargs.Append(userAlias)
+        Dim sInfo As ProcessStartInfo = New ProcessStartInfo("Wscript.exe", mailargs.ToString())
+        sInfo.WindowStyle = ProcessWindowStyle.Hidden
+        Process.Start(sInfo)
+    End Sub
 
-    'Return oDE
+    ''' <summary>
+    ''' Method that validates if a string has an email pattern.
+    ''' </summary>
+    ''' <param name="mail"></param>
+    ''' <returns></returns>
+    Public Function IsEmail(ByVal mail As String) As Boolean
+        Dim mailPattern As RegularExpressions.Regex = New RegularExpressions.Regex("\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*")
+        Return mailPattern.IsMatch(mail)
+    End Function
+
+    ''' <summary>
+    ''' Method that formats a date in the required format
+    ''' needed (AAAAMMDDMMSSSS.0Z) to compare dates in AD.
+    ''' </summary>
+    ''' <param name="date_Renamed"></param>
+    ''' <returns>Date in valid format for AD</returns>
+    Public Function ToADDateString(ByVal date_Renamed As DateTime) As String
+        Dim year As String = date_Renamed.Year.ToString()
+        Dim month As Integer = date_Renamed.Month
+        Dim day As Integer = date_Renamed.Day
+        Dim sb As StringBuilder = New StringBuilder()
+        sb.Append(year)
+        If month < 10 Then
+            sb.Append("0")
+        End If
+        sb.Append(month.ToString())
+        If day < 10 Then
+            sb.Append("0")
+        End If
+        sb.Append(day.ToString())
+        sb.Append("000000.0Z")
+        Return sb.ToString()
+    End Function
+
+
+    'Private Function GetDirectoryObject(ByVal domainReference As String, ByVal UserName As String, ByVal Password As String) As DirectoryEntry
+    '    Dim oDE As DirectoryEntry
+    '    oDE = New DirectoryEntry(ADFullPath + domainReference, UserName, Password, AuthenticationTypes.Secure)
+    '    Return oDE
     'End Function
-
 
     'Private Shared Function GetLDAPDomain() As String
 
-    '    Dim LDAPDomain As New Text.StringBuilder()
-    '    Dim LDAPDC As String() = ADServer.Split("."c)
-    '    For i As Integer = 0 To LDAPDC.GetUpperBound(0)
+    'Dim LDAPDomain As New Text.StringBuilder()
+    'Dim LDAPDC As String() = ADServer.Split("."c)
+    'For i As Integer = 0 To LDAPDC.GetUpperBound(0)
 
-    '        LDAPDomain.Append("DC=" + LDAPDC(i))
-    '        If i < LDAPDC.GetUpperBound(0) Then
-    '            LDAPDomain.Append(",")
-    '        End If
-    '    Next
+    '    LDAPDomain.Append("DC=" + LDAPDC(i))
+    '    If i < LDAPDC.GetUpperBound(0) Then
+    '        LDAPDomain.Append(",")
+    '    End If
+    'Next
 
-    '    Return LDAPDomain.ToString()
+    'Return LDAPDomain.ToString()
     'End Function
 
 
-    Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
-        'Me.adTabControl.T()
+
+    Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
+        UpdateUserAccountProperties(Me.txtSAM.Text)
     End Sub
 
+    ' Account Properties changed - enable save button
+    Private Sub txtFirstName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFirstName.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtInitials_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtInitials.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtLastName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtLastName.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtDisplayName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDisplayName.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtDescription_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDescription.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtOffice_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtOffice.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtTelephone_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTelephone.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtEmail_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtEmail.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtTitle_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtTitle.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtDepartment_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtDepartment.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
+    Private Sub txtCompany_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCompany.TextChanged
+        Me.btnSave.Enabled = True
+    End Sub
 
     Private Sub btnExit_Clicked(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         Me.Close()
     End Sub
-
     Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
         Me.UserTabs_Clear()
         Me.txtSearch.Text = ""
+        Me.btnSave.Enabled = False
         Me.SearchResults.Items.Clear()
     End Sub
 End Class
