@@ -46,17 +46,23 @@ Public Class ProcInfo
             KBDivider = 1
         Else
             Dim ratio As Long = PWS_vb / PWS_wmi
-            If ratio > 0 And ratio < 0.01 Then
+
+            If ratio < 0 Then
+                ' sometimes throws negative number
+                ratio = ratio * -1
+            End If
+
+            If ratio < 0.01 Then
                 KBDivider = 1024
             ElseIf ratio > 0.8 And ratio < 1.2 Then
                 KBDivider = 1
             ElseIf ratio > 800 And ratio < 1200 Then
                 KBDivider = 1 / 1024
             End If
-        End If
+            End If
 
-        ' start the clock ticking
-        Timer1.Start()
+            ' start the clock ticking
+            Timer1.Start()
 
     End Sub
 

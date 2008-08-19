@@ -10744,10 +10744,12 @@ Public Class Form1
                 Return ""
             End If
             Dim sDebug As String = "None"
+
             Dim i As Integer = RegistryKey.OpenRemoteBaseKey _
                         (RegistryHive.LocalMachine, PC.Name). _
                         OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon"). _
                         GetValue("UserEnvDebugLevel", 0)
+
             Select Case i
                 Case 0
                     sDebug = "None"
@@ -10801,14 +10803,35 @@ Public Class Form1
     Private Sub gpo_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles gpo.Paint
         If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
             gpoDebugCombo.Text = String.Empty
-            gpoDebugCombo.SelectedText = GPODebugSetting
+            If AltUserCheckBox.Checked Then
+                Dim impersonator As New Impersonation
+                If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+                    gpoDebugCombo.SelectedText = GPODebugSetting
+                    impersonator.undoImpersonation()
+                End If
+            Else
+                gpoDebugCombo.SelectedText = GPODebugSetting
+            End If
+
         End If
     End Sub
     Private Sub gpoDebugCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gpoDebugCombo.SelectedIndexChanged
         Me.Cursor = Cursors.WaitCursor
         Try
             Dim NewDebug As String = gpoDebugCombo.SelectedItem
-            GPODebugSetting = NewDebug
+
+            If AltUserCheckBox.Checked Then
+                Dim impersonator As New Impersonation
+                If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+                    GPODebugSetting = NewDebug
+                    impersonator.undoImpersonation()
+                End If
+            Else
+                GPODebugSetting = NewDebug
+            End If
+
+
+
             gpoDebugCombo.Text = GPODebugSetting
         Catch ex As Exception
             MsgBox(ex.Message)

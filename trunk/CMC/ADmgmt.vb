@@ -64,16 +64,18 @@ Public Class ADmgmt
         Dim domainname As String = String.Empty
         Dim domaindnsname As String = String.Empty
 
-        'Dim usr As New cmcUser
-        'domainname = usr.ComputerNetBIOSDomain
-        'domaindnsname = usr.dnsdomain
+        Dim usr As New cmcUser
+        domainname = usr.userdomain
+        domaindnsname = usr.dnsdomain
 
-        Dim objSearcher As New Management.ManagementObjectSearcher("SELECT Name,DnsForestName FROM Win32_NTDomain")
-        Dim objDomain As Management.ManagementObject
-        For Each objDomain In objSearcher.Get()
-            domainname = objDomain("Name").ToString().ToUpper.Replace("DOMAIN: ", "")
-            domaindnsname = CStr(objDomain("DnsForestName"))
-        Next objDomain
+        'Dim objSearcher As New Management.ManagementObjectSearcher("SELECT Name,DnsForestName FROM Win32_NTDomain")
+        'Dim objDomain As Management.ManagementObject
+        'For Each objDomain In objSearcher.Get()
+        '    domainname = objDomain("Name").ToString().ToUpper.Replace("DOMAIN: ", "")
+        '    domaindnsname = CStr(objDomain("DnsForestName"))
+        'Next objDomain
+
+        'MsgBox(domainname & vbCr & domaindnsname)
 
         ' check whether local domain already in dataset
         Dim bLocalDomainInList As Boolean = False
@@ -90,7 +92,10 @@ Public Class ADmgmt
 
         ' add local domain to dataTable (domainList)
         If Not bLocalDomainInList Then
-            domainList.Rows.Add(domainname.ToUpper, domaindnsname, "", Nothing, Nothing)
+            ' MsgBox("adding " & domainname.ToUpper)
+            domainList.Rows.Add(domainname.ToUpper, domaindnsname, "", "", "")
+            'Else
+            'MsgBox("not adding " & domainname.ToUpper)
         End If
 
 
@@ -122,7 +127,7 @@ Public Class ADmgmt
                     If Not String.IsNullOrEmpty(row(2).ToString) Then strDC = row(2).ToString & "/"
                     Me._LDAPPath = "LDAP://" & strDC & aDsPath
                     Me._ADUsername = row(3)
-                    Me._ADPassword = row(4)
+                    Me._ADPassword = CStr(row(4))
                     If String.IsNullOrEmpty(Me._ADUsername) Then
                         Me._ADUsername = Nothing
                         Me._ADPassword = Nothing
@@ -186,6 +191,9 @@ Public Class ADmgmt
         Me.txtEmail.Text = String.Empty
         Me.txtDomain.Text = String.Empty
         Me.txtSAM.Text = String.Empty
+        Me.txtTitle.Text = String.Empty
+        Me.txtDepartment.Text = String.Empty
+        Me.txtCompany.Text = String.Empty
     End Sub
 
     ''' <summary>
@@ -287,6 +295,9 @@ Public Class ADmgmt
         Me.txtEmail.Text = Me.GetProperty(result, "mail")
         Me.txtDomain.Text = Me.DomainSelect.Text
         Me.txtSAM.Text = Me.GetProperty(result, "sAMAccountName")
+        Me.txtTitle.Text = Me.GetProperty(result, "title")
+        Me.txtDepartment.Text = Me.GetProperty(result, "department")
+        Me.txtCompany.Text = Me.GetProperty(result, "company")
 
     End Sub
 
@@ -612,6 +623,17 @@ Public Class ADmgmt
 
     Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
         'Me.adTabControl.T()
+    End Sub
+
+
+    Private Sub btnExit_Clicked(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
+        Me.Close()
+    End Sub
+
+    Private Sub btnClear_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnClear.Click
+        Me.UserTabs_Clear()
+        Me.txtSearch.Text = ""
+        Me.SearchResults.Items.Clear()
     End Sub
 End Class
 
