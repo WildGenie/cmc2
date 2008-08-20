@@ -12,6 +12,7 @@ Public Class ADmgmt
 
     Private domainList As New DataTable()
     Private _LDAPPath As String
+    Private _LDAPHeader As String
     Private _ADUsername As String
     Private _ADPassword As String
     Private de As DirectoryEntry
@@ -32,7 +33,6 @@ Public Class ADmgmt
         UF_ACCOUNT_LOCKOUT = 16
         UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED = 128
     End Enum
-
     Public Enum LoginResult
         LOGIN_OK = 0
         LOGIN_USER_DOESNT_EXIST
@@ -40,11 +40,9 @@ Public Class ADmgmt
     End Enum
 
 
-
     Private Sub ADmgmt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         LoadDomains()
     End Sub
-
     Public Sub LoadDomains()
 
         domainList.Columns.Add(New DataColumn("NetBIOSName", GetType(String)))
@@ -68,6 +66,7 @@ Public Class ADmgmt
         Dim usr As New cmcUser
         domainname = usr.userdomain
         domaindnsname = usr.dnsdomain
+        If domainname = "no domain found" Then domainname = String.Empty
 
         'Dim objSearcher As New Management.ManagementObjectSearcher("SELECT Name,DnsForestName FROM Win32_NTDomain")
         'Dim objDomain As Management.ManagementObject
@@ -93,10 +92,7 @@ Public Class ADmgmt
 
         ' add local domain to dataTable (domainList)
         If Not bLocalDomainInList Then
-            ' MsgBox("adding " & domainname.ToUpper)
             domainList.Rows.Add(domainname.ToUpper, domaindnsname, "", "", "")
-            'Else
-            'MsgBox("not adding " & domainname.ToUpper)
         End If
 
 
@@ -127,6 +123,7 @@ Public Class ADmgmt
                     Dim aDsPath As String = "dc=" & row(1).ToString.Replace(".", ",dc=")
                     If Not String.IsNullOrEmpty(row(2).ToString) Then strDC = row(2).ToString & "/"
                     Me._LDAPPath = "LDAP://" & strDC & aDsPath
+                    Me._LDAPHeader = "LDAP://" & strDC
                     Me._ADUsername = row(3)
                     Me._ADPassword = CStr(row(4))
                     If String.IsNullOrEmpty(Me._ADUsername) Then
@@ -164,12 +161,16 @@ Public Class ADmgmt
     Private Sub SearchResults_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SearchResults.SelectedIndexChanged
 
         UserTabs_Clear()
+        Me.listBoxMembers.Items.Clear()
 
         If Me.radioUsers.Checked Then
             GetUserDetails(Me.SearchResults.SelectedItem.ToString)
         ElseIf Me.radioGroups.Checked Then
-            'GetADGroupUsers(Me.SearchResults.SelectedItem.ToString)
-            GroupMembers(Me.SearchResults.SelectedItem.ToString)
+            If Not Me.SearchResults.SelectedItem Is Nothing Then
+                Me.lblGroupName.Text = Me.SearchResults.SelectedItem.ToString
+                GroupMembers(Me.SearchResults.SelectedItem.ToString)
+            End If
+
         End If
 
     End Sub
@@ -192,6 +193,9 @@ Public Class ADmgmt
         Me.btnSave.Enabled = False
 
         Me.lbMemberOf.Items.Clear()
+
+        Me.lblGroupName.Text = String.Empty
+        Me.listBoxMembers.Items.Clear()
     End Sub
 
     ''' <summary>
@@ -302,6 +306,18 @@ Public Class ADmgmt
 
     End Sub
 
+    Private Function GetNamefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
+        Try
+            Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
+            Dim result As System.DirectoryServices.SearchResult
+            Searcher.Filter = "(distinguishedName= " & dsPath & ")"
+            result = Searcher.FindOne
+            Return Me.GetProperty(result, "CN")
+        Catch ex As Exception
+            Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
+        End Try
+    End Function
+
     Private Sub GroupMembers(ByVal groupName As String)
         ' To see the members in a group, you actually need to look at
         ' the member attribute of a group object, not its children as
@@ -320,12 +336,13 @@ Public Class ADmgmt
 
         Dim myGroup As DirectoryEntry
         'instanciate myGroup to a valid group object in AD using its distinguished name.... 
-        myGroup = New DirectoryEntry("LDAP://server/" & ldapPath)
+        myGroup = New DirectoryEntry(Me._LDAPHeader & ldapPath)
         Dim members As PropertyValueCollection
         members = myGroup.Properties("member")
         Dim member As Object
         For Each member In members
-            Me.listBoxMembers.Items.Add(member.ToString)
+            'Me.listBoxMembers.Items.Add(member.ToString)
+            Me.listBoxMembers.Items.Add(GetNamefromDN("CN", member.ToString))
         Next
 
     End Sub
@@ -732,7 +749,6 @@ Public Class ADmgmt
     'End Function
 
 
-
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         UpdateUserAccountProperties(Me.txtSAM.Text)
     End Sub
@@ -781,8 +797,24 @@ Public Class ADmgmt
         Me.btnSave.Enabled = False
         Me.SearchResults.Items.Clear()
     End Sub
-End Class
 
+    ' select tab according to search type selected
+    Private Sub radioGroups_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioGroups.CheckedChanged
+        Me.SearchResults.Items.Clear()
+        If Me.radioGroups.Checked Then
+            Me.adTabControl.SelectTab(tabGroupMembers)
+        End If
+    End Sub
+    Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
+        If Me.radioUsers.Checked Then
+            Me.adTabControl.SelectTab(tabAccount)
+        End If
+    End Sub
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+        Me.SearchResults.Items.Clear()
+        UserTabs_Clear()
+    End Sub
+End Class
 
 
 
