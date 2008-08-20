@@ -114,6 +114,8 @@ Public Class ADmgmt
         Me.UserTabs_Clear()
         Me.SearchResults.Items.Clear()
 
+        Me.Cursor = Cursors.AppStarting
+
         If Not Me.DomainSelect.Text = " - Select Domain - " Then
 
             ' Find matching datarow for selected domain
@@ -130,7 +132,7 @@ Public Class ADmgmt
                         Me._ADUsername = Nothing
                         Me._ADPassword = Nothing
                     End If
-                    lbldomain.Text = Me._LDAPPath
+                    'lbldomain.Text = Me._LDAPPath
                     de = GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure)
                 End If
             Next
@@ -144,10 +146,13 @@ Public Class ADmgmt
 
         End If
 
+        Me.Cursor = Cursors.Default
+
     End Sub
 
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
-
+        Me.Cursor = Cursors.AppStarting
+        If String.IsNullOrEmpty(Me.txtSearch.Text) Then Return
         Me.SearchResults.Items.Clear()
 
         If Me.radioUsers.Checked Then
@@ -155,7 +160,7 @@ Public Class ADmgmt
         ElseIf Me.radioGroups.Checked Then
             SearchGroup()
         End If
-
+        Me.Cursor = Cursors.Default
     End Sub
 
     Private Sub SearchResults_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SearchResults.SelectedIndexChanged
@@ -168,7 +173,21 @@ Public Class ADmgmt
         ElseIf Me.radioGroups.Checked Then
             If Not Me.SearchResults.SelectedItem Is Nothing Then
                 Me.lblGroupName.Text = Me.SearchResults.SelectedItem.ToString
-                GroupMembers(Me.SearchResults.SelectedItem.ToString)
+
+                ' return selected user attribute for each group member
+                If String.IsNullOrEmpty(Me.comboGroupUserProperty.Text) Then
+                    GroupMembers(Me.SearchResults.SelectedItem.ToString, "samaccountname")
+                Else
+                    GroupMembers(Me.SearchResults.SelectedItem.ToString, Me.comboGroupUserProperty.Text)
+                End If
+
+                ' enable export button
+                If Me.listBoxMembers.Items.Count > 1 Then
+                    Me.btnExportUsers.Enabled = True
+                Else
+                    Me.btnExportUsers.Enabled = False
+                End If
+
             End If
 
         End If
@@ -189,6 +208,9 @@ Public Class ADmgmt
         Me.txtTitle.Text = String.Empty
         Me.txtDepartment.Text = String.Empty
         Me.txtCompany.Text = String.Empty
+        Me.txtHomeProfile.Text = String.Empty
+        Me.txtHomeFolder.Text = String.Empty
+        Me.txtHomeDrive.Text = String.Empty
 
         Me.btnSave.Enabled = False
 
@@ -196,6 +218,7 @@ Public Class ADmgmt
 
         Me.lblGroupName.Text = String.Empty
         Me.listBoxMembers.Items.Clear()
+        Me.btnExportUsers.Enabled = False
     End Sub
 
     ''' <summary>
@@ -210,7 +233,6 @@ Public Class ADmgmt
                 '.PropertiesToLoad.Add("distinguishedName")
                 '.PropertiesToLoad.Add("displayName")
                 .PropertiesToLoad.Add("sAMAccountName")
-
                 .Filter = "(&(objectClass=user)(objectCategory=person)(anr=" & Me.txtSearch.Text & "))"
             End With
 
@@ -253,7 +275,7 @@ Public Class ADmgmt
             Try
                 RecordCount = DirSearch.FindAll.Count
                 If DirSearch.FindAll.Count = 0 Then
-                    MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    MessageBox.Show("Group not found", "Group not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                     Exit Sub
                 End If
             Catch ex As System.Runtime.InteropServices.COMException
@@ -299,6 +321,11 @@ Public Class ADmgmt
         Me.txtDepartment.Text = Me.GetProperty(result, "department")
         Me.txtCompany.Text = Me.GetProperty(result, "company")
 
+        Me.txtHomeProfile.Text = Me.GetProperty(result, "profilePath")
+        Me.txtHomeFolder.Text = Me.GetProperty(result, "homeDirectory")
+        Me.txtHomeDrive.Text = Me.GetProperty(result, "homeDrive")
+
+        'http://msdn.microsoft.com/en-us/library/aa380823.aspx
 
         For Each gp As String In GetGroups(sAccountName)
             lbMemberOf.Items.Add(gp)
@@ -306,19 +333,19 @@ Public Class ADmgmt
 
     End Sub
 
-    Private Function GetNamefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
+    Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
         Try
             Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
             Dim result As System.DirectoryServices.SearchResult
             Searcher.Filter = "(distinguishedName= " & dsPath & ")"
             result = Searcher.FindOne
-            Return Me.GetProperty(result, "CN")
+            Return Me.GetProperty(result, attributeToReturn)
         Catch ex As Exception
             Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
         End Try
     End Function
 
-    Private Sub GroupMembers(ByVal groupName As String)
+    Private Sub GroupMembers(ByVal groupName As String, ByVal attribute As String)
         ' To see the members in a group, you actually need to look at
         ' the member attribute of a group object, not its children as
         ' groups aren't container objects in AD (only containers have children). 
@@ -342,13 +369,11 @@ Public Class ADmgmt
         Dim member As Object
         For Each member In members
             'Me.listBoxMembers.Items.Add(member.ToString)
-            Me.listBoxMembers.Items.Add(GetNamefromDN("CN", member.ToString))
+            Dim val As String = GetAttributefromDN(attribute, member.ToString)
+            If Not String.IsNullOrEmpty(val) Then Me.listBoxMembers.Items.Add(val)
         Next
 
     End Sub
-
-
-
 
 
     ''' <summary>
@@ -802,18 +827,62 @@ Public Class ADmgmt
     Private Sub radioGroups_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioGroups.CheckedChanged
         Me.SearchResults.Items.Clear()
         If Me.radioGroups.Checked Then
+            ShowTabPage(tabGroupMembers)
             Me.adTabControl.SelectTab(tabGroupMembers)
+            HideTabPage(tabAccount)
+            HideTabPage(tabMemberOf)
+            HideTabPage(tabProfile)
+            HideTabPage(tabCustom)
         End If
     End Sub
     Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
         If Me.radioUsers.Checked Then
+            ShowTabPage(tabAccount)
+            ShowTabPage(tabMemberOf)
+            ShowTabPage(tabProfile)
+            ShowTabPage(tabCustom)
             Me.adTabControl.SelectTab(tabAccount)
+            HideTabPage(tabGroupMembers)
         End If
     End Sub
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
         Me.SearchResults.Items.Clear()
         UserTabs_Clear()
     End Sub
+
+    ' Add/Remove Tab Pages
+    Private Sub HideTabPage(ByVal tp As TabPage)
+        If Me.adTabControl.TabPages.Contains(tp) Then Me.adTabControl.TabPages.Remove(tp)
+    End Sub
+    Private Sub ShowTabPage(ByVal tp As TabPage)
+        ShowTabPage(tp, Me.adTabControl.TabPages.Count)
+    End Sub
+    Private Sub ShowTabPage(ByVal tp As TabPage, ByVal index As Integer)
+        If Me.adTabControl.TabPages.Contains(tp) Then Return
+        InsertTabPage(tp, index)
+    End Sub
+    Private Sub InsertTabPage(ByVal [tabpage] As TabPage, ByVal [index] As Integer)
+        If [index] < 0 Or [index] > Me.adTabControl.TabCount Then
+            Throw New ArgumentException("Index out of Range.")
+        End If
+        Me.adTabControl.TabPages.Add([tabpage])
+        If [index] < Me.adTabControl.TabCount - 1 Then
+            Do While Me.adTabControl.TabPages.IndexOf([tabpage]) <> [index]
+                SwapTabPages([tabpage], (Me.adTabControl.TabPages(Me.adTabControl.TabPages.IndexOf([tabpage]) - 1)))
+            Loop
+        End If
+        Me.adTabControl.SelectedTab = [tabpage]
+    End Sub
+    Private Sub SwapTabPages(ByVal tp1 As TabPage, ByVal tp2 As TabPage)
+        If Me.adTabControl.TabPages.Contains(tp1) = False Or Me.adTabControl.TabPages.Contains(tp2) = False Then
+            Throw New ArgumentException("TabPages must be in the TabCotrols TabPageCollection.")
+        End If
+        Dim Index1 As Integer = Me.adTabControl.TabPages.IndexOf(tp1)
+        Dim Index2 As Integer = Me.adTabControl.TabPages.IndexOf(tp2)
+        Me.adTabControl.TabPages(Index1) = tp2
+        Me.adTabControl.TabPages(Index2) = tp1
+    End Sub
+
 End Class
 
 
