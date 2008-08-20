@@ -41,7 +41,12 @@ Public Class ProcInfo
         ' so need to add custom divisor for some items.
         ' determine correct value for wmi PeakWorkingSet and pagefile (use vb value as target value
         PWS_vb = CInt(GetPeakWorkingSetKB(pc.Name, Me.txtProcPid.Text))
-        PWS_wmi = CInt(Me.txtPeakWorkingSet.Text)
+        If Me.txtPeakWorkingSet.Text = "" Then
+            PWS_wmi = 0
+        Else
+            PWS_wmi = CInt(Me.txtPeakWorkingSet.Text)
+        End If
+
         If PWS_vb = 0 Then
             KBDivider = 1
         Else
@@ -59,10 +64,10 @@ Public Class ProcInfo
             ElseIf ratio > 800 And ratio < 1200 Then
                 KBDivider = 1 / 1024
             End If
-            End If
+        End If
 
-            ' start the clock ticking
-            Timer1.Start()
+        ' start the clock ticking
+        Timer1.Start()
 
     End Sub
 

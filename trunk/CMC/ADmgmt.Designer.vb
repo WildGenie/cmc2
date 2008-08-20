@@ -65,12 +65,12 @@ Partial Class ADmgmt
         Me.tabGroupMembers = New System.Windows.Forms.TabPage
         Me.listBoxMembers = New System.Windows.Forms.ListBox
         Me.gbSearch = New System.Windows.Forms.GroupBox
-        Me.radioComputers = New System.Windows.Forms.RadioButton
         Me.radioGroups = New System.Windows.Forms.RadioButton
         Me.radioUsers = New System.Windows.Forms.RadioButton
         Me.btnExit = New System.Windows.Forms.Button
         Me.btnClear = New System.Windows.Forms.Button
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
+        Me.lblGroupName = New System.Windows.Forms.Label
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
@@ -82,6 +82,7 @@ Partial Class ADmgmt
         '
         'DomainSelect
         '
+        Me.DomainSelect.BackColor = System.Drawing.Color.LightSkyBlue
         Me.DomainSelect.FormattingEnabled = True
         Me.DomainSelect.Location = New System.Drawing.Point(13, 32)
         Me.DomainSelect.Name = "DomainSelect"
@@ -90,7 +91,8 @@ Partial Class ADmgmt
         '
         'txtSearch
         '
-        Me.txtSearch.Location = New System.Drawing.Point(143, 19)
+        Me.txtSearch.BackColor = System.Drawing.Color.LightGoldenrodYellow
+        Me.txtSearch.Location = New System.Drawing.Point(132, 19)
         Me.txtSearch.Name = "txtSearch"
         Me.txtSearch.Size = New System.Drawing.Size(147, 20)
         Me.txtSearch.TabIndex = 2
@@ -116,9 +118,9 @@ Partial Class ADmgmt
         'SearchResults
         '
         Me.SearchResults.FormattingEnabled = True
-        Me.SearchResults.Location = New System.Drawing.Point(143, 45)
+        Me.SearchResults.Location = New System.Drawing.Point(68, 49)
         Me.SearchResults.Name = "SearchResults"
-        Me.SearchResults.Size = New System.Drawing.Size(211, 69)
+        Me.SearchResults.Size = New System.Drawing.Size(286, 69)
         Me.SearchResults.TabIndex = 6
         '
         'DataSet1
@@ -131,9 +133,9 @@ Partial Class ADmgmt
         Me.lbldomain.ForeColor = System.Drawing.SystemColors.ControlDark
         Me.lbldomain.Location = New System.Drawing.Point(120, 13)
         Me.lbldomain.Name = "lbldomain"
-        Me.lbldomain.Size = New System.Drawing.Size(39, 13)
+        Me.lbldomain.Size = New System.Drawing.Size(10, 13)
         Me.lbldomain.TabIndex = 7
-        Me.lbldomain.Text = "Label3"
+        Me.lbldomain.Text = " "
         '
         'adTabControl
         '
@@ -454,6 +456,7 @@ Partial Class ADmgmt
         Me.lbMemberOf.Location = New System.Drawing.Point(21, 27)
         Me.lbMemberOf.Name = "lbMemberOf"
         Me.lbMemberOf.Size = New System.Drawing.Size(329, 199)
+        Me.lbMemberOf.Sorted = True
         Me.lbMemberOf.TabIndex = 0
         '
         'tabCustom
@@ -467,6 +470,7 @@ Partial Class ADmgmt
         '
         'tabGroupMembers
         '
+        Me.tabGroupMembers.Controls.Add(Me.lblGroupName)
         Me.tabGroupMembers.Controls.Add(Me.listBoxMembers)
         Me.tabGroupMembers.Location = New System.Drawing.Point(4, 22)
         Me.tabGroupMembers.Name = "tabGroupMembers"
@@ -481,11 +485,11 @@ Partial Class ADmgmt
         Me.listBoxMembers.Location = New System.Drawing.Point(19, 55)
         Me.listBoxMembers.Name = "listBoxMembers"
         Me.listBoxMembers.Size = New System.Drawing.Size(343, 212)
+        Me.listBoxMembers.Sorted = True
         Me.listBoxMembers.TabIndex = 0
         '
         'gbSearch
         '
-        Me.gbSearch.Controls.Add(Me.radioComputers)
         Me.gbSearch.Controls.Add(Me.radioGroups)
         Me.gbSearch.Controls.Add(Me.radioUsers)
         Me.gbSearch.Controls.Add(Me.SearchResults)
@@ -500,24 +504,12 @@ Partial Class ADmgmt
         Me.gbSearch.TabStop = False
         Me.gbSearch.Text = "Search"
         '
-        'radioComputers
-        '
-        Me.radioComputers.AutoSize = True
-        Me.radioComputers.FlatAppearance.BorderSize = 3
-        Me.radioComputers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioComputers.Location = New System.Drawing.Point(52, 68)
-        Me.radioComputers.Name = "radioComputers"
-        Me.radioComputers.Size = New System.Drawing.Size(74, 17)
-        Me.radioComputers.TabIndex = 9
-        Me.radioComputers.Text = "Computers"
-        Me.radioComputers.UseVisualStyleBackColor = True
-        '
         'radioGroups
         '
         Me.radioGroups.AutoSize = True
         Me.radioGroups.FlatAppearance.BorderSize = 3
         Me.radioGroups.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioGroups.Location = New System.Drawing.Point(52, 45)
+        Me.radioGroups.Location = New System.Drawing.Point(68, 26)
         Me.radioGroups.Name = "radioGroups"
         Me.radioGroups.Size = New System.Drawing.Size(58, 17)
         Me.radioGroups.TabIndex = 8
@@ -530,7 +522,7 @@ Partial Class ADmgmt
         Me.radioUsers.Checked = True
         Me.radioUsers.FlatAppearance.BorderSize = 3
         Me.radioUsers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioUsers.Location = New System.Drawing.Point(52, 21)
+        Me.radioUsers.Location = New System.Drawing.Point(68, 11)
         Me.radioUsers.Name = "radioUsers"
         Me.radioUsers.Size = New System.Drawing.Size(51, 17)
         Me.radioUsers.TabIndex = 7
@@ -571,6 +563,14 @@ Partial Class ADmgmt
         Me.TableLayoutPanel1.Size = New System.Drawing.Size(135, 26)
         Me.TableLayoutPanel1.TabIndex = 10
         '
+        'lblGroupName
+        '
+        Me.lblGroupName.AutoSize = True
+        Me.lblGroupName.Location = New System.Drawing.Point(19, 36)
+        Me.lblGroupName.Name = "lblGroupName"
+        Me.lblGroupName.Size = New System.Drawing.Size(0, 13)
+        Me.lblGroupName.TabIndex = 1
+        '
         'ADmgmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -591,6 +591,7 @@ Partial Class ADmgmt
         Me.tabAccount.PerformLayout()
         Me.tabMemberOf.ResumeLayout(False)
         Me.tabGroupMembers.ResumeLayout(False)
+        Me.tabGroupMembers.PerformLayout()
         Me.gbSearch.ResumeLayout(False)
         Me.gbSearch.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -630,7 +631,6 @@ Partial Class ADmgmt
     Friend WithEvents tabMemberOf As System.Windows.Forms.TabPage
     Friend WithEvents tabCustom As System.Windows.Forms.TabPage
     Friend WithEvents gbSearch As System.Windows.Forms.GroupBox
-    Friend WithEvents radioComputers As System.Windows.Forms.RadioButton
     Friend WithEvents radioGroups As System.Windows.Forms.RadioButton
     Friend WithEvents radioUsers As System.Windows.Forms.RadioButton
     Friend WithEvents tabGroupMembers As System.Windows.Forms.TabPage
@@ -646,4 +646,5 @@ Partial Class ADmgmt
     Friend WithEvents btnClear As System.Windows.Forms.Button
     Friend WithEvents TableLayoutPanel1 As System.Windows.Forms.TableLayoutPanel
     Friend WithEvents lbMemberOf As System.Windows.Forms.ListBox
+    Friend WithEvents lblGroupName As System.Windows.Forms.Label
 End Class
