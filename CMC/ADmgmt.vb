@@ -7,7 +7,6 @@ Imports System.Text
 Imports System.Collections
 
 
-
 Public Class ADmgmt
 
     Private domainList As New DataTable()
@@ -42,16 +41,19 @@ Public Class ADmgmt
 
 
     Private Sub ADmgmt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
-        LoadDomains()
+        'LoadDomains()
+        Create_DomainListDataset()
+        customDomainCombo.SelectedIndex = 0
     End Sub
-    Public Sub LoadDomains()
-
+    Private Sub Create_DomainListDataset()
         domainList.Columns.Add(New DataColumn("NetBIOSName", GetType(String)))
         domainList.Columns.Add(New DataColumn("DnsName", GetType(String)))
         domainList.Columns.Add(New DataColumn("DomainController", GetType(String)))
         domainList.Columns.Add(New DataColumn("UserName", GetType(String)))
         domainList.Columns.Add(New DataColumn("Password", GetType(String)))
+    End Sub
 
+    Public Sub LoadDomains()
 
         ' add custom domains to DomainList dataset
         Dim di As New CustomDomainInfo
@@ -104,7 +106,7 @@ Public Class ADmgmt
 
         Me.DomainSelect.Items.Add(" - Select Domain - ")
         For Each row As DataRow In domainList.Rows
-            Me.DomainSelect.Items.Add(row(0))
+            If Not String.IsNullOrEmpty(row(0)) Then Me.DomainSelect.Items.Add(row(0))
         Next
         Me.DomainSelect.SelectedIndex = 0
 
@@ -167,28 +169,19 @@ Public Class ADmgmt
     Private Sub SearchResults_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SearchResults.SelectedIndexChanged
 
         UserTabs_Clear()
-        Me.listBoxMembers.Items.Clear()
+        Me.DGVMembers.Rows.Clear()
 
         If Me.radioUsers.Checked Then
             GetUserDetails(Me.SearchResults.SelectedItem.ToString)
         ElseIf Me.radioGroups.Checked Then
             If Not Me.SearchResults.SelectedItem Is Nothing Then
                 Me.lblGroupName.Text = Me.SearchResults.SelectedItem.ToString
-
-                ' return selected user attribute for each group member
-                If String.IsNullOrEmpty(Me.comboGroupUserProperty.Text) Then
-                    GroupMembers(Me.SearchResults.SelectedItem.ToString, "samaccountname")
-                Else
-                    GroupMembers(Me.SearchResults.SelectedItem.ToString, Me.comboGroupUserProperty.Text)
-                End If
-
-                ' enable export button
-                If Me.listBoxMembers.Items.Count > 1 Then
+                GroupMembers(Me.SearchResults.SelectedItem.ToString)
+                If Me.DGVMembers.Rows.Count > 1 Then
                     Me.btnExportUsers.Enabled = True
                 Else
                     Me.btnExportUsers.Enabled = False
                 End If
-
             End If
 
         End If
@@ -221,7 +214,7 @@ Public Class ADmgmt
         Me.lbMemberOf.Items.Clear()
 
         Me.lblGroupName.Text = String.Empty
-        Me.listBoxMembers.Items.Clear()
+        Me.DGVMembers.Rows.Clear()
         Me.btnExportUsers.Enabled = False
     End Sub
 
@@ -369,7 +362,7 @@ Public Class ADmgmt
         End Try
     End Function
 
-    Private Sub GroupMembers(ByVal groupName As String, ByVal attribute As String)
+    Private Sub GroupMembers(ByVal groupName As String)
         ' To see the members in a group, you actually need to look at
         ' the member attribute of a group object, not its children as
         ' groups aren't container objects in AD (only containers have children). 
@@ -385,16 +378,27 @@ Public Class ADmgmt
 
         End Using
 
+        Me.DGVMembers.Columns("colSam").Width = 120
+        Me.DGVMembers.Columns("colDisplay").Width = 250
+        Me.DGVMembers.Columns("colMail").Width = 170
+        Me.DGVMembers.Columns("colDN").Width = 300
+        'Me.DGVMembers.Columns("colSam").Visible = Me.cbLogon.Checked
+        'Me.DGVMembers.Columns("colDisplay").Visible = Me.cbDisplay.Checked
+        'Me.DGVMembers.Columns("colMail").Visible = Me.cbMail.Checked
+        'Me.DGVMembers.Columns("colDN").Visible = Me.cbDN.Checked
+
         Dim myGroup As DirectoryEntry
+
         'instanciate myGroup to a valid group object in AD using its distinguished name.... 
         myGroup = New DirectoryEntry(Me._LDAPHeader & ldapPath)
         Dim members As PropertyValueCollection
         members = myGroup.Properties("member")
         Dim member As Object
         For Each member In members
-            'Me.listBoxMembers.Items.Add(member.ToString)
-            Dim val As String = GetAttributefromDN(attribute, member.ToString)
-            If Not String.IsNullOrEmpty(val) Then Me.listBoxMembers.Items.Add(val)
+            Me.DGVMembers.Rows.Add(GetAttributefromDN("sAMAccountName", member.ToString), _
+                                   GetAttributefromDN("displayName", member.ToString), _
+                                   GetAttributefromDN("mail", member.ToString), _
+                                   GetAttributefromDN("distinguishedName", member.ToString))
         Next
 
     End Sub
@@ -894,6 +898,8 @@ Public Class ADmgmt
             HideTabPage(tabMemberOf)
             HideTabPage(tabProfile)
             HideTabPage(tabCustom)
+            Me.cbLogon.Checked = True
+            Me.cbDisplay.Checked = True
         End If
     End Sub
     Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
@@ -909,6 +915,7 @@ Public Class ADmgmt
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
         Me.SearchResults.Items.Clear()
         UserTabs_Clear()
+        Me.AcceptButton = Me.btnSearch
     End Sub
 
     ' Add/Remove Tab Pages
@@ -944,6 +951,89 @@ Public Class ADmgmt
         Me.adTabControl.TabPages(Index2) = tp1
     End Sub
 
+    ' make group member columns visible
+    Private Sub cbLogon_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbLogon.CheckedChanged
+        MakeColumnVisible("colSAM", Me.cbLogon.Checked)
+    End Sub
+    Private Sub cbDisplay_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDisplay.CheckedChanged
+        MakeColumnVisible("colDisplay", Me.cbDisplay.Checked)
+    End Sub
+    Private Sub cbMail_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbMail.CheckedChanged
+        MakeColumnVisible("colMail", Me.cbMail.Checked)
+    End Sub
+    Private Sub cbDN_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDN.CheckedChanged
+        MakeColumnVisible("colDN", Me.cbDN.Checked)
+    End Sub
+    Private Sub MakeColumnVisible(ByVal ColumnName As String, ByVal Visible As Boolean)
+        Me.DGVMembers.Columns(ColumnName).Visible = Visible
+    End Sub
+
+    Private Sub btnExportUsers_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportUsers.Click
+        If Me.DGVMembers.Rows.Count > 1 Then
+            Dim exportFile As New System.IO.StreamWriter("c:\" & Me.SearchResults.SelectedItem.ToString & ".csv")
+            For Each row As DataGridViewRow In Me.DGVMembers.Rows
+                exportFile.WriteLine(Me.DGVMembers(0, row.Index).Value & "," & _
+                                     Me.DGVMembers(1, row.Index).Value & "," & _
+                                     Me.DGVMembers(2, row.Index).Value & "," & _
+                                     Me.DGVMembers(3, row.Index).Value)
+            Next
+            exportFile.Close()
+            MsgBox("File created" & vbCr & "c:\" & Me.SearchResults.SelectedItem.ToString & ".csv")
+        End If
+    End Sub
+
+    Private Sub customDomainCombo_DropDown(ByVal sender As Object, ByVal e As System.EventArgs) Handles customDomainCombo.DropDown
+        customDomainCombo.Items.Clear()
+        customDomainCombo.Items.Add(" (Add New...)")
+        For i As Integer = 0 To 9
+            Dim valuename As String = "Domain" & CStr(i)
+            Dim rk As String = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue(valuename, Nothing)
+            If Not rk Is Nothing Then
+                Dim dominfo() As String = Split(rk, ";")
+                customDomainCombo.Items.Add(dominfo(0))
+            End If
+        Next
+    End Sub
+    Private Sub customDomainCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles customDomainCombo.SelectedIndexChanged
+        If customDomainCombo.Text = " (Add New...)" Then
+            Dim di As New AddDomainInfo
+            di.ShowDialog()
+
+            Me.customDomainCombo.Items.Clear()
+            Me.customDomainCombo.Items.AddRange(New Object() {" (edit custom domains)"})
+            Me.customDomainCombo.SelectedIndex = 0
+
+        Else
+            For i As Integer = 0 To 9
+                Dim valuename As String = "Domain" & CStr(i)
+                Dim rk As String = Microsoft.Win32.Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue(valuename, Nothing)
+                If Not rk Is Nothing Then
+                    Dim dominfo() As String = Split(rk, ";")
+                    If dominfo(0).ToUpper = customDomainCombo.Text.ToUpper Then
+
+                        Dim di As New AddDomainInfo
+                        di.OK_Button.Text = "Save"
+
+                        Dim user As String = dominfo(3)
+                        If Not String.IsNullOrEmpty(user) Then user = EncryptText.DecryptText(user)
+                        Dim pass As String = dominfo(4)
+                        If Not String.IsNullOrEmpty(pass) Then pass = EncryptText.DecryptText(pass)
+
+                        di.txtDomain.Text = dominfo(0)
+                        di.txtDNS.Text = dominfo(1)
+                        di.txtDC.Text = dominfo(2)
+                        di.txtUser.Text = user
+                        di.txtPass.Text = pass
+                        di.ShowDialog()
+
+                    End If
+                End If
+            Next
+        End If
+        Me.domainList.Rows.Clear()
+        Me.DomainSelect.Items.Clear()
+        Me.LoadDomains()
+    End Sub
 
 End Class
 

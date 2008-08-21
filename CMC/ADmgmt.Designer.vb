@@ -73,12 +73,49 @@ Partial Class ADmgmt
         Me.tabMemberOf = New System.Windows.Forms.TabPage
         Me.lbMemberOf = New System.Windows.Forms.ListBox
         Me.tabCustom = New System.Windows.Forms.TabPage
-        Me.tabGroupMembers = New System.Windows.Forms.TabPage
-        Me.btnExportUsers = New System.Windows.Forms.Button
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.ea15 = New System.Windows.Forms.TextBox
+        Me.ea14 = New System.Windows.Forms.TextBox
+        Me.ea13 = New System.Windows.Forms.TextBox
+        Me.ea12 = New System.Windows.Forms.TextBox
+        Me.ea11 = New System.Windows.Forms.TextBox
+        Me.ea10 = New System.Windows.Forms.TextBox
+        Me.ea9 = New System.Windows.Forms.TextBox
+        Me.ea8 = New System.Windows.Forms.TextBox
+        Me.ea7 = New System.Windows.Forms.TextBox
+        Me.ea6 = New System.Windows.Forms.TextBox
+        Me.ea5 = New System.Windows.Forms.TextBox
+        Me.ea4 = New System.Windows.Forms.TextBox
+        Me.ea3 = New System.Windows.Forms.TextBox
+        Me.ea2 = New System.Windows.Forms.TextBox
+        Me.ea1 = New System.Windows.Forms.TextBox
+        Me.Label30 = New System.Windows.Forms.Label
+        Me.Label29 = New System.Windows.Forms.Label
+        Me.Label28 = New System.Windows.Forms.Label
+        Me.Label27 = New System.Windows.Forms.Label
+        Me.Label26 = New System.Windows.Forms.Label
+        Me.Label25 = New System.Windows.Forms.Label
+        Me.Label24 = New System.Windows.Forms.Label
+        Me.Label23 = New System.Windows.Forms.Label
+        Me.Label22 = New System.Windows.Forms.Label
+        Me.Label21 = New System.Windows.Forms.Label
+        Me.Label20 = New System.Windows.Forms.Label
+        Me.Label19 = New System.Windows.Forms.Label
+        Me.Label18 = New System.Windows.Forms.Label
+        Me.Label15 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
-        Me.comboGroupUserProperty = New System.Windows.Forms.ComboBox
+        Me.tabGroupMembers = New System.Windows.Forms.TabPage
+        Me.cbDN = New System.Windows.Forms.CheckBox
+        Me.cbMail = New System.Windows.Forms.CheckBox
+        Me.cbDisplay = New System.Windows.Forms.CheckBox
+        Me.cbLogon = New System.Windows.Forms.CheckBox
+        Me.DGVMembers = New System.Windows.Forms.DataGridView
+        Me.colSAM = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.colDisplay = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.colMail = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.colDN = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.btnExportUsers = New System.Windows.Forms.Button
         Me.lblGroupName = New System.Windows.Forms.Label
-        Me.listBoxMembers = New System.Windows.Forms.ListBox
         Me.gbSearch = New System.Windows.Forms.GroupBox
         Me.radioGroups = New System.Windows.Forms.RadioButton
         Me.radioUsers = New System.Windows.Forms.RadioButton
@@ -86,6 +123,7 @@ Partial Class ADmgmt
         Me.btnClear = New System.Windows.Forms.Button
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
         Me.Panel1 = New System.Windows.Forms.Panel
+        Me.customDomainCombo = New System.Windows.Forms.ComboBox
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
@@ -93,7 +131,10 @@ Partial Class ADmgmt
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.tabMemberOf.SuspendLayout()
+        Me.tabCustom.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.tabGroupMembers.SuspendLayout()
+        CType(Me.DGVMembers, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSearch.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
         Me.Panel1.SuspendLayout()
@@ -111,17 +152,18 @@ Partial Class ADmgmt
         'txtSearch
         '
         Me.txtSearch.BackColor = System.Drawing.Color.LightGoldenrodYellow
+        Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.txtSearch.Location = New System.Drawing.Point(83, 19)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(158, 20)
-        Me.txtSearch.TabIndex = 2
+        Me.txtSearch.Size = New System.Drawing.Size(222, 21)
+        Me.txtSearch.TabIndex = 3
         '
         'btnSearch
         '
-        Me.btnSearch.Location = New System.Drawing.Point(247, 13)
+        Me.btnSearch.Location = New System.Drawing.Point(311, 13)
         Me.btnSearch.Name = "btnSearch"
         Me.btnSearch.Size = New System.Drawing.Size(58, 31)
-        Me.btnSearch.TabIndex = 3
+        Me.btnSearch.TabIndex = 2
         Me.btnSearch.Text = "Search..."
         Me.btnSearch.UseVisualStyleBackColor = True
         '
@@ -131,17 +173,20 @@ Partial Class ADmgmt
         Me.Label1.Location = New System.Drawing.Point(12, 9)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
-        Me.Label1.TabIndex = 4
+        Me.Label1.TabIndex = 100000
         Me.Label1.Text = "Select Domain"
         '
         'SearchResults
         '
+        Me.SearchResults.BackColor = System.Drawing.Color.LightGoldenrodYellow
         Me.SearchResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.SearchResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SearchResults.FormattingEnabled = True
+        Me.SearchResults.ItemHeight = 15
         Me.SearchResults.Location = New System.Drawing.Point(83, 47)
         Me.SearchResults.Name = "SearchResults"
-        Me.SearchResults.Size = New System.Drawing.Size(222, 67)
-        Me.SearchResults.TabIndex = 6
+        Me.SearchResults.Size = New System.Drawing.Size(222, 62)
+        Me.SearchResults.TabIndex = 4
         '
         'DataSet1
         '
@@ -163,7 +208,7 @@ Partial Class ADmgmt
         '
         'tabAccount
         '
-        Me.tabAccount.BackColor = System.Drawing.Color.Transparent
+        Me.tabAccount.BackColor = System.Drawing.SystemColors.Control
         Me.tabAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.tabAccount.Controls.Add(Me.btnSave)
         Me.tabAccount.Controls.Add(Me.Label13)
@@ -195,7 +240,6 @@ Partial Class ADmgmt
         Me.tabAccount.Size = New System.Drawing.Size(381, 287)
         Me.tabAccount.TabIndex = 0
         Me.tabAccount.Text = "Account"
-        Me.tabAccount.UseVisualStyleBackColor = True
         '
         'btnSave
         '
@@ -417,7 +461,7 @@ Partial Class ADmgmt
         '
         'tabProfile
         '
-        Me.tabProfile.BackColor = System.Drawing.Color.Transparent
+        Me.tabProfile.BackColor = System.Drawing.SystemColors.Control
         Me.tabProfile.Controls.Add(Me.GroupBox2)
         Me.tabProfile.Controls.Add(Me.GroupBox1)
         Me.tabProfile.Controls.Add(Me.btnProfileSave)
@@ -427,7 +471,6 @@ Partial Class ADmgmt
         Me.tabProfile.Size = New System.Drawing.Size(381, 287)
         Me.tabProfile.TabIndex = 1
         Me.tabProfile.Text = "Profile"
-        Me.tabProfile.UseVisualStyleBackColor = True
         '
         'GroupBox2
         '
@@ -436,7 +479,7 @@ Partial Class ADmgmt
         Me.GroupBox2.Controls.Add(Me.txtHomeDrive)
         Me.GroupBox2.Controls.Add(Me.txtHomeProfile)
         Me.GroupBox2.Controls.Add(Me.Label14)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 9)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 37)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(356, 71)
         Me.GroupBox2.TabIndex = 13
@@ -490,7 +533,7 @@ Partial Class ADmgmt
         Me.GroupBox1.Controls.Add(Me.txtTSDrive)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.txtTSProfile)
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 92)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, 139)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(356, 91)
         Me.GroupBox1.TabIndex = 12
@@ -557,7 +600,7 @@ Partial Class ADmgmt
         '
         'tabMemberOf
         '
-        Me.tabMemberOf.BackColor = System.Drawing.Color.Transparent
+        Me.tabMemberOf.BackColor = System.Drawing.SystemColors.Control
         Me.tabMemberOf.Controls.Add(Me.lbMemberOf)
         Me.tabMemberOf.Location = New System.Drawing.Point(4, 22)
         Me.tabMemberOf.Name = "tabMemberOf"
@@ -565,7 +608,6 @@ Partial Class ADmgmt
         Me.tabMemberOf.Size = New System.Drawing.Size(381, 287)
         Me.tabMemberOf.TabIndex = 2
         Me.tabMemberOf.Text = "Member Of"
-        Me.tabMemberOf.UseVisualStyleBackColor = True
         '
         'lbMemberOf
         '
@@ -578,71 +620,430 @@ Partial Class ADmgmt
         '
         'tabCustom
         '
+        Me.tabCustom.BackColor = System.Drawing.SystemColors.Control
+        Me.tabCustom.Controls.Add(Me.GroupBox3)
         Me.tabCustom.Location = New System.Drawing.Point(4, 22)
         Me.tabCustom.Name = "tabCustom"
         Me.tabCustom.Size = New System.Drawing.Size(381, 287)
         Me.tabCustom.TabIndex = 3
         Me.tabCustom.Text = "Custom"
-        Me.tabCustom.UseVisualStyleBackColor = True
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Controls.Add(Me.ea15)
+        Me.GroupBox3.Controls.Add(Me.ea14)
+        Me.GroupBox3.Controls.Add(Me.ea13)
+        Me.GroupBox3.Controls.Add(Me.ea12)
+        Me.GroupBox3.Controls.Add(Me.ea11)
+        Me.GroupBox3.Controls.Add(Me.ea10)
+        Me.GroupBox3.Controls.Add(Me.ea9)
+        Me.GroupBox3.Controls.Add(Me.ea8)
+        Me.GroupBox3.Controls.Add(Me.ea7)
+        Me.GroupBox3.Controls.Add(Me.ea6)
+        Me.GroupBox3.Controls.Add(Me.ea5)
+        Me.GroupBox3.Controls.Add(Me.ea4)
+        Me.GroupBox3.Controls.Add(Me.ea3)
+        Me.GroupBox3.Controls.Add(Me.ea2)
+        Me.GroupBox3.Controls.Add(Me.ea1)
+        Me.GroupBox3.Controls.Add(Me.Label30)
+        Me.GroupBox3.Controls.Add(Me.Label29)
+        Me.GroupBox3.Controls.Add(Me.Label28)
+        Me.GroupBox3.Controls.Add(Me.Label27)
+        Me.GroupBox3.Controls.Add(Me.Label26)
+        Me.GroupBox3.Controls.Add(Me.Label25)
+        Me.GroupBox3.Controls.Add(Me.Label24)
+        Me.GroupBox3.Controls.Add(Me.Label23)
+        Me.GroupBox3.Controls.Add(Me.Label22)
+        Me.GroupBox3.Controls.Add(Me.Label21)
+        Me.GroupBox3.Controls.Add(Me.Label20)
+        Me.GroupBox3.Controls.Add(Me.Label19)
+        Me.GroupBox3.Controls.Add(Me.Label18)
+        Me.GroupBox3.Controls.Add(Me.Label15)
+        Me.GroupBox3.Controls.Add(Me.Label4)
+        Me.GroupBox3.Location = New System.Drawing.Point(15, 92)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(353, 182)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "extension attributes"
+        '
+        'ea15
+        '
+        Me.ea15.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea15.Location = New System.Drawing.Point(208, 132)
+        Me.ea15.Name = "ea15"
+        Me.ea15.Size = New System.Drawing.Size(118, 17)
+        Me.ea15.TabIndex = 9016
+        '
+        'ea14
+        '
+        Me.ea14.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea14.Location = New System.Drawing.Point(208, 113)
+        Me.ea14.Name = "ea14"
+        Me.ea14.Size = New System.Drawing.Size(118, 17)
+        Me.ea14.TabIndex = 9015
+        '
+        'ea13
+        '
+        Me.ea13.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea13.Location = New System.Drawing.Point(208, 94)
+        Me.ea13.Name = "ea13"
+        Me.ea13.Size = New System.Drawing.Size(118, 17)
+        Me.ea13.TabIndex = 9014
+        '
+        'ea12
+        '
+        Me.ea12.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea12.Location = New System.Drawing.Point(208, 75)
+        Me.ea12.Name = "ea12"
+        Me.ea12.Size = New System.Drawing.Size(118, 17)
+        Me.ea12.TabIndex = 9013
+        '
+        'ea11
+        '
+        Me.ea11.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea11.Location = New System.Drawing.Point(208, 56)
+        Me.ea11.Name = "ea11"
+        Me.ea11.Size = New System.Drawing.Size(118, 17)
+        Me.ea11.TabIndex = 9012
+        '
+        'ea10
+        '
+        Me.ea10.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea10.Location = New System.Drawing.Point(208, 37)
+        Me.ea10.Name = "ea10"
+        Me.ea10.Size = New System.Drawing.Size(118, 17)
+        Me.ea10.TabIndex = 9011
+        '
+        'ea9
+        '
+        Me.ea9.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea9.Location = New System.Drawing.Point(208, 18)
+        Me.ea9.Name = "ea9"
+        Me.ea9.Size = New System.Drawing.Size(118, 17)
+        Me.ea9.TabIndex = 9010
+        '
+        'ea8
+        '
+        Me.ea8.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea8.Location = New System.Drawing.Point(34, 151)
+        Me.ea8.Name = "ea8"
+        Me.ea8.Size = New System.Drawing.Size(118, 17)
+        Me.ea8.TabIndex = 9009
+        '
+        'ea7
+        '
+        Me.ea7.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea7.Location = New System.Drawing.Point(34, 132)
+        Me.ea7.Name = "ea7"
+        Me.ea7.Size = New System.Drawing.Size(118, 17)
+        Me.ea7.TabIndex = 9008
+        '
+        'ea6
+        '
+        Me.ea6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea6.Location = New System.Drawing.Point(34, 113)
+        Me.ea6.Name = "ea6"
+        Me.ea6.Size = New System.Drawing.Size(118, 17)
+        Me.ea6.TabIndex = 9007
+        '
+        'ea5
+        '
+        Me.ea5.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea5.Location = New System.Drawing.Point(34, 94)
+        Me.ea5.Name = "ea5"
+        Me.ea5.Size = New System.Drawing.Size(118, 17)
+        Me.ea5.TabIndex = 9006
+        '
+        'ea4
+        '
+        Me.ea4.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea4.Location = New System.Drawing.Point(34, 75)
+        Me.ea4.Name = "ea4"
+        Me.ea4.Size = New System.Drawing.Size(118, 17)
+        Me.ea4.TabIndex = 9005
+        '
+        'ea3
+        '
+        Me.ea3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea3.Location = New System.Drawing.Point(34, 56)
+        Me.ea3.Name = "ea3"
+        Me.ea3.Size = New System.Drawing.Size(118, 17)
+        Me.ea3.TabIndex = 9004
+        '
+        'ea2
+        '
+        Me.ea2.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea2.Location = New System.Drawing.Point(34, 37)
+        Me.ea2.Name = "ea2"
+        Me.ea2.Size = New System.Drawing.Size(118, 17)
+        Me.ea2.TabIndex = 9003
+        '
+        'ea1
+        '
+        Me.ea1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ea1.Location = New System.Drawing.Point(34, 18)
+        Me.ea1.Name = "ea1"
+        Me.ea1.Size = New System.Drawing.Size(118, 17)
+        Me.ea1.TabIndex = 9002
+        '
+        'Label30
+        '
+        Me.Label30.AutoSize = True
+        Me.Label30.Location = New System.Drawing.Point(183, 134)
+        Me.Label30.Name = "Label30"
+        Me.Label30.Size = New System.Drawing.Size(19, 13)
+        Me.Label30.TabIndex = 9001
+        Me.Label30.Text = "15"
+        '
+        'Label29
+        '
+        Me.Label29.AutoSize = True
+        Me.Label29.Location = New System.Drawing.Point(183, 115)
+        Me.Label29.Name = "Label29"
+        Me.Label29.Size = New System.Drawing.Size(19, 13)
+        Me.Label29.TabIndex = 14
+        Me.Label29.Text = "14"
+        '
+        'Label28
+        '
+        Me.Label28.AutoSize = True
+        Me.Label28.Location = New System.Drawing.Point(183, 96)
+        Me.Label28.Name = "Label28"
+        Me.Label28.Size = New System.Drawing.Size(19, 13)
+        Me.Label28.TabIndex = 9000
+        Me.Label28.Text = "13"
+        '
+        'Label27
+        '
+        Me.Label27.AutoSize = True
+        Me.Label27.Location = New System.Drawing.Point(183, 77)
+        Me.Label27.Name = "Label27"
+        Me.Label27.Size = New System.Drawing.Size(19, 13)
+        Me.Label27.TabIndex = 11
+        Me.Label27.Text = "12"
+        '
+        'Label26
+        '
+        Me.Label26.AutoSize = True
+        Me.Label26.Location = New System.Drawing.Point(183, 58)
+        Me.Label26.Name = "Label26"
+        Me.Label26.Size = New System.Drawing.Size(19, 13)
+        Me.Label26.TabIndex = 10
+        Me.Label26.Text = "11"
+        '
+        'Label25
+        '
+        Me.Label25.AutoSize = True
+        Me.Label25.Location = New System.Drawing.Point(183, 39)
+        Me.Label25.Name = "Label25"
+        Me.Label25.Size = New System.Drawing.Size(19, 13)
+        Me.Label25.TabIndex = 9
+        Me.Label25.Text = "10"
+        '
+        'Label24
+        '
+        Me.Label24.AutoSize = True
+        Me.Label24.Location = New System.Drawing.Point(189, 20)
+        Me.Label24.Name = "Label24"
+        Me.Label24.Size = New System.Drawing.Size(13, 13)
+        Me.Label24.TabIndex = 8
+        Me.Label24.Text = "9"
+        '
+        'Label23
+        '
+        Me.Label23.AutoSize = True
+        Me.Label23.Location = New System.Drawing.Point(15, 153)
+        Me.Label23.Name = "Label23"
+        Me.Label23.Size = New System.Drawing.Size(13, 13)
+        Me.Label23.TabIndex = 7
+        Me.Label23.Text = "8"
+        '
+        'Label22
+        '
+        Me.Label22.AutoSize = True
+        Me.Label22.Location = New System.Drawing.Point(15, 134)
+        Me.Label22.Name = "Label22"
+        Me.Label22.Size = New System.Drawing.Size(13, 13)
+        Me.Label22.TabIndex = 6
+        Me.Label22.Text = "7"
+        '
+        'Label21
+        '
+        Me.Label21.AutoSize = True
+        Me.Label21.Location = New System.Drawing.Point(15, 115)
+        Me.Label21.Name = "Label21"
+        Me.Label21.Size = New System.Drawing.Size(13, 13)
+        Me.Label21.TabIndex = 5
+        Me.Label21.Text = "6"
+        '
+        'Label20
+        '
+        Me.Label20.AutoSize = True
+        Me.Label20.Location = New System.Drawing.Point(15, 96)
+        Me.Label20.Name = "Label20"
+        Me.Label20.Size = New System.Drawing.Size(13, 13)
+        Me.Label20.TabIndex = 4
+        Me.Label20.Text = "5"
+        '
+        'Label19
+        '
+        Me.Label19.AutoSize = True
+        Me.Label19.Location = New System.Drawing.Point(15, 77)
+        Me.Label19.Name = "Label19"
+        Me.Label19.Size = New System.Drawing.Size(13, 13)
+        Me.Label19.TabIndex = 3
+        Me.Label19.Text = "4"
+        '
+        'Label18
+        '
+        Me.Label18.AutoSize = True
+        Me.Label18.Location = New System.Drawing.Point(15, 58)
+        Me.Label18.Name = "Label18"
+        Me.Label18.Size = New System.Drawing.Size(13, 13)
+        Me.Label18.TabIndex = 2
+        Me.Label18.Text = "3"
+        '
+        'Label15
+        '
+        Me.Label15.AutoSize = True
+        Me.Label15.Location = New System.Drawing.Point(15, 39)
+        Me.Label15.Name = "Label15"
+        Me.Label15.Size = New System.Drawing.Size(13, 13)
+        Me.Label15.TabIndex = 1
+        Me.Label15.Text = "2"
+        '
+        'Label4
+        '
+        Me.Label4.AutoSize = True
+        Me.Label4.Location = New System.Drawing.Point(15, 20)
+        Me.Label4.Name = "Label4"
+        Me.Label4.Size = New System.Drawing.Size(13, 13)
+        Me.Label4.TabIndex = 0
+        Me.Label4.Text = "1"
         '
         'tabGroupMembers
         '
+        Me.tabGroupMembers.BackColor = System.Drawing.SystemColors.Control
+        Me.tabGroupMembers.Controls.Add(Me.cbDN)
+        Me.tabGroupMembers.Controls.Add(Me.cbMail)
+        Me.tabGroupMembers.Controls.Add(Me.cbDisplay)
+        Me.tabGroupMembers.Controls.Add(Me.cbLogon)
+        Me.tabGroupMembers.Controls.Add(Me.DGVMembers)
         Me.tabGroupMembers.Controls.Add(Me.btnExportUsers)
-        Me.tabGroupMembers.Controls.Add(Me.Label4)
-        Me.tabGroupMembers.Controls.Add(Me.comboGroupUserProperty)
         Me.tabGroupMembers.Controls.Add(Me.lblGroupName)
-        Me.tabGroupMembers.Controls.Add(Me.listBoxMembers)
         Me.tabGroupMembers.Location = New System.Drawing.Point(4, 22)
         Me.tabGroupMembers.Name = "tabGroupMembers"
         Me.tabGroupMembers.Size = New System.Drawing.Size(381, 287)
         Me.tabGroupMembers.TabIndex = 4
         Me.tabGroupMembers.Text = "Members"
-        Me.tabGroupMembers.UseVisualStyleBackColor = True
+        '
+        'cbDN
+        '
+        Me.cbDN.AutoSize = True
+        Me.cbDN.Location = New System.Drawing.Point(101, 271)
+        Me.cbDN.Name = "cbDN"
+        Me.cbDN.Size = New System.Drawing.Size(67, 17)
+        Me.cbDN.TabIndex = 9
+        Me.cbDN.Text = "aDsPath"
+        Me.cbDN.UseVisualStyleBackColor = True
+        '
+        'cbMail
+        '
+        Me.cbMail.AutoSize = True
+        Me.cbMail.Location = New System.Drawing.Point(101, 257)
+        Me.cbMail.Name = "cbMail"
+        Me.cbMail.Size = New System.Drawing.Size(51, 17)
+        Me.cbMail.TabIndex = 8
+        Me.cbMail.Text = "Email"
+        Me.cbMail.UseVisualStyleBackColor = True
+        '
+        'cbDisplay
+        '
+        Me.cbDisplay.AutoSize = True
+        Me.cbDisplay.Location = New System.Drawing.Point(4, 271)
+        Me.cbDisplay.Name = "cbDisplay"
+        Me.cbDisplay.Size = New System.Drawing.Size(91, 17)
+        Me.cbDisplay.TabIndex = 7
+        Me.cbDisplay.Text = "Display Name"
+        Me.cbDisplay.UseVisualStyleBackColor = True
+        '
+        'cbLogon
+        '
+        Me.cbLogon.AutoSize = True
+        Me.cbLogon.Location = New System.Drawing.Point(4, 257)
+        Me.cbLogon.Name = "cbLogon"
+        Me.cbLogon.Size = New System.Drawing.Size(87, 17)
+        Me.cbLogon.TabIndex = 6
+        Me.cbLogon.Text = "Logon Name"
+        Me.cbLogon.UseVisualStyleBackColor = True
+        '
+        'DGVMembers
+        '
+        Me.DGVMembers.AllowUserToAddRows = False
+        Me.DGVMembers.AllowUserToDeleteRows = False
+        Me.DGVMembers.AllowUserToResizeRows = False
+        Me.DGVMembers.BackgroundColor = System.Drawing.SystemColors.Window
+        Me.DGVMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGVMembers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colSAM, Me.colDisplay, Me.colMail, Me.colDN})
+        Me.DGVMembers.GridColor = System.Drawing.SystemColors.ControlLight
+        Me.DGVMembers.Location = New System.Drawing.Point(3, 21)
+        Me.DGVMembers.Name = "DGVMembers"
+        Me.DGVMembers.ReadOnly = True
+        Me.DGVMembers.RowHeadersVisible = False
+        Me.DGVMembers.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.DGVMembers.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.DeepSkyBlue
+        Me.DGVMembers.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
+        Me.DGVMembers.RowTemplate.Height = 21
+        Me.DGVMembers.Size = New System.Drawing.Size(375, 235)
+        Me.DGVMembers.TabIndex = 5
+        '
+        'colSAM
+        '
+        Me.colSAM.HeaderText = "Logon name"
+        Me.colSAM.Name = "colSAM"
+        Me.colSAM.ReadOnly = True
+        Me.colSAM.Width = 120
+        '
+        'colDisplay
+        '
+        Me.colDisplay.HeaderText = "Display Name"
+        Me.colDisplay.Name = "colDisplay"
+        Me.colDisplay.ReadOnly = True
+        Me.colDisplay.Width = 250
+        '
+        'colMail
+        '
+        Me.colMail.HeaderText = "Email Address"
+        Me.colMail.Name = "colMail"
+        Me.colMail.ReadOnly = True
+        Me.colMail.Visible = False
+        '
+        'colDN
+        '
+        Me.colDN.HeaderText = "aDsPath"
+        Me.colDN.Name = "colDN"
+        Me.colDN.ReadOnly = True
+        Me.colDN.Visible = False
         '
         'btnExportUsers
         '
         Me.btnExportUsers.Enabled = False
-        Me.btnExportUsers.Location = New System.Drawing.Point(288, 261)
+        Me.btnExportUsers.Location = New System.Drawing.Point(304, 260)
         Me.btnExportUsers.Name = "btnExportUsers"
         Me.btnExportUsers.Size = New System.Drawing.Size(75, 23)
         Me.btnExportUsers.TabIndex = 4
         Me.btnExportUsers.Text = "export"
         Me.btnExportUsers.UseVisualStyleBackColor = True
         '
-        'Label4
-        '
-        Me.Label4.AutoSize = True
-        Me.Label4.Location = New System.Drawing.Point(110, 11)
-        Me.Label4.Name = "Label4"
-        Me.Label4.Size = New System.Drawing.Size(90, 13)
-        Me.Label4.TabIndex = 3
-        Me.Label4.Text = "property to return:"
-        '
-        'comboGroupUserProperty
-        '
-        Me.comboGroupUserProperty.FormattingEnabled = True
-        Me.comboGroupUserProperty.Items.AddRange(New Object() {"sAMAccountName", "displayName", "description"})
-        Me.comboGroupUserProperty.Location = New System.Drawing.Point(203, 8)
-        Me.comboGroupUserProperty.Name = "comboGroupUserProperty"
-        Me.comboGroupUserProperty.Size = New System.Drawing.Size(160, 21)
-        Me.comboGroupUserProperty.TabIndex = 2
-        '
         'lblGroupName
         '
         Me.lblGroupName.AutoSize = True
-        Me.lblGroupName.Location = New System.Drawing.Point(19, 36)
+        Me.lblGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblGroupName.Location = New System.Drawing.Point(7, 5)
         Me.lblGroupName.Name = "lblGroupName"
         Me.lblGroupName.Size = New System.Drawing.Size(0, 13)
         Me.lblGroupName.TabIndex = 1
-        '
-        'listBoxMembers
-        '
-        Me.listBoxMembers.FormattingEnabled = True
-        Me.listBoxMembers.Location = New System.Drawing.Point(20, 57)
-        Me.listBoxMembers.Name = "listBoxMembers"
-        Me.listBoxMembers.Size = New System.Drawing.Size(343, 199)
-        Me.listBoxMembers.Sorted = True
-        Me.listBoxMembers.TabIndex = 0
         '
         'gbSearch
         '
@@ -665,10 +1066,10 @@ Partial Class ADmgmt
         Me.radioGroups.AutoSize = True
         Me.radioGroups.FlatAppearance.BorderSize = 3
         Me.radioGroups.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioGroups.Location = New System.Drawing.Point(318, 29)
+        Me.radioGroups.Location = New System.Drawing.Point(19, 35)
         Me.radioGroups.Name = "radioGroups"
         Me.radioGroups.Size = New System.Drawing.Size(58, 17)
-        Me.radioGroups.TabIndex = 8
+        Me.radioGroups.TabIndex = 2
         Me.radioGroups.Text = "Groups"
         Me.radioGroups.UseVisualStyleBackColor = True
         '
@@ -678,10 +1079,10 @@ Partial Class ADmgmt
         Me.radioUsers.Checked = True
         Me.radioUsers.FlatAppearance.BorderSize = 3
         Me.radioUsers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioUsers.Location = New System.Drawing.Point(318, 13)
+        Me.radioUsers.Location = New System.Drawing.Point(19, 19)
         Me.radioUsers.Name = "radioUsers"
         Me.radioUsers.Size = New System.Drawing.Size(51, 17)
-        Me.radioUsers.TabIndex = 7
+        Me.radioUsers.TabIndex = 1
         Me.radioUsers.TabStop = True
         Me.radioUsers.Text = "Users"
         Me.radioUsers.UseVisualStyleBackColor = True
@@ -729,11 +1130,22 @@ Partial Class ADmgmt
         Me.Panel1.Size = New System.Drawing.Size(412, 26)
         Me.Panel1.TabIndex = 11
         '
+        'customDomainCombo
+        '
+        Me.customDomainCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.customDomainCombo.FormattingEnabled = True
+        Me.customDomainCombo.Items.AddRange(New Object() {" (edit custom domains)"})
+        Me.customDomainCombo.Location = New System.Drawing.Point(284, 6)
+        Me.customDomainCombo.Name = "customDomainCombo"
+        Me.customDomainCombo.Size = New System.Drawing.Size(121, 20)
+        Me.customDomainCombo.TabIndex = 100001
+        '
         'ADmgmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(412, 510)
+        Me.Controls.Add(Me.customDomainCombo)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.gbSearch)
         Me.Controls.Add(Me.adTabControl)
@@ -752,8 +1164,12 @@ Partial Class ADmgmt
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.tabMemberOf.ResumeLayout(False)
+        Me.tabCustom.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
+        Me.GroupBox3.PerformLayout()
         Me.tabGroupMembers.ResumeLayout(False)
         Me.tabGroupMembers.PerformLayout()
+        CType(Me.DGVMembers, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbSearch.ResumeLayout(False)
         Me.gbSearch.PerformLayout()
         Me.TableLayoutPanel1.ResumeLayout(False)
@@ -794,7 +1210,6 @@ Partial Class ADmgmt
     Friend WithEvents radioGroups As System.Windows.Forms.RadioButton
     Friend WithEvents radioUsers As System.Windows.Forms.RadioButton
     Friend WithEvents tabGroupMembers As System.Windows.Forms.TabPage
-    Friend WithEvents listBoxMembers As System.Windows.Forms.ListBox
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtCompany As System.Windows.Forms.TextBox
     Friend WithEvents Label13 As System.Windows.Forms.Label
@@ -808,8 +1223,6 @@ Partial Class ADmgmt
     Friend WithEvents lbMemberOf As System.Windows.Forms.ListBox
     Friend WithEvents lblGroupName As System.Windows.Forms.Label
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
-    Friend WithEvents comboGroupUserProperty As System.Windows.Forms.ComboBox
-    Friend WithEvents Label4 As System.Windows.Forms.Label
     Friend WithEvents btnExportUsers As System.Windows.Forms.Button
     Friend WithEvents Label5 As System.Windows.Forms.Label
     Friend WithEvents txtTSProfile As System.Windows.Forms.TextBox
@@ -825,4 +1238,45 @@ Partial Class ADmgmt
     Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
     Friend WithEvents cbAllowTSLogon As System.Windows.Forms.CheckBox
     Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents DGVMembers As System.Windows.Forms.DataGridView
+    Friend WithEvents cbLogon As System.Windows.Forms.CheckBox
+    Friend WithEvents cbDN As System.Windows.Forms.CheckBox
+    Friend WithEvents cbMail As System.Windows.Forms.CheckBox
+    Friend WithEvents cbDisplay As System.Windows.Forms.CheckBox
+    Friend WithEvents colSAM As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDisplay As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colMail As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDN As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents customDomainCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
+    Friend WithEvents Label25 As System.Windows.Forms.Label
+    Friend WithEvents Label24 As System.Windows.Forms.Label
+    Friend WithEvents Label23 As System.Windows.Forms.Label
+    Friend WithEvents Label22 As System.Windows.Forms.Label
+    Friend WithEvents Label21 As System.Windows.Forms.Label
+    Friend WithEvents Label20 As System.Windows.Forms.Label
+    Friend WithEvents Label19 As System.Windows.Forms.Label
+    Friend WithEvents Label18 As System.Windows.Forms.Label
+    Friend WithEvents Label15 As System.Windows.Forms.Label
+    Friend WithEvents Label4 As System.Windows.Forms.Label
+    Friend WithEvents ea15 As System.Windows.Forms.TextBox
+    Friend WithEvents ea14 As System.Windows.Forms.TextBox
+    Friend WithEvents ea13 As System.Windows.Forms.TextBox
+    Friend WithEvents ea12 As System.Windows.Forms.TextBox
+    Friend WithEvents ea11 As System.Windows.Forms.TextBox
+    Friend WithEvents ea10 As System.Windows.Forms.TextBox
+    Friend WithEvents ea9 As System.Windows.Forms.TextBox
+    Friend WithEvents ea8 As System.Windows.Forms.TextBox
+    Friend WithEvents ea7 As System.Windows.Forms.TextBox
+    Friend WithEvents ea6 As System.Windows.Forms.TextBox
+    Friend WithEvents ea5 As System.Windows.Forms.TextBox
+    Friend WithEvents ea4 As System.Windows.Forms.TextBox
+    Friend WithEvents ea3 As System.Windows.Forms.TextBox
+    Friend WithEvents ea2 As System.Windows.Forms.TextBox
+    Friend WithEvents ea1 As System.Windows.Forms.TextBox
+    Friend WithEvents Label30 As System.Windows.Forms.Label
+    Friend WithEvents Label29 As System.Windows.Forms.Label
+    Friend WithEvents Label28 As System.Windows.Forms.Label
+    Friend WithEvents Label27 As System.Windows.Forms.Label
+    Friend WithEvents Label26 As System.Windows.Forms.Label
 End Class
