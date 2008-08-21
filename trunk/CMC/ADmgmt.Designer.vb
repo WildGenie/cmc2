@@ -56,16 +56,20 @@ Partial Class ADmgmt
         Me.txtInitials = New System.Windows.Forms.TextBox
         Me.txtFirstName = New System.Windows.Forms.TextBox
         Me.tabProfile = New System.Windows.Forms.TabPage
-        Me.txtTSProfile = New System.Windows.Forms.TextBox
-        Me.Label17 = New System.Windows.Forms.Label
-        Me.txtTSHomeFolder = New System.Windows.Forms.TextBox
-        Me.Label16 = New System.Windows.Forms.Label
-        Me.Label15 = New System.Windows.Forms.Label
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.txtHomeFolder = New System.Windows.Forms.TextBox
+        Me.Label5 = New System.Windows.Forms.Label
+        Me.txtHomeDrive = New System.Windows.Forms.TextBox
         Me.txtHomeProfile = New System.Windows.Forms.TextBox
         Me.Label14 = New System.Windows.Forms.Label
-        Me.txtHomeFolder = New System.Windows.Forms.TextBox
-        Me.txtHomeDrive = New System.Windows.Forms.TextBox
-        Me.Label5 = New System.Windows.Forms.Label
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.cbAllowTSLogon = New System.Windows.Forms.CheckBox
+        Me.txtTSHomeFolder = New System.Windows.Forms.TextBox
+        Me.Label16 = New System.Windows.Forms.Label
+        Me.txtTSDrive = New System.Windows.Forms.TextBox
+        Me.Label17 = New System.Windows.Forms.Label
+        Me.txtTSProfile = New System.Windows.Forms.TextBox
+        Me.btnProfileSave = New System.Windows.Forms.Button
         Me.tabMemberOf = New System.Windows.Forms.TabPage
         Me.lbMemberOf = New System.Windows.Forms.ListBox
         Me.tabCustom = New System.Windows.Forms.TabPage
@@ -82,11 +86,12 @@ Partial Class ADmgmt
         Me.btnClear = New System.Windows.Forms.Button
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
         Me.Panel1 = New System.Windows.Forms.Panel
-        Me.txtTSDrive = New System.Windows.Forms.TextBox
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
         Me.tabProfile.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.tabMemberOf.SuspendLayout()
         Me.tabGroupMembers.SuspendLayout()
         Me.gbSearch.SuspendLayout()
@@ -297,7 +302,7 @@ Partial Class ADmgmt
         'txtTelephone
         '
         Me.txtTelephone.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTelephone.Location = New System.Drawing.Point(93, 127)
+        Me.txtTelephone.Location = New System.Drawing.Point(279, 127)
         Me.txtTelephone.Name = "txtTelephone"
         Me.txtTelephone.Size = New System.Drawing.Size(85, 20)
         Me.txtTelephone.TabIndex = 14
@@ -316,17 +321,17 @@ Partial Class ADmgmt
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(12, 130)
+        Me.Label9.Location = New System.Drawing.Point(241, 130)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(61, 13)
+        Me.Label9.Size = New System.Drawing.Size(41, 13)
         Me.Label9.TabIndex = 12
-        Me.Label9.Text = "Telephone:"
+        Me.Label9.Text = "Phone:"
         '
         'Label8
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(191, 130)
+        Me.Label8.Location = New System.Drawing.Point(12, 130)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(38, 13)
         Me.Label8.TabIndex = 11
@@ -365,9 +370,9 @@ Partial Class ADmgmt
         'txtOffice
         '
         Me.txtOffice.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOffice.Location = New System.Drawing.Point(235, 127)
+        Me.txtOffice.Location = New System.Drawing.Point(93, 127)
         Me.txtOffice.Name = "txtOffice"
-        Me.txtOffice.Size = New System.Drawing.Size(129, 20)
+        Me.txtOffice.Size = New System.Drawing.Size(143, 20)
         Me.txtOffice.TabIndex = 5
         '
         'txtDescription
@@ -413,17 +418,9 @@ Partial Class ADmgmt
         'tabProfile
         '
         Me.tabProfile.BackColor = System.Drawing.Color.Transparent
-        Me.tabProfile.Controls.Add(Me.txtTSDrive)
-        Me.tabProfile.Controls.Add(Me.txtTSProfile)
-        Me.tabProfile.Controls.Add(Me.Label17)
-        Me.tabProfile.Controls.Add(Me.txtTSHomeFolder)
-        Me.tabProfile.Controls.Add(Me.Label16)
-        Me.tabProfile.Controls.Add(Me.Label15)
-        Me.tabProfile.Controls.Add(Me.txtHomeProfile)
-        Me.tabProfile.Controls.Add(Me.Label14)
-        Me.tabProfile.Controls.Add(Me.txtHomeFolder)
-        Me.tabProfile.Controls.Add(Me.txtHomeDrive)
-        Me.tabProfile.Controls.Add(Me.Label5)
+        Me.tabProfile.Controls.Add(Me.GroupBox2)
+        Me.tabProfile.Controls.Add(Me.GroupBox1)
+        Me.tabProfile.Controls.Add(Me.btnProfileSave)
         Me.tabProfile.Location = New System.Drawing.Point(4, 22)
         Me.tabProfile.Name = "tabProfile"
         Me.tabProfile.Padding = New System.Windows.Forms.Padding(3)
@@ -432,50 +429,46 @@ Partial Class ADmgmt
         Me.tabProfile.Text = "Profile"
         Me.tabProfile.UseVisualStyleBackColor = True
         '
-        'txtTSProfile
+        'GroupBox2
         '
-        Me.txtTSProfile.Location = New System.Drawing.Point(111, 152)
-        Me.txtTSProfile.Name = "txtTSProfile"
-        Me.txtTSProfile.Size = New System.Drawing.Size(254, 20)
-        Me.txtTSProfile.TabIndex = 9
+        Me.GroupBox2.Controls.Add(Me.txtHomeFolder)
+        Me.GroupBox2.Controls.Add(Me.Label5)
+        Me.GroupBox2.Controls.Add(Me.txtHomeDrive)
+        Me.GroupBox2.Controls.Add(Me.txtHomeProfile)
+        Me.GroupBox2.Controls.Add(Me.Label14)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 9)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(356, 71)
+        Me.GroupBox2.TabIndex = 13
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "User Profile"
         '
-        'Label17
+        'txtHomeFolder
         '
-        Me.Label17.AutoSize = True
-        Me.Label17.Location = New System.Drawing.Point(24, 155)
-        Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(36, 13)
-        Me.Label17.TabIndex = 8
-        Me.Label17.Text = "Profile"
+        Me.txtHomeFolder.Location = New System.Drawing.Point(136, 15)
+        Me.txtHomeFolder.Name = "txtHomeFolder"
+        Me.txtHomeFolder.Size = New System.Drawing.Size(209, 20)
+        Me.txtHomeFolder.TabIndex = 2
         '
-        'txtTSHomeFolder
+        'Label5
         '
-        Me.txtTSHomeFolder.Location = New System.Drawing.Point(156, 125)
-        Me.txtTSHomeFolder.Name = "txtTSHomeFolder"
-        Me.txtTSHomeFolder.Size = New System.Drawing.Size(209, 20)
-        Me.txtTSHomeFolder.TabIndex = 7
+        Me.Label5.AutoSize = True
+        Me.Label5.Location = New System.Drawing.Point(4, 18)
+        Me.Label5.Name = "Label5"
+        Me.Label5.Size = New System.Drawing.Size(80, 13)
+        Me.Label5.TabIndex = 0
+        Me.Label5.Text = "Home Directory"
         '
-        'Label16
+        'txtHomeDrive
         '
-        Me.Label16.AutoSize = True
-        Me.Label16.Location = New System.Drawing.Point(24, 128)
-        Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(67, 13)
-        Me.Label16.TabIndex = 6
-        Me.Label16.Text = "Home Folder"
-        '
-        'Label15
-        '
-        Me.Label15.AutoSize = True
-        Me.Label15.Location = New System.Drawing.Point(6, 104)
-        Me.Label15.Name = "Label15"
-        Me.Label15.Size = New System.Drawing.Size(91, 13)
-        Me.Label15.TabIndex = 5
-        Me.Label15.Text = "Terminal Services"
+        Me.txtHomeDrive.Location = New System.Drawing.Point(91, 15)
+        Me.txtHomeDrive.Name = "txtHomeDrive"
+        Me.txtHomeDrive.Size = New System.Drawing.Size(29, 20)
+        Me.txtHomeDrive.TabIndex = 1
         '
         'txtHomeProfile
         '
-        Me.txtHomeProfile.Location = New System.Drawing.Point(111, 58)
+        Me.txtHomeProfile.Location = New System.Drawing.Point(91, 40)
         Me.txtHomeProfile.Name = "txtHomeProfile"
         Me.txtHomeProfile.Size = New System.Drawing.Size(254, 20)
         Me.txtHomeProfile.TabIndex = 4
@@ -483,34 +476,84 @@ Partial Class ADmgmt
         'Label14
         '
         Me.Label14.AutoSize = True
-        Me.Label14.Location = New System.Drawing.Point(24, 61)
+        Me.Label14.Location = New System.Drawing.Point(4, 43)
         Me.Label14.Name = "Label14"
         Me.Label14.Size = New System.Drawing.Size(61, 13)
         Me.Label14.TabIndex = 3
         Me.Label14.Text = "Profile Path"
         '
-        'txtHomeFolder
+        'GroupBox1
         '
-        Me.txtHomeFolder.Location = New System.Drawing.Point(156, 30)
-        Me.txtHomeFolder.Name = "txtHomeFolder"
-        Me.txtHomeFolder.Size = New System.Drawing.Size(209, 20)
-        Me.txtHomeFolder.TabIndex = 2
+        Me.GroupBox1.Controls.Add(Me.cbAllowTSLogon)
+        Me.GroupBox1.Controls.Add(Me.txtTSHomeFolder)
+        Me.GroupBox1.Controls.Add(Me.Label16)
+        Me.GroupBox1.Controls.Add(Me.txtTSDrive)
+        Me.GroupBox1.Controls.Add(Me.Label17)
+        Me.GroupBox1.Controls.Add(Me.txtTSProfile)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, 92)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(356, 91)
+        Me.GroupBox1.TabIndex = 12
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Terminal Services Profile"
         '
-        'txtHomeDrive
+        'cbAllowTSLogon
         '
-        Me.txtHomeDrive.Location = New System.Drawing.Point(111, 30)
-        Me.txtHomeDrive.Name = "txtHomeDrive"
-        Me.txtHomeDrive.Size = New System.Drawing.Size(29, 20)
-        Me.txtHomeDrive.TabIndex = 1
+        Me.cbAllowTSLogon.AutoSize = True
+        Me.cbAllowTSLogon.Location = New System.Drawing.Point(91, 67)
+        Me.cbAllowTSLogon.Name = "cbAllowTSLogon"
+        Me.cbAllowTSLogon.Size = New System.Drawing.Size(163, 17)
+        Me.cbAllowTSLogon.TabIndex = 11
+        Me.cbAllowTSLogon.Text = "Allow logon to terminal server"
+        Me.cbAllowTSLogon.UseVisualStyleBackColor = True
         '
-        'Label5
+        'txtTSHomeFolder
         '
-        Me.Label5.AutoSize = True
-        Me.Label5.Location = New System.Drawing.Point(24, 33)
-        Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(80, 13)
-        Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Home Directory"
+        Me.txtTSHomeFolder.Location = New System.Drawing.Point(136, 19)
+        Me.txtTSHomeFolder.Name = "txtTSHomeFolder"
+        Me.txtTSHomeFolder.Size = New System.Drawing.Size(209, 20)
+        Me.txtTSHomeFolder.TabIndex = 7
+        '
+        'Label16
+        '
+        Me.Label16.AutoSize = True
+        Me.Label16.Location = New System.Drawing.Point(4, 22)
+        Me.Label16.Name = "Label16"
+        Me.Label16.Size = New System.Drawing.Size(67, 13)
+        Me.Label16.TabIndex = 6
+        Me.Label16.Text = "Home Folder"
+        '
+        'txtTSDrive
+        '
+        Me.txtTSDrive.Location = New System.Drawing.Point(91, 20)
+        Me.txtTSDrive.Name = "txtTSDrive"
+        Me.txtTSDrive.Size = New System.Drawing.Size(29, 20)
+        Me.txtTSDrive.TabIndex = 10
+        '
+        'Label17
+        '
+        Me.Label17.AutoSize = True
+        Me.Label17.Location = New System.Drawing.Point(4, 46)
+        Me.Label17.Name = "Label17"
+        Me.Label17.Size = New System.Drawing.Size(36, 13)
+        Me.Label17.TabIndex = 8
+        Me.Label17.Text = "Profile"
+        '
+        'txtTSProfile
+        '
+        Me.txtTSProfile.Location = New System.Drawing.Point(91, 43)
+        Me.txtTSProfile.Name = "txtTSProfile"
+        Me.txtTSProfile.Size = New System.Drawing.Size(254, 20)
+        Me.txtTSProfile.TabIndex = 9
+        '
+        'btnProfileSave
+        '
+        Me.btnProfileSave.Location = New System.Drawing.Point(297, 258)
+        Me.btnProfileSave.Name = "btnProfileSave"
+        Me.btnProfileSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnProfileSave.TabIndex = 11
+        Me.btnProfileSave.Text = "Save"
+        Me.btnProfileSave.UseVisualStyleBackColor = True
         '
         'tabMemberOf
         '
@@ -686,13 +729,6 @@ Partial Class ADmgmt
         Me.Panel1.Size = New System.Drawing.Size(412, 26)
         Me.Panel1.TabIndex = 11
         '
-        'txtTSDrive
-        '
-        Me.txtTSDrive.Location = New System.Drawing.Point(111, 126)
-        Me.txtTSDrive.Name = "txtTSDrive"
-        Me.txtTSDrive.Size = New System.Drawing.Size(29, 20)
-        Me.txtTSDrive.TabIndex = 10
-        '
         'ADmgmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -711,7 +747,10 @@ Partial Class ADmgmt
         Me.tabAccount.ResumeLayout(False)
         Me.tabAccount.PerformLayout()
         Me.tabProfile.ResumeLayout(False)
-        Me.tabProfile.PerformLayout()
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.tabMemberOf.ResumeLayout(False)
         Me.tabGroupMembers.ResumeLayout(False)
         Me.tabGroupMembers.PerformLayout()
@@ -777,10 +816,13 @@ Partial Class ADmgmt
     Friend WithEvents Label17 As System.Windows.Forms.Label
     Friend WithEvents txtTSHomeFolder As System.Windows.Forms.TextBox
     Friend WithEvents Label16 As System.Windows.Forms.Label
-    Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents txtHomeProfile As System.Windows.Forms.TextBox
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtHomeFolder As System.Windows.Forms.TextBox
     Friend WithEvents txtHomeDrive As System.Windows.Forms.TextBox
     Friend WithEvents txtTSDrive As System.Windows.Forms.TextBox
+    Friend WithEvents btnProfileSave As System.Windows.Forms.Button
+    Friend WithEvents GroupBox1 As System.Windows.Forms.GroupBox
+    Friend WithEvents cbAllowTSLogon As System.Windows.Forms.CheckBox
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
 End Class

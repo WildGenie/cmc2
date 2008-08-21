@@ -341,6 +341,7 @@ Public Class ADmgmt
         Me.txtTSProfile.Text = m_TsUser.TerminalServicesProfilePath
         Me.txtTSDrive.Text = m_TsUser.TerminalServicesHomeDrive
         Me.txtTSHomeFolder.Text = m_TsUser.TerminalServicesHomeDirectory
+        Me.cbAllowTSLogon.Checked = m_TsUser.AllowLogon
         'entry1.CommitChanges()
 
         For Each gp As String In GetGroups(sAccountName)
@@ -497,9 +498,44 @@ Public Class ADmgmt
             SetADProperty(dirEntryResults, "company", Me.txtCompany.Text)
 
             ' Commit the changes
-            dirEntryResults.CommitChanges()
+            Try
+                dirEntryResults.CommitChanges()
+            Catch ex As System.DirectoryServices.DirectoryServicesCOMException
+                MsgBox("Unable to commit changes - An error has occurred." & vbCr & vbCr & ex.Message)
+            End Try
+
             dirEntryResults.Close()
         End If
+
+    End Sub
+    Private Sub UpdateUserTSProperties(ByVal userLogin As String)
+
+        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
+        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
+        Searcher.SearchScope = SearchScope.Subtree
+
+        Dim Result As SearchResult = Searcher.FindOne()
+
+        If Not Result Is Nothing Then
+
+            Dim entry1 As DirectoryEntry = New DirectoryEntry(Me._LDAPHeader & Me.GetProperty(Result, "distinguishedName"))
+            Dim iADsUser1 As ActiveDs.IADsUser = CType(entry1.NativeObject, ActiveDs.IADsUser)
+            Dim m_TsUser As TSUSEREXLib.IADsTSUserEx = CType(iADsUser1, TSUSEREXLib.IADsTSUserEx)
+            m_TsUser.TerminalServicesProfilePath = Me.txtTSProfile.Text
+            m_TsUser.TerminalServicesHomeDrive = Me.txtTSDrive.Text
+            m_TsUser.TerminalServicesHomeDirectory = Me.txtTSHomeFolder.Text
+            If Me.cbAllowTSLogon.Checked Then
+                m_TsUser.AllowLogon = 1
+            Else
+                m_TsUser.AllowLogon = 0
+            End If
+
+            entry1.CommitChanges()
+            entry1.Close()
+
+        End If
+
+        Searcher.Dispose()
 
     End Sub
 
@@ -615,7 +651,6 @@ Public Class ADmgmt
             dirEntryResults.Close()
         End If
     End Sub
-
 
 
     ''' <summary>
@@ -800,6 +835,9 @@ Public Class ADmgmt
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         UpdateUserAccountProperties(Me.txtSAM.Text)
     End Sub
+    Private Sub btnProfileSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProfileSave.Click
+        UpdateUserTSProperties(Me.txtSAM.Text)
+    End Sub
 
     ' Account Properties changed - enable save button
     Private Sub txtFirstName_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtFirstName.TextChanged
@@ -905,6 +943,7 @@ Public Class ADmgmt
         Me.adTabControl.TabPages(Index1) = tp2
         Me.adTabControl.TabPages(Index2) = tp1
     End Sub
+
 
 End Class
 
