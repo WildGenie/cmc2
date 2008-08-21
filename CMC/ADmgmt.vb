@@ -16,6 +16,7 @@ Public Class ADmgmt
     Private _ADUsername As String
     Private _ADPassword As String
     Private de As DirectoryEntry
+    Dim m_TsUser As TSUSEREXLib.IADsTSUserEx
 
     Public Enum ADAccountOptions
         UF_TEMP_DUPLICATE_ACCOUNT = 256
@@ -211,8 +212,11 @@ Public Class ADmgmt
         Me.txtHomeProfile.Text = String.Empty
         Me.txtHomeFolder.Text = String.Empty
         Me.txtHomeDrive.Text = String.Empty
-
         Me.btnSave.Enabled = False
+
+        Me.txtTSProfile.Text = String.Empty
+        Me.txtTSDrive.Text = String.Empty
+        Me.txtTSHomeFolder.Text = String.Empty
 
         Me.lbMemberOf.Items.Clear()
 
@@ -326,11 +330,30 @@ Public Class ADmgmt
         Me.txtHomeDrive.Text = Me.GetProperty(result, "homeDrive")
 
         'http://msdn.microsoft.com/en-us/library/aa380823.aspx
+        'http://www.eggheadcafe.com/forumarchives/adsigeneral/Aug2005/post23514440.asp
+        'InitialiseTS()
+        'Me.txtTSProfile.Text = Me.m_TsUser.TerminalServicesProfilePath
+
+
+        Dim entry1 As DirectoryEntry = New DirectoryEntry(Me._LDAPHeader & Me.GetProperty(result, "distinguishedName"))
+        Dim iADsUser1 As ActiveDs.IADsUser = CType(entry1.NativeObject, ActiveDs.IADsUser)
+        Dim m_TsUser As TSUSEREXLib.IADsTSUserEx = CType(iADsUser1, TSUSEREXLib.IADsTSUserEx)
+        Me.txtTSProfile.Text = m_TsUser.TerminalServicesProfilePath
+        Me.txtTSDrive.Text = m_TsUser.TerminalServicesHomeDrive
+        Me.txtTSHomeFolder.Text = m_TsUser.TerminalServicesHomeDirectory
+        'entry1.CommitChanges()
 
         For Each gp As String In GetGroups(sAccountName)
             lbMemberOf.Items.Add(gp)
         Next
 
+    End Sub
+
+    Protected Sub InitialiseTS()
+        If (Me.m_TsUser Is Nothing) Then
+            Dim iADsUser As ActiveDs.IADsUser = CType(de, ActiveDs.IADsUser)
+            m_TsUser = CType(iADsUser, TSUSEREXLib.IADsTSUserEx)
+        End If
     End Sub
 
     Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
