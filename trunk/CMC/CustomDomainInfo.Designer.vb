@@ -219,6 +219,7 @@ Partial Class AddDomainInfo
         Me.txtPass.Name = "txtPass"
         Me.txtPass.Size = New System.Drawing.Size(115, 20)
         Me.txtPass.TabIndex = 4
+        Me.txtPass.UseSystemPasswordChar = True
         '
         'txtUser
         '
