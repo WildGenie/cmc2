@@ -31,6 +31,7 @@ Partial Class ADmgmt
         Me.DataSet1 = New System.Data.DataSet
         Me.adTabControl = New System.Windows.Forms.TabControl
         Me.tabAccount = New System.Windows.Forms.TabPage
+        Me.AccDisabled = New System.Windows.Forms.CheckBox
         Me.btnSave = New System.Windows.Forms.Button
         Me.Label13 = New System.Windows.Forms.Label
         Me.txtDepartment = New System.Windows.Forms.TextBox
@@ -56,6 +57,8 @@ Partial Class ADmgmt
         Me.txtInitials = New System.Windows.Forms.TextBox
         Me.txtFirstName = New System.Windows.Forms.TextBox
         Me.tabProfile = New System.Windows.Forms.TabPage
+        Me.txtExpires = New System.Windows.Forms.TextBox
+        Me.Label31 = New System.Windows.Forms.Label
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.txtHomeFolder = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
@@ -74,6 +77,7 @@ Partial Class ADmgmt
         Me.lbMemberOf = New System.Windows.Forms.ListBox
         Me.tabCustom = New System.Windows.Forms.TabPage
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.btnEaSave = New System.Windows.Forms.Button
         Me.ea15 = New System.Windows.Forms.TextBox
         Me.ea14 = New System.Windows.Forms.TextBox
         Me.ea13 = New System.Windows.Forms.TextBox
@@ -180,13 +184,13 @@ Partial Class ADmgmt
         '
         Me.SearchResults.BackColor = System.Drawing.Color.LightGoldenrodYellow
         Me.SearchResults.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.SearchResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.SearchResults.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.SearchResults.FormattingEnabled = True
-        Me.SearchResults.ItemHeight = 15
         Me.SearchResults.Location = New System.Drawing.Point(83, 47)
         Me.SearchResults.Name = "SearchResults"
-        Me.SearchResults.Size = New System.Drawing.Size(222, 62)
+        Me.SearchResults.Size = New System.Drawing.Size(222, 67)
         Me.SearchResults.TabIndex = 4
+        Me.SearchResults.Visible = False
         '
         'DataSet1
         '
@@ -210,6 +214,7 @@ Partial Class ADmgmt
         '
         Me.tabAccount.BackColor = System.Drawing.SystemColors.Control
         Me.tabAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabAccount.Controls.Add(Me.AccDisabled)
         Me.tabAccount.Controls.Add(Me.btnSave)
         Me.tabAccount.Controls.Add(Me.Label13)
         Me.tabAccount.Controls.Add(Me.txtDepartment)
@@ -241,15 +246,28 @@ Partial Class ADmgmt
         Me.tabAccount.TabIndex = 0
         Me.tabAccount.Text = "Account"
         '
+        'AccDisabled
+        '
+        Me.AccDisabled.AutoSize = True
+        Me.AccDisabled.CheckAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.AccDisabled.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.AccDisabled.Location = New System.Drawing.Point(93, 264)
+        Me.AccDisabled.Name = "AccDisabled"
+        Me.AccDisabled.Size = New System.Drawing.Size(117, 17)
+        Me.AccDisabled.TabIndex = 26
+        Me.AccDisabled.Text = "account is disabled"
+        Me.AccDisabled.UseVisualStyleBackColor = True
+        '
         'btnSave
         '
+        Me.btnSave.BackColor = System.Drawing.SystemColors.Control
         Me.btnSave.Enabled = False
         Me.btnSave.Location = New System.Drawing.Point(289, 257)
         Me.btnSave.Name = "btnSave"
         Me.btnSave.Size = New System.Drawing.Size(75, 23)
         Me.btnSave.TabIndex = 25
         Me.btnSave.Text = "Save"
-        Me.btnSave.UseVisualStyleBackColor = True
+        Me.btnSave.UseVisualStyleBackColor = False
         '
         'Label13
         '
@@ -462,6 +480,8 @@ Partial Class ADmgmt
         'tabProfile
         '
         Me.tabProfile.BackColor = System.Drawing.SystemColors.Control
+        Me.tabProfile.Controls.Add(Me.txtExpires)
+        Me.tabProfile.Controls.Add(Me.Label31)
         Me.tabProfile.Controls.Add(Me.GroupBox2)
         Me.tabProfile.Controls.Add(Me.GroupBox1)
         Me.tabProfile.Controls.Add(Me.btnProfileSave)
@@ -472,6 +492,23 @@ Partial Class ADmgmt
         Me.tabProfile.TabIndex = 1
         Me.tabProfile.Text = "Profile"
         '
+        'txtExpires
+        '
+        Me.txtExpires.Location = New System.Drawing.Point(107, 6)
+        Me.txtExpires.Name = "txtExpires"
+        Me.txtExpires.ReadOnly = True
+        Me.txtExpires.Size = New System.Drawing.Size(109, 20)
+        Me.txtExpires.TabIndex = 15
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(16, 9)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(87, 13)
+        Me.Label31.TabIndex = 14
+        Me.Label31.Text = "Account Expires:"
+        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtHomeFolder)
@@ -479,7 +516,7 @@ Partial Class ADmgmt
         Me.GroupBox2.Controls.Add(Me.txtHomeDrive)
         Me.GroupBox2.Controls.Add(Me.txtHomeProfile)
         Me.GroupBox2.Controls.Add(Me.Label14)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 37)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 72)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(356, 71)
         Me.GroupBox2.TabIndex = 13
@@ -533,7 +570,7 @@ Partial Class ADmgmt
         Me.GroupBox1.Controls.Add(Me.txtTSDrive)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.txtTSProfile)
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 139)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, 158)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(356, 91)
         Me.GroupBox1.TabIndex = 12
@@ -630,6 +667,7 @@ Partial Class ADmgmt
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.btnEaSave)
         Me.GroupBox3.Controls.Add(Me.ea15)
         Me.GroupBox3.Controls.Add(Me.ea14)
         Me.GroupBox3.Controls.Add(Me.ea13)
@@ -666,6 +704,15 @@ Partial Class ADmgmt
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "extension attributes"
+        '
+        'btnEaSave
+        '
+        Me.btnEaSave.Location = New System.Drawing.Point(254, 153)
+        Me.btnEaSave.Name = "btnEaSave"
+        Me.btnEaSave.Size = New System.Drawing.Size(75, 23)
+        Me.btnEaSave.TabIndex = 9017
+        Me.btnEaSave.Text = "Save"
+        Me.btnEaSave.UseVisualStyleBackColor = True
         '
         'ea15
         '
@@ -1159,6 +1206,7 @@ Partial Class ADmgmt
         Me.tabAccount.ResumeLayout(False)
         Me.tabAccount.PerformLayout()
         Me.tabProfile.ResumeLayout(False)
+        Me.tabProfile.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -1279,4 +1327,8 @@ Partial Class ADmgmt
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label26 As System.Windows.Forms.Label
+    Friend WithEvents txtExpires As System.Windows.Forms.TextBox
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents AccDisabled As System.Windows.Forms.CheckBox
+    Friend WithEvents btnEaSave As System.Windows.Forms.Button
 End Class
