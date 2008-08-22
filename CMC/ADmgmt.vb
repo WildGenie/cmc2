@@ -9,7 +9,7 @@ Imports System.Collections
 
 Public Class ADmgmt
 
-    Private domainList As New DataTable()
+    Protected Friend domainList As New DataTable()
     Private _LDAPPath As String
     Private _LDAPHeader As String
     Private _ADUsername As String
@@ -99,19 +99,14 @@ Public Class ADmgmt
         End If
 
 
-        '' Set domainList datatable as source for domain selection combo
-        'Me.DomainSelect.DataSource = domainList
-        'Me.DomainSelect.DisplayMember = "NetBIOSName"
-        ''Me.DomainSelect.ValueMember = "DnsName"
-
         Me.DomainSelect.Items.Add(" - Select Domain - ")
         For Each row As DataRow In domainList.Rows
             If Not String.IsNullOrEmpty(row(0)) Then Me.DomainSelect.Items.Add(row(0))
         Next
+        Me.DomainSelect.Sorted = True
         Me.DomainSelect.SelectedIndex = 0
 
     End Sub
-
     Private Sub DomainSelect_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DomainSelect.SelectedIndexChanged
 
         Me.UserTabs_Clear()
@@ -152,11 +147,11 @@ Public Class ADmgmt
         Me.Cursor = Cursors.Default
 
     End Sub
-
     Private Sub btnSearch_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSearch.Click
         Me.Cursor = Cursors.AppStarting
         If String.IsNullOrEmpty(Me.txtSearch.Text) Then Return
         Me.SearchResults.Items.Clear()
+        Me.SearchResults.Visible = True
 
         If Me.radioUsers.Checked Then
             SearchUser()
@@ -165,14 +160,13 @@ Public Class ADmgmt
         End If
         Me.Cursor = Cursors.Default
     End Sub
-
-    Private Sub SearchResults_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SearchResults.SelectedIndexChanged
-
+    Private Sub SearchResults_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles SearchResults.MouseDoubleClick
         UserTabs_Clear()
         Me.DGVMembers.Rows.Clear()
 
         If Me.radioUsers.Checked Then
             GetUserDetails(Me.SearchResults.SelectedItem.ToString)
+            Me.btnSave.Enabled = False
         ElseIf Me.radioGroups.Checked Then
             If Not Me.SearchResults.SelectedItem Is Nothing Then
                 Me.lblGroupName.Text = Me.SearchResults.SelectedItem.ToString
@@ -185,9 +179,7 @@ Public Class ADmgmt
             End If
 
         End If
-
     End Sub
-
     Private Sub UserTabs_Clear()
         Me.txtFirstName.Text = String.Empty
         Me.txtInitials.Text = String.Empty
@@ -210,6 +202,9 @@ Public Class ADmgmt
         Me.txtTSProfile.Text = String.Empty
         Me.txtTSDrive.Text = String.Empty
         Me.txtTSHomeFolder.Text = String.Empty
+
+        Me.txtExpires.Text = String.Empty
+        Me.AccDisabled.Checked = False
 
         Me.lbMemberOf.Items.Clear()
 
@@ -248,7 +243,12 @@ Public Class ADmgmt
             End Try
 
             For Each sResultSet As SearchResult In DirSearch.FindAll()
-                Me.SearchResults.Items.Add(Me.GetProperty(sResultSet, "sAMAccountName"))
+                Dim sAMAccount As String = Me.GetProperty(sResultSet, "sAMAccountName")
+                Me.SearchResults.Items.Add(sAMAccount)
+                If RecordCount = 1 Then
+                    GetUserDetails(sAMAccount)
+                    Me.btnSave.Enabled = False
+                End If
             Next
 
         End Using
@@ -297,13 +297,13 @@ Public Class ADmgmt
     ''' <remarks></remarks>
     Private Sub GetUserDetails(ByVal sAccountName As String)
 
-        'Dim entry As New DirectoryServices.DirectoryEntry(Me._LDAPPath)
-        Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
+        Dim Searcher As New System.DirectoryServices.DirectorySearcher(de)
         Dim result As System.DirectoryServices.SearchResult
         Searcher.Filter = "(sAMAccountName= " & sAccountName & ")"
 
         result = Searcher.FindOne
 
+        ' User Account properties
         Me.txtFirstName.Text = Me.GetProperty(result, "givenName")
         Me.txtInitials.Text = Me.GetProperty(result, "initials")
         Me.txtLastName.Text = Me.GetProperty(result, "sn")
@@ -318,16 +318,28 @@ Public Class ADmgmt
         Me.txtDepartment.Text = Me.GetProperty(result, "department")
         Me.txtCompany.Text = Me.GetProperty(result, "company")
 
+        ' User Profile
         Me.txtHomeProfile.Text = Me.GetProperty(result, "profilePath")
         Me.txtHomeFolder.Text = Me.GetProperty(result, "homeDirectory")
         Me.txtHomeDrive.Text = Me.GetProperty(result, "homeDrive")
 
-        'http://msdn.microsoft.com/en-us/library/aa380823.aspx
-        'http://www.eggheadcafe.com/forumarchives/adsigeneral/Aug2005/post23514440.asp
-        'InitialiseTS()
-        'Me.txtTSProfile.Text = Me.m_TsUser.TerminalServicesProfilePath
+        Me.ea1.Text = Me.GetProperty(result, "extensionAttribute1")
+        Me.ea2.Text = Me.GetProperty(result, "extensionAttribute2")
+        Me.ea3.Text = Me.GetProperty(result, "extensionAttribute3")
+        Me.ea4.Text = Me.GetProperty(result, "extensionAttribute4")
+        Me.ea5.Text = Me.GetProperty(result, "extensionAttribute5")
+        Me.ea6.Text = Me.GetProperty(result, "extensionAttribute6")
+        Me.ea7.Text = Me.GetProperty(result, "extensionAttribute7")
+        Me.ea8.Text = Me.GetProperty(result, "extensionAttribute8")
+        Me.ea9.Text = Me.GetProperty(result, "extensionAttribute9")
+        Me.ea10.Text = Me.GetProperty(result, "extensionAttribute10")
+        Me.ea11.Text = Me.GetProperty(result, "extensionAttribute11")
+        Me.ea12.Text = Me.GetProperty(result, "extensionAttribute12")
+        Me.ea13.Text = Me.GetProperty(result, "extensionAttribute13")
+        Me.ea14.Text = Me.GetProperty(result, "extensionAttribute14")
+        Me.ea15.Text = Me.GetProperty(result, "extensionAttribute15")
 
-
+        ' Terminal Services profile
         Dim entry1 As DirectoryEntry = New DirectoryEntry(Me._LDAPHeader & Me.GetProperty(result, "distinguishedName"))
         Dim iADsUser1 As ActiveDs.IADsUser = CType(entry1.NativeObject, ActiveDs.IADsUser)
         Dim m_TsUser As TSUSEREXLib.IADsTSUserEx = CType(iADsUser1, TSUSEREXLib.IADsTSUserEx)
@@ -335,32 +347,222 @@ Public Class ADmgmt
         Me.txtTSDrive.Text = m_TsUser.TerminalServicesHomeDrive
         Me.txtTSHomeFolder.Text = m_TsUser.TerminalServicesHomeDirectory
         Me.cbAllowTSLogon.Checked = m_TsUser.AllowLogon
-        'entry1.CommitChanges()
 
+
+        Dim I_userAccountControl As Integer = CInt(Me.GetProperty(result, "userAccountControl"))
+
+        ' Account Expires ?
+        Me.txtExpires.Text = Me.AccExpires(result, "accountExpires")
+
+        ' Is account enabled
+        Me.AccDisabled.Checked = Not IsAccountActive(I_userAccountControl)
+
+
+        ' Group Membership
         For Each gp As String In GetGroups(sAccountName)
             lbMemberOf.Items.Add(gp)
         Next
 
     End Sub
 
-    Protected Sub InitialiseTS()
-        If (Me.m_TsUser Is Nothing) Then
-            Dim iADsUser As ActiveDs.IADsUser = CType(de, ActiveDs.IADsUser)
-            m_TsUser = CType(iADsUser, TSUSEREXLib.IADsTSUserEx)
+
+    ''' <summary>
+    ''' Method that updates user's properties
+    ''' </summary>
+    ''' <param name="userLogin">sAMAccountName of the user to update</param>
+    Public Sub UpdateUserAccountProperties(ByVal userLogin As String)
+
+        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
+        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
+        Searcher.SearchScope = SearchScope.Subtree
+
+        Dim searchResults As SearchResult = Searcher.FindOne()
+
+        If Not searchResults Is Nothing Then
+            Dim dirEntryResults As New DirectoryEntry(searchResults.Path)
+
+            ' Set the new property values for the specified user
+            SetADProperty(dirEntryResults, "givenName", Me.txtFirstName.Text)
+            SetADProperty(dirEntryResults, "initials", Me.txtInitials.Text)
+            SetADProperty(dirEntryResults, "sn", Me.txtLastName.Text)
+            SetADProperty(dirEntryResults, "displayName", Me.txtDisplayName.Text)
+            SetADProperty(dirEntryResults, "description", Me.txtDescription.Text)
+            SetADProperty(dirEntryResults, "physicalDeliveryOfficeName", Me.txtOffice.Text)
+            SetADProperty(dirEntryResults, "telephoneNumber", Me.txtTelephone.Text)
+            SetADProperty(dirEntryResults, "mail", Me.txtEmail.Text)
+            SetADProperty(dirEntryResults, "title", Me.txtTitle.Text)
+            SetADProperty(dirEntryResults, "department", Me.txtDepartment.Text)
+            SetADProperty(dirEntryResults, "company", Me.txtCompany.Text)
+
+            ' enable / disable account
+            Me.AccountDisable(Me.txtSAM.Text, Me.AccDisabled.Checked)
+
+
+            ' Commit the changes
+            Try
+                dirEntryResults.CommitChanges()
+            Catch ex As System.DirectoryServices.DirectoryServicesCOMException
+                MsgBox("Unable to commit changes - An error has occurred." & vbCr & vbCr & ex.Message)
+            End Try
+
+            dirEntryResults.Close()
+        End If
+
+    End Sub
+    Private Sub UpdateUserTSProperties(ByVal userLogin As String)
+
+        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
+        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
+        Searcher.SearchScope = SearchScope.Subtree
+
+        Dim Result As SearchResult = Searcher.FindOne()
+
+        If Not Result Is Nothing Then
+
+            Dim entry1 As DirectoryEntry = New DirectoryEntry(Me._LDAPHeader & Me.GetProperty(Result, "distinguishedName"))
+            Dim iADsUser1 As ActiveDs.IADsUser = CType(entry1.NativeObject, ActiveDs.IADsUser)
+            Dim m_TsUser As TSUSEREXLib.IADsTSUserEx = CType(iADsUser1, TSUSEREXLib.IADsTSUserEx)
+            m_TsUser.TerminalServicesProfilePath = Me.txtTSProfile.Text
+            m_TsUser.TerminalServicesHomeDrive = Me.txtTSDrive.Text
+            m_TsUser.TerminalServicesHomeDirectory = Me.txtTSHomeFolder.Text
+            If Me.cbAllowTSLogon.Checked Then
+                m_TsUser.AllowLogon = 1
+            Else
+                m_TsUser.AllowLogon = 0
+            End If
+
+            entry1.CommitChanges()
+            entry1.Close()
+
+        End If
+
+        Searcher.Dispose()
+
+    End Sub
+    Private Sub UpdateUserExtensionAttributes(ByVal userLogin As String)
+        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
+        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
+        Searcher.SearchScope = SearchScope.Subtree
+
+        Dim searchResults As SearchResult = Searcher.FindOne()
+
+        If Not searchResults Is Nothing Then
+            Dim dirEntryResults As New DirectoryEntry(searchResults.Path)
+
+            ' Set the new property values for the specified user
+            SetADProperty(dirEntryResults, "extensionAttribute1", Me.ea1.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute2", Me.ea2.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute3", Me.ea3.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute4", Me.ea4.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute5", Me.ea5.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute6", Me.ea6.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute7", Me.ea7.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute8", Me.ea8.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute9", Me.ea9.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute10", Me.ea10.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute11", Me.ea11.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute12", Me.ea12.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute13", Me.ea13.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute14", Me.ea14.Text)
+            SetADProperty(dirEntryResults, "extensionAttribute15", Me.ea15.Text)
+
+
+            ' Commit the changes
+            Try
+                dirEntryResults.CommitChanges()
+            Catch ex As System.DirectoryServices.DirectoryServicesCOMException
+                MsgBox("Unable to commit changes - An error has occurred." & vbCr & vbCr & ex.Message)
+            End Try
+
+            dirEntryResults.Close()
         End If
     End Sub
 
-    Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
-        Try
-            Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
-            Dim result As System.DirectoryServices.SearchResult
-            Searcher.Filter = "(distinguishedName= " & dsPath & ")"
-            result = Searcher.FindOne
-            Return Me.GetProperty(result, attributeToReturn)
-        Catch ex As Exception
-            Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
-        End Try
+    ''' <summary>
+    ''' Return property value from a search result.
+    ''' </summary>
+    ''' <param name="SR"></param>
+    ''' <param name="PropertyName"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function GetProperty(ByVal SR As SearchResult, ByVal PropertyName As String) As String
+        Dim retval As String
+        If SR.Properties.Contains(PropertyName) Then
+            retval = SR.Properties(PropertyName)(0).ToString()
+        Else
+            retval = String.Empty
+        End If
+        Return retval
     End Function
+
+    ''' <summary>
+    ''' Return formatted value for account expired field.
+    ''' Either a date string or Never.
+    ''' </summary>
+    ''' <param name="SR"></param>
+    ''' <param name="PropertyName"></param>
+    ''' <returns></returns>
+    ''' <remarks></remarks>
+    Private Function AccExpires(ByVal SR As SearchResult, ByVal PropertyName As String) As String
+        '
+        ' //msdn2.microsoft.com/en-gb/library/ms675098.aspx
+        '  LDAP- "accountExpires" - The date when the account expires.
+        ' A value of 0 or 0x7FFFFFFFFFFFFFFF (9223372036854775807)
+        '   indicates that the account never expires.
+        '
+        Dim WrkUInt64 As System.UInt64                ' unsigned 64bit
+        Dim WrkUInt32H, WrkUInt32L As System.UInt32   ' unsigned 32bit
+        Dim WrkDtTm As DateTime
+        Dim Val As String = String.Empty
+
+        If SR.Properties.Contains("accountExpires") Then
+            WrkUInt64 = SR.Properties("accountExpires").Item(0)
+            WrkUInt32H = CType((WrkUInt64 >> 32), UInteger)
+            WrkUInt64 = WrkUInt64 << 32
+            WrkUInt64 = WrkUInt64 >> 32
+            WrkUInt32L = Convert.ToUInt32(WrkUInt64)
+            WrkUInt64 = (WrkUInt32H * &H100000000) + WrkUInt32L
+            Try
+                WrkDtTm = DateTime.FromFileTime(WrkUInt64)
+            Catch ex As Exception       ' not valid = "0x7FFFFFFFFFFFFFFF"
+                WrkUInt64 = &H0
+            End Try
+
+            If WrkUInt64 = &H0 Then     ' not valid = "0"
+                Val = "Never"
+            Else
+                Val = WrkDtTm
+            End If
+        Else                            ' property was not returned in the result
+            Val = " *Error*"
+        End If
+        Return Val
+    End Function
+
+    ''' <summary>
+    ''' Helper method that sets properties for AD users.
+    ''' </summary>
+    ''' <param name="entry">DirectoryEntry to use</param>
+    ''' <param name="pName">Property name to set</param>
+    ''' <param name="pValue">Value of property to set</param>
+    Public Shared Sub SetADProperty(ByVal entry As DirectoryEntry, ByVal pName As String, ByVal pValue As String)
+
+        If Not String.IsNullOrEmpty(pValue) Then
+
+            'Check to see if the DirectoryEntry contains this property already
+            If entry.Properties.Contains(pName) Then
+                'Update the properties value
+                entry.Properties(pName)(0) = pValue
+            Else
+                'Add the property and set it's value
+                entry.Properties(pName).Add(pValue)
+            End If
+        Else
+            entry.Properties(pName).Clear()
+        End If
+
+    End Sub
+
 
     Private Sub GroupMembers(ByVal groupName As String)
         ' To see the members in a group, you actually need to look at
@@ -402,24 +604,18 @@ Public Class ADmgmt
         Next
 
     End Sub
-
-
-    ''' <summary>
-    ''' Return property value from a search result.
-    ''' </summary>
-    ''' <param name="SR"></param>
-    ''' <param name="PropertyName"></param>
-    ''' <returns></returns>
-    ''' <remarks></remarks>
-    Private Function GetProperty(ByVal SR As SearchResult, ByVal PropertyName As String) As String
-        Dim retval As String
-        If SR.Properties.Contains(PropertyName) Then
-            retval = SR.Properties(PropertyName)(0).ToString()
-        Else
-            retval = String.Empty
-        End If
-        Return retval
+    Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
+        Try
+            Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
+            Dim result As System.DirectoryServices.SearchResult
+            Searcher.Filter = "(distinguishedName= " & dsPath & ")"
+            result = Searcher.FindOne
+            Return Me.GetProperty(result, attributeToReturn)
+        Catch ex As Exception
+            Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
+        End Try
     End Function
+
 
 
     Private Sub UNUSED_AddUser_WINNT()
@@ -473,99 +669,7 @@ Public Class ADmgmt
         Return de
     End Function
 
-    ''' <summary>
-    ''' Method that updates user's properties
-    ''' </summary>
-    ''' <param name="userLogin">sAMAccountName of the user to update</param>
-    Public Sub UpdateUserAccountProperties(ByVal userLogin As String)
 
-        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
-        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
-        Searcher.SearchScope = SearchScope.Subtree
-
-        Dim searchResults As SearchResult = Searcher.FindOne()
-
-        If Not searchResults Is Nothing Then
-            Dim dirEntryResults As New DirectoryEntry(searchResults.Path)
-
-            ' Set the new property values for the specified user
-            SetADProperty(dirEntryResults, "givenName", Me.txtFirstName.Text)
-            SetADProperty(dirEntryResults, "initials", Me.txtInitials.Text)
-            SetADProperty(dirEntryResults, "sn", Me.txtLastName.Text)
-            SetADProperty(dirEntryResults, "displayName", Me.txtDisplayName.Text)
-            SetADProperty(dirEntryResults, "description", Me.txtDescription.Text)
-            SetADProperty(dirEntryResults, "physicalDeliveryOfficeName", Me.txtOffice.Text)
-            SetADProperty(dirEntryResults, "telephoneNumber", Me.txtTelephone.Text)
-            SetADProperty(dirEntryResults, "mail", Me.txtEmail.Text)
-            SetADProperty(dirEntryResults, "title", Me.txtTitle.Text)
-            SetADProperty(dirEntryResults, "department", Me.txtDepartment.Text)
-            SetADProperty(dirEntryResults, "company", Me.txtCompany.Text)
-
-            ' Commit the changes
-            Try
-                dirEntryResults.CommitChanges()
-            Catch ex As System.DirectoryServices.DirectoryServicesCOMException
-                MsgBox("Unable to commit changes - An error has occurred." & vbCr & vbCr & ex.Message)
-            End Try
-
-            dirEntryResults.Close()
-        End If
-
-    End Sub
-    Private Sub UpdateUserTSProperties(ByVal userLogin As String)
-
-        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
-        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
-        Searcher.SearchScope = SearchScope.Subtree
-
-        Dim Result As SearchResult = Searcher.FindOne()
-
-        If Not Result Is Nothing Then
-
-            Dim entry1 As DirectoryEntry = New DirectoryEntry(Me._LDAPHeader & Me.GetProperty(Result, "distinguishedName"))
-            Dim iADsUser1 As ActiveDs.IADsUser = CType(entry1.NativeObject, ActiveDs.IADsUser)
-            Dim m_TsUser As TSUSEREXLib.IADsTSUserEx = CType(iADsUser1, TSUSEREXLib.IADsTSUserEx)
-            m_TsUser.TerminalServicesProfilePath = Me.txtTSProfile.Text
-            m_TsUser.TerminalServicesHomeDrive = Me.txtTSDrive.Text
-            m_TsUser.TerminalServicesHomeDirectory = Me.txtTSHomeFolder.Text
-            If Me.cbAllowTSLogon.Checked Then
-                m_TsUser.AllowLogon = 1
-            Else
-                m_TsUser.AllowLogon = 0
-            End If
-
-            entry1.CommitChanges()
-            entry1.Close()
-
-        End If
-
-        Searcher.Dispose()
-
-    End Sub
-
-    ''' <summary>
-    ''' Helper method that sets properties for AD users.
-    ''' </summary>
-    ''' <param name="entry">DirectoryEntry to use</param>
-    ''' <param name="pName">Property name to set</param>
-    ''' <param name="pValue">Value of property to set</param>
-    Public Shared Sub SetADProperty(ByVal entry As DirectoryEntry, ByVal pName As String, ByVal pValue As String)
-
-        If Not String.IsNullOrEmpty(pValue) Then
-
-            'Check to see if the DirectoryEntry contains this property already
-            If entry.Properties.Contains(pName) Then
-                'Update the properties value
-                entry.Properties(pName)(0) = pValue
-            Else
-                'Add the property and set it's value
-                entry.Properties(pName).Add(pValue)
-            End If
-        Else
-            entry.Properties(pName).Clear()
-        End If
-
-    End Sub
 
     ''' <summary>
     ''' Method to set a user's password
@@ -576,21 +680,6 @@ Public Class ADmgmt
         Dim oPassword As Object() = New Object() {sPassword}
         Dim ret As Object = Entry.Invoke("SetPassword", oPassword)
         Entry.CommitChanges()
-    End Sub
-
-    ''' <summary>
-    ''' Method to enable a user account in the AD.
-    ''' </summary>
-    ''' <param name="entry"></param>
-    Private Sub Enable_Account(ByVal entry As DirectoryEntry)
-        'UF_DONT_EXPIRE_PASSWD 0x10000
-        Dim exp As Integer = CInt(de.Properties("userAccountControl").Value)
-        entry.Properties("userAccountControl").Value = exp Or &H1
-        entry.CommitChanges()
-        'UF_ACCOUNTDISABLE 0x0002
-        Dim val As Integer = CInt(de.Properties("userAccountControl").Value)
-        entry.Properties("userAccountControl").Value = val And Not &H2
-        entry.CommitChanges()
     End Sub
 
     ''' <summary>
@@ -628,32 +717,6 @@ Public Class ADmgmt
 
         End If
 
-    End Sub
-
-    ''' <summary>
-    ''' Method that disables a user account in the AD 
-    ''' and hides user's email from Exchange address lists.
-    ''' </summary>
-    ''' <param name="sLogin">Login of the user to disable</param>
-    Public Sub DisableAccount(ByVal sLogin As String)
-
-        ' Search the Active Directory for the desired user
-        Dim dirSearcher As DirectorySearcher = New DirectorySearcher(de)
-        dirSearcher.Filter = "(&(objectCategory=Person)(objectClass=user)(SAMAccountName=" & sLogin & "))"
-        dirSearcher.SearchScope = SearchScope.Subtree
-        Dim results As SearchResult = dirSearcher.FindOne()
-
-        ' Check returned results
-        If Not results Is Nothing Then  ' User was returned
-            Dim dirEntryResults As DirectoryEntry = GetDirectoryEntry(results.Path, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure)
-            Dim iVal As Integer = CInt(dirEntryResults.Properties("userAccountControl").Value)
-            ' Disable the users account
-            dirEntryResults.Properties("userAccountControl").Value = iVal Or &H2
-            ' Hide users email from all Exchange Mailing Lists
-            dirEntryResults.Properties("msExchHideFromAddressLists").Value = "TRUE"
-            dirEntryResults.CommitChanges()
-            dirEntryResults.Close()
-        End If
     End Sub
 
 
@@ -713,16 +776,18 @@ Public Class ADmgmt
     ''' </summary>
     ''' <param name="userAccountControl"></param>
     ''' <returns></returns>
-    Public Shared Function IsAccountActive(ByVal userAccountControl As Integer) As Boolean
-        Dim accountDisabled As Integer = Convert.ToInt32(ADAccountOptions.UF_ACCOUNTDISABLE)
+    Private Function IsAccountActive(ByVal userAccountControl As Integer) As Boolean
+
+        Dim accountDisabled As Integer = Convert.ToInt32(ADAccountOptions.UF_ACCOUNTDISABLE) '2
         Dim flagExists As Integer = userAccountControl And accountDisabled
-        'if a match is found, then the disabled 
-        'flag exists within the control flags
+
+        'if a match is found, then the disabled flag exists within the control flags.
         If flagExists > 0 Then
             Return False
         Else
             Return True
         End If
+
     End Function
 
     ''' <summary>
@@ -750,20 +815,54 @@ Public Class ADmgmt
         'oUser.Close()
     End Sub
 
+
     ''' <summary>
-    ''' Method to enable a user account.
+    ''' Method that enables/disables a user account in the AD 
+    ''' and hides user's email from Exchange address lists.
     ''' </summary>
-    ''' <param name="entry"></param>
-    Private Shared Sub EnableAccount(ByVal entry As DirectoryEntry)
-        'UF_DONT_EXPIRE_PASSWD 0x10000
-        Dim exp As Integer = CInt(entry.Properties("userAccountControl").Value)
-        entry.Properties("userAccountControl").Value = exp Or &H1
-        entry.CommitChanges()
-        'UF_ACCOUNTDISABLE 0x0002
-        Dim val As Integer = CInt(entry.Properties("userAccountControl").Value)
-        entry.Properties("userAccountControl").Value = val And Not &H2
-        entry.CommitChanges()
+    ''' <param name="userLogin">Login of the user to disable</param>
+    Public Sub AccountDisable(ByVal userLogin As String, ByVal DisableAccount As Boolean)
+
+        Dim Searcher As DirectorySearcher = New DirectorySearcher(de)
+        Searcher.Filter = "(&(objectCategory=Person)(objectClass=user)(sAMAccountName=" & userLogin & "))"
+        Searcher.SearchScope = SearchScope.Subtree
+
+        Dim searchResults As SearchResult = Searcher.FindOne()
+
+        If Not searchResults Is Nothing Then
+
+            Dim dirEntryResults As New DirectoryEntry(searchResults.Path)
+            Dim iVal As Integer = CInt(dirEntryResults.Properties("userAccountControl").Value)
+
+
+            If dirEntryResults.Properties.Contains("userAccountControl") Then
+                If DisableAccount Then ' disable account
+                    dirEntryResults.Properties("userAccountControl")(0) = iVal Or &H2
+                Else                   ' enable account
+                    dirEntryResults.Properties("userAccountControl")(0) = iVal And Not &H2
+                End If
+            Else
+                If DisableAccount Then ' disable account
+                    dirEntryResults.Properties("userAccountControl").Add(iVal Or &H2)
+                Else                   ' enable account
+                    dirEntryResults.Properties("userAccountControl").Add(iVal And Not &H2)
+                End If
+            End If
+
+
+            ' Commit the changes
+            Try
+                dirEntryResults.CommitChanges()
+            Catch ex As System.DirectoryServices.DirectoryServicesCOMException
+                MsgBox("Unable to commit changes - An error has occurred." & vbCr & vbCr & ex.Message)
+            End Try
+
+            dirEntryResults.Close()
+            dirEntryResults.Dispose()
+        End If
+
     End Sub
+
 
     ''' <summary>
     ''' Method that calls and starts a WSHControl.vbs
@@ -814,33 +913,15 @@ Public Class ADmgmt
     End Function
 
 
-    'Private Function GetDirectoryObject(ByVal domainReference As String, ByVal UserName As String, ByVal Password As String) As DirectoryEntry
-    '    Dim oDE As DirectoryEntry
-    '    oDE = New DirectoryEntry(ADFullPath + domainReference, UserName, Password, AuthenticationTypes.Secure)
-    '    Return oDE
-    'End Function
-
-    'Private Shared Function GetLDAPDomain() As String
-
-    'Dim LDAPDomain As New Text.StringBuilder()
-    'Dim LDAPDC As String() = ADServer.Split("."c)
-    'For i As Integer = 0 To LDAPDC.GetUpperBound(0)
-
-    '    LDAPDomain.Append("DC=" + LDAPDC(i))
-    '    If i < LDAPDC.GetUpperBound(0) Then
-    '        LDAPDomain.Append(",")
-    '    End If
-    'Next
-
-    'Return LDAPDomain.ToString()
-    'End Function
-
-
+    ' Save Button Handlers
     Private Sub btnSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSave.Click
         UpdateUserAccountProperties(Me.txtSAM.Text)
     End Sub
     Private Sub btnProfileSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnProfileSave.Click
         UpdateUserTSProperties(Me.txtSAM.Text)
+    End Sub
+    Private Sub btnEaSave_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnEaSave.Click
+        UpdateUserExtensionAttributes(Me.txtSAM.Text)
     End Sub
 
     ' Account Properties changed - enable save button
@@ -877,7 +958,11 @@ Public Class ADmgmt
     Private Sub txtCompany_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtCompany.TextChanged
         Me.btnSave.Enabled = True
     End Sub
+    Private Sub AccDisabled_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AccDisabled.CheckedChanged
+        Me.btnSave.Enabled = True
+    End Sub
 
+    ' Clear and Exit Button handlers
     Private Sub btnExit_Clicked(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExit.Click
         Me.Close()
     End Sub
@@ -886,69 +971,7 @@ Public Class ADmgmt
         Me.txtSearch.Text = ""
         Me.btnSave.Enabled = False
         Me.SearchResults.Items.Clear()
-    End Sub
-
-    ' select tab according to search type selected
-    Private Sub radioGroups_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioGroups.CheckedChanged
-        Me.SearchResults.Items.Clear()
-        If Me.radioGroups.Checked Then
-            ShowTabPage(tabGroupMembers)
-            Me.adTabControl.SelectTab(tabGroupMembers)
-            HideTabPage(tabAccount)
-            HideTabPage(tabMemberOf)
-            HideTabPage(tabProfile)
-            HideTabPage(tabCustom)
-            Me.cbLogon.Checked = True
-            Me.cbDisplay.Checked = True
-        End If
-    End Sub
-    Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
-        If Me.radioUsers.Checked Then
-            ShowTabPage(tabAccount)
-            ShowTabPage(tabMemberOf)
-            ShowTabPage(tabProfile)
-            ShowTabPage(tabCustom)
-            Me.adTabControl.SelectTab(tabAccount)
-            HideTabPage(tabGroupMembers)
-        End If
-    End Sub
-    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
-        Me.SearchResults.Items.Clear()
-        UserTabs_Clear()
-        Me.AcceptButton = Me.btnSearch
-    End Sub
-
-    ' Add/Remove Tab Pages
-    Private Sub HideTabPage(ByVal tp As TabPage)
-        If Me.adTabControl.TabPages.Contains(tp) Then Me.adTabControl.TabPages.Remove(tp)
-    End Sub
-    Private Sub ShowTabPage(ByVal tp As TabPage)
-        ShowTabPage(tp, Me.adTabControl.TabPages.Count)
-    End Sub
-    Private Sub ShowTabPage(ByVal tp As TabPage, ByVal index As Integer)
-        If Me.adTabControl.TabPages.Contains(tp) Then Return
-        InsertTabPage(tp, index)
-    End Sub
-    Private Sub InsertTabPage(ByVal [tabpage] As TabPage, ByVal [index] As Integer)
-        If [index] < 0 Or [index] > Me.adTabControl.TabCount Then
-            Throw New ArgumentException("Index out of Range.")
-        End If
-        Me.adTabControl.TabPages.Add([tabpage])
-        If [index] < Me.adTabControl.TabCount - 1 Then
-            Do While Me.adTabControl.TabPages.IndexOf([tabpage]) <> [index]
-                SwapTabPages([tabpage], (Me.adTabControl.TabPages(Me.adTabControl.TabPages.IndexOf([tabpage]) - 1)))
-            Loop
-        End If
-        Me.adTabControl.SelectedTab = [tabpage]
-    End Sub
-    Private Sub SwapTabPages(ByVal tp1 As TabPage, ByVal tp2 As TabPage)
-        If Me.adTabControl.TabPages.Contains(tp1) = False Or Me.adTabControl.TabPages.Contains(tp2) = False Then
-            Throw New ArgumentException("TabPages must be in the TabCotrols TabPageCollection.")
-        End If
-        Dim Index1 As Integer = Me.adTabControl.TabPages.IndexOf(tp1)
-        Dim Index2 As Integer = Me.adTabControl.TabPages.IndexOf(tp2)
-        Me.adTabControl.TabPages(Index1) = tp2
-        Me.adTabControl.TabPages(Index2) = tp1
+        Me.SearchResults.Visible = False
     End Sub
 
     ' make group member columns visible
@@ -1034,6 +1057,74 @@ Public Class ADmgmt
         Me.DomainSelect.Items.Clear()
         Me.LoadDomains()
     End Sub
+
+#Region "Tab management"
+
+    ' Select tab according to search type selected
+    Private Sub radioGroups_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioGroups.CheckedChanged
+        Me.SearchResults.Items.Clear()
+        If Me.radioGroups.Checked Then
+            ShowTabPage(tabGroupMembers)
+            Me.adTabControl.SelectTab(tabGroupMembers)
+            HideTabPage(tabAccount)
+            HideTabPage(tabMemberOf)
+            HideTabPage(tabProfile)
+            HideTabPage(tabCustom)
+            Me.cbLogon.Checked = True
+            Me.cbDisplay.Checked = True
+        End If
+    End Sub
+    Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
+        If Me.radioUsers.Checked Then
+            ShowTabPage(tabAccount)
+            ShowTabPage(tabMemberOf)
+            ShowTabPage(tabProfile)
+            ShowTabPage(tabCustom)
+            Me.adTabControl.SelectTab(tabAccount)
+            HideTabPage(tabGroupMembers)
+        End If
+    End Sub
+    Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
+        Me.SearchResults.Items.Clear()
+        UserTabs_Clear()
+        Me.AcceptButton = Me.btnSearch
+    End Sub
+
+    ' Add/Remove Tab Pages
+    Private Sub HideTabPage(ByVal tp As TabPage)
+        If Me.adTabControl.TabPages.Contains(tp) Then Me.adTabControl.TabPages.Remove(tp)
+    End Sub
+    Private Sub ShowTabPage(ByVal tp As TabPage)
+        ShowTabPage(tp, Me.adTabControl.TabPages.Count)
+    End Sub
+    Private Sub ShowTabPage(ByVal tp As TabPage, ByVal index As Integer)
+        If Me.adTabControl.TabPages.Contains(tp) Then Return
+        InsertTabPage(tp, index)
+    End Sub
+    Private Sub InsertTabPage(ByVal [tabpage] As TabPage, ByVal [index] As Integer)
+        If [index] < 0 Or [index] > Me.adTabControl.TabCount Then
+            Throw New ArgumentException("Index out of Range.")
+        End If
+        Me.adTabControl.TabPages.Add([tabpage])
+        If [index] < Me.adTabControl.TabCount - 1 Then
+            Do While Me.adTabControl.TabPages.IndexOf([tabpage]) <> [index]
+                SwapTabPages([tabpage], (Me.adTabControl.TabPages(Me.adTabControl.TabPages.IndexOf([tabpage]) - 1)))
+            Loop
+        End If
+        Me.adTabControl.SelectedTab = [tabpage]
+    End Sub
+    Private Sub SwapTabPages(ByVal tp1 As TabPage, ByVal tp2 As TabPage)
+        If Me.adTabControl.TabPages.Contains(tp1) = False Or Me.adTabControl.TabPages.Contains(tp2) = False Then
+            Throw New ArgumentException("TabPages must be in the TabCotrols TabPageCollection.")
+        End If
+        Dim Index1 As Integer = Me.adTabControl.TabPages.IndexOf(tp1)
+        Dim Index2 As Integer = Me.adTabControl.TabPages.IndexOf(tp2)
+        Me.adTabControl.TabPages(Index1) = tp2
+        Me.adTabControl.TabPages(Index2) = tp1
+    End Sub
+
+#End Region
+
 
 End Class
 
