@@ -99,6 +99,16 @@ Public Class SvcInfo
 
     End Sub
 
+
+    Private Sub svcStartupCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles svcStartupCombo.SelectedIndexChanged
+        If Me.FormLoading = False Then
+            Me.Cursor = Cursors.AppStarting
+            Form1.Service_ChangeStartMode(txtSvcName.Text, svcStartupCombo.Text)
+            Me.Cursor = Cursors.Default
+        End If
+    End Sub
+
+
     ''' <summary>
     ''' Enables/Disables control buttons depending 
     ''' upon the service abilities and the service state.
@@ -152,6 +162,7 @@ Public Class SvcInfo
         '"Paused"
         '"Unknown"
     End Sub
+
 
 
 End Class

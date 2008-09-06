@@ -540,9 +540,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -3359,23 +3359,23 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
+        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
-        Me.sgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        Me.sgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
         Me.sgrid.RowTemplate.Height = 18
@@ -3695,8 +3695,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
+        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -7833,6 +7833,7 @@ Public Class Form1
             queryCollection = wmi.wmiQuery("SELECT name FROM Win32_Service Where Name ='" & servicename & "'")
             For Each m In queryCollection
                 outparams = m.InvokeMethod("StartService", Nothing, Nothing)
+                System.Threading.Thread.Sleep(800)
                 If outparams.Properties("ReturnValue").Value <> 0 Then
                     MsgBox("error starting service: " & servicename & vbCrLf & "error:" & outparams.Properties("ReturnValue").Value)
                 End If
@@ -7841,7 +7842,7 @@ Public Class Form1
             MsgBox("An error occurred: " & ex.Message)
         End Try
     End Sub
-    Public Sub Service_ChangeStartMode(ByVal servicename As String, ByVal NewStartMode As String)
+    Protected Friend Sub Service_ChangeStartMode(ByVal servicename As String, ByVal NewStartMode As String)
         If NewStartMode <> "Automatic" AndAlso NewStartMode <> "Manual" AndAlso NewStartMode <> "Disabled" Then
             MsgBox("Invalid service start mode passed")
             Exit Sub
@@ -8295,13 +8296,11 @@ Public Class Form1
     Private Sub ProcessRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcessRefresh.Click
         Me.Panel2.Text = "enumerating running processes..."
         Me.processgrid.Cursor = Cursors.AppStarting
-
         Me.processgrid.Rows.Clear()
         Me.GetProcesses_WMI()
         Me.processgrid.Sort(pr_name, ComponentModel.ListSortDirection.Ascending)
         Me.processgrid.ClearSelection()
         Me.processgrid.Focus()
-
         Me.Panel2.Text = "ready"
         Me.processgrid.Cursor = Cursors.Default
     End Sub
@@ -8310,6 +8309,7 @@ Public Class Form1
 
 
         'If get_processes_by_wmi_checkbox.Checked Then
+        Me.processgrid.Rows.Clear()
         GetProcesses_WMI()
         'Else
         '    If AltUserCheckBox.Checked Then
@@ -8617,14 +8617,14 @@ Public Class Form1
 
         sgrid.Rows.Clear()
         Panel2.Text = "getting installed software..."
-        Me.sgrid.Cursor = Cursors.AppStarting
+        Me.Cursor = Cursors.AppStarting
 
         Dim swThread As New System.Threading.Thread(AddressOf Enum_Software)
         swThread.Start()
         'Enum_Software()
 
         Tabholder1.SelectedTab.Refresh()
-        Me.sgrid.Cursor = Cursors.Default
+        Me.Cursor = Cursors.Default
         Panel2.Text = "ready."
 
     End Sub
@@ -8649,6 +8649,7 @@ Public Class Form1
         End If
 
         If ShowUpdates.Checked = False Then Show_Updates()
+        Me.sgrid.Refresh()
 
 
     End Sub
@@ -8813,11 +8814,11 @@ Public Class Form1
         '       "you are particularly desparate).", MsgBoxStyle.Information, "Your patience is appreciated")
 
         'Exit Sub
-
-        If UninstallString.ToLower.StartsWith("msiexec") Then
-            UninstallString = "msiexec /x " & UninstallString.Substring(UninstallString.IndexOf("{")) & " /qn"
+        If Not String.IsNullOrEmpty(UninstallString) Then
+            If UninstallString.ToLower.StartsWith("msiexec") Then
+                UninstallString = "msiexec /x " & UninstallString.Substring(UninstallString.IndexOf("{")) & " /qn"
+            End If
         End If
-
 
         RemoteExec(Computer, UninstallString, False)
 
@@ -8839,6 +8840,11 @@ Public Class Form1
                 Me.swGrid_URL = sgrid(6, hti.RowIndex).Value
 
                 Me.mnuSwName.Text = Me.swGrid_Name
+                If String.IsNullOrEmpty(Me.swGrid_Uninst) Then
+                    mnuSwUninst.Enabled = False
+                Else
+                    mnuSwUninst.Enabled = True
+                End If
 
                 swContextmenu.Show(sgrid, New Point(e.X, e.Y))
             End If
@@ -13984,9 +13990,10 @@ Public Class Form1
         objLogs = EventLog.GetEventLogs(PC.Name)
 
         For Each objLog As EventLog In objLogs
-            MsgBox(objLog.LogDisplayName) ' List 'Application' , 'Security' , 'System' etc
+            'MsgBox(objLog.LogDisplayName) 'List: 'Application' , 'Security' , 'System' etc
             For Each objEntry As EventLogEntry In objLog.Entries
-                If objEntry.Source = "MsiInstaller" Then
+                'If DateDiff(DateInterval.Minute, objEntry.TimeGenerated, DateTime.Now) > 10 Then Exit For
+                If objEntry.Source = "MsiInstaller" AndAlso DateDiff(DateInterval.Day, objEntry.TimeGenerated, DateTime.Now) > 1 Then
                     MsgBox("Source: " & objEntry.Source & " Time: " & objEntry.TimeGenerated.ToString & " Message: " & objEntry.Message)
                 End If
             Next
