@@ -6,8 +6,9 @@ Public Class pc
     Public OperatingSystem As String
     Public ServicePack As String
     Public OSVersion As String
-    Public SystemDirectory As String
+    Protected Friend SystemDirectory As String
     Protected Friend TSEnabled As Boolean
+    Protected Friend PhysicalMemory As Integer
     Dim m_LastBootTime As String
     Public IEVersion As String
     Public IEProxy As String
@@ -206,6 +207,7 @@ Public Class pc
         ServicePack = Nothing
         OSVersion = Nothing
         SystemDirectory = Nothing
+        Me.PhysicalMemory = Nothing
         m_LastBootTime = Nothing
         LastBootTime = Nothing
         IEVersion = Nothing
