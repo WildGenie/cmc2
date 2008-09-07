@@ -3,13 +3,13 @@
     <ProjectType>Local</ProjectType>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{1B3501CE-EEFF-45FB-9EED-2DFB5C8929B3}</ProjectGuid>
+    <ProjectGuid>{AE8FAA50-2E56-4EBA-ADE6-A10FC2576ACC}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ApplicationIcon>Resources\files\cmc.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
-    <AssemblyName>CMC</AssemblyName>
+    <AssemblyName>ADMgmt</AssemblyName>
     <AssemblyOriginatorKeyFile>
     </AssemblyOriginatorKeyFile>
     <AssemblyOriginatorKeyMode>None</AssemblyOriginatorKeyMode>
@@ -21,8 +21,8 @@
     <OptionCompare>Binary</OptionCompare>
     <OptionExplicit>On</OptionExplicit>
     <OptionStrict>Off</OptionStrict>
-    <RootNamespace>CMC</RootNamespace>
-    <StartupObject>CMC.My.MyApplication</StartupObject>
+    <RootNamespace>ADmgmt</RootNamespace>
+    <StartupObject>ADmgmt.My.MyApplication</StartupObject>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
     <MyType>WindowsForms</MyType>
@@ -43,9 +43,9 @@
     </SccAuxPath>
     <SccProvider>
     </SccProvider>
-    <PublishUrl>\\server\desktop\cmc\</PublishUrl>
+    <PublishUrl>c:\</PublishUrl>
     <Install>true</Install>
-    <InstallFrom>Unc</InstallFrom>
+    <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
     <UpdateMode>Background</UpdateMode>
     <UpdateInterval>1</UpdateInterval>
@@ -58,13 +58,13 @@
     <ProductName>CMC</ProductName>
     <PublisherName>Peter Forman</PublisherName>
     <OpenBrowserOnPublish>false</OpenBrowserOnPublish>
-    <ApplicationVersion>2.17.0.0</ApplicationVersion>
+    <ApplicationVersion>1.0.0.0</ApplicationVersion>
     <BootstrapperEnabled>true</BootstrapperEnabled>
     <BootstrapperComponentsLocation>Relative</BootstrapperComponentsLocation>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>CMC.xml</DocumentationFile>
+    <DocumentationFile>ADMgmt.xml</DocumentationFile>
     <BaseAddress>285212672</BaseAddress>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
@@ -85,7 +85,7 @@
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <OutputPath>bin\</OutputPath>
-    <DocumentationFile>CMC.xml</DocumentationFile>
+    <DocumentationFile>ADMgmt.xml</DocumentationFile>
     <BaseAddress>285212672</BaseAddress>
     <ConfigurationOverrideFile>
     </ConfigurationOverrideFile>
@@ -113,8 +113,6 @@
     <Reference Include="System.Drawing">
       <Name>System.Drawing</Name>
     </Reference>
-    <Reference Include="System.Management" />
-    <Reference Include="System.ServiceProcess" />
     <Reference Include="System.Windows.Forms">
       <Name>System.Windows.Forms</Name>
     </Reference>
@@ -129,20 +127,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="appdeploy.Designer.vb">
-      <DependentUpon>appdeploy.vb</DependentUpon>
+    <Compile Include="AD.vb" />
+    <Compile Include="ADmgmt.Designer.vb">
+      <DependentUpon>ADmgmt.vb</DependentUpon>
     </Compile>
-    <Compile Include="appdeploy.vb">
+    <Compile Include="ADmgmt.vb">
       <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ApplicationEvents.vb" />
-    <Compile Include="AppTable.Designer.vb">
-      <DependentUpon>AppTable.vb</DependentUpon>
-    </Compile>
-    <Compile Include="AppTable.vb">
-    </Compile>
-    <Compile Include="AssemblyInfo.vb">
-      <SubType>Code</SubType>
     </Compile>
     <Compile Include="CustomDomainInfo.Designer.vb">
       <DependentUpon>CustomDomainInfo.vb</DependentUpon>
@@ -150,38 +140,12 @@
     <Compile Include="CustomDomainInfo.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="encrypt.vb" />
-    <Compile Include="Impersonation.vb" />
-    <Compile Include="ProcInfo.Designer.vb">
-      <DependentUpon>ProcInfo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="ProcInfo.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SvcInfo.Designer.vb">
-      <DependentUpon>SvcInfo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SvcInfo.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SwInfo.Designer.vb">
-      <DependentUpon>SwInfo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="SwInfo.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="WinAPI_Window.vb" />
-    <Compile Include="cmcUser.vb" />
-    <Compile Include="pc.vb" />
-    <Compile Include="PingClass.vb" />
-    <Compile Include="wmiConnection.vb" />
-    <Compile Include="Form1.vb">
-      <SubType>Form</SubType>
-    </Compile>
+    <Compile Include="encryption.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
     </Compile>
+    <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Resources.Designer.vb">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -192,106 +156,36 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
       <DependentUpon>Settings.settings</DependentUpon>
     </Compile>
-    <Content Include="changelog.txt" />
+    <Compile Include="Password.Designer.vb">
+      <DependentUpon>Password.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Password.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Content Include="My Project\Application.myapp">
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </Content>
-    <None Include="Resources\application_cascade.png" />
-    <None Include="Resources\application_osx_terminal.png" />
-    <None Include="Resources\email.png" />
-    <None Include="Resources\drive_network.png" />
-    <None Include="Resources\comment.png" />
-    <None Include="Resources\door_out.png" />
-    <None Include="Resources\application_add.png" />
-    <None Include="Resources\application_form.png" />
-    <None Include="Resources\exclamation.png" />
-    <None Include="Resources\computer.png" />
-    <None Include="Resources\computer_link.png" />
-    <None Include="Resources\application_get.png" />
-    <None Include="Resources\arrow_join.png" />
-    <None Include="Resources\application_view_tile.png" />
-    <None Include="Resources\bullet_go.png" />
-    <None Include="Resources\0029.ico" />
-    <None Include="Resources\book_open.png" />
-    <None Include="Resources\cancel.png" />
-    <Content Include="Resources\files\netdom.exe">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <EmbeddedResource Include="appdeploy.resx">
+    <EmbeddedResource Include="ADmgmt.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>appdeploy.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="AppTable.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>AppTable.vb</DependentUpon>
+      <DependentUpon>ADmgmt.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CustomDomainInfo.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CustomDomainInfo.vb</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProcInfo.resx">
+    <EmbeddedResource Include="Password.resx">
       <SubType>Designer</SubType>
-      <DependentUpon>ProcInfo.vb</DependentUpon>
+      <DependentUpon>Password.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\files\cmc.ico">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <Content Include="Resources\files\regx3.dll" />
-    <Content Include="Resources\files\vncviewer.exe" />
-    <Content Include="Resources\files\winvnc\logmessages.dll" />
-    <Content Include="Resources\files\winvnc\winvnc4.exe" />
-    <Content Include="Resources\files\winvnc\wm_hooks.dll" />
-    <Content Include="Resources\files\XZip.dll" />
-    <None Include="Resources\stop.png" />
-    <None Include="Resources\play.png" />
-    <None Include="Resources\pause.png" />
-    <None Include="Resources\stats_info.png" />
-    <None Include="Resources\gear.png" />
-    <None Include="Resources\regedit.png" />
-    <None Include="Resources\picture_key.png" />
-    <None Include="Resources\folder_add.png" />
-    <None Include="Resources\folder_delete.png" />
-    <None Include="Resources\server.png" />
-    <None Include="Resources\keyboard.png" />
-    <None Include="Resources\monitor_go.png" />
-    <None Include="Resources\monitor.png" />
-    <None Include="Resources\folder_user.png" />
-    <None Include="Resources\group.png" />
-    <None Include="Resources\page_error.png" />
-    <None Include="Resources\page_lightning.png" />
-    <None Include="Resources\page_delete.png" />
-    <None Include="Resources\page.png" />
-    <None Include="Resources\wrench.png" />
-    <None Include="Resources\package_green.png" />
-    <None Include="Resources\table.png" />
-    <None Include="Resources\table_gear.png" />
-    <None Include="Resources\wrench_orange.png" />
-    <None Include="Resources\monitor_lightning.png" />
-    <None Include="Resources\page_save.png" />
-    <None Include="Resources\group_key.png" />
-    <None Include="Resources\printer.png" />
-    <EmbeddedResource Include="Form1.en-GB.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>Form1.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.vb</DependentUpon>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <SubType>Designer</SubType>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SvcInfo.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SvcInfo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SwInfo.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SwInfo.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -305,7 +199,6 @@
     <BaseApplicationManifest Include="My Project\app.manifest" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
     <None Include="My Project\Settings.settings">
       <CustomToolNamespace>My</CustomToolNamespace>
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -313,15 +206,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <PublishFile Include="changelog.txt">
-      <Visible>False</Visible>
-      <Group>
-      </Group>
-      <TargetPath>
-      </TargetPath>
-      <PublishState>Exclude</PublishState>
-      <FileType>File</FileType>
-    </PublishFile>
     <PublishFile Include="en-GB\CMC.resources">
       <Visible>False</Visible>
       <Group>
@@ -356,6 +240,14 @@
       <VersionMinor>0</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+    </COMReference>
+    <COMReference Include="stdole">
+      <Guid>{00020430-0000-0000-C000-000000000046}</Guid>
+      <VersionMajor>2</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>
     </COMReference>
     <COMReference Include="TSUSEREXLib">
