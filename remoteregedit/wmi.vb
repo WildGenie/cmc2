@@ -228,8 +228,8 @@ ByVal valueName As String) As String
         'Const REG_MULTI_SZ = 7
         Dim oreg As Object
         oreg = GetObject("winmgmts:{impersonationLevel=impersonate}!\\" & machineName & "\root\default:StdRegProv")
-        Dim arrValueNames As String()
-        Dim arrValueTypes As Integer()
+        Dim arrValueNames As String() = Nothing
+        Dim arrValueTypes As Integer() = Nothing
         If Not (oreg.EnumValues(HKEY_LOCAL_MACHINE, subKeyName, arrValueNames, arrValueTypes) Is DBNull.Value) Then
             For i As Integer = 0 To UBound(arrValueNames)
                 'WScript.Echo("Value Name: " & arrValueNames(i))
