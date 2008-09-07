@@ -99,11 +99,11 @@ Public Class SvcInfo
 
     End Sub
 
-
     Private Sub svcStartupCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles svcStartupCombo.SelectedIndexChanged
         If Me.FormLoading = False Then
             Me.Cursor = Cursors.AppStarting
             Form1.Service_ChangeStartMode(txtSvcName.Text, svcStartupCombo.Text)
+            Me.ButtonsEnable()
             Me.Cursor = Cursors.Default
         End If
     End Sub
@@ -129,7 +129,11 @@ Public Class SvcInfo
                 Me.btnSvcResume.Enabled = False
                 Me.picSvcStatus.Image = Nothing
             Case "Stopped"
-                Me.btnSvcStart.Enabled = True
+                If svcStartupCombo.Text = "Disabled" Then
+                    Me.btnSvcStart.Enabled = False
+                Else
+                    Me.btnSvcStart.Enabled = True
+                End If
                 Me.btnSvcStop.Enabled = False
                 Me.btnSvcPause.Enabled = False
                 Me.btnSvcResume.Enabled = False

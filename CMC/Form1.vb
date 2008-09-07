@@ -6117,12 +6117,18 @@ Public Class Form1
 
 
         ' psexec.exe location
+
+        Dim defaultpath As String = My.Application.Info.DirectoryPath.ToLower & "\files\psexec.exe"
+        If System.Diagnostics.Debugger.IsAttached Then
+            defaultpath = defaultpath.Replace("cmc\bin\files", "cmc\resources\files")
+        End If
+
         psexecpath.Text = My.Settings.psexecpath
         If psexecpath.Text = "" Then
-            If System.IO.File.Exists(My.Application.Info.DirectoryPath & "\files\psexec.exe") Then
-                My.Settings.psexecpath = My.Application.Info.DirectoryPath & "\files\psexec.exe"
-                psexecpath.Text = My.Application.Info.DirectoryPath & "\files\psexec.exe"
-                psexecfile = Chr(34) & psexecpath.Text & Chr(34)
+            If System.IO.File.Exists(defaultpath) Then
+                My.Settings.psexecpath = defaultpath
+                psexecpath.Text = defaultpath
+                psexecfile = Chr(34) & defaultpath & Chr(34)
             ElseIf System.IO.File.Exists(Environment.ExpandEnvironmentVariables("%systemroot%") & "\system32\psexec.exe") Then
                 My.Settings.psexecpath = Environment.ExpandEnvironmentVariables("%systemroot%") & "\system32\psexec.exe"
                 psexecpath.Text = Environment.ExpandEnvironmentVariables("%systemroot%") & "\system32\psexec.exe"
@@ -6153,6 +6159,11 @@ Public Class Form1
             Dim sKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Sysinternals", True)
             If sKey Is Nothing Then
                 Registry.CurrentUser.OpenSubKey("Software", True).CreateSubKey("Sysinternals").CreateSubKey("PSExec").SetValue("EulaAccepted", 1, RegistryValueKind.DWord)
+            Else
+                Dim pKey As RegistryKey = Registry.CurrentUser.OpenSubKey("Software\Sysinternals\PSExec", True)
+                If pKey Is Nothing Then
+                    Registry.CurrentUser.OpenSubKey("Software\Sysinternals", True).CreateSubKey("PSExec").SetValue("EulaAccepted", 1, RegistryValueKind.DWord)
+                End If
             End If
         End If
 
@@ -9790,11 +9801,30 @@ Public Class Form1
         End If
 
         Try
-            Shell(Chr(34) & My.Application.Info.DirectoryPath & _
-              "\files\netdom" & Chr(34) & " join " & PC.Name & " /Domain:" & _
-              domaintojoin.Text & " /UserD:" & joindomuser.Text & " /PasswordD:" & _
-              joindompass.Text & " /UserO:" & localusername & " /PasswordO:" & _
-              localuserpass, 0, True)
+            'Shell(Chr(34) & My.Application.Info.DirectoryPath & _
+            '  "\files\netdom" & Chr(34) & " join " & PC.Name & " /Domain:" & _
+            '  domaintojoin.Text & " /UserD:" & joindomuser.Text & " /PasswordD:" & _
+            '  joindompass.Text & " /UserO:" & localusername & " /PasswordO:" & _
+            '  localuserpass, 0, True)
+
+            Dim netdompath As String = My.Application.Info.DirectoryPath.ToLower & "\files\netdom"
+            If System.Diagnostics.Debugger.IsAttached Then
+                netdompath = netdompath.Replace("cmc\cmc\bin\files\netdom.exe", "cmc\cmc\resources\files\netdom.exe")
+            End If
+
+            If File.Exists(netdompath) Then
+                Dim p As New Process
+                Dim psi As ProcessStartInfo = New ProcessStartInfo
+                psi.FileName = netdompath
+                If ConnectionExists Then
+                    psi.Arguments = "join " & PC.Name & " /Domain:" & domaintojoin.Text & _
+                                    " /UserD:" & joindomuser.Text & " /PasswordD:" & joindompass.Text & _
+                                    " /UserO:" & localusername & " /PasswordO:" & localuserpass
+                End If
+                p.StartInfo = psi
+                p.Start()
+            End If
+
 
             ' set logon screen options
             If domainlogon.Checked Then
@@ -12299,6 +12329,10 @@ Public Class Form1
         Tabholder1.SelectTab(message)
         Me.AcceptButton = Nothing
     End Sub
+    Private Sub WindRegMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WindRegMenuItem.Click
+        WinRegEdit()
+    End Sub
+    ' external tools
     Private Sub RemRegMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RemRegMenuItem.Click
 
         Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\files\remreg.exe"
@@ -12318,9 +12352,6 @@ Public Class Form1
         Else
             MsgBox("File not found")
         End If
-    End Sub
-    Private Sub WindRegMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles WindRegMenuItem.Click
-        WinRegEdit()
     End Sub
     Private Sub ADUserInfoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ADUserInfoToolStripMenuItem.Click
         'Tabholder1.SelectTab(aduser)
@@ -12353,12 +12384,32 @@ Public Class Form1
             Dim psi As ProcessStartInfo = New ProcessStartInfo
             psi.FileName = Path
             If ConnectionExists Then
-                psi.Arguments = "\\" & PC.Name & " /m:" & PC.PhysicalMemory & " /h /t:2"
+                psi.Arguments = "\\" & PC.Name & " /m:" & PC.PhysicalMemory & " /h /t:1"
             End If
             p.StartInfo = psi
             p.Start()
         End If
 
+    End Sub
+    Private Sub admanagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles admanagement.Click
+
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        If System.Diagnostics.Debugger.IsAttached Then
+            Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
+        End If
+
+        If File.Exists(Path) Then
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = Path
+            If ConnectionExists Then
+                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & PC.CurrentUser
+            End If
+            p.StartInfo = psi
+            p.Start()
+        End If
+
+        Me.GO_Button.Select()
     End Sub
 
     ' gpupdate
@@ -14480,26 +14531,7 @@ Public Class Form1
     End Sub
 
 
-    Private Sub admanagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles admanagement.Click
 
-        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
-        If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
-        End If
-
-        If File.Exists(Path) Then
-            Dim p As New Process
-            Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.FileName = Path
-            If ConnectionExists Then
-                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & PC.CurrentUser
-            End If
-            p.StartInfo = psi
-            p.Start()
-        End If
-
-        Me.GO_Button.Select()
-    End Sub
 
 End Class
 
