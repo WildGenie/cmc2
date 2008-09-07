@@ -231,4 +231,12 @@ Public Class PerfMonitor
         End If
 
     End Sub
+
+    Private Sub AlwaysOnTopToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
+        If Me.TopMost = True Then
+            Me.TopMost = False
+        Else
+            Me.TopMost = True
+        End If
+    End Sub
 End Class

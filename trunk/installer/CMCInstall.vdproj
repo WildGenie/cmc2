@@ -111,20 +111,20 @@
         }
         "Entry"
         {
-        "MsmKey" = "8:_B8C377B090E0620F1777C580ED199097"
-        "OwnerKey" = "8:_F4EC628FDA43F9FE4719E008EB5E6583"
+        "MsmKey" = "8:_BD24C23B4E73465392DD156C878C656A"
+        "OwnerKey" = "8:_UNDEFINED"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_B8C377B090E0620F1777C580ED199097"
+        "MsmKey" = "8:_C079F3E7F75F065CC136B0B10E7CDFB0"
         "OwnerKey" = "8:_7332F71D7096A320228ED92243936941"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
         {
-        "MsmKey" = "8:_BD24C23B4E73465392DD156C878C656A"
-        "OwnerKey" = "8:_UNDEFINED"
+        "MsmKey" = "8:_C079F3E7F75F065CC136B0B10E7CDFB0"
+        "OwnerKey" = "8:_F4EC628FDA43F9FE4719E008EB5E6583"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -397,11 +397,6 @@
             "AssemblyAsmDisplayName" = "8:Interop.ActiveDs, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_5F53C2EFF945B2E98815521999998275"
-                    {
-                    "Name" = "8:Interop.ActiveDs.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interop.ActiveDs.dll"
             "TargetName" = "8:"
@@ -583,26 +578,6 @@
             "IsDependency" = "11:FALSE"
             "IsolateTo" = "8:"
             }
-            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_B8C377B090E0620F1777C580ED199097"
-            {
-            "SourcePath" = "8:tsuserex.dll"
-            "TargetName" = "8:tsuserex.dll"
-            "Tag" = "8:"
-            "Folder" = "8:_CEC1D51E3EE54F65B897331C9E2912E6"
-            "Condition" = "8:"
-            "Transitive" = "11:FALSE"
-            "Vital" = "11:TRUE"
-            "ReadOnly" = "11:FALSE"
-            "Hidden" = "11:FALSE"
-            "System" = "11:FALSE"
-            "Permanent" = "11:FALSE"
-            "SharedLegacy" = "11:FALSE"
-            "PackageAs" = "3:1"
-            "Register" = "3:1"
-            "Exclude" = "11:FALSE"
-            "IsDependency" = "11:TRUE"
-            "IsolateTo" = "8:"
-            }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_BD24C23B4E73465392DD156C878C656A"
             {
             "SourcePath" = "8:..\\CMC\\Resources\\files\\xzip.dll"
@@ -621,6 +596,26 @@
             "Register" = "3:4"
             "Exclude" = "11:FALSE"
             "IsDependency" = "11:FALSE"
+            "IsolateTo" = "8:"
+            }
+            "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_C079F3E7F75F065CC136B0B10E7CDFB0"
+            {
+            "SourcePath" = "8:tsuserex.dll"
+            "TargetName" = "8:tsuserex.dll"
+            "Tag" = "8:"
+            "Folder" = "8:_CEC1D51E3EE54F65B897331C9E2912E6"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
             "IsolateTo" = "8:"
             }
             "{1FB2D0AE-D3B9-43D4-B9DD-F88EC61E35DE}:_ECA593CC327941B699B5A2CE6A643DA6"
@@ -650,11 +645,6 @@
             "AssemblyAsmDisplayName" = "8:Interop.TSUSEREXLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL"
                 "ScatterAssemblies"
                 {
-                    "_F4EC628FDA43F9FE4719E008EB5E6583"
-                    {
-                    "Name" = "8:Interop.TSUSEREXLib.dll"
-                    "Attributes" = "3:512"
-                    }
                 }
             "SourcePath" = "8:Interop.TSUSEREXLib.dll"
             "TargetName" = "8:"
@@ -846,14 +836,14 @@
         {
         "Name" = "8:Microsoft Visual Studio"
         "ProductName" = "8:CMC"
-        "ProductCode" = "8:{041F07A2-E853-428A-B0A1-C234C5B73CFE}"
-        "PackageCode" = "8:{62C23E52-006A-4AEA-BEE5-747DAACEA771}"
+        "ProductCode" = "8:{AD8E4723-9D93-4619-8B71-C558EEB00676}"
+        "PackageCode" = "8:{71149A33-2D3E-4F23-A073-A970EEB0918F}"
         "UpgradeCode" = "8:{27211E50-B135-4674-A7E9-477FF02EE685}"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:TRUE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:TRUE"
-        "ProductVersion" = "8:2.6.08"
+        "ProductVersion" = "8:2.6.09"
         "Manufacturer" = "8:Peter Forman"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:http://computermanagementconsole.co.uk"
@@ -992,7 +982,7 @@
             {
             "Name" = "8:user manager"
             "Arguments" = "8:"
-            "Description" = "8:Active Directory User Management"
+            "Description" = "8:active directory user management tool"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"
@@ -1020,7 +1010,7 @@
             {
             "Name" = "8:remote registry editor"
             "Arguments" = "8:"
-            "Description" = "8:Simple registry editor"
+            "Description" = "8:simple remote registry editor"
             "ShowCmd" = "3:1"
             "IconIndex" = "3:0"
             "Transitive" = "11:FALSE"

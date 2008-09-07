@@ -34,13 +34,16 @@ Partial Class PerfMonitor
         Me.TimeValue = New System.Windows.Forms.NumericUpDown
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.btnTogglePanel = New System.Windows.Forms.Button
-        Me.Panel2 = New System.Windows.Forms.Panel
         Me.Label1 = New System.Windows.Forms.Label
+        Me.Panel2 = New System.Windows.Forms.Panel
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
+        Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'PerfMonTimer
@@ -135,6 +138,7 @@ Partial Class PerfMonitor
         Me.Panel1.Controls.Add(Me.btnStart)
         Me.Panel1.Controls.Add(Me.btnStop)
         Me.Panel1.Controls.Add(Me.Label1)
+        Me.Panel1.Controls.Add(Me.MenuStrip1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
@@ -150,6 +154,15 @@ Partial Class PerfMonitor
         Me.btnTogglePanel.Text = "-"
         Me.btnTogglePanel.UseVisualStyleBackColor = True
         '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(45, 40)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(12, 13)
+        Me.Label1.TabIndex = 10
+        Me.Label1.Text = "s"
+        '
         'Panel2
         '
         Me.Panel2.Controls.Add(Me.labelCPU)
@@ -162,14 +175,23 @@ Partial Class PerfMonitor
         Me.Panel2.Size = New System.Drawing.Size(148, 190)
         Me.Panel2.TabIndex = 10
         '
-        'Label1
+        'MenuStrip1
         '
-        Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(45, 40)
-        Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(12, 13)
-        Me.Label1.TabIndex = 10
-        Me.Label1.Text = "s"
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(148, 24)
+        Me.MenuStrip1.TabIndex = 11
+        Me.MenuStrip1.Text = "MenuStrip1"
+        Me.MenuStrip1.Visible = False
+        '
+        'AlwaysOnTopToolStripMenuItem
+        '
+        Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
+        Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+                    Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
+        Me.AlwaysOnTopToolStripMenuItem.Text = "always on top"
         '
         'PerfMonitor
         '
@@ -181,6 +203,7 @@ Partial Class PerfMonitor
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.MinimumSize = New System.Drawing.Size(164, 110)
         Me.Name = "PerfMonitor"
         Me.Text = "PerfMonitor"
@@ -191,6 +214,8 @@ Partial Class PerfMonitor
         Me.Panel1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -207,5 +232,7 @@ Partial Class PerfMonitor
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnTogglePanel As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents AlwaysOnTopToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

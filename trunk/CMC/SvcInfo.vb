@@ -43,9 +43,12 @@ Public Class SvcInfo
         Me.Cursor = Cursors.AppStarting
         Me.progBar.Visible = True
         Me.progBar.Value = 0
+
+        Form1.StartService(Me.txtSvcName.Text)
+
         Do While Me.lblSvcStatus.Text <> "Running"
             Me.progBar.Increment(100 / 15)
-            Form1.StartService(Me.txtSvcName.Text)
+
             Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
             System.Threading.Thread.Sleep(1000)
@@ -74,9 +77,11 @@ Public Class SvcInfo
         Me.Cursor = Cursors.AppStarting
         Me.progBar.Visible = True
         Me.progBar.Value = 0
+
+        Form1.StopService(Me.txtSvcName.Text)
+
         Do While Me.lblSvcStatus.Text <> "Stopped"
             Me.progBar.Increment(100 / 15)
-            Form1.StopService(Me.txtSvcName.Text)
             Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
             System.Threading.Thread.Sleep(1000)
