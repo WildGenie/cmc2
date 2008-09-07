@@ -6,7 +6,112 @@ ADMgmt
 </name>
 </assembly>
 <members>
-<member name="M:ADmgmt.AD.GetDirectoryEntry(System.String,System.String,System.String,System.DirectoryServices.AuthenticationTypes)">
+<member name="M:ADmgmt.AddDomainInfo.OK_Button_Click(System.Object,System.EventArgs)">
+	<summary>
+ Validates and adds custom domain information.
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks>Peter Forman 09/08/2008</remarks>
+</member><member name="M:ADmgmt.AddDomainInfo.txtDC_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Read Domain Controller value and add to aDSPath
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:ADmgmt.AddDomainInfo.txtDNS_TextChanged(System.Object,System.EventArgs)">
+	<summary>
+ Read DNS Domain name and convert to aDSPath
+ </summary>
+	<param name="sender"></param>
+	<param name="e"></param>
+	<remarks></remarks>
+</member><member name="M:ADmgmt.AddDomainInfo.ValidateInformation">
+	<summary>
+ Checks that mandatory domain fields are completed.
+ </summary>
+	<returns>true/false</returns>
+	<remarks>username and password not validated.</remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.Found(System.String)">
+	<summary>
+ Returns boolean value indicating whether the requested domain name
+ has a custom registry entry.
+ </summary>
+	<param name="NT_Domain"></param>
+	<value></value>
+	<returns>True/False</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.RegKeyName(System.String)">
+	<summary>
+ Returns the registry key name containing the information
+ for the selected domain.
+ </summary>
+	<param name="NT_Domain"></param>
+	<value></value>
+	<returns>Registry Key Name</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.NTDomainName">
+	<summary>
+ The NT (Short) domain name
+ </summary>
+	<returns>Short domain name in upper case</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.DNSDomainName">
+	<summary>
+ The dns name of the domain.
+ </summary>
+	<returns>Lower case dns domain name</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.DomainController">
+	<summary>
+ The preferred domain controller used for querying AD.
+ </summary>
+	<value></value>
+	<returns>Upper case domain controller name</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.Username">
+	<summary>
+ Optional username to use when querying AD. Returns Nothing if empty
+ </summary>
+	<value></value>
+	<returns>Decrypted username as string, or Nothing if empty</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.Password">
+	<summary>
+ Optional password to use when querying AD. Returns Nothing if empty
+ </summary>
+	<value></value>
+	<returns>Decrypted password as string, or Nothing if empty</returns>
+	<remarks></remarks>
+</member><member name="P:ADmgmt.CustomDomainInfo.DSPath">
+	<summary>
+ Returns DSPath (LDAP://{DC}/my.domain.com) for the selected domain.
+ </summary>
+	<value></value>
+	<returns>aDSPath as string</returns>
+	<remarks>Includes DC in string if available</remarks>
+</member><member name="M:ADmgmt.CustomDomainInfo.FindCustomDomainInfo(System.String)">
+	<summary>
+ Checks for custom domain entry in registry, returns true if found
+ </summary>
+	<param name="Domain"></param>
+	<returns>Populates internal properties</returns>
+	<remarks></remarks>
+</member><member name="M:ADmgmt.CustomDomainInfo.SaveCustomDomainInfo(System.String,System.String,System.String,System.String,System.String)">
+	<summary>
+ Saves custom domain information to the registry in first available space.
+ </summary>
+	<param name="Domain"></param>
+	<remarks></remarks>
+</member><member name="T:ADmgmt.CustomDomainInfo">
+	<summary>
+ Stores and retrieves custom domain strings.
+ Strings contain: NT Domain Name, DNS Domain Name, Preferred domain controller,
+                  Optional Username and Password.
+ </summary>
+	<remarks>Peter Forman 09/08/2008</remarks>
+</member><member name="M:ADmgmt.AD.GetDirectoryEntry(System.String,System.String,System.String,System.DirectoryServices.AuthenticationTypes)">
 	<summary>
  Method used to create an entry to the AD.
  Replace the path, username, and password.
@@ -169,111 +274,6 @@ ADMgmt
 	<summary>
   A strongly-typed resource class, for looking up localized strings, etc.
 </summary>
-</member><member name="M:ADmgmt.AddDomainInfo.OK_Button_Click(System.Object,System.EventArgs)">
-	<summary>
- Validates and adds custom domain information.
- </summary>
-	<param name="sender"></param>
-	<param name="e"></param>
-	<remarks>Peter Forman 09/08/2008</remarks>
-</member><member name="M:ADmgmt.AddDomainInfo.txtDC_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Read Domain Controller value and add to aDSPath
- </summary>
-	<param name="sender"></param>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:ADmgmt.AddDomainInfo.txtDNS_TextChanged(System.Object,System.EventArgs)">
-	<summary>
- Read DNS Domain name and convert to aDSPath
- </summary>
-	<param name="sender"></param>
-	<param name="e"></param>
-	<remarks></remarks>
-</member><member name="M:ADmgmt.AddDomainInfo.ValidateInformation">
-	<summary>
- Checks that mandatory domain fields are completed.
- </summary>
-	<returns>true/false</returns>
-	<remarks>username and password not validated.</remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.Found(System.String)">
-	<summary>
- Returns boolean value indicating whether the requested domain name
- has a custom registry entry.
- </summary>
-	<param name="NT_Domain"></param>
-	<value></value>
-	<returns>True/False</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.RegKeyName(System.String)">
-	<summary>
- Returns the registry key name containing the information
- for the selected domain.
- </summary>
-	<param name="NT_Domain"></param>
-	<value></value>
-	<returns>Registry Key Name</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.NTDomainName">
-	<summary>
- The NT (Short) domain name
- </summary>
-	<returns>Short domain name in upper case</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.DNSDomainName">
-	<summary>
- The dns name of the domain.
- </summary>
-	<returns>Lower case dns domain name</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.DomainController">
-	<summary>
- The preferred domain controller used for querying AD.
- </summary>
-	<value></value>
-	<returns>Upper case domain controller name</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.Username">
-	<summary>
- Optional username to use when querying AD. Returns Nothing if empty
- </summary>
-	<value></value>
-	<returns>Decrypted username as string, or Nothing if empty</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.Password">
-	<summary>
- Optional password to use when querying AD. Returns Nothing if empty
- </summary>
-	<value></value>
-	<returns>Decrypted password as string, or Nothing if empty</returns>
-	<remarks></remarks>
-</member><member name="P:ADmgmt.CustomDomainInfo.DSPath">
-	<summary>
- Returns DSPath (LDAP://{DC}/my.domain.com) for the selected domain.
- </summary>
-	<value></value>
-	<returns>aDSPath as string</returns>
-	<remarks>Includes DC in string if available</remarks>
-</member><member name="M:ADmgmt.CustomDomainInfo.FindCustomDomainInfo(System.String)">
-	<summary>
- Checks for custom domain entry in registry, returns true if found
- </summary>
-	<param name="Domain"></param>
-	<returns>Populates internal properties</returns>
-	<remarks></remarks>
-</member><member name="M:ADmgmt.CustomDomainInfo.SaveCustomDomainInfo(System.String,System.String,System.String,System.String,System.String)">
-	<summary>
- Saves custom domain information to the registry in first available space.
- </summary>
-	<param name="Domain"></param>
-	<remarks></remarks>
-</member><member name="T:ADmgmt.CustomDomainInfo">
-	<summary>
- Stores and retrieves custom domain strings.
- Strings contain: NT Domain Name, DNS Domain Name, Preferred domain controller,
-                  Optional Username and Password.
- </summary>
-	<remarks>Peter Forman 09/08/2008</remarks>
 </member>
 </members>
 </doc>

@@ -1216,7 +1216,7 @@ Public Class ADmgmt
                         di.txtPass.Text = pass
                         di.EditMode = True
                         di.ShowDialog()
-                        di.EditMode = False
+                        'di.EditMode = False
                     End If
                 End If
             Next
