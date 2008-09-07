@@ -510,7 +510,6 @@ Public Class Form1
     Friend WithEvents lblDhcp As System.Windows.Forms.Label
     Friend WithEvents PropertiesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator26 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents btnTestAdMgnt As System.Windows.Forms.Button
     Friend WithEvents admanagement As System.Windows.Forms.Button
     Friend WithEvents pr_name As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pr_id As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -966,7 +965,6 @@ Public Class Form1
         Me.startupLocation = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.startupUser = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.test = New System.Windows.Forms.TabPage
-        Me.btnTestAdMgnt = New System.Windows.Forms.Button
         Me.GroupBox10 = New System.Windows.Forms.GroupBox
         Me.btn_GetSiteOrg = New System.Windows.Forms.Button
         Me.Label42 = New System.Windows.Forms.Label
@@ -5438,7 +5436,6 @@ Public Class Form1
         '
         'test
         '
-        Me.test.Controls.Add(Me.btnTestAdMgnt)
         Me.test.Controls.Add(Me.GroupBox10)
         Me.test.Controls.Add(Me.groupToAdd)
         Me.test.Controls.Add(Me.btn_AddGroup)
@@ -5457,15 +5454,6 @@ Public Class Form1
         Me.test.TabIndex = 12
         Me.test.Text = "test"
         Me.test.UseVisualStyleBackColor = True
-        '
-        'btnTestAdMgnt
-        '
-        Me.btnTestAdMgnt.Location = New System.Drawing.Point(185, 109)
-        Me.btnTestAdMgnt.Name = "btnTestAdMgnt"
-        Me.btnTestAdMgnt.Size = New System.Drawing.Size(75, 23)
-        Me.btnTestAdMgnt.TabIndex = 106
-        Me.btnTestAdMgnt.Text = "admgmt"
-        Me.btnTestAdMgnt.UseVisualStyleBackColor = True
         '
         'GroupBox10
         '
@@ -6092,9 +6080,6 @@ Public Class Form1
                         altPassword_TextBox.Text = Mid(Environment.GetCommandLineArgs(i).ToString, 4, Environment.GetCommandLineArgs(i).Length - 3)
                     Case "/r"
                         Main()
-                    Case "/ad"
-                        MsgBox("ad")
-                        ADmgmt.Show()
                 End Select
             Next
         End If
@@ -10042,8 +10027,8 @@ Public Class Form1
     ''' <remarks></remarks>
     Private Sub GetUserProperties(ByVal sAMAccountName As String, ByVal LDAPPath As String, ByVal adusername As String, ByVal adpassword As String)
 
-        Dim ad As New AD
-        Using DirSearch As New DirectorySearcher(ad.GetDirectoryEntry(LDAPPath, adusername, adpassword, AuthenticationTypes.Secure))
+        Dim de As New DirectoryEntry(LDAPPath, adusername, adpassword, AuthenticationTypes.Secure)
+        Using DirSearch As New DirectorySearcher(de)
 
             With DirSearch
                 .PropertiesToLoad.Add("distinguishedName")
@@ -14452,13 +14437,6 @@ Public Class Form1
 
     '    GetDescriptorBlockFromEDID = strResult
     'End Function
-
-    Private Sub btnTestAdMgnt_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTestAdMgnt.Click
-        'Dim adm As New ADmgmt
-        'adm.LoadDomains()
-
-        ADmgmt.Show()
-    End Sub
 
 #End Region
 
