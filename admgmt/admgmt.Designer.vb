@@ -57,8 +57,6 @@ Partial Class ADmgmt
         Me.txtInitials = New System.Windows.Forms.TextBox
         Me.txtFirstName = New System.Windows.Forms.TextBox
         Me.tabProfile = New System.Windows.Forms.TabPage
-        Me.txtExpires = New System.Windows.Forms.TextBox
-        Me.Label31 = New System.Windows.Forms.Label
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
         Me.txtHomeFolder = New System.Windows.Forms.TextBox
         Me.Label5 = New System.Windows.Forms.Label
@@ -122,8 +120,13 @@ Partial Class ADmgmt
         Me.lblGroupName = New System.Windows.Forms.Label
         Me.gbSearch = New System.Windows.Forms.GroupBox
         Me.SearchResultsDGV = New System.Windows.Forms.DataGridView
+        Me.srName = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.srDescription = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.userContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.NameMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.ResetPasswordMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.PropertiesMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.Label32 = New System.Windows.Forms.Label
         Me.radioGroups = New System.Windows.Forms.RadioButton
         Me.radioUsers = New System.Windows.Forms.RadioButton
@@ -135,11 +138,9 @@ Partial Class ADmgmt
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.SearchPanel = New System.Windows.Forms.Panel
         Me.Panel4 = New System.Windows.Forms.Panel
-        Me.NameMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.PropertiesMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.srName = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.srDescription = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.txtExpires = New System.Windows.Forms.TextBox
+        Me.Label31 = New System.Windows.Forms.Label
+        Me.Label33 = New System.Windows.Forms.Label
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
@@ -219,6 +220,9 @@ Partial Class ADmgmt
         '
         Me.tabAccount.BackColor = System.Drawing.SystemColors.Control
         Me.tabAccount.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.tabAccount.Controls.Add(Me.Label33)
+        Me.tabAccount.Controls.Add(Me.txtExpires)
+        Me.tabAccount.Controls.Add(Me.Label31)
         Me.tabAccount.Controls.Add(Me.AccDisabled)
         Me.tabAccount.Controls.Add(Me.btnSave)
         Me.tabAccount.Controls.Add(Me.Label13)
@@ -256,11 +260,10 @@ Partial Class ADmgmt
         Me.AccDisabled.AutoSize = True
         Me.AccDisabled.CheckAlign = System.Drawing.ContentAlignment.BottomLeft
         Me.AccDisabled.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.AccDisabled.Location = New System.Drawing.Point(93, 264)
+        Me.AccDisabled.Location = New System.Drawing.Point(135, 266)
         Me.AccDisabled.Name = "AccDisabled"
-        Me.AccDisabled.Size = New System.Drawing.Size(117, 17)
+        Me.AccDisabled.Size = New System.Drawing.Size(15, 14)
         Me.AccDisabled.TabIndex = 26
-        Me.AccDisabled.Text = "account is disabled"
         Me.AccDisabled.UseVisualStyleBackColor = True
         '
         'btnSave
@@ -278,7 +281,7 @@ Partial Class ADmgmt
         '
         Me.Label13.AutoSize = True
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label13.Location = New System.Drawing.Point(12, 208)
+        Me.Label13.Location = New System.Drawing.Point(12, 194)
         Me.Label13.Name = "Label13"
         Me.Label13.Size = New System.Drawing.Size(62, 13)
         Me.Label13.TabIndex = 24
@@ -287,7 +290,7 @@ Partial Class ADmgmt
         'txtDepartment
         '
         Me.txtDepartment.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDepartment.Location = New System.Drawing.Point(93, 205)
+        Me.txtDepartment.Location = New System.Drawing.Point(93, 191)
         Me.txtDepartment.Name = "txtDepartment"
         Me.txtDepartment.Size = New System.Drawing.Size(271, 20)
         Me.txtDepartment.TabIndex = 23
@@ -296,7 +299,7 @@ Partial Class ADmgmt
         '
         Me.Label12.AutoSize = True
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label12.Location = New System.Drawing.Point(12, 182)
+        Me.Label12.Location = New System.Drawing.Point(12, 170)
         Me.Label12.Name = "Label12"
         Me.Label12.Size = New System.Drawing.Size(30, 13)
         Me.Label12.TabIndex = 22
@@ -305,7 +308,7 @@ Partial Class ADmgmt
         'txtTitle
         '
         Me.txtTitle.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTitle.Location = New System.Drawing.Point(93, 179)
+        Me.txtTitle.Location = New System.Drawing.Point(93, 167)
         Me.txtTitle.Name = "txtTitle"
         Me.txtTitle.Size = New System.Drawing.Size(271, 20)
         Me.txtTitle.TabIndex = 21
@@ -314,7 +317,7 @@ Partial Class ADmgmt
         '
         Me.Label2.AutoSize = True
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label2.Location = New System.Drawing.Point(12, 234)
+        Me.Label2.Location = New System.Drawing.Point(12, 218)
         Me.Label2.Name = "Label2"
         Me.Label2.Size = New System.Drawing.Size(54, 13)
         Me.Label2.TabIndex = 20
@@ -323,7 +326,7 @@ Partial Class ADmgmt
         'txtCompany
         '
         Me.txtCompany.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtCompany.Location = New System.Drawing.Point(93, 231)
+        Me.txtCompany.Location = New System.Drawing.Point(93, 215)
         Me.txtCompany.Name = "txtCompany"
         Me.txtCompany.Size = New System.Drawing.Size(271, 20)
         Me.txtCompany.TabIndex = 19
@@ -361,7 +364,7 @@ Partial Class ADmgmt
         'txtEmail
         '
         Me.txtEmail.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtEmail.Location = New System.Drawing.Point(93, 153)
+        Me.txtEmail.Location = New System.Drawing.Point(93, 143)
         Me.txtEmail.Name = "txtEmail"
         Me.txtEmail.Size = New System.Drawing.Size(271, 20)
         Me.txtEmail.TabIndex = 15
@@ -369,7 +372,7 @@ Partial Class ADmgmt
         'txtTelephone
         '
         Me.txtTelephone.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtTelephone.Location = New System.Drawing.Point(279, 127)
+        Me.txtTelephone.Location = New System.Drawing.Point(279, 119)
         Me.txtTelephone.Name = "txtTelephone"
         Me.txtTelephone.Size = New System.Drawing.Size(85, 20)
         Me.txtTelephone.TabIndex = 14
@@ -378,7 +381,7 @@ Partial Class ADmgmt
         '
         Me.Label10.AutoSize = True
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label10.Location = New System.Drawing.Point(12, 156)
+        Me.Label10.Location = New System.Drawing.Point(12, 146)
         Me.Label10.Name = "Label10"
         Me.Label10.Size = New System.Drawing.Size(35, 13)
         Me.Label10.TabIndex = 13
@@ -388,7 +391,7 @@ Partial Class ADmgmt
         '
         Me.Label9.AutoSize = True
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label9.Location = New System.Drawing.Point(241, 130)
+        Me.Label9.Location = New System.Drawing.Point(241, 122)
         Me.Label9.Name = "Label9"
         Me.Label9.Size = New System.Drawing.Size(41, 13)
         Me.Label9.TabIndex = 12
@@ -398,7 +401,7 @@ Partial Class ADmgmt
         '
         Me.Label8.AutoSize = True
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label8.Location = New System.Drawing.Point(12, 130)
+        Me.Label8.Location = New System.Drawing.Point(12, 122)
         Me.Label8.Name = "Label8"
         Me.Label8.Size = New System.Drawing.Size(38, 13)
         Me.Label8.TabIndex = 11
@@ -408,7 +411,7 @@ Partial Class ADmgmt
         '
         Me.Label7.AutoSize = True
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label7.Location = New System.Drawing.Point(12, 101)
+        Me.Label7.Location = New System.Drawing.Point(12, 98)
         Me.Label7.Name = "Label7"
         Me.Label7.Size = New System.Drawing.Size(63, 13)
         Me.Label7.TabIndex = 10
@@ -418,7 +421,7 @@ Partial Class ADmgmt
         '
         Me.Label6.AutoSize = True
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label6.Location = New System.Drawing.Point(12, 78)
+        Me.Label6.Location = New System.Drawing.Point(12, 74)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(75, 13)
         Me.Label6.TabIndex = 9
@@ -428,7 +431,7 @@ Partial Class ADmgmt
         '
         Me.Label3.AutoSize = True
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label3.Location = New System.Drawing.Point(12, 50)
+        Me.Label3.Location = New System.Drawing.Point(12, 48)
         Me.Label3.Name = "Label3"
         Me.Label3.Size = New System.Drawing.Size(38, 13)
         Me.Label3.TabIndex = 6
@@ -437,7 +440,7 @@ Partial Class ADmgmt
         'txtOffice
         '
         Me.txtOffice.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtOffice.Location = New System.Drawing.Point(93, 127)
+        Me.txtOffice.Location = New System.Drawing.Point(93, 119)
         Me.txtOffice.Name = "txtOffice"
         Me.txtOffice.Size = New System.Drawing.Size(143, 20)
         Me.txtOffice.TabIndex = 5
@@ -445,7 +448,7 @@ Partial Class ADmgmt
         'txtDescription
         '
         Me.txtDescription.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDescription.Location = New System.Drawing.Point(93, 101)
+        Me.txtDescription.Location = New System.Drawing.Point(93, 95)
         Me.txtDescription.Name = "txtDescription"
         Me.txtDescription.Size = New System.Drawing.Size(271, 20)
         Me.txtDescription.TabIndex = 4
@@ -453,7 +456,7 @@ Partial Class ADmgmt
         'txtDisplayName
         '
         Me.txtDisplayName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDisplayName.Location = New System.Drawing.Point(93, 75)
+        Me.txtDisplayName.Location = New System.Drawing.Point(93, 71)
         Me.txtDisplayName.Name = "txtDisplayName"
         Me.txtDisplayName.Size = New System.Drawing.Size(271, 20)
         Me.txtDisplayName.TabIndex = 3
@@ -461,7 +464,7 @@ Partial Class ADmgmt
         'txtLastName
         '
         Me.txtLastName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtLastName.Location = New System.Drawing.Point(235, 47)
+        Me.txtLastName.Location = New System.Drawing.Point(235, 45)
         Me.txtLastName.Name = "txtLastName"
         Me.txtLastName.Size = New System.Drawing.Size(129, 20)
         Me.txtLastName.TabIndex = 2
@@ -469,7 +472,7 @@ Partial Class ADmgmt
         'txtInitials
         '
         Me.txtInitials.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtInitials.Location = New System.Drawing.Point(203, 47)
+        Me.txtInitials.Location = New System.Drawing.Point(203, 45)
         Me.txtInitials.Name = "txtInitials"
         Me.txtInitials.Size = New System.Drawing.Size(26, 20)
         Me.txtInitials.TabIndex = 1
@@ -477,7 +480,7 @@ Partial Class ADmgmt
         'txtFirstName
         '
         Me.txtFirstName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtFirstName.Location = New System.Drawing.Point(93, 47)
+        Me.txtFirstName.Location = New System.Drawing.Point(93, 45)
         Me.txtFirstName.Name = "txtFirstName"
         Me.txtFirstName.Size = New System.Drawing.Size(104, 20)
         Me.txtFirstName.TabIndex = 0
@@ -485,8 +488,6 @@ Partial Class ADmgmt
         'tabProfile
         '
         Me.tabProfile.BackColor = System.Drawing.SystemColors.Control
-        Me.tabProfile.Controls.Add(Me.txtExpires)
-        Me.tabProfile.Controls.Add(Me.Label31)
         Me.tabProfile.Controls.Add(Me.GroupBox2)
         Me.tabProfile.Controls.Add(Me.GroupBox1)
         Me.tabProfile.Controls.Add(Me.btnProfileSave)
@@ -497,23 +498,6 @@ Partial Class ADmgmt
         Me.tabProfile.TabIndex = 1
         Me.tabProfile.Text = "Profile"
         '
-        'txtExpires
-        '
-        Me.txtExpires.Location = New System.Drawing.Point(107, 6)
-        Me.txtExpires.Name = "txtExpires"
-        Me.txtExpires.ReadOnly = True
-        Me.txtExpires.Size = New System.Drawing.Size(109, 20)
-        Me.txtExpires.TabIndex = 15
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(16, 9)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(87, 13)
-        Me.Label31.TabIndex = 14
-        Me.Label31.Text = "Account Expires:"
-        '
         'GroupBox2
         '
         Me.GroupBox2.Controls.Add(Me.txtHomeFolder)
@@ -521,7 +505,7 @@ Partial Class ADmgmt
         Me.GroupBox2.Controls.Add(Me.txtHomeDrive)
         Me.GroupBox2.Controls.Add(Me.txtHomeProfile)
         Me.GroupBox2.Controls.Add(Me.Label14)
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 72)
+        Me.GroupBox2.Location = New System.Drawing.Point(14, 26)
         Me.GroupBox2.Name = "GroupBox2"
         Me.GroupBox2.Size = New System.Drawing.Size(356, 71)
         Me.GroupBox2.TabIndex = 13
@@ -575,7 +559,7 @@ Partial Class ADmgmt
         Me.GroupBox1.Controls.Add(Me.txtTSDrive)
         Me.GroupBox1.Controls.Add(Me.Label17)
         Me.GroupBox1.Controls.Add(Me.txtTSProfile)
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 158)
+        Me.GroupBox1.Location = New System.Drawing.Point(14, 134)
         Me.GroupBox1.Name = "GroupBox1"
         Me.GroupBox1.Size = New System.Drawing.Size(356, 91)
         Me.GroupBox1.TabIndex = 12
@@ -703,7 +687,7 @@ Partial Class ADmgmt
         Me.GroupBox3.Controls.Add(Me.Label18)
         Me.GroupBox3.Controls.Add(Me.Label15)
         Me.GroupBox3.Controls.Add(Me.Label4)
-        Me.GroupBox3.Location = New System.Drawing.Point(15, 92)
+        Me.GroupBox3.Location = New System.Drawing.Point(12, 55)
         Me.GroupBox3.Name = "GroupBox3"
         Me.GroupBox3.Size = New System.Drawing.Size(353, 182)
         Me.GroupBox3.TabIndex = 0
@@ -995,9 +979,9 @@ Partial Class ADmgmt
         Me.cbDN.AutoSize = True
         Me.cbDN.Location = New System.Drawing.Point(101, 271)
         Me.cbDN.Name = "cbDN"
-        Me.cbDN.Size = New System.Drawing.Size(67, 17)
+        Me.cbDN.Size = New System.Drawing.Size(64, 17)
         Me.cbDN.TabIndex = 9
-        Me.cbDN.Text = "aDsPath"
+        Me.cbDN.Text = "adspath"
         Me.cbDN.UseVisualStyleBackColor = True
         '
         'cbMail
@@ -1005,9 +989,9 @@ Partial Class ADmgmt
         Me.cbMail.AutoSize = True
         Me.cbMail.Location = New System.Drawing.Point(101, 257)
         Me.cbMail.Name = "cbMail"
-        Me.cbMail.Size = New System.Drawing.Size(51, 17)
+        Me.cbMail.Size = New System.Drawing.Size(50, 17)
         Me.cbMail.TabIndex = 8
-        Me.cbMail.Text = "Email"
+        Me.cbMail.Text = "email"
         Me.cbMail.UseVisualStyleBackColor = True
         '
         'cbDisplay
@@ -1015,9 +999,9 @@ Partial Class ADmgmt
         Me.cbDisplay.AutoSize = True
         Me.cbDisplay.Location = New System.Drawing.Point(4, 271)
         Me.cbDisplay.Name = "cbDisplay"
-        Me.cbDisplay.Size = New System.Drawing.Size(91, 17)
+        Me.cbDisplay.Size = New System.Drawing.Size(87, 17)
         Me.cbDisplay.TabIndex = 7
-        Me.cbDisplay.Text = "Display Name"
+        Me.cbDisplay.Text = "display name"
         Me.cbDisplay.UseVisualStyleBackColor = True
         '
         'cbLogon
@@ -1025,9 +1009,9 @@ Partial Class ADmgmt
         Me.cbLogon.AutoSize = True
         Me.cbLogon.Location = New System.Drawing.Point(4, 257)
         Me.cbLogon.Name = "cbLogon"
-        Me.cbLogon.Size = New System.Drawing.Size(87, 17)
+        Me.cbLogon.Size = New System.Drawing.Size(81, 17)
         Me.cbLogon.TabIndex = 6
-        Me.cbLogon.Text = "Logon Name"
+        Me.cbLogon.Text = "logon name"
         Me.cbLogon.UseVisualStyleBackColor = True
         '
         'DGVMembers
@@ -1139,17 +1123,50 @@ Partial Class ADmgmt
         Me.SearchResultsDGV.TabIndex = 6
         Me.SearchResultsDGV.Visible = False
         '
+        'srName
+        '
+        Me.srName.HeaderText = "Name"
+        Me.srName.Name = "srName"
+        Me.srName.ReadOnly = True
+        Me.srName.Width = 140
+        '
+        'srDescription
+        '
+        Me.srDescription.HeaderText = "Description"
+        Me.srDescription.Name = "srDescription"
+        Me.srDescription.ReadOnly = True
+        Me.srDescription.Width = 210
+        '
         'userContextMenu
         '
         Me.userContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NameMenu, Me.ToolStripSeparator1, Me.ResetPasswordMenu, Me.PropertiesMenu})
         Me.userContextMenu.Name = "userContextMenu"
         Me.userContextMenu.Size = New System.Drawing.Size(156, 76)
         '
+        'NameMenu
+        '
+        Me.NameMenu.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.NameMenu.Name = "NameMenu"
+        Me.NameMenu.Size = New System.Drawing.Size(155, 22)
+        Me.NameMenu.Text = "name"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(152, 6)
+        '
         'ResetPasswordMenu
         '
         Me.ResetPasswordMenu.Name = "ResetPasswordMenu"
         Me.ResetPasswordMenu.Size = New System.Drawing.Size(155, 22)
         Me.ResetPasswordMenu.Text = "Reset Password"
+        '
+        'PropertiesMenu
+        '
+        Me.PropertiesMenu.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.PropertiesMenu.Name = "PropertiesMenu"
+        Me.PropertiesMenu.Size = New System.Drawing.Size(155, 22)
+        Me.PropertiesMenu.Text = "Properties"
         '
         'Label32
         '
@@ -1224,7 +1241,7 @@ Partial Class ADmgmt
         '
         Me.Panel1.Controls.Add(Me.TableLayoutPanel1)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel1.Location = New System.Drawing.Point(0, 511)
+        Me.Panel1.Location = New System.Drawing.Point(0, 507)
         Me.Panel1.Name = "Panel1"
         Me.Panel1.Size = New System.Drawing.Size(425, 26)
         Me.Panel1.TabIndex = 11
@@ -1243,7 +1260,7 @@ Partial Class ADmgmt
         '
         Me.Panel2.Controls.Add(Me.adTabControl)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel2.Location = New System.Drawing.Point(0, 191)
+        Me.Panel2.Location = New System.Drawing.Point(0, 187)
         Me.Panel2.Name = "Panel2"
         Me.Panel2.Size = New System.Drawing.Size(425, 320)
         Me.Panel2.TabIndex = 100002
@@ -1254,7 +1271,7 @@ Partial Class ADmgmt
         Me.SearchPanel.Dock = System.Windows.Forms.DockStyle.Fill
         Me.SearchPanel.Location = New System.Drawing.Point(0, 34)
         Me.SearchPanel.Name = "SearchPanel"
-        Me.SearchPanel.Size = New System.Drawing.Size(425, 157)
+        Me.SearchPanel.Size = New System.Drawing.Size(425, 153)
         Me.SearchPanel.TabIndex = 100003
         '
         'Panel4
@@ -1268,44 +1285,38 @@ Partial Class ADmgmt
         Me.Panel4.Size = New System.Drawing.Size(425, 34)
         Me.Panel4.TabIndex = 100004
         '
-        'NameMenu
+        'txtExpires
         '
-        Me.NameMenu.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.NameMenu.Name = "NameMenu"
-        Me.NameMenu.Size = New System.Drawing.Size(155, 22)
-        Me.NameMenu.Text = "name"
+        Me.txtExpires.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtExpires.Location = New System.Drawing.Point(135, 245)
+        Me.txtExpires.Name = "txtExpires"
+        Me.txtExpires.ReadOnly = True
+        Me.txtExpires.Size = New System.Drawing.Size(109, 18)
+        Me.txtExpires.TabIndex = 28
         '
-        'ToolStripSeparator1
+        'Label31
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(152, 6)
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(89, 247)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(40, 13)
+        Me.Label31.TabIndex = 27
+        Me.Label31.Text = "expires"
         '
-        'PropertiesMenu
+        'Label33
         '
-        Me.PropertiesMenu.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.PropertiesMenu.Name = "PropertiesMenu"
-        Me.PropertiesMenu.Size = New System.Drawing.Size(155, 22)
-        Me.PropertiesMenu.Text = "Properties"
-        '
-        'srName
-        '
-        Me.srName.HeaderText = "Name"
-        Me.srName.Name = "srName"
-        Me.srName.ReadOnly = True
-        Me.srName.Width = 140
-        '
-        'srDescription
-        '
-        Me.srDescription.HeaderText = "Description"
-        Me.srDescription.Name = "srDescription"
-        Me.srDescription.ReadOnly = True
-        Me.srDescription.Width = 210
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(89, 265)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(46, 13)
+        Me.Label33.TabIndex = 29
+        Me.Label33.Text = "disabled"
         '
         'ADmgmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(425, 537)
+        Me.ClientSize = New System.Drawing.Size(425, 533)
         Me.Controls.Add(Me.SearchPanel)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -1318,7 +1329,6 @@ Partial Class ADmgmt
         Me.tabAccount.ResumeLayout(False)
         Me.tabAccount.PerformLayout()
         Me.tabProfile.ResumeLayout(False)
-        Me.tabProfile.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
         Me.GroupBox1.ResumeLayout(False)
@@ -1443,8 +1453,6 @@ Partial Class ADmgmt
     Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label27 As System.Windows.Forms.Label
     Friend WithEvents Label26 As System.Windows.Forms.Label
-    Friend WithEvents txtExpires As System.Windows.Forms.TextBox
-    Friend WithEvents Label31 As System.Windows.Forms.Label
     Friend WithEvents AccDisabled As System.Windows.Forms.CheckBox
     Friend WithEvents btnEaSave As System.Windows.Forms.Button
     Friend WithEvents SearchResultsDGV As System.Windows.Forms.DataGridView
@@ -1459,4 +1467,7 @@ Partial Class ADmgmt
     Friend WithEvents PropertiesMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents srName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents srDescription As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents txtExpires As System.Windows.Forms.TextBox
+    Friend WithEvents Label31 As System.Windows.Forms.Label
+    Friend WithEvents Label33 As System.Windows.Forms.Label
 End Class
