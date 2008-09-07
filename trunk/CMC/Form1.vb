@@ -12300,8 +12300,21 @@ Public Class Form1
         Me.AcceptButton = Nothing
     End Sub
     Private Sub RemRegMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RemRegMenuItem.Click
-        If My.Computer.FileSystem.FileExists(My.Application.Info.DirectoryPath & "\files\remreg.exe") Then
-            Shell(My.Application.Info.DirectoryPath & "\files\remreg.exe " & PC.Name, 1, False)
+
+        Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\files\remreg.exe"
+        If System.Diagnostics.Debugger.IsAttached Then
+            path = path.Replace("cmc\cmc\bin\files\remreg.exe", "cmc\remoteregedit\obj\debug\remreg.exe")
+        End If
+
+        If File.Exists(path) Then
+            Dim p As New Process
+            Dim psi As ProcessStartInfo = New ProcessStartInfo
+            psi.FileName = path
+            If ConnectionExists Then
+                psi.Arguments = PC.Name
+            End If
+            p.StartInfo = psi
+            p.Start()
         Else
             MsgBox("File not found")
         End If
@@ -12311,7 +12324,12 @@ Public Class Form1
     End Sub
     Private Sub ADUserInfoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ADUserInfoToolStripMenuItem.Click
         'Tabholder1.SelectTab(aduser)
-        Dim Path As String = My.Application.Info.DirectoryPath & "\files\admgmt.exe"
+
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        If System.Diagnostics.Debugger.IsAttached Then
+            Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
+        End If
+
         If File.Exists(Path) Then
             Dim p As New Process
             Dim psi As ProcessStartInfo = New ProcessStartInfo
@@ -12324,17 +12342,23 @@ Public Class Form1
         End If
     End Sub
     Private Sub PerfMonMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PerfMonMenu.Click
-        Dim dsaPath As String = My.Application.Info.DirectoryPath & "\files\perfmonitor.exe"
-        If File.Exists(dsaPath) Then
+
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\perfmonitor.exe"
+        If System.Diagnostics.Debugger.IsAttached Then
+            Path = Path.Replace("cmc\cmc\bin\files\perfmonitor.exe", "cmc\perfmonitor\obj\Debug\perfmonitor.exe")
+        End If
+
+        If File.Exists(Path) Then
             Dim p As New Process
             Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.FileName = dsaPath
+            psi.FileName = Path
             If ConnectionExists Then
                 psi.Arguments = "\\" & PC.Name & " /m:" & PC.PhysicalMemory & " /h /t:2"
             End If
             p.StartInfo = psi
             p.Start()
         End If
+
     End Sub
 
     ' gpupdate
@@ -14440,7 +14464,7 @@ Public Class Form1
 
 #End Region
 
-    ' If System.Diagnostics.Debugger.IsAttached the (is running in ide)
+    ' If System.Diagnostics.Debugger.IsAttached then (is running in ide)
 
     Private Sub Impersonation_Template()
 
@@ -14458,13 +14482,17 @@ Public Class Form1
 
     Private Sub admanagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles admanagement.Click
 
-        Dim Path As String = My.Application.Info.DirectoryPath & "\files\admgmt.exe"
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        If System.Diagnostics.Debugger.IsAttached Then
+            Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
+        End If
+
         If File.Exists(Path) Then
             Dim p As New Process
             Dim psi As ProcessStartInfo = New ProcessStartInfo
             psi.FileName = Path
             If ConnectionExists Then
-                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & Chr(34) & PC.CurrentUser & Chr(34)
+                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & PC.CurrentUser
             End If
             p.StartInfo = psi
             p.Start()
