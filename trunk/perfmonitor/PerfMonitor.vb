@@ -2,6 +2,7 @@ Public Class PerfMonitor
 
     Private cpu, mem As PerformanceCounter
     Private totalMemory As Integer
+    Private FirstRun As Boolean
     Protected Friend Username As String = Nothing
     Protected Friend Password As String = Nothing
 
@@ -20,6 +21,7 @@ Public Class PerfMonitor
             If totalMemory = -1 Then Return
         End If
 
+        FirstRun = True
         PerfMonTimer.Enabled = True
         PerfMonTimer.Interval = TimeValue.Value * 1000
         PerfMonTimer.Start()
@@ -47,6 +49,13 @@ Public Class PerfMonitor
 
     Private Sub PerfMonTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PerfMonTimer.Tick
 
+
+        ' time first run of process stat enumeration
+        Dim start, totaltime As Double
+        If FirstRun Then
+            start = Microsoft.VisualBasic.DateAndTime.Timer
+        End If
+
         ' custom colours
         Dim cpucolor As Color = Color.FromArgb(0, 255, 0)
         Dim memColor As Color = Color.FromArgb(0, 255, 0) 'Color.RoyalBlue
@@ -62,6 +71,14 @@ Public Class PerfMonitor
         End If
         LabelMem.Text = "RAM " & memValue & "%"
         UpdatePercentGraph(memValue, Pic2, memColor)
+
+        If FirstRun Then
+            totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 5)
+            'Debug.Print(totaltime)
+            Me.TimeValue.Value = CInt(totaltime) + 1
+            FirstRun = False
+        End If
+
 
     End Sub
     Private Sub UpdatePercentGraph(ByVal FillPercent As Integer, ByVal PicBox As PictureBox, ByVal BaseColour As Color)
