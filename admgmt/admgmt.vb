@@ -122,8 +122,10 @@ Public Class ADmgmt
 
         End Try
         
+        If domainList.Rows.Count > 1 Then
+            Me.DomainSelect.Items.Add(" - Select Domain - ")
+        End If
 
-        Me.DomainSelect.Items.Add(" - Select Domain - ")
         For Each row As DataRow In domainList.Rows
             If Not String.IsNullOrEmpty(row(0)) Then Me.DomainSelect.Items.Add(row(0))
         Next
@@ -172,6 +174,13 @@ Public Class ADmgmt
 
         End If
 
+        If domainList.Rows.Count = 1 Then
+            Me.gbSearch.Enabled = True
+            Me.adTabControl.Enabled = True
+            Me.DomainSelect.BackColor = System.Drawing.SystemColors.Window
+        End If
+
+
         Me.DomainSelect.Select(1, 0)
         Me.Cursor = Cursors.Default
 
@@ -204,7 +213,7 @@ Public Class ADmgmt
     ''' <remarks></remarks>
     Private Sub SearchUser()
 
-        Using DirSearch As New DirectorySearcher(de) 'GetDirectoryEntry(Me._LDAPPath, Me._ADUsername, Me._ADPassword, AuthenticationTypes.Secure))
+        Using DirSearch As New DirectorySearcher(de)
 
             With DirSearch
                 '.PropertiesToLoad.Add("distinguishedName")
@@ -460,6 +469,7 @@ Public Class ADmgmt
 
 
         ' Group Membership
+        lbMemberOf.Items.Add("Domain Users")
         For Each gp As String In GetGroups(sAccountName)
             lbMemberOf.Items.Add(gp)
         Next
@@ -728,15 +738,15 @@ Public Class ADmgmt
 
     End Sub
     Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
-        Try
-            Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
-            Dim result As System.DirectoryServices.SearchResult
-            Searcher.Filter = "(distinguishedName= " & dsPath & ")"
-            result = Searcher.FindOne
-            Return Me.GetProperty(result, attributeToReturn)
-        Catch ex As Exception
-            Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
-        End Try
+        'Try
+        Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
+        Dim result As System.DirectoryServices.SearchResult
+        Searcher.Filter = "(distinguishedName= " & dsPath & ")"
+        result = Searcher.FindOne
+        Return Me.GetProperty(result, attributeToReturn)
+        'Catch ex As Exception
+        'Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
+        'End Try
     End Function
 
 
@@ -856,32 +866,64 @@ Public Class ADmgmt
     ''' Method to add a user to a group
     ''' </summary>
     ''' <param name="entry">DirectoryEntry to use</param>
-    ''' <param name="deUser">User DirectoryEntry to use</param>
+    ''' <param name="User">User DirectoryEntry to use</param>
     ''' <param name="GroupName">Group Name to add user to</param>
-    Public Shared Sub AddUserToGroup(ByVal entry As DirectoryEntry, _
-                                     ByVal deUser As DirectoryEntry, _
+    Public Sub AddUserToGroup(ByVal entry As DirectoryEntry, _
+                                     ByVal User As DirectoryEntry, _
                                      ByVal GroupName As String)
 
-        Dim deSearch As DirectorySearcher = New DirectorySearcher()
-        deSearch.SearchRoot = entry
+        Dim deSearch As DirectorySearcher = New DirectorySearcher(entry)
+
         deSearch.Filter = "(&(objectClass=group) (cn=" & GroupName & "))"
         Dim results As SearchResultCollection = deSearch.FindAll()
+
         Dim isGroupMember As Boolean = False
         If results.Count > 0 Then
 
-            Dim group As New DirectoryEntry(results(0).Path)
+            Dim group As New DirectoryEntry(results(0).Path) ' adspath
             Dim members As Object = group.Invoke("Members", Nothing)
             For Each member As Object In CType(members, IEnumerable)
                 Dim x As DirectoryEntry = New DirectoryEntry(member)
                 Dim name As String = x.Name
-                If name = deUser.Name Then
+                If name = User.Name Then
                     isGroupMember = True
                     Exit For
                 End If
             Next
 
             If (Not isGroupMember) Then
-                group.Invoke("Add", New Object() {deUser.Path.ToString()})
+                group.Invoke("Add", New Object() {User.Path.ToString()})
+            End If
+            group.Close()
+
+        End If
+
+    End Sub
+    Public Sub RemoveUserFromGroup(ByVal entry As DirectoryEntry, _
+                                     ByVal User As DirectoryEntry, _
+                                     ByVal GroupName As String)
+
+        Dim deSearch As DirectorySearcher = New DirectorySearcher(entry)
+
+        deSearch.Filter = "(&(objectClass=group) (cn=" & GroupName & "))"
+        Dim results As SearchResultCollection = deSearch.FindAll()
+
+        Dim isGroupMember As Boolean = False
+        If results.Count > 0 Then
+
+            Dim group As New DirectoryEntry(results(0).Path) ' adspath
+            Dim members As Object = group.Invoke("Members", Nothing)
+            For Each member As Object In CType(members, IEnumerable)
+                Dim x As DirectoryEntry = New DirectoryEntry(member)
+                Dim name As String = x.Name
+                If name = User.Name Then
+                    isGroupMember = True
+                    Exit For
+                End If
+            Next
+
+            If isGroupMember Then
+                group.Invoke("Remove", New Object() {User.Path.ToString()})
             End If
             group.Close()
 
@@ -958,31 +1000,6 @@ Public Class ADmgmt
         End If
 
     End Function
-
-    ''' <summary>
-    ''' This will perform the removal of a user from the specified group
-    ''' </summary>
-    ''' <param name="UserName">Username of the user to remove</param>
-    ''' <param name="GroupName">Groupname to remove them from</param>
-    ''' <remarks></remarks>
-    Public Shared Sub RemoveUserFromGroup(ByVal UserName As String, ByVal GroupName As String)
-
-        'Dim Domain As New String("")
-
-        ''get reference to group
-        'Domain = "/CN=" + GroupName & ",CN=Users," & GetLDAPDomain()
-        'Dim oGroup As DirectoryEntry = GetDirectoryObject(Domain)
-
-        ''get reference to user
-        'Domain = "/CN=" + UserName + ",CN=Users," + GetLDAPDomain()
-        'Dim oUser As DirectoryEntry = GetDirectoryObject(Domain)
-
-        ''Add the user to the group via the invoke method
-        'oGroup.Invoke("Remove", New Object() {oUser.Path.ToString()})
-
-        'oGroup.Close()
-        'oUser.Close()
-    End Sub
 
     ''' <summary>
     ''' Method that enables/disables a user account in the AD 
@@ -1325,5 +1342,162 @@ Public Class ADmgmt
         UserTabs_Clear()
         Me.DGVMembers.Rows.Clear()
         Me.Call_GetDetails()
+    End Sub
+
+    ''' <summary>
+    ''' Add the current user to another group
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btnAddUsertoGroup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAddUsertoGroup.Click
+        Dim s As New TextEntryDialog
+        s.Text = "Group Search"
+        s.labelMain.Text = "Enter the group name"
+        s.ShowDialog()
+        s.txtSearch.Focus()
+
+        If s.DialogResult = Windows.Forms.DialogResult.OK Then
+
+            Dim searchstring As String = s.searchstring
+
+            Dim deSearch As DirectorySearcher = New DirectorySearcher(de)
+            deSearch.Filter = "(&(objectClass=group)(anr=" & searchstring & "))"
+            deSearch.PropertiesToLoad.Add("distinguishedname")
+            Dim results As SearchResultCollection = deSearch.FindAll()
+
+            Dim r As New ResultSelector
+            r.Text = "Select Group"
+            For Each result As SearchResult In results
+                r.ListBox1.Items.Add(GetAttributefromDN("CN", Me.GetProperty(result, "distinguishedname")))
+            Next
+            If r.ListBox1.Items.Count = 1 Then
+                r.ListBox1.SelectedIndex = 0
+            End If
+
+            r.ShowDialog()
+            If r.DialogResult = Windows.Forms.DialogResult.OK Then
+
+                ' get directory entry for user
+                Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
+                UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & Me.txtSAM.Text & "))"
+                UserSearch.PropertiesToLoad.Add("Path")
+                Dim userresult As SearchResultCollection = UserSearch.FindAll()
+                Dim user As New DirectoryEntry(userresult(0).Path)
+
+                ' Call sub to add user to group
+                Me.AddUserToGroup(de, user, r.SelectedResult)
+
+                ' reload groups
+                lbMemberOf.Items.Clear()
+                lbMemberOf.Items.Add("Domain Users")
+                For Each gp As String In GetGroups(Me.txtSAM.Text)
+                    lbMemberOf.Items.Add(gp)
+                Next
+
+            End If
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Remove the current user from selected group
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btnRemoveUserfromGroup_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemoveUserfromGroup.Click
+
+        Me.btnRemoveUserfromGroup.Enabled = False
+
+        Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
+        UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & Me.txtSAM.Text & "))"
+        UserSearch.PropertiesToLoad.Add("Path")
+        Dim userresult As SearchResultCollection = UserSearch.FindAll()
+        Dim user As New DirectoryEntry(userresult(0).Path)
+
+        ' call removefromgroup sub
+        Me.RemoveUserFromGroup(de, user, Me.lbMemberOf.SelectedItem.ToString)
+
+        ' reload groups
+        lbMemberOf.Items.Clear()
+        lbMemberOf.Items.Add("Domain Users")
+        For Each gp As String In GetGroups(Me.txtSAM.Text)
+            lbMemberOf.Items.Add(gp)
+        Next
+
+    End Sub
+    ''' <summary>
+    ''' enable/disable Remove (current user from selected group) button
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub lbMemberOf_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbMemberOf.SelectedIndexChanged
+        If Not String.IsNullOrEmpty(Me.lbMemberOf.SelectedItem.ToString) Then
+            btnRemoveUserfromGroup.Enabled = True
+        Else
+            btnRemoveUserfromGroup.Enabled = False
+        End If
+    End Sub
+
+    ''' <summary>
+    ''' Add a new user to current group
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+
+        Dim s As New TextEntryDialog
+        s.Text = "Group Search"
+        s.labelMain.Text = "Search for user:"
+        s.ShowDialog()
+        s.txtSearch.Focus()
+
+        If s.DialogResult = Windows.Forms.DialogResult.OK Then
+            Dim searchstring As String = s.searchstring
+            Dim deSearch As DirectorySearcher = New DirectorySearcher(de)
+            deSearch.Filter = "(&(objectClass=user)(objectCategory=person)(anr=" & searchstring & "))"
+            deSearch.PropertiesToLoad.Add("distinguishedname")
+            Dim results As SearchResultCollection = deSearch.FindAll()
+
+            Dim r As New ResultSelector
+            r.Text = "Select Group"
+            For Each result As SearchResult In results
+                r.ListBox1.Items.Add(GetAttributefromDN("samaccountname", Me.GetProperty(result, "distinguishedname")))
+            Next
+            If r.ListBox1.Items.Count = 1 Then
+                r.ListBox1.SelectedIndex = 0
+            End If
+
+            r.ShowDialog()
+            If r.DialogResult = Windows.Forms.DialogResult.OK Then
+
+                ' Get user as DirectoryEntry
+                Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
+                UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & r.SelectedResult & "))"
+                UserSearch.PropertiesToLoad.Add("Path")
+                Dim userresult As SearchResultCollection = UserSearch.FindAll()
+                Dim user As New DirectoryEntry(userresult(0).Path)
+
+                ' Call sub to add user to group
+                Me.AddUserToGroup(de, user, lblGroupName.Text)
+
+                ' refresh list
+                Me.DGVMembers.Rows.Clear()
+                GroupMembers(lblGroupName.Text)
+                If Me.DGVMembers.Rows.Count > 1 Then
+                    Me.btnExportUsers.Enabled = True
+                Else
+                    Me.btnExportUsers.Enabled = False
+                End If
+
+            End If
+        End If
+
+
+
+        
+
     End Sub
 End Class

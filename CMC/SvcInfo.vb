@@ -45,13 +45,16 @@ Public Class SvcInfo
         Me.progBar.Value = 0
 
         Form1.StartService(Me.txtSvcName.Text)
+        System.Threading.Thread.Sleep(1000)
 
         Do While Me.lblSvcStatus.Text <> "Running"
-            Me.progBar.Increment(100 / 15)
+            Me.progBar.Increment(100 / 30)
 
             Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
-            System.Threading.Thread.Sleep(1000)
+            System.Threading.Thread.Sleep(400)
+            Me.progBar.Increment(100 / 30)
+            System.Threading.Thread.Sleep(600)
             If count >= 15 Then
                 Exit Do
                 MsgBox("Unable to start service within time.")
@@ -79,21 +82,28 @@ Public Class SvcInfo
         Me.progBar.Value = 0
 
         Form1.StopService(Me.txtSvcName.Text)
+        System.Threading.Thread.Sleep(1000)
 
         Do While Me.lblSvcStatus.Text <> "Stopped"
-            Me.progBar.Increment(100 / 15)
-            Me.lblSvcStatus.Text = Form1.Get_ServiceState(Me.txtSvcName.Text)
+            Me.progBar.Increment(100 / 24)
+            Dim state As String = Form1.Get_ServiceState(Me.txtSvcName.Text)
+            Me.lblSvcStatus.Text = state
+            Debug.Print(state)
             Form1.UpdateSelectedService(Form1.sGridRowNumber)
+
             System.Threading.Thread.Sleep(1000)
-            If count >= 15 Then
+            Me.progBar.Increment(100 / 24)
+
+            If count >= 12 Then
                 Exit Do
                 MsgBox("Unable to stop service within time.")
                 Me.Close()
             End If
+
         Loop
         Do While Me.progBar.Value < 100
-            Me.progBar.Increment(20)
-            System.Threading.Thread.Sleep(100)
+            Me.progBar.Increment(10)
+            System.Threading.Thread.Sleep(50)
         Loop
         If Me.lblSvcStatus.Text = "Stopped" Then
             Me.btnSvcStart.Enabled = True
