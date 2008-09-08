@@ -31,6 +31,9 @@ Partial Class ADmgmt
         Me.DataSet1 = New System.Data.DataSet
         Me.adTabControl = New System.Windows.Forms.TabControl
         Me.tabAccount = New System.Windows.Forms.TabPage
+        Me.Label33 = New System.Windows.Forms.Label
+        Me.txtExpires = New System.Windows.Forms.TextBox
+        Me.Label31 = New System.Windows.Forms.Label
         Me.AccDisabled = New System.Windows.Forms.CheckBox
         Me.btnSave = New System.Windows.Forms.Button
         Me.Label13 = New System.Windows.Forms.Label
@@ -72,6 +75,8 @@ Partial Class ADmgmt
         Me.txtTSProfile = New System.Windows.Forms.TextBox
         Me.btnProfileSave = New System.Windows.Forms.Button
         Me.tabMemberOf = New System.Windows.Forms.TabPage
+        Me.btnRemoveUserfromGroup = New System.Windows.Forms.Button
+        Me.btnAddUsertoGroup = New System.Windows.Forms.Button
         Me.lbMemberOf = New System.Windows.Forms.ListBox
         Me.tabCustom = New System.Windows.Forms.TabPage
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
@@ -107,6 +112,7 @@ Partial Class ADmgmt
         Me.Label15 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.tabGroupMembers = New System.Windows.Forms.TabPage
+        Me.btnAdd = New System.Windows.Forms.Button
         Me.cbDN = New System.Windows.Forms.CheckBox
         Me.cbMail = New System.Windows.Forms.CheckBox
         Me.cbDisplay = New System.Windows.Forms.CheckBox
@@ -138,9 +144,6 @@ Partial Class ADmgmt
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.SearchPanel = New System.Windows.Forms.Panel
         Me.Panel4 = New System.Windows.Forms.Panel
-        Me.txtExpires = New System.Windows.Forms.TextBox
-        Me.Label31 = New System.Windows.Forms.Label
-        Me.Label33 = New System.Windows.Forms.Label
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
@@ -254,6 +257,33 @@ Partial Class ADmgmt
         Me.tabAccount.Size = New System.Drawing.Size(381, 287)
         Me.tabAccount.TabIndex = 0
         Me.tabAccount.Text = "Account"
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.Location = New System.Drawing.Point(89, 265)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(46, 13)
+        Me.Label33.TabIndex = 29
+        Me.Label33.Text = "disabled"
+        '
+        'txtExpires
+        '
+        Me.txtExpires.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.txtExpires.Location = New System.Drawing.Point(135, 245)
+        Me.txtExpires.Name = "txtExpires"
+        Me.txtExpires.ReadOnly = True
+        Me.txtExpires.Size = New System.Drawing.Size(109, 18)
+        Me.txtExpires.TabIndex = 28
+        '
+        'Label31
+        '
+        Me.Label31.AutoSize = True
+        Me.Label31.Location = New System.Drawing.Point(89, 247)
+        Me.Label31.Name = "Label31"
+        Me.Label31.Size = New System.Drawing.Size(40, 13)
+        Me.Label31.TabIndex = 27
+        Me.Label31.Text = "expires"
         '
         'AccDisabled
         '
@@ -627,6 +657,8 @@ Partial Class ADmgmt
         'tabMemberOf
         '
         Me.tabMemberOf.BackColor = System.Drawing.SystemColors.Control
+        Me.tabMemberOf.Controls.Add(Me.btnRemoveUserfromGroup)
+        Me.tabMemberOf.Controls.Add(Me.btnAddUsertoGroup)
         Me.tabMemberOf.Controls.Add(Me.lbMemberOf)
         Me.tabMemberOf.Location = New System.Drawing.Point(4, 22)
         Me.tabMemberOf.Name = "tabMemberOf"
@@ -634,6 +666,25 @@ Partial Class ADmgmt
         Me.tabMemberOf.Size = New System.Drawing.Size(381, 287)
         Me.tabMemberOf.TabIndex = 2
         Me.tabMemberOf.Text = "Member Of"
+        '
+        'btnRemoveUserfromGroup
+        '
+        Me.btnRemoveUserfromGroup.Enabled = False
+        Me.btnRemoveUserfromGroup.Location = New System.Drawing.Point(289, 232)
+        Me.btnRemoveUserfromGroup.Name = "btnRemoveUserfromGroup"
+        Me.btnRemoveUserfromGroup.Size = New System.Drawing.Size(61, 23)
+        Me.btnRemoveUserfromGroup.TabIndex = 2
+        Me.btnRemoveUserfromGroup.Text = "Remove"
+        Me.btnRemoveUserfromGroup.UseVisualStyleBackColor = True
+        '
+        'btnAddUsertoGroup
+        '
+        Me.btnAddUsertoGroup.Location = New System.Drawing.Point(221, 232)
+        Me.btnAddUsertoGroup.Name = "btnAddUsertoGroup"
+        Me.btnAddUsertoGroup.Size = New System.Drawing.Size(66, 23)
+        Me.btnAddUsertoGroup.TabIndex = 1
+        Me.btnAddUsertoGroup.Text = "Add..."
+        Me.btnAddUsertoGroup.UseVisualStyleBackColor = True
         '
         'lbMemberOf
         '
@@ -961,6 +1012,7 @@ Partial Class ADmgmt
         'tabGroupMembers
         '
         Me.tabGroupMembers.BackColor = System.Drawing.SystemColors.Control
+        Me.tabGroupMembers.Controls.Add(Me.btnAdd)
         Me.tabGroupMembers.Controls.Add(Me.cbDN)
         Me.tabGroupMembers.Controls.Add(Me.cbMail)
         Me.tabGroupMembers.Controls.Add(Me.cbDisplay)
@@ -973,6 +1025,15 @@ Partial Class ADmgmt
         Me.tabGroupMembers.Size = New System.Drawing.Size(381, 287)
         Me.tabGroupMembers.TabIndex = 4
         Me.tabGroupMembers.Text = "Members"
+        '
+        'btnAdd
+        '
+        Me.btnAdd.Location = New System.Drawing.Point(330, 5)
+        Me.btnAdd.Name = "btnAdd"
+        Me.btnAdd.Size = New System.Drawing.Size(48, 20)
+        Me.btnAdd.TabIndex = 10
+        Me.btnAdd.Text = "Add..."
+        Me.btnAdd.UseVisualStyleBackColor = True
         '
         'cbDN
         '
@@ -1023,7 +1084,7 @@ Partial Class ADmgmt
         Me.DGVMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVMembers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colSAM, Me.colDisplay, Me.colMail, Me.colDN})
         Me.DGVMembers.GridColor = System.Drawing.SystemColors.ControlLight
-        Me.DGVMembers.Location = New System.Drawing.Point(3, 21)
+        Me.DGVMembers.Location = New System.Drawing.Point(3, 29)
         Me.DGVMembers.Name = "DGVMembers"
         Me.DGVMembers.ReadOnly = True
         Me.DGVMembers.RowHeadersVisible = False
@@ -1032,7 +1093,7 @@ Partial Class ADmgmt
         Me.DGVMembers.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
         Me.DGVMembers.RowTemplate.Height = 21
         Me.DGVMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGVMembers.Size = New System.Drawing.Size(375, 235)
+        Me.DGVMembers.Size = New System.Drawing.Size(375, 227)
         Me.DGVMembers.TabIndex = 5
         '
         'colSAM
@@ -1285,33 +1346,6 @@ Partial Class ADmgmt
         Me.Panel4.Size = New System.Drawing.Size(425, 34)
         Me.Panel4.TabIndex = 100004
         '
-        'txtExpires
-        '
-        Me.txtExpires.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtExpires.Location = New System.Drawing.Point(135, 245)
-        Me.txtExpires.Name = "txtExpires"
-        Me.txtExpires.ReadOnly = True
-        Me.txtExpires.Size = New System.Drawing.Size(109, 18)
-        Me.txtExpires.TabIndex = 28
-        '
-        'Label31
-        '
-        Me.Label31.AutoSize = True
-        Me.Label31.Location = New System.Drawing.Point(89, 247)
-        Me.Label31.Name = "Label31"
-        Me.Label31.Size = New System.Drawing.Size(40, 13)
-        Me.Label31.TabIndex = 27
-        Me.Label31.Text = "expires"
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.Location = New System.Drawing.Point(89, 265)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(46, 13)
-        Me.Label33.TabIndex = 29
-        Me.Label33.Text = "disabled"
-        '
         'ADmgmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1470,4 +1504,7 @@ Partial Class ADmgmt
     Friend WithEvents txtExpires As System.Windows.Forms.TextBox
     Friend WithEvents Label31 As System.Windows.Forms.Label
     Friend WithEvents Label33 As System.Windows.Forms.Label
+    Friend WithEvents btnAdd As System.Windows.Forms.Button
+    Friend WithEvents btnAddUsertoGroup As System.Windows.Forms.Button
+    Friend WithEvents btnRemoveUserfromGroup As System.Windows.Forms.Button
 End Class
