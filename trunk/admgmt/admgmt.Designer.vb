@@ -134,9 +134,6 @@ Partial Class ADmgmt
         Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.ResetPasswordMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.PropertiesMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.Label32 = New System.Windows.Forms.Label
-        Me.radioGroups = New System.Windows.Forms.RadioButton
-        Me.radioUsers = New System.Windows.Forms.RadioButton
         Me.btnExit = New System.Windows.Forms.Button
         Me.btnClear = New System.Windows.Forms.Button
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
@@ -145,6 +142,14 @@ Partial Class ADmgmt
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.SearchPanel = New System.Windows.Forms.Panel
         Me.Panel4 = New System.Windows.Forms.Panel
+        Me.SearchTypeCombo = New System.Windows.Forms.ComboBox
+        Me.groupContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddUserMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemoveUserMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.RefreshMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
+        Me.ExportToolItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
@@ -164,13 +169,14 @@ Partial Class ADmgmt
         Me.Panel2.SuspendLayout()
         Me.SearchPanel.SuspendLayout()
         Me.Panel4.SuspendLayout()
+        Me.groupContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'DomainSelect
         '
         Me.DomainSelect.BackColor = System.Drawing.Color.LightSkyBlue
         Me.DomainSelect.FormattingEnabled = True
-        Me.DomainSelect.Location = New System.Drawing.Point(85, 10)
+        Me.DomainSelect.Location = New System.Drawing.Point(96, 7)
         Me.DomainSelect.Name = "DomainSelect"
         Me.DomainSelect.Size = New System.Drawing.Size(158, 21)
         Me.DomainSelect.TabIndex = 0
@@ -179,9 +185,9 @@ Partial Class ADmgmt
         '
         Me.txtSearch.BackColor = System.Drawing.SystemColors.Window
         Me.txtSearch.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSearch.Location = New System.Drawing.Point(163, 19)
+        Me.txtSearch.Location = New System.Drawing.Point(150, 19)
         Me.txtSearch.Name = "txtSearch"
-        Me.txtSearch.Size = New System.Drawing.Size(145, 21)
+        Me.txtSearch.Size = New System.Drawing.Size(158, 21)
         Me.txtSearch.TabIndex = 3
         '
         'btnSearch
@@ -196,7 +202,7 @@ Partial Class ADmgmt
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(3, 13)
+        Me.Label1.Location = New System.Drawing.Point(14, 10)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(76, 13)
         Me.Label1.TabIndex = 100000
@@ -314,9 +320,9 @@ Partial Class ADmgmt
         Me.Label13.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label13.Location = New System.Drawing.Point(12, 194)
         Me.Label13.Name = "Label13"
-        Me.Label13.Size = New System.Drawing.Size(62, 13)
+        Me.Label13.Size = New System.Drawing.Size(60, 13)
         Me.Label13.TabIndex = 24
-        Me.Label13.Text = "Department"
+        Me.Label13.Text = "department"
         '
         'txtDepartment
         '
@@ -332,9 +338,9 @@ Partial Class ADmgmt
         Me.Label12.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label12.Location = New System.Drawing.Point(12, 170)
         Me.Label12.Name = "Label12"
-        Me.Label12.Size = New System.Drawing.Size(30, 13)
+        Me.Label12.Size = New System.Drawing.Size(26, 13)
         Me.Label12.TabIndex = 22
-        Me.Label12.Text = "Title:"
+        Me.Label12.Text = "title:"
         '
         'txtTitle
         '
@@ -350,9 +356,9 @@ Partial Class ADmgmt
         Me.Label2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label2.Location = New System.Drawing.Point(12, 218)
         Me.Label2.Name = "Label2"
-        Me.Label2.Size = New System.Drawing.Size(54, 13)
+        Me.Label2.Size = New System.Drawing.Size(53, 13)
         Me.Label2.TabIndex = 20
-        Me.Label2.Text = "Company:"
+        Me.Label2.Text = "company:"
         '
         'txtCompany
         '
@@ -366,7 +372,7 @@ Partial Class ADmgmt
         '
         Me.txtSAM.BackColor = System.Drawing.SystemColors.ControlLight
         Me.txtSAM.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtSAM.Location = New System.Drawing.Point(203, 11)
+        Me.txtSAM.Location = New System.Drawing.Point(203, 14)
         Me.txtSAM.Name = "txtSAM"
         Me.txtSAM.ReadOnly = True
         Me.txtSAM.Size = New System.Drawing.Size(161, 20)
@@ -377,7 +383,7 @@ Partial Class ADmgmt
         Me.txtDomain.BackColor = System.Drawing.SystemColors.ControlLight
         Me.txtDomain.Enabled = False
         Me.txtDomain.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.txtDomain.Location = New System.Drawing.Point(93, 11)
+        Me.txtDomain.Location = New System.Drawing.Point(93, 14)
         Me.txtDomain.Name = "txtDomain"
         Me.txtDomain.Size = New System.Drawing.Size(104, 20)
         Me.txtDomain.TabIndex = 17
@@ -386,11 +392,11 @@ Partial Class ADmgmt
         '
         Me.Label11.AutoSize = True
         Me.Label11.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label11.Location = New System.Drawing.Point(12, 14)
+        Me.Label11.Location = New System.Drawing.Point(12, 17)
         Me.Label11.Name = "Label11"
-        Me.Label11.Size = New System.Drawing.Size(68, 13)
+        Me.Label11.Size = New System.Drawing.Size(62, 13)
         Me.Label11.TabIndex = 16
-        Me.Label11.Text = "Logon Name"
+        Me.Label11.Text = "logon name"
         '
         'txtEmail
         '
@@ -414,9 +420,9 @@ Partial Class ADmgmt
         Me.Label10.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label10.Location = New System.Drawing.Point(12, 146)
         Me.Label10.Name = "Label10"
-        Me.Label10.Size = New System.Drawing.Size(35, 13)
+        Me.Label10.Size = New System.Drawing.Size(34, 13)
         Me.Label10.TabIndex = 13
-        Me.Label10.Text = "Email:"
+        Me.Label10.Text = "email:"
         '
         'Label9
         '
@@ -424,9 +430,9 @@ Partial Class ADmgmt
         Me.Label9.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label9.Location = New System.Drawing.Point(241, 122)
         Me.Label9.Name = "Label9"
-        Me.Label9.Size = New System.Drawing.Size(41, 13)
+        Me.Label9.Size = New System.Drawing.Size(40, 13)
         Me.Label9.TabIndex = 12
-        Me.Label9.Text = "Phone:"
+        Me.Label9.Text = "phone:"
         '
         'Label8
         '
@@ -434,9 +440,9 @@ Partial Class ADmgmt
         Me.Label8.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label8.Location = New System.Drawing.Point(12, 122)
         Me.Label8.Name = "Label8"
-        Me.Label8.Size = New System.Drawing.Size(38, 13)
+        Me.Label8.Size = New System.Drawing.Size(36, 13)
         Me.Label8.TabIndex = 11
-        Me.Label8.Text = "Office:"
+        Me.Label8.Text = "office:"
         '
         'Label7
         '
@@ -444,9 +450,9 @@ Partial Class ADmgmt
         Me.Label7.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label7.Location = New System.Drawing.Point(12, 98)
         Me.Label7.Name = "Label7"
-        Me.Label7.Size = New System.Drawing.Size(63, 13)
+        Me.Label7.Size = New System.Drawing.Size(61, 13)
         Me.Label7.TabIndex = 10
-        Me.Label7.Text = "Description:"
+        Me.Label7.Text = "description:"
         '
         'Label6
         '
@@ -454,9 +460,9 @@ Partial Class ADmgmt
         Me.Label6.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label6.Location = New System.Drawing.Point(12, 74)
         Me.Label6.Name = "Label6"
-        Me.Label6.Size = New System.Drawing.Size(75, 13)
+        Me.Label6.Size = New System.Drawing.Size(71, 13)
         Me.Label6.TabIndex = 9
-        Me.Label6.Text = "Display Name:"
+        Me.Label6.Text = "display name:"
         '
         'Label3
         '
@@ -464,9 +470,9 @@ Partial Class ADmgmt
         Me.Label3.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label3.Location = New System.Drawing.Point(12, 48)
         Me.Label3.Name = "Label3"
-        Me.Label3.Size = New System.Drawing.Size(38, 13)
+        Me.Label3.Size = New System.Drawing.Size(36, 13)
         Me.Label3.TabIndex = 6
-        Me.Label3.Text = "Name:"
+        Me.Label3.Text = "name:"
         '
         'txtOffice
         '
@@ -555,9 +561,9 @@ Partial Class ADmgmt
         Me.Label5.AutoSize = True
         Me.Label5.Location = New System.Drawing.Point(4, 18)
         Me.Label5.Name = "Label5"
-        Me.Label5.Size = New System.Drawing.Size(80, 13)
+        Me.Label5.Size = New System.Drawing.Size(76, 13)
         Me.Label5.TabIndex = 0
-        Me.Label5.Text = "Home Directory"
+        Me.Label5.Text = "home directory"
         '
         'txtHomeDrive
         '
@@ -578,9 +584,9 @@ Partial Class ADmgmt
         Me.Label14.AutoSize = True
         Me.Label14.Location = New System.Drawing.Point(4, 43)
         Me.Label14.Name = "Label14"
-        Me.Label14.Size = New System.Drawing.Size(61, 13)
+        Me.Label14.Size = New System.Drawing.Size(59, 13)
         Me.Label14.TabIndex = 3
-        Me.Label14.Text = "Profile Path"
+        Me.Label14.Text = "profile path"
         '
         'GroupBox1
         '
@@ -602,9 +608,9 @@ Partial Class ADmgmt
         Me.cbAllowTSLogon.AutoSize = True
         Me.cbAllowTSLogon.Location = New System.Drawing.Point(91, 67)
         Me.cbAllowTSLogon.Name = "cbAllowTSLogon"
-        Me.cbAllowTSLogon.Size = New System.Drawing.Size(163, 17)
+        Me.cbAllowTSLogon.Size = New System.Drawing.Size(162, 17)
         Me.cbAllowTSLogon.TabIndex = 11
-        Me.cbAllowTSLogon.Text = "Allow logon to terminal server"
+        Me.cbAllowTSLogon.Text = "allow logon to terminal server"
         Me.cbAllowTSLogon.UseVisualStyleBackColor = True
         '
         'txtTSHomeFolder
@@ -619,9 +625,9 @@ Partial Class ADmgmt
         Me.Label16.AutoSize = True
         Me.Label16.Location = New System.Drawing.Point(4, 22)
         Me.Label16.Name = "Label16"
-        Me.Label16.Size = New System.Drawing.Size(67, 13)
+        Me.Label16.Size = New System.Drawing.Size(62, 13)
         Me.Label16.TabIndex = 6
-        Me.Label16.Text = "Home Folder"
+        Me.Label16.Text = "home folder"
         '
         'txtTSDrive
         '
@@ -635,9 +641,9 @@ Partial Class ADmgmt
         Me.Label17.AutoSize = True
         Me.Label17.Location = New System.Drawing.Point(4, 46)
         Me.Label17.Name = "Label17"
-        Me.Label17.Size = New System.Drawing.Size(36, 13)
+        Me.Label17.Size = New System.Drawing.Size(35, 13)
         Me.Label17.TabIndex = 8
-        Me.Label17.Text = "Profile"
+        Me.Label17.Text = "profile"
         '
         'txtTSProfile
         '
@@ -1104,6 +1110,7 @@ Partial Class ADmgmt
         Me.DGVMembers.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DGVMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGVMembers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colSAM, Me.colDisplay, Me.colMail, Me.colDN})
+        Me.DGVMembers.ContextMenuStrip = Me.groupContextMenu
         Me.DGVMembers.GridColor = System.Drawing.SystemColors.ControlLight
         Me.DGVMembers.Location = New System.Drawing.Point(3, 29)
         Me.DGVMembers.Name = "DGVMembers"
@@ -1157,10 +1164,8 @@ Partial Class ADmgmt
         '
         'gbSearch
         '
+        Me.gbSearch.Controls.Add(Me.SearchTypeCombo)
         Me.gbSearch.Controls.Add(Me.SearchResultsDGV)
-        Me.gbSearch.Controls.Add(Me.Label32)
-        Me.gbSearch.Controls.Add(Me.radioGroups)
-        Me.gbSearch.Controls.Add(Me.radioUsers)
         Me.gbSearch.Controls.Add(Me.txtSearch)
         Me.gbSearch.Controls.Add(Me.btnSearch)
         Me.gbSearch.Enabled = False
@@ -1241,41 +1246,6 @@ Partial Class ADmgmt
         Me.PropertiesMenu.Size = New System.Drawing.Size(155, 22)
         Me.PropertiesMenu.Text = "Properties"
         '
-        'Label32
-        '
-        Me.Label32.AutoSize = True
-        Me.Label32.Location = New System.Drawing.Point(125, 23)
-        Me.Label32.Name = "Label32"
-        Me.Label32.Size = New System.Drawing.Size(35, 13)
-        Me.Label32.TabIndex = 5
-        Me.Label32.Text = "Name"
-        '
-        'radioGroups
-        '
-        Me.radioGroups.AutoSize = True
-        Me.radioGroups.FlatAppearance.BorderSize = 3
-        Me.radioGroups.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioGroups.Location = New System.Drawing.Point(23, 26)
-        Me.radioGroups.Name = "radioGroups"
-        Me.radioGroups.Size = New System.Drawing.Size(58, 17)
-        Me.radioGroups.TabIndex = 2
-        Me.radioGroups.Text = "Groups"
-        Me.radioGroups.UseVisualStyleBackColor = True
-        '
-        'radioUsers
-        '
-        Me.radioUsers.AutoSize = True
-        Me.radioUsers.Checked = True
-        Me.radioUsers.FlatAppearance.BorderSize = 3
-        Me.radioUsers.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.radioUsers.Location = New System.Drawing.Point(23, 12)
-        Me.radioUsers.Name = "radioUsers"
-        Me.radioUsers.Size = New System.Drawing.Size(51, 17)
-        Me.radioUsers.TabIndex = 1
-        Me.radioUsers.TabStop = True
-        Me.radioUsers.Text = "Users"
-        Me.radioUsers.UseVisualStyleBackColor = True
-        '
         'btnExit
         '
         Me.btnExit.Location = New System.Drawing.Point(70, 3)
@@ -1324,7 +1294,7 @@ Partial Class ADmgmt
         Me.customDomainCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.customDomainCombo.FormattingEnabled = True
         Me.customDomainCombo.Items.AddRange(New Object() {" (edit custom domains)"})
-        Me.customDomainCombo.Location = New System.Drawing.Point(275, 10)
+        Me.customDomainCombo.Location = New System.Drawing.Point(297, 8)
         Me.customDomainCombo.Name = "customDomainCombo"
         Me.customDomainCombo.Size = New System.Drawing.Size(121, 20)
         Me.customDomainCombo.TabIndex = 100001
@@ -1357,6 +1327,55 @@ Partial Class ADmgmt
         Me.Panel4.Name = "Panel4"
         Me.Panel4.Size = New System.Drawing.Size(425, 34)
         Me.Panel4.TabIndex = 100004
+        '
+        'SearchTypeCombo
+        '
+        Me.SearchTypeCombo.FormattingEnabled = True
+        Me.SearchTypeCombo.Items.AddRange(New Object() {"Users", "Groups"})
+        Me.SearchTypeCombo.Location = New System.Drawing.Point(23, 19)
+        Me.SearchTypeCombo.Name = "SearchTypeCombo"
+        Me.SearchTypeCombo.Size = New System.Drawing.Size(103, 21)
+        Me.SearchTypeCombo.TabIndex = 7
+        '
+        'groupContextMenu
+        '
+        Me.groupContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUserMenu, Me.RemoveUserMenu, Me.ToolStripSeparator2, Me.RefreshMenuItem, Me.ToolStripSeparator3, Me.ExportToolItem})
+        Me.groupContextMenu.Name = "groupContextMenu"
+        Me.groupContextMenu.Size = New System.Drawing.Size(143, 104)
+        '
+        'AddUserMenu
+        '
+        Me.AddUserMenu.Name = "AddUserMenu"
+        Me.AddUserMenu.Size = New System.Drawing.Size(142, 22)
+        Me.AddUserMenu.Text = "Add user..."
+        '
+        'RemoveUserMenu
+        '
+        Me.RemoveUserMenu.Name = "RemoveUserMenu"
+        Me.RemoveUserMenu.Size = New System.Drawing.Size(142, 22)
+        Me.RemoveUserMenu.Text = "Remove user"
+        '
+        'RefreshMenuItem
+        '
+        Me.RefreshMenuItem.Name = "RefreshMenuItem"
+        Me.RefreshMenuItem.Size = New System.Drawing.Size(142, 22)
+        Me.RefreshMenuItem.Text = "Refresh"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(139, 6)
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(139, 6)
+        '
+        'ExportToolItem
+        '
+        Me.ExportToolItem.Name = "ExportToolItem"
+        Me.ExportToolItem.Size = New System.Drawing.Size(142, 22)
+        Me.ExportToolItem.Text = "Export"
         '
         'ADmgmt
         '
@@ -1396,6 +1415,7 @@ Partial Class ADmgmt
         Me.SearchPanel.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
+        Me.groupContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1427,8 +1447,6 @@ Partial Class ADmgmt
     Friend WithEvents tabMemberOf As System.Windows.Forms.TabPage
     Friend WithEvents tabCustom As System.Windows.Forms.TabPage
     Friend WithEvents gbSearch As System.Windows.Forms.GroupBox
-    Friend WithEvents radioGroups As System.Windows.Forms.RadioButton
-    Friend WithEvents radioUsers As System.Windows.Forms.RadioButton
     Friend WithEvents tabGroupMembers As System.Windows.Forms.TabPage
     Friend WithEvents Label2 As System.Windows.Forms.Label
     Friend WithEvents txtCompany As System.Windows.Forms.TextBox
@@ -1502,7 +1520,6 @@ Partial Class ADmgmt
     Friend WithEvents AccDisabled As System.Windows.Forms.CheckBox
     Friend WithEvents btnEaSave As System.Windows.Forms.Button
     Friend WithEvents SearchResultsDGV As System.Windows.Forms.DataGridView
-    Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents SearchPanel As System.Windows.Forms.Panel
     Friend WithEvents Panel4 As System.Windows.Forms.Panel
@@ -1520,4 +1537,12 @@ Partial Class ADmgmt
     Friend WithEvents btnAddUsertoGroup As System.Windows.Forms.Button
     Friend WithEvents btnRemoveUserfromGroup As System.Windows.Forms.Button
     Friend WithEvents btnRemoveUser As System.Windows.Forms.Button
+    Friend WithEvents SearchTypeCombo As System.Windows.Forms.ComboBox
+    Friend WithEvents groupContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents AddUserMenu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RemoveUserMenu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents RefreshMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents ExportToolItem As System.Windows.Forms.ToolStripMenuItem
 End Class

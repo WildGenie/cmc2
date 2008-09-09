@@ -39,6 +39,8 @@ Public Class ADmgmt
 
     Private Sub ADmgmt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
+        Me.SearchTypeCombo.SelectedIndex = 0
+
         'LoadDomains()
         Create_DomainListDataset()
         customDomainCombo.SelectedIndex = 0
@@ -198,9 +200,9 @@ Public Class ADmgmt
 
         Me.Cursor = Cursors.AppStarting
 
-        If Me.radioUsers.Checked Then
+        If Me.SearchTypeCombo.Text = "Users" Then
             SearchUser()
-        ElseIf Me.radioGroups.Checked Then
+        ElseIf Me.SearchTypeCombo.Text = "Groups" Then
             SearchGroup()
         End If
 
@@ -307,10 +309,10 @@ Public Class ADmgmt
         End If
     End Sub
     Private Sub Call_GetDetails()
-        If Me.radioUsers.Checked Then
+        If Me.SearchTypeCombo.Text = "Users" Then
             GetUserDetails(SelectedResult)
             Me.btnSave.Enabled = False
-        ElseIf Me.radioGroups.Checked Then
+        ElseIf Me.SearchTypeCombo.Text = "Groups" Then
             If Not String.IsNullOrEmpty(SelectedResult) Then
                 Me.lblGroupName.Text = SelectedResult
                 GroupMembers(SelectedResult)
@@ -390,6 +392,22 @@ Public Class ADmgmt
 
         Me.txtExpires.Text = String.Empty
         Me.AccDisabled.Checked = False
+
+        Me.ea1.Text = String.Empty
+        Me.ea2.Text = String.Empty
+        Me.ea3.Text = String.Empty
+        Me.ea4.Text = String.Empty
+        Me.ea5.Text = String.Empty
+        Me.ea6.Text = String.Empty
+        Me.ea7.Text = String.Empty
+        Me.ea8.Text = String.Empty
+        Me.ea9.Text = String.Empty
+        Me.ea10.Text = String.Empty
+        Me.ea11.Text = String.Empty
+        Me.ea12.Text = String.Empty
+        Me.ea13.Text = String.Empty
+        Me.ea14.Text = String.Empty
+        Me.ea15.Text = String.Empty
 
         Me.lbMemberOf.Items.Clear()
 
@@ -678,24 +696,6 @@ Public Class ADmgmt
         End If
 
     End Sub
-    Public Shared Sub SetADPropertyInt(ByVal entry As DirectoryEntry, ByVal pName As String, ByVal pValue As Integer)
-
-        If Not String.IsNullOrEmpty(pValue) Then
-
-            'Check to see if the DirectoryEntry contains this property already
-            If entry.Properties.Contains(pName) Then
-                'Update the properties value
-                entry.Properties(pName)(0) = pValue
-            Else
-                'Add the property and set it's value
-                entry.Properties(pName).Add(pValue)
-            End If
-        Else
-            entry.Properties(pName).Clear()
-        End If
-
-    End Sub
-
 
     Private Sub GroupMembers(ByVal groupName As String)
         ' To see the members in a group, you actually need to look at
@@ -717,10 +717,6 @@ Public Class ADmgmt
         Me.DGVMembers.Columns("colDisplay").Width = 250
         Me.DGVMembers.Columns("colMail").Width = 170
         Me.DGVMembers.Columns("colDN").Width = 300
-        'Me.DGVMembers.Columns("colSam").Visible = Me.cbLogon.Checked
-        'Me.DGVMembers.Columns("colDisplay").Visible = Me.cbDisplay.Checked
-        'Me.DGVMembers.Columns("colMail").Visible = Me.cbMail.Checked
-        'Me.DGVMembers.Columns("colDN").Visible = Me.cbDN.Checked
 
         Dim myGroup As DirectoryEntry
 
@@ -738,15 +734,15 @@ Public Class ADmgmt
 
     End Sub
     Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
-        'Try
-        Dim Searcher As New System.DirectoryServices.DirectorySearcher(de) 'entry)
-        Dim result As System.DirectoryServices.SearchResult
-        Searcher.Filter = "(distinguishedName= " & dsPath & ")"
-        result = Searcher.FindOne
-        Return Me.GetProperty(result, attributeToReturn)
-        'Catch ex As Exception
-        'Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
-        'End Try
+        Try
+            Dim Searcher As New System.DirectoryServices.DirectorySearcher(de)
+            Dim result As System.DirectoryServices.SearchResult
+            Searcher.Filter = "(distinguishedName= " & dsPath & ")"
+            result = Searcher.FindOne
+            Return Me.GetProperty(result, attributeToReturn)
+        Catch ex As Exception
+            Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
+        End Try
     End Function
 
 
@@ -1176,17 +1172,57 @@ Public Class ADmgmt
     End Sub
 
     Private Sub btnExportUsers_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportUsers.Click
-        'If Me.DGVMembers.Rows.Count > 1 Then
-        '    Dim exportFile As New System.IO.StreamWriter("c:\" & Me.SearchResult & ".csv")
-        '    For Each row As DataGridViewRow In Me.DGVMembers.Rows
-        '        exportFile.WriteLine(Me.DGVMembers(0, row.Index).Value & "," & _
-        '                             Me.DGVMembers(1, row.Index).Value & "," & _
-        '                             Me.DGVMembers(2, row.Index).Value & "," & _
-        '                             Me.DGVMembers(3, row.Index).Value)
-        '    Next
-        '    exportFile.Close()
-        '    MsgBox("File created" & vbCr & "c:\" & Me.SearchResults.SelectedItem.ToString & ".csv")
-        'End If
+
+
+        Dim exportFile As New System.IO.StreamWriter("c:\" & lblGroupName.Text & ".csv", False)
+
+        If Me.DGVMembers.Rows.Count > 1 Then
+
+            exportFile.WriteLine("Logon Name, Display Name, Email")
+            exportFile.WriteLine("")
+
+            For Each row As DataGridViewRow In Me.DGVMembers.Rows
+                exportFile.WriteLine(Me.DGVMembers(0, row.Index).Value & "," & _
+                                     Me.DGVMembers(1, row.Index).Value & "," & _
+                                     Me.DGVMembers(2, row.Index).Value) ' & "," & Me.DGVMembers(3, row.Index).Value)
+            Next
+            exportFile.Close()
+
+            Shell("notepad c:\" & lblGroupName.Text & ".csv")
+
+        End If
+    End Sub
+    Public Sub ExportToExcel(ByVal dt As DataTable)
+        '    Try
+        '        Dim oApp As New Excel.Application
+        '        Dim oBook As Excel.Workbook = oApp.Workbooks.Add
+        '        Dim oSheet As Excel.Worksheet = CType(oBook.Worksheets(1), Excel.Worksheet)
+
+        '        oApp.Visible = False
+
+        '        With oSheet
+        '            Dim c As Long = Asc("A")
+        '            For Each dc As DataColumn In dt.Columns
+        '        .Range(C hr(c) & "1").Value = dc.ColumnName.ToString
+        '        .Range(C hr(c) & "1").Font.Bold = True
+        '                c += 1
+        '            Next
+
+        '            Dim i As Long = 2
+        '            For Each dr As DataRow In dt.Rows
+        '                c = Asc("A")
+        '                For Each dc As DataColumn In dt.Columns
+        '           .Range(C hr(c) & i.ToString).Value =  dr.Item(dc.ColumnName)
+        '                    c += 1
+        '                Next
+        '                i += 1
+        '            Next
+
+        '            oApp.Visible = True
+        '        End With
+        '    Catch ex As Exception
+        '        MessageBox.Show("Source [" & ex.Source & "] Description  [" & ex.Message & "]")
+        '    End Try
     End Sub
 
     Private Sub customDomainCombo_DropDown(ByVal sender As Object, ByVal e As System.EventArgs) Handles customDomainCombo.DropDown
@@ -1243,32 +1279,50 @@ Public Class ADmgmt
         Me.LoadDomains()
     End Sub
 
+    ''' <summary>
+    ''' Code to handle resizing form
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ADmgmt_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+
+        ' column width ratio - maintain
+        Dim firstcolumnratio As Double = Me.SearchResultsDGV.Columns(0).Width / Me.SearchResultsDGV.Width
+
+        Me.gbSearch.Width = Me.SearchPanel.Width - 20
+        Me.gbSearch.Height = Me.SearchPanel.Height - 20
+        Me.SearchResultsDGV.Width = Me.SearchPanel.Width - 60
+        Me.SearchResultsDGV.Height = Me.SearchPanel.Height - 76
+
+        Me.SearchResultsDGV.Columns(0).Width = Me.SearchResultsDGV.Width * firstcolumnratio '0.4
+        Me.SearchResultsDGV.Columns(1).Width = Me.SearchResultsDGV.Width * 1 - firstcolumnratio '0.6
+    End Sub
+
 #Region "Tab management"
 
     ' Select tab according to search type selected
-    Private Sub radioGroups_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioGroups.CheckedChanged
-        Me.SearchResultsDGV.Rows.Clear()
-        If Me.radioGroups.Checked Then
-            ShowTabPage(tabGroupMembers)
-            Me.adTabControl.SelectTab(tabGroupMembers)
-            HideTabPage(tabAccount)
-            HideTabPage(tabMemberOf)
-            HideTabPage(tabProfile)
-            HideTabPage(tabCustom)
-            Me.cbLogon.Checked = True
-            Me.cbDisplay.Checked = True
-        End If
+    Private Sub SearchTypeCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SearchTypeCombo.SelectedIndexChanged
+        Select Case Me.SearchTypeCombo.Text
+            Case "Users"
+                ShowTabPage(tabAccount)
+                ShowTabPage(tabMemberOf)
+                ShowTabPage(tabProfile)
+                ShowTabPage(tabCustom)
+                Me.adTabControl.SelectTab(tabAccount)
+                HideTabPage(tabGroupMembers)
+            Case "Groups"
+                ShowTabPage(tabGroupMembers)
+                Me.adTabControl.SelectTab(tabGroupMembers)
+                HideTabPage(tabAccount)
+                HideTabPage(tabMemberOf)
+                HideTabPage(tabProfile)
+                HideTabPage(tabCustom)
+                Me.cbLogon.Checked = True
+                Me.cbDisplay.Checked = True
+        End Select
     End Sub
-    Private Sub radioUsers_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles radioUsers.CheckedChanged
-        If Me.radioUsers.Checked Then
-            ShowTabPage(tabAccount)
-            ShowTabPage(tabMemberOf)
-            ShowTabPage(tabProfile)
-            ShowTabPage(tabCustom)
-            Me.adTabControl.SelectTab(tabAccount)
-            HideTabPage(tabGroupMembers)
-        End If
-    End Sub
+
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
         Me.SearchResultsDGV.Rows.Clear()
         UserTabs_Clear()
@@ -1310,20 +1364,14 @@ Public Class ADmgmt
 
 #End Region
 
-    Private Sub ADmgmt_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
 
-        ' column width ratio - maintain
-        Dim firstcolumnratio As Double = Me.SearchResultsDGV.Columns(0).Width / Me.SearchResultsDGV.Width
-        
-        Me.gbSearch.Width = Me.SearchPanel.Width - 20
-        Me.gbSearch.Height = Me.SearchPanel.Height - 20
-        Me.SearchResultsDGV.Width = Me.SearchPanel.Width - 60
-        Me.SearchResultsDGV.Height = Me.SearchPanel.Height - 76
 
-        Me.SearchResultsDGV.Columns(0).Width = Me.SearchResultsDGV.Width * firstcolumnratio '0.4
-        Me.SearchResultsDGV.Columns(1).Width = Me.SearchResultsDGV.Width * 1 - firstcolumnratio '0.6
-    End Sub
-
+    ''' <summary>
+    ''' Reset a users password.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub ResetPasswordMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ResetPasswordMenu.Click
         Dim pwd As New Password
         pwd.Text = "Reset Password: " & SelectedResult
@@ -1338,6 +1386,12 @@ Public Class ADmgmt
         End If
     End Sub
 
+    ''' <summary>
+    ''' Display Users properties (context menu selection)
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub PropertiesMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropertiesMenu.Click
         UserTabs_Clear()
         Me.DGVMembers.Rows.Clear()
@@ -1497,69 +1551,90 @@ Public Class ADmgmt
 
     End Sub
 
+    ''' <summary>
+    ''' Remove selected users (UserList) from current group.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks>removes all users in userlist</remarks>
     Private Sub btnRemoveUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemoveUser.Click
 
-        If Not String.IsNullOrEmpty(Me.selectedLogon) Then
-            ' Get user as DirectoryEntry
-            Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
-            UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & Me.selectedLogon & "))"
-            UserSearch.PropertiesToLoad.Add("Path")
-            Dim userresult As SearchResultCollection = UserSearch.FindAll()
-            Dim user As New DirectoryEntry(userresult(0).Path)
+        If UserList.Count = 0 Then Return
 
-            ' call removefromgroup sub
-            Me.RemoveUserFromGroup(de, user, lblGroupName.Text)
+        For i As Integer = 0 To UserList.Count - 1
+            Dim username As String = UserList.Item(i)
 
+            If Not String.IsNullOrEmpty(username) Then
 
-            ' refresh list
-            Me.DGVMembers.Rows.Clear()
-            GroupMembers(lblGroupName.Text)
-            If Me.DGVMembers.Rows.Count > 1 Then
-                Me.btnExportUsers.Enabled = True
-            Else
-                Me.btnExportUsers.Enabled = False
-            End If
+                ' Get user as DirectoryEntry
+                Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
+                UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & username & "))"
+                UserSearch.PropertiesToLoad.Add("Path")
+                Dim userresult As SearchResultCollection = UserSearch.FindAll()
+                Dim user As New DirectoryEntry(userresult(0).Path)
 
-        End If
-    End Sub
-
-
-    Private selectedRow As Integer
-    Private selectedLogon As String
-    Private UserList As ArrayList
-
-    Private Sub DGVMembers_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DGVMembers.MouseDown
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
-
-            If hti.Type = DataGridViewHitTestType.Cell Then
-                'DGVMembers.ClearSelection()
-                DGVMembers(hti.ColumnIndex, hti.RowIndex).Selected = True
-
-                Me.selectedRow = hti.RowIndex
-                Me.selectedLogon = DGVMembers(0, hti.RowIndex).Value
+                ' call removefromgroup sub
+                Me.RemoveUserFromGroup(de, user, lblGroupName.Text)
 
             End If
-
-        ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-
-            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
-            If hti.Type = DataGridViewHitTestType.Cell Then
-                'DGVMembers.ClearSelection()
-                DGVMembers(hti.ColumnIndex, hti.RowIndex).Selected = True
-
-                Me.selectedRow = hti.RowIndex
-                Me.selectedLogon = DGVMembers(0, hti.RowIndex).Value
-
-            End If
-        End If
-    End Sub
-
-    Private Sub DGVMembers_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DGVMembers.SelectionChanged
-        For Each row As DataGridViewRow In Me.DGVMembers.SelectedRows
-            'UserList.Add(Me.DGVMembers(0, row.Index).Value)
-            'MsgBox(Me.DGVMembers(0, row.Index).Value)
         Next
 
+        ' refresh list
+        Me.DGVMembers.Rows.Clear()
+        GroupMembers(lblGroupName.Text)
+        If Me.DGVMembers.Rows.Count > 1 Then
+            Me.btnExportUsers.Enabled = True
+        Else
+            Me.btnExportUsers.Enabled = False
+        End If
+
+    End Sub
+
+    Private UserList As ArrayList
+
+    ''' <summary>
+    ''' Add selected users to UserList
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub DGVMembers_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DGVMembers.SelectionChanged
+
+        UserList = New ArrayList
+        For Each row As DataGridViewRow In Me.DGVMembers.SelectedRows
+            UserList.Add(Me.DGVMembers(0, row.Index).Value)
+        Next
+        UserList.Sort()
+
+    End Sub
+
+
+    Private Sub ExportToolItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExportToolItem.Click
+        Dim exportFile As New System.IO.StreamWriter("c:\" & lblGroupName.Text & ".csv", False)
+
+        If Me.DGVMembers.Rows.Count > 1 Then
+
+            exportFile.WriteLine("Logon Name, Display Name, Email")
+            exportFile.WriteLine("")
+
+            For Each row As DataGridViewRow In Me.DGVMembers.Rows
+                exportFile.WriteLine(Me.DGVMembers(0, row.Index).Value & "," & _
+                                     Me.DGVMembers(1, row.Index).Value & "," & _
+                                     Me.DGVMembers(2, row.Index).Value) ' & "," & Me.DGVMembers(3, row.Index).Value)
+            Next
+            exportFile.Close()
+
+            Shell("notepad c:\" & lblGroupName.Text & ".csv")
+        End If
+    End Sub
+    Private Sub RefreshMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshMenuItem.Click
+        ' refresh list
+        Me.DGVMembers.Rows.Clear()
+        GroupMembers(lblGroupName.Text)
+        If Me.DGVMembers.Rows.Count > 1 Then
+            Me.btnExportUsers.Enabled = True
+        Else
+            Me.btnExportUsers.Enabled = False
+        End If
     End Sub
 End Class
