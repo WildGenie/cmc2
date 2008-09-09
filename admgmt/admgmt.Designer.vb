@@ -112,7 +112,9 @@ Partial Class ADmgmt
         Me.Label15 = New System.Windows.Forms.Label
         Me.Label4 = New System.Windows.Forms.Label
         Me.tabGroupMembers = New System.Windows.Forms.TabPage
+        Me.btnRemoveUser = New System.Windows.Forms.Button
         Me.btnAdd = New System.Windows.Forms.Button
+        Me.btnExportUsers = New System.Windows.Forms.Button
         Me.cbDN = New System.Windows.Forms.CheckBox
         Me.cbMail = New System.Windows.Forms.CheckBox
         Me.cbDisplay = New System.Windows.Forms.CheckBox
@@ -122,7 +124,6 @@ Partial Class ADmgmt
         Me.colDisplay = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.colMail = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.colDN = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.btnExportUsers = New System.Windows.Forms.Button
         Me.lblGroupName = New System.Windows.Forms.Label
         Me.gbSearch = New System.Windows.Forms.GroupBox
         Me.SearchResultsDGV = New System.Windows.Forms.DataGridView
@@ -1012,13 +1013,14 @@ Partial Class ADmgmt
         'tabGroupMembers
         '
         Me.tabGroupMembers.BackColor = System.Drawing.SystemColors.Control
+        Me.tabGroupMembers.Controls.Add(Me.btnRemoveUser)
         Me.tabGroupMembers.Controls.Add(Me.btnAdd)
+        Me.tabGroupMembers.Controls.Add(Me.btnExportUsers)
         Me.tabGroupMembers.Controls.Add(Me.cbDN)
         Me.tabGroupMembers.Controls.Add(Me.cbMail)
         Me.tabGroupMembers.Controls.Add(Me.cbDisplay)
         Me.tabGroupMembers.Controls.Add(Me.cbLogon)
         Me.tabGroupMembers.Controls.Add(Me.DGVMembers)
-        Me.tabGroupMembers.Controls.Add(Me.btnExportUsers)
         Me.tabGroupMembers.Controls.Add(Me.lblGroupName)
         Me.tabGroupMembers.Location = New System.Drawing.Point(4, 22)
         Me.tabGroupMembers.Name = "tabGroupMembers"
@@ -1026,19 +1028,38 @@ Partial Class ADmgmt
         Me.tabGroupMembers.TabIndex = 4
         Me.tabGroupMembers.Text = "Members"
         '
+        'btnRemoveUser
+        '
+        Me.btnRemoveUser.Location = New System.Drawing.Point(240, 262)
+        Me.btnRemoveUser.Name = "btnRemoveUser"
+        Me.btnRemoveUser.Size = New System.Drawing.Size(64, 20)
+        Me.btnRemoveUser.TabIndex = 11
+        Me.btnRemoveUser.Text = "Remove"
+        Me.btnRemoveUser.UseVisualStyleBackColor = True
+        '
         'btnAdd
         '
-        Me.btnAdd.Location = New System.Drawing.Point(330, 5)
+        Me.btnAdd.Location = New System.Drawing.Point(306, 262)
         Me.btnAdd.Name = "btnAdd"
-        Me.btnAdd.Size = New System.Drawing.Size(48, 20)
+        Me.btnAdd.Size = New System.Drawing.Size(71, 20)
         Me.btnAdd.TabIndex = 10
         Me.btnAdd.Text = "Add..."
         Me.btnAdd.UseVisualStyleBackColor = True
         '
+        'btnExportUsers
+        '
+        Me.btnExportUsers.Enabled = False
+        Me.btnExportUsers.Location = New System.Drawing.Point(153, 261)
+        Me.btnExportUsers.Name = "btnExportUsers"
+        Me.btnExportUsers.Size = New System.Drawing.Size(47, 23)
+        Me.btnExportUsers.TabIndex = 4
+        Me.btnExportUsers.Text = "export"
+        Me.btnExportUsers.UseVisualStyleBackColor = True
+        '
         'cbDN
         '
         Me.cbDN.AutoSize = True
-        Me.cbDN.Location = New System.Drawing.Point(101, 271)
+        Me.cbDN.Location = New System.Drawing.Point(91, 271)
         Me.cbDN.Name = "cbDN"
         Me.cbDN.Size = New System.Drawing.Size(64, 17)
         Me.cbDN.TabIndex = 9
@@ -1048,7 +1069,7 @@ Partial Class ADmgmt
         'cbMail
         '
         Me.cbMail.AutoSize = True
-        Me.cbMail.Location = New System.Drawing.Point(101, 257)
+        Me.cbMail.Location = New System.Drawing.Point(91, 257)
         Me.cbMail.Name = "cbMail"
         Me.cbMail.Size = New System.Drawing.Size(50, 17)
         Me.cbMail.TabIndex = 8
@@ -1093,7 +1114,7 @@ Partial Class ADmgmt
         Me.DGVMembers.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
         Me.DGVMembers.RowTemplate.Height = 21
         Me.DGVMembers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.DGVMembers.Size = New System.Drawing.Size(375, 227)
+        Me.DGVMembers.Size = New System.Drawing.Size(375, 222)
         Me.DGVMembers.TabIndex = 5
         '
         'colSAM
@@ -1124,20 +1145,11 @@ Partial Class ADmgmt
         Me.colDN.ReadOnly = True
         Me.colDN.Visible = False
         '
-        'btnExportUsers
-        '
-        Me.btnExportUsers.Enabled = False
-        Me.btnExportUsers.Location = New System.Drawing.Point(304, 260)
-        Me.btnExportUsers.Name = "btnExportUsers"
-        Me.btnExportUsers.Size = New System.Drawing.Size(75, 23)
-        Me.btnExportUsers.TabIndex = 4
-        Me.btnExportUsers.Text = "export"
-        Me.btnExportUsers.UseVisualStyleBackColor = True
-        '
         'lblGroupName
         '
         Me.lblGroupName.AutoSize = True
-        Me.lblGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblGroupName.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.lblGroupName.ForeColor = System.Drawing.Color.RoyalBlue
         Me.lblGroupName.Location = New System.Drawing.Point(7, 5)
         Me.lblGroupName.Name = "lblGroupName"
         Me.lblGroupName.Size = New System.Drawing.Size(0, 13)
@@ -1507,4 +1519,5 @@ Partial Class ADmgmt
     Friend WithEvents btnAdd As System.Windows.Forms.Button
     Friend WithEvents btnAddUsertoGroup As System.Windows.Forms.Button
     Friend WithEvents btnRemoveUserfromGroup As System.Windows.Forms.Button
+    Friend WithEvents btnRemoveUser As System.Windows.Forms.Button
 End Class

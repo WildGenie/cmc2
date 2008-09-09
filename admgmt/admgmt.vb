@@ -1446,7 +1446,7 @@ Public Class ADmgmt
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btnAdd_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
+    Private Sub btnAddUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
 
         Dim s As New TextEntryDialog
         s.Text = "Group Search"
@@ -1495,9 +1495,71 @@ Public Class ADmgmt
             End If
         End If
 
+    End Sub
+
+    Private Sub btnRemoveUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemoveUser.Click
+
+        If Not String.IsNullOrEmpty(Me.selectedLogon) Then
+            ' Get user as DirectoryEntry
+            Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
+            UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & Me.selectedLogon & "))"
+            UserSearch.PropertiesToLoad.Add("Path")
+            Dim userresult As SearchResultCollection = UserSearch.FindAll()
+            Dim user As New DirectoryEntry(userresult(0).Path)
+
+            ' call removefromgroup sub
+            Me.RemoveUserFromGroup(de, user, lblGroupName.Text)
 
 
-        
+            ' refresh list
+            Me.DGVMembers.Rows.Clear()
+            GroupMembers(lblGroupName.Text)
+            If Me.DGVMembers.Rows.Count > 1 Then
+                Me.btnExportUsers.Enabled = True
+            Else
+                Me.btnExportUsers.Enabled = False
+            End If
+
+        End If
+    End Sub
+
+
+    Private selectedRow As Integer
+    Private selectedLogon As String
+    Private UserList As ArrayList
+
+    Private Sub DGVMembers_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles DGVMembers.MouseDown
+        If e.Button = Windows.Forms.MouseButtons.Right Then
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                'DGVMembers.ClearSelection()
+                DGVMembers(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.selectedRow = hti.RowIndex
+                Me.selectedLogon = DGVMembers(0, hti.RowIndex).Value
+
+            End If
+
+        ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
+
+            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
+            If hti.Type = DataGridViewHitTestType.Cell Then
+                'DGVMembers.ClearSelection()
+                DGVMembers(hti.ColumnIndex, hti.RowIndex).Selected = True
+
+                Me.selectedRow = hti.RowIndex
+                Me.selectedLogon = DGVMembers(0, hti.RowIndex).Value
+
+            End If
+        End If
+    End Sub
+
+    Private Sub DGVMembers_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DGVMembers.SelectionChanged
+        For Each row As DataGridViewRow In Me.DGVMembers.SelectedRows
+            'UserList.Add(Me.DGVMembers(0, row.Index).Value)
+            'MsgBox(Me.DGVMembers(0, row.Index).Value)
+        Next
 
     End Sub
 End Class
