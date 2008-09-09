@@ -536,9 +536,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle13 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle14 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle15 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -3338,22 +3338,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle13.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle13.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle13.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle13.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle13.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle13.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle13.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle13
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle14.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle14
         Me.sgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -3674,8 +3674,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle15.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle15
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -4184,13 +4184,15 @@ Public Class Form1
         '
         'admanagement
         '
+        Me.admanagement.FlatAppearance.BorderSize = 0
         Me.admanagement.FlatStyle = System.Windows.Forms.FlatStyle.Popup
-        Me.admanagement.Location = New System.Drawing.Point(293, 100)
+        Me.admanagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.admanagement.Location = New System.Drawing.Point(292, 96)
         Me.admanagement.Name = "admanagement"
-        Me.admanagement.Size = New System.Drawing.Size(18, 16)
+        Me.admanagement.Size = New System.Drawing.Size(48, 20)
         Me.admanagement.TabIndex = 70
+        Me.admanagement.Text = "ad mgr"
         Me.admanagement.UseVisualStyleBackColor = True
-        Me.admanagement.Visible = False
         '
         'cpu_info_lbl
         '
@@ -4246,7 +4248,7 @@ Public Class Form1
         Me.adbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.adbutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.adbutton.Image = Global.CMC.My.Resources.Resources.folder_user
-        Me.adbutton.Location = New System.Drawing.Point(269, 97)
+        Me.adbutton.Location = New System.Drawing.Point(269, 95)
         Me.adbutton.Name = "adbutton"
         Me.adbutton.Size = New System.Drawing.Size(22, 22)
         Me.adbutton.TabIndex = 65
@@ -4269,7 +4271,7 @@ Public Class Form1
         Me.HWButton.Enabled = False
         Me.HWButton.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.HWButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.HWButton.Location = New System.Drawing.Point(304, 120)
+        Me.HWButton.Location = New System.Drawing.Point(304, 122)
         Me.HWButton.Name = "HWButton"
         Me.HWButton.Size = New System.Drawing.Size(48, 20)
         Me.HWButton.TabIndex = 14
@@ -4468,7 +4470,7 @@ Public Class Form1
         '
         Me.Label_User.BackColor = System.Drawing.SystemColors.Window
         Me.Label_User.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.Label_User.Location = New System.Drawing.Point(92, 98)
+        Me.Label_User.Location = New System.Drawing.Point(92, 96)
         Me.Label_User.Name = "Label_User"
         Me.Label_User.ReadOnly = True
         Me.Label_User.Size = New System.Drawing.Size(175, 19)
@@ -4554,7 +4556,7 @@ Public Class Form1
         '
         Me.LabelUser.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.LabelUser.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.LabelUser.Location = New System.Drawing.Point(28, 100)
+        Me.LabelUser.Location = New System.Drawing.Point(28, 98)
         Me.LabelUser.Name = "LabelUser"
         Me.LabelUser.Size = New System.Drawing.Size(72, 16)
         Me.LabelUser.TabIndex = 36
@@ -6609,13 +6611,26 @@ Public Class Form1
             ' Read last user logon from registry
             Dim lDomain As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultDomainName")
             Dim lUser As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultUserName")
+
+            ' if still no last logon values returned then try using api vb call rather than wmi
+            If String.IsNullOrEmpty(lDomain) Then
+                If AltUserCheckBox.Checked Then
+                    Dim impersonator As New Impersonation
+                    If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
+                        lUser = GetLastLogon()
+                        impersonator.undoImpersonation()
+                    End If
+                Else
+                    lUser = GetLastLogon()
+                End If
+            End If
+
+
             If lUser.Contains("\") Then
                 PC.LastLogon = lUser
             Else
                 If String.IsNullOrEmpty(lDomain) = False AndAlso String.IsNullOrEmpty(lUser) = False Then
                     PC.LastLogon = lDomain & "\" & lUser
-                    'Else
-                    '    PC.LastLogon = "unknown"
                 End If
             End If
 
@@ -6628,7 +6643,8 @@ Public Class Form1
             Dim queryCollection As ManagementObjectCollection
             queryCollection = wmi.wmiQuery("SELECT Name FROM Win32_Process")
             For Each m In queryCollection
-                If Mid(StrReverse(m("Name")), 1, 3) = "rcs" Then
+                Dim procName As String = m("Name").ToString.ToLower
+                If procName.Substring(procName.Length - 4) = ".scr" Then
                     scr_running = True
                     Exit For
                 End If
@@ -6656,6 +6672,21 @@ Public Class Form1
         End If
 
     End Sub
+
+    ''' <summary>
+    ''' Use VB registry call to retrieve last logon information
+    ''' </summary>
+    ''' <returns>domain\user</returns>
+    ''' <remarks></remarks>
+    Private Function GetLastLogon() As String
+        Dim strkeyPath As String = "Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
+        Dim user As String = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("DefaultUserName")
+        Dim domain As String = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("DefaultDomainName")
+        If String.IsNullOrEmpty(user) AndAlso (String.IsNullOrEmpty(domain) = False) Then
+            user = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("AltDefaultUserName")
+        End If
+        Return domain & "\" & user
+    End Function
 
     ''' <summary>
     ''' Read IE Version from the registry.
@@ -6907,8 +6938,10 @@ Public Class Form1
     End Sub
 
     ' Username stuff
+    Private currentUser As String
     Private Sub Label_User_MouseEnter(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label_User.MouseEnter
         If Label_User.Text = "" Then Exit Sub
+        Me.currentUser = Label_User.Text
         On Error Resume Next
         If PC.LastLogon <> "" Then
             Label_User.Text = "Last User: " & PC.LastLogon
@@ -6921,13 +6954,15 @@ Public Class Form1
     Private Sub Label_User_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label_User.MouseLeave
         If Label_User.Text = "" Then Exit Sub
         On Error Resume Next
-        If PC.LastLogon <> "" Then
-            Label_User.Text = "no one is logged on"
-        Else
+        If PC.LastLogon = "" Then
             If Label_User.BackColor = Color.LightGray Then
-                Label_User.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
+                'Label_User.Text = PC.CurrentUserDomain & "\" & PC.CurrentUser
             End If
+            'Else
+            '    Label_User.Text = "no one is logged on"
         End If
+        Label_User.Text = Me.currentUser
+        Me.currentUser = String.Empty
     End Sub
     Private Sub Label_User_DoubleClick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Label_User.DoubleClick
         If FormCleared = True Then Exit Sub
@@ -9880,41 +9915,41 @@ Public Class Form1
     ' front screen button
     Private Sub adbutton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles adbutton.Click
 
-        'Panel2.Text = "Searching for account..."
-        'ClearADUser()
-        'samaccountname.Text = Label_User.Text
-        'Tabholder1.SelectTab(aduser)
-        'Tabholder1.Refresh()
-
-        'Me.Cursor = Cursors.WaitCursor
-
-        'Tabholder1.SelectTab(aduser)
-        'ADUserProfile2(Label_User.Text)
-
-        'Me.Cursor = Cursors.Default
-        'Panel2.Text = "ready"
-
-
+        Panel2.Text = "Searching for account..."
+        ClearADUser()
+        samaccountname.Text = Label_User.Text
+        Tabholder1.SelectTab(aduser)
+        Tabholder1.Refresh()
 
         Me.Cursor = Cursors.WaitCursor
-        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
-        If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
-        End If
 
-        If File.Exists(Path) Then
-            Dim p As New Process
-            Dim psi As ProcessStartInfo = New ProcessStartInfo
-            psi.FileName = Path
-            If ConnectionExists Then
-                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & Chr(34) & PC.CurrentUser & Chr(34)
-            End If
-            p.StartInfo = psi
-            p.Start()
-        End If
+        Tabholder1.SelectTab(aduser)
+        ADUserProfile2(Label_User.Text)
+
         Me.Cursor = Cursors.Default
+        Panel2.Text = "ready"
 
-        Me.GO_Button.Focus()
+
+
+        'Me.Cursor = Cursors.WaitCursor
+        'Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        'If System.Diagnostics.Debugger.IsAttached Then
+        '    Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
+        'End If
+
+        'If File.Exists(Path) Then
+        '    Dim p As New Process
+        '    Dim psi As ProcessStartInfo = New ProcessStartInfo
+        '    psi.FileName = Path
+        '    If ConnectionExists Then
+        '        psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & Chr(34) & PC.CurrentUser & Chr(34)
+        '    End If
+        '    p.StartInfo = psi
+        '    p.Start()
+        'End If
+        'Me.Cursor = Cursors.Default
+
+        'Me.GO_Button.Focus()
 
     End Sub
     ' Go button
@@ -12383,7 +12418,7 @@ Public Class Form1
 
         Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\perfmonitor.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\cmc\bin\files\perfmonitor.exe", "cmc\perfmonitor\obj\Debug\perfmonitor.exe")
+            Path = Path.Replace("\cmc\bin\files\perfmonitor.exe", "\perfmonitor\obj\Debug\perfmonitor.exe")
         End If
 
         If File.Exists(Path) Then
@@ -12400,9 +12435,28 @@ Public Class Form1
     End Sub
     Private Sub admanagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles admanagement.Click
 
+        'Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        'If System.Diagnostics.Debugger.IsAttached Then
+        '    Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
+        'End If
+
+        'If File.Exists(Path) Then
+        '    Dim p As New Process
+        '    Dim psi As ProcessStartInfo = New ProcessStartInfo
+        '    psi.FileName = Path
+        '    If ConnectionExists Then
+        '        psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & Chr(34) & PC.CurrentUser & Chr(34)
+        '    End If
+        '    p.StartInfo = psi
+        '    p.Start()
+        'End If
+
+        'Me.GO_Button.Select()
+
+        Me.Cursor = Cursors.WaitCursor
         Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
+            Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
         End If
 
         If File.Exists(Path) Then
@@ -12415,8 +12469,10 @@ Public Class Form1
             p.StartInfo = psi
             p.Start()
         End If
+        Me.Cursor = Cursors.Default
 
         Me.GO_Button.Select()
+        'Me.GO_Button.Focus()
     End Sub
 
     ' gpupdate
