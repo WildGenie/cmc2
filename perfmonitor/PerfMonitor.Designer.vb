@@ -23,6 +23,7 @@ Partial Class PerfMonitor
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PerfMonitor))
         Me.PerfMonTimer = New System.Windows.Forms.Timer(Me.components)
         Me.Pic1 = New System.Windows.Forms.PictureBox
         Me.labelCPU = New System.Windows.Forms.Label
@@ -35,15 +36,15 @@ Partial Class PerfMonitor
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.btnTogglePanel = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
-        Me.Panel2 = New System.Windows.Forms.Panel
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.Panel2 = New System.Windows.Forms.Panel
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.Panel2.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
         Me.SuspendLayout()
         '
         'PerfMonTimer
@@ -163,18 +164,6 @@ Partial Class PerfMonitor
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "s"
         '
-        'Panel2
-        '
-        Me.Panel2.Controls.Add(Me.labelCPU)
-        Me.Panel2.Controls.Add(Me.Pic1)
-        Me.Panel2.Controls.Add(Me.LabelMem)
-        Me.Panel2.Controls.Add(Me.Pic2)
-        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(0, 74)
-        Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(148, 190)
-        Me.Panel2.TabIndex = 10
-        '
         'MenuStrip1
         '
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem})
@@ -193,6 +182,18 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
         Me.AlwaysOnTopToolStripMenuItem.Text = "always on top"
         '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.labelCPU)
+        Me.Panel2.Controls.Add(Me.Pic1)
+        Me.Panel2.Controls.Add(Me.LabelMem)
+        Me.Panel2.Controls.Add(Me.Pic2)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel2.Location = New System.Drawing.Point(0, 74)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(148, 190)
+        Me.Panel2.TabIndex = 10
+        '
         'PerfMonitor
         '
         Me.AcceptButton = Me.btnStart
@@ -203,6 +204,7 @@ Partial Class PerfMonitor
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.MinimumSize = New System.Drawing.Size(164, 110)
         Me.Name = "PerfMonitor"
@@ -212,10 +214,10 @@ Partial Class PerfMonitor
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.Panel2.ResumeLayout(False)
-        Me.Panel2.PerformLayout()
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel2.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub

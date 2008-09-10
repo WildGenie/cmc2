@@ -1164,40 +1164,40 @@ Partial Class ADmgmt
         '
         Me.groupContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUserMenu, Me.RemoveUserMenu, Me.ToolStripSeparator2, Me.RefreshMenuItem, Me.ToolStripSeparator3, Me.ExportToolItem})
         Me.groupContextMenu.Name = "groupContextMenu"
-        Me.groupContextMenu.Size = New System.Drawing.Size(149, 104)
+        Me.groupContextMenu.Size = New System.Drawing.Size(143, 104)
         '
         'AddUserMenu
         '
         Me.AddUserMenu.Name = "AddUserMenu"
-        Me.AddUserMenu.Size = New System.Drawing.Size(148, 22)
+        Me.AddUserMenu.Size = New System.Drawing.Size(142, 22)
         Me.AddUserMenu.Text = "Add user..."
         '
         'RemoveUserMenu
         '
         Me.RemoveUserMenu.Name = "RemoveUserMenu"
-        Me.RemoveUserMenu.Size = New System.Drawing.Size(148, 22)
+        Me.RemoveUserMenu.Size = New System.Drawing.Size(142, 22)
         Me.RemoveUserMenu.Text = "Remove user"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(145, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(139, 6)
         '
         'RefreshMenuItem
         '
         Me.RefreshMenuItem.Name = "RefreshMenuItem"
-        Me.RefreshMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.RefreshMenuItem.Size = New System.Drawing.Size(142, 22)
         Me.RefreshMenuItem.Text = "Refresh"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(145, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(139, 6)
         '
         'ExportToolItem
         '
         Me.ExportToolItem.Name = "ExportToolItem"
-        Me.ExportToolItem.Size = New System.Drawing.Size(148, 22)
+        Me.ExportToolItem.Size = New System.Drawing.Size(142, 22)
         Me.ExportToolItem.Text = "Export"
         '
         'lblGroupName
@@ -1276,31 +1276,31 @@ Partial Class ADmgmt
         '
         Me.userContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NameMenu, Me.ToolStripSeparator1, Me.ResetPasswordMenu, Me.PropertiesMenu})
         Me.userContextMenu.Name = "userContextMenu"
-        Me.userContextMenu.Size = New System.Drawing.Size(163, 76)
+        Me.userContextMenu.Size = New System.Drawing.Size(156, 76)
         '
         'NameMenu
         '
         Me.NameMenu.ForeColor = System.Drawing.Color.RoyalBlue
         Me.NameMenu.Name = "NameMenu"
-        Me.NameMenu.Size = New System.Drawing.Size(162, 22)
+        Me.NameMenu.Size = New System.Drawing.Size(155, 22)
         Me.NameMenu.Text = "name"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(159, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(152, 6)
         '
         'ResetPasswordMenu
         '
         Me.ResetPasswordMenu.Name = "ResetPasswordMenu"
-        Me.ResetPasswordMenu.Size = New System.Drawing.Size(162, 22)
+        Me.ResetPasswordMenu.Size = New System.Drawing.Size(155, 22)
         Me.ResetPasswordMenu.Text = "Reset Password"
         '
         'PropertiesMenu
         '
         Me.PropertiesMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.PropertiesMenu.Name = "PropertiesMenu"
-        Me.PropertiesMenu.Size = New System.Drawing.Size(162, 22)
+        Me.PropertiesMenu.Size = New System.Drawing.Size(155, 22)
         Me.PropertiesMenu.Text = "Properties"
         '
         'btnExit

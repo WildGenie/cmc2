@@ -3,6 +3,7 @@ Public Class PerfMonitor
     Private cpu, mem As PerformanceCounter
     Private totalMemory As Integer
     Private FirstRun As Boolean
+    Protected Friend loading As Boolean
     Protected Friend Username As String = Nothing
     Protected Friend Password As String = Nothing
 
@@ -34,6 +35,8 @@ Public Class PerfMonitor
         Me.btnStop.Enabled = True
         Me.computername.Enabled = False
         Me.btnStop.Focus()
+
+        Me.loading = False
     End Sub
     Private Sub btnStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStop.Click
         PerfMonTimer.Stop()
@@ -186,7 +189,15 @@ Public Class PerfMonitor
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub PerfMonitor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Me.loading = True
+        
         If Environment.GetCommandLineArgs().Length > 1 Then
+
+            Me.Visible = False
+            Dim loader As New System.Threading.Thread(AddressOf DoWhileLoading)
+            loader.Start()
+
             Dim i As Integer
             Dim memory As Integer = 0
             For i = 1 To Environment.GetCommandLineArgs().Length - 1
@@ -228,7 +239,14 @@ Public Class PerfMonitor
                 End If
             End If
 
+            loader.Join()
+            Me.Visible = True
+
+        Else
+            Me.loading = False
         End If
+
+        
 
     End Sub
 
@@ -238,5 +256,14 @@ Public Class PerfMonitor
         Else
             Me.TopMost = True
         End If
+    End Sub
+
+    Private Sub DoWhileLoading()
+        splashscreen1.Show()
+        splashscreen1.Refresh()
+        Do While Me.loading = True
+            System.Threading.Thread.Sleep(1000)
+        Loop
+        splashscreen1.Close()
     End Sub
 End Class
