@@ -726,10 +726,12 @@ Public Class ADmgmt
         members = myGroup.Properties("member")
         Dim member As Object
         For Each member In members
+            'MsgBox(GetObjectClass_fromDN(member.ToString))
             Me.DGVMembers.Rows.Add(GetAttributefromDN("sAMAccountName", member.ToString), _
                                    GetAttributefromDN("displayName", member.ToString), _
                                    GetAttributefromDN("mail", member.ToString), _
-                                   GetAttributefromDN("distinguishedName", member.ToString))
+                                   GetAttributefromDN("distinguishedName", member.ToString), _
+                                   GetObjectClass_fromDN(member.ToString))
         Next
 
     End Sub
@@ -743,6 +745,38 @@ Public Class ADmgmt
         Catch ex As Exception
             Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
         End Try
+    End Function
+
+    ''' <summary>
+    ''' Identify whether object is a Group; Person; OrganisationalUnit...
+    ''' </summary>
+    ''' <param name="dsPath">distinguishedName</param>
+    ''' <returns>objectClass(1)</returns>
+    ''' <remarks>Need to add code to enumerate each objectClass value.
+    '''          Peter Forman 2008</remarks>
+    Private Function GetObjectClass_fromDN(ByVal dsPath As String) As String
+        'user
+        'group
+        'contact
+        'container
+        'organizationalUnit
+        'msexchDynamicDistributionList
+        Dim Searcher As New System.DirectoryServices.DirectorySearcher(de)
+        Dim result As System.DirectoryServices.SearchResultCollection
+        Searcher.Filter = "(distinguishedName= " & dsPath & ")" '(objectClass=Group)"
+        result = Searcher.FindAll()
+        Dim retval As String = String.Empty
+        For Each r As SearchResult In result
+            If r.Properties.Contains("objectClass") Then
+                'r.Properties("objectClass").Count
+                'For Each oclass As String In r.Properties("objectClass")
+                '    MsgBox(oclass)
+                'Next
+                'dim lastProperty as integer = r.Properties("objectClass")(1).ToString()
+                retval = r.Properties("objectClass")(r.Properties("objectClass").Count - 1).ToString()
+            End If
+        Next
+        Return retval
     End Function
 
 
@@ -1311,6 +1345,7 @@ Public Class ADmgmt
                 ShowTabPage(tabCustom)
                 Me.adTabControl.SelectTab(tabAccount)
                 HideTabPage(tabGroupMembers)
+                Me.SearchResultsDGV.Columns(0).Width = 140
             Case "Groups"
                 ShowTabPage(tabGroupMembers)
                 Me.adTabControl.SelectTab(tabGroupMembers)
@@ -1320,6 +1355,8 @@ Public Class ADmgmt
                 HideTabPage(tabCustom)
                 Me.cbLogon.Checked = True
                 Me.cbDisplay.Checked = True
+                Me.SearchResultsDGV.Columns(0).Width = 350
+                '140,350
         End Select
     End Sub
 
@@ -1487,7 +1524,7 @@ Public Class ADmgmt
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub lbMemberOf_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbMemberOf.SelectedIndexChanged
-        If Not String.IsNullOrEmpty(Me.lbMemberOf.SelectedItem.ToString) Then
+        If Not Me.lbMemberOf.SelectedItem Is Nothing Then
             btnRemoveUserfromGroup.Enabled = True
         Else
             btnRemoveUserfromGroup.Enabled = False
@@ -1637,4 +1674,34 @@ Public Class ADmgmt
             Me.btnExportUsers.Enabled = False
         End If
     End Sub
+
+    Private Sub txtTSHomeFolder_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTSHomeFolder.MouseDoubleClick
+        Try
+            System.Diagnostics.Process.Start(txtTSHomeFolder.Text)
+        Catch ex As Exception
+            Panel2.Text = "unable to open folder"
+        End Try
+    End Sub
+    Private Sub txtTSProfile_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTSProfile.MouseDoubleClick
+        Try
+            System.Diagnostics.Process.Start(txtTSProfile.Text)
+        Catch ex As Exception
+            Panel2.Text = "unable to open folder"
+        End Try
+    End Sub
+    Private Sub txtHomeProfile_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtHomeProfile.MouseDoubleClick
+        Try
+            System.Diagnostics.Process.Start(txtHomeProfile.Text)
+        Catch ex As Exception
+            Panel2.Text = "unable to open folder"
+        End Try
+    End Sub
+    Private Sub txtHomeFolder_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtHomeFolder.MouseDoubleClick
+        Try
+            System.Diagnostics.Process.Start(txtHomeFolder.Text)
+        Catch ex As Exception
+            Panel2.Text = "unable to open folder"
+        End Try
+    End Sub
+
 End Class
