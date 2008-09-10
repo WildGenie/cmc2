@@ -6294,13 +6294,33 @@ Public Class Form1
     End Sub
 
     ' GO BUTTON....
+    Private working As Boolean
     Private Sub GO_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GO_Button.Click
         computername.Text = Trim(computername.Text.ToLower)
         Me.Refresh()
+
+        working = True
+        Dim updatethread As New System.Threading.Thread(AddressOf Redraw)
+        updatethread.Start()
+
         Main()
+
+        'Dim mainthread As New System.Threading.Thread(AddressOf Main)
+        'working = True
+        'mainthread.Start()
+        'Do While working = True
+        '    System.Threading.Thread.Sleep(200)
+        'Loop
+        'mainthread.Join()
+
+    End Sub
+    Private Sub Redraw()
+        Do While working
+            System.Threading.Thread.Sleep(200)
+            Me.Redraw()
+        Loop
     End Sub
     Private Sub Main()
-        '=================================================================
 
         ' prepare form...
         Me.Cursor = Cursors.WaitCursor
@@ -6371,7 +6391,6 @@ Public Class Form1
 
 
         '=================================================================
-
         ' Retrieve WMI information
 
         If bMultiThread Then
@@ -6419,7 +6438,6 @@ Public Class Form1
         End If
 
         '=================================================================
-
         ' map IPC$ share
 
         If AltUserCheckBox.Checked Then _
@@ -6454,7 +6472,6 @@ Public Class Form1
         End If
 
         '===============  Finished  ======================================
-
         totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 4)
 
         Me.AddToHistory(PC.Name)
@@ -6473,6 +6490,8 @@ Public Class Form1
         Panel3.Text = totaltime & "s"
         Me.Cursor = Cursors.Default
         Me.Refresh()
+
+        working = False
 
     End Sub
 

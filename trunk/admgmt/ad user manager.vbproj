@@ -6,7 +6,7 @@
     <ProjectGuid>{AE8FAA50-2E56-4EBA-ADE6-A10FC2576ACC}</ProjectGuid>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ApplicationIcon>Resources\files\cmc.ico</ApplicationIcon>
+    <ApplicationIcon>users.ico</ApplicationIcon>
     <AssemblyKeyContainerName>
     </AssemblyKeyContainerName>
     <AssemblyName>ADMgmt</AssemblyName>
@@ -179,6 +179,7 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </Content>
     <Content Include="Resources\files\users.ico" />
+    <Content Include="users.ico" />
     <EmbeddedResource Include="ADmgmt.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ADmgmt.vb</DependentUpon>

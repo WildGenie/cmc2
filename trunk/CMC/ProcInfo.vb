@@ -59,12 +59,15 @@ Public Class ProcInfo
 
             If ratio < 0.01 Then
                 KBDivider = 1024
-            ElseIf ratio > 0.8 And ratio < 1.2 Then
+            ElseIf ratio > 0.6 And ratio < 1.4 Then
                 KBDivider = 1
             ElseIf ratio > 800 And ratio < 1200 Then
                 KBDivider = 1 / 1024
             End If
         End If
+
+        ' override for testing
+        KBDivider = 1
 
         ' start the clock ticking
         Timer1.Start()
