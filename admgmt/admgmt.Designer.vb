@@ -124,8 +124,17 @@ Partial Class ADmgmt
         Me.colDisplay = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.colMail = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.colDN = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.objectClass = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.groupContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.AddUserMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemoveUserMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.RefreshMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
+        Me.ExportToolItem = New System.Windows.Forms.ToolStripMenuItem
         Me.lblGroupName = New System.Windows.Forms.Label
         Me.gbSearch = New System.Windows.Forms.GroupBox
+        Me.SearchTypeCombo = New System.Windows.Forms.ComboBox
         Me.SearchResultsDGV = New System.Windows.Forms.DataGridView
         Me.srName = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.srDescription = New System.Windows.Forms.DataGridViewTextBoxColumn
@@ -142,14 +151,6 @@ Partial Class ADmgmt
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.SearchPanel = New System.Windows.Forms.Panel
         Me.Panel4 = New System.Windows.Forms.Panel
-        Me.SearchTypeCombo = New System.Windows.Forms.ComboBox
-        Me.groupContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
-        Me.AddUserMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoveUserMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.RefreshMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.ExportToolItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.DataSet1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.adTabControl.SuspendLayout()
         Me.tabAccount.SuspendLayout()
@@ -161,6 +162,7 @@ Partial Class ADmgmt
         Me.GroupBox3.SuspendLayout()
         Me.tabGroupMembers.SuspendLayout()
         CType(Me.DGVMembers, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.groupContextMenu.SuspendLayout()
         Me.gbSearch.SuspendLayout()
         CType(Me.SearchResultsDGV, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.userContextMenu.SuspendLayout()
@@ -169,7 +171,6 @@ Partial Class ADmgmt
         Me.Panel2.SuspendLayout()
         Me.SearchPanel.SuspendLayout()
         Me.Panel4.SuspendLayout()
-        Me.groupContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'DomainSelect
@@ -1055,9 +1056,9 @@ Partial Class ADmgmt
         'btnExportUsers
         '
         Me.btnExportUsers.Enabled = False
-        Me.btnExportUsers.Location = New System.Drawing.Point(153, 261)
+        Me.btnExportUsers.Location = New System.Drawing.Point(125, 254)
         Me.btnExportUsers.Name = "btnExportUsers"
-        Me.btnExportUsers.Size = New System.Drawing.Size(47, 23)
+        Me.btnExportUsers.Size = New System.Drawing.Size(47, 30)
         Me.btnExportUsers.TabIndex = 4
         Me.btnExportUsers.Text = "export"
         Me.btnExportUsers.UseVisualStyleBackColor = True
@@ -1065,7 +1066,7 @@ Partial Class ADmgmt
         'cbDN
         '
         Me.cbDN.AutoSize = True
-        Me.cbDN.Location = New System.Drawing.Point(91, 271)
+        Me.cbDN.Location = New System.Drawing.Point(65, 268)
         Me.cbDN.Name = "cbDN"
         Me.cbDN.Size = New System.Drawing.Size(64, 17)
         Me.cbDN.TabIndex = 9
@@ -1075,31 +1076,31 @@ Partial Class ADmgmt
         'cbMail
         '
         Me.cbMail.AutoSize = True
-        Me.cbMail.Location = New System.Drawing.Point(91, 257)
+        Me.cbMail.Location = New System.Drawing.Point(65, 254)
         Me.cbMail.Name = "cbMail"
-        Me.cbMail.Size = New System.Drawing.Size(50, 17)
+        Me.cbMail.Size = New System.Drawing.Size(44, 17)
         Me.cbMail.TabIndex = 8
-        Me.cbMail.Text = "email"
+        Me.cbMail.Text = "mail"
         Me.cbMail.UseVisualStyleBackColor = True
         '
         'cbDisplay
         '
         Me.cbDisplay.AutoSize = True
-        Me.cbDisplay.Location = New System.Drawing.Point(4, 271)
+        Me.cbDisplay.Location = New System.Drawing.Point(4, 268)
         Me.cbDisplay.Name = "cbDisplay"
-        Me.cbDisplay.Size = New System.Drawing.Size(87, 17)
+        Me.cbDisplay.Size = New System.Drawing.Size(58, 17)
         Me.cbDisplay.TabIndex = 7
-        Me.cbDisplay.Text = "display name"
+        Me.cbDisplay.Text = "display"
         Me.cbDisplay.UseVisualStyleBackColor = True
         '
         'cbLogon
         '
         Me.cbLogon.AutoSize = True
-        Me.cbLogon.Location = New System.Drawing.Point(4, 257)
+        Me.cbLogon.Location = New System.Drawing.Point(4, 254)
         Me.cbLogon.Name = "cbLogon"
-        Me.cbLogon.Size = New System.Drawing.Size(81, 17)
+        Me.cbLogon.Size = New System.Drawing.Size(38, 17)
         Me.cbLogon.TabIndex = 6
-        Me.cbLogon.Text = "logon name"
+        Me.cbLogon.Text = "cn"
         Me.cbLogon.UseVisualStyleBackColor = True
         '
         'DGVMembers
@@ -1109,7 +1110,7 @@ Partial Class ADmgmt
         Me.DGVMembers.AllowUserToResizeRows = False
         Me.DGVMembers.BackgroundColor = System.Drawing.SystemColors.Window
         Me.DGVMembers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGVMembers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colSAM, Me.colDisplay, Me.colMail, Me.colDN})
+        Me.DGVMembers.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.colSAM, Me.colDisplay, Me.colMail, Me.colDN, Me.objectClass})
         Me.DGVMembers.ContextMenuStrip = Me.groupContextMenu
         Me.DGVMembers.GridColor = System.Drawing.SystemColors.ControlLight
         Me.DGVMembers.Location = New System.Drawing.Point(3, 29)
@@ -1152,6 +1153,53 @@ Partial Class ADmgmt
         Me.colDN.ReadOnly = True
         Me.colDN.Visible = False
         '
+        'objectClass
+        '
+        Me.objectClass.HeaderText = "type"
+        Me.objectClass.Name = "objectClass"
+        Me.objectClass.ReadOnly = True
+        Me.objectClass.Width = 50
+        '
+        'groupContextMenu
+        '
+        Me.groupContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUserMenu, Me.RemoveUserMenu, Me.ToolStripSeparator2, Me.RefreshMenuItem, Me.ToolStripSeparator3, Me.ExportToolItem})
+        Me.groupContextMenu.Name = "groupContextMenu"
+        Me.groupContextMenu.Size = New System.Drawing.Size(149, 104)
+        '
+        'AddUserMenu
+        '
+        Me.AddUserMenu.Name = "AddUserMenu"
+        Me.AddUserMenu.Size = New System.Drawing.Size(148, 22)
+        Me.AddUserMenu.Text = "Add user..."
+        '
+        'RemoveUserMenu
+        '
+        Me.RemoveUserMenu.Name = "RemoveUserMenu"
+        Me.RemoveUserMenu.Size = New System.Drawing.Size(148, 22)
+        Me.RemoveUserMenu.Text = "Remove user"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(145, 6)
+        '
+        'RefreshMenuItem
+        '
+        Me.RefreshMenuItem.Name = "RefreshMenuItem"
+        Me.RefreshMenuItem.Size = New System.Drawing.Size(148, 22)
+        Me.RefreshMenuItem.Text = "Refresh"
+        '
+        'ToolStripSeparator3
+        '
+        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(145, 6)
+        '
+        'ExportToolItem
+        '
+        Me.ExportToolItem.Name = "ExportToolItem"
+        Me.ExportToolItem.Size = New System.Drawing.Size(148, 22)
+        Me.ExportToolItem.Text = "Export"
+        '
         'lblGroupName
         '
         Me.lblGroupName.AutoSize = True
@@ -1176,6 +1224,15 @@ Partial Class ADmgmt
         Me.gbSearch.TabIndex = 9
         Me.gbSearch.TabStop = False
         Me.gbSearch.Text = "Search"
+        '
+        'SearchTypeCombo
+        '
+        Me.SearchTypeCombo.FormattingEnabled = True
+        Me.SearchTypeCombo.Items.AddRange(New Object() {"Users", "Groups"})
+        Me.SearchTypeCombo.Location = New System.Drawing.Point(23, 19)
+        Me.SearchTypeCombo.Name = "SearchTypeCombo"
+        Me.SearchTypeCombo.Size = New System.Drawing.Size(103, 21)
+        Me.SearchTypeCombo.TabIndex = 7
         '
         'SearchResultsDGV
         '
@@ -1219,31 +1276,31 @@ Partial Class ADmgmt
         '
         Me.userContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NameMenu, Me.ToolStripSeparator1, Me.ResetPasswordMenu, Me.PropertiesMenu})
         Me.userContextMenu.Name = "userContextMenu"
-        Me.userContextMenu.Size = New System.Drawing.Size(156, 76)
+        Me.userContextMenu.Size = New System.Drawing.Size(163, 76)
         '
         'NameMenu
         '
         Me.NameMenu.ForeColor = System.Drawing.Color.RoyalBlue
         Me.NameMenu.Name = "NameMenu"
-        Me.NameMenu.Size = New System.Drawing.Size(155, 22)
+        Me.NameMenu.Size = New System.Drawing.Size(162, 22)
         Me.NameMenu.Text = "name"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(152, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(159, 6)
         '
         'ResetPasswordMenu
         '
         Me.ResetPasswordMenu.Name = "ResetPasswordMenu"
-        Me.ResetPasswordMenu.Size = New System.Drawing.Size(155, 22)
+        Me.ResetPasswordMenu.Size = New System.Drawing.Size(162, 22)
         Me.ResetPasswordMenu.Text = "Reset Password"
         '
         'PropertiesMenu
         '
-        Me.PropertiesMenu.Font = New System.Drawing.Font("Segoe UI", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.PropertiesMenu.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.PropertiesMenu.Name = "PropertiesMenu"
-        Me.PropertiesMenu.Size = New System.Drawing.Size(155, 22)
+        Me.PropertiesMenu.Size = New System.Drawing.Size(162, 22)
         Me.PropertiesMenu.Text = "Properties"
         '
         'btnExit
@@ -1328,55 +1385,6 @@ Partial Class ADmgmt
         Me.Panel4.Size = New System.Drawing.Size(425, 34)
         Me.Panel4.TabIndex = 100004
         '
-        'SearchTypeCombo
-        '
-        Me.SearchTypeCombo.FormattingEnabled = True
-        Me.SearchTypeCombo.Items.AddRange(New Object() {"Users", "Groups"})
-        Me.SearchTypeCombo.Location = New System.Drawing.Point(23, 19)
-        Me.SearchTypeCombo.Name = "SearchTypeCombo"
-        Me.SearchTypeCombo.Size = New System.Drawing.Size(103, 21)
-        Me.SearchTypeCombo.TabIndex = 7
-        '
-        'groupContextMenu
-        '
-        Me.groupContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AddUserMenu, Me.RemoveUserMenu, Me.ToolStripSeparator2, Me.RefreshMenuItem, Me.ToolStripSeparator3, Me.ExportToolItem})
-        Me.groupContextMenu.Name = "groupContextMenu"
-        Me.groupContextMenu.Size = New System.Drawing.Size(143, 104)
-        '
-        'AddUserMenu
-        '
-        Me.AddUserMenu.Name = "AddUserMenu"
-        Me.AddUserMenu.Size = New System.Drawing.Size(142, 22)
-        Me.AddUserMenu.Text = "Add user..."
-        '
-        'RemoveUserMenu
-        '
-        Me.RemoveUserMenu.Name = "RemoveUserMenu"
-        Me.RemoveUserMenu.Size = New System.Drawing.Size(142, 22)
-        Me.RemoveUserMenu.Text = "Remove user"
-        '
-        'RefreshMenuItem
-        '
-        Me.RefreshMenuItem.Name = "RefreshMenuItem"
-        Me.RefreshMenuItem.Size = New System.Drawing.Size(142, 22)
-        Me.RefreshMenuItem.Text = "Refresh"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(139, 6)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(139, 6)
-        '
-        'ExportToolItem
-        '
-        Me.ExportToolItem.Name = "ExportToolItem"
-        Me.ExportToolItem.Size = New System.Drawing.Size(142, 22)
-        Me.ExportToolItem.Text = "Export"
-        '
         'ADmgmt
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -1405,6 +1413,7 @@ Partial Class ADmgmt
         Me.tabGroupMembers.ResumeLayout(False)
         Me.tabGroupMembers.PerformLayout()
         CType(Me.DGVMembers, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.groupContextMenu.ResumeLayout(False)
         Me.gbSearch.ResumeLayout(False)
         Me.gbSearch.PerformLayout()
         CType(Me.SearchResultsDGV, System.ComponentModel.ISupportInitialize).EndInit()
@@ -1415,7 +1424,6 @@ Partial Class ADmgmt
         Me.SearchPanel.ResumeLayout(False)
         Me.Panel4.ResumeLayout(False)
         Me.Panel4.PerformLayout()
-        Me.groupContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -1481,10 +1489,6 @@ Partial Class ADmgmt
     Friend WithEvents cbDN As System.Windows.Forms.CheckBox
     Friend WithEvents cbMail As System.Windows.Forms.CheckBox
     Friend WithEvents cbDisplay As System.Windows.Forms.CheckBox
-    Friend WithEvents colSAM As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colDisplay As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colMail As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents colDN As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents customDomainCombo As System.Windows.Forms.ComboBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
     Friend WithEvents Label25 As System.Windows.Forms.Label
@@ -1545,4 +1549,9 @@ Partial Class ADmgmt
     Friend WithEvents RefreshMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ExportToolItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents colSAM As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDisplay As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colMail As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents colDN As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents objectClass As System.Windows.Forms.DataGridViewTextBoxColumn
 End Class

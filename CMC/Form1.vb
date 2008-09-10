@@ -12379,7 +12379,7 @@ Public Class Form1
 
         Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\files\remreg.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            path = path.Replace("cmc\cmc\bin\files\remreg.exe", "cmc\remoteregedit\obj\debug\remreg.exe")
+            path = path.Replace("cmc\bin\files\remreg.exe", "remoteregedit\obj\debug\remreg.exe")
         End If
 
         If File.Exists(path) Then
@@ -12400,7 +12400,7 @@ Public Class Form1
 
         Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\cmc\bin\files\admgmt.exe", "cmc\admgmt\obj\Debug\admgmt.exe")
+            Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
         End If
 
         If File.Exists(Path) Then
@@ -12408,7 +12408,7 @@ Public Class Form1
             Dim psi As ProcessStartInfo = New ProcessStartInfo
             psi.FileName = Path
             If ConnectionExists Then
-                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & PC.CurrentUser
+                psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & Chr(34) & PC.CurrentUser & Chr(34)
             End If
             p.StartInfo = psi
             p.Start()
