@@ -12025,7 +12025,8 @@ Public Class Form1
         'WriteLog("")
         If VNC_INSTALL_RUNNING = True Then
             VNC_Warning()
-            Exit Sub
+            vnc_warning_count = vnc_warning_count + 1
+            If vnc_warning_count < 2 Then Exit Sub
         End If
 
         ClearBoxes()
@@ -12041,7 +12042,8 @@ Public Class Form1
     Private Sub ButtonExit_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonExit.Click
         If VNC_INSTALL_RUNNING = True Then
             VNC_Warning()
-            Exit Sub
+            vnc_warning_count = vnc_warning_count + 1
+            If vnc_warning_count < 2 Then Exit Sub
         End If
         CMC_CLOSE()
     End Sub
@@ -12908,18 +12910,21 @@ Public Class Form1
             If PC.CurrentUser = "" Then vnc_queryconnect = False
         End If
 
+        Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\files\"
+        If System.Diagnostics.Debugger.IsAttached Then
+            path = path.Replace("\bin\files", "\resources\files")
+        End If
+
+
         If vncinstall = False Then
-            Shell(Chr(34) & My.Application.Info.DirectoryPath & "\files\vncviewer.exe" & Chr(34) & " " & strcomputer, 0, False)
+            Shell(Chr(34) & path & "vncviewer.exe" & Chr(34) & " " & strcomputer, 0, False)
         Else
+
             Me.Cursor = Cursors.WaitCursor
 
             ' remove existing reg entries and winvnc service#
             Panel2.Text = "cleaning up previous instances..."
             VNC_Cleanup(strcomputer)
-
-            VNC_INSTALL_RUNNING = True
-            Me.ControlBox = False
-            'computername.Enabled = False
 
             WriteLog(strcomputer & " - vnc - installing service")
 
@@ -12932,38 +12937,50 @@ Public Class Form1
                 vncpass = ""
             End If
 
-            If IO.File.Exists(My.Application.Info.DirectoryPath & "\Files\winvnc\winvnc.cmd") = False OrElse _
-                IO.File.Exists(My.Application.Info.DirectoryPath & "\Files\winvnc\winvnc.reg") = False Then
+            If IO.File.Exists(path & "winvnc\winvnc.cmd") = False OrElse IO.File.Exists(path & "winvnc\winvnc.reg") = False Then
                 Panel2.Text = "preparing vnc files..."
                 VNC_Create_Files(vnc_queryconnect)
+                If File.Exists(path & "winvnc\winvnc.cmd") = False Then
+                    MsgBox("Required files missing" & vbCr & path & "winvnc.cmd", MsgBoxStyle.Exclamation, "Error")
+                    Me.Cursor = Cursors.Default
+                    Exit Sub
+                End If
             End If
 
             ' copy vnc server files to remote pc
             Panel2.Text = "copying files..."
-            If shell_xcopy(My.Application.Info.DirectoryPath & "\Files\winvnc", "\\" & PC.Name & "\c$\winvnc") = False Then
+
+            If shell_xcopy(path & "winvnc", "\\" & PC.Name & "\c$\winvnc") = False Then
                 MsgBox("VNC failed at: filecopy", MsgBoxStyle.Critical, PC.Name & " - VNC Install Error")
                 ' reset Cursor
                 Me.Cursor = Cursors.Default
-                VNC_INSTALL_RUNNING = False
-                Me.ControlBox = True
-                computername.Enabled = True
                 Exit Sub
             End If
 
+            ' If Not File.Exists(PC.Name & "\c$\winvnc\winvnc4.exe") Then
+            '     do check...
+            ' End If
 
-            If Not File.Exists(PC.Name & "\c$\winvnc\winvnc4.exe") Then
-                ' do check...
-            End If
 
-            Panel2.Text = "starting vnc service..."
 
-            ' Run install cmd on remote computer
-            If psexecpath.Text <> "" Then
-                Shell("cmd /c " & psexecfile & " \\" & strcomputer & vncuser & vncpass & _
-                " C:\winvnc\winvnc.cmd", 0, True)
+           
+
+
+            '' Run install cmd on remote computer
+            'If psexecpath.Text <> "" Then
+            '    Shell("cmd /c " & psexecfile & " \\" & strcomputer & vncuser & vncpass & " C:\winvnc\winvnc.cmd", 0, True)
+            'Else
+            If RemoteExec(strcomputer, "c:\winvnc\winvnc.cmd", True) <> 0 Then
+                VNC_INSTALL_RUNNING = True
+                vnc_warning_count = 0
+                Me.ControlBox = False
+
+                Panel2.Text = "starting vnc service..."
             Else
-                RemoteExec(strcomputer, "c:\winvnc\winvnc.cmd")
+                Me.Cursor = Cursors.Default
+                Exit Sub
             End If
+            'End If
 
             Dim count As Integer = 0
             Dim svc_ok As Boolean = True
@@ -13009,8 +13026,10 @@ Public Class Form1
             Me.Cursor = Cursors.Default
 
             ' Run vnc viewer app
-            Shell(Chr(34) & My.Application.Info.DirectoryPath & "\files\vncviewer.exe" & _
-            Chr(34) & " " & strcomputer, 0, True)
+            Shell(Chr(34) & path & "vncviewer.exe" & Chr(34) & " " & strcomputer, 0, True)
+
+
+
 
             Me.Cursor = Cursors.WaitCursor
             Panel2.Text = "vnc service is being removed..."
@@ -13041,7 +13060,6 @@ Public Class Form1
             wmi.RegistryDeleteKeyRecursive(PC.Name, RegistryHive.LocalMachine, "Software\RealVNC")
 
             ' delete local files
-            'Dim vncdeleteThread As New System.Threading.Thread(AddressOf VNC_Delete_Files)
             vncDeleteThread.Start()
 
             ' reset Cursor
@@ -13060,10 +13078,8 @@ Public Class Form1
         ' holder for running vnc install in new thread
         RunVNC(PC.Name, True, False)
     End Sub
+    Private vnc_warning_count As Integer
     Private Sub VNC_Warning()
-        'MsgBox("VNC is currently installed on " & UCase(PC.Name) & vbCrLf & _
-        '        "and will need to be removed manually." & vbCrLf & vbCrLf & _
-        '        "(reconnect to " & UCase(PC.Name) & " and delete the WinVNC service.)", MsgBoxStyle.Exclamation, "CMC - VNC INSTALLATION")
         MsgBox("VNC has been installed on " & UCase(PC.Name) & "." & vbCrLf & vbCrLf & _
                 "Please close the VNC session before" & vbCrLf & _
                 "closing or disconnecting this cmc session" _
@@ -13099,15 +13115,34 @@ Public Class Form1
         End If
 
 
-        Dim VNC_CMD_FILENAME As String = My.Application.Info.DirectoryPath & "\files\winvnc\winvnc.cmd"
-        Dim writer As New System.IO.StreamWriter(VNC_CMD_FILENAME, False)
-        writer.WriteLine("regedit /s c:\winvnc\winvnc.reg")
-        writer.WriteLine("c:\winvnc\winvnc4.exe -register")
-        writer.WriteLine("ping -n 2 127.0.0.1")
-        writer.WriteLine("c:\winvnc\winvnc4.exe -start QueryConnect=" & queryconnectInt)
-        writer.Close()
+        Dim VNC_CMD_FILENAME As String = My.Application.Info.DirectoryPath.ToLower & "\files\winvnc\winvnc.cmd"
+        If System.Diagnostics.Debugger.IsAttached Then
+            VNC_CMD_FILENAME = VNC_CMD_FILENAME.Replace("cmc\bin", "cmc\resources")
+        End If
 
-        Dim VNC_REG_FILENAME As String = My.Application.Info.DirectoryPath & "\files\winvnc\winvnc.reg"
+        ' vista client error  here - permissions to local winvnc folder
+        Dim writer As System.IO.StreamWriter
+        Try
+            writer = New System.IO.StreamWriter(VNC_CMD_FILENAME, False)
+            writer.WriteLine("regedit /s c:\winvnc\winvnc.reg")
+            writer.WriteLine("c:\winvnc\winvnc4.exe -register")
+            writer.WriteLine("ping -n 2 127.0.0.1")
+            writer.WriteLine("c:\winvnc\winvnc4.exe -start -QueryConnect=" & queryconnectInt & " -QueryOnlyIfLoggedOn")
+            'winvnc4.exe -service -QueryConnect=1 -QueryConnectTimeout=30 -SecurityTypes=none -QueryOnlyIfLoggedOn
+            writer.Close()
+        Catch ex As Exception
+            MsgBox("Check that you have at least modify permission" & vbCr & My.Application.Info.DirectoryPath.ToLower & "\files\winvnc", MsgBoxStyle.Critical, "NTFS permission Error")
+            Exit Sub
+        End Try
+
+
+       
+
+        Dim VNC_REG_FILENAME As String = My.Application.Info.DirectoryPath.ToLower & "\files\winvnc\winvnc.reg"
+        If System.Diagnostics.Debugger.IsAttached Then
+            VNC_REG_FILENAME = VNC_REG_FILENAME.Replace("cmc\bin", "cmc\resources")
+        End If
+
         Dim regwriter As New System.IO.StreamWriter(VNC_REG_FILENAME, False)
         regwriter.WriteLine("REGEDIT4")
         regwriter.WriteLine("")
@@ -13128,8 +13163,12 @@ Public Class Form1
     End Sub
     Private Sub VNC_Delete_Files()
         ' delete local files
-        System.IO.File.Delete(My.Application.Info.DirectoryPath & "\Files\winvnc\winvnc.cmd")
-        System.IO.File.Delete(My.Application.Info.DirectoryPath & "\Files\winvnc\winvnc.reg")
+        Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\files\winvnc\"
+        If System.Diagnostics.Debugger.IsAttached Then
+            path = path.Replace("cmc\bin\files", "cmc\resources\files")
+        End If
+        System.IO.File.Delete(path & "winvnc.cmd")
+        System.IO.File.Delete(path & "winvnc.reg")
     End Sub
 
     Private Function shell_xcopy(ByVal SourceFolder As String, ByVal DestinationFolder As String) As Boolean
