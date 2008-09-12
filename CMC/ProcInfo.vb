@@ -40,34 +40,39 @@ Public Class ProcInfo
         ' wmi provider appears to change unit for some items from bytes to kb (or something)
         ' so need to add custom divisor for some items.
         ' determine correct value for wmi PeakWorkingSet and pagefile (use vb value as target value
-        PWS_vb = CInt(GetPeakWorkingSetKB(pc.Name, Me.txtProcPid.Text))
-        If Me.txtPeakWorkingSet.Text = "" Then
-            PWS_wmi = 0
-        Else
-            PWS_wmi = CInt(Me.txtPeakWorkingSet.Text)
+
+        '' OLD METHOD
+        'PWS_vb = CInt(GetPeakWorkingSetKB(pc.Name, Me.txtProcPid.Text))
+        'If Me.txtPeakWorkingSet.Text = "" Then
+        '    PWS_wmi = 0
+        'Else
+        '    PWS_wmi = CInt(Me.txtPeakWorkingSet.Text)
+        'End If
+
+        'If PWS_vb = 0 Then
+        '    KBDivider = 1
+        'Else
+        '    Dim ratio As Long = PWS_vb / PWS_wmi
+
+        '    If ratio < 0 Then
+        '        ' sometimes throws negative number
+        '        ratio = ratio * -1
+        '    End If
+
+        '    If ratio < 0.01 Then
+        '        KBDivider = 1024
+        '    ElseIf ratio > 0.6 And ratio < 1.4 Then
+        '        KBDivider = 1
+        '    ElseIf ratio > 800 And ratio < 1200 Then
+        '        KBDivider = 1 / 1024
+        '    End If
+        'End If
+
+
+        ' NEW METHOD
+        If CInt(Me.txtPeakWorkingSet.Text) / CInt(Me.txtWorkingSet.Text) > 500 Then
+            KBDivider = 1024
         End If
-
-        If PWS_vb = 0 Then
-            KBDivider = 1
-        Else
-            Dim ratio As Long = PWS_vb / PWS_wmi
-
-            If ratio < 0 Then
-                ' sometimes throws negative number
-                ratio = ratio * -1
-            End If
-
-            If ratio < 0.01 Then
-                KBDivider = 1024
-            ElseIf ratio > 0.6 And ratio < 1.4 Then
-                KBDivider = 1
-            ElseIf ratio > 800 And ratio < 1200 Then
-                KBDivider = 1 / 1024
-            End If
-        End If
-
-        ' override for testing
-        KBDivider = 1
 
         ' start the clock ticking
         Timer1.Start()

@@ -6,6 +6,7 @@ Public Class PerfMonitor
     Protected Friend loading As Boolean
     Protected Friend Username As String = Nothing
     Protected Friend Password As String = Nothing
+    Private CriticalError As Boolean = False
 
     Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
         Start()
@@ -27,7 +28,18 @@ Public Class PerfMonitor
         PerfMonTimer.Interval = TimeValue.Value * 1000
         PerfMonTimer.Start()
 
-        cpu = New PerformanceCounter("Processor", "% Processor Time", "_Total", Me.computername.Text)
+        Try
+            cpu = New PerformanceCounter("Processor", "% Processor Time", "_Total", Me.computername.Text)
+        Catch ex As Exception
+            PerfMonTimer.Stop()
+            PerfMonTimer.Enabled = False
+            MsgBox("An error occurred while requesting" & vbCr & _
+                   "performance information from " & Me.computername.Text & _
+                   vbCr & vbCr & "The application will be closed.", MsgBoxStyle.Critical, "Perf Mon Error")
+            Me.Close()
+            End
+        End Try
+
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
 
         Me.Text = Me.computername.Text.ToUpper
@@ -63,10 +75,20 @@ Public Class PerfMonitor
         Dim cpucolor As Color = Color.FromArgb(0, 255, 0)
         Dim memColor As Color = Color.FromArgb(0, 255, 0) 'Color.RoyalBlue
 
-
-        Dim cpuvalue As Byte = cpu.NextValue
-        labelCPU.Text = "CPU " & cpuvalue & "%"
-        UpdatePercentGraph(cpuvalue, Pic1, cpucolor)
+        Try
+            Dim cpuvalue As Byte = cpu.NextValue
+            labelCPU.Text = "CPU " & cpuvalue & "%"
+            UpdatePercentGraph(cpuvalue, Pic1, cpucolor)
+        Catch ex As Exception
+            PerfMonTimer.Stop()
+            PerfMonTimer.Enabled = False
+            MsgBox("An error occurred while requesting" & vbCr & _
+                               "performance information from " & Me.computername.Text & _
+                               vbCr & vbCr & "The application will be closed.", MsgBoxStyle.Critical, "Perf Mon Error")
+            Me.Close()
+            End
+        End Try
+        
 
         Dim memValue As Single = mem.NextValue
         If memValue > 0 Then

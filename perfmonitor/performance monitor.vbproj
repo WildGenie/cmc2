@@ -51,6 +51,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="PerfMonitor.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -109,7 +110,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="appicon.ico" />
     <Content Include="perf.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
