@@ -263,6 +263,7 @@ Public Class PerfMonitor
         splashscreen1.Refresh()
         Do While Me.loading = True
             System.Threading.Thread.Sleep(1000)
+            splashscreen1.Refresh()
         Loop
         splashscreen1.Close()
     End Sub
