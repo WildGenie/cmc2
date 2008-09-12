@@ -10,6 +10,10 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "remoteregedit", "remoterege
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "installer", "installer\CMCInstall.vdproj", "{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}"
 EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "netlib", "netlib\netlib.vbproj", "{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "networkping", "netdetect\networkping.vbproj", "{0EB62AD9-ACED-45A0-AB3F-F03D25A583EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +40,14 @@ Global
 		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Debug|Any CPU.Build.0 = Debug
 		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Release|Any CPU.ActiveCfg = Release
 		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Release|Any CPU.Build.0 = Release
+		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0EB62AD9-ACED-45A0-AB3F-F03D25A583EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0EB62AD9-ACED-45A0-AB3F-F03D25A583EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0EB62AD9-ACED-45A0-AB3F-F03D25A583EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0EB62AD9-ACED-45A0-AB3F-F03D25A583EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
