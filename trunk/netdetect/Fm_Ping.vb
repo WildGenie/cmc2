@@ -9,14 +9,16 @@ Public Class Form1
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ' Get the IP address of this machine.
-        'Dim ip As IPAddress = Dns.GetHostAddresses(Dns.GetHostName())(0)
-
         Dim ip As IPAddress
-        For Each ip In Dns.GetHostAddresses(Dns.GetHostName())
-            If ip.AddressFamily.ToString() = "Internetwork" Then
-                Exit For
-            End If
-        Next
+        ip = Dns.GetHostAddresses(Dns.GetHostName())(0)
+
+        If InStr(ip.ToString, ":") Then
+            For Each ip In Dns.GetHostAddresses(Dns.GetHostName())
+                If ip.AddressFamily.ToString() = "Internetwork" Then
+                    Exit For
+                End If
+            Next
+        End If
 
         ' Determine IP range for a class C network based on the machine IP.
         If ip IsNot Nothing Then
