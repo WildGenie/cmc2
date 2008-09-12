@@ -6699,12 +6699,17 @@ Public Class Form1
     ''' <remarks></remarks>
     Private Function GetLastLogon() As String
         Dim strkeyPath As String = "Software\Microsoft\Windows NT\CurrentVersion\Winlogon"
-        Dim user As String = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("DefaultUserName")
-        Dim domain As String = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("DefaultDomainName")
-        If String.IsNullOrEmpty(user) AndAlso (String.IsNullOrEmpty(domain) = False) Then
-            user = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("AltDefaultUserName")
-        End If
-        Return domain & "\" & user
+        Try
+            Dim user As String = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("DefaultUserName")
+            Dim domain As String = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("DefaultDomainName")
+            If String.IsNullOrEmpty(user) AndAlso (String.IsNullOrEmpty(domain) = False) Then
+                user = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetValue("AltDefaultUserName")
+            End If
+            Return domain & "\" & user
+        Catch ex As Exception
+            Return String.Empty
+        End Try
+        
     End Function
 
     ''' <summary>
