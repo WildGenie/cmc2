@@ -12,7 +12,10 @@ Public Class ADmgmt
     Private _ADUsername As String
     Private _ADPassword As String
     Private de As DirectoryEntry
+    Private Loading As Boolean
+    Private CurrentGroupName As String
     Dim m_TsUser As TSUSEREXLib.IADsTSUserEx
+
 
     Public Enum ADAccountOptions
         UF_TEMP_DUPLICATE_ACCOUNT = 256
@@ -30,14 +33,24 @@ Public Class ADmgmt
         UF_ACCOUNT_LOCKOUT = 16
         UF_ENCRYPTED_TEXT_PASSWORD_ALLOWED = 128
     End Enum
-    Public Enum LoginResult
-        LOGIN_OK = 0
-        LOGIN_USER_DOESNT_EXIST
-        LOGIN_USER_ACCOUNT_INACTIVE
-    End Enum
 
+
+    Private Sub DoWhileLoading()
+        Splash.Show()
+        Splash.Refresh()
+        Do While Me.Loading = True
+            System.Threading.Thread.Sleep(1000)
+            Splash.Refresh()
+        Loop
+        Splash.Close()
+    End Sub
 
     Private Sub ADmgmt_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Me.Loading = True
+        Me.Visible = False
+        Dim loader As New System.Threading.Thread(AddressOf DoWhileLoading)
+        loader.Start()
 
         Me.SearchTypeCombo.SelectedIndex = 0
 
@@ -76,6 +89,12 @@ Public Class ADmgmt
                 StartSearch()
             End If
         End If
+
+        Me.Loading = False
+        loader.Join()
+        Me.Visible = True
+
+
     End Sub
     Private Sub Create_DomainListDataset()
         domainList.Columns.Add(New DataColumn("NetBIOSName", GetType(String)))
@@ -123,7 +142,7 @@ Public Class ADmgmt
         Catch ex As Exception
 
         End Try
-        
+
         If domainList.Rows.Count > 1 Then
             Me.DomainSelect.Items.Add(" - Select Domain - ")
         End If
@@ -228,12 +247,39 @@ Public Class ADmgmt
             Try
                 RecordCount = DirSearch.FindAll.Count
                 If DirSearch.FindAll.Count = 0 Then
+
+
+
+                    Me.TopMost = True
+                    If Me.Loading Then
+                        Splash.Close()
+                        Me.Loading = False
+                        Me.Visible = True
+                    End If
                     MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
+                    Me.TopMost = False
+
+
+
+
                     Exit Sub
                 End If
             Catch ex As System.Runtime.InteropServices.COMException
                 'If ex.Message = "The specified domain either does not exist or could not be contacted." Then
+                ' "The server is not operational"
+
+
+                Me.TopMost = True
+                If Me.Loading Then
+                    Splash.Close()
+                    Me.Loading = False
+                    Me.Visible = True
+                End If
+                'MessageBox.Show("User not found", "User not found", MessageBoxButtons.OK, MessageBoxIcon.Exclamation)
                 MsgBox(ex.Message)
+                Me.TopMost = False
+
+                'MsgBox(ex.Message)
                 Exit Sub
                 'End If
             End Try
@@ -287,14 +333,16 @@ Public Class ADmgmt
 
     End Sub
 
+
+
     Private SelectedResult As String
 
     Private Sub SearchResultsDGV_CellContentDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SearchResultsDGV.CellDoubleClick
 
-        UserTabs_Clear()
-        Me.DGVMembers.Rows.Clear()
+        If SearchTypeCombo.Text = "Users" Then UserTabs_Clear()
+        FmGroupMembers.MembersListView.Items.Clear()
         Me.Call_GetDetails()
-        
+
     End Sub
     Private Sub SearchResultsDGV_KeyUp(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles SearchResultsDGV.KeyUp
         'MsgBox(Me.SearchResultsDGV.Rows.Count)
@@ -302,7 +350,7 @@ Public Class ADmgmt
             If e.KeyCode = Keys.Space Then
 
                 UserTabs_Clear()
-                Me.DGVMembers.Rows.Clear()
+                FmGroupMembers.MembersListView.Items.Clear()
                 Me.Call_GetDetails()
 
             End If
@@ -314,13 +362,10 @@ Public Class ADmgmt
             Me.btnSave.Enabled = False
         ElseIf Me.SearchTypeCombo.Text = "Groups" Then
             If Not String.IsNullOrEmpty(SelectedResult) Then
-                Me.lblGroupName.Text = SelectedResult
-                GroupMembers(SelectedResult)
-                If Me.DGVMembers.Rows.Count > 1 Then
-                    Me.btnExportUsers.Enabled = True
-                Else
-                    Me.btnExportUsers.Enabled = False
-                End If
+
+                CurrentGroupName = SelectedResult
+                Me.RefreshMembersListView()
+
             End If
         End If
     End Sub
@@ -365,9 +410,9 @@ Public Class ADmgmt
         End If
 
     End Sub
-   
 
-    Private Sub UserTabs_Clear()
+
+    Protected Friend Sub UserTabs_Clear()
         Me.txtFirstName.Text = String.Empty
         Me.txtInitials.Text = String.Empty
         Me.txtLastName.Text = String.Empty
@@ -409,11 +454,17 @@ Public Class ADmgmt
         Me.ea14.Text = String.Empty
         Me.ea15.Text = String.Empty
 
+        'For Each tb As Control In GroupBox3.Controls
+        '    If tb.Name.Substring(1, 2).ToString = "ea" Then
+        '        tb.Text = String.Empty
+        '    End If
+        'Next
+
         Me.lbMemberOf.Items.Clear()
 
-        Me.lblGroupName.Text = String.Empty
-        Me.DGVMembers.Rows.Clear()
-        Me.btnExportUsers.Enabled = False
+        CurrentGroupName = String.Empty
+        'FmGroupMembers.MembersListView.Items.Clear()
+        'Me.btnExportUsers.Enabled = False
     End Sub
 
 
@@ -423,7 +474,7 @@ Public Class ADmgmt
     ''' </summary>
     ''' <param name="sAccountName"></param>
     ''' <remarks></remarks>
-    Private Sub GetUserDetails(ByVal sAccountName As String)
+    Protected Friend Sub GetUserDetails(ByVal sAccountName As String)
 
         Dim Searcher As New System.DirectoryServices.DirectorySearcher(de)
         Dim result As System.DirectoryServices.SearchResult
@@ -697,7 +748,9 @@ Public Class ADmgmt
 
     End Sub
 
-    Private Sub GroupMembers(ByVal groupName As String)
+
+
+    Protected Friend Sub GroupMembers(ByVal groupName As String, ByVal mListView As ListView)
         ' To see the members in a group, you actually need to look at
         ' the member attribute of a group object, not its children as
         ' groups aren't container objects in AD (only containers have children). 
@@ -713,10 +766,6 @@ Public Class ADmgmt
 
         End Using
 
-        Me.DGVMembers.Columns("colSam").Width = 120
-        Me.DGVMembers.Columns("colDisplay").Width = 250
-        Me.DGVMembers.Columns("colMail").Width = 170
-        Me.DGVMembers.Columns("colDN").Width = 300
 
         Dim myGroup As DirectoryEntry
 
@@ -726,15 +775,22 @@ Public Class ADmgmt
         members = myGroup.Properties("member")
         Dim member As Object
         For Each member In members
-            'MsgBox(GetObjectClass_fromDN(member.ToString))
-            Me.DGVMembers.Rows.Add(GetAttributefromDN("sAMAccountName", member.ToString), _
-                                   GetAttributefromDN("displayName", member.ToString), _
-                                   GetAttributefromDN("mail", member.ToString), _
-                                   GetAttributefromDN("distinguishedName", member.ToString), _
-                                   GetObjectClass_fromDN(member.ToString))
+
+            Dim img As Integer
+            If GetObjectClass_fromDN(member.ToString) = "user" Then
+                img = 0
+            Else
+                img = 1
+            End If
+            Dim lv_row As ListViewItem = New ListViewItem(New String() {GetAttributefromDN("sAMAccountName", member.ToString), _
+                                                                        GetAttributefromDN("displayName", member.ToString), _
+                                                                        GetAttributefromDN("mail", member.ToString), _
+                                                                        GetAttributefromDN("distinguishedName", member.ToString)}, img)
+            mListView.Items.Add(lv_row)
         Next
 
     End Sub
+
     Private Function GetAttributefromDN(ByVal attributeToReturn As String, ByVal dsPath As String) As String
         Try
             Dim Searcher As New System.DirectoryServices.DirectorySearcher(de)
@@ -773,7 +829,7 @@ Public Class ADmgmt
                 '    MsgBox(oclass)
                 'Next
                 'dim lastProperty as integer = r.Properties("objectClass")(1).ToString()
-                retval = r.Properties("objectClass")(r.Properties("objectClass").Count - 1).ToString()
+                retval = r.Properties("objectClass")(r.Properties("objectClass").Count - 1).ToString().ToLower
             End If
         Next
         Return retval
@@ -922,7 +978,11 @@ Public Class ADmgmt
             Next
 
             If (Not isGroupMember) Then
-                group.Invoke("Add", New Object() {User.Path.ToString()})
+                Try
+                    group.Invoke("Add", New Object() {User.Path.ToString()})
+                Catch ex As Exception
+                    MsgBox("Unable to add " & Replace(User.Name, "cn=", "", 1, 1, CompareMethod.Text) & " to " & GroupName & vbCr & vbCr & ex.Message, MsgBoxStyle.Critical, "Group Invoke Error")
+                End Try
             End If
             group.Close()
 
@@ -1186,44 +1246,29 @@ Public Class ADmgmt
         Me.btnSave.Enabled = False
         Me.SearchResultsDGV.Rows.Clear()
         Me.SearchResultsDGV.Visible = False
+
+        ' members context menu
+        MemberRefreshMenu.Enabled = False
+        MemberExportMenu.Enabled = False
+        MemberAddMenu.Enabled = False
+        'Me.btnAdd.Enabled = False
     End Sub
 
-    ' make group member columns visible
-    Private Sub cbLogon_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbLogon.CheckedChanged
-        MakeColumnVisible("colSAM", Me.cbLogon.Checked)
-    End Sub
-    Private Sub cbDisplay_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDisplay.CheckedChanged
-        MakeColumnVisible("colDisplay", Me.cbDisplay.Checked)
-    End Sub
-    Private Sub cbMail_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbMail.CheckedChanged
-        MakeColumnVisible("colMail", Me.cbMail.Checked)
-    End Sub
-    Private Sub cbDN_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cbDN.CheckedChanged
-        MakeColumnVisible("colDN", Me.cbDN.Checked)
-    End Sub
-    Private Sub MakeColumnVisible(ByVal ColumnName As String, ByVal Visible As Boolean)
-        Me.DGVMembers.Columns(ColumnName).Visible = Visible
-    End Sub
 
-    Private Sub btnExportUsers_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnExportUsers.Click
+    Private Sub btnExportUsers_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        ExportToCSV()
+    End Sub
+    Private Sub ExportToCSV()
+        Dim exportFile As New System.IO.StreamWriter("c:\" & CurrentGroupName & ".csv", False)
 
-
-        Dim exportFile As New System.IO.StreamWriter("c:\" & lblGroupName.Text & ".csv", False)
-
-        If Me.DGVMembers.Rows.Count > 1 Then
-
+        If FmGroupMembers.MembersListView.Items.Count > 0 Then
             exportFile.WriteLine("Logon Name, Display Name, Email")
             exportFile.WriteLine("")
-
-            For Each row As DataGridViewRow In Me.DGVMembers.Rows
-                exportFile.WriteLine(Me.DGVMembers(0, row.Index).Value & "," & _
-                                     Me.DGVMembers(1, row.Index).Value & "," & _
-                                     Me.DGVMembers(2, row.Index).Value) ' & "," & Me.DGVMembers(3, row.Index).Value)
+            For Each member As ListViewItem In FmGroupMembers.MembersListView.Items
+                exportFile.WriteLine(member.SubItems(0).Text & "," & member.SubItems(1).Text)
             Next
             exportFile.Close()
-
-            Shell("notepad c:\" & lblGroupName.Text & ".csv")
-
+            Shell("notepad c:\" & CurrentGroupName & ".csv")
         End If
     End Sub
     Public Sub ExportToExcel(ByVal dt As DataTable)
@@ -1337,32 +1382,43 @@ Public Class ADmgmt
 
     ' Select tab according to search type selected
     Private Sub SearchTypeCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SearchTypeCombo.SelectedIndexChanged
+
+        'Me.UserTabs_Clear()
+        Me.btnSave.Enabled = False
+        'Me.SearchResultsDGV.Rows.Clear()
+
+        '' members context menu
+        'MemberRefreshMenu.Enabled = False
+        'MemberExportMenu.Enabled = False
+        'MemberAddMenu.Enabled = False
+        'Me.btnAdd.Enabled = False
+
         Select Case Me.SearchTypeCombo.Text
             Case "Users"
-                ShowTabPage(tabAccount)
-                ShowTabPage(tabMemberOf)
-                ShowTabPage(tabProfile)
-                ShowTabPage(tabCustom)
+                Me.PictureBox1.Image = Global.ADmgmt.My.Resources.Resources.user_16x16
+                'ShowTabPage(tabAccount)
+                'ShowTabPage(tabMemberOf)
+                'ShowTabPage(tabProfile)
+                'ShowTabPage(tabCustom)
                 Me.adTabControl.SelectTab(tabAccount)
-                HideTabPage(tabGroupMembers)
+                'HideTabPage(tabGroupMembers)
                 Me.SearchResultsDGV.Columns(0).Width = 140
             Case "Groups"
-                ShowTabPage(tabGroupMembers)
-                Me.adTabControl.SelectTab(tabGroupMembers)
-                HideTabPage(tabAccount)
-                HideTabPage(tabMemberOf)
-                HideTabPage(tabProfile)
-                HideTabPage(tabCustom)
-                Me.cbLogon.Checked = True
-                Me.cbDisplay.Checked = True
-                Me.SearchResultsDGV.Columns(0).Width = 350
+                Me.PictureBox1.Image = Global.ADmgmt.My.Resources.Resources.user_group_16x16
+                'ShowTabPage(tabGroupMembers)
+                'Me.adTabControl.SelectTab(tabGroupMembers)
+                'HideTabPage(tabAccount)
+                'HideTabPage(tabMemberOf)
+                'HideTabPage(tabProfile)
+                'HideTabPage(tabCustom)
+                'Me.SearchResultsDGV.Columns(0).Width = 360
                 '140,350
         End Select
     End Sub
 
     Private Sub txtSearch_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSearch.TextChanged
         Me.SearchResultsDGV.Rows.Clear()
-        UserTabs_Clear()
+        'UserTabs_Clear()
         Me.AcceptButton = Me.btnSearch
     End Sub
 
@@ -1431,7 +1487,7 @@ Public Class ADmgmt
     ''' <remarks></remarks>
     Private Sub PropertiesMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropertiesMenu.Click
         UserTabs_Clear()
-        Me.DGVMembers.Rows.Clear()
+        FmGroupMembers.MembersListView.Items.Clear()
         Me.Call_GetDetails()
     End Sub
 
@@ -1517,6 +1573,23 @@ Public Class ADmgmt
         Next
 
     End Sub
+
+    Private Sub lbMemberOf_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbMemberOf.DoubleClick
+        If Not Me.lbMemberOf.SelectedItem Is Nothing Then
+            If FmGroupMembers.Visible = False Then
+                FmGroupMembers.Text = CurrentGroupName & "Members"
+                FmGroupMembers.MembersListView.Items.Clear()
+                FmGroupMembers.GroupName = CurrentGroupName
+                GroupMembers(CurrentGroupName, FmGroupMembers.MembersListView)
+                FmGroupMembers.Show()
+            Else
+                FmGroupMembers.Text = CurrentGroupName
+                FmGroupMembers.MembersListView.Items.Clear()
+                FmGroupMembers.GroupName = CurrentGroupName
+                GroupMembers(CurrentGroupName, FmGroupMembers.MembersListView)
+            End If
+        End If
+    End Sub
     ''' <summary>
     ''' enable/disable Remove (current user from selected group) button
     ''' </summary>
@@ -1524,6 +1597,7 @@ Public Class ADmgmt
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub lbMemberOf_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lbMemberOf.SelectedIndexChanged
+        CurrentGroupName = Me.lbMemberOf.SelectedItem
         If Not Me.lbMemberOf.SelectedItem Is Nothing Then
             btnRemoveUserfromGroup.Enabled = True
         Else
@@ -1537,8 +1611,10 @@ Public Class ADmgmt
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub btnAddUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnAdd.Click
-
+    Private Sub btnAddUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        AddUserCall()
+    End Sub
+    Protected Friend Sub AddUserCall()
         Dim s As New TextEntryDialog
         s.Text = "Group Search"
         s.labelMain.Text = "Search for user:"
@@ -1548,7 +1624,7 @@ Public Class ADmgmt
         If s.DialogResult = Windows.Forms.DialogResult.OK Then
             Dim searchstring As String = s.searchstring
             Dim deSearch As DirectorySearcher = New DirectorySearcher(de)
-            deSearch.Filter = "(&(objectClass=user)(objectCategory=person)(anr=" & searchstring & "))"
+            deSearch.Filter = "(&(anr=" & searchstring & ")(|(objectClass=user)(objectClass=group)))"  '"(&(objectClass=user)(objectCategory=person)(anr=" & searchstring & "))"
             deSearch.PropertiesToLoad.Add("distinguishedname")
             Dim results As SearchResultCollection = deSearch.FindAll()
 
@@ -1564,28 +1640,26 @@ Public Class ADmgmt
             r.ShowDialog()
             If r.DialogResult = Windows.Forms.DialogResult.OK Then
 
+                If r.SelectedResult.ToLower = CurrentGroupName.ToLower Then
+                    ' has selected the group that we are trying to add to
+                    MsgBox("Cannot add a group to itself", MsgBoxStyle.Critical, "Numpty Alert")
+                    Exit Sub
+                End If
+
                 ' Get user as DirectoryEntry
                 Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
-                UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & r.SelectedResult & "))"
+                UserSearch.Filter = "(samaccountname=" & r.SelectedResult & ")" '  "(&(objectClass=user)(objectCategory=person)(samaccountname=" & r.SelectedResult & "))"
                 UserSearch.PropertiesToLoad.Add("Path")
                 Dim userresult As SearchResultCollection = UserSearch.FindAll()
                 Dim user As New DirectoryEntry(userresult(0).Path)
 
                 ' Call sub to add user to group
-                Me.AddUserToGroup(de, user, lblGroupName.Text)
+                Me.AddUserToGroup(de, user, CurrentGroupName)
 
-                ' refresh list
-                Me.DGVMembers.Rows.Clear()
-                GroupMembers(lblGroupName.Text)
-                If Me.DGVMembers.Rows.Count > 1 Then
-                    Me.btnExportUsers.Enabled = True
-                Else
-                    Me.btnExportUsers.Enabled = False
-                End If
+                RefreshMembersListView()
 
             End If
         End If
-
     End Sub
 
     ''' <summary>
@@ -1594,85 +1668,72 @@ Public Class ADmgmt
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks>removes all users in userlist</remarks>
-    Private Sub btnRemoveUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnRemoveUser.Click
-
+    Private Sub btnRemoveUser_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
+        RemoveUserCall()
+    End Sub
+    Protected Friend Sub RemoveUserCall()
         If UserList.Count = 0 Then Return
-
         For i As Integer = 0 To UserList.Count - 1
             Dim username As String = UserList.Item(i)
-
             If Not String.IsNullOrEmpty(username) Then
-
                 ' Get user as DirectoryEntry
                 Dim UserSearch As DirectorySearcher = New DirectorySearcher(de)
-                UserSearch.Filter = "(&(objectClass=user)(objectCategory=person)(samaccountname=" & username & "))"
+                UserSearch.Filter = "(samaccountname=" & username & ")" ' (&(objectClass=user)(objectCategory=person)())
                 UserSearch.PropertiesToLoad.Add("Path")
                 Dim userresult As SearchResultCollection = UserSearch.FindAll()
                 Dim user As New DirectoryEntry(userresult(0).Path)
 
-                ' call removefromgroup sub
-                Me.RemoveUserFromGroup(de, user, lblGroupName.Text)
-
+                Me.RemoveUserFromGroup(de, user, CurrentGroupName)
             End If
         Next
-
-        ' refresh list
-        Me.DGVMembers.Rows.Clear()
-        GroupMembers(lblGroupName.Text)
-        If Me.DGVMembers.Rows.Count > 1 Then
-            Me.btnExportUsers.Enabled = True
-        Else
-            Me.btnExportUsers.Enabled = False
-        End If
-
+        RefreshMembersListView()
     End Sub
 
-    Private UserList As ArrayList
+
+    Protected Friend UserList As ArrayList
 
     ''' <summary>
-    ''' Add selected users to UserList
+    ''' Add selected users to UserList array
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks></remarks>
-    Private Sub DGVMembers_SelectionChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles DGVMembers.SelectionChanged
-
+    Private Sub MembersListView_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs)
         UserList = New ArrayList
-        For Each row As DataGridViewRow In Me.DGVMembers.SelectedRows
-            UserList.Add(Me.DGVMembers(0, row.Index).Value)
+        For Each member As ListViewItem In FmGroupMembers.MembersListView.SelectedItems
+            UserList.Add(member.SubItems(0).Text)
         Next
         UserList.Sort()
 
-    End Sub
-
-
-    Private Sub ExportToolItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExportToolItem.Click
-        Dim exportFile As New System.IO.StreamWriter("c:\" & lblGroupName.Text & ".csv", False)
-
-        If Me.DGVMembers.Rows.Count > 1 Then
-
-            exportFile.WriteLine("Logon Name, Display Name, Email")
-            exportFile.WriteLine("")
-
-            For Each row As DataGridViewRow In Me.DGVMembers.Rows
-                exportFile.WriteLine(Me.DGVMembers(0, row.Index).Value & "," & _
-                                     Me.DGVMembers(1, row.Index).Value & "," & _
-                                     Me.DGVMembers(2, row.Index).Value) ' & "," & Me.DGVMembers(3, row.Index).Value)
-            Next
-            exportFile.Close()
-
-            Shell("notepad c:\" & lblGroupName.Text & ".csv")
+        If UserList.Count = 0 Then
+            Me.MemberRemoveMenu.Enabled = False
+            'Me.btnRemoveUser.Enabled = False
+        ElseIf UserList.Count = 1 Then
+            If FmGroupMembers.MembersListView.SelectedItems(0).ImageIndex = 0 Then
+                ' "user"
+                Me.MemberRemoveMenu.Text = "Remove user..."
+            Else
+                ' "group"
+                Me.MemberRemoveMenu.Text = "Remove sub group..."
+            End If
+            Me.MemberRemoveMenu.Enabled = True
+            'Me.btnRemoveUser.Enabled = True
+        ElseIf UserList.Count > 1 Then
+            Me.MemberRemoveMenu.Text = "Remove members..."
+            Me.MemberRemoveMenu.Enabled = True
+            'Me.btnRemoveUser.Enabled = True
         End If
     End Sub
-    Private Sub RefreshMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshMenuItem.Click
-        ' refresh list
-        Me.DGVMembers.Rows.Clear()
-        GroupMembers(lblGroupName.Text)
-        If Me.DGVMembers.Rows.Count > 1 Then
-            Me.btnExportUsers.Enabled = True
-        Else
-            Me.btnExportUsers.Enabled = False
-        End If
+
+
+    Private Sub RefreshMembersListView()
+
+        FmGroupMembers.Text = CurrentGroupName
+        FmGroupMembers.MembersListView.Items.Clear()
+        FmGroupMembers.GroupName = CurrentGroupName
+        GroupMembers(CurrentGroupName, FmGroupMembers.MembersListView)
+        FmGroupMembers.Show()
+
     End Sub
 
     Private Sub txtTSHomeFolder_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles txtTSHomeFolder.MouseDoubleClick
@@ -1704,4 +1765,29 @@ Public Class ADmgmt
         End Try
     End Sub
 
+
+
+    ' group context menu items
+    Private Sub AddUserMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MemberAddMenu.Click
+        AddUserCall()
+    End Sub
+    Private Sub RemoveUserMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MemberRemoveMenu.Click
+        RemoveUserCall()
+    End Sub
+    Private Sub RefreshMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MemberRefreshMenu.Click
+        RefreshMembersListView()
+    End Sub
+    Private Sub ExportToolItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MemberExportMenu.Click
+        ExportToCSV()
+    End Sub
+
+
+    Private Sub SearchResultsDGV_CellContentClick(ByVal sender As System.Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles SearchResultsDGV.CellContentClick
+
+    End Sub
+
+    Private Sub txtSAM_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles txtSAM.TextChanged
+        Me.adTabControl.SelectedIndex = 0
+    End Sub
 End Class
+
