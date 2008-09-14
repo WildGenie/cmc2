@@ -31,47 +31,29 @@ Public Class ProcInfo
             Timer1.Interval = 2000
         ElseIf totaltime < 1 Then
             Timer1.Interval = 4000
+        ElseIf totaltime < 2 Then
+            Timer1.Interval = 5000
+        ElseIf totaltime < 4 Then
+            Timer1.Interval = 10000
+        ElseIf totaltime < 8 Then
+            Timer1.Interval = 15000
         Else
-            Timer1.Interval = totaltime * 4000
+            Timer1.Interval = CInt(totaltime) * 4000
         End If
         Me.lblTick.Text = "Refresh Rate: " & (Timer1.Interval / 1000).ToString & " s"
 
 
-        ' wmi provider appears to change unit for some items from bytes to kb (or something)
+        ' wmi provider appears to change unit for some items/os's 
+        ' from bytes to kb (or something)
         ' so need to add custom divisor for some items.
-        ' determine correct value for wmi PeakWorkingSet and pagefile (use vb value as target value
-
-        '' OLD METHOD
-        'PWS_vb = CInt(GetPeakWorkingSetKB(pc.Name, Me.txtProcPid.Text))
-        'If Me.txtPeakWorkingSet.Text = "" Then
-        '    PWS_wmi = 0
-        'Else
-        '    PWS_wmi = CInt(Me.txtPeakWorkingSet.Text)
-        'End If
-
-        'If PWS_vb = 0 Then
-        '    KBDivider = 1
-        'Else
-        '    Dim ratio As Long = PWS_vb / PWS_wmi
-
-        '    If ratio < 0 Then
-        '        ' sometimes throws negative number
-        '        ratio = ratio * -1
-        '    End If
-
-        '    If ratio < 0.01 Then
-        '        KBDivider = 1024
-        '    ElseIf ratio > 0.6 And ratio < 1.4 Then
-        '        KBDivider = 1
-        '    ElseIf ratio > 800 And ratio < 1200 Then
-        '        KBDivider = 1 / 1024
-        '    End If
-        'End If
-
-
-        ' NEW METHOD
-        If CInt(Me.txtPeakWorkingSet.Text) / CInt(Me.txtWorkingSet.Text) > 500 Then
+        ' WorkingSet always seems to be accurate, so use that as 
+        ' a basis for checking...
+        ' determine correct value for PeakWorkingSet and pagefile
+        If CInt(Me.txtPeakWorkingSet.Text) / CInt(Me.txtWorkingSet.Text) > 1000 Then
             KBDivider = 1024
+            Me.txtPeakWorkingSet.Text = CInt(Me.txtPeakWorkingSet.Text / KBDivider)
+            Me.txtPageFile.Text = CInt(Me.txtPageFile.Text / KBDivider)
+            Me.txtPeakPageFile.Text = CInt(Me.txtPeakPageFile.Text / KBDivider)
         End If
 
         ' start the clock ticking
@@ -114,10 +96,10 @@ Public Class ProcInfo
             Else
                 For Each m In queryCollection
                     Me.txtHandleCount.Text = m("HandleCount")
-                    Me.txtWorkingSet.Text = CInt(m("WorkingSetSize") / 1024)  ' b?  
-                    Me.txtPeakWorkingSet.Text = CInt(m("PeakWorkingSetSize") / KBDivider) ' K
-                    Me.txtPageFile.Text = CInt(m("PageFileUsage") / KBDivider) ' K
-                    Me.txtPeakPageFile.Text = CInt(m("PeakPageFileUsage") / KBDivider)
+                    Me.txtWorkingSet.Text = FormatNumber(CInt(m("WorkingSetSize") / 1024), 0, TriState.True)
+                    Me.txtPeakWorkingSet.Text = FormatNumber(CInt(m("PeakWorkingSetSize") / KBDivider), 0, TriState.True)
+                    Me.txtPageFile.Text = FormatNumber(CInt(m("PageFileUsage") / KBDivider), 0, TriState.True)
+                    Me.txtPeakPageFile.Text = FormatNumber(CInt(m("PeakPageFileUsage") / KBDivider), 0, TriState.True)
                     Me.txtCPUTime.Text = CInt((m("UserModeTime") + m("KernelModeTime")) / 10000000) ' 100ns unit - to convert to mins /600,000,000
                 Next
             End If

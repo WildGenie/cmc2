@@ -141,6 +141,13 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="encryption.vb" />
+    <Compile Include="FmGroupMembers.Designer.vb">
+      <DependentUpon>FmGroupMembers.vb</DependentUpon>
+    </Compile>
+    <Compile Include="FmGroupMembers.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ListViewComparer.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
       <DependentUpon>Application.myapp</DependentUpon>
@@ -168,6 +175,12 @@
     <Compile Include="ResultSelector.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Splash.Designer.vb">
+      <DependentUpon>Splash.vb</DependentUpon>
+    </Compile>
+    <Compile Include="Splash.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="TextEntryDialog.Designer.vb">
       <DependentUpon>TextEntryDialog.vb</DependentUpon>
     </Compile>
@@ -179,6 +192,10 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </Content>
     <Content Include="Resources\files\users.ico" />
+    <None Include="Resources\users-48x48.png" />
+    <None Include="Resources\users-32x32.png" />
+    <None Include="Resources\user-16x16.png" />
+    <None Include="Resources\user-group-16x16.png" />
     <Content Include="users.ico" />
     <EmbeddedResource Include="ADmgmt.resx">
       <SubType>Designer</SubType>
@@ -187,6 +204,10 @@
     <EmbeddedResource Include="CustomDomainInfo.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CustomDomainInfo.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FmGroupMembers.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>FmGroupMembers.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Password.resx">
       <SubType>Designer</SubType>
@@ -204,6 +225,10 @@
     <EmbeddedResource Include="ResultSelector.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ResultSelector.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Splash.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>Splash.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="TextEntryDialog.resx">
       <SubType>Designer</SubType>

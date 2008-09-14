@@ -31,7 +31,6 @@ Partial Class SvcInfo
         Me.txtSvcName = New System.Windows.Forms.TextBox
         Me.lblSvcAccount = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.txtDescription = New System.Windows.Forms.TextBox
         Me.svcStartupCombo = New System.Windows.Forms.ComboBox
         Me.Label5 = New System.Windows.Forms.Label
@@ -41,18 +40,19 @@ Partial Class SvcInfo
         Me.Label1 = New System.Windows.Forms.Label
         Me.gbSvcStatus = New System.Windows.Forms.GroupBox
         Me.progBar = New System.Windows.Forms.ProgressBar
-        Me.picSvcStatus = New System.Windows.Forms.PictureBox
         Me.btnSvcResume = New System.Windows.Forms.Button
         Me.btnSvcPause = New System.Windows.Forms.Button
         Me.btnSvcStop = New System.Windows.Forms.Button
         Me.btnSvcStart = New System.Windows.Forms.Button
         Me.lblSvcStatus = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
+        Me.picSvcStatus = New System.Windows.Forms.PictureBox
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbGeneral.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSvcStatus.SuspendLayout()
         CType(Me.picSvcStatus, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -154,15 +154,6 @@ Partial Class SvcInfo
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Account:"
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.gear
-        Me.PictureBox1.Location = New System.Drawing.Point(331, 10)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(34, 34)
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
-        '
         'txtDescription
         '
         Me.txtDescription.Location = New System.Drawing.Point(98, 91)
@@ -257,15 +248,6 @@ Partial Class SvcInfo
         Me.progBar.TabIndex = 7
         Me.progBar.Visible = False
         '
-        'picSvcStatus
-        '
-        Me.picSvcStatus.Image = Global.CMC.My.Resources.Resources._stop
-        Me.picSvcStatus.Location = New System.Drawing.Point(311, 11)
-        Me.picSvcStatus.Name = "picSvcStatus"
-        Me.picSvcStatus.Size = New System.Drawing.Size(32, 32)
-        Me.picSvcStatus.TabIndex = 6
-        Me.picSvcStatus.TabStop = False
-        '
         'btnSvcResume
         '
         Me.btnSvcResume.Location = New System.Drawing.Point(268, 64)
@@ -321,6 +303,24 @@ Partial Class SvcInfo
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Service Status:"
         '
+        'picSvcStatus
+        '
+        Me.picSvcStatus.Image = Global.CMC.My.Resources.Resources._stop
+        Me.picSvcStatus.Location = New System.Drawing.Point(311, 11)
+        Me.picSvcStatus.Name = "picSvcStatus"
+        Me.picSvcStatus.Size = New System.Drawing.Size(32, 32)
+        Me.picSvcStatus.TabIndex = 6
+        Me.picSvcStatus.TabStop = False
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.PictureBox1.Location = New System.Drawing.Point(328, 19)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(34, 34)
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
+        '
         'SvcInfo
         '
         Me.AcceptButton = Me.Cancel_Button
@@ -341,10 +341,10 @@ Partial Class SvcInfo
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.gbGeneral.ResumeLayout(False)
         Me.gbGeneral.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbSvcStatus.ResumeLayout(False)
         Me.gbSvcStatus.PerformLayout()
         CType(Me.picSvcStatus, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub

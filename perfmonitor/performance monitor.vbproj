@@ -51,7 +51,6 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ApplicationEvents.vb" />
     <Compile Include="PerfMonitor.vb">
       <SubType>Form</SubType>
     </Compile>
