@@ -32,12 +32,12 @@ Partial Class FmGroupMembers
         Me.ButtonExport = New System.Windows.Forms.Button
         Me.ButtonClose = New System.Windows.Forms.Button
         Me.Panel2 = New System.Windows.Forms.Panel
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.MembersListView = New System.Windows.Forms.ListView
         Me.memberCN = New System.Windows.Forms.ColumnHeader
         Me.memberDisplay = New System.Windows.Forms.ColumnHeader
         Me.memberEmail = New System.Windows.Forms.ColumnHeader
         Me.memberDN = New System.Windows.Forms.ColumnHeader
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.Panel1.SuspendLayout()
         Me.Panel3.SuspendLayout()
         Me.TableLayoutPanel1.SuspendLayout()
@@ -125,17 +125,6 @@ Partial Class FmGroupMembers
         Me.Panel2.Size = New System.Drawing.Size(455, 284)
         Me.Panel2.TabIndex = 1
         '
-        'ImageList1
-        '
-        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        Me.ImageList1.Images.SetKeyName(0, "user.png")
-        Me.ImageList1.Images.SetKeyName(1, "group.png")
-        Me.ImageList1.Images.SetKeyName(2, "people.png")
-        Me.ImageList1.Images.SetKeyName(3, "users.png")
-        Me.ImageList1.Images.SetKeyName(4, "computer.png")
-        Me.ImageList1.Images.SetKeyName(5, "contact.png")
-        '
         'MembersListView
         '
         Me.MembersListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.memberCN, Me.memberDisplay, Me.memberEmail, Me.memberDN})
@@ -168,6 +157,17 @@ Partial Class FmGroupMembers
         '
         Me.memberDN.Text = "Distinguished Name"
         Me.memberDN.Width = 0
+        '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "user.png")
+        Me.ImageList1.Images.SetKeyName(1, "group.png")
+        Me.ImageList1.Images.SetKeyName(2, "people.png")
+        Me.ImageList1.Images.SetKeyName(3, "users.png")
+        Me.ImageList1.Images.SetKeyName(4, "computer.png")
+        Me.ImageList1.Images.SetKeyName(5, "contact.png")
         '
         'FmGroupMembers
         '

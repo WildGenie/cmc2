@@ -760,8 +760,12 @@ Public Class ADmgmt
         Using DirSearch As New DirectorySearcher(de)
 
             DirSearch.PropertiesToLoad.Add("distinguishedName")
-            DirSearch.Filter = "(&(objectClass=group)(CN=" & groupName & "))"
+            DirSearch.Filter = "(&(objectClass=group)(cn=" & groupName & "))"
             Dim result As System.DirectoryServices.SearchResult = DirSearch.FindOne()
+            If result Is Nothing Then
+                MsgBox("Error finding group: " & vbCr & groupName)
+                Return
+            End If
             ldapPath = Me.GetProperty(result, "distinguishedName")
 
         End Using
@@ -799,6 +803,7 @@ Public Class ADmgmt
             result = Searcher.FindOne
             Return Me.GetProperty(result, attributeToReturn)
         Catch ex As Exception
+            'MsgBox(ex.Message)
             Return dsPath.Substring(3, dsPath.IndexOf(",") - 3)
         End Try
     End Function
@@ -1038,18 +1043,11 @@ Public Class ADmgmt
             Dim dirSearchResults As SearchResult = dirSearcher.FindOne()
             propCount = dirSearchResults.Properties("memberOf").Count
             Dim dn As String
-            Dim equalsIndex As String
-            Dim commaIndex As String
             For i As Integer = 0 To propCount - 1
                 dn = dirSearchResults.Properties("memberOf")(i)
-                equalsIndex = dn.IndexOf("=", 1)
-                commaIndex = dn.IndexOf(",", 1)
-                If equalsIndex = -1 Then
-                    Return Nothing
-                End If
-                If Not Groups.Contains(dn.Substring((equalsIndex + 1), _
-                                      (commaIndex - equalsIndex) - 1)) Then
-                    Groups.Add(dn.Substring((equalsIndex + 1), (commaIndex - equalsIndex) - 1))
+                Dim gName As String = GetAttributefromDN("name", dn)
+                If Not Groups.Contains(gName) Then
+                    Groups.Add(gName)
                 End If
             Next
         Catch ex As Exception
@@ -1057,9 +1055,7 @@ Public Class ADmgmt
                 MessageBox.Show("Selected user isn't a member of any groups " & _
                                 "at this time.", "No groups listed", _
                                 MessageBoxButtons.OK, MessageBoxIcon.Error)
-                'they are still a good user just does not
-                'have a "memberOf" attribute so it errors out.
-                'code to do something else here if you want
+                ' user does not have a "memberOf" attribute so it errors out.
             Else
                 MessageBox.Show(ex.Message.ToString, "Search Error", MessageBoxButtons.OK, MessageBoxIcon.Error)
             End If
@@ -1576,17 +1572,19 @@ Public Class ADmgmt
 
     Private Sub lbMemberOf_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles lbMemberOf.DoubleClick
         If Not Me.lbMemberOf.SelectedItem Is Nothing Then
+            FmGroupMembers.Text = CurrentGroupName
+            FmGroupMembers.MembersListView.Items.Clear()
+            FmGroupMembers.GroupName = CurrentGroupName
+
+            FmGroupMembers.Loading = True
+            Dim loader As New System.Threading.Thread(AddressOf FmGroupMembers.DoWhileLoading)
+            loader.Start()
+            GroupMembers(CurrentGroupName, FmGroupMembers.MembersListView)
+            FmGroupMembers.Loading = False
+
             If FmGroupMembers.Visible = False Then
-                FmGroupMembers.Text = CurrentGroupName & "Members"
-                FmGroupMembers.MembersListView.Items.Clear()
-                FmGroupMembers.GroupName = CurrentGroupName
-                GroupMembers(CurrentGroupName, FmGroupMembers.MembersListView)
+                FmGroupMembers.Loading = False
                 FmGroupMembers.Show()
-            Else
-                FmGroupMembers.Text = CurrentGroupName
-                FmGroupMembers.MembersListView.Items.Clear()
-                FmGroupMembers.GroupName = CurrentGroupName
-                GroupMembers(CurrentGroupName, FmGroupMembers.MembersListView)
             End If
         End If
     End Sub

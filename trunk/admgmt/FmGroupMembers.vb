@@ -1,6 +1,19 @@
 Public Class FmGroupMembers
 
     Protected Friend GroupName As String
+    Protected Friend Loading As Boolean
+
+    Protected Friend Sub DoWhileLoading()
+        Splash.Text = "Group Members"
+        Splash.Label1.Text = "Enumerating group members..."
+        Splash.Show()
+        Splash.Refresh()
+        Do While Me.Loading = True
+            System.Threading.Thread.Sleep(2000)
+            Splash.Refresh()
+        Loop
+        Splash.Close()
+    End Sub
 
     Private Sub MembersListView_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles MembersListView.MouseDoubleClick
         If ADmgmt.UserList.Count = 1 Then
@@ -149,4 +162,5 @@ Public Class FmGroupMembers
             Me.memberEmail.Width = 0
         End If
     End Sub
+
 End Class
