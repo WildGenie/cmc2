@@ -6562,7 +6562,7 @@ Public Class Form1
             Dim lUser As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, path, "DefaultUserName")
 
             ' if still no last logon values returned then try using api vb call rather than wmi
-            If String.IsNullOrEmpty(lDomain) Then
+            If String.IsNullOrEmpty(lUser) Then
                 If AltUserCheckBox.Checked Then
                     Dim impersonator As New Impersonation
                     If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
