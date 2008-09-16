@@ -503,9 +503,9 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle1 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle2 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle4 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle5 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
+        Dim DataGridViewCellStyle6 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -1062,6 +1062,7 @@ Public Class Form1
         Me.ButtonClear.Name = "ButtonClear"
         Me.ButtonClear.Size = New System.Drawing.Size(38, 28)
         Me.ButtonClear.TabIndex = 43
+        Me.ButtonClear.TabStop = False
         Me.ButtonClear.Text = "clear"
         Me.ButtonClear.UseVisualStyleBackColor = False
         '
@@ -1075,6 +1076,7 @@ Public Class Form1
         Me.ButtonExit.Name = "ButtonExit"
         Me.ButtonExit.Size = New System.Drawing.Size(35, 28)
         Me.ButtonExit.TabIndex = 38
+        Me.ButtonExit.TabStop = False
         Me.ButtonExit.Text = "exit"
         Me.ButtonExit.UseVisualStyleBackColor = False
         '
@@ -3305,22 +3307,22 @@ Public Class Form1
         Me.sgrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.sgrid.ColumnHeadersVisible = False
         Me.sgrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.swname, Me.swver, Me.swpub, Me.swdate, Me.swloc, Me.swunins, Me.sw_url})
-        DataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
-        DataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Window
-        DataGridViewCellStyle1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        DataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black
-        DataGridViewCellStyle1.SelectionBackColor = System.Drawing.Color.Khaki
-        DataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.MidnightBlue
-        DataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle1
+        DataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft
+        DataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window
+        DataGridViewCellStyle4.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        DataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black
+        DataGridViewCellStyle4.SelectionBackColor = System.Drawing.Color.Khaki
+        DataGridViewCellStyle4.SelectionForeColor = System.Drawing.Color.MidnightBlue
+        DataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.DefaultCellStyle = DataGridViewCellStyle4
         Me.sgrid.GridColor = System.Drawing.Color.White
         Me.sgrid.Location = New System.Drawing.Point(2, 23)
         Me.sgrid.Name = "sgrid"
         Me.sgrid.ReadOnly = True
         Me.sgrid.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None
         Me.sgrid.RowHeadersVisible = False
-        DataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
-        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle2
+        DataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.[False]
+        Me.sgrid.RowsDefaultCellStyle = DataGridViewCellStyle5
         Me.sgrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.sgrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -3641,8 +3643,8 @@ Public Class Form1
         Me.svc_datagrid.Name = "svc_datagrid"
         Me.svc_datagrid.ReadOnly = True
         Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
+        DataGridViewCellStyle6.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle6
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.LightSkyBlue
         Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.Black
@@ -4151,6 +4153,7 @@ Public Class Form1
         '
         'admanagement
         '
+        Me.admanagement.AccessibleRole = System.Windows.Forms.AccessibleRole.None
         Me.admanagement.FlatAppearance.BorderSize = 0
         Me.admanagement.FlatStyle = System.Windows.Forms.FlatStyle.Popup
         Me.admanagement.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -4158,6 +4161,7 @@ Public Class Form1
         Me.admanagement.Name = "admanagement"
         Me.admanagement.Size = New System.Drawing.Size(48, 20)
         Me.admanagement.TabIndex = 70
+        Me.admanagement.TabStop = False
         Me.admanagement.Text = "ad mgr"
         Me.admanagement.UseVisualStyleBackColor = True
         '
@@ -4194,6 +4198,7 @@ Public Class Form1
         Me.proxyset.Name = "proxyset"
         Me.proxyset.Size = New System.Drawing.Size(26, 19)
         Me.proxyset.TabIndex = 68
+        Me.proxyset.TabStop = False
         Me.proxyset.Text = "set"
         Me.proxyset.UseVisualStyleBackColor = True
         Me.proxyset.Visible = False
@@ -4219,6 +4224,7 @@ Public Class Form1
         Me.adbutton.Name = "adbutton"
         Me.adbutton.Size = New System.Drawing.Size(22, 22)
         Me.adbutton.TabIndex = 65
+        Me.adbutton.TabStop = False
         Me.ToolTip1.SetToolTip(Me.adbutton, "AD User Profile")
         Me.adbutton.UseVisualStyleBackColor = True
         '
@@ -4242,6 +4248,7 @@ Public Class Form1
         Me.HWButton.Name = "HWButton"
         Me.HWButton.Size = New System.Drawing.Size(48, 20)
         Me.HWButton.TabIndex = 14
+        Me.HWButton.TabStop = False
         Me.HWButton.Text = "refresh"
         Me.ToolTip1.SetToolTip(Me.HWButton, "load hardware information")
         '
@@ -4588,7 +4595,7 @@ Public Class Form1
         Me.Tabholder1.Controls.Add(Me.test)
         Me.Tabholder1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Tabholder1.ItemSize = New System.Drawing.Size(58, 18)
-        Me.Tabholder1.Location = New System.Drawing.Point(4, 83)
+        Me.Tabholder1.Location = New System.Drawing.Point(4, 84)
         Me.Tabholder1.Name = "Tabholder1"
         Me.Tabholder1.SelectedIndex = 0
         Me.Tabholder1.Size = New System.Drawing.Size(378, 264)
@@ -5854,9 +5861,9 @@ Public Class Form1
         Me.Controls.Add(Me.altPassword_TextBox)
         Me.Controls.Add(Me.altusername_TextBox)
         Me.Controls.Add(Me.Label11)
-        Me.Controls.Add(Me.Tabholder1)
         Me.Controls.Add(Me.notification_label)
         Me.Controls.Add(Me.AltUserCheckBox)
+        Me.Controls.Add(Me.Tabholder1)
         Me.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -6171,7 +6178,12 @@ Public Class Form1
 
     ' Computername Changed Code
     Private Sub computername_TextChanged1(ByVal sender As Object, ByVal e As System.EventArgs) Handles computername.TextChanged
-        If Not FormCleared Then ClearBoxes()
+        If Not FormCleared Then
+            Dim clearThread As New System.Threading.Thread(AddressOf ClearBoxes)
+            clearThread.Start()
+            'ClearBoxes()
+        End If
+
         Me.AcceptButton = Me.GO_Button
     End Sub
 
@@ -6282,12 +6294,17 @@ Public Class Form1
         computername.Text = Trim(computername.Text.ToLower)
         Me.computername.Refresh()
 
-        PC = New pc
-        PC.Name = computername.Text
-
         ' clear the form
         If FormCleared = False Then ClearBoxes()
+        'Dim clearThread As New System.Threading.Thread(AddressOf ClearBoxes)
+        'clearThread.Start()
+        'End If
+
         GO_Button.Enabled = False
+
+
+        PC = New pc
+        PC.Name = computername.Text
 
         Panel2.Text = "connecting..."
 
@@ -14575,6 +14592,7 @@ Public Class Form1
         Else
             ' Run Routine Here WITHOUT impersonation
         End If
+
     End Sub
 
 End Class
