@@ -78,17 +78,18 @@ Public Class FmGroupMembers
 
     ' Export
     Private Sub Button3_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ButtonExport.Click
-        Dim filepath As String = "c:\" & Me.GroupName & ".tsv"
+        Dim filepath As String = "c:\" & Me.GroupName & ".csv"
         Dim exportFile As New System.IO.StreamWriter(filepath, False)
 
         If Me.MembersListView.Items.Count > 0 Then
-            exportFile.WriteLine("Logon Name, Display Name, Email")
+            exportFile.WriteLine("Name, DisplayName, Email")
             exportFile.WriteLine("")
             For Each member As ListViewItem In Me.MembersListView.Items
-                exportFile.WriteLine(member.SubItems(0).Text & vbTab & member.SubItems(1).Text & vbTab & member.SubItems(2).Text)
+                exportFile.WriteLine(member.SubItems(0).Text & "," & member.SubItems(1).Text & "," & member.SubItems(2).Text)
             Next
             exportFile.Close()
-            Shell("notepad " & filepath)
+
+            System.Diagnostics.Process.Start(filepath)
         End If
     End Sub
 
