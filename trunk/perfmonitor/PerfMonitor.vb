@@ -1,6 +1,6 @@
 Public Class PerfMonitor
 
-    Private cpu, mem As PerformanceCounter
+    Private cpu, mem, dskTime As PerformanceCounter
     Private totalMemory As Integer
     Private FirstRun As Boolean
     Protected Friend loading As Boolean
@@ -41,6 +41,8 @@ Public Class PerfMonitor
         End Try
 
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
+        dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total", Me.computername.Text)
+
 
         Me.Text = Me.computername.Text.ToUpper
         Me.btnStart.Enabled = False
@@ -51,6 +53,11 @@ Public Class PerfMonitor
         Me.loading = False
     End Sub
     Private Sub btnStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStop.Click
+        If Me.Recording Then
+            Recording = False
+            Writer.Close()
+            RecordStartButton.Text = "o"
+        End If
         PerfMonTimer.Stop()
         PerfMonTimer.Enabled = False
         labelCPU.Text = "CPU"
@@ -75,8 +82,9 @@ Public Class PerfMonitor
         Dim cpucolor As Color = Color.FromArgb(0, 255, 0)
         Dim memColor As Color = Color.FromArgb(0, 255, 0) 'Color.RoyalBlue
 
+        Dim cpuvalue As Byte
         Try
-            Dim cpuvalue As Byte = cpu.NextValue
+            cpuvalue = cpu.NextValue
             labelCPU.Text = "CPU " & cpuvalue & "%"
             UpdatePercentGraph(cpuvalue, Pic1, cpucolor)
         Catch ex As Exception
@@ -88,7 +96,7 @@ Public Class PerfMonitor
             Me.Close()
             End
         End Try
-        
+
 
         Dim memValue As Single = mem.NextValue
         If memValue > 0 Then
@@ -97,11 +105,19 @@ Public Class PerfMonitor
         LabelMem.Text = "RAM " & memValue & "%"
         UpdatePercentGraph(memValue, Pic2, memColor)
 
+        Dim dsktimeValue As Single = dskTime.NextValue
+
+
+        If Recording Then
+            Me.Recording_Write_Line(CInt(cpuvalue) & "," & CInt(memValue) & "," & CInt(dsktimeValue))
+        End If
+
         If FirstRun Then
             totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 5)
             'Debug.Print(totaltime)
             Me.TimeValue.Value = CInt(totaltime) + 1
             FirstRun = False
+            Me.RecordStartButton.Enabled = True
         End If
 
 
@@ -183,8 +199,8 @@ Public Class PerfMonitor
         Pic2.Location = New System.Drawing.Point(Panel2.Width - 11 - Pic1.Width, 25)
         Me.LabelMem.Location = New System.Drawing.Point(Panel2.Width - 11 - Pic1.Width, 9)
         Pic2.Width = (Panel2.Width - 44) / 2
-        Pic1.Height = Panel2.Height - 40
-        Pic2.Height = Panel2.Height - 40
+        Pic1.Height = Panel2.Height - 55
+        Pic2.Height = Panel2.Height - 55
     End Sub
 
     ''' <summary>
@@ -213,7 +229,7 @@ Public Class PerfMonitor
     Private Sub PerfMonitor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         Me.loading = True
-        
+
         If Environment.GetCommandLineArgs().Length > 1 Then
 
             Me.Visible = False
@@ -259,6 +275,7 @@ Public Class PerfMonitor
                 Else
                     Start(True)
                 End If
+                Me.TopMost = True
             End If
 
             loader.Join()
@@ -268,7 +285,7 @@ Public Class PerfMonitor
             Me.loading = False
         End If
 
-        
+
 
     End Sub
 
@@ -289,4 +306,49 @@ Public Class PerfMonitor
         Loop
         splashscreen1.Close()
     End Sub
+
+    Private Recording As Boolean = False
+    Private Writer As System.IO.StreamWriter
+    Private Sub RecordStartButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordStartButton.Click
+
+        Dim rd As New RecordingDialog
+        rd.ShowDialog()
+        If rd.DialogResult = Windows.Forms.DialogResult.OK Then
+            TimeValue.Value = rd.NumericUpDown1.Value
+            Recording = True
+            Writer = New System.IO.StreamWriter("c:\record.csv", False)
+            Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
+            Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total")
+            Me.RecordStartButton.Enabled = False
+            Me.RecordPauseButton.Enabled = True
+            Me.RecordStopButton.Enabled = True
+            Me.RecordingStatusLabel.Visible = True
+            Me.RecordingStatusLabel.Text = "recording"
+        End If
+    End Sub
+    Private Sub RecordStopButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordStopButton.Click
+        Recording = False
+        Writer.Close()
+        Me.RecordStopButton.Enabled = False
+        Me.RecordPauseButton.Enabled = False
+        Me.RecordStartButton.Enabled = True
+        Me.RecordingStatusLabel.Text = "stopped"
+    End Sub
+    Private Sub RecordPauseButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordPauseButton.Click
+        If Me.RecordPauseButton.ImageIndex = 2 Then ' we want to pause
+            Me.Recording = False
+            Me.RecordPauseButton.ImageIndex = 3
+            Me.RecordingStatusLabel.Text = "paused"
+        Else
+            Me.Recording = True
+            Me.RecordPauseButton.ImageIndex = 2
+            Me.RecordingStatusLabel.Text = "recording"
+        End If
+    End Sub
+    Private Sub Recording_Write_Line(ByVal Line As String)
+        Writer.WriteLine(DateTime.Now.ToLongTimeString & "," & Line)
+    End Sub
+
+
+
 End Class

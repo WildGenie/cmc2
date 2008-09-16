@@ -73,6 +73,12 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Compile Include="RecordingDialog.Designer.vb">
+      <DependentUpon>RecordingDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="RecordingDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="splashscreen1.Designer.vb">
       <DependentUpon>splashscreen1.vb</DependentUpon>
     </Compile>
@@ -91,6 +97,10 @@
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="RecordingDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>RecordingDialog.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="splashscreen1.resx">
       <SubType>Designer</SubType>

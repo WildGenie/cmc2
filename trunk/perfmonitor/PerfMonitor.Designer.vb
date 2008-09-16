@@ -39,12 +39,20 @@ Partial Class PerfMonitor
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Panel2 = New System.Windows.Forms.Panel
+        Me.Panel3 = New System.Windows.Forms.Panel
+        Me.RecordPauseButton = New System.Windows.Forms.Button
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
+        Me.RecordStopButton = New System.Windows.Forms.Button
+        Me.RecordStartButton = New System.Windows.Forms.Button
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.RecordingStatusLabel = New System.Windows.Forms.Label
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'PerfMonTimer
@@ -184,6 +192,7 @@ Partial Class PerfMonitor
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.Panel3)
         Me.Panel2.Controls.Add(Me.labelCPU)
         Me.Panel2.Controls.Add(Me.Pic1)
         Me.Panel2.Controls.Add(Me.LabelMem)
@@ -191,8 +200,80 @@ Partial Class PerfMonitor
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 74)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(148, 190)
+        Me.Panel2.Size = New System.Drawing.Size(148, 201)
         Me.Panel2.TabIndex = 10
+        '
+        'Panel3
+        '
+        Me.Panel3.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel3.Controls.Add(Me.RecordingStatusLabel)
+        Me.Panel3.Controls.Add(Me.RecordPauseButton)
+        Me.Panel3.Controls.Add(Me.RecordStopButton)
+        Me.Panel3.Controls.Add(Me.RecordStartButton)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel3.Location = New System.Drawing.Point(0, 183)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(148, 18)
+        Me.Panel3.TabIndex = 9
+        '
+        'RecordPauseButton
+        '
+        Me.RecordPauseButton.Enabled = False
+        Me.RecordPauseButton.ImageIndex = 2
+        Me.RecordPauseButton.ImageList = Me.ImageList1
+        Me.RecordPauseButton.Location = New System.Drawing.Point(17, 0)
+        Me.RecordPauseButton.Name = "RecordPauseButton"
+        Me.RecordPauseButton.Size = New System.Drawing.Size(18, 18)
+        Me.RecordPauseButton.TabIndex = 10
+        Me.RecordPauseButton.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.RecordPauseButton, "pause/resume recording")
+        Me.RecordPauseButton.UseVisualStyleBackColor = True
+        '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "record.png")
+        Me.ImageList1.Images.SetKeyName(1, "stop.png")
+        Me.ImageList1.Images.SetKeyName(2, "pause.png")
+        Me.ImageList1.Images.SetKeyName(3, "play.png")
+        '
+        'RecordStopButton
+        '
+        Me.RecordStopButton.Enabled = False
+        Me.RecordStopButton.ImageIndex = 1
+        Me.RecordStopButton.ImageList = Me.ImageList1
+        Me.RecordStopButton.Location = New System.Drawing.Point(34, 0)
+        Me.RecordStopButton.Name = "RecordStopButton"
+        Me.RecordStopButton.Size = New System.Drawing.Size(18, 18)
+        Me.RecordStopButton.TabIndex = 9
+        Me.RecordStopButton.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.RecordStopButton, "stop recording")
+        Me.RecordStopButton.UseVisualStyleBackColor = True
+        '
+        'RecordStartButton
+        '
+        Me.RecordStartButton.Enabled = False
+        Me.RecordStartButton.ImageIndex = 0
+        Me.RecordStartButton.ImageList = Me.ImageList1
+        Me.RecordStartButton.Location = New System.Drawing.Point(0, 0)
+        Me.RecordStartButton.Name = "RecordStartButton"
+        Me.RecordStartButton.Size = New System.Drawing.Size(18, 18)
+        Me.RecordStartButton.TabIndex = 8
+        Me.RecordStartButton.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.RecordStartButton, "record")
+        Me.RecordStartButton.UseVisualStyleBackColor = True
+        '
+        'RecordingStatusLabel
+        '
+        Me.RecordingStatusLabel.AutoSize = True
+        Me.RecordingStatusLabel.ForeColor = System.Drawing.Color.SkyBlue
+        Me.RecordingStatusLabel.Location = New System.Drawing.Point(71, 2)
+        Me.RecordingStatusLabel.Name = "RecordingStatusLabel"
+        Me.RecordingStatusLabel.Size = New System.Drawing.Size(51, 13)
+        Me.RecordingStatusLabel.TabIndex = 11
+        Me.RecordingStatusLabel.Text = "recording"
+        Me.RecordingStatusLabel.Visible = False
         '
         'PerfMonitor
         '
@@ -200,7 +281,7 @@ Partial Class PerfMonitor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnStop
-        Me.ClientSize = New System.Drawing.Size(148, 264)
+        Me.ClientSize = New System.Drawing.Size(148, 275)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
@@ -218,6 +299,8 @@ Partial Class PerfMonitor
         Me.MenuStrip1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel3.PerformLayout()
         Me.ResumeLayout(False)
 
     End Sub
@@ -236,5 +319,12 @@ Partial Class PerfMonitor
     Friend WithEvents Label1 As System.Windows.Forms.Label
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents AlwaysOnTopToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RecordStartButton As System.Windows.Forms.Button
+    Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents RecordStopButton As System.Windows.Forms.Button
+    Friend WithEvents RecordPauseButton As System.Windows.Forms.Button
+    Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
+    Friend WithEvents RecordingStatusLabel As System.Windows.Forms.Label
 
 End Class
