@@ -9,7 +9,7 @@ Public Class FmGroupMembers
         Splash.Show()
         Splash.Refresh()
         Do While Me.Loading = True
-            System.Threading.Thread.Sleep(2000)
+            System.Threading.Thread.Sleep(500)
             Splash.Refresh()
         Loop
         Splash.Close()
