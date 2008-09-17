@@ -56,12 +56,12 @@ Public Class PerfMonitor
         If Me.Recording Then
             Recording = False
             Writer.Close()
-            RecordStartButton.Text = "o"
         End If
         PerfMonTimer.Stop()
         PerfMonTimer.Enabled = False
-        labelCPU.Text = "CPU"
-        LabelMem.Text = "RAM"
+        labelCPU.Text = ""
+        LabelMem.Text = ""
+        LabelDisk.Text = ""
         Me.btnStart.Enabled = True
         Me.btnStop.Enabled = False
         Me.computername.Enabled = True
@@ -70,7 +70,6 @@ Public Class PerfMonitor
     End Sub
 
     Private Sub PerfMonTimer_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PerfMonTimer.Tick
-
 
         ' time first run of process stat enumeration
         Dim start, totaltime As Double
@@ -81,11 +80,13 @@ Public Class PerfMonitor
         ' custom colours
         Dim cpucolor As Color = Color.FromArgb(0, 255, 0)
         Dim memColor As Color = Color.FromArgb(0, 255, 0) 'Color.RoyalBlue
+        Dim dskColor As Color = Color.FromArgb(0, 255, 0)
+
 
         Dim cpuvalue As Byte
         Try
             cpuvalue = cpu.NextValue
-            labelCPU.Text = "CPU " & cpuvalue & "%"
+            labelCPU.Text = cpuvalue & "%"
             UpdatePercentGraph(cpuvalue, Pic1, cpucolor)
         Catch ex As Exception
             PerfMonTimer.Stop()
@@ -97,15 +98,23 @@ Public Class PerfMonitor
             End
         End Try
 
-
+        '  ----  % Memory Utilisation  ---------
         Dim memValue As Single = mem.NextValue
         If memValue > 0 Then
             memValue = CInt(100 * (totalMemory - memValue) / totalMemory)
         End If
-        LabelMem.Text = "RAM " & memValue & "%"
+        LabelMem.Text = memValue & "%"
         UpdatePercentGraph(memValue, Pic2, memColor)
 
-        Dim dsktimeValue As Single = dskTime.NextValue
+        ' ----  % Disk Time  -------------
+        Dim dsktimeValue As Integer = CInt(dskTime.NextValue)
+        LabelDisk.Text = dsktimeValue & "%"
+        If dsktimeValue > 100 Then
+            dsktimeValue = 100
+        End If
+
+        UpdatePercentGraph(dsktimeValue, Pic3, dskColor)
+
 
 
         If Recording Then
@@ -195,12 +204,33 @@ Public Class PerfMonitor
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub PerfMonitor_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-        Pic1.Width = (Panel2.Width - 44) / 2
-        Pic2.Location = New System.Drawing.Point(Panel2.Width - 11 - Pic1.Width, 25)
-        Me.LabelMem.Location = New System.Drawing.Point(Panel2.Width - 11 - Pic1.Width, 9)
-        Pic2.Width = (Panel2.Width - 44) / 2
-        Pic1.Height = Panel2.Height - 55
-        Pic2.Height = Panel2.Height - 55
+
+        Dim overallWidth As Integer = Panel2.Width
+        Dim PicCount As Integer = 3
+        Dim borderSize As Integer = 10
+        Dim widthAvailablePerPic = (overallWidth - 1 * borderSize) / PicCount
+        Dim PicWidth As Integer = widthAvailablePerPic - borderSize
+        Dim PicHeight As Integer = Panel2.Height - 56
+
+        Pic1.Width = PicWidth
+        Pic2.Width = PicWidth
+        Pic3.Width = PicWidth
+
+        Pic1.Location = New System.Drawing.Point(borderSize, 20)
+        Pic2.Location = New System.Drawing.Point(widthAvailablePerPic + borderSize, 20)
+        Pic3.Location = New System.Drawing.Point((2 * widthAvailablePerPic) + borderSize, 20)
+
+        Me.labelCPU.Location = New System.Drawing.Point(borderSize + (0.5 * PicWidth - 12), 4)
+        Me.LabelMem.Location = New System.Drawing.Point(widthAvailablePerPic + borderSize + (0.5 * PicWidth - 12), 4)
+        Me.LabelDisk.Location = New System.Drawing.Point((2 * widthAvailablePerPic) + borderSize + (0.5 * PicWidth - 12), 4)
+        Me.labelPic1.Location = New System.Drawing.Point(borderSize + (0.5 * PicWidth - 12), PicHeight + 20)
+        Me.LabelPic2.Location = New System.Drawing.Point(widthAvailablePerPic + borderSize + (0.5 * PicWidth - 12), PicHeight + 20)
+        Me.LabelPic3.Location = New System.Drawing.Point((2 * widthAvailablePerPic) + borderSize + (0.5 * PicWidth - 12), PicHeight + 20)
+
+        Pic1.Height = PicHeight
+        Pic2.Height = PicHeight
+        Pic3.Height = PicHeight
+
     End Sub
 
     ''' <summary>
