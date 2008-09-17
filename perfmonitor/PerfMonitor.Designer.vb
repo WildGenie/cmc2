@@ -39,26 +39,26 @@ Partial Class PerfMonitor
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Panel2 = New System.Windows.Forms.Panel
+        Me.LabelDisk = New System.Windows.Forms.Label
+        Me.Pic3 = New System.Windows.Forms.PictureBox
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.RecordingStatusLabel = New System.Windows.Forms.Label
         Me.RecordPauseButton = New System.Windows.Forms.Button
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.RecordStopButton = New System.Windows.Forms.Button
         Me.RecordStartButton = New System.Windows.Forms.Button
-        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.Pic3 = New System.Windows.Forms.PictureBox
-        Me.LabelDisk = New System.Windows.Forms.Label
         Me.LabelPic3 = New System.Windows.Forms.Label
         Me.labelPic1 = New System.Windows.Forms.Label
         Me.LabelPic2 = New System.Windows.Forms.Label
+        Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
-        Me.Panel3.SuspendLayout()
         CType(Me.Pic3, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.Panel3.SuspendLayout()
         Me.SuspendLayout()
         '
         'PerfMonTimer
@@ -78,7 +78,7 @@ Partial Class PerfMonitor
         'labelCPU
         '
         Me.labelCPU.AutoSize = True
-        Me.labelCPU.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.labelCPU.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.labelCPU.ForeColor = System.Drawing.Color.RoyalBlue
         Me.labelCPU.Location = New System.Drawing.Point(13, 9)
         Me.labelCPU.Name = "labelCPU"
@@ -127,7 +127,7 @@ Partial Class PerfMonitor
         'LabelMem
         '
         Me.LabelMem.AutoSize = True
-        Me.LabelMem.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelMem.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelMem.ForeColor = System.Drawing.Color.RoyalBlue
         Me.LabelMem.Location = New System.Drawing.Point(55, 9)
         Me.LabelMem.Name = "LabelMem"
@@ -155,7 +155,7 @@ Partial Class PerfMonitor
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(148, 74)
+        Me.Panel1.Size = New System.Drawing.Size(156, 74)
         Me.Panel1.TabIndex = 9
         '
         'btnTogglePanel
@@ -191,7 +191,7 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
         Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(86, 20)
         Me.AlwaysOnTopToolStripMenuItem.Text = "always on top"
         '
         'Panel2
@@ -209,29 +209,51 @@ Partial Class PerfMonitor
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 74)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(148, 221)
+        Me.Panel2.Size = New System.Drawing.Size(156, 221)
         Me.Panel2.TabIndex = 10
+        '
+        'LabelDisk
+        '
+        Me.LabelDisk.AutoSize = True
+        Me.LabelDisk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelDisk.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LabelDisk.Location = New System.Drawing.Point(99, 9)
+        Me.LabelDisk.Name = "LabelDisk"
+        Me.LabelDisk.Size = New System.Drawing.Size(0, 13)
+        Me.LabelDisk.TabIndex = 11
+        '
+        'Pic3
+        '
+        Me.Pic3.BackColor = System.Drawing.Color.LightGray
+        Me.Pic3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Pic3.Location = New System.Drawing.Point(102, 25)
+        Me.Pic3.Name = "Pic3"
+        Me.Pic3.Size = New System.Drawing.Size(32, 150)
+        Me.Pic3.TabIndex = 10
+        Me.Pic3.TabStop = False
         '
         'Panel3
         '
         Me.Panel3.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Panel3.Controls.Add(Me.RecordingStatusLabel)
         Me.Panel3.Controls.Add(Me.RecordPauseButton)
         Me.Panel3.Controls.Add(Me.RecordStopButton)
         Me.Panel3.Controls.Add(Me.RecordStartButton)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 203)
+        Me.Panel3.Location = New System.Drawing.Point(0, 201)
         Me.Panel3.Name = "Panel3"
-        Me.Panel3.Size = New System.Drawing.Size(148, 18)
+        Me.Panel3.Size = New System.Drawing.Size(156, 20)
         Me.Panel3.TabIndex = 9
         '
         'RecordingStatusLabel
         '
         Me.RecordingStatusLabel.AutoSize = True
-        Me.RecordingStatusLabel.ForeColor = System.Drawing.Color.SkyBlue
+        Me.RecordingStatusLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.RecordingStatusLabel.ForeColor = System.Drawing.Color.RoyalBlue
         Me.RecordingStatusLabel.Location = New System.Drawing.Point(71, 2)
         Me.RecordingStatusLabel.Name = "RecordingStatusLabel"
-        Me.RecordingStatusLabel.Size = New System.Drawing.Size(51, 13)
+        Me.RecordingStatusLabel.Size = New System.Drawing.Size(50, 13)
         Me.RecordingStatusLabel.TabIndex = 11
         Me.RecordingStatusLabel.Text = "recording"
         Me.RecordingStatusLabel.Visible = False
@@ -241,9 +263,9 @@ Partial Class PerfMonitor
         Me.RecordPauseButton.Enabled = False
         Me.RecordPauseButton.ImageIndex = 2
         Me.RecordPauseButton.ImageList = Me.ImageList1
-        Me.RecordPauseButton.Location = New System.Drawing.Point(17, 0)
+        Me.RecordPauseButton.Location = New System.Drawing.Point(19, -1)
         Me.RecordPauseButton.Name = "RecordPauseButton"
-        Me.RecordPauseButton.Size = New System.Drawing.Size(18, 18)
+        Me.RecordPauseButton.Size = New System.Drawing.Size(20, 20)
         Me.RecordPauseButton.TabIndex = 10
         Me.RecordPauseButton.TabStop = False
         Me.ToolTip1.SetToolTip(Me.RecordPauseButton, "pause/resume recording")
@@ -263,9 +285,9 @@ Partial Class PerfMonitor
         Me.RecordStopButton.Enabled = False
         Me.RecordStopButton.ImageIndex = 1
         Me.RecordStopButton.ImageList = Me.ImageList1
-        Me.RecordStopButton.Location = New System.Drawing.Point(34, 0)
+        Me.RecordStopButton.Location = New System.Drawing.Point(38, -1)
         Me.RecordStopButton.Name = "RecordStopButton"
-        Me.RecordStopButton.Size = New System.Drawing.Size(18, 18)
+        Me.RecordStopButton.Size = New System.Drawing.Size(20, 20)
         Me.RecordStopButton.TabIndex = 9
         Me.RecordStopButton.TabStop = False
         Me.ToolTip1.SetToolTip(Me.RecordStopButton, "stop recording")
@@ -273,36 +295,18 @@ Partial Class PerfMonitor
         '
         'RecordStartButton
         '
+        Me.RecordStartButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink
         Me.RecordStartButton.Enabled = False
+        Me.RecordStartButton.FlatAppearance.BorderSize = 0
         Me.RecordStartButton.ImageIndex = 0
         Me.RecordStartButton.ImageList = Me.ImageList1
-        Me.RecordStartButton.Location = New System.Drawing.Point(0, 0)
+        Me.RecordStartButton.Location = New System.Drawing.Point(0, -1)
         Me.RecordStartButton.Name = "RecordStartButton"
-        Me.RecordStartButton.Size = New System.Drawing.Size(18, 18)
+        Me.RecordStartButton.Size = New System.Drawing.Size(20, 20)
         Me.RecordStartButton.TabIndex = 8
         Me.RecordStartButton.TabStop = False
         Me.ToolTip1.SetToolTip(Me.RecordStartButton, "record")
         Me.RecordStartButton.UseVisualStyleBackColor = True
-        '
-        'Pic3
-        '
-        Me.Pic3.BackColor = System.Drawing.Color.LightGray
-        Me.Pic3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Pic3.Location = New System.Drawing.Point(102, 25)
-        Me.Pic3.Name = "Pic3"
-        Me.Pic3.Size = New System.Drawing.Size(32, 150)
-        Me.Pic3.TabIndex = 10
-        Me.Pic3.TabStop = False
-        '
-        'LabelDisk
-        '
-        Me.LabelDisk.AutoSize = True
-        Me.LabelDisk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelDisk.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LabelDisk.Location = New System.Drawing.Point(99, 9)
-        Me.LabelDisk.Name = "LabelDisk"
-        Me.LabelDisk.Size = New System.Drawing.Size(0, 13)
-        Me.LabelDisk.TabIndex = 11
         '
         'LabelPic3
         '
@@ -343,7 +347,7 @@ Partial Class PerfMonitor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnStop
-        Me.ClientSize = New System.Drawing.Size(148, 295)
+        Me.ClientSize = New System.Drawing.Size(156, 295)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
@@ -361,9 +365,9 @@ Partial Class PerfMonitor
         Me.MenuStrip1.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        CType(Me.Pic3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
-        CType(Me.Pic3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
