@@ -59,6 +59,7 @@ Public Class PerfMonitor
             Recording = False
             Writer.Close()
         End If
+        Me.RecordingButton.Enabled = False
         PerfMonTimer.Stop()
         PerfMonTimer.Enabled = False
         labelCPU.Text = ""
@@ -136,7 +137,7 @@ Public Class PerfMonitor
             'Debug.Print(totaltime)
             Me.TimeValue.Value = CInt(totaltime) + 1
             FirstRun = False
-            Me.RecordStartButton.Enabled = True
+            Me.RecordingButton.Enabled = True
         End If
 
 
@@ -165,21 +166,42 @@ Public Class PerfMonitor
         g.Dispose()
     End Sub
 
-    ''' <summary>
-    ''' Handle changing of timer interval.
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub TimeValue_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeValue.ValueChanged
-        If TimeValue.Value = 0 Then TimeValue.Value = 1
-        If TimeValue.Value > 60 Then TimeValue.Value = 60
-        PerfMonTimer.Interval = TimeValue.Value * 1000
-        If PerfMonTimer.Enabled Then
-            Me.btnStop.Focus()
+    Private Recording As Boolean = False
+    Private Writer As System.IO.StreamWriter
+    Private _cpu, _mem, _dsk1, _dsk2, _dsk3 As Boolean
+    Private Sub RecordingButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordingButton.Click
+        If Recording = False Then
+            Dim rd As New RecordingDialog
+            rd.ShowDialog()
+            rd.TopMost = True
+            If rd.DialogResult = Windows.Forms.DialogResult.OK Then
+                TimeValue.Value = rd.NumericUpDown1.Value
+
+                _cpu = rd.cCPU.Checked
+                _mem = rd.cMem.Checked
+                _dsk1 = rd.cDsk1.Checked
+                _dsk2 = rd.cDsk2.Checked
+                _dsk3 = rd.cDsk3.Checked
+
+                Recording = True
+                Writer = New System.IO.StreamWriter("c:\record.csv", False)
+                Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
+                Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
+                Me.RecordingButton.ImageIndex = 5
+                Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop recording")
+                Me.RecordingStatusLabel.Visible = True
+                Me.RecordingStatusLabel.Text = "recording"
+            End If
         Else
-            Me.btnStart.Focus()
+            Recording = False
+            Writer.Close()
+            Me.RecordingStatusLabel.Text = "stopped"
+            Me.ToolTip1.SetToolTip(Me.RecordingButton, "start recording")
+            RecordingButton.ImageIndex = 4
         End If
+    End Sub
+    Private Sub Recording_Write_Line(ByVal Line As String)
+        Writer.WriteLine(DateTime.Now.ToLongTimeString & "," & Line)
     End Sub
 
     ''' <summary>
@@ -202,6 +224,23 @@ Public Class PerfMonitor
 
         Return totalMemory
     End Function
+
+    ''' <summary>
+    ''' Handle changing of timer interval.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub TimeValue_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeValue.ValueChanged
+        If TimeValue.Value = 0 Then TimeValue.Value = 1
+        If TimeValue.Value > 60 Then TimeValue.Value = 60
+        PerfMonTimer.Interval = TimeValue.Value * 1000
+        If PerfMonTimer.Enabled Then
+            Me.btnStop.Focus()
+        Else
+            Me.btnStart.Focus()
+        End If
+    End Sub
 
     Private Sub computername_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles computername.TextChanged
         Me.btnStart.Enabled = True
@@ -243,22 +282,7 @@ Public Class PerfMonitor
 
     End Sub
 
-    ''' <summary>
-    ''' Show or hide top panel.
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub ToggleTopPanel(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTogglePanel.Click
-        If Panel1.Height = 10 Then
-            Panel1.Height = 76
-            Me.Height = Me.Height + 66
-        Else
-            Panel1.Height = 10
-            Me.Height = Me.Height - 66
-        End If
-        Me.btnTogglePanel.Location = New System.Drawing.Point(0, Panel1.Height - 10)
-    End Sub
+
 
     ''' <summary>
     ''' Read in command line parameters.
@@ -328,15 +352,6 @@ Public Class PerfMonitor
 
 
     End Sub
-
-    Private Sub AlwaysOnTopToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
-        If Me.TopMost = True Then
-            Me.TopMost = False
-        Else
-            Me.TopMost = True
-        End If
-    End Sub
-
     Private Sub DoWhileLoading()
         splashscreen1.Show()
         splashscreen1.Refresh()
@@ -346,50 +361,29 @@ Public Class PerfMonitor
         Loop
         splashscreen1.Close()
     End Sub
-
-    Private Recording As Boolean = False
-    Private Writer As System.IO.StreamWriter
-    Private Sub RecordStartButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordStartButton.Click
-
-        Dim rd As New RecordingDialog
-        rd.ShowDialog()
-        rd.TopMost = True
-        If rd.DialogResult = Windows.Forms.DialogResult.OK Then
-            TimeValue.Value = rd.NumericUpDown1.Value
-            Recording = True
-            Writer = New System.IO.StreamWriter("c:\record.csv", False)
-            Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
-            Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
-            Me.RecordStartButton.Enabled = False
-            Me.RecordPauseButton.Enabled = True
-            Me.RecordStopButton.Enabled = True
-            Me.RecordingStatusLabel.Visible = True
-            Me.RecordingStatusLabel.Text = "recording"
-        End If
-    End Sub
-    Private Sub RecordStopButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordStopButton.Click
-        Recording = False
-        Writer.Close()
-        Me.RecordStopButton.Enabled = False
-        Me.RecordPauseButton.Enabled = False
-        Me.RecordStartButton.Enabled = True
-        Me.RecordingStatusLabel.Text = "stopped"
-    End Sub
-    Private Sub RecordPauseButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordPauseButton.Click
-        If Me.RecordPauseButton.ImageIndex = 2 Then ' we want to pause
-            Me.Recording = False
-            Me.RecordPauseButton.ImageIndex = 3
-            Me.RecordingStatusLabel.Text = "paused"
+    Private Sub AlwaysOnTopToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
+        If Me.TopMost = True Then
+            Me.TopMost = False
         Else
-            Me.Recording = True
-            Me.RecordPauseButton.ImageIndex = 2
-            Me.RecordingStatusLabel.Text = "recording"
+            Me.TopMost = True
         End If
     End Sub
-    Private Sub Recording_Write_Line(ByVal Line As String)
-        Writer.WriteLine(DateTime.Now.ToLongTimeString & "," & Line)
+    ''' <summary>
+    ''' Show or hide top panel.
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
+    Private Sub ToggleTopPanel(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnTogglePanel.Click
+        If Panel1.Height = 10 Then
+            Panel1.Height = 76
+            Me.Height = Me.Height + 66
+        Else
+            Panel1.Height = 10
+            Me.Height = Me.Height - 66
+        End If
+        Me.btnTogglePanel.Location = New System.Drawing.Point(0, Panel1.Height - 10)
     End Sub
-
 
 
 End Class
