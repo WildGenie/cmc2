@@ -40,12 +40,17 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.Panel3 = New System.Windows.Forms.Panel
+        Me.RecordingStatusLabel = New System.Windows.Forms.Label
         Me.RecordPauseButton = New System.Windows.Forms.Button
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.RecordStopButton = New System.Windows.Forms.Button
         Me.RecordStartButton = New System.Windows.Forms.Button
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.RecordingStatusLabel = New System.Windows.Forms.Label
+        Me.Pic3 = New System.Windows.Forms.PictureBox
+        Me.LabelDisk = New System.Windows.Forms.Label
+        Me.LabelPic3 = New System.Windows.Forms.Label
+        Me.labelPic1 = New System.Windows.Forms.Label
+        Me.LabelPic2 = New System.Windows.Forms.Label
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -53,6 +58,7 @@ Partial Class PerfMonitor
         Me.MenuStrip1.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
+        CType(Me.Pic3, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PerfMonTimer
@@ -65,7 +71,7 @@ Partial Class PerfMonitor
         Me.Pic1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
         Me.Pic1.Location = New System.Drawing.Point(15, 25)
         Me.Pic1.Name = "Pic1"
-        Me.Pic1.Size = New System.Drawing.Size(49, 150)
+        Me.Pic1.Size = New System.Drawing.Size(30, 150)
         Me.Pic1.TabIndex = 1
         Me.Pic1.TabStop = False
         '
@@ -76,9 +82,8 @@ Partial Class PerfMonitor
         Me.labelCPU.ForeColor = System.Drawing.Color.RoyalBlue
         Me.labelCPU.Location = New System.Drawing.Point(13, 9)
         Me.labelCPU.Name = "labelCPU"
-        Me.labelCPU.Size = New System.Drawing.Size(28, 13)
+        Me.labelCPU.Size = New System.Drawing.Size(0, 13)
         Me.labelCPU.TabIndex = 2
-        Me.labelCPU.Text = "CPU"
         '
         'btnStart
         '
@@ -113,9 +118,9 @@ Partial Class PerfMonitor
         '
         Me.Pic2.BackColor = System.Drawing.Color.LightGray
         Me.Pic2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Pic2.Location = New System.Drawing.Point(88, 25)
+        Me.Pic2.Location = New System.Drawing.Point(57, 25)
         Me.Pic2.Name = "Pic2"
-        Me.Pic2.Size = New System.Drawing.Size(45, 150)
+        Me.Pic2.Size = New System.Drawing.Size(34, 150)
         Me.Pic2.TabIndex = 6
         Me.Pic2.TabStop = False
         '
@@ -124,11 +129,10 @@ Partial Class PerfMonitor
         Me.LabelMem.AutoSize = True
         Me.LabelMem.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.LabelMem.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.LabelMem.Location = New System.Drawing.Point(86, 9)
+        Me.LabelMem.Location = New System.Drawing.Point(55, 9)
         Me.LabelMem.Name = "LabelMem"
-        Me.LabelMem.Size = New System.Drawing.Size(30, 13)
+        Me.LabelMem.Size = New System.Drawing.Size(0, 13)
         Me.LabelMem.TabIndex = 7
-        Me.LabelMem.Text = "RAM"
         '
         'TimeValue
         '
@@ -192,15 +196,20 @@ Partial Class PerfMonitor
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.LabelDisk)
+        Me.Panel2.Controls.Add(Me.Pic3)
         Me.Panel2.Controls.Add(Me.Panel3)
         Me.Panel2.Controls.Add(Me.labelCPU)
         Me.Panel2.Controls.Add(Me.Pic1)
         Me.Panel2.Controls.Add(Me.LabelMem)
         Me.Panel2.Controls.Add(Me.Pic2)
+        Me.Panel2.Controls.Add(Me.LabelPic3)
+        Me.Panel2.Controls.Add(Me.labelPic1)
+        Me.Panel2.Controls.Add(Me.LabelPic2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel2.Location = New System.Drawing.Point(0, 74)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(148, 201)
+        Me.Panel2.Size = New System.Drawing.Size(148, 221)
         Me.Panel2.TabIndex = 10
         '
         'Panel3
@@ -211,10 +220,21 @@ Partial Class PerfMonitor
         Me.Panel3.Controls.Add(Me.RecordStopButton)
         Me.Panel3.Controls.Add(Me.RecordStartButton)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 183)
+        Me.Panel3.Location = New System.Drawing.Point(0, 203)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(148, 18)
         Me.Panel3.TabIndex = 9
+        '
+        'RecordingStatusLabel
+        '
+        Me.RecordingStatusLabel.AutoSize = True
+        Me.RecordingStatusLabel.ForeColor = System.Drawing.Color.SkyBlue
+        Me.RecordingStatusLabel.Location = New System.Drawing.Point(71, 2)
+        Me.RecordingStatusLabel.Name = "RecordingStatusLabel"
+        Me.RecordingStatusLabel.Size = New System.Drawing.Size(51, 13)
+        Me.RecordingStatusLabel.TabIndex = 11
+        Me.RecordingStatusLabel.Text = "recording"
+        Me.RecordingStatusLabel.Visible = False
         '
         'RecordPauseButton
         '
@@ -264,16 +284,58 @@ Partial Class PerfMonitor
         Me.ToolTip1.SetToolTip(Me.RecordStartButton, "record")
         Me.RecordStartButton.UseVisualStyleBackColor = True
         '
-        'RecordingStatusLabel
+        'Pic3
         '
-        Me.RecordingStatusLabel.AutoSize = True
-        Me.RecordingStatusLabel.ForeColor = System.Drawing.Color.SkyBlue
-        Me.RecordingStatusLabel.Location = New System.Drawing.Point(71, 2)
-        Me.RecordingStatusLabel.Name = "RecordingStatusLabel"
-        Me.RecordingStatusLabel.Size = New System.Drawing.Size(51, 13)
-        Me.RecordingStatusLabel.TabIndex = 11
-        Me.RecordingStatusLabel.Text = "recording"
-        Me.RecordingStatusLabel.Visible = False
+        Me.Pic3.BackColor = System.Drawing.Color.LightGray
+        Me.Pic3.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Pic3.Location = New System.Drawing.Point(102, 25)
+        Me.Pic3.Name = "Pic3"
+        Me.Pic3.Size = New System.Drawing.Size(32, 150)
+        Me.Pic3.TabIndex = 10
+        Me.Pic3.TabStop = False
+        '
+        'LabelDisk
+        '
+        Me.LabelDisk.AutoSize = True
+        Me.LabelDisk.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelDisk.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LabelDisk.Location = New System.Drawing.Point(99, 9)
+        Me.LabelDisk.Name = "LabelDisk"
+        Me.LabelDisk.Size = New System.Drawing.Size(0, 13)
+        Me.LabelDisk.TabIndex = 11
+        '
+        'LabelPic3
+        '
+        Me.LabelPic3.AutoSize = True
+        Me.LabelPic3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPic3.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LabelPic3.Location = New System.Drawing.Point(104, 176)
+        Me.LabelPic3.Name = "LabelPic3"
+        Me.LabelPic3.Size = New System.Drawing.Size(25, 13)
+        Me.LabelPic3.TabIndex = 14
+        Me.LabelPic3.Text = "disk"
+        '
+        'labelPic1
+        '
+        Me.labelPic1.AutoSize = True
+        Me.labelPic1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.labelPic1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.labelPic1.Location = New System.Drawing.Point(18, 176)
+        Me.labelPic1.Name = "labelPic1"
+        Me.labelPic1.Size = New System.Drawing.Size(24, 13)
+        Me.labelPic1.TabIndex = 12
+        Me.labelPic1.Text = "cpu"
+        '
+        'LabelPic2
+        '
+        Me.LabelPic2.AutoSize = True
+        Me.LabelPic2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.LabelPic2.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LabelPic2.Location = New System.Drawing.Point(60, 176)
+        Me.LabelPic2.Name = "LabelPic2"
+        Me.LabelPic2.Size = New System.Drawing.Size(29, 13)
+        Me.LabelPic2.TabIndex = 13
+        Me.LabelPic2.Text = "mem"
         '
         'PerfMonitor
         '
@@ -281,7 +343,7 @@ Partial Class PerfMonitor
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.btnStop
-        Me.ClientSize = New System.Drawing.Size(148, 275)
+        Me.ClientSize = New System.Drawing.Size(148, 295)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
@@ -301,6 +363,7 @@ Partial Class PerfMonitor
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
+        CType(Me.Pic3, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -326,5 +389,10 @@ Partial Class PerfMonitor
     Friend WithEvents RecordPauseButton As System.Windows.Forms.Button
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents RecordingStatusLabel As System.Windows.Forms.Label
+    Friend WithEvents Pic3 As System.Windows.Forms.PictureBox
+    Friend WithEvents LabelDisk As System.Windows.Forms.Label
+    Friend WithEvents LabelPic3 As System.Windows.Forms.Label
+    Friend WithEvents labelPic1 As System.Windows.Forms.Label
+    Friend WithEvents LabelPic2 As System.Windows.Forms.Label
 
 End Class
