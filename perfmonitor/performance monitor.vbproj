@@ -120,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="perf.ico" />
+    <None Include="Resources\chart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
