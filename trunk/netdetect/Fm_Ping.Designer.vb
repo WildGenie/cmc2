@@ -39,12 +39,11 @@ Partial Public Class Form1
                     Or System.Windows.Forms.AnchorStyles.Left) _
                     Or System.Windows.Forms.AnchorStyles.Right), System.Windows.Forms.AnchorStyles)
         Me.resultsListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ipAddressColumn, Me.responseTimeColumn, Me.hostnameColumn})
+        Me.resultsListView.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.resultsListView.FullRowSelect = True
-        Me.resultsListView.HoverSelection = True
         Me.resultsListView.Location = New System.Drawing.Point(13, 92)
         Me.resultsListView.Name = "resultsListView"
         Me.resultsListView.Size = New System.Drawing.Size(395, 211)
-        Me.resultsListView.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.resultsListView.TabIndex = 14
         Me.resultsListView.UseCompatibleStateImageBehavior = False
         Me.resultsListView.View = System.Windows.Forms.View.Details
