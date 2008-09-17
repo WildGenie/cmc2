@@ -1,6 +1,6 @@
 Public Class PerfMonitor
 
-    Private cpu, mem, dskTime As PerformanceCounter
+    Private cpu, mem, dskTime, dskReadQ, dskWriteQ As PerformanceCounter
     Private totalMemory As Integer
     Private FirstRun As Boolean
     Protected Friend loading As Boolean
@@ -42,6 +42,8 @@ Public Class PerfMonitor
 
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
         dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total", Me.computername.Text)
+        dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", "_Total", Me.computername.Text)
+        dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", "_Total", Me.computername.Text)
 
 
         Me.Text = Me.computername.Text.ToUpper
@@ -113,12 +115,20 @@ Public Class PerfMonitor
             dsktimeValue = 100
         End If
 
+        '  ----  Avg Disk Read & Write Queues
+        Dim ReadQ As Single = dskReadQ.NextValue
+        'LblReadQ.Text = FormatNumber(ReadQ, 2)
+        Dim WriteQ As Single = dskWriteQ.NextValue
+        'LblWriteQ.Text = FormatNumber(WriteQ, 2)
+
+
+
         UpdatePercentGraph(dsktimeValue, Pic3, dskColor)
 
 
 
         If Recording Then
-            Me.Recording_Write_Line(CInt(cpuvalue) & "," & CInt(memValue) & "," & CInt(dsktimeValue))
+            Me.Recording_Write_Line(CInt(cpuvalue) & "," & CInt(memValue) & "," & CInt(dsktimeValue) & "," & ReadQ & "," & WriteQ)
         End If
 
         If FirstRun Then
@@ -305,7 +315,7 @@ Public Class PerfMonitor
                 Else
                     Start(True)
                 End If
-                Me.TopMost = True
+                'Me.TopMost = True
             End If
 
             loader.Join()
@@ -343,12 +353,13 @@ Public Class PerfMonitor
 
         Dim rd As New RecordingDialog
         rd.ShowDialog()
+        rd.TopMost = True
         If rd.DialogResult = Windows.Forms.DialogResult.OK Then
             TimeValue.Value = rd.NumericUpDown1.Value
             Recording = True
             Writer = New System.IO.StreamWriter("c:\record.csv", False)
             Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
-            Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total")
+            Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
             Me.RecordStartButton.Enabled = False
             Me.RecordPauseButton.Enabled = True
             Me.RecordStopButton.Enabled = True
