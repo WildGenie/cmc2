@@ -6194,6 +6194,7 @@ Public Class Form1
     Protected Friend sAltPassword As String
     Protected Friend sAltDomain As String
     Protected Friend sAltDomainUser As String
+
     Private Sub AltUserCheckBox_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AltUserCheckBox.CheckedChanged
         If AltUserCheckBox.Checked Then
             altPassword_TextBox.UseSystemPasswordChar = True
@@ -6292,43 +6293,47 @@ Public Class Form1
     ' GO BUTTON....
 
     Private Sub GO_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GO_Button.Click
+
+        ' disable the Go button to prevent double press.
+        GO_Button.Enabled = False
+
         Me.Cursor = Cursors.WaitCursor
         computername.Text = Trim(computername.Text.ToLower)
         Me.computername.Refresh()
 
         ' clear the form
         If FormCleared = False Then ClearBoxes()
-        'Dim clearThread As New System.Threading.Thread(AddressOf ClearBoxes)
-        'clearThread.Start()
-        'End If
 
-        GO_Button.Enabled = False
-
-
+        ' instantiate a new pc object
         PC = New pc
         PC.Name = computername.Text
 
         Panel2.Text = "connecting..."
 
+        ' ping the computer to confirm connectivity
         If Not PingClass.TryPing(PC.Name) Then
             Panel2.Text = "connection failed. check the computer is online."
         Else
+
             PC.IPAddress = Label_IP.Text
 
+            ' Check whether alternate credentials to be used.
             CheckAltUserCredentials()
 
             ' --------------------------
 
-            ' Make WMI Connection
+            ' Attempt to make WMI Connection to the target computer
             Panel2.Text = "connecting to wmi....."
             wmi = New wmiConnection
-
             If wmi.WMIConnect(PC.Name) = False Then
+
+                ' wmi connection failed
                 Dim tmpstring As String = notification_label.Text
                 ClearBoxes()
                 notification_label.Text = tmpstring
                 tmpstring = Nothing
                 Panel2.Text = "wmi connect failed"
+
             Else
 
                 ConnectionExists = True
@@ -6345,10 +6350,10 @@ Public Class Form1
                 Catch ex As Exception
                 End Try
                 mainthread = Nothing
-                'Main()
 
                 Me.AddToHistory(PC.Name)
                 Me.SaveHistory()
+
                 ' re-select new entry & refresh
                 computername.Text = PC.Name
                 computername.Refresh()
@@ -6357,13 +6362,13 @@ Public Class Form1
                 AppendToolStripMenuItem.Enabled = True
                 FormCleared = False
 
-                End If
+            End If
         End If
 
         GO_Button.Enabled = True
-        'GO_Button.Focus()
         Me.Refresh()
         Me.Cursor = Cursors.Default
+
     End Sub
 
     Private MainThreadRunning As Boolean
@@ -6372,7 +6377,6 @@ Public Class Form1
 
         MainThreadRunning = True
         
-
         ' start timing
         Dim start, totaltime As Double
         start = Microsoft.VisualBasic.DateAndTime.Timer
@@ -6384,8 +6388,8 @@ Public Class Form1
             bMultiThread = True
         End If
 
-        ' Retrieve WMI information
 
+        ' Retrieve WMI information
         Dim OSThread As New System.Threading.Thread(AddressOf GetOS)
         Dim UserProxyThread As New System.Threading.Thread(AddressOf UserProxy)
         Dim ieThread As New System.Threading.Thread(AddressOf getIE)
@@ -6400,28 +6404,25 @@ Public Class Form1
             getIE()
         End If
 
+
         ' Get Shares
         refreshShares()
 
 
-        '==============    Hardware , Network, Services, Processes   ===================================
-
+        ' Hardware , Network, Services, Processes
         If My.Settings.hw Then gethardware()
         If My.Settings.nw Then WMINetwork()
         If My.Settings.sv Then GetSVClist()
         If My.Settings.pr Then GetProcesses()
 
-        '=================================================================
-        ' map IPC$ share
 
+        ' map IPC$ share
         If AltUserCheckBox.Checked Then _
                 Shell("net use \\" & PC.Name & "\ipc$ /USER:" & Me.sAltUsername & " " & Me.sAltPassword, 0, False)
 
 
-        '=================================================================
+        ' Enable the toolbar buttons on the form
         EnableButtons()
-
-        '=================================================================
 
         ' Rejoin threads
         If bMultiThread Then
@@ -6439,7 +6440,7 @@ Public Class Form1
             End Try
         End If
 
-        '===============  Finished  ======================================
+        ' Finished
         totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 4)
         WriteLog(PC.Name & " - connection time: " & totaltime.ToString)
         Panel2.Text = "ready"
