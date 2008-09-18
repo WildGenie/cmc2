@@ -184,7 +184,8 @@ Public Class PerfMonitor
                 _dsk3 = rd.cDsk3.Checked
 
                 Recording = True
-                Writer = New System.IO.StreamWriter("c:\record.csv", False)
+                Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "")
+                Writer = New System.IO.StreamWriter("c:\Perf_" & UCase(computername.Text) & "_" & starttime & ".csv", False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
                 Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
                 Me.RecordingButton.ImageIndex = 5

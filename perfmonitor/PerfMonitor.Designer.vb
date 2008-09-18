@@ -189,7 +189,7 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
         Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(86, 20)
         Me.AlwaysOnTopToolStripMenuItem.Text = "always on top"
         '
         'Panel2
@@ -235,6 +235,8 @@ Partial Class PerfMonitor
         'RecordingButton
         '
         Me.RecordingButton.Enabled = False
+        Me.RecordingButton.FlatAppearance.BorderSize = 0
+        Me.RecordingButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.RecordingButton.ImageIndex = 4
         Me.RecordingButton.ImageList = Me.ImageList1
         Me.RecordingButton.Location = New System.Drawing.Point(1, 0)
