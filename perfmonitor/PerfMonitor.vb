@@ -184,25 +184,27 @@ Public Class PerfMonitor
                 _dsk3 = rd.cDsk3.Checked
 
                 Recording = True
+                Dim path As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments
                 Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "")
-                Writer = New System.IO.StreamWriter("c:\Perf_" & UCase(computername.Text) & "_" & starttime & ".csv", False)
+                Writer = New System.IO.StreamWriter(path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".csv", False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
                 Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
-                Me.RecordingButton.ImageIndex = 5
-                Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop recording")
+                Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop capturing performance data")
+                Me.RecordingButton.Text = "stop recording"
                 Me.RecordingStatusLabel.Visible = True
                 Me.RecordingStatusLabel.Text = "recording"
             End If
         Else
             Recording = False
             Writer.Close()
-            Me.RecordingStatusLabel.Text = "stopped"
-            Me.ToolTip1.SetToolTip(Me.RecordingButton, "start recording")
-            RecordingButton.ImageIndex = 4
+            Me.RecordingStatusLabel.Text = String.Empty
+            Me.RecordingButton.Text = "start recording"
+            Me.ToolTip1.SetToolTip(Me.RecordingButton, "record the performance data to file")
         End If
     End Sub
     Private Sub Recording_Write_Line(ByVal Line As String)
-        Writer.WriteLine(DateTime.Now.ToLongTimeString & "," & Line)
+        'Writer.WriteLine(DateTime.Now.ToString("yyyyMMddhhmmss") & "," & Line)
+        Writer.WriteLine(DateTime.Now & "," & Line)
     End Sub
 
     ''' <summary>
@@ -246,6 +248,8 @@ Public Class PerfMonitor
     Private Sub computername_TextChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles computername.TextChanged
         Me.btnStart.Enabled = True
     End Sub
+
+    
 
     ''' <summary>
     ''' Change graph size proportionally with form
@@ -361,6 +365,18 @@ Public Class PerfMonitor
             splashscreen1.Refresh()
         Loop
         splashscreen1.Close()
+    End Sub
+    Private Sub PerfMonitor_FormClosing(ByVal sender As Object, ByVal e As System.Windows.Forms.FormClosingEventArgs) Handles Me.FormClosing
+        If Recording Then
+            If MsgBox("Performance metrics are being captured to file." & vbCr & "Are you sure you want to stop?", MsgBoxStyle.Exclamation + MsgBoxStyle.YesNoCancel, "Stop Recording") = MsgBoxResult.No Then
+                e.Cancel = True
+            Else
+                ' close the stream before quitting
+                Writer.Close()
+                Me.RecordingStatusLabel.Text = String.Empty
+                e.Cancel = False
+            End If
+        End If
     End Sub
     Private Sub AlwaysOnTopToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
         If Me.TopMost = True Then
