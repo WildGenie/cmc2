@@ -39,7 +39,7 @@ Public Class SvcInfo
 
     Private Sub btnSvcStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSvcStart.Click
 
-        Dim count As Integer
+        Dim count As Integer = 0
         Me.Cursor = Cursors.AppStarting
         Me.progBar.Visible = True
         Me.progBar.Value = 0
@@ -57,9 +57,8 @@ Public Class SvcInfo
             System.Threading.Thread.Sleep(600)
             If count >= 15 Then
                 Exit Do
-                MsgBox("Unable to start service within time.")
-                Me.Close()
             End If
+            count += 1
         Loop
         Do While Me.progBar.Value < 100
             Me.progBar.Increment(20)
@@ -67,6 +66,8 @@ Public Class SvcInfo
         Loop
         If Me.lblSvcStatus.Text = "Running" Then
             Me.btnSvcStop.Enabled = True
+        Else
+            MsgBox("Unable to start service within time." & vbCr & vbCr & "Check the event log", MsgBoxStyle.Critical, "Service Start Failed")
         End If
         ButtonsEnable()
         Me.Cursor = Cursors.Default
@@ -76,7 +77,7 @@ Public Class SvcInfo
 
     Private Sub btnSvcStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnSvcStop.Click
 
-        Dim count As Integer
+        Dim count As Integer = 0
         Me.Cursor = Cursors.AppStarting
         Me.progBar.Visible = True
         Me.progBar.Value = 0
@@ -96,10 +97,8 @@ Public Class SvcInfo
 
             If count >= 12 Then
                 Exit Do
-                MsgBox("Unable to stop service within time.")
-                Me.Close()
             End If
-
+            count += 1
         Loop
         Do While Me.progBar.Value < 100
             Me.progBar.Increment(10)
@@ -107,6 +106,8 @@ Public Class SvcInfo
         Loop
         If Me.lblSvcStatus.Text = "Stopped" Then
             Me.btnSvcStart.Enabled = True
+        Else
+            MsgBox("Unable to stop the service within time." & vbCr & vbCr & "Check the event log", MsgBoxStyle.Critical, "Service Stop Failed")
         End If
         ButtonsEnable()
         Me.Cursor = Cursors.Default
