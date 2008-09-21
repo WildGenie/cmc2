@@ -7,6 +7,7 @@ Public Class PerfMonitor
     Protected Friend Username As String = Nothing
     Protected Friend Password As String = Nothing
     Private CriticalError As Boolean = False
+    Private RecordingFileName
 
     Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
         Start()
@@ -186,7 +187,8 @@ Public Class PerfMonitor
                 Recording = True
                 Dim path As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments
                 Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "")
-                Writer = New System.IO.StreamWriter(path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".csv", False)
+                Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".csv"
+                Writer = New System.IO.StreamWriter(Me.RecordingFileName, False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
                 Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
                 Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop capturing performance data")
@@ -200,6 +202,11 @@ Public Class PerfMonitor
             Me.RecordingStatusLabel.Text = String.Empty
             Me.RecordingButton.Text = "start recording"
             Me.ToolTip1.SetToolTip(Me.RecordingButton, "record the performance data to file")
+            'Dim t As New System.Threading.Thread(addres
+            Dim g As New FmGraph
+            g.FileToOpen = Me.RecordingFileName
+            g.Show()
+
         End If
     End Sub
     Private Sub Recording_Write_Line(ByVal Line As String)
