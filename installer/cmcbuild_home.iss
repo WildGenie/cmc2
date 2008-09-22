@@ -24,15 +24,16 @@ Name: "{app}\MyDir" ; Permissions: authusers-modify
 
 [Files]
 Source: "E:\dotnet projects\! vb\cmc\CMC\bin\cmc.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\ADMgmt.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\netdetect\bin\Release\NetDetect.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\perfmonitor\bin\Release\PerfMonitor.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\remoteregedit\bin\Release\RemReg.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\Interop.ActiveDs.dll"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\Interop.TSUSEREXLib.dll"; DestDir: "{app}\Files"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\CMC\bin\cmc.exe.config"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\ADMgmt.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\perfmonitor\bin\Release\PerfMonitor.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\remoteregedit\bin\Release\RemReg.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\netdetect\bin\Release\NetDetect.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\Interop.ActiveDs.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\Interop.TSUSEREXLib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\netdom.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\netlib\bin\Release\NetLib.dll"; DestDir: "{app}\Files"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\perfmonitor\Resources\ZedGraph.dll"; DestDir: "{app}\Files"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\netlib\bin\Release\NetLib.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\perfmonitor\Resources\ZedGraph.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\psexec.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\regx3.dll"; DestDir: "{app}\Files"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\vncviewer.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
@@ -44,10 +45,10 @@ Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\winvnc\wm_hooks.dll"; D
 
 [Icons]
 Name: "{group}\CMC"; Filename: "{app}\cmc.exe";Comment: "Computer Management Console";Flags: UseAppPaths
-Name: "{group}\AD User Manager"; Filename: "{app}\files\admgmt.exe"
-Name: "{group}\Network Scanner (test)"; Filename: "{app}\files\netdetect.exe"
-Name: "{group}\Remote RegEdit"; Filename: "{app}\files\remreg.exe"
-Name: "{group}\Performance Monitor"; Filename: "{app}\files\perfmon.exe"
+Name: "{group}\AD User Manager"; Filename: "{app}\admgmt.exe"
+Name: "{group}\Network Scanner (test)"; Filename: "{app}\netdetect.exe"
+Name: "{group}\Remote RegEdit"; Filename: "{app}\remreg.exe"
+Name: "{group}\Performance Monitor"; Filename: "{app}\perfmon.exe"
 Name: "{group}\{cm:UninstallProgram,CMC}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\CMC"; Filename: "{app}\cmc.exe"; Tasks: desktopicon
 Name: "{userappdata}\Microsoft\Internet Explorer\Quick Launch\CMC"; Filename: "{app}\cmc.exe"; Tasks: quicklaunchicon
