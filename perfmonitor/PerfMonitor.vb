@@ -187,7 +187,7 @@ Public Class PerfMonitor
                 Recording = True
                 Dim path As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments
                 Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "")
-                Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".csv"
+                Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".pff"
                 Writer = New System.IO.StreamWriter(Me.RecordingFileName, False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
                 Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
@@ -203,7 +203,7 @@ Public Class PerfMonitor
             Me.RecordingButton.Text = "start recording"
             Me.ToolTip1.SetToolTip(Me.RecordingButton, "record the performance data to file")
             'Dim t As New System.Threading.Thread(addres
-            Dim g As New FmGraph
+            Dim g As New PerformanceGraph.FmGraph
             g.FileToOpen = Me.RecordingFileName
             g.Show()
 
@@ -409,7 +409,7 @@ Public Class PerfMonitor
         Me.TopMost = AlwaysOnTopToolStripMenuItem1.Checked
     End Sub
     Private Sub OpenRecordedDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenRecordedDataToolStripMenuItem.Click
-        Dim g As New FmGraph
+        Dim g As New PerformanceGraph.FmGraph
         g.Show()
     End Sub
 End Class
