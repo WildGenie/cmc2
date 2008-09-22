@@ -2,11 +2,15 @@ Imports ZedGraph
 
 Public Class FmGraph
 
-    Protected Friend FileToOpen As String
+    Public FileToOpen As String
     Private myData As DataTable
-    Protected Friend IsSmoothed As Boolean = True
+    Private IsSmoothed As Boolean
 
-
+    ''' <summary>
+    ''' Reads file containing performance data into a datatable
+    ''' </summary>
+    ''' <param name="filename"></param>
+    ''' <remarks></remarks>
     Private Sub Fill_DataTable(ByVal filename As String)
         myData = New DataTable()
         myData.Columns.Add(New DataColumn("Time", GetType(DateTime)))
@@ -188,27 +192,6 @@ Public Class FmGraph
         zgc.AxisChange()
     End Sub
 
-    ''' <summary>
-    ''' Launches open file dialog to open recorded data files
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks>jesus, why is typing to difficult?</remarks>
-    Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
-        Me.OpenFileDialog1.ShowDialog()
-        Dim file As String
-        file = Me.OpenFileDialog1.FileName
-        If Not String.IsNullOrEmpty(file) Then
-            Fill_DataTable(file)
-            CreateGraph(zg1)
-            CreateDiskGraph(zg2)
-            Me.Text = "Performance Graph: " & file
-            Me.Width = 800
-            Me.Height = 800
-            Me.SplitContainer1.Visible = True
-        End If
-    End Sub
 
     ''' <summary>
     ''' contains code to resize elements
@@ -225,6 +208,7 @@ Public Class FmGraph
     End Sub
 
     Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+        IsSmoothed = Me.SmoothCurvesToolStripMenuItem.Checked
         If Not FileToOpen Is Nothing Then
             Fill_DataTable(FileToOpen)
             CreateGraph(zg1)
@@ -250,7 +234,13 @@ Public Class FmGraph
             End If
         End If
     End Sub
-    Private Sub OpenToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
+    ''' <summary>
+    ''' Launches open file dialog to open recorded data files
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks>jesus, why is typing to difficult?</remarks>
+    Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         Me.OpenFileDialog1.ShowDialog()
         Dim file As String
@@ -265,11 +255,44 @@ Public Class FmGraph
             Me.SplitContainer1.Visible = True
         End If
     End Sub
+    Private Sub OpenToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
+        Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        Me.OpenFileDialog1.ShowDialog()
+        Dim file As String
+        file = Me.OpenFileDialog1.FileName
+        If Not String.IsNullOrEmpty(file) Then
+            If Not myData Is Nothing Then
+                zg1.GraphPane.CurveList.Clear()
+                zg2.GraphPane.CurveList.Clear()
+                zg1.Invalidate()
+                zg2.Invalidate()
+            End If
+            Fill_DataTable(file)
+            CreateGraph(zg1)
+            CreateDiskGraph(zg2)
+            Me.Text = "Performance Graph: " & file
+            Me.Width = 800
+            Me.Height = 800
+            Me.SplitContainer1.Visible = True
+        End If
+    End Sub
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
+    Private Sub SmoothCurvesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SmoothCurvesToolStripMenuItem.Click
+        Me.IsSmoothed = Me.SmoothCurvesToolStripMenuItem.Checked
 
-#Region "zedgraph helper"
+        If Not myData Is Nothing Then
+            zg1.GraphPane.CurveList.Clear()
+            zg2.GraphPane.CurveList.Clear()
+            zg1.Invalidate()
+            zg2.Invalidate()
+            CreateGraph(zg1)
+            CreateDiskGraph(zg2)
+        End If
+    End Sub
+
+#Region "zedgraph help"
     '#  In the Solution Explorer, right-click on the ZedGraphSample project and select "Add Reference..."
     '# Pick the browse tab, and navigate to the zedGraph.dll (downloadable from here), and click OK
     '# From View menu, select Toolbox, scroll down to the bottom of the toolbox window to see the "General" bar
@@ -283,17 +306,5 @@ Public Class FmGraph
     '# Go to the top of the file (above the "Public Class Form1" declaration) and add Imports ZedGraph 
 #End Region
 
-    Private Sub SmoothCurvesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SmoothCurvesToolStripMenuItem.Click
-        Me.IsSmoothed = Me.SmoothCurvesToolStripMenuItem.Checked
 
-        If Not myData Is Nothing Then
-            zg1.GraphPane.CurveList.Clear()
-            zg2.GraphPane.CurveList.Clear()
-            zg1.Invalidate()
-            zg2.Invalidate()
-            CreateGraph(zg1)
-            CreateDiskGraph(zg2)
-        End If
-
-    End Sub
 End Class

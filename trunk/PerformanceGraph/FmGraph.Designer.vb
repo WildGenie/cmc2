@@ -56,7 +56,7 @@ Partial Class FmGraph
         '
         'OpenFileDialog1
         '
-        Me.OpenFileDialog1.Filter = "PerfMonitor Files|*.csv|All Files|*.*"
+        Me.OpenFileDialog1.Filter = "PerfMonitor Files|*.pff|All Files|*.*"
         Me.OpenFileDialog1.Title = "Select file to open"
         '
         'zg2
@@ -87,8 +87,8 @@ Partial Class FmGraph
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.zg2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(277, 115)
-        Me.SplitContainer1.SplitterDistance = 56
+        Me.SplitContainer1.Size = New System.Drawing.Size(269, 123)
+        Me.SplitContainer1.SplitterDistance = 58
         Me.SplitContainer1.TabIndex = 3
         Me.SplitContainer1.Visible = False
         '
@@ -97,7 +97,7 @@ Partial Class FmGraph
         Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(277, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(269, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -111,40 +111,37 @@ Partial Class FmGraph
         '
         'OpenToolStripMenuItem
         '
-        Me.OpenToolStripMenuItem.Image = Global.PerfMonitor.My.Resources.Resources.chart
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.OpenToolStripMenuItem.Text = "Open"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SmoothCurvesToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
         'SmoothCurvesToolStripMenuItem
         '
-        Me.SmoothCurvesToolStripMenuItem.Checked = True
         Me.SmoothCurvesToolStripMenuItem.CheckOnClick = True
-        Me.SmoothCurvesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked
         Me.SmoothCurvesToolStripMenuItem.Name = "SmoothCurvesToolStripMenuItem"
-        Me.SmoothCurvesToolStripMenuItem.Size = New System.Drawing.Size(155, 22)
+        Me.SmoothCurvesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.SmoothCurvesToolStripMenuItem.Text = "smooth curves"
         '
         'FmGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(277, 139)
+        Me.ClientSize = New System.Drawing.Size(269, 147)
         Me.Controls.Add(Me.SplitContainer1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)

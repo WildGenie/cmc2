@@ -5,13 +5,13 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.50727</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{721EAF87-C559-480E-AE56-C4D7B1DD69CD}</ProjectGuid>
+    <ProjectGuid>{1BF9242C-A749-4C3A-A692-C535C72EACC8}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <StartupObject>PerfMonitor.My.MyApplication</StartupObject>
-    <RootNamespace>PerfMonitor</RootNamespace>
-    <AssemblyName>PerfMonitor</AssemblyName>
+    <StartupObject>PerformanceGraph.My.MyApplication</StartupObject>
+    <RootNamespace>PerformanceGraph</RootNamespace>
+    <AssemblyName>PerformanceGraph</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <ApplicationIcon>perf.ico</ApplicationIcon>
+    <ApplicationIcon>chart.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -19,7 +19,7 @@
     <DefineDebug>true</DefineDebug>
     <DefineTrace>true</DefineTrace>
     <OutputPath>bin\Debug\</OutputPath>
-    <DocumentationFile>PerfMonitor.xml</DocumentationFile>
+    <DocumentationFile>PerformanceGraph.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
@@ -28,30 +28,37 @@
     <DefineTrace>true</DefineTrace>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
-    <DocumentationFile>PerfMonitor.xml</DocumentationFile>
+    <DocumentationFile>PerformanceGraph.xml</DocumentationFile>
     <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ZedGraph, Version=5.1.2.878, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>.\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
     <Import Include="System" />
     <Import Include="System.Collections" />
     <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
     <Import Include="System.Drawing" />
     <Import Include="System.Diagnostics" />
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PerfMonitor.vb">
+    <Compile Include="FmGraph.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="PerfMonitor.Designer.vb">
-      <DependentUpon>PerfMonitor.vb</DependentUpon>
+    <Compile Include="FmGraph.Designer.vb">
+      <DependentUpon>FmGraph.vb</DependentUpon>
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="My Project\AssemblyInfo.vb" />
@@ -69,38 +76,17 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="RecordingDialog.Designer.vb">
-      <DependentUpon>RecordingDialog.vb</DependentUpon>
-    </Compile>
-    <Compile Include="RecordingDialog.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="splashscreen1.Designer.vb">
-      <DependentUpon>splashscreen1.vb</DependentUpon>
-    </Compile>
-    <Compile Include="splashscreen1.vb">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="wmi.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="PerfMonitor.resx">
+    <EmbeddedResource Include="FmGraph.resx">
+      <DependentUpon>FmGraph.vb</DependentUpon>
       <SubType>Designer</SubType>
-      <DependentUpon>PerfMonitor.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.vb</LastGenOutput>
       <CustomToolNamespace>My.Resources</CustomToolNamespace>
       <SubType>Designer</SubType>
-    </EmbeddedResource>
-    <EmbeddedResource Include="RecordingDialog.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>RecordingDialog.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="splashscreen1.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>splashscreen1.vb</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
@@ -116,14 +102,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chart.ico" />
-    <Content Include="perf.ico" />
-    <None Include="Resources\chart.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\PerformanceGraph\PerformanceGraph.vbproj">
-      <Project>{1BF9242C-A749-4C3A-A692-C535C72EACC8}</Project>
-      <Name>PerformanceGraph</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

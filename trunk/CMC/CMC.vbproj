@@ -209,6 +209,7 @@
     <None Include="Resources\book_open.png" />
     <None Include="Resources\cancel.png" />
     <None Include="Resources\chart.png" />
+    <None Include="Resources\chart_accept.png" />
     <Content Include="Resources\files\netdom.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -308,37 +309,37 @@
   <ItemGroup>
     <PublishFile Include="changelog.txt">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="en-GB\CMC.resources">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
       <FileType>Satellite</FileType>
     </PublishFile>
     <PublishFile Include="My Project\Application.myapp">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\files\netdom.exe">
       <Visible>False</Visible>
-      <PublishState>Auto</PublishState>
       <Group>system</Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Auto</PublishState>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
@@ -350,6 +351,10 @@
     <ProjectReference Include="..\perfmonitor\performance monitor.vbproj">
       <Project>{721EAF87-C559-480E-AE56-C4D7B1DD69CD}</Project>
       <Name>performance monitor</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\PerformanceGraph\PerformanceGraph.vbproj">
+      <Project>{1BF9242C-A749-4C3A-A692-C535C72EACC8}</Project>
+      <Name>PerformanceGraph</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
