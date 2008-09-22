@@ -4,6 +4,7 @@ Public Class FmGraph
 
     Protected Friend FileToOpen As String
     Private myData As DataTable
+    Protected Friend IsSmoothed As Boolean = True
 
 
     Private Sub Fill_DataTable(ByVal filename As String)
@@ -67,19 +68,19 @@ Public Class FmGraph
 
         Curve = myPane.AddCurve("% CPU", cpuList, Color.Red, SymbolType.None)
         'cpuCurve.Symbol.Fill = New Fill(Color.Yellow)
-        Curve.Line.IsSmooth = True
+        If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
 
 
         Curve = myPane.AddCurve("% Disk Time", diskList, Color.Green, SymbolType.None)
-        Curve.Line.IsSmooth = True
+        If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         Curve.Line.Style = Drawing2D.DashStyle.Dash
         ' Curve.Symbol.Fill = New Fill(Color.LightSkyBlue)
 
         ' Generate a filled blue curve with no symbols, and "% Mem" in the legend - Filled, therefore should be last graph drawn
         Curve = myPane.AddCurve("% Physical Memory", memList, Color.LemonChiffon, SymbolType.None)
-        Curve.Line.IsSmooth = True
+        If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         ' Fill the area under the curve with a white-red gradient at 90 degrees
         Curve.Line.Fill = New Fill(Color.Khaki) '(Color.Thistle)
@@ -158,19 +159,19 @@ Public Class FmGraph
 
         ' Generate a green curve with circle symbols, and "% Disk Time" in the legend
         Curve = myPane.AddCurve("% Disk Time", diskList, Color.Green, SymbolType.None)
-        Curve.Line.IsSmooth = True
+        If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         ' diskPercentCurve.Symbol.Fill = New Fill(Color.LightSkyBlue)
 
         Curve = myPane.AddCurve("Read Queue", rQList, Color.RoyalBlue, SymbolType.Circle)
-        Curve.Line.IsSmooth = True
+        If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         Curve.Symbol.Fill = New Fill(Color.White)
         ' Associate this curve with the Y2 axis
         Curve.IsY2Axis = True
 
         Curve = myPane.AddCurve("Write Queue", wQList, Color.DeepSkyBlue, SymbolType.Square)
-        Curve.Line.IsSmooth = True
+        If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         Curve.Symbol.Fill = New Fill(Color.White)
         ' Associate this curve with the Y2 axis
@@ -281,4 +282,18 @@ Public Class FmGraph
     '# Double click the Windows Form (not the ZedGraphControl), this will cause the window to switch to CodeView, with a template for Sub Form1_Load
     '# Go to the top of the file (above the "Public Class Form1" declaration) and add Imports ZedGraph 
 #End Region
+
+    Private Sub SmoothCurvesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles SmoothCurvesToolStripMenuItem.Click
+        Me.IsSmoothed = Me.SmoothCurvesToolStripMenuItem.Checked
+
+        If Not myData Is Nothing Then
+            zg1.GraphPane.CurveList.Clear()
+            zg2.GraphPane.CurveList.Clear()
+            zg1.Invalidate()
+            zg2.Invalidate()
+            CreateGraph(zg1)
+            CreateDiskGraph(zg2)
+        End If
+
+    End Sub
 End Class

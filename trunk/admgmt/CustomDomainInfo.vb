@@ -104,8 +104,10 @@ Public Class AddDomainInfo
 
     Private Sub AddDomainInfo_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If EditMode = True Then
+            OK_Button.Text = "Save"
             btnDelete.Visible = True
         Else
+            OK_Button.Text = "Add"
             btnDelete.Visible = False
         End If
     End Sub
