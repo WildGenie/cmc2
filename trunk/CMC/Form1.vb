@@ -9926,28 +9926,6 @@ Public Class Form1
         Me.Cursor = Cursors.Default
         Panel2.Text = "ready"
 
-
-
-        'Me.Cursor = Cursors.WaitCursor
-        'Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
-        'If System.Diagnostics.Debugger.IsAttached Then
-        '    Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
-        'End If
-
-        'If File.Exists(Path) Then
-        '    Dim p As New Process
-        '    Dim psi As ProcessStartInfo = New ProcessStartInfo
-        '    psi.FileName = Path
-        '    If ConnectionExists Then
-        '        psi.Arguments = "/d:" & PC.CurrentUserDomain & " /u:" & Chr(34) & PC.CurrentUser & Chr(34)
-        '    End If
-        '    p.StartInfo = psi
-        '    p.Start()
-        'End If
-        'Me.Cursor = Cursors.Default
-
-        'Me.GO_Button.Focus()
-
     End Sub
     ' Go button
     Private Sub userupdate_button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles userupdate_button.Click
@@ -12327,9 +12305,9 @@ Public Class Form1
     ' external tools
     Private Sub RemRegMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RemRegMenuItem.Click
 
-        Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\files\remreg.exe"
+        Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\remreg.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            path = path.Replace("cmc\bin\files\remreg.exe", "remoteregedit\obj\debug\remreg.exe")
+            path = path.Replace("cmc\bin\remreg.exe", "remoteregedit\obj\debug\remreg.exe")
         End If
 
         If File.Exists(path) Then
@@ -12348,9 +12326,9 @@ Public Class Form1
     Private Sub ADUserInfoToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ADUserInfoToolStripMenuItem.Click
         'Tabholder1.SelectTab(aduser)
 
-        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\admgmt.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
+            Path = Path.Replace("cmc\bin\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
         End If
 
         If File.Exists(Path) Then
@@ -12366,9 +12344,9 @@ Public Class Form1
     End Sub
     Private Sub PerfMonMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PerfMonMenu.Click
 
-        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\perfmonitor.exe"
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\perfmonitor.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("\cmc\bin\files\perfmonitor.exe", "\perfmonitor\obj\Debug\perfmonitor.exe")
+            Path = Path.Replace("\cmc\bin\perfmonitor.exe", "\perfmonitor\obj\Debug\perfmonitor.exe")
         End If
 
         If File.Exists(Path) Then
@@ -12390,9 +12368,9 @@ Public Class Form1
     Private Sub admanagement_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles admanagement.Click
 
         Me.Cursor = Cursors.WaitCursor
-        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\files\admgmt.exe"
+        Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\admgmt.exe"
         If System.Diagnostics.Debugger.IsAttached Then
-            Path = Path.Replace("cmc\bin\files\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
+            Path = Path.Replace("cmc\bin\admgmt.exe", "admgmt\obj\Debug\admgmt.exe")
         End If
 
         If File.Exists(Path) Then
