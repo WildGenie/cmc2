@@ -143,12 +143,6 @@
     <Compile Include="AssemblyInfo.vb">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CustomDomainInfo.Designer.vb">
-      <DependentUpon>CustomDomainInfo.vb</DependentUpon>
-    </Compile>
-    <Compile Include="CustomDomainInfo.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="encrypt.vb" />
     <Compile Include="Impersonation.vb" />
     <Compile Include="ProcInfo.Designer.vb">
@@ -214,6 +208,7 @@
     <None Include="Resources\0029.ico" />
     <None Include="Resources\book_open.png" />
     <None Include="Resources\cancel.png" />
+    <None Include="Resources\chart.png" />
     <Content Include="Resources\files\netdom.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -224,10 +219,6 @@
     <EmbeddedResource Include="AppTable.resx">
       <SubType>Designer</SubType>
       <DependentUpon>AppTable.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="CustomDomainInfo.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>CustomDomainInfo.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ProcInfo.resx">
       <SubType>Designer</SubType>
@@ -350,6 +341,16 @@
       <PublishState>Auto</PublishState>
       <FileType>File</FileType>
     </PublishFile>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\admgmt\ad user manager.vbproj">
+      <Project>{AE8FAA50-2E56-4EBA-ADE6-A10FC2576ACC}</Project>
+      <Name>ad user manager</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\perfmonitor\performance monitor.vbproj">
+      <Project>{721EAF87-C559-480E-AE56-C4D7B1DD69CD}</Project>
+      <Name>performance monitor</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <PropertyGroup>

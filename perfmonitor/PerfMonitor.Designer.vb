@@ -32,14 +32,14 @@ Partial Class PerfMonitor
         Me.computername = New System.Windows.Forms.TextBox
         Me.Pic2 = New System.Windows.Forms.PictureBox
         Me.LabelMem = New System.Windows.Forms.Label
-        Me.TimeValue = New System.Windows.Forms.NumericUpDown
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.btnTogglePanel = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
         Me.MenuStrip2 = New System.Windows.Forms.MenuStrip
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AlwaysOnTopToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.OpenRecordedDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AlwaysOnTopToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.RecordingStatusLabel = New System.Windows.Forms.Label
@@ -51,15 +51,15 @@ Partial Class PerfMonitor
         Me.LabelPic2 = New System.Windows.Forms.Label
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.TimeValue = New System.Windows.Forms.NumericUpDown
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.Pic3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PerfMonTimer
@@ -135,15 +135,6 @@ Partial Class PerfMonitor
         Me.LabelMem.Size = New System.Drawing.Size(0, 13)
         Me.LabelMem.TabIndex = 7
         '
-        'TimeValue
-        '
-        Me.TimeValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TimeValue.Location = New System.Drawing.Point(17, 49)
-        Me.TimeValue.Name = "TimeValue"
-        Me.TimeValue.Size = New System.Drawing.Size(33, 19)
-        Me.TimeValue.TabIndex = 8
-        Me.TimeValue.Value = New Decimal(New Integer() {1, 0, 0, 0})
-        '
         'Panel1
         '
         Me.Panel1.Controls.Add(Me.btnTogglePanel)
@@ -179,7 +170,7 @@ Partial Class PerfMonitor
         '
         'MenuStrip2
         '
-        Me.MenuStrip2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStrip2.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip2.Name = "MenuStrip2"
@@ -192,8 +183,16 @@ Partial Class PerfMonitor
         Me.FileToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenRecordedDataToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem1, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(32, 20)
-        Me.FileToolStripMenuItem.Text = "file"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'OpenRecordedDataToolStripMenuItem
+        '
+        Me.OpenRecordedDataToolStripMenuItem.Image = Global.PerfMonitor.My.Resources.Resources.chart
+        Me.OpenRecordedDataToolStripMenuItem.Name = "OpenRecordedDataToolStripMenuItem"
+        Me.OpenRecordedDataToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.OpenRecordedDataToolStripMenuItem.Text = "open recorded data"
         '
         'AlwaysOnTopToolStripMenuItem1
         '
@@ -201,16 +200,15 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem1.Name = "AlwaysOnTopToolStripMenuItem1"
         Me.AlwaysOnTopToolStripMenuItem1.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(203, 22)
+        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(206, 22)
         Me.AlwaysOnTopToolStripMenuItem1.Text = "always on top"
         '
-        'OpenRecordedDataToolStripMenuItem
+        'ExitToolStripMenuItem
         '
-        Me.OpenRecordedDataToolStripMenuItem.CheckOnClick = True
-        Me.OpenRecordedDataToolStripMenuItem.Name = "OpenRecordedDataToolStripMenuItem"
-        Me.OpenRecordedDataToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
-        Me.OpenRecordedDataToolStripMenuItem.Text = "open recorded data"
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ExitToolStripMenuItem.Text = "exit"
         '
         'Panel2
         '
@@ -331,19 +329,19 @@ Partial Class PerfMonitor
         Me.ImageList1.Images.SetKeyName(4, "")
         Me.ImageList1.Images.SetKeyName(5, "StopRed.png")
         '
-        'ExitToolStripMenuItem
+        'TimeValue
         '
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
-        Me.ExitToolStripMenuItem.Text = "exit"
+        Me.TimeValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.TimeValue.Location = New System.Drawing.Point(17, 49)
+        Me.TimeValue.Name = "TimeValue"
+        Me.TimeValue.Size = New System.Drawing.Size(33, 19)
+        Me.TimeValue.TabIndex = 8
+        Me.TimeValue.Value = New Decimal(New Integer() {1, 0, 0, 0})
         '
         'PerfMonitor
         '
-        Me.AcceptButton = Me.btnStart
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.CancelButton = Me.btnStop
         Me.ClientSize = New System.Drawing.Size(156, 295)
         Me.Controls.Add(Me.Panel2)
         Me.Controls.Add(Me.Panel1)
@@ -354,7 +352,6 @@ Partial Class PerfMonitor
         Me.Text = "PerfMonitor"
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).EndInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         Me.MenuStrip2.ResumeLayout(False)
@@ -364,6 +361,7 @@ Partial Class PerfMonitor
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.Pic3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -375,7 +373,6 @@ Partial Class PerfMonitor
     Friend WithEvents computername As System.Windows.Forms.TextBox
     Friend WithEvents Pic2 As System.Windows.Forms.PictureBox
     Friend WithEvents LabelMem As System.Windows.Forms.Label
-    Friend WithEvents TimeValue As System.Windows.Forms.NumericUpDown
     Friend WithEvents Panel1 As System.Windows.Forms.Panel
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnTogglePanel As System.Windows.Forms.Button
@@ -395,5 +392,6 @@ Partial Class PerfMonitor
     Friend WithEvents AlwaysOnTopToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpenRecordedDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents TimeValue As System.Windows.Forms.NumericUpDown
 
 End Class
