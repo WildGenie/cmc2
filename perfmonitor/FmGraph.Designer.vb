@@ -23,13 +23,19 @@ Partial Class FmGraph
     <System.Diagnostics.DebuggerStepThrough()> _
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
+        Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FmGraph))
         Me.zg1 = New ZedGraph.ZedGraphControl
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
         Me.zg2 = New ZedGraph.ZedGraphControl
         Me.SplitContainer1 = New System.Windows.Forms.SplitContainer
+        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
+        Me.MenuStrip1.SuspendLayout()
         Me.SuspendLayout()
         '
         'zg1
@@ -43,7 +49,7 @@ Partial Class FmGraph
         Me.zg1.ScrollMinX = 0
         Me.zg1.ScrollMinY = 0
         Me.zg1.ScrollMinY2 = 0
-        Me.zg1.Size = New System.Drawing.Size(615, 266)
+        Me.zg1.Size = New System.Drawing.Size(260, 53)
         Me.zg1.TabIndex = 0
         '
         'OpenFileDialog1
@@ -62,13 +68,13 @@ Partial Class FmGraph
         Me.zg2.ScrollMinX = 0
         Me.zg2.ScrollMinY = 0
         Me.zg2.ScrollMinY2 = 0
-        Me.zg2.Size = New System.Drawing.Size(615, 206)
+        Me.zg2.Size = New System.Drawing.Size(260, 52)
         Me.zg2.TabIndex = 0
         '
         'SplitContainer1
         '
         Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.SplitContainer1.Location = New System.Drawing.Point(0, 24)
         Me.SplitContainer1.Name = "SplitContainer1"
         Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
         '
@@ -79,28 +85,69 @@ Partial Class FmGraph
         'SplitContainer1.Panel2
         '
         Me.SplitContainer1.Panel2.Controls.Add(Me.zg2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(282, 132)
-        Me.SplitContainer1.SplitterDistance = 66
+        Me.SplitContainer1.Size = New System.Drawing.Size(277, 115)
+        Me.SplitContainer1.SplitterDistance = 56
         Me.SplitContainer1.TabIndex = 3
         Me.SplitContainer1.Visible = False
+        '
+        'MenuStrip1
+        '
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip1.Name = "MenuStrip1"
+        Me.MenuStrip1.Size = New System.Drawing.Size(277, 24)
+        Me.MenuStrip1.TabIndex = 4
+        Me.MenuStrip1.Text = "MenuStrip1"
+        '
+        'FileToolStripMenuItem
+        '
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.FileToolStripMenuItem.Text = "File"
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Text = "Open"
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Text = "Exit"
         '
         'FmGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(282, 132)
+        Me.ClientSize = New System.Drawing.Size(277, 139)
         Me.Controls.Add(Me.SplitContainer1)
+        Me.Controls.Add(Me.MenuStrip1)
+        Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
+        Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FmGraph"
         Me.Text = "Performance Graph"
         Me.SplitContainer1.Panel1.ResumeLayout(False)
         Me.SplitContainer1.Panel2.ResumeLayout(False)
         Me.SplitContainer1.ResumeLayout(False)
+        Me.MenuStrip1.ResumeLayout(False)
+        Me.MenuStrip1.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
     Friend WithEvents zg1 As ZedGraph.ZedGraphControl
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
     Friend WithEvents zg2 As ZedGraph.ZedGraphControl
     Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
+    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

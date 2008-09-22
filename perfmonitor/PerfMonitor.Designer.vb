@@ -36,8 +36,10 @@ Partial Class PerfMonitor
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.btnTogglePanel = New System.Windows.Forms.Button
         Me.Label1 = New System.Windows.Forms.Label
-        Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
-        Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MenuStrip2 = New System.Windows.Forms.MenuStrip
+        Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AlwaysOnTopToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.OpenRecordedDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Panel2 = New System.Windows.Forms.Panel
         Me.Panel3 = New System.Windows.Forms.Panel
         Me.RecordingStatusLabel = New System.Windows.Forms.Label
@@ -49,11 +51,12 @@ Partial Class PerfMonitor
         Me.LabelPic2 = New System.Windows.Forms.Label
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
-        Me.MenuStrip1.SuspendLayout()
+        Me.MenuStrip2.SuspendLayout()
         Me.Panel2.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.Pic3, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -86,7 +89,7 @@ Partial Class PerfMonitor
         'btnStart
         '
         Me.btnStart.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnStart.Location = New System.Drawing.Point(58, 38)
+        Me.btnStart.Location = New System.Drawing.Point(62, 48)
         Me.btnStart.Name = "btnStart"
         Me.btnStart.Size = New System.Drawing.Size(38, 21)
         Me.btnStart.TabIndex = 3
@@ -98,7 +101,7 @@ Partial Class PerfMonitor
         Me.btnStop.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.btnStop.Enabled = False
         Me.btnStop.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.btnStop.Location = New System.Drawing.Point(96, 38)
+        Me.btnStop.Location = New System.Drawing.Point(100, 48)
         Me.btnStop.Name = "btnStop"
         Me.btnStop.Size = New System.Drawing.Size(38, 21)
         Me.btnStop.TabIndex = 4
@@ -107,7 +110,7 @@ Partial Class PerfMonitor
         '
         'computername
         '
-        Me.computername.Location = New System.Drawing.Point(12, 13)
+        Me.computername.Location = New System.Drawing.Point(16, 26)
         Me.computername.Name = "computername"
         Me.computername.Size = New System.Drawing.Size(122, 20)
         Me.computername.TabIndex = 5
@@ -135,7 +138,7 @@ Partial Class PerfMonitor
         'TimeValue
         '
         Me.TimeValue.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.TimeValue.Location = New System.Drawing.Point(13, 39)
+        Me.TimeValue.Location = New System.Drawing.Point(17, 49)
         Me.TimeValue.Name = "TimeValue"
         Me.TimeValue.Size = New System.Drawing.Size(33, 19)
         Me.TimeValue.TabIndex = 8
@@ -149,16 +152,16 @@ Partial Class PerfMonitor
         Me.Panel1.Controls.Add(Me.btnStop)
         Me.Panel1.Controls.Add(Me.Label1)
         Me.Panel1.Controls.Add(Me.TimeValue)
-        Me.Panel1.Controls.Add(Me.MenuStrip1)
+        Me.Panel1.Controls.Add(Me.MenuStrip2)
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel1.Location = New System.Drawing.Point(0, 0)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(156, 74)
+        Me.Panel1.Size = New System.Drawing.Size(156, 80)
         Me.Panel1.TabIndex = 9
         '
         'btnTogglePanel
         '
-        Me.btnTogglePanel.Location = New System.Drawing.Point(1, 63)
+        Me.btnTogglePanel.Location = New System.Drawing.Point(1, 69)
         Me.btnTogglePanel.Name = "btnTogglePanel"
         Me.btnTogglePanel.Size = New System.Drawing.Size(12, 10)
         Me.btnTogglePanel.TabIndex = 9
@@ -168,29 +171,46 @@ Partial Class PerfMonitor
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(45, 40)
+        Me.Label1.Location = New System.Drawing.Point(49, 50)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(12, 13)
         Me.Label1.TabIndex = 10
         Me.Label1.Text = "s"
         '
-        'MenuStrip1
+        'MenuStrip2
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AlwaysOnTopToolStripMenuItem})
-        Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
-        Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(148, 24)
-        Me.MenuStrip1.TabIndex = 11
-        Me.MenuStrip1.Text = "MenuStrip1"
-        Me.MenuStrip1.Visible = False
+        Me.MenuStrip2.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.MenuStrip2.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
+        Me.MenuStrip2.Location = New System.Drawing.Point(0, 0)
+        Me.MenuStrip2.Name = "MenuStrip2"
+        Me.MenuStrip2.Size = New System.Drawing.Size(156, 24)
+        Me.MenuStrip2.TabIndex = 12
+        Me.MenuStrip2.Text = "MenuStrip2"
         '
-        'AlwaysOnTopToolStripMenuItem
+        'FileToolStripMenuItem
         '
-        Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
-        Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+        Me.FileToolStripMenuItem.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text
+        Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenRecordedDataToolStripMenuItem, Me.AlwaysOnTopToolStripMenuItem1, Me.ExitToolStripMenuItem})
+        Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(32, 20)
+        Me.FileToolStripMenuItem.Text = "file"
+        '
+        'AlwaysOnTopToolStripMenuItem1
+        '
+        Me.AlwaysOnTopToolStripMenuItem1.CheckOnClick = True
+        Me.AlwaysOnTopToolStripMenuItem1.Name = "AlwaysOnTopToolStripMenuItem1"
+        Me.AlwaysOnTopToolStripMenuItem1.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(92, 20)
-        Me.AlwaysOnTopToolStripMenuItem.Text = "always on top"
+        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(203, 22)
+        Me.AlwaysOnTopToolStripMenuItem1.Text = "always on top"
+        '
+        'OpenRecordedDataToolStripMenuItem
+        '
+        Me.OpenRecordedDataToolStripMenuItem.CheckOnClick = True
+        Me.OpenRecordedDataToolStripMenuItem.Name = "OpenRecordedDataToolStripMenuItem"
+        Me.OpenRecordedDataToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
+        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(202, 22)
+        Me.OpenRecordedDataToolStripMenuItem.Text = "open recorded data"
         '
         'Panel2
         '
@@ -205,9 +225,9 @@ Partial Class PerfMonitor
         Me.Panel2.Controls.Add(Me.labelPic1)
         Me.Panel2.Controls.Add(Me.LabelPic2)
         Me.Panel2.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel2.Location = New System.Drawing.Point(0, 74)
+        Me.Panel2.Location = New System.Drawing.Point(0, 80)
         Me.Panel2.Name = "Panel2"
-        Me.Panel2.Size = New System.Drawing.Size(156, 221)
+        Me.Panel2.Size = New System.Drawing.Size(156, 215)
         Me.Panel2.TabIndex = 10
         '
         'Panel3
@@ -215,7 +235,7 @@ Partial Class PerfMonitor
         Me.Panel3.Controls.Add(Me.RecordingStatusLabel)
         Me.Panel3.Controls.Add(Me.RecordingButton)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel3.Location = New System.Drawing.Point(0, 201)
+        Me.Panel3.Location = New System.Drawing.Point(0, 195)
         Me.Panel3.Name = "Panel3"
         Me.Panel3.Size = New System.Drawing.Size(156, 20)
         Me.Panel3.TabIndex = 15
@@ -311,6 +331,13 @@ Partial Class PerfMonitor
         Me.ImageList1.Images.SetKeyName(4, "")
         Me.ImageList1.Images.SetKeyName(5, "StopRed.png")
         '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.ExitToolStripMenuItem.Text = "exit"
+        '
         'PerfMonitor
         '
         Me.AcceptButton = Me.btnStart
@@ -322,7 +349,6 @@ Partial Class PerfMonitor
         Me.Controls.Add(Me.Panel1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
-        Me.MainMenuStrip = Me.MenuStrip1
         Me.MinimumSize = New System.Drawing.Size(164, 110)
         Me.Name = "PerfMonitor"
         Me.Text = "PerfMonitor"
@@ -331,8 +357,8 @@ Partial Class PerfMonitor
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
-        Me.MenuStrip1.ResumeLayout(False)
-        Me.MenuStrip1.PerformLayout()
+        Me.MenuStrip2.ResumeLayout(False)
+        Me.MenuStrip2.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
         Me.Panel3.ResumeLayout(False)
@@ -354,8 +380,6 @@ Partial Class PerfMonitor
     Friend WithEvents Panel2 As System.Windows.Forms.Panel
     Friend WithEvents btnTogglePanel As System.Windows.Forms.Button
     Friend WithEvents Label1 As System.Windows.Forms.Label
-    Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
-    Friend WithEvents AlwaysOnTopToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ImageList1 As System.Windows.Forms.ImageList
     Friend WithEvents ToolTip1 As System.Windows.Forms.ToolTip
     Friend WithEvents RecordingStatusLabel As System.Windows.Forms.Label
@@ -366,5 +390,10 @@ Partial Class PerfMonitor
     Friend WithEvents LabelPic2 As System.Windows.Forms.Label
     Friend WithEvents Panel3 As System.Windows.Forms.Panel
     Friend WithEvents RecordingButton As System.Windows.Forms.Button
+    Friend WithEvents MenuStrip2 As System.Windows.Forms.MenuStrip
+    Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents AlwaysOnTopToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents OpenRecordedDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
 
 End Class

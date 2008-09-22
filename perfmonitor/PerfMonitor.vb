@@ -256,8 +256,6 @@ Public Class PerfMonitor
         Me.btnStart.Enabled = True
     End Sub
 
-    
-
     ''' <summary>
     ''' Change graph size proportionally with form
     ''' </summary>
@@ -293,8 +291,6 @@ Public Class PerfMonitor
         Pic3.Height = PicHeight
 
     End Sub
-
-
 
     ''' <summary>
     ''' Read in command line parameters.
@@ -345,13 +341,15 @@ Public Class PerfMonitor
             Next
 
             If Not String.IsNullOrEmpty(Me.computername.Text) Then
+                MenuStrip2.Visible = False
+                'Me.TopMost = True
                 If memory > 0 Then
                     Me.totalMemory = memory
                     Start(False)
                 Else
                     Start(True)
                 End If
-                'Me.TopMost = True
+
             End If
 
             loader.Join()
@@ -385,13 +383,8 @@ Public Class PerfMonitor
             End If
         End If
     End Sub
-    Private Sub AlwaysOnTopToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AlwaysOnTopToolStripMenuItem.Click
-        If Me.TopMost = True Then
-            Me.TopMost = False
-        Else
-            Me.TopMost = True
-        End If
-    End Sub
+
+
     ''' <summary>
     ''' Show or hide top panel.
     ''' </summary>
@@ -402,12 +395,21 @@ Public Class PerfMonitor
         If Panel1.Height = 10 Then
             Panel1.Height = 76
             Me.Height = Me.Height + 66
+            Me.MenuStrip2.Visible = True
         Else
             Panel1.Height = 10
             Me.Height = Me.Height - 66
+            Me.MenuStrip2.Visible = False
         End If
         Me.btnTogglePanel.Location = New System.Drawing.Point(0, Panel1.Height - 10)
     End Sub
 
 
+    Private Sub AlwaysOnTopToolStripMenuItem1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AlwaysOnTopToolStripMenuItem1.Click
+        Me.TopMost = AlwaysOnTopToolStripMenuItem1.Checked
+    End Sub
+    Private Sub OpenRecordedDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenRecordedDataToolStripMenuItem.Click
+        Dim g As New FmGraph
+        g.Show()
+    End Sub
 End Class

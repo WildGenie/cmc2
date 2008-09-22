@@ -27,12 +27,6 @@ Public Class FmGraph
             End If
         Loop
         sr.Close()
-
-        Dim sw As New System.IO.StreamWriter("c:\check.csv", False)
-        For Each row As DataRow In myData.Rows
-            sw.WriteLine(row(0) & "," & row(1) & "," & row(2) & "," & row(3) & "," & row(4) & "," & row(5))
-        Next
-        sw.Close()
     End Sub
 
     Private Sub CreateGraph(ByVal zgc As ZedGraphControl)
@@ -193,6 +187,12 @@ Public Class FmGraph
         zgc.AxisChange()
     End Sub
 
+    ''' <summary>
+    ''' Launches open file dialog to open recorded data files
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks>jesus, why is typing to difficult?</remarks>
     Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
         Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         Me.OpenFileDialog1.ShowDialog()
@@ -209,7 +209,12 @@ Public Class FmGraph
         End If
     End Sub
 
-
+    ''' <summary>
+    ''' contains code to resize elements
+    ''' </summary>
+    ''' <param name="sender"></param>
+    ''' <param name="e"></param>
+    ''' <remarks></remarks>
     Private Sub SplitContainer1_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles SplitContainer1.Resize
         SplitContainer1.SplitterDistance = SplitContainer1.Height / 2
         zg1.Width = SplitContainer1.Panel1.Width
@@ -217,7 +222,6 @@ Public Class FmGraph
         zg2.Width = SplitContainer1.Panel2.Width
         zg2.Height = SplitContainer1.Panel2.Height
     End Sub
-
 
     Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
         If Not FileToOpen Is Nothing Then
@@ -228,6 +232,53 @@ Public Class FmGraph
             Me.Width = 800
             Me.Height = 800
             Me.SplitContainer1.Visible = True
+        Else
+            Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+            Me.OpenFileDialog1.ShowDialog()
+            Dim file As String
+            Me.OpenFileDialog1.Title = "Select a pre-recorded file to open"
+            file = Me.OpenFileDialog1.FileName
+            If Not String.IsNullOrEmpty(file) Then
+                Fill_DataTable(file)
+                CreateGraph(zg1)
+                CreateDiskGraph(zg2)
+                Me.Text = "Performance Graph: " & file
+                Me.Width = 800
+                Me.Height = 800
+                Me.SplitContainer1.Visible = True
+            End If
         End If
     End Sub
+    Private Sub OpenToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
+        Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+        Me.OpenFileDialog1.ShowDialog()
+        Dim file As String
+        file = Me.OpenFileDialog1.FileName
+        If Not String.IsNullOrEmpty(file) Then
+            Fill_DataTable(file)
+            CreateGraph(zg1)
+            CreateDiskGraph(zg2)
+            Me.Text = "Performance Graph: " & file
+            Me.Width = 800
+            Me.Height = 800
+            Me.SplitContainer1.Visible = True
+        End If
+    End Sub
+    Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
+        Me.Close()
+    End Sub
+
+#Region "zedgraph helper"
+    '#  In the Solution Explorer, right-click on the ZedGraphSample project and select "Add Reference..."
+    '# Pick the browse tab, and navigate to the zedGraph.dll (downloadable from here), and click OK
+    '# From View menu, select Toolbox, scroll down to the bottom of the toolbox window to see the "General" bar
+    '# If ZedGraphControl is not already available as an option, rightclick on the "General" bar, and select "Choose Items..."
+    '# Under ".Net Framework Components" tab, click browse
+    '# Navigate to the zedgraph.dll file, and click Open, Click OK
+    '# In the toolbox, left-click on the ZedGraphControl, go to your Form and click inside it to place a ZedGraphControl item.
+    '# With the ZedGraphControl selected in the form, under the View menu select "Properties Window"
+    '# Change the "(Name)" field for the ZedGraphControl to zg1 (it would typically be 'zedGraphControl1').
+    '# Double click the Windows Form (not the ZedGraphControl), this will cause the window to switch to CodeView, with a template for Sub Form1_Load
+    '# Go to the top of the file (above the "Public Class Form1" declaration) and add Imports ZedGraph 
+#End Region
 End Class
