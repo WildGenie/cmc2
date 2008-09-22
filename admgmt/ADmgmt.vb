@@ -148,13 +148,22 @@ Public Class ADmgmt
 
         If domainList.Rows.Count > 1 Then
             Me.DomainSelect.Items.Add(" - Select Domain - ")
+
+            
         End If
 
         For Each row As DataRow In domainList.Rows
             If Not String.IsNullOrEmpty(row(0)) Then Me.DomainSelect.Items.Add(row(0))
         Next
+        
         Me.DomainSelect.Sorted = True
+
+        If Me.DomainSelect.Items.Count = 0 Then
+            Me.DomainSelect.Items.Add(" - Select Domain - ")
+        End If
         Me.DomainSelect.SelectedIndex = 0
+
+
 
     End Sub
     Private Sub DomainSelect_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DomainSelect.SelectedIndexChanged
@@ -207,6 +216,11 @@ Public Class ADmgmt
 
         Me.DomainSelect.Select(1, 0)
         Me.Cursor = Cursors.Default
+
+        'If Me.Loading = True Then
+        '    Me.Loading = False
+        '    If Splash.Visible Then Splash.Close()
+        'End If
 
     End Sub
 
@@ -1319,7 +1333,10 @@ Public Class ADmgmt
         Next
     End Sub
     Private Sub customDomainCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles customDomainCombo.SelectedIndexChanged
-        If customDomainCombo.Text = " (Add New...)" Then
+
+        If customDomainCombo.Text = " (edit custom domains)" Then
+            'Return
+        ElseIf customDomainCombo.Text = " (Add New...)" Then
             Dim di As New AddDomainInfo
             di.ShowDialog()
 
