@@ -184,7 +184,7 @@ Public Class PerfMonitor
                 _dsk2 = rd.cDsk2.Checked
                 _dsk3 = rd.cDsk3.Checked
 
-                Recording = True
+                Me.Recording = True
                 Dim path As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments
                 Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "")
                 Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".pff"
@@ -202,10 +202,21 @@ Public Class PerfMonitor
             Me.RecordingStatusLabel.Text = String.Empty
             Me.RecordingButton.Text = "start recording"
             Me.ToolTip1.SetToolTip(Me.RecordingButton, "record the performance data to file")
-            'Dim t As New System.Threading.Thread(addres
-            Dim g As New PerformanceGraph.FmGraph
-            g.FileToOpen = Me.RecordingFileName
-            g.Show()
+
+            '    ** using this method, graph display can't be left open 
+            '    when closing perfmon form
+            '    so replaced with processstartinfo method.
+            'Dim g As New PerformanceGraph.FmGraph
+            'g.FileToOpen = Me.RecordingFileName
+            'g.Show()
+
+            Dim pi As New System.Diagnostics.ProcessStartInfo
+            pi.FileName = My.Application.Info.DirectoryPath & "\performancegraph.exe"
+            If System.Diagnostics.Debugger.IsAttached Then
+                pi.FileName = My.Application.Info.DirectoryPath & "\performancegraph.exe".ToLower.Replace("cmc\bin", "performancegraph\bin\debug")
+            End If
+            pi.Arguments = Chr(34) & Me.RecordingFileName & Chr(34)
+            System.Diagnostics.Process.Start(pi)
 
         End If
     End Sub
