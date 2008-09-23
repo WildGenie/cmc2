@@ -42,9 +42,19 @@ Public Class PerfMonitor
         End Try
 
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
+
+        Dim diskinstance As String = "_Total"
+        'If Not String.IsNullOrEmpty(Me.drivename.Text) Then
+        '    diskinstance = ""
+        'End If
+
         dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total", Me.computername.Text)
         dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", "_Total", Me.computername.Text)
         dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", "_Total", Me.computername.Text)
+
+
+        'Dim dt As New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", "0 C:", Me.computername.Text)
+        'MsgBox(CStr(dt.NextValue))
 
 
         Me.Text = Me.computername.Text.ToUpper
@@ -54,6 +64,7 @@ Public Class PerfMonitor
         Me.btnStop.Focus()
 
         Me.loading = False
+
     End Sub
     Private Sub btnStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStop.Click
         If Me.Recording Then
@@ -254,7 +265,6 @@ Public Class PerfMonitor
     ''' <remarks></remarks>
     Private Sub TimeValue_ValueChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles TimeValue.ValueChanged
         If TimeValue.Value = 0 Then TimeValue.Value = 1
-        If TimeValue.Value > 60 Then TimeValue.Value = 60
         PerfMonTimer.Interval = TimeValue.Value * 1000
         If PerfMonTimer.Enabled Then
             Me.btnStop.Focus()
@@ -310,6 +320,10 @@ Public Class PerfMonitor
     ''' <param name="e"></param>
     ''' <remarks></remarks>
     Private Sub PerfMonitor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ' for testing...
+        If System.Diagnostics.Debugger.IsAttached Then drivename.Visible = True
+
 
         Me.loading = True
 

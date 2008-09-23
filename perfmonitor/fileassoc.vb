@@ -45,32 +45,32 @@ End Sub
 End Class
 
 
-Windows Registry Editor Version 5.00
+'Windows Registry Editor Version 5.00
 
-[HKEY_CLASSES_ROOT\.pff]
-@="Perfmonitor.Datafile"
+'[HKEY_CLASSES_ROOT\.pff]
+'@="Perfmonitor.Datafile"
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile]
-@="PerfMonitor Data File"
-"EditFlags"=dword:00000000
-"BrowserFlags"=dword:00000008
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile]
+'@="PerfMonitor Data File"
+'"EditFlags"=dword:00000000
+'"BrowserFlags"=dword:00000008
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\DefaultIcon]
-@="C:\\Program Files\\CMC\\files\\perf.ico,0"
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\DefaultIcon]
+'@="C:\\Program Files\\CMC\\files\\perf.ico,0"
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell]
-@="open"
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell]
+'@="open"
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open]
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open]
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\command]
-@="\"c:\\program files\\cmc\\performancegraph.exe\" \"%1\""
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\command]
+'@="\"c:\\program files\\cmc\\performancegraph.exe\" \"%1\""
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\ddeexec]
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\ddeexec]
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\ddeexec\Application]
-@="performancegraph"
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\ddeexec\Application]
+'@="performancegraph"
 
-[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\ddeexec\Topic]
-@="System"
+'[HKEY_CLASSES_ROOT\Perfmonitor.Datafile\shell\open\ddeexec\Topic]
+'@="System"
 
