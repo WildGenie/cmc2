@@ -47,6 +47,7 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="fileassoc.vb" />
     <Compile Include="PerfMonitor.vb">
       <SubType>Form</SubType>
     </Compile>

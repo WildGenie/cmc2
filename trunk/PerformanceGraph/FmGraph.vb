@@ -208,7 +208,17 @@ Public Class FmGraph
     End Sub
 
     Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        ' if arg passed, use as target file
+        If Environment.GetCommandLineArgs().Length = 2 Then
+            Dim filename As String = Environment.GetCommandLineArgs(1)
+            If System.IO.File.Exists(filename) Then
+                FileToOpen = filename
+            End If
+        End If
+
         IsSmoothed = Me.SmoothCurvesToolStripMenuItem.Checked
+
         If Not FileToOpen Is Nothing Then
             Fill_DataTable(FileToOpen)
             CreateGraph(zg1)
@@ -218,20 +228,20 @@ Public Class FmGraph
             Me.Height = 800
             Me.SplitContainer1.Visible = True
         Else
-            Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
-            Me.OpenFileDialog1.ShowDialog()
-            Dim file As String
-            Me.OpenFileDialog1.Title = "Select a pre-recorded file to open"
-            file = Me.OpenFileDialog1.FileName
-            If Not String.IsNullOrEmpty(file) Then
-                Fill_DataTable(file)
-                CreateGraph(zg1)
-                CreateDiskGraph(zg2)
-                Me.Text = "Performance Graph: " & file
-                Me.Width = 800
-                Me.Height = 800
-                Me.SplitContainer1.Visible = True
-            End If
+            'Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
+            'Me.OpenFileDialog1.ShowDialog()
+            'Dim file As String
+            'Me.OpenFileDialog1.Title = "Select a pre-recorded file to open"
+            'file = Me.OpenFileDialog1.FileName
+            'If Not String.IsNullOrEmpty(file) Then
+            '    Fill_DataTable(file)
+            '    CreateGraph(zg1)
+            '    CreateDiskGraph(zg2)
+            '    Me.Text = "Performance Graph: " & file
+            '    Me.Width = 800
+            '    Me.Height = 800
+            '    Me.SplitContainer1.Visible = True
+            'End If
         End If
     End Sub
     ''' <summary>

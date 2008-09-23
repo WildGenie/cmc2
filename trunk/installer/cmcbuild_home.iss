@@ -27,13 +27,14 @@ Source: "E:\dotnet projects\! vb\cmc\CMC\bin\cmc.exe"; DestDir: "{app}"; Flags: 
 Source: "E:\dotnet projects\! vb\cmc\CMC\bin\cmc.exe.config"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\ADMgmt.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\perfmonitor\bin\Release\PerfMonitor.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\performancegraph\bin\Release\performanceGraph.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\remoteregedit\bin\Release\RemReg.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\netdetect\bin\Release\NetDetect.exe"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\Interop.ActiveDs.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\admgmt\bin\Interop.TSUSEREXLib.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\netdom.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\netlib\bin\Release\NetLib.dll"; DestDir: "{app}"; Flags: ignoreversion
-Source: "E:\dotnet projects\! vb\cmc\perfmonitor\Resources\ZedGraph.dll"; DestDir: "{app}"; Flags: ignoreversion
+Source: "E:\dotnet projects\! vb\cmc\performanceGraph\ZedGraph.dll"; DestDir: "{app}"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\psexec.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\regx3.dll"; DestDir: "{app}\Files"; Flags: ignoreversion
 Source: "E:\dotnet projects\! vb\cmc\CMC\Resources\files\vncviewer.exe"; DestDir: "{app}\Files"; Flags: ignoreversion
