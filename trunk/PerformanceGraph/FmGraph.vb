@@ -5,6 +5,7 @@ Public Class FmGraph
     Public FileToOpen As String
     Private myData As DataTable
     Private IsSmoothed As Boolean
+    Private Computer As String
 
     ''' <summary>
     ''' Reads file containing performance data into a datatable
@@ -22,7 +23,7 @@ Public Class FmGraph
 
 
         Dim sr As New System.IO.StreamReader(filename)
-        sr.ReadLine()
+        Computer = UCase(sr.ReadLine.Split(" ")(0))
         sr.ReadLine()
         Do While Not sr.EndOfStream
             Dim line() As String = sr.ReadLine.Split(",")
@@ -39,7 +40,7 @@ Public Class FmGraph
         Dim myPane As GraphPane = zgc.GraphPane
 
         ' Set the title
-        myPane.Title.Text = "Performance"
+        myPane.Title.Text = Computer & " - Performance"
         ' Set the axis type and labels
         myPane.XAxis.Title.Text = "Time"
         myPane.XAxis.Type = AxisType.Date
@@ -105,7 +106,7 @@ Public Class FmGraph
         Dim myPane As GraphPane = zgc.GraphPane
 
         ' Set the title
-        myPane.Title.Text = "Physical Disk"
+        myPane.Title.Text = Computer & " - Physical Disk"
         ' Set the axis type and labels
         myPane.XAxis.Title.Text = "Time"
         myPane.XAxis.Type = AxisType.Date

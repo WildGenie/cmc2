@@ -12356,6 +12356,7 @@ Public Class Form1
         Dim Path As String = My.Application.Info.DirectoryPath.ToLower & "\perfmonitor.exe"
         If System.Diagnostics.Debugger.IsAttached Then
             Path = Path.Replace("\cmc\bin\perfmonitor.exe", "\perfmonitor\obj\Debug\perfmonitor.exe")
+            '"c:\data\dotnet projects\cmc\trunk\perfmonitor\obj\Debug\perfmonitor.exe"
         End If
 
         If File.Exists(Path) Then
