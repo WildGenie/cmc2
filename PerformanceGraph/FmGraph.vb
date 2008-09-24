@@ -34,8 +34,12 @@ Public Class FmGraph
         Do While Not sr.EndOfStream
             Dim line() As String = sr.ReadLine.Split(",")
             If line.Length = 6 Then
-                ' Add data to new myData row
-                myData.Rows.Add(line(0), line(1), line(2), line(3), line(4), line(5))
+                Try
+                    ' Add data to new myData row
+                    myData.Rows.Add(line(0), line(1), line(2), line(3), line(4), line(5))
+                Catch ex As System.ArgumentException
+                    ' data not in correct format - maybe incomplete line - skip
+                End Try
             End If
         Loop
         sr.Close()

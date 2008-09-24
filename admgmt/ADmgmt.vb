@@ -485,7 +485,6 @@ Public Class ADmgmt
     End Sub
 
 
-
     ''' <summary>
     ''' Fill form with selected users attributes.
     ''' </summary>
