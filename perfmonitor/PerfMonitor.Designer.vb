@@ -52,7 +52,6 @@ Partial Class PerfMonitor
         Me.LabelPic2 = New System.Windows.Forms.Label
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        Me.drivename = New System.Windows.Forms.TextBox
         CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
         CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
@@ -138,7 +137,6 @@ Partial Class PerfMonitor
         '
         'Panel1
         '
-        Me.Panel1.Controls.Add(Me.drivename)
         Me.Panel1.Controls.Add(Me.btnTogglePanel)
         Me.Panel1.Controls.Add(Me.computername)
         Me.Panel1.Controls.Add(Me.btnStart)
@@ -202,7 +200,7 @@ Partial Class PerfMonitor
         Me.OpenRecordedDataToolStripMenuItem.Image = Global.PerfMonitor.My.Resources.Resources.chart
         Me.OpenRecordedDataToolStripMenuItem.Name = "OpenRecordedDataToolStripMenuItem"
         Me.OpenRecordedDataToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
         Me.OpenRecordedDataToolStripMenuItem.Text = "open recorded data"
         '
         'AlwaysOnTopToolStripMenuItem1
@@ -211,14 +209,14 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem1.Name = "AlwaysOnTopToolStripMenuItem1"
         Me.AlwaysOnTopToolStripMenuItem1.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(206, 22)
+        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(203, 22)
         Me.AlwaysOnTopToolStripMenuItem1.Text = "always on top"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
         Me.ExitToolStripMenuItem.Text = "exit"
         '
         'Panel2
@@ -295,6 +293,7 @@ Partial Class PerfMonitor
         Me.Pic3.Size = New System.Drawing.Size(32, 150)
         Me.Pic3.TabIndex = 10
         Me.Pic3.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.Pic3, "Double click to select instance")
         '
         'LabelPic3
         '
@@ -339,14 +338,6 @@ Partial Class PerfMonitor
         Me.ImageList1.Images.SetKeyName(3, "play.png")
         Me.ImageList1.Images.SetKeyName(4, "")
         Me.ImageList1.Images.SetKeyName(5, "StopRed.png")
-        '
-        'drivename
-        '
-        Me.drivename.Location = New System.Drawing.Point(138, 26)
-        Me.drivename.Name = "drivename"
-        Me.drivename.Size = New System.Drawing.Size(18, 20)
-        Me.drivename.TabIndex = 16
-        Me.drivename.Visible = False
         '
         'PerfMonitor
         '
@@ -403,6 +394,5 @@ Partial Class PerfMonitor
     Friend WithEvents OpenRecordedDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TimeValue As System.Windows.Forms.NumericUpDown
-    Friend WithEvents drivename As System.Windows.Forms.TextBox
 
 End Class

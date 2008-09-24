@@ -3,6 +3,7 @@ Public Class PerfMonitor
     Private cpu, mem, dskTime, dskReadQ, dskWriteQ As PerformanceCounter
     Private totalMemory As Integer
     Private FirstRun As Boolean
+    Private DiskInstance As String = "_Total"
     Protected Friend loading As Boolean
     Protected Friend Username As String = Nothing
     Protected Friend Password As String = Nothing
@@ -43,18 +44,9 @@ Public Class PerfMonitor
 
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
 
-        Dim diskinstance As String = "_Total"
-        'If Not String.IsNullOrEmpty(Me.drivename.Text) Then
-        '    diskinstance = ""
-        'End If
-
-        dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", "_Total", Me.computername.Text)
-        dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", "_Total", Me.computername.Text)
-        dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", "_Total", Me.computername.Text)
-
-
-        'Dim dt As New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", "0 C:", Me.computername.Text)
-        'MsgBox(CStr(dt.NextValue))
+        dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance, Me.computername.Text)
+        dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance, Me.computername.Text)
+        dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance, Me.computername.Text)
 
 
         Me.Text = Me.computername.Text.ToUpper
@@ -96,7 +88,6 @@ Public Class PerfMonitor
         Dim cpucolor As Color = Color.FromArgb(0, 255, 0)
         Dim memColor As Color = Color.FromArgb(0, 255, 0) 'Color.RoyalBlue
         Dim dskColor As Color = Color.FromArgb(0, 255, 0)
-
 
         Dim cpuvalue As Byte
         Try
@@ -177,6 +168,38 @@ Public Class PerfMonitor
         'Free resources
         g.Dispose()
     End Sub
+    Private Sub Pic3_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Pic3.DoubleClick
+
+        If String.IsNullOrEmpty(computername.Text) Then
+            MsgBox("Enter a computer name to monitor" & vbCr & "before selecting instance.", MsgBoxStyle.Critical, "Select Instance")
+            Return
+        End If
+
+        If Me.Recording Then
+            MsgBox("Selected instance cannot be changed whilst" & vbCr & "data is being recorded." & vbCr & vbCr & _
+                   "Stop recording before changing instances.", MsgBoxStyle.Critical, "Select Instance")
+            Return
+        End If
+
+        Dim si As New SelectInstance
+
+        Dim category As New PerformanceCounterCategory("PhysicalDisk", computername.Text)
+        Dim instances() As String = category.GetInstanceNames
+        For Each instance As String In instances
+            si.InstanceCombo.Items.Add(instance)
+        Next
+        si.InstanceCombo.Text = Me.DiskInstance
+        si.ShowDialog()
+
+        If si.DialogResult = Windows.Forms.DialogResult.OK Then
+            Me.DiskInstance = si.InstanceCombo.Text
+            dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance, Me.computername.Text)
+            dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance, Me.computername.Text)
+            dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance, Me.computername.Text)
+        End If
+        
+
+    End Sub
 
     Private Recording As Boolean = False
     Private Writer As System.IO.StreamWriter
@@ -197,11 +220,11 @@ Public Class PerfMonitor
 
                 Me.Recording = True
                 Dim path As String = My.Computer.FileSystem.SpecialDirectories.MyDocuments
-                Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "")
+                Dim starttime As String = Replace(DateTime.Now.ToShortDateString, "/", "") & "_" & Replace(DateTime.Now.ToShortTimeString, ":", "") & DateTime.Now.Second
                 Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".pff"
                 Writer = New System.IO.StreamWriter(Me.RecordingFileName, False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
-                Writer.WriteLine("Time,Processor\% Processor Time\_Total,PhysicalMemory\% Used,PhysicalDisk\% Disk Time\_Total,PhysicalDisk\Avg Read Queue\_Total,PhysicalDisk\Avg Write Queue\_Total")
+                Writer.WriteLine("Time,% Processor Time\_Total,% Mem Used,% Disk Time\" & Me.DiskInstance & ",Avg Read Queue\" & Me.DiskInstance & ",Avg Write Queue\" & Me.DiskInstance)
                 Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop capturing performance data")
                 Me.RecordingButton.Text = "stop recording"
                 Me.RecordingStatusLabel.Visible = True
@@ -322,7 +345,7 @@ Public Class PerfMonitor
     Private Sub PerfMonitor_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
         ' for testing...
-        If System.Diagnostics.Debugger.IsAttached Then drivename.Visible = True
+        'If System.Diagnostics.Debugger.IsAttached Then drivename.Visible = True
 
 
         Me.loading = True
@@ -404,6 +427,11 @@ Public Class PerfMonitor
                 ' close the stream before quitting
                 Writer.Close()
                 Me.RecordingStatusLabel.Text = String.Empty
+                cpu.Dispose()
+                mem.Dispose()
+                dskTime.Dispose()
+                dskReadQ.Dispose()
+                dskWriteQ.Dispose()
                 e.Cancel = False
             End If
         End If
@@ -437,4 +465,7 @@ Public Class PerfMonitor
         Dim g As New PerformanceGraph.FmGraph
         g.Show()
     End Sub
+
+
+
 End Class
