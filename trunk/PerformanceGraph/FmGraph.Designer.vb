@@ -33,7 +33,24 @@ Partial Class FmGraph
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.SmoothCurvesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MenuGraph1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph1_cpu = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph1_ram = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph1_disktime = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph1_diskReadQueue = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph1_diskWriteQueue = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
+        Me.menu_graph1_smoothCurvesMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.MenuGraph2 = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph2_cpu = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph2_ram = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph2_disktime = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph2_diskReadQueue = New System.Windows.Forms.ToolStripMenuItem
+        Me.menu_graph2_diskWriteQueue = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
+        Me.menu_graph2_smoothCurvesMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.LineThicknessToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripComboBox2 = New System.Windows.Forms.ToolStripComboBox
         Me.SplitContainer1.Panel1.SuspendLayout()
         Me.SplitContainer1.Panel2.SuspendLayout()
         Me.SplitContainer1.SuspendLayout()
@@ -125,17 +142,142 @@ Partial Class FmGraph
         '
         'OptionsToolStripMenuItem
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.SmoothCurvesToolStripMenuItem})
+        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuGraph1, Me.MenuGraph2, Me.LineThicknessToolStripMenuItem})
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(61, 20)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
-        'SmoothCurvesToolStripMenuItem
+        'MenuGraph1
         '
-        Me.SmoothCurvesToolStripMenuItem.CheckOnClick = True
-        Me.SmoothCurvesToolStripMenuItem.Name = "SmoothCurvesToolStripMenuItem"
-        Me.SmoothCurvesToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.SmoothCurvesToolStripMenuItem.Text = "smooth curves"
+        Me.MenuGraph1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menu_graph1_cpu, Me.menu_graph1_ram, Me.menu_graph1_disktime, Me.menu_graph1_diskReadQueue, Me.menu_graph1_diskWriteQueue, Me.ToolStripSeparator1, Me.menu_graph1_smoothCurvesMenu})
+        Me.MenuGraph1.Name = "MenuGraph1"
+        Me.MenuGraph1.Size = New System.Drawing.Size(151, 22)
+        Me.MenuGraph1.Text = "graph1"
+        '
+        'menu_graph1_cpu
+        '
+        Me.menu_graph1_cpu.Checked = True
+        Me.menu_graph1_cpu.CheckOnClick = True
+        Me.menu_graph1_cpu.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.menu_graph1_cpu.Name = "menu_graph1_cpu"
+        Me.menu_graph1_cpu.Size = New System.Drawing.Size(166, 22)
+        Me.menu_graph1_cpu.Text = "% cpu utilisation"
+        '
+        'menu_graph1_ram
+        '
+        Me.menu_graph1_ram.Checked = True
+        Me.menu_graph1_ram.CheckOnClick = True
+        Me.menu_graph1_ram.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.menu_graph1_ram.Name = "menu_graph1_ram"
+        Me.menu_graph1_ram.Size = New System.Drawing.Size(166, 22)
+        Me.menu_graph1_ram.Text = "% mem uilisation"
+        '
+        'menu_graph1_disktime
+        '
+        Me.menu_graph1_disktime.CheckOnClick = True
+        Me.menu_graph1_disktime.Name = "menu_graph1_disktime"
+        Me.menu_graph1_disktime.Size = New System.Drawing.Size(166, 22)
+        Me.menu_graph1_disktime.Text = "% disk time"
+        '
+        'menu_graph1_diskReadQueue
+        '
+        Me.menu_graph1_diskReadQueue.CheckOnClick = True
+        Me.menu_graph1_diskReadQueue.Name = "menu_graph1_diskReadQueue"
+        Me.menu_graph1_diskReadQueue.Size = New System.Drawing.Size(166, 22)
+        Me.menu_graph1_diskReadQueue.Text = "disk read queue"
+        '
+        'menu_graph1_diskWriteQueue
+        '
+        Me.menu_graph1_diskWriteQueue.CheckOnClick = True
+        Me.menu_graph1_diskWriteQueue.Name = "menu_graph1_diskWriteQueue"
+        Me.menu_graph1_diskWriteQueue.Size = New System.Drawing.Size(166, 22)
+        Me.menu_graph1_diskWriteQueue.Text = "disk write queue"
+        '
+        'ToolStripSeparator1
+        '
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(163, 6)
+        '
+        'menu_graph1_smoothCurvesMenu
+        '
+        Me.menu_graph1_smoothCurvesMenu.CheckOnClick = True
+        Me.menu_graph1_smoothCurvesMenu.Name = "menu_graph1_smoothCurvesMenu"
+        Me.menu_graph1_smoothCurvesMenu.Size = New System.Drawing.Size(166, 22)
+        Me.menu_graph1_smoothCurvesMenu.Text = "smooth curves"
+        '
+        'MenuGraph2
+        '
+        Me.MenuGraph2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menu_graph2_cpu, Me.menu_graph2_ram, Me.menu_graph2_disktime, Me.menu_graph2_diskReadQueue, Me.menu_graph2_diskWriteQueue, Me.ToolStripSeparator2, Me.menu_graph2_smoothCurvesMenu})
+        Me.MenuGraph2.Name = "MenuGraph2"
+        Me.MenuGraph2.Size = New System.Drawing.Size(151, 22)
+        Me.MenuGraph2.Text = "graph2"
+        '
+        'menu_graph2_cpu
+        '
+        Me.menu_graph2_cpu.CheckOnClick = True
+        Me.menu_graph2_cpu.Name = "menu_graph2_cpu"
+        Me.menu_graph2_cpu.Size = New System.Drawing.Size(160, 22)
+        Me.menu_graph2_cpu.Text = "% cpu"
+        '
+        'menu_graph2_ram
+        '
+        Me.menu_graph2_ram.CheckOnClick = True
+        Me.menu_graph2_ram.Name = "menu_graph2_ram"
+        Me.menu_graph2_ram.Size = New System.Drawing.Size(160, 22)
+        Me.menu_graph2_ram.Text = "% ram"
+        '
+        'menu_graph2_disktime
+        '
+        Me.menu_graph2_disktime.Checked = True
+        Me.menu_graph2_disktime.CheckOnClick = True
+        Me.menu_graph2_disktime.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.menu_graph2_disktime.Name = "menu_graph2_disktime"
+        Me.menu_graph2_disktime.Size = New System.Drawing.Size(160, 22)
+        Me.menu_graph2_disktime.Text = "% disk time"
+        '
+        'menu_graph2_diskReadQueue
+        '
+        Me.menu_graph2_diskReadQueue.Checked = True
+        Me.menu_graph2_diskReadQueue.CheckOnClick = True
+        Me.menu_graph2_diskReadQueue.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.menu_graph2_diskReadQueue.Name = "menu_graph2_diskReadQueue"
+        Me.menu_graph2_diskReadQueue.Size = New System.Drawing.Size(160, 22)
+        Me.menu_graph2_diskReadQueue.Text = "disk read queue"
+        '
+        'menu_graph2_diskWriteQueue
+        '
+        Me.menu_graph2_diskWriteQueue.Checked = True
+        Me.menu_graph2_diskWriteQueue.CheckOnClick = True
+        Me.menu_graph2_diskWriteQueue.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.menu_graph2_diskWriteQueue.Name = "menu_graph2_diskWriteQueue"
+        Me.menu_graph2_diskWriteQueue.Size = New System.Drawing.Size(160, 22)
+        Me.menu_graph2_diskWriteQueue.Text = "disk write queue"
+        '
+        'ToolStripSeparator2
+        '
+        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(157, 6)
+        '
+        'menu_graph2_smoothCurvesMenu
+        '
+        Me.menu_graph2_smoothCurvesMenu.CheckOnClick = True
+        Me.menu_graph2_smoothCurvesMenu.Name = "menu_graph2_smoothCurvesMenu"
+        Me.menu_graph2_smoothCurvesMenu.Size = New System.Drawing.Size(160, 22)
+        Me.menu_graph2_smoothCurvesMenu.Text = "smooth curves"
+        '
+        'LineThicknessToolStripMenuItem
+        '
+        Me.LineThicknessToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBox2})
+        Me.LineThicknessToolStripMenuItem.Name = "LineThicknessToolStripMenuItem"
+        Me.LineThicknessToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.LineThicknessToolStripMenuItem.Text = "Line Thickness"
+        '
+        'ToolStripComboBox2
+        '
+        Me.ToolStripComboBox2.AutoCompleteCustomSource.AddRange(New String() {"1", "2", "3", "4"})
+        Me.ToolStripComboBox2.Items.AddRange(New Object() {"1", "2", "3", "4"})
+        Me.ToolStripComboBox2.Name = "ToolStripComboBox2"
+        Me.ToolStripComboBox2.Size = New System.Drawing.Size(121, 23)
         '
         'FmGraph
         '
@@ -166,6 +308,23 @@ Partial Class FmGraph
     Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents SmoothCurvesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuGraph1 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph1_cpu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph1_ram As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph1_disktime As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents MenuGraph2 As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph2_cpu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph2_ram As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph2_disktime As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph2_diskReadQueue As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph2_diskWriteQueue As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph1_diskReadQueue As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents menu_graph1_diskWriteQueue As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents menu_graph1_smoothCurvesMenu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents menu_graph2_smoothCurvesMenu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents LineThicknessToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripComboBox2 As System.Windows.Forms.ToolStripComboBox
 
 End Class
