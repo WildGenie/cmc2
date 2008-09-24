@@ -47,6 +47,12 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SelectInstance.Designer.vb">
+      <DependentUpon>SelectInstance.vb</DependentUpon>
+    </Compile>
+    <Compile Include="SelectInstance.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="fileassoc.vb" />
     <Compile Include="PerfMonitor.vb">
       <SubType>Form</SubType>
@@ -85,6 +91,10 @@
     <Compile Include="wmi.vb" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="SelectInstance.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>SelectInstance.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="PerfMonitor.resx">
       <SubType>Designer</SubType>
       <DependentUpon>PerfMonitor.vb</DependentUpon>

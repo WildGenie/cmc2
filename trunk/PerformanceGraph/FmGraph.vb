@@ -6,6 +6,9 @@ Public Class FmGraph
     Private myData As DataTable
     Private IsSmoothed As Boolean
     Private Computer As String
+    Private _diskPercentInstance As String
+    Private _diskReadInstance As String
+    Private _diskWriteInstance As String
 
     ''' <summary>
     ''' Reads file containing performance data into a datatable
@@ -24,7 +27,10 @@ Public Class FmGraph
 
         Dim sr As New System.IO.StreamReader(filename)
         Computer = UCase(sr.ReadLine.Split(" ")(0))
-        sr.ReadLine()
+        Dim instanceLine() As String = sr.ReadLine.Split(",")
+        Me._diskPercentInstance = instanceLine(3).Substring(instanceLine(3).LastIndexOf("\") + 1)
+        Me._diskReadInstance = instanceLine(4).Substring(instanceLine(4).LastIndexOf("\") + 1)
+        Me._diskWriteInstance = instanceLine(5).Substring(instanceLine(5).LastIndexOf("\") + 1)
         Do While Not sr.EndOfStream
             Dim line() As String = sr.ReadLine.Split(",")
             If line.Length = 6 Then
@@ -77,7 +83,7 @@ Public Class FmGraph
         Curve.Line.IsAntiAlias = True
 
 
-        Curve = myPane.AddCurve("% Disk Time", diskList, Color.Green, SymbolType.None)
+        Curve = myPane.AddCurve("% Disk Time: " & Me._diskPercentInstance, diskList, Color.Green, SymbolType.None)
         If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         Curve.Line.Style = Drawing2D.DashStyle.Dash
@@ -163,19 +169,19 @@ Public Class FmGraph
         Dim Curve As LineItem
 
         ' Generate a green curve with circle symbols, and "% Disk Time" in the legend
-        Curve = myPane.AddCurve("% Disk Time", diskList, Color.Green, SymbolType.None)
+        Curve = myPane.AddCurve("% Disk Time: " & Me._diskPercentInstance, diskList, Color.Green, SymbolType.None)
         If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         ' diskPercentCurve.Symbol.Fill = New Fill(Color.LightSkyBlue)
 
-        Curve = myPane.AddCurve("Read Queue", rQList, Color.RoyalBlue, SymbolType.Circle)
+        Curve = myPane.AddCurve("Read Queue: " & Me._diskReadInstance, rQList, Color.RoyalBlue, SymbolType.Circle)
         If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         Curve.Symbol.Fill = New Fill(Color.White)
         ' Associate this curve with the Y2 axis
         Curve.IsY2Axis = True
 
-        Curve = myPane.AddCurve("Write Queue", wQList, Color.DeepSkyBlue, SymbolType.Square)
+        Curve = myPane.AddCurve("Write Queue: " & Me._diskWriteInstance, wQList, Color.DeepSkyBlue, SymbolType.Square)
         If Me.IsSmoothed Then Curve.Line.IsSmooth = True
         Curve.Line.IsAntiAlias = True
         Curve.Symbol.Fill = New Fill(Color.White)
