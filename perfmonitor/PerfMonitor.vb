@@ -1,6 +1,6 @@
 Public Class PerfMonitor
 
-    Private cpu, mem, dskTime, dskReadQ, dskWriteQ As PerformanceCounter
+    Private cpu, mem, dskTime, dskReadQ, dskWriteQ, diskReadBytes, diskWriteBytes As PerformanceCounter
     Private totalMemory As Integer
     Private FirstRun As Boolean
     Private DiskInstance As String = "_Total"
@@ -43,11 +43,11 @@ Public Class PerfMonitor
         End Try
 
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
-
         dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance, Me.computername.Text)
         dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance, Me.computername.Text)
         dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance, Me.computername.Text)
-
+        diskReadBytes = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance, Me.computername.Text)
+        diskWriteBytes = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance, Me.computername.Text)
 
         Me.Text = Me.computername.Text.ToUpper
         Me.btnStart.Enabled = False
@@ -119,12 +119,11 @@ Public Class PerfMonitor
             dsktimeValue = 100
         End If
 
-        '  ----  Avg Disk Read & Write Queues
+        '  Disk Read & Write
         Dim ReadQ As Single = dskReadQ.NextValue
-        'LblReadQ.Text = FormatNumber(ReadQ, 2)
         Dim WriteQ As Single = dskWriteQ.NextValue
-        'LblWriteQ.Text = FormatNumber(WriteQ, 2)
-
+        Dim DiskReadKbSec As Integer = CInt(Me.diskReadBytes.NextValue / 1024)
+        Dim DiskWriteKbSec As Integer = CInt(Me.diskWriteBytes.NextValue / 1024)
 
 
         UpdatePercentGraph(dsktimeValue, Pic3, dskColor)
@@ -132,7 +131,13 @@ Public Class PerfMonitor
 
 
         If Recording Then
-            Me.Recording_Write_Line(CInt(cpuvalue) & "," & CInt(memValue) & "," & CInt(dsktimeValue) & "," & ReadQ & "," & WriteQ)
+            Me.Recording_Write_Line(CInt(cpuvalue) & "," & _
+                                    CInt(memValue) & "," & _
+                                    CInt(dsktimeValue) & "," & _
+                                    ReadQ & "," & _
+                                    WriteQ & "," & _
+                                    DiskReadKbSec & "," & _
+                                    DiskWriteKbSec)
         End If
 
         If FirstRun Then
@@ -224,7 +229,11 @@ Public Class PerfMonitor
                 Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".pff"
                 Writer = New System.IO.StreamWriter(Me.RecordingFileName, False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
-                Writer.WriteLine("Time,% Processor Time\_Total,% Mem Used,% Disk Time\" & Me.DiskInstance & ",Avg Read Queue\" & Me.DiskInstance & ",Avg Write Queue\" & Me.DiskInstance)
+                Writer.WriteLine("Time,% Processor Time\_Total,% Mem Used,% Disk Time\" & Me.DiskInstance & _
+                                 ",Avg Read Queue\" & Me.DiskInstance & _
+                                 ",Avg Write Queue\" & Me.DiskInstance & _
+                                 ",Disk Read kbs\" & Me.DiskInstance & _
+                                 ",Disk Write kbs\" & Me.DiskInstance)
                 Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop capturing performance data")
                 Me.RecordingButton.Text = "stop recording"
                 Me.RecordingStatusLabel.Visible = True
@@ -465,7 +474,6 @@ Public Class PerfMonitor
         Dim g As New PerformanceGraph.FmGraph
         g.Show()
     End Sub
-
 
 
 End Class

@@ -200,7 +200,7 @@ Partial Class PerfMonitor
         Me.OpenRecordedDataToolStripMenuItem.Image = Global.PerfMonitor.My.Resources.Resources.chart
         Me.OpenRecordedDataToolStripMenuItem.Name = "OpenRecordedDataToolStripMenuItem"
         Me.OpenRecordedDataToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.OpenRecordedDataToolStripMenuItem.Text = "open recorded data"
         '
         'AlwaysOnTopToolStripMenuItem1
@@ -209,14 +209,14 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem1.Name = "AlwaysOnTopToolStripMenuItem1"
         Me.AlwaysOnTopToolStripMenuItem1.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(203, 22)
+        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(206, 22)
         Me.AlwaysOnTopToolStripMenuItem1.Text = "always on top"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
         Me.ExitToolStripMenuItem.Text = "exit"
         '
         'Panel2
