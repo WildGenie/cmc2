@@ -44,12 +44,18 @@ Partial Class FmGraph
         Me.zgc_phsdisk3 = New ZedGraph.ZedGraphControl
         Me.Panel_PhysDisk_1 = New System.Windows.Forms.Panel
         Me.zgc_phsdisk1 = New ZedGraph.ZedGraphControl
+        Me.ListViewStats = New System.Windows.Forms.ListView
+        Me.Metric = New System.Windows.Forms.ColumnHeader
+        Me.Max = New System.Windows.Forms.ColumnHeader
+        Me.Min = New System.Windows.Forms.ColumnHeader
+        Me.Avg = New System.Windows.Forms.ColumnHeader
         Me.MenuStrip1.SuspendLayout()
         Me.Panel1.SuspendLayout()
         Me.TabControl1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
         Me.Panel_Perf_CPU.SuspendLayout()
         Me.Panel_Perf_RAM.SuspendLayout()
+        Me.Panel_Info.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.Panel_PhysDisk_2.SuspendLayout()
         Me.Panel_PhysDisk_3.SuspendLayout()
@@ -98,7 +104,7 @@ Partial Class FmGraph
         Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel1.Location = New System.Drawing.Point(0, 24)
         Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(514, 446)
+        Me.Panel1.Size = New System.Drawing.Size(514, 510)
         Me.Panel1.TabIndex = 5
         '
         'TabControl1
@@ -109,7 +115,7 @@ Partial Class FmGraph
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
         Me.TabControl1.SelectedIndex = 0
-        Me.TabControl1.Size = New System.Drawing.Size(514, 446)
+        Me.TabControl1.Size = New System.Drawing.Size(514, 510)
         Me.TabControl1.TabIndex = 0
         '
         'TabPage2
@@ -120,7 +126,7 @@ Partial Class FmGraph
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(506, 420)
+        Me.TabPage2.Size = New System.Drawing.Size(506, 484)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Performance"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -129,7 +135,7 @@ Partial Class FmGraph
         '
         Me.Panel_Perf_CPU.Controls.Add(Me.zgc_cpu)
         Me.Panel_Perf_CPU.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel_Perf_CPU.Location = New System.Drawing.Point(3, 186)
+        Me.Panel_Perf_CPU.Location = New System.Drawing.Point(3, 250)
         Me.Panel_Perf_CPU.Name = "Panel_Perf_CPU"
         Me.Panel_Perf_CPU.Size = New System.Drawing.Size(500, 102)
         Me.Panel_Perf_CPU.TabIndex = 1
@@ -155,7 +161,7 @@ Partial Class FmGraph
         '
         Me.Panel_Perf_RAM.Controls.Add(Me.zgc_ram)
         Me.Panel_Perf_RAM.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel_Perf_RAM.Location = New System.Drawing.Point(3, 288)
+        Me.Panel_Perf_RAM.Location = New System.Drawing.Point(3, 352)
         Me.Panel_Perf_RAM.Name = "Panel_Perf_RAM"
         Me.Panel_Perf_RAM.Size = New System.Drawing.Size(500, 129)
         Me.Panel_Perf_RAM.TabIndex = 2
@@ -178,6 +184,7 @@ Partial Class FmGraph
         '
         'Panel_Info
         '
+        Me.Panel_Info.Controls.Add(Me.ListViewStats)
         Me.Panel_Info.Dock = System.Windows.Forms.DockStyle.Top
         Me.Panel_Info.Location = New System.Drawing.Point(3, 3)
         Me.Panel_Info.Name = "Panel_Info"
@@ -269,11 +276,46 @@ Partial Class FmGraph
         Me.zgc_phsdisk1.Size = New System.Drawing.Size(506, 131)
         Me.zgc_phsdisk1.TabIndex = 0
         '
+        'ListViewStats
+        '
+        Me.ListViewStats.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Metric, Me.Max, Me.Min, Me.Avg})
+        Me.ListViewStats.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListViewStats.Font = New System.Drawing.Font("Courier New", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewStats.FullRowSelect = True
+        Me.ListViewStats.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.ListViewStats.LabelWrap = False
+        Me.ListViewStats.Location = New System.Drawing.Point(0, 0)
+        Me.ListViewStats.Name = "ListViewStats"
+        Me.ListViewStats.Size = New System.Drawing.Size(500, 137)
+        Me.ListViewStats.TabIndex = 0
+        Me.ListViewStats.UseCompatibleStateImageBehavior = False
+        Me.ListViewStats.View = System.Windows.Forms.View.Details
+        '
+        'Metric
+        '
+        Me.Metric.Text = "Metric"
+        Me.Metric.Width = 179
+        '
+        'Max
+        '
+        Me.Max.Text = "Max Value"
+        Me.Max.Width = 94
+        '
+        'Min
+        '
+        Me.Min.Text = "Min Value"
+        Me.Min.Width = 85
+        '
+        'Avg
+        '
+        Me.Avg.Text = "Average"
+        Me.Avg.Width = 91
+        '
         'FmGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(514, 470)
+        Me.ClientSize = New System.Drawing.Size(514, 534)
         Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
@@ -287,6 +329,7 @@ Partial Class FmGraph
         Me.TabPage2.ResumeLayout(False)
         Me.Panel_Perf_CPU.ResumeLayout(False)
         Me.Panel_Perf_RAM.ResumeLayout(False)
+        Me.Panel_Info.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.Panel_PhysDisk_2.ResumeLayout(False)
         Me.Panel_PhysDisk_3.ResumeLayout(False)
@@ -315,5 +358,10 @@ Partial Class FmGraph
     Friend WithEvents zgc_phsdisk2 As ZedGraph.ZedGraphControl
     Friend WithEvents zgc_phsdisk3 As ZedGraph.ZedGraphControl
     Friend WithEvents Panel_Info As System.Windows.Forms.Panel
+    Friend WithEvents ListViewStats As System.Windows.Forms.ListView
+    Friend WithEvents Metric As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Max As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Min As System.Windows.Forms.ColumnHeader
+    Friend WithEvents Avg As System.Windows.Forms.ColumnHeader
 
 End Class

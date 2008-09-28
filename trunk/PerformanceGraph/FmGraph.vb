@@ -21,7 +21,7 @@ Public Class FmGraph
     Private _diskWriteMBInstance As String
 
     ''' <summary>
-    ''' Reads file containing performance data into a datatable
+    ''' Create datatable and read performance data from file into datatable
     ''' </summary>
     ''' <param name="filename"></param>
     ''' <remarks></remarks>
@@ -244,6 +244,76 @@ Public Class FmGraph
 
         ZGC.AxisChange()
     End Sub
+    Private Sub GetStats()
+
+        Me.ListViewStats.Items.Clear()
+        Dim item As ListViewItem
+
+        Try
+            item = New ListViewItem("CPU %")
+            item.SubItems.Add(CInt(myData.Compute("MAX([cpu%])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([cpu%])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("AVG([cpu%])", String.Empty)))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+        Try
+            item = New ListViewItem("RAM % Used")
+            item.SubItems.Add(CInt(myData.Compute("MAX([mem%])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([mem%])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("AVG([mem%])", String.Empty)))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+        Try
+            item = New ListViewItem("Disk % Time")
+            item.SubItems.Add(CInt(myData.Compute("MAX([disk%])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([disk%])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("AVG([disk%])", String.Empty)))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+        Try
+            item = New ListViewItem("Disk Read Queue")
+            item.SubItems.Add(CInt(myData.Compute("MAX([diskRead])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([diskRead])", String.Empty)))
+            item.SubItems.Add(CType(myData.Compute("AVG([diskRead])", String.Empty), Single))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+        Try
+            item = New ListViewItem("Disk Write Queue")
+            item.SubItems.Add(CInt(myData.Compute("MAX([diskWrite])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([diskWrite])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("AVG([diskWrite])", String.Empty)))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+        Try
+            item = New ListViewItem("Disk IO Read kb/s")
+            item.SubItems.Add(CInt(myData.Compute("MAX([diskReadKbSec])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([diskReadKbSec])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("AVG([diskReadKbSec])", String.Empty)))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+        Try
+            item = New ListViewItem("Disk IO Write kb/s")
+            item.SubItems.Add(CInt(myData.Compute("MAX([diskWriteKbSec])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("MIN([diskWriteKbSec])", String.Empty)))
+            item.SubItems.Add(CInt(myData.Compute("AVG([diskWriteKbSec])", String.Empty)))
+            Me.ListViewStats.Items.Add(item)
+        Catch ex As Exception
+        End Try
+
+
+    End Sub
 
     Private Sub PlotFileData(ByVal filename As String, ByVal UseCurrentData As Boolean)
 
@@ -325,11 +395,11 @@ Public Class FmGraph
         End If
 
 
-
         If Not FileToOpen Is Nothing Then
-            Me.Height = 700
+            Me.Height = 600
             GraphPanelsVisible(True)
             Me.PlotFileData(FileToOpen, False)
+            Me.GetStats()
         Else
             GraphPanelsVisible(False)
             Me.Height = 200
@@ -350,6 +420,7 @@ Public Class FmGraph
         Dim file As String
         file = Me.OpenFileDialog1.FileName
         Me.PlotFileData(file, False)
+        Me.GetStats()
     End Sub
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
