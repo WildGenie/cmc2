@@ -24,102 +24,49 @@ Partial Class FmGraph
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(FmGraph))
-        Me.zg1 = New ZedGraph.ZedGraphControl
         Me.OpenFileDialog1 = New System.Windows.Forms.OpenFileDialog
-        Me.zg2 = New ZedGraph.ZedGraphControl
-        Me.SplitContainer1 = New System.Windows.Forms.SplitContainer
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MenuGraph1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_cpu = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_ram = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_disktime = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_diskReadQueue = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_diskWriteQueue = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_diskreadMBs = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph1_diskwriteMBs = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.menu_graph1_smoothCurvesMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.MenuGraph2 = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_cpu = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_ram = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_disktime = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_diskReadQueue = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_diskWriteQueue = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_diskreadMBs = New System.Windows.Forms.ToolStripMenuItem
-        Me.menu_graph2_diskwriteMBs = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.menu_graph2_smoothCurvesMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.LineThicknessToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripComboBox2 = New System.Windows.Forms.ToolStripComboBox
-        Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.SplitContainer1.Panel1.SuspendLayout()
-        Me.SplitContainer1.Panel2.SuspendLayout()
-        Me.SplitContainer1.SuspendLayout()
+        Me.Panel1 = New System.Windows.Forms.Panel
+        Me.TabControl1 = New System.Windows.Forms.TabControl
+        Me.TabPage2 = New System.Windows.Forms.TabPage
+        Me.Panel_Perf_CPU = New System.Windows.Forms.Panel
+        Me.zgc_cpu = New ZedGraph.ZedGraphControl
+        Me.Panel_Perf_RAM = New System.Windows.Forms.Panel
+        Me.zgc_ram = New ZedGraph.ZedGraphControl
+        Me.Panel_Info = New System.Windows.Forms.Panel
+        Me.TabPage3 = New System.Windows.Forms.TabPage
+        Me.Panel_PhysDisk_2 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk2 = New ZedGraph.ZedGraphControl
+        Me.Panel_PhysDisk_3 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk3 = New ZedGraph.ZedGraphControl
+        Me.Panel_PhysDisk_1 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk1 = New ZedGraph.ZedGraphControl
         Me.MenuStrip1.SuspendLayout()
+        Me.Panel1.SuspendLayout()
+        Me.TabControl1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.Panel_Perf_CPU.SuspendLayout()
+        Me.Panel_Perf_RAM.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.Panel_PhysDisk_2.SuspendLayout()
+        Me.Panel_PhysDisk_3.SuspendLayout()
+        Me.Panel_PhysDisk_1.SuspendLayout()
         Me.SuspendLayout()
-        '
-        'zg1
-        '
-        Me.zg1.Location = New System.Drawing.Point(0, 0)
-        Me.zg1.Name = "zg1"
-        Me.zg1.ScrollGrace = 0
-        Me.zg1.ScrollMaxX = 0
-        Me.zg1.ScrollMaxY = 0
-        Me.zg1.ScrollMaxY2 = 0
-        Me.zg1.ScrollMinX = 0
-        Me.zg1.ScrollMinY = 0
-        Me.zg1.ScrollMinY2 = 0
-        Me.zg1.Size = New System.Drawing.Size(260, 53)
-        Me.zg1.TabIndex = 0
         '
         'OpenFileDialog1
         '
         Me.OpenFileDialog1.Filter = "PerfMonitor Files|*.pff|All Files|*.*"
         Me.OpenFileDialog1.Title = "Select file to open"
         '
-        'zg2
-        '
-        Me.zg2.Location = New System.Drawing.Point(0, 0)
-        Me.zg2.Name = "zg2"
-        Me.zg2.ScrollGrace = 0
-        Me.zg2.ScrollMaxX = 0
-        Me.zg2.ScrollMaxY = 0
-        Me.zg2.ScrollMaxY2 = 0
-        Me.zg2.ScrollMinX = 0
-        Me.zg2.ScrollMinY = 0
-        Me.zg2.ScrollMinY2 = 0
-        Me.zg2.Size = New System.Drawing.Size(260, 52)
-        Me.zg2.TabIndex = 0
-        '
-        'SplitContainer1
-        '
-        Me.SplitContainer1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.SplitContainer1.Location = New System.Drawing.Point(0, 24)
-        Me.SplitContainer1.Name = "SplitContainer1"
-        Me.SplitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal
-        '
-        'SplitContainer1.Panel1
-        '
-        Me.SplitContainer1.Panel1.Controls.Add(Me.zg1)
-        '
-        'SplitContainer1.Panel2
-        '
-        Me.SplitContainer1.Panel2.Controls.Add(Me.zg2)
-        Me.SplitContainer1.Size = New System.Drawing.Size(269, 123)
-        Me.SplitContainer1.SplitterDistance = 58
-        Me.SplitContainer1.TabIndex = 3
-        Me.SplitContainer1.Visible = False
-        '
         'MenuStrip1
         '
-        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem, Me.OptionsToolStripMenuItem})
+        Me.MenuStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FileToolStripMenuItem})
         Me.MenuStrip1.Location = New System.Drawing.Point(0, 0)
         Me.MenuStrip1.Name = "MenuStrip1"
-        Me.MenuStrip1.Size = New System.Drawing.Size(269, 24)
+        Me.MenuStrip1.Size = New System.Drawing.Size(514, 24)
         Me.MenuStrip1.TabIndex = 4
         Me.MenuStrip1.Text = "MenuStrip1"
         '
@@ -135,239 +82,238 @@ Partial Class FmGraph
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.OpenToolStripMenuItem.Text = "Open"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
-        'OptionsToolStripMenuItem
+        'Panel1
         '
-        Me.OptionsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuGraph1, Me.MenuGraph2, Me.ToolStripSeparator3, Me.LineThicknessToolStripMenuItem})
-        Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(56, 20)
-        Me.OptionsToolStripMenuItem.Text = "Options"
+        Me.Panel1.Controls.Add(Me.TabControl1)
+        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel1.Location = New System.Drawing.Point(0, 24)
+        Me.Panel1.Name = "Panel1"
+        Me.Panel1.Size = New System.Drawing.Size(514, 446)
+        Me.Panel1.TabIndex = 5
         '
-        'MenuGraph1
+        'TabControl1
         '
-        Me.MenuGraph1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menu_graph1_cpu, Me.menu_graph1_ram, Me.menu_graph1_disktime, Me.menu_graph1_diskReadQueue, Me.menu_graph1_diskWriteQueue, Me.menu_graph1_diskreadMBs, Me.menu_graph1_diskwriteMBs, Me.ToolStripSeparator1, Me.menu_graph1_smoothCurvesMenu})
-        Me.MenuGraph1.Name = "MenuGraph1"
-        Me.MenuGraph1.Size = New System.Drawing.Size(152, 22)
-        Me.MenuGraph1.Text = "graph1"
+        Me.TabControl1.Controls.Add(Me.TabPage2)
+        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.TabControl1.Location = New System.Drawing.Point(0, 0)
+        Me.TabControl1.Name = "TabControl1"
+        Me.TabControl1.SelectedIndex = 0
+        Me.TabControl1.Size = New System.Drawing.Size(514, 446)
+        Me.TabControl1.TabIndex = 0
         '
-        'menu_graph1_cpu
+        'TabPage2
         '
-        Me.menu_graph1_cpu.Checked = True
-        Me.menu_graph1_cpu.CheckOnClick = True
-        Me.menu_graph1_cpu.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.menu_graph1_cpu.Name = "menu_graph1_cpu"
-        Me.menu_graph1_cpu.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_cpu.Text = "% cpu utilisation"
+        Me.TabPage2.Controls.Add(Me.Panel_Perf_CPU)
+        Me.TabPage2.Controls.Add(Me.Panel_Perf_RAM)
+        Me.TabPage2.Controls.Add(Me.Panel_Info)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(506, 420)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Performance"
+        Me.TabPage2.UseVisualStyleBackColor = True
         '
-        'menu_graph1_ram
+        'Panel_Perf_CPU
         '
-        Me.menu_graph1_ram.Checked = True
-        Me.menu_graph1_ram.CheckOnClick = True
-        Me.menu_graph1_ram.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.menu_graph1_ram.Name = "menu_graph1_ram"
-        Me.menu_graph1_ram.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_ram.Text = "% mem uilisation"
+        Me.Panel_Perf_CPU.Controls.Add(Me.zgc_cpu)
+        Me.Panel_Perf_CPU.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel_Perf_CPU.Location = New System.Drawing.Point(3, 186)
+        Me.Panel_Perf_CPU.Name = "Panel_Perf_CPU"
+        Me.Panel_Perf_CPU.Size = New System.Drawing.Size(500, 102)
+        Me.Panel_Perf_CPU.TabIndex = 1
         '
-        'menu_graph1_disktime
+        'zgc_cpu
         '
-        Me.menu_graph1_disktime.CheckOnClick = True
-        Me.menu_graph1_disktime.Name = "menu_graph1_disktime"
-        Me.menu_graph1_disktime.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_disktime.Text = "% disk time"
+        Me.zgc_cpu.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_cpu.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.zgc_cpu.IsAntiAlias = True
+        Me.zgc_cpu.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_cpu.Name = "zgc_cpu"
+        Me.zgc_cpu.ScrollGrace = 0
+        Me.zgc_cpu.ScrollMaxX = 0
+        Me.zgc_cpu.ScrollMaxY = 0
+        Me.zgc_cpu.ScrollMaxY2 = 0
+        Me.zgc_cpu.ScrollMinX = 0
+        Me.zgc_cpu.ScrollMinY = 0
+        Me.zgc_cpu.ScrollMinY2 = 0
+        Me.zgc_cpu.Size = New System.Drawing.Size(500, 102)
+        Me.zgc_cpu.TabIndex = 0
         '
-        'menu_graph1_diskReadQueue
+        'Panel_Perf_RAM
         '
-        Me.menu_graph1_diskReadQueue.CheckOnClick = True
-        Me.menu_graph1_diskReadQueue.Name = "menu_graph1_diskReadQueue"
-        Me.menu_graph1_diskReadQueue.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_diskReadQueue.Text = "disk read queue"
+        Me.Panel_Perf_RAM.Controls.Add(Me.zgc_ram)
+        Me.Panel_Perf_RAM.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel_Perf_RAM.Location = New System.Drawing.Point(3, 288)
+        Me.Panel_Perf_RAM.Name = "Panel_Perf_RAM"
+        Me.Panel_Perf_RAM.Size = New System.Drawing.Size(500, 129)
+        Me.Panel_Perf_RAM.TabIndex = 2
         '
-        'menu_graph1_diskWriteQueue
+        'zgc_ram
         '
-        Me.menu_graph1_diskWriteQueue.CheckOnClick = True
-        Me.menu_graph1_diskWriteQueue.Name = "menu_graph1_diskWriteQueue"
-        Me.menu_graph1_diskWriteQueue.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_diskWriteQueue.Text = "disk write queue"
+        Me.zgc_ram.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_ram.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.zgc_ram.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_ram.Name = "zgc_ram"
+        Me.zgc_ram.ScrollGrace = 0
+        Me.zgc_ram.ScrollMaxX = 0
+        Me.zgc_ram.ScrollMaxY = 0
+        Me.zgc_ram.ScrollMaxY2 = 0
+        Me.zgc_ram.ScrollMinX = 0
+        Me.zgc_ram.ScrollMinY = 0
+        Me.zgc_ram.ScrollMinY2 = 0
+        Me.zgc_ram.Size = New System.Drawing.Size(500, 129)
+        Me.zgc_ram.TabIndex = 0
         '
-        'menu_graph1_diskreadMBs
+        'Panel_Info
         '
-        Me.menu_graph1_diskreadMBs.CheckOnClick = True
-        Me.menu_graph1_diskreadMBs.Name = "menu_graph1_diskreadMBs"
-        Me.menu_graph1_diskreadMBs.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_diskreadMBs.Text = "disk read MB/s"
+        Me.Panel_Info.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_Info.Location = New System.Drawing.Point(3, 3)
+        Me.Panel_Info.Name = "Panel_Info"
+        Me.Panel_Info.Size = New System.Drawing.Size(500, 137)
+        Me.Panel_Info.TabIndex = 3
         '
-        'menu_graph1_diskwriteMBs
+        'TabPage3
         '
-        Me.menu_graph1_diskwriteMBs.CheckOnClick = True
-        Me.menu_graph1_diskwriteMBs.Name = "menu_graph1_diskwriteMBs"
-        Me.menu_graph1_diskwriteMBs.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_diskwriteMBs.Text = "disk write MB/s"
+        Me.TabPage3.Controls.Add(Me.Panel_PhysDisk_2)
+        Me.TabPage3.Controls.Add(Me.Panel_PhysDisk_3)
+        Me.TabPage3.Controls.Add(Me.Panel_PhysDisk_1)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage3.Name = "TabPage3"
+        Me.TabPage3.Size = New System.Drawing.Size(506, 420)
+        Me.TabPage3.TabIndex = 2
+        Me.TabPage3.Text = "PhysicalDisk"
+        Me.TabPage3.UseVisualStyleBackColor = True
         '
-        'ToolStripSeparator1
+        'Panel_PhysDisk_2
         '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(162, 6)
+        Me.Panel_PhysDisk_2.Controls.Add(Me.zgc_phsdisk2)
+        Me.Panel_PhysDisk_2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel_PhysDisk_2.Location = New System.Drawing.Point(0, 131)
+        Me.Panel_PhysDisk_2.Name = "Panel_PhysDisk_2"
+        Me.Panel_PhysDisk_2.Size = New System.Drawing.Size(506, 143)
+        Me.Panel_PhysDisk_2.TabIndex = 2
         '
-        'menu_graph1_smoothCurvesMenu
+        'zgc_phsdisk2
         '
-        Me.menu_graph1_smoothCurvesMenu.CheckOnClick = True
-        Me.menu_graph1_smoothCurvesMenu.Name = "menu_graph1_smoothCurvesMenu"
-        Me.menu_graph1_smoothCurvesMenu.Size = New System.Drawing.Size(165, 22)
-        Me.menu_graph1_smoothCurvesMenu.Text = "smooth curves"
+        Me.zgc_phsdisk2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk2.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk2.Name = "zgc_phsdisk2"
+        Me.zgc_phsdisk2.ScrollGrace = 0
+        Me.zgc_phsdisk2.ScrollMaxX = 0
+        Me.zgc_phsdisk2.ScrollMaxY = 0
+        Me.zgc_phsdisk2.ScrollMaxY2 = 0
+        Me.zgc_phsdisk2.ScrollMinX = 0
+        Me.zgc_phsdisk2.ScrollMinY = 0
+        Me.zgc_phsdisk2.ScrollMinY2 = 0
+        Me.zgc_phsdisk2.Size = New System.Drawing.Size(506, 143)
+        Me.zgc_phsdisk2.TabIndex = 0
         '
-        'MenuGraph2
+        'Panel_PhysDisk_3
         '
-        Me.MenuGraph2.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.menu_graph2_cpu, Me.menu_graph2_ram, Me.menu_graph2_disktime, Me.menu_graph2_diskReadQueue, Me.menu_graph2_diskWriteQueue, Me.menu_graph2_diskreadMBs, Me.menu_graph2_diskwriteMBs, Me.ToolStripSeparator2, Me.menu_graph2_smoothCurvesMenu})
-        Me.MenuGraph2.Name = "MenuGraph2"
-        Me.MenuGraph2.Size = New System.Drawing.Size(152, 22)
-        Me.MenuGraph2.Text = "graph2"
+        Me.Panel_PhysDisk_3.Controls.Add(Me.zgc_phsdisk3)
+        Me.Panel_PhysDisk_3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel_PhysDisk_3.Location = New System.Drawing.Point(0, 274)
+        Me.Panel_PhysDisk_3.Name = "Panel_PhysDisk_3"
+        Me.Panel_PhysDisk_3.Size = New System.Drawing.Size(506, 146)
+        Me.Panel_PhysDisk_3.TabIndex = 1
         '
-        'menu_graph2_cpu
+        'zgc_phsdisk3
         '
-        Me.menu_graph2_cpu.CheckOnClick = True
-        Me.menu_graph2_cpu.Name = "menu_graph2_cpu"
-        Me.menu_graph2_cpu.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_cpu.Text = "% cpu"
+        Me.zgc_phsdisk3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk3.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk3.Name = "zgc_phsdisk3"
+        Me.zgc_phsdisk3.ScrollGrace = 0
+        Me.zgc_phsdisk3.ScrollMaxX = 0
+        Me.zgc_phsdisk3.ScrollMaxY = 0
+        Me.zgc_phsdisk3.ScrollMaxY2 = 0
+        Me.zgc_phsdisk3.ScrollMinX = 0
+        Me.zgc_phsdisk3.ScrollMinY = 0
+        Me.zgc_phsdisk3.ScrollMinY2 = 0
+        Me.zgc_phsdisk3.Size = New System.Drawing.Size(506, 146)
+        Me.zgc_phsdisk3.TabIndex = 0
         '
-        'menu_graph2_ram
+        'Panel_PhysDisk_1
         '
-        Me.menu_graph2_ram.CheckOnClick = True
-        Me.menu_graph2_ram.Name = "menu_graph2_ram"
-        Me.menu_graph2_ram.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_ram.Text = "% ram"
+        Me.Panel_PhysDisk_1.Controls.Add(Me.zgc_phsdisk1)
+        Me.Panel_PhysDisk_1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_PhysDisk_1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel_PhysDisk_1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_PhysDisk_1.Name = "Panel_PhysDisk_1"
+        Me.Panel_PhysDisk_1.Size = New System.Drawing.Size(506, 131)
+        Me.Panel_PhysDisk_1.TabIndex = 0
         '
-        'menu_graph2_disktime
+        'zgc_phsdisk1
         '
-        Me.menu_graph2_disktime.Checked = True
-        Me.menu_graph2_disktime.CheckOnClick = True
-        Me.menu_graph2_disktime.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.menu_graph2_disktime.Name = "menu_graph2_disktime"
-        Me.menu_graph2_disktime.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_disktime.Text = "% disk time"
-        '
-        'menu_graph2_diskReadQueue
-        '
-        Me.menu_graph2_diskReadQueue.Checked = True
-        Me.menu_graph2_diskReadQueue.CheckOnClick = True
-        Me.menu_graph2_diskReadQueue.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.menu_graph2_diskReadQueue.Name = "menu_graph2_diskReadQueue"
-        Me.menu_graph2_diskReadQueue.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_diskReadQueue.Text = "disk read queue"
-        '
-        'menu_graph2_diskWriteQueue
-        '
-        Me.menu_graph2_diskWriteQueue.Checked = True
-        Me.menu_graph2_diskWriteQueue.CheckOnClick = True
-        Me.menu_graph2_diskWriteQueue.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.menu_graph2_diskWriteQueue.Name = "menu_graph2_diskWriteQueue"
-        Me.menu_graph2_diskWriteQueue.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_diskWriteQueue.Text = "disk write queue"
-        '
-        'menu_graph2_diskreadMBs
-        '
-        Me.menu_graph2_diskreadMBs.CheckOnClick = True
-        Me.menu_graph2_diskreadMBs.Name = "menu_graph2_diskreadMBs"
-        Me.menu_graph2_diskreadMBs.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_diskreadMBs.Text = "disk reads MB/s"
-        '
-        'menu_graph2_diskwriteMBs
-        '
-        Me.menu_graph2_diskwriteMBs.CheckOnClick = True
-        Me.menu_graph2_diskwriteMBs.Name = "menu_graph2_diskwriteMBs"
-        Me.menu_graph2_diskwriteMBs.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_diskwriteMBs.Text = "disk writes MB/s"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(160, 6)
-        '
-        'menu_graph2_smoothCurvesMenu
-        '
-        Me.menu_graph2_smoothCurvesMenu.CheckOnClick = True
-        Me.menu_graph2_smoothCurvesMenu.Name = "menu_graph2_smoothCurvesMenu"
-        Me.menu_graph2_smoothCurvesMenu.Size = New System.Drawing.Size(163, 22)
-        Me.menu_graph2_smoothCurvesMenu.Text = "smooth curves"
-        '
-        'LineThicknessToolStripMenuItem
-        '
-        Me.LineThicknessToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripComboBox2})
-        Me.LineThicknessToolStripMenuItem.Name = "LineThicknessToolStripMenuItem"
-        Me.LineThicknessToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
-        Me.LineThicknessToolStripMenuItem.Text = "line thickness"
-        '
-        'ToolStripComboBox2
-        '
-        Me.ToolStripComboBox2.AutoCompleteCustomSource.AddRange(New String() {"1", "2", "3", "4"})
-        Me.ToolStripComboBox2.Items.AddRange(New Object() {"1", "2", "3", "4"})
-        Me.ToolStripComboBox2.Name = "ToolStripComboBox2"
-        Me.ToolStripComboBox2.Size = New System.Drawing.Size(75, 21)
-        '
-        'ToolStripSeparator3
-        '
-        Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(149, 6)
+        Me.zgc_phsdisk1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk1.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk1.Name = "zgc_phsdisk1"
+        Me.zgc_phsdisk1.ScrollGrace = 0
+        Me.zgc_phsdisk1.ScrollMaxX = 0
+        Me.zgc_phsdisk1.ScrollMaxY = 0
+        Me.zgc_phsdisk1.ScrollMaxY2 = 0
+        Me.zgc_phsdisk1.ScrollMinX = 0
+        Me.zgc_phsdisk1.ScrollMinY = 0
+        Me.zgc_phsdisk1.ScrollMinY2 = 0
+        Me.zgc_phsdisk1.Size = New System.Drawing.Size(506, 131)
+        Me.zgc_phsdisk1.TabIndex = 0
         '
         'FmGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(269, 147)
-        Me.Controls.Add(Me.SplitContainer1)
+        Me.ClientSize = New System.Drawing.Size(514, 470)
+        Me.Controls.Add(Me.Panel1)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
         Me.Name = "FmGraph"
         Me.Text = "Performance Graph"
-        Me.SplitContainer1.Panel1.ResumeLayout(False)
-        Me.SplitContainer1.Panel2.ResumeLayout(False)
-        Me.SplitContainer1.ResumeLayout(False)
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
+        Me.Panel1.ResumeLayout(False)
+        Me.TabControl1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.Panel_Perf_CPU.ResumeLayout(False)
+        Me.Panel_Perf_RAM.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.Panel_PhysDisk_2.ResumeLayout(False)
+        Me.Panel_PhysDisk_3.ResumeLayout(False)
+        Me.Panel_PhysDisk_1.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
     End Sub
-    Friend WithEvents zg1 As ZedGraph.ZedGraphControl
     Friend WithEvents OpenFileDialog1 As System.Windows.Forms.OpenFileDialog
-    Friend WithEvents zg2 As ZedGraph.ZedGraphControl
-    Friend WithEvents SplitContainer1 As System.Windows.Forms.SplitContainer
     Friend WithEvents MenuStrip1 As System.Windows.Forms.MenuStrip
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents OptionsToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuGraph1 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph1_cpu As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph1_ram As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph1_disktime As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents MenuGraph2 As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_cpu As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_ram As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_disktime As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_diskReadQueue As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_diskWriteQueue As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph1_diskReadQueue As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph1_diskWriteQueue As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents menu_graph1_smoothCurvesMenu As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents menu_graph2_smoothCurvesMenu As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LineThicknessToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripComboBox2 As System.Windows.Forms.ToolStripComboBox
-    Friend WithEvents menu_graph1_diskreadMBs As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph1_diskwriteMBs As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_diskreadMBs As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents menu_graph2_diskwriteMBs As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator3 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
+    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
+    Friend WithEvents zgc_cpu As ZedGraph.ZedGraphControl
+    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel_Perf_RAM As System.Windows.Forms.Panel
+    Friend WithEvents Panel_Perf_CPU As System.Windows.Forms.Panel
+    Friend WithEvents zgc_ram As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_PhysDisk_2 As System.Windows.Forms.Panel
+    Friend WithEvents Panel_PhysDisk_3 As System.Windows.Forms.Panel
+    Friend WithEvents Panel_PhysDisk_1 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk1 As ZedGraph.ZedGraphControl
+    Friend WithEvents zgc_phsdisk2 As ZedGraph.ZedGraphControl
+    Friend WithEvents zgc_phsdisk3 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_Info As System.Windows.Forms.Panel
 
 End Class

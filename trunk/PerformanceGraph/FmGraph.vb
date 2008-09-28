@@ -4,8 +4,16 @@ Public Class FmGraph
 
     Public FileToOpen As String
     Private myData As DataTable
-    Private LineThickness As Single = 2
     Private Computer As String
+
+    Private CPUCurve As CurveSettings
+    Private RAMCurve As CurveSettings
+    Private PhysDiskPercentCurve As CurveSettings
+    Private PhysDiskQueueReadCurve As CurveSettings
+    Private PhysDiskQueueWriteCurve As CurveSettings
+    Private PhysDiskIOReadCurve As CurveSettings
+    Private PhysDiskIOWriteCurve As CurveSettings
+
     Private _diskPercentInstance As String
     Private _diskReadInstance As String
     Private _diskWriteInstance As String
@@ -19,7 +27,7 @@ Public Class FmGraph
     ''' <remarks></remarks>
     Private Sub Fill_DataTable(ByVal filename As String)
         myData = New DataTable()
-        myData.Columns.Add(New DataColumn("Time", GetType(DateTime)))
+        myData.Columns.Add(New DataColumn("time", GetType(DateTime)))
         myData.Columns.Add(New DataColumn("cpu%", GetType(Double)))
         myData.Columns.Add(New DataColumn("mem%", GetType(Double)))
         myData.Columns.Add(New DataColumn("disk%", GetType(Double)))
@@ -28,175 +36,104 @@ Public Class FmGraph
         myData.Columns.Add(New DataColumn("diskReadKbSec", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskWriteKbSec", GetType(Double)))
 
-
         Dim sr As New System.IO.StreamReader(filename)
         Computer = UCase(sr.ReadLine.Split(" ")(0))
         Dim instanceLine() As String = sr.ReadLine.Split(",")
         Me._diskPercentInstance = instanceLine(3).Substring(instanceLine(3).LastIndexOf("\") + 1)
         Me._diskReadInstance = instanceLine(4).Substring(instanceLine(4).LastIndexOf("\") + 1)
         Me._diskWriteInstance = instanceLine(5).Substring(instanceLine(5).LastIndexOf("\") + 1)
-        If instanceLine.Length = 8 Then
+        If instanceLine.Length >= 8 Then
             Me._diskReadMBInstance = instanceLine(6).Substring(instanceLine(6).LastIndexOf("\") + 1)
             Me._diskWriteMBInstance = instanceLine(7).Substring(instanceLine(7).LastIndexOf("\") + 1)
         End If
 
         Do While Not sr.EndOfStream
             Dim line() As String = sr.ReadLine.Split(",")
-            If line.Length = 6 Then
-                Try
-                    ' Add data to new myData row
-                    myData.Rows.Add(line(0), line(1), line(2), line(3), line(4), line(5))
-                Catch ex As System.ArgumentException
-                    ' data not in correct format - maybe incomplete line - skip
-                End Try
-            ElseIf line.Length = 8 Then
-                Try
-                    ' Add data to new myData row
-                    myData.Rows.Add(line(0), line(1), line(2), line(3), line(4), line(5), line(6), line(7))
-                Catch ex As System.ArgumentException
-                    ' data not in correct format - maybe incomplete line - skip
-                End Try
-            End If
+            Dim dtNewRow As DataRow = myData.NewRow()
+            For i As Integer = 0 To line.Length - 1
+                dtNewRow.Item(i) = line(i)
+            Next
+            Try
+                myData.Rows.Add(dtNewRow)
+            Catch ex As Exception
+            End Try
         Loop
         sr.Close()
     End Sub
 
-    ''' <summary>
-    ''' Draw the graph selected curves in the specified graphcontrol
-    ''' </summary>
-    ''' <param name="zgc"></param>
-    ''' <remarks></remarks>
-    Private Sub CreateGraph(ByVal zgc As ZedGraphControl)
-
-        ' selected metrics
-        Dim _showCPU As Boolean = False
-        Dim _showRAM As Boolean = False
-        Dim _showDiskTime As Boolean = False
-        Dim _showDiskReadQueue As Boolean = False
-        Dim _showDiskWriteQueue As Boolean = False
-        Dim _ShowDiskReadKB As Boolean = False
-        Dim _ShowDiskWriteKB As Boolean = False
-
-        ' line / axis options
-        Dim _smoothLines As Boolean = False
-        Dim _showY2Axis As Boolean = False
-        Dim _ShowYAxis As Boolean = True
-
-        Dim GraphNumber As Integer
-        Try
-            GraphNumber = CInt(zgc.Name.Substring(zgc.Name.Length - 1))
-        Catch ex As Exception
-            MsgBox("Graph Control Name must end with an Integer")
-        End Try
-
-        'If GraphNumber = 1 Then
-        '    For Each mnuitm As ToolStripMenuItem In Me.MenuGraph1.DropDownItems
-        '    Next
-        'End If
-
-        If GraphNumber = 1 Then
-            If Me.menu_graph1_cpu.Checked Then _showCPU = True
-            If Me.menu_graph1_ram.Checked Then _showRAM = True
-            If Me.menu_graph1_disktime.Checked Then _showDiskTime = True
-            If Me.menu_graph1_diskReadQueue.Checked Then _showDiskReadQueue = True
-            If Me.menu_graph1_diskWriteQueue.Checked Then _showDiskWriteQueue = True
-            If Me.menu_graph1_diskreadMBs.Checked Then _ShowDiskReadKB = True
-            If Me.menu_graph1_diskwriteMBs.Checked Then _ShowDiskWriteKB = True
-
-            If Me.menu_graph1_diskReadQueue.Checked OrElse Me.menu_graph1_diskWriteQueue.Checked Then
-                _showY2Axis = True
-            End If
-            If Not Me.menu_graph1_cpu.Checked AndAlso Not Me.menu_graph1_ram.Checked AndAlso Not Me.menu_graph1_disktime.Checked Then
-                _ShowYAxis = False
-            End If
-            If Me.menu_graph1_smoothCurvesMenu.Checked Then _smoothLines = True
-        ElseIf GraphNumber = 2 Then
-            If Me.menu_graph2_cpu.Checked Then _showCPU = True
-            If Me.menu_graph2_ram.Checked Then _showRAM = True
-            If Me.menu_graph2_disktime.Checked Then _showDiskTime = True
-            If Me.menu_graph2_diskReadQueue.Checked Then _showDiskReadQueue = True
-            If Me.menu_graph2_diskWriteQueue.Checked Then _showDiskWriteQueue = True
-            If Me.menu_graph2_diskreadMBs.Checked Then _ShowDiskReadKB = True
-            If Me.menu_graph2_diskwriteMBs.Checked Then _ShowDiskWriteKB = True
-
-            If Me.menu_graph2_diskReadQueue.Checked OrElse Me.menu_graph2_diskWriteQueue.Checked Then
-                _showY2Axis = True
-            End If
-            If Not Me.menu_graph2_cpu.Checked AndAlso Not Me.menu_graph2_ram.Checked AndAlso Not Me.menu_graph2_disktime.Checked Then
-                _ShowYAxis = False
-            End If
-
-            If Me.menu_graph2_smoothCurvesMenu.Checked Then _smoothLines = True
-        Else
-
-        End If
+    Private Sub CreateSingleGraph(ByVal ZGC As ZedGraphControl, _
+                                  ByVal GraphTitle As String, _
+                                  ByVal YAxis1Title As String, _
+                                  ByVal YAxis2Title As String, _
+                                  ByVal CPUGraph As Boolean, _
+                                  ByVal RAMGraph As Boolean, _
+                                  ByVal DiskPercentGraph As Boolean, _
+                                  ByVal DiskReadQueueGraph As Boolean, _
+                                  ByVal DiskWriteQueueGraph As Boolean, _
+                                  ByVal DiskReadRateGraph As Boolean, _
+                                  ByVal DiskWriteRateGraph As Boolean, _
+                                  ByVal LineTension As Single, _
+                                  ByVal LineWidth As Integer)
 
 
-        Dim myPane As GraphPane = zgc.GraphPane
+        Dim myPane As GraphPane = ZGC.GraphPane
 
-        ' Set the title
-        myPane.Title.Text = Computer
-        ' Set the axis type and labels
+
+        ' Disable Font Scaling
+        myPane.IsFontsScaled = False
+
+
+        myPane.Title.FontSpec.Size = 12
+        myPane.Title.FontSpec.IsBold = False
+
+        myPane.XAxis.Title.FontSpec.Size = 12
+        myPane.YAxis.Title.FontSpec.Size = 12
+        myPane.Y2Axis.Title.FontSpec.Size = 12
+        myPane.XAxis.Title.FontSpec.IsBold = False
+        myPane.YAxis.Title.FontSpec.IsBold = False
+        myPane.Y2Axis.Title.FontSpec.IsBold = False
+
+        myPane.XAxis.Scale.FontSpec.Size = 10
+        myPane.YAxis.Scale.FontSpec.Size = 10
+        myPane.Y2Axis.Scale.FontSpec.Size = 10
+
+        myPane.YAxis.MinorTic.Size = 0
+
+        ' Set the Graph Title
+        myPane.Title.Text = GraphTitle
+
+        ' X Axis
         myPane.XAxis.Title.Text = "Time"
         myPane.XAxis.Type = AxisType.Date
         myPane.XAxis.Scale.Format = "HH:mm:ss"
-        ' Show the x axis grid
         myPane.XAxis.MajorGrid.IsVisible = True
 
-        If _ShowYAxis Then
-            myPane.YAxis.Title.Text = "% Percentage"
-            '' Manually set the axis range
-            myPane.YAxis.Scale.Min = 0
-            myPane.YAxis.Scale.Max = 100
-            ' Show the y axis grid
-            myPane.YAxis.MajorGrid.IsVisible = True
-            ' turn off the opposite tics so the Y tics don't show up on the Y2 axis
-            myPane.YAxis.MajorTic.IsOpposite = False
-            myPane.YAxis.MinorTic.IsOpposite = False
-            ' Align the Y axis labels so they are flush to the axis
-            myPane.YAxis.Scale.Align = AlignP.Inside
-            myPane.YAxis.Scale.FontSpec.FontColor = Color.Black
-            myPane.YAxis.Title.FontSpec.FontColor = Color.Black
-        Else
-            myPane.YAxis.Title.Text = " "
-            myPane.YAxis.MajorGrid.IsVisible = False
-            myPane.YAxis.MinorGrid.IsVisible = False
-            myPane.YAxis.IsVisible = True
-            myPane.YAxis.MajorGrid.IsVisible = False
-            myPane.YAxis.Scale.FontSpec.FontColor = Color.Transparent
-            myPane.YAxis.Title.FontSpec.FontColor = Color.Transparent
-            myPane.YAxis.MajorTic.Color = Color.Transparent
-            myPane.YAxis.MinorTic.Color = Color.Transparent
+        ' Y Axis
+        myPane.YAxis.Title.Text = YAxis1Title
+        myPane.YAxis.MajorGrid.IsVisible = True
+        myPane.YAxis.MajorTic.IsOpposite = False
+        myPane.YAxis.MinorTic.IsOpposite = False
+        myPane.YAxis.Scale.Align = AlignP.Inside
+        myPane.YAxis.Scale.FontSpec.FontColor = Color.Black
+        myPane.YAxis.Title.FontSpec.FontColor = Color.Black
 
-            myPane.Y2Axis.MajorGrid.IsVisible = True
-        End If
 
-        If _showY2Axis Then
-            ' Enable the Y2 axis display
+        ' Y2 Axis
+        myPane.Y2Axis.MajorTic.IsOpposite = False
+        myPane.Y2Axis.MinorTic.IsOpposite = False
+        myPane.Y2Axis.Scale.Align = AlignP.Inside
+        myPane.Y2Axis.Title.Text = YAxis2Title
+        If Not String.IsNullOrEmpty(YAxis2Title) Then
             myPane.Y2Axis.IsVisible = True
-            ' Set The Y2 Title
-            myPane.Y2Axis.Title.Text = "Length"
-            ' Make the Y2 axis scale blue
             myPane.Y2Axis.Scale.FontSpec.FontColor = Color.Blue
             myPane.Y2Axis.Title.FontSpec.FontColor = Color.Blue
-            ' turn off the opposite tics so the Y2 tics don't show up on the Y axis
-            myPane.Y2Axis.MajorTic.IsOpposite = False
-            myPane.Y2Axis.MinorTic.IsOpposite = False
-            ' Align the Y2 axis labels so they are flush to the axis
-            myPane.Y2Axis.Scale.Align = AlignP.Inside
+            myPane.Y2Axis.MajorTic.Color = Color.Blue
         Else
-            ' Disable the Y2 axis display
-            myPane.Y2Axis.IsVisible = True
-            ' Set The Y2 Title
-            myPane.Y2Axis.Title.Text = " "
-            ' Make the Y2 axis scale White
+            myPane.Y2Axis.IsVisible = False
             myPane.Y2Axis.Scale.FontSpec.FontColor = Color.Transparent
             myPane.Y2Axis.Title.FontSpec.FontColor = Color.Transparent
-            ' turn off the opposite tics so the Y2 tics don't show up on the Y axis
             myPane.Y2Axis.MajorTic.Color = Color.Transparent
-            myPane.Y2Axis.MinorTic.Color = Color.Transparent
         End If
-
 
 
         Dim cpuList = New PointPairList()
@@ -207,169 +144,142 @@ Public Class FmGraph
         Dim ReadKbList = New PointPairList()
         Dim WriteKBList = New PointPairList()
 
-        Dim MaxQueue As Double = 0
+        'Dim MaxQueue As Double = 0
         For Each row As DataRow In myData.Rows
             Dim x As Double = New XDate(CDate(row(0))).XLDate
-            cpuList.add(x, row(1))
-            memList.add(x, row(2))
-            diskList.add(x, row(3))
-            Dim rq As Double = row(4)
-            Dim wq As Double = row(5)
-            rQList.add(x, rq)
-            wQList.add(x, wq)
-            If rq > MaxQueue Then MaxQueue = rq
-            If wq > MaxQueue Then MaxQueue = wq
+            If Not row.IsNull(1) Then cpuList.add(x, row(1))
+            If Not row.IsNull(2) Then memList.add(x, row(2))
+            If Not row.IsNull(3) Then diskList.add(x, row(3))
+            If Not row.IsNull(4) Then rQList.add(x, row(4))
+            If Not row.IsNull(5) Then wQList.add(x, row(5))
             If Not row.IsNull(6) Then ReadKbList.add(x, row(6))
             If Not row.IsNull(7) Then WriteKBList.add(x, row(7))
         Next
 
 
-        ' Manually Set Y2 Axis according to disk q
-        myPane.Y2Axis.Scale.Min = 0
-        myPane.Y2Axis.Scale.Max = CInt(MaxQueue) + 1
-
-
         Dim Curve As LineItem
 
-        If _ShowDiskReadKB Then
-
-            ' customise y axis
-            myPane.YAxis.IsVisible = True
-            myPane.YAxis.MajorGrid.IsVisible = True
-            myPane.YAxis.Title.Text = "Disk Kb per second"
-            myPane.YAxis.Scale.FontSpec.FontColor = Color.Blue
-            myPane.YAxis.Title.FontSpec.FontColor = Color.Blue
-            _showCPU = False
-            _showRAM = False
-            _showDiskTime = False
-
-            Curve = myPane.AddCurve("Disk Read: " & Me._diskPercentInstance, ReadKbList, Color.HotPink, SymbolType.None)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
+        If DiskReadRateGraph Then
+            Curve = myPane.AddCurve("Disk Read: " & Me._diskPercentInstance, ReadKbList, Me.PhysDiskIOReadCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.PhysDiskIOReadCurve.LineTension
+            Curve.Line.Width = Me.PhysDiskIOReadCurve.LineThickness
             Curve.Line.IsAntiAlias = True
+            If Me.PhysDiskIOReadCurve.Filled Then Curve.Line.Fill = New Fill(Me.PhysDiskIOReadCurve.LineColor)
+        End If
+
+        If DiskWriteRateGraph Then
+            Curve = myPane.AddCurve("Disk Write: " & Me._diskPercentInstance, WriteKBList, Me.PhysDiskIOWriteCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.PhysDiskIOWriteCurve.LineTension
+            Curve.Line.Width = Me.PhysDiskIOWriteCurve.LineThickness
+            Curve.Line.IsAntiAlias = True
+            If Me.PhysDiskIOWriteCurve.Filled Then Curve.Line.Fill = New Fill(Me.PhysDiskIOWriteCurve.LineColor)
+        End If
+
+        If DiskReadQueueGraph Then
+            Curve = myPane.AddCurve("Read Queue: " & Me._diskReadInstance, rQList, Me.PhysDiskQueueReadCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.PhysDiskQueueReadCurve.LineTension
+            Curve.Line.Width = Me.PhysDiskQueueReadCurve.LineThickness
+            Curve.Line.IsAntiAlias = True
+            If Me.PhysDiskQueueReadCurve.Filled Then Curve.Line.Fill = New Fill(Me.PhysDiskQueueReadCurve.LineColor)
+
             Curve.IsY2Axis = True
         End If
 
-        If _ShowDiskWriteKB Then
-            ' customise y axis
-            myPane.YAxis.IsVisible = True
-            myPane.YAxis.MajorGrid.IsVisible = True
-            myPane.YAxis.Title.Text = "Disk Kb per second"
-            myPane.YAxis.Scale.FontSpec.FontColor = Color.Blue
-            myPane.YAxis.Title.FontSpec.FontColor = Color.Blue
-            _showCPU = False
-            _showRAM = False
-            _showDiskTime = False
-
-            Curve = myPane.AddCurve("Disk Write: " & Me._diskPercentInstance, WriteKBList, Color.Plum, SymbolType.None)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
+        If DiskWriteQueueGraph Then
+            Curve = myPane.AddCurve("Write Queue: " & Me._diskWriteInstance, wQList, Me.PhysDiskQueueWriteCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.PhysDiskQueueWriteCurve.LineTension
+            Curve.Line.Width = Me.PhysDiskQueueWriteCurve.LineThickness
             Curve.Line.IsAntiAlias = True
+            If Me.PhysDiskQueueWriteCurve.Filled Then Curve.Line.Fill = New Fill(Me.PhysDiskQueueWriteCurve.LineColor)
+
             Curve.IsY2Axis = True
         End If
 
-        If _showDiskTime Then
-            ' Generate a green curve with circle symbols, and "% Disk Time" in the legend
-            Curve = myPane.AddCurve("% Disk Time: " & Me._diskPercentInstance, diskList, Color.Green, SymbolType.None)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
+        If DiskPercentGraph Then
+            Curve = myPane.AddCurve("% Disk Time: " & Me._diskPercentInstance, diskList, Me.PhysDiskPercentCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.PhysDiskPercentCurve.LineTension
+            Curve.Line.Width = Me.PhysDiskPercentCurve.LineThickness
             Curve.Line.IsAntiAlias = True
+            If Me.PhysDiskPercentCurve.Filled Then Curve.Line.Fill = New Fill(Me.PhysDiskPercentCurve.LineColor)
+
+            myPane.YAxis.Scale.Min = 0
+            myPane.YAxis.Scale.Max = 105
         End If
 
-        If _showDiskReadQueue Then
-            Curve = myPane.AddCurve("Read Queue: " & Me._diskReadInstance, rQList, Color.RoyalBlue, SymbolType.None)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
+        If CPUGraph Then
+            Curve = myPane.AddCurve("% CPU", cpuList, Me.CPUCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.CPUCurve.LineTension
+            Curve.Line.Width = Me.CPUCurve.LineThickness
             Curve.Line.IsAntiAlias = True
-            Curve.Symbol.Fill = New Fill(Color.White)
-            ' Associate this curve with the Y2 axis
-            Curve.IsY2Axis = True
+            If Me.CPUCurve.Filled Then Curve.Line.Fill = New Fill(Me.CPUCurve.LineColor)
+
+            myPane.YAxis.Scale.Min = 0
+            myPane.YAxis.Scale.Max = 105
         End If
 
-        If _showDiskWriteQueue Then
-            Curve = myPane.AddCurve("Write Queue: " & Me._diskWriteInstance, wQList, Color.DeepSkyBlue, SymbolType.None)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
+        If RAMGraph Then
+            Curve = myPane.AddCurve("% Physical Memory", memList, Me.RAMCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.RAMCurve.LineTension
+            Curve.Line.Width = Me.RAMCurve.LineThickness
             Curve.Line.IsAntiAlias = True
-            Curve.Symbol.Fill = New Fill(Color.White)
+            If Me.RAMCurve.Filled Then Curve.Line.Fill = New Fill(Me.RAMCurve.LineColor)
 
-            ' Associate this curve with the Y2 axis
-            Curve.IsY2Axis = True
-        End If
-
-
-        If _showCPU Then
-            Curve = myPane.AddCurve("% CPU", cpuList, Color.Red, SymbolType.None)
-            'cpuCurve.Symbol.Fill = New Fill(Color.Yellow)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
-            Curve.Line.IsAntiAlias = True
-        End If
-
-        If _showRAM Then
-            ' Generate a filled blue curve with no symbols, and "% Mem" in the legend - Filled, therefore should be last graph drawn
-            Curve = myPane.AddCurve("% Physical Memory", memList, Color.LemonChiffon, SymbolType.None)
-            If _smoothLines Then
-                Curve.Line.IsSmooth = True
-                Curve.Line.SmoothTension = 0.1
-            End If
-            Curve.Line.Width = Me.LineThickness
-            Curve.Line.IsAntiAlias = True
-            ' Fill the area under the curve with a white-red gradient at 90 degrees
-            Curve.Line.Fill = New Fill(Color.Khaki) '(Color.Thistle)
+            ' Always show zero % as base
+            myPane.YAxis.Scale.Min = 0
+            myPane.YAxis.Scale.Max = 105
+            ' Set scale max % according to data
+            'myPane.YAxis.Scale.MaxAuto = True
         End If
 
 
-
-        ' Fill the axis background with a color gradient
         myPane.Chart.Fill = New Fill(Color.White, Color.FromArgb(240, 240, 240), 45.0F) '(Color.AliceBlue, Color.White, 90.0F)
-        ' Fill the outer pane background with a color gradient
-        myPane.Fill = New Fill(Color.White) '(Color.White, Color.Gray, 90.0F)
+        myPane.Fill = New Fill(Color.WhiteSmoke) '(Color.White, Color.Gray, 90.0F)
 
-        ' Calculate the Axis Scale Ranges
-        zgc.AxisChange()
+        ZGC.AxisChange()
     End Sub
 
-    Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+    Private Sub PlotFileData(ByVal filename As String, ByVal UseCurrentData As Boolean)
 
-        ' if arg passed, use as target file
-        If Environment.GetCommandLineArgs().Length = 2 Then
-            Dim filename As String = Environment.GetCommandLineArgs(1)
-            If System.IO.File.Exists(filename) Then
-                FileToOpen = filename
+        GraphPanelsVisible(True)
+        If Me.Height < 500 Then Me.Height = 600
+
+        ' Clear Existing Graphs
+        If Not myData Is Nothing Then
+            zgc_cpu.GraphPane.CurveList.Clear()
+            zgc_ram.GraphPane.CurveList.Clear()
+            zgc_phsdisk1.GraphPane.CurveList.Clear()
+            zgc_phsdisk2.GraphPane.CurveList.Clear()
+            zgc_phsdisk3.GraphPane.CurveList.Clear()
+            zgc_cpu.Invalidate()
+            zgc_ram.Invalidate()
+            zgc_phsdisk1.Invalidate()
+            zgc_phsdisk2.Invalidate()
+            zgc_phsdisk3.Invalidate()
+        End If
+
+
+        If UseCurrentData = False Then
+            ' Read New File data and plot graphs
+            If Not filename Is Nothing Then
+                Fill_DataTable(filename)
+            Else
+                MsgBox("Load New File", MsgBoxStyle.Critical, "No Data")
+                Return
             End If
         End If
-
-        If Not FileToOpen Is Nothing Then
-            Fill_DataTable(FileToOpen)
-            'CreateGraph(zg1)
-            CreateGraph(zg1)
-            CreateGraph(zg2)
-            Me.Text = "Performance Graph: " & FileToOpen
-            Me.Width = 800
-            Me.Height = 800
-            Me.SplitContainer1.Visible = True
-        End If
-
-        ToolStripComboBox2.Text = Me.LineThickness.ToString
+        CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, False, False, False, 0.2, 1)
+        CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, False, False, False, 0.2, 1)
+        CreateSingleGraph(zgc_phsdisk1, "Disk Utilisation", " % Percent", "", False, False, True, False, False, False, False, 0.2, 1)
+        CreateSingleGraph(zgc_phsdisk2, "Disk Queue Length", "Avg Queue Length", "", False, False, False, True, True, False, False, 0.2, 1)
+        CreateSingleGraph(zgc_phsdisk3, "Disk IO", "Kb/Second", "", False, False, False, False, False, True, True, 0.2, 1)
+        Me.Text = "Performance Graph: " & FileToOpen
 
     End Sub
 
@@ -384,163 +294,233 @@ Public Class FmGraph
     '# Navigate to the zedgraph.dll file, and click Open, Click OK
     '# In the toolbox, left-click on the ZedGraphControl, go to your Form and click inside it to place a ZedGraphControl item.
     '# With the ZedGraphControl selected in the form, under the View menu select "Properties Window"
-    '# Change the "(Name)" field for the ZedGraphControl to zg1 (it would typically be 'zedGraphControl1').
+    '# Change the "(Name)" field for the ZedGraphControl to zgc_cpu (it would typically be 'zedGraphControl1').
     '# Double click the Windows Form (not the ZedGraphControl), this will cause the window to switch to CodeView, with a template for Sub Form1_Load
     '# Go to the top of the file (above the "Public Class Form1" declaration) and add Imports ZedGraph 
 #End Region
 
-#Region "Menu Items"
+    Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
+
+        Me.CPUCurve = New CurveSettings
+        Me.CPUCurve.Add("CPU", True)
+        Me.RAMCurve = New CurveSettings
+        Me.RAMCurve.Add("RAM", True)
+        Me.PhysDiskPercentCurve = New CurveSettings
+        Me.PhysDiskPercentCurve.Add("DiskPercent", True)
+        Me.PhysDiskQueueReadCurve = New CurveSettings
+        Me.PhysDiskQueueReadCurve.Add("DiskQueueRead", True)
+        Me.PhysDiskQueueWriteCurve = New CurveSettings
+        Me.PhysDiskQueueWriteCurve.Add("DiskQueueWrite", True)
+        Me.PhysDiskIOReadCurve = New CurveSettings
+        Me.PhysDiskIOReadCurve.Add("DiskIORead", True)
+        Me.PhysDiskIOWriteCurve = New CurveSettings
+        Me.PhysDiskIOWriteCurve.Add("DiskIOWrite", True)
+
+        ' if arg passed, use as target file
+        If Environment.GetCommandLineArgs().Length = 2 Then
+            Dim filename As String = Environment.GetCommandLineArgs(1)
+            If System.IO.File.Exists(filename) Then
+                FileToOpen = filename
+            End If
+        End If
+
+
+
+        If Not FileToOpen Is Nothing Then
+            Me.Height = 700
+            GraphPanelsVisible(True)
+            Me.PlotFileData(FileToOpen, False)
+        Else
+            GraphPanelsVisible(False)
+            Me.Height = 200
+        End If
+
+
+    End Sub
+
     ''' <summary>
     ''' Launches open file dialog to open recorded data files
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
     ''' <remarks>jesus, why is typing to difficult?</remarks>
-    Private Sub OpenToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
-        Me.OpenFileDialog1.ShowDialog()
-        Dim file As String
-        file = Me.OpenFileDialog1.FileName
-        If Not String.IsNullOrEmpty(file) Then
-            Fill_DataTable(file)
-            'CreateGraph(zg1)
-            CreateGraph(zg1)
-            CreateGraph(zg2)
-            Me.Text = "Performance Graph: " & file
-            Me.Width = 800
-            Me.Height = 800
-            Me.SplitContainer1.Visible = True
-        End If
-    End Sub
     Private Sub OpenToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
         Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         Me.OpenFileDialog1.ShowDialog()
         Dim file As String
         file = Me.OpenFileDialog1.FileName
-        If Not String.IsNullOrEmpty(file) Then
-            If Not myData Is Nothing Then
-                zg1.GraphPane.CurveList.Clear()
-                zg2.GraphPane.CurveList.Clear()
-                zg1.Invalidate()
-                zg2.Invalidate()
-            End If
-            Fill_DataTable(file)
-            'CreateGraph(zg1)
-            CreateGraph(zg1)
-            CreateGraph(zg2)
-            Me.Text = "Performance Graph: " & file
-            Me.Width = 800
-            Me.Height = 800
-            Me.SplitContainer1.Visible = True
-        End If
+        Me.PlotFileData(file, False)
     End Sub
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
-    Private Sub SmoothCurvesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs)
-        If Not myData Is Nothing Then
-            zg1.GraphPane.CurveList.Clear()
-            zg2.GraphPane.CurveList.Clear()
-            zg1.Invalidate()
-            zg2.Invalidate()
-            CreateGraph(zg1)
-            CreateGraph(zg2)
+
+    Private Sub FmGraph_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        Me.Panel_Info.Height = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_Perf_CPU.Height = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_Perf_RAM.Height = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_PhysDisk_1.Height = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_PhysDisk_2.Height = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_PhysDisk_3.Height = (Me.TabControl1.Height - 26) / 3
+    End Sub
+
+    Private Sub GraphPanelsVisible(ByVal Visible As Boolean)
+        Me.Panel_Info.Height = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_Perf_CPU.Visible = Visible
+        Me.Panel_Perf_RAM.Visible = Visible
+        Me.Panel_PhysDisk_1.Visible = Visible
+        Me.Panel_PhysDisk_2.Visible = Visible
+        Me.Panel_PhysDisk_3.Visible = Visible
+    End Sub
+
+
+
+    Private Sub cpuContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_cpu.ContextMenuBuilder
+        ' create a new menu item
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        ' This is the user-defined name so you can find this menu item later if necessary
+        item.Name = "cpuPropsMenu"
+        ' This is the text that will show up in the menu
+        item.Text = "Properties"
+
+        ' Add a handler that will respond when that menu item is selected
+        AddHandler item.Click, AddressOf Me.ShowSettings
+
+        ' Add the menu item to the menu
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub ramContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_ram.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "ramPropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub diskPercentContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk1.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydisk1PropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub diskqueueContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk2.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydiskqueuePropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub diskioContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk3.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydiskIOPropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+
+    Protected Sub ShowSettings(ByVal sender As Object, ByVal e As System.EventArgs)
+
+        Dim cs As New ChangeSettings
+        Dim myCurve As CurveSettings = Nothing
+        Dim myCurve2 As CurveSettings = Nothing
+        Dim NumberOfLines As Integer = 1
+
+        ' not used - redraw individual graphs
+        Dim myGraph As ZedGraphControl = Nothing
+
+        Select Case sender.name
+            Case "cpuPropsMenu"
+                myCurve = Me.CPUCurve
+                cs.GroupBoxLine1.Text = "CPU"
+            Case "ramPropsMenu"
+                myCurve = Me.RAMCurve
+                cs.GroupBoxLine1.Text = "RAM"
+            Case "phydisk1PropsMenu"
+                myCurve = Me.PhysDiskPercentCurve
+                cs.GroupBoxLine1.Text = "Disk %"
+            Case "phydiskqueuePropsMenu"
+                myCurve = Me.PhysDiskQueueReadCurve
+                myCurve2 = Me.PhysDiskQueueWriteCurve
+                cs.GroupBoxLine1.Text = "Disk Read Queue"
+                cs.GroupBoxLine2.Text = "Disk Write Queue"
+                NumberOfLines = 2
+            Case "phydiskIOPropsMenu"
+                myCurve = Me.PhysDiskIOReadCurve
+                myCurve2 = Me.PhysDiskIOWriteCurve
+                cs.GroupBoxLine1.Text = "Disk Read IO"
+                cs.GroupBoxLine2.Text = "Disk Write IO"
+                NumberOfLines = 2
+            Case Else
+                MsgBox("invalid graph selection")
+                Exit Sub
+        End Select
+
+
+        ' load current curve settings into dialog
+        If myCurve.Filled Then
+            cs.comboLineStyle.SelectedIndex = 1
+        Else
+            cs.comboLineStyle.SelectedIndex = 0
+        End If
+        cs.comboLineThickness.Text = myCurve.LineThickness
+        cs.TrackBarLineTension.Value = myCurve.LineTension * 10
+        cs.labelcolour1.Text = "colour: " & myCurve.LineColor.Name
+        cs.labelcolour1.ForeColor = myCurve.LineColor
+
+        If NumberOfLines = 2 Then
+            If myCurve2.Filled Then
+                cs.comboLineStyle2.SelectedIndex = 1
+            Else
+                cs.comboLineStyle2.SelectedIndex = 0
+            End If
+            cs.comboLineThickness2.Text = myCurve2.LineThickness
+            cs.TrackBarLineTension2.Value = myCurve2.LineTension * 10
+            cs.labelcolour2.Text = "colour: " & myCurve2.LineColor.Name
+            cs.labelcolour2.ForeColor = myCurve2.LineColor
+
+            cs.Width = 460
+            cs.GroupBoxLine2.Visible = True
+        Else
+            cs.Width = 230
+            cs.GroupBoxLine2.Visible = True
+        End If
+
+        ' display the dialog
+        cs.ShowDialog()
+
+        If cs.DialogResult = Windows.Forms.DialogResult.OK Then
+            If cs.comboLineStyle.SelectedIndex = 1 Then
+                myCurve.Filled = True
+            Else
+                myCurve.Filled = False
+            End If
+            myCurve.LineThickness = cs.comboLineThickness.Text
+            If cs.TrackBarLineTension.Value = 0 Then
+                myCurve.LineTension = 0
+            Else
+                myCurve.LineTension = cs.TrackBarLineTension.Value / 10
+            End If
+
+            myCurve.LineColor = cs.labelcolour1.ForeColor
+
+            If NumberOfLines = 2 Then
+                If cs.comboLineStyle2.SelectedIndex = 1 Then
+                    myCurve2.Filled = True
+                Else
+                    myCurve2.Filled = False
+                End If
+                myCurve2.LineThickness = cs.comboLineThickness2.Text
+                If cs.TrackBarLineTension2.Value = 0 Then
+                    myCurve2.LineTension = 0
+                Else
+                    myCurve2.LineTension = cs.TrackBarLineTension2.Value / 10
+                End If
+                myCurve2.LineColor = cs.labelcolour2.ForeColor
+            End If
+
+            ' redraw the graph
+            PlotFileData(Nothing, True)
         End If
     End Sub
 
-
-    Private Sub Graph_Options_Changed(ByVal GraphControl As ZedGraphControl)
-        If Not myData Is Nothing Then
-            GraphControl.GraphPane.CurveList.Clear()
-            GraphControl.Invalidate()
-            CreateGraph(GraphControl)
-        End If
-    End Sub
-
-    Private Sub menu_graph1_cpu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_cpu.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub menu_graph1_ram_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_ram.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub menu_graph1_disktime_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_disktime.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub menu_graph1_diskReadQueue_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_diskReadQueue.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub menu_graph1_diskWriteQueue_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_diskWriteQueue.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub menu_graph1_diskreadMBs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_diskreadMBs.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub menu_graph1_diskwriteMBs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_diskwriteMBs.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-    Private Sub graph1_SmoothCurvesMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph1_smoothCurvesMenu.Click
-        Graph_Options_Changed(zg1)
-    End Sub
-
-    Private Sub menu_graph2_cpu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_cpu.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub menu_graph2_ram_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_ram.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub menu_graph2_disktime_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_disktime.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub menu_graph2_diskReadQueue_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_diskReadQueue.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub menu_graph2_diskWriteQueue_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_diskWriteQueue.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub menu_graph2_diskreadMBs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_diskreadMBs.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub menu_graph2_diskwriteMBs_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_diskwriteMBs.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-    Private Sub graph2_SmoothCurvesMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles menu_graph2_smoothCurvesMenu.Click
-        Graph_Options_Changed(zg2)
-    End Sub
-
-    Private Sub ToolStripComboBox2_SelectedIndexChanged(ByVal sender As Object, ByVal e As System.EventArgs) Handles ToolStripComboBox2.SelectedIndexChanged
-        Try
-            Me.LineThickness = CType(ToolStripComboBox2.Text, Single)
-        Catch ex As Exception
-            Me.LineThickness = 2
-        End Try
-        Graph_Options_Changed(zg1)
-        Graph_Options_Changed(zg2)
-    End Sub
-
-#End Region
-
-#Region "Layout"
-    ''' <summary>
-    ''' contains code to resize elements
-    ''' </summary>
-    ''' <param name="sender"></param>
-    ''' <param name="e"></param>
-    ''' <remarks></remarks>
-    Private Sub SplitContainer1_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles SplitContainer1.Resize
-        SplitContainer1.SplitterDistance = SplitContainer1.Height / 2
-        zg1.Width = SplitContainer1.Panel1.Width
-        zg1.Height = SplitContainer1.Panel1.Height
-        zg2.Width = SplitContainer1.Panel2.Width
-        zg2.Height = SplitContainer1.Panel2.Height
-    End Sub
-    Private Sub SplitContainer1_SplitterMoved(ByVal sender As Object, ByVal e As System.Windows.Forms.SplitterEventArgs) Handles SplitContainer1.SplitterMoved
-        zg1.Height = SplitContainer1.Panel1.Height
-        zg2.Height = SplitContainer1.Panel2.Height
-    End Sub
-#End Region
-
-
-    Private Sub zg1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles zg1.Load
-
-    End Sub
 End Class

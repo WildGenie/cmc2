@@ -54,6 +54,13 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChangeSettings.Designer.vb">
+      <DependentUpon>ChangeSettings.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ChangeSettings.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CurveSettings.vb" />
     <Compile Include="FmGraph.vb">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +85,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="ChangeSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ChangeSettings.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FmGraph.resx">
       <DependentUpon>FmGraph.vb</DependentUpon>
       <SubType>Designer</SubType>
