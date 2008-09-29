@@ -14,11 +14,9 @@ Public Class FmGraph
     Private PhysDiskIOReadCurve As CurveSettings
     Private PhysDiskIOWriteCurve As CurveSettings
 
-    Private _diskPercentInstance As String
-    Private _diskReadInstance As String
-    Private _diskWriteInstance As String
-    Private _diskReadMBInstance As String
-    Private _diskWriteMBInstance As String
+    Private _disk1Instance As String
+    Private _disk2Instance As String
+    Private _disk3Instance As String
 
     ''' <summary>
     ''' Create datatable and read performance data from file into datatable
@@ -30,6 +28,8 @@ Public Class FmGraph
         myData.Columns.Add(New DataColumn("time", GetType(DateTime)))
         myData.Columns.Add(New DataColumn("cpu%", GetType(Double)))
         myData.Columns.Add(New DataColumn("mem%", GetType(Double)))
+        myData.Columns.Add(New DataColumn("memPages", GetType(Double)))
+        myData.Columns.Add(New DataColumn("NicBytes", GetType(Double)))
         myData.Columns.Add(New DataColumn("disk%", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskRead", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskWrite", GetType(Double)))
@@ -39,12 +39,30 @@ Public Class FmGraph
         Dim sr As New System.IO.StreamReader(filename)
         Computer = UCase(sr.ReadLine.Split(" ")(0))
         Dim instanceLine() As String = sr.ReadLine.Split(",")
-        Me._diskPercentInstance = instanceLine(3).Substring(instanceLine(3).LastIndexOf("\") + 1)
-        Me._diskReadInstance = instanceLine(4).Substring(instanceLine(4).LastIndexOf("\") + 1)
-        Me._diskWriteInstance = instanceLine(5).Substring(instanceLine(5).LastIndexOf("\") + 1)
-        If instanceLine.Length >= 8 Then
-            Me._diskReadMBInstance = instanceLine(6).Substring(instanceLine(6).LastIndexOf("\") + 1)
-            Me._diskWriteMBInstance = instanceLine(7).Substring(instanceLine(7).LastIndexOf("\") + 1)
+
+        ' 1 Time
+        ' 2 CPU_%
+        ' 3 RAM_%
+        ' 4 Memory&Pages_InputPerSec
+        ' 5 Network_BytesPerSec_Broadcom NetXtreme Gigabit Ethernet - Packet Scheduler Miniport
+
+        ' 6 DiskTime_%_0 C:
+        ' 7 Read&Queue_Length_0 C:
+        ' 8 Write&Queue_Length_0 C:
+        ' 9 Disk&Read_kbs0 C:
+        '10 Disk&Write_kbs_0 C:
+
+
+        If instanceLine.Length > 5 Then
+            Me._disk2Instance = instanceLine(6).Substring(instanceLine(6).LastIndexOf("_") + 1)
+        End If
+
+        If instanceLine.Length > 10 Then
+            Me._disk2Instance = instanceLine(11).Substring(instanceLine(11).LastIndexOf("_") + 1)
+        End If
+
+        If instanceLine.Length > 15 Then
+            Me._disk2Instance = instanceLine(16).Substring(instanceLine(16).LastIndexOf("_") + 1)
         End If
 
         Do While Not sr.EndOfStream
@@ -138,6 +156,8 @@ Public Class FmGraph
 
         Dim cpuList = New PointPairList()
         Dim memList = New PointPairList()
+        Dim memPagesList = New PointPairList()
+        Dim NICList = New PointPairList()
         Dim diskList = New PointPairList()
         Dim rQList = New PointPairList()
         Dim wQList = New PointPairList()
@@ -149,18 +169,20 @@ Public Class FmGraph
             Dim x As Double = New XDate(CDate(row(0))).XLDate
             If Not row.IsNull(1) Then cpuList.add(x, row(1))
             If Not row.IsNull(2) Then memList.add(x, row(2))
-            If Not row.IsNull(3) Then diskList.add(x, row(3))
-            If Not row.IsNull(4) Then rQList.add(x, row(4))
-            If Not row.IsNull(5) Then wQList.add(x, row(5))
-            If Not row.IsNull(6) Then ReadKbList.add(x, row(6))
-            If Not row.IsNull(7) Then WriteKBList.add(x, row(7))
+            If Not row.IsNull(3) Then memPagesList.add(x, row(3))
+            If Not row.IsNull(4) Then NICList.add(x, row(4))
+            If Not row.IsNull(5) Then diskList.add(x, row(5))
+            If Not row.IsNull(6) Then rQList.add(x, row(6))
+            If Not row.IsNull(7) Then wQList.add(x, row(7))
+            If Not row.IsNull(8) Then ReadKbList.add(x, row(8))
+            If Not row.IsNull(9) Then WriteKBList.add(x, row(9))
         Next
 
 
         Dim Curve As LineItem
 
         If DiskReadRateGraph Then
-            Curve = myPane.AddCurve("Disk Read: " & Me._diskPercentInstance, ReadKbList, Me.PhysDiskIOReadCurve.LineColor, SymbolType.None)
+            Curve = myPane.AddCurve("Disk Read: " & Me._disk1Instance, ReadKbList, Me.PhysDiskIOReadCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskIOReadCurve.LineTension
             Curve.Line.Width = Me.PhysDiskIOReadCurve.LineThickness
@@ -169,7 +191,7 @@ Public Class FmGraph
         End If
 
         If DiskWriteRateGraph Then
-            Curve = myPane.AddCurve("Disk Write: " & Me._diskPercentInstance, WriteKBList, Me.PhysDiskIOWriteCurve.LineColor, SymbolType.None)
+            Curve = myPane.AddCurve("Disk Write: " & Me._disk1Instance, WriteKBList, Me.PhysDiskIOWriteCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskIOWriteCurve.LineTension
             Curve.Line.Width = Me.PhysDiskIOWriteCurve.LineThickness
@@ -178,7 +200,7 @@ Public Class FmGraph
         End If
 
         If DiskReadQueueGraph Then
-            Curve = myPane.AddCurve("Read Queue: " & Me._diskReadInstance, rQList, Me.PhysDiskQueueReadCurve.LineColor, SymbolType.None)
+            Curve = myPane.AddCurve("Read Queue: " & Me._disk1Instance, rQList, Me.PhysDiskQueueReadCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskQueueReadCurve.LineTension
             Curve.Line.Width = Me.PhysDiskQueueReadCurve.LineThickness
@@ -189,7 +211,7 @@ Public Class FmGraph
         End If
 
         If DiskWriteQueueGraph Then
-            Curve = myPane.AddCurve("Write Queue: " & Me._diskWriteInstance, wQList, Me.PhysDiskQueueWriteCurve.LineColor, SymbolType.None)
+            Curve = myPane.AddCurve("Write Queue: " & Me._disk1Instance, wQList, Me.PhysDiskQueueWriteCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskQueueWriteCurve.LineTension
             Curve.Line.Width = Me.PhysDiskQueueWriteCurve.LineThickness
@@ -200,7 +222,7 @@ Public Class FmGraph
         End If
 
         If DiskPercentGraph Then
-            Curve = myPane.AddCurve("% Disk Time: " & Me._diskPercentInstance, diskList, Me.PhysDiskPercentCurve.LineColor, SymbolType.None)
+            Curve = myPane.AddCurve("% Disk Time: " & Me._disk1Instance, diskList, Me.PhysDiskPercentCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskPercentCurve.LineTension
             Curve.Line.Width = Me.PhysDiskPercentCurve.LineThickness
