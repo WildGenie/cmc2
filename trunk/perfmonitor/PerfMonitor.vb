@@ -377,7 +377,8 @@ Public Class PerfMonitor
                 End If
 
                 Dim i As Integer = 1
-                For Each item As String In rd.ListBoxDiskInstance.Items
+                For Each item As String In rd.ListBoxDiskInstance.SelectedItems
+
                     If i = 1 Then
                         Me.DiskInstance1 = item
                         dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance1, Me.computername.Text)
@@ -406,9 +407,9 @@ Public Class PerfMonitor
                     End If
 
                     If i = 4 Then
-                        MsgBox("Max 3 PhysicalDisk Instances")
+                        MsgBox("Max 3 instances")
                     End If
-                    i = i + 1
+                    i += 1
                 Next
 
                 _dsk1 = rd.cDsk1.Checked
