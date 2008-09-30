@@ -132,7 +132,7 @@ Partial Class RecordingDialog
         Me.cDsk1.Checked = True
         Me.cDsk1.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cDsk1.Enabled = False
-        Me.cDsk1.Location = New System.Drawing.Point(10, 98)
+        Me.cDsk1.Location = New System.Drawing.Point(10, 93)
         Me.cDsk1.Name = "cDsk1"
         Me.cDsk1.Size = New System.Drawing.Size(84, 17)
         Me.cDsk1.TabIndex = 7
@@ -145,7 +145,7 @@ Partial Class RecordingDialog
         Me.cDsk2.Checked = True
         Me.cDsk2.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cDsk2.Enabled = False
-        Me.cDsk2.Location = New System.Drawing.Point(10, 114)
+        Me.cDsk2.Location = New System.Drawing.Point(10, 109)
         Me.cDsk2.Name = "cDsk2"
         Me.cDsk2.Size = New System.Drawing.Size(116, 17)
         Me.cDsk2.TabIndex = 8
@@ -176,8 +176,9 @@ Partial Class RecordingDialog
         'ListBoxDiskInstance
         '
         Me.ListBoxDiskInstance.FormattingEnabled = True
-        Me.ListBoxDiskInstance.Location = New System.Drawing.Point(10, 25)
+        Me.ListBoxDiskInstance.Location = New System.Drawing.Point(10, 19)
         Me.ListBoxDiskInstance.Name = "ListBoxDiskInstance"
+        Me.ListBoxDiskInstance.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple
         Me.ListBoxDiskInstance.Size = New System.Drawing.Size(146, 56)
         Me.ListBoxDiskInstance.TabIndex = 12
         '
@@ -187,7 +188,7 @@ Partial Class RecordingDialog
         Me.cDsk3.Checked = True
         Me.cDsk3.CheckState = System.Windows.Forms.CheckState.Checked
         Me.cDsk3.Enabled = False
-        Me.cDsk3.Location = New System.Drawing.Point(10, 130)
+        Me.cDsk3.Location = New System.Drawing.Point(10, 125)
         Me.cDsk3.Name = "cDsk3"
         Me.cDsk3.Size = New System.Drawing.Size(74, 17)
         Me.cDsk3.TabIndex = 9

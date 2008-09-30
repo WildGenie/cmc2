@@ -14,6 +14,11 @@ Public Class RecordingDialog
 
     Private Sub ListBoxDiskInstance_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListBoxDiskInstance.SelectedIndexChanged
         If Not Me.ListBoxDiskInstance.SelectedItems Is Nothing Then
+            If Me.ListBoxDiskInstance.SelectedItems.Count > 3 Then
+                MsgBox("No more than 3 PhysicalDisk instances" & vbCr & "can be monitored.", MsgBoxStyle.Critical, "Performance Monitor")
+                Me.ListBoxDiskInstance.SelectedIndex = 0
+                Exit Sub
+            End If
             Me.cDsk1.Enabled = True
             Me.cDsk2.Enabled = True
             Me.cDsk3.Enabled = True

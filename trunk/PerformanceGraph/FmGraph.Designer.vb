@@ -29,37 +29,94 @@ Partial Class FmGraph
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.Panel1 = New System.Windows.Forms.Panel
+        Me.TabPage1 = New System.Windows.Forms.TabPage
+        Me.Panel2 = New System.Windows.Forms.Panel
+        Me.ZedGraphControl1 = New ZedGraph.ZedGraphControl
+        Me.Panel3 = New System.Windows.Forms.Panel
+        Me.ZedGraphControl2 = New ZedGraph.ZedGraphControl
+        Me.Panel4 = New System.Windows.Forms.Panel
+        Me.ListView1 = New System.Windows.Forms.ListView
+        Me.ColumnHeader1 = New System.Windows.Forms.ColumnHeader
+        Me.ColumnHeader2 = New System.Windows.Forms.ColumnHeader
+        Me.ColumnHeader3 = New System.Windows.Forms.ColumnHeader
+        Me.ColumnHeader4 = New System.Windows.Forms.ColumnHeader
+        Me.TabPage4 = New System.Windows.Forms.TabPage
+        Me.Panel5 = New System.Windows.Forms.Panel
+        Me.ZedGraphControl3 = New ZedGraph.ZedGraphControl
+        Me.Panel6 = New System.Windows.Forms.Panel
+        Me.ZedGraphControl4 = New ZedGraph.ZedGraphControl
+        Me.Panel7 = New System.Windows.Forms.Panel
+        Me.ZedGraphControl5 = New ZedGraph.ZedGraphControl
         Me.TabControl1 = New System.Windows.Forms.TabControl
-        Me.TabPage2 = New System.Windows.Forms.TabPage
+        Me.TabPagePerf = New System.Windows.Forms.TabPage
         Me.Panel_Perf_CPU = New System.Windows.Forms.Panel
         Me.zgc_cpu = New ZedGraph.ZedGraphControl
         Me.Panel_Perf_RAM = New System.Windows.Forms.Panel
         Me.zgc_ram = New ZedGraph.ZedGraphControl
         Me.Panel_Info = New System.Windows.Forms.Panel
-        Me.TabPage3 = New System.Windows.Forms.TabPage
+        Me.ListViewStats = New System.Windows.Forms.ListView
+        Me.Metric = New System.Windows.Forms.ColumnHeader
+        Me.Max = New System.Windows.Forms.ColumnHeader
+        Me.Min = New System.Windows.Forms.ColumnHeader
+        Me.Avg = New System.Windows.Forms.ColumnHeader
+        Me.TabPageDsk1 = New System.Windows.Forms.TabPage
         Me.Panel_PhysDisk_2 = New System.Windows.Forms.Panel
         Me.zgc_phsdisk2 = New ZedGraph.ZedGraphControl
         Me.Panel_PhysDisk_3 = New System.Windows.Forms.Panel
         Me.zgc_phsdisk3 = New ZedGraph.ZedGraphControl
         Me.Panel_PhysDisk_1 = New System.Windows.Forms.Panel
         Me.zgc_phsdisk1 = New ZedGraph.ZedGraphControl
-        Me.ListViewStats = New System.Windows.Forms.ListView
-        Me.Metric = New System.Windows.Forms.ColumnHeader
-        Me.Max = New System.Windows.Forms.ColumnHeader
-        Me.Min = New System.Windows.Forms.ColumnHeader
-        Me.Avg = New System.Windows.Forms.ColumnHeader
+        Me.TabPageDsk2 = New System.Windows.Forms.TabPage
+        Me.Panel_physdisk_6 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk6 = New ZedGraph.ZedGraphControl
+        Me.Panel_physdisk_5 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk5 = New ZedGraph.ZedGraphControl
+        Me.Panel_physdisk_4 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk4 = New ZedGraph.ZedGraphControl
+        Me.TabPageOther = New System.Windows.Forms.TabPage
+        Me.Panel_Oth_3 = New System.Windows.Forms.Panel
+        Me.Panel_Oth_2 = New System.Windows.Forms.Panel
+        Me.zgc_oth_2 = New ZedGraph.ZedGraphControl
+        Me.Panel_Oth_1 = New System.Windows.Forms.Panel
+        Me.zgc_oth_1 = New ZedGraph.ZedGraphControl
+        Me.Panelr = New System.Windows.Forms.Panel
+        Me.TabPageDsk3 = New System.Windows.Forms.TabPage
+        Me.Panel_physdisk_7 = New System.Windows.Forms.Panel
+        Me.Panel_physdisk_8 = New System.Windows.Forms.Panel
+        Me.Panel_physdisk_9 = New System.Windows.Forms.Panel
+        Me.zgc_phsdisk7 = New ZedGraph.ZedGraphControl
+        Me.zgc_phsdisk8 = New ZedGraph.ZedGraphControl
+        Me.zgc_phsdisk9 = New ZedGraph.ZedGraphControl
         Me.MenuStrip1.SuspendLayout()
-        Me.Panel1.SuspendLayout()
+        Me.TabPage1.SuspendLayout()
+        Me.Panel2.SuspendLayout()
+        Me.Panel3.SuspendLayout()
+        Me.Panel4.SuspendLayout()
+        Me.TabPage4.SuspendLayout()
+        Me.Panel5.SuspendLayout()
+        Me.Panel6.SuspendLayout()
+        Me.Panel7.SuspendLayout()
         Me.TabControl1.SuspendLayout()
-        Me.TabPage2.SuspendLayout()
+        Me.TabPagePerf.SuspendLayout()
         Me.Panel_Perf_CPU.SuspendLayout()
         Me.Panel_Perf_RAM.SuspendLayout()
         Me.Panel_Info.SuspendLayout()
-        Me.TabPage3.SuspendLayout()
+        Me.TabPageDsk1.SuspendLayout()
         Me.Panel_PhysDisk_2.SuspendLayout()
         Me.Panel_PhysDisk_3.SuspendLayout()
         Me.Panel_PhysDisk_1.SuspendLayout()
+        Me.TabPageDsk2.SuspendLayout()
+        Me.Panel_physdisk_6.SuspendLayout()
+        Me.Panel_physdisk_5.SuspendLayout()
+        Me.Panel_physdisk_4.SuspendLayout()
+        Me.TabPageOther.SuspendLayout()
+        Me.Panel_Oth_2.SuspendLayout()
+        Me.Panel_Oth_1.SuspendLayout()
+        Me.Panelr.SuspendLayout()
+        Me.TabPageDsk3.SuspendLayout()
+        Me.Panel_physdisk_7.SuspendLayout()
+        Me.Panel_physdisk_8.SuspendLayout()
+        Me.Panel_physdisk_9.SuspendLayout()
         Me.SuspendLayout()
         '
         'OpenFileDialog1
@@ -98,19 +155,206 @@ Partial Class FmGraph
         Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(136, 22)
         Me.ExitToolStripMenuItem.Text = "Exit"
         '
-        'Panel1
+        'TabPage1
         '
-        Me.Panel1.Controls.Add(Me.TabControl1)
-        Me.Panel1.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.Panel1.Location = New System.Drawing.Point(0, 24)
-        Me.Panel1.Name = "Panel1"
-        Me.Panel1.Size = New System.Drawing.Size(514, 510)
-        Me.Panel1.TabIndex = 5
+        Me.TabPage1.Controls.Add(Me.Panel2)
+        Me.TabPage1.Controls.Add(Me.Panel3)
+        Me.TabPage1.Controls.Add(Me.Panel4)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage1.Name = "TabPage1"
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(506, 484)
+        Me.TabPage1.TabIndex = 1
+        Me.TabPage1.Text = "Performance"
+        Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'Panel2
+        '
+        Me.Panel2.Controls.Add(Me.ZedGraphControl1)
+        Me.Panel2.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel2.Location = New System.Drawing.Point(3, 250)
+        Me.Panel2.Name = "Panel2"
+        Me.Panel2.Size = New System.Drawing.Size(500, 102)
+        Me.Panel2.TabIndex = 1
+        '
+        'ZedGraphControl1
+        '
+        Me.ZedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ZedGraphControl1.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ZedGraphControl1.IsAntiAlias = True
+        Me.ZedGraphControl1.Location = New System.Drawing.Point(0, 0)
+        Me.ZedGraphControl1.Name = "ZedGraphControl1"
+        Me.ZedGraphControl1.ScrollGrace = 0
+        Me.ZedGraphControl1.ScrollMaxX = 0
+        Me.ZedGraphControl1.ScrollMaxY = 0
+        Me.ZedGraphControl1.ScrollMaxY2 = 0
+        Me.ZedGraphControl1.ScrollMinX = 0
+        Me.ZedGraphControl1.ScrollMinY = 0
+        Me.ZedGraphControl1.ScrollMinY2 = 0
+        Me.ZedGraphControl1.Size = New System.Drawing.Size(500, 102)
+        Me.ZedGraphControl1.TabIndex = 0
+        '
+        'Panel3
+        '
+        Me.Panel3.Controls.Add(Me.ZedGraphControl2)
+        Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel3.Location = New System.Drawing.Point(3, 352)
+        Me.Panel3.Name = "Panel3"
+        Me.Panel3.Size = New System.Drawing.Size(500, 129)
+        Me.Panel3.TabIndex = 2
+        '
+        'ZedGraphControl2
+        '
+        Me.ZedGraphControl2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ZedGraphControl2.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ZedGraphControl2.Location = New System.Drawing.Point(0, 0)
+        Me.ZedGraphControl2.Name = "ZedGraphControl2"
+        Me.ZedGraphControl2.ScrollGrace = 0
+        Me.ZedGraphControl2.ScrollMaxX = 0
+        Me.ZedGraphControl2.ScrollMaxY = 0
+        Me.ZedGraphControl2.ScrollMaxY2 = 0
+        Me.ZedGraphControl2.ScrollMinX = 0
+        Me.ZedGraphControl2.ScrollMinY = 0
+        Me.ZedGraphControl2.ScrollMinY2 = 0
+        Me.ZedGraphControl2.Size = New System.Drawing.Size(500, 129)
+        Me.ZedGraphControl2.TabIndex = 0
+        '
+        'Panel4
+        '
+        Me.Panel4.Controls.Add(Me.ListView1)
+        Me.Panel4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel4.Location = New System.Drawing.Point(3, 3)
+        Me.Panel4.Name = "Panel4"
+        Me.Panel4.Size = New System.Drawing.Size(500, 137)
+        Me.Panel4.TabIndex = 3
+        '
+        'ListView1
+        '
+        Me.ListView1.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.ColumnHeader1, Me.ColumnHeader2, Me.ColumnHeader3, Me.ColumnHeader4})
+        Me.ListView1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListView1.Font = New System.Drawing.Font("Courier New", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListView1.FullRowSelect = True
+        Me.ListView1.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.ListView1.LabelWrap = False
+        Me.ListView1.Location = New System.Drawing.Point(0, 0)
+        Me.ListView1.Name = "ListView1"
+        Me.ListView1.Size = New System.Drawing.Size(500, 137)
+        Me.ListView1.TabIndex = 0
+        Me.ListView1.UseCompatibleStateImageBehavior = False
+        Me.ListView1.View = System.Windows.Forms.View.Details
+        '
+        'ColumnHeader1
+        '
+        Me.ColumnHeader1.Text = "Metric"
+        Me.ColumnHeader1.Width = 179
+        '
+        'ColumnHeader2
+        '
+        Me.ColumnHeader2.Text = "Max Value"
+        Me.ColumnHeader2.Width = 94
+        '
+        'ColumnHeader3
+        '
+        Me.ColumnHeader3.Text = "Min Value"
+        Me.ColumnHeader3.Width = 85
+        '
+        'ColumnHeader4
+        '
+        Me.ColumnHeader4.Text = "Average"
+        Me.ColumnHeader4.Width = 91
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Controls.Add(Me.Panel5)
+        Me.TabPage4.Controls.Add(Me.Panel6)
+        Me.TabPage4.Controls.Add(Me.Panel7)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(506, 484)
+        Me.TabPage4.TabIndex = 2
+        Me.TabPage4.Text = "PhysicalDisk"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'Panel5
+        '
+        Me.Panel5.Controls.Add(Me.ZedGraphControl3)
+        Me.Panel5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panel5.Location = New System.Drawing.Point(0, 131)
+        Me.Panel5.Name = "Panel5"
+        Me.Panel5.Size = New System.Drawing.Size(506, 207)
+        Me.Panel5.TabIndex = 2
+        '
+        'ZedGraphControl3
+        '
+        Me.ZedGraphControl3.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ZedGraphControl3.Location = New System.Drawing.Point(0, 0)
+        Me.ZedGraphControl3.Name = "ZedGraphControl3"
+        Me.ZedGraphControl3.ScrollGrace = 0
+        Me.ZedGraphControl3.ScrollMaxX = 0
+        Me.ZedGraphControl3.ScrollMaxY = 0
+        Me.ZedGraphControl3.ScrollMaxY2 = 0
+        Me.ZedGraphControl3.ScrollMinX = 0
+        Me.ZedGraphControl3.ScrollMinY = 0
+        Me.ZedGraphControl3.ScrollMinY2 = 0
+        Me.ZedGraphControl3.Size = New System.Drawing.Size(506, 207)
+        Me.ZedGraphControl3.TabIndex = 0
+        '
+        'Panel6
+        '
+        Me.Panel6.Controls.Add(Me.ZedGraphControl4)
+        Me.Panel6.Dock = System.Windows.Forms.DockStyle.Bottom
+        Me.Panel6.Location = New System.Drawing.Point(0, 338)
+        Me.Panel6.Name = "Panel6"
+        Me.Panel6.Size = New System.Drawing.Size(506, 146)
+        Me.Panel6.TabIndex = 1
+        '
+        'ZedGraphControl4
+        '
+        Me.ZedGraphControl4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ZedGraphControl4.Location = New System.Drawing.Point(0, 0)
+        Me.ZedGraphControl4.Name = "ZedGraphControl4"
+        Me.ZedGraphControl4.ScrollGrace = 0
+        Me.ZedGraphControl4.ScrollMaxX = 0
+        Me.ZedGraphControl4.ScrollMaxY = 0
+        Me.ZedGraphControl4.ScrollMaxY2 = 0
+        Me.ZedGraphControl4.ScrollMinX = 0
+        Me.ZedGraphControl4.ScrollMinY = 0
+        Me.ZedGraphControl4.ScrollMinY2 = 0
+        Me.ZedGraphControl4.Size = New System.Drawing.Size(506, 146)
+        Me.ZedGraphControl4.TabIndex = 0
+        '
+        'Panel7
+        '
+        Me.Panel7.Controls.Add(Me.ZedGraphControl5)
+        Me.Panel7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel7.Font = New System.Drawing.Font("Courier New", 8.25!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Panel7.Location = New System.Drawing.Point(0, 0)
+        Me.Panel7.Name = "Panel7"
+        Me.Panel7.Size = New System.Drawing.Size(506, 131)
+        Me.Panel7.TabIndex = 0
+        '
+        'ZedGraphControl5
+        '
+        Me.ZedGraphControl5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ZedGraphControl5.Location = New System.Drawing.Point(0, 0)
+        Me.ZedGraphControl5.Name = "ZedGraphControl5"
+        Me.ZedGraphControl5.ScrollGrace = 0
+        Me.ZedGraphControl5.ScrollMaxX = 0
+        Me.ZedGraphControl5.ScrollMaxY = 0
+        Me.ZedGraphControl5.ScrollMaxY2 = 0
+        Me.ZedGraphControl5.ScrollMinX = 0
+        Me.ZedGraphControl5.ScrollMinY = 0
+        Me.ZedGraphControl5.ScrollMinY2 = 0
+        Me.ZedGraphControl5.Size = New System.Drawing.Size(506, 131)
+        Me.ZedGraphControl5.TabIndex = 0
         '
         'TabControl1
         '
-        Me.TabControl1.Controls.Add(Me.TabPage2)
-        Me.TabControl1.Controls.Add(Me.TabPage3)
+        Me.TabControl1.Controls.Add(Me.TabPagePerf)
+        Me.TabControl1.Controls.Add(Me.TabPageOther)
+        Me.TabControl1.Controls.Add(Me.TabPageDsk1)
+        Me.TabControl1.Controls.Add(Me.TabPageDsk2)
+        Me.TabControl1.Controls.Add(Me.TabPageDsk3)
         Me.TabControl1.Dock = System.Windows.Forms.DockStyle.Fill
         Me.TabControl1.Location = New System.Drawing.Point(0, 0)
         Me.TabControl1.Name = "TabControl1"
@@ -118,18 +362,18 @@ Partial Class FmGraph
         Me.TabControl1.Size = New System.Drawing.Size(514, 510)
         Me.TabControl1.TabIndex = 0
         '
-        'TabPage2
+        'TabPagePerf
         '
-        Me.TabPage2.Controls.Add(Me.Panel_Perf_CPU)
-        Me.TabPage2.Controls.Add(Me.Panel_Perf_RAM)
-        Me.TabPage2.Controls.Add(Me.Panel_Info)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(506, 484)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Performance"
-        Me.TabPage2.UseVisualStyleBackColor = True
+        Me.TabPagePerf.Controls.Add(Me.Panel_Perf_CPU)
+        Me.TabPagePerf.Controls.Add(Me.Panel_Perf_RAM)
+        Me.TabPagePerf.Controls.Add(Me.Panel_Info)
+        Me.TabPagePerf.Location = New System.Drawing.Point(4, 22)
+        Me.TabPagePerf.Name = "TabPagePerf"
+        Me.TabPagePerf.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPagePerf.Size = New System.Drawing.Size(506, 484)
+        Me.TabPagePerf.TabIndex = 1
+        Me.TabPagePerf.Text = "Performance"
+        Me.TabPagePerf.UseVisualStyleBackColor = True
         '
         'Panel_Perf_CPU
         '
@@ -191,17 +435,52 @@ Partial Class FmGraph
         Me.Panel_Info.Size = New System.Drawing.Size(500, 137)
         Me.Panel_Info.TabIndex = 3
         '
-        'TabPage3
+        'ListViewStats
         '
-        Me.TabPage3.Controls.Add(Me.Panel_PhysDisk_2)
-        Me.TabPage3.Controls.Add(Me.Panel_PhysDisk_3)
-        Me.TabPage3.Controls.Add(Me.Panel_PhysDisk_1)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(506, 420)
-        Me.TabPage3.TabIndex = 2
-        Me.TabPage3.Text = "PhysicalDisk"
-        Me.TabPage3.UseVisualStyleBackColor = True
+        Me.ListViewStats.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Metric, Me.Max, Me.Min, Me.Avg})
+        Me.ListViewStats.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ListViewStats.Font = New System.Drawing.Font("Courier New", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.ListViewStats.FullRowSelect = True
+        Me.ListViewStats.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
+        Me.ListViewStats.LabelWrap = False
+        Me.ListViewStats.Location = New System.Drawing.Point(0, 0)
+        Me.ListViewStats.Name = "ListViewStats"
+        Me.ListViewStats.Size = New System.Drawing.Size(500, 137)
+        Me.ListViewStats.TabIndex = 0
+        Me.ListViewStats.UseCompatibleStateImageBehavior = False
+        Me.ListViewStats.View = System.Windows.Forms.View.Details
+        '
+        'Metric
+        '
+        Me.Metric.Text = "Metric"
+        Me.Metric.Width = 179
+        '
+        'Max
+        '
+        Me.Max.Text = "Max Value"
+        Me.Max.Width = 94
+        '
+        'Min
+        '
+        Me.Min.Text = "Min Value"
+        Me.Min.Width = 85
+        '
+        'Avg
+        '
+        Me.Avg.Text = "Average"
+        Me.Avg.Width = 91
+        '
+        'TabPageDsk1
+        '
+        Me.TabPageDsk1.Controls.Add(Me.Panel_PhysDisk_2)
+        Me.TabPageDsk1.Controls.Add(Me.Panel_PhysDisk_3)
+        Me.TabPageDsk1.Controls.Add(Me.Panel_PhysDisk_1)
+        Me.TabPageDsk1.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageDsk1.Name = "TabPageDsk1"
+        Me.TabPageDsk1.Size = New System.Drawing.Size(506, 484)
+        Me.TabPageDsk1.TabIndex = 2
+        Me.TabPageDsk1.Text = "PhysicalDisk1"
+        Me.TabPageDsk1.UseVisualStyleBackColor = True
         '
         'Panel_PhysDisk_2
         '
@@ -209,7 +488,7 @@ Partial Class FmGraph
         Me.Panel_PhysDisk_2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel_PhysDisk_2.Location = New System.Drawing.Point(0, 131)
         Me.Panel_PhysDisk_2.Name = "Panel_PhysDisk_2"
-        Me.Panel_PhysDisk_2.Size = New System.Drawing.Size(506, 143)
+        Me.Panel_PhysDisk_2.Size = New System.Drawing.Size(506, 207)
         Me.Panel_PhysDisk_2.TabIndex = 2
         '
         'zgc_phsdisk2
@@ -224,14 +503,14 @@ Partial Class FmGraph
         Me.zgc_phsdisk2.ScrollMinX = 0
         Me.zgc_phsdisk2.ScrollMinY = 0
         Me.zgc_phsdisk2.ScrollMinY2 = 0
-        Me.zgc_phsdisk2.Size = New System.Drawing.Size(506, 143)
+        Me.zgc_phsdisk2.Size = New System.Drawing.Size(506, 207)
         Me.zgc_phsdisk2.TabIndex = 0
         '
         'Panel_PhysDisk_3
         '
         Me.Panel_PhysDisk_3.Controls.Add(Me.zgc_phsdisk3)
         Me.Panel_PhysDisk_3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel_PhysDisk_3.Location = New System.Drawing.Point(0, 274)
+        Me.Panel_PhysDisk_3.Location = New System.Drawing.Point(0, 338)
         Me.Panel_PhysDisk_3.Name = "Panel_PhysDisk_3"
         Me.Panel_PhysDisk_3.Size = New System.Drawing.Size(506, 146)
         Me.Panel_PhysDisk_3.TabIndex = 1
@@ -276,47 +555,257 @@ Partial Class FmGraph
         Me.zgc_phsdisk1.Size = New System.Drawing.Size(506, 131)
         Me.zgc_phsdisk1.TabIndex = 0
         '
-        'ListViewStats
+        'TabPageDsk2
         '
-        Me.ListViewStats.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.Metric, Me.Max, Me.Min, Me.Avg})
-        Me.ListViewStats.Dock = System.Windows.Forms.DockStyle.Fill
-        Me.ListViewStats.Font = New System.Drawing.Font("Courier New", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.ListViewStats.FullRowSelect = True
-        Me.ListViewStats.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable
-        Me.ListViewStats.LabelWrap = False
-        Me.ListViewStats.Location = New System.Drawing.Point(0, 0)
-        Me.ListViewStats.Name = "ListViewStats"
-        Me.ListViewStats.Size = New System.Drawing.Size(500, 137)
-        Me.ListViewStats.TabIndex = 0
-        Me.ListViewStats.UseCompatibleStateImageBehavior = False
-        Me.ListViewStats.View = System.Windows.Forms.View.Details
+        Me.TabPageDsk2.Controls.Add(Me.Panel_physdisk_6)
+        Me.TabPageDsk2.Controls.Add(Me.Panel_physdisk_5)
+        Me.TabPageDsk2.Controls.Add(Me.Panel_physdisk_4)
+        Me.TabPageDsk2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageDsk2.Name = "TabPageDsk2"
+        Me.TabPageDsk2.Size = New System.Drawing.Size(506, 484)
+        Me.TabPageDsk2.TabIndex = 3
+        Me.TabPageDsk2.Text = "PhysicalDisk2"
+        Me.TabPageDsk2.UseVisualStyleBackColor = True
         '
-        'Metric
+        'Panel_physdisk_6
         '
-        Me.Metric.Text = "Metric"
-        Me.Metric.Width = 179
+        Me.Panel_physdisk_6.Controls.Add(Me.zgc_phsdisk6)
+        Me.Panel_physdisk_6.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_physdisk_6.Location = New System.Drawing.Point(0, 297)
+        Me.Panel_physdisk_6.Name = "Panel_physdisk_6"
+        Me.Panel_physdisk_6.Size = New System.Drawing.Size(506, 144)
+        Me.Panel_physdisk_6.TabIndex = 2
         '
-        'Max
+        'zgc_phsdisk6
         '
-        Me.Max.Text = "Max Value"
-        Me.Max.Width = 94
+        Me.zgc_phsdisk6.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk6.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk6.Name = "zgc_phsdisk6"
+        Me.zgc_phsdisk6.ScrollGrace = 0
+        Me.zgc_phsdisk6.ScrollMaxX = 0
+        Me.zgc_phsdisk6.ScrollMaxY = 0
+        Me.zgc_phsdisk6.ScrollMaxY2 = 0
+        Me.zgc_phsdisk6.ScrollMinX = 0
+        Me.zgc_phsdisk6.ScrollMinY = 0
+        Me.zgc_phsdisk6.ScrollMinY2 = 0
+        Me.zgc_phsdisk6.Size = New System.Drawing.Size(506, 144)
+        Me.zgc_phsdisk6.TabIndex = 0
         '
-        'Min
+        'Panel_physdisk_5
         '
-        Me.Min.Text = "Min Value"
-        Me.Min.Width = 85
+        Me.Panel_physdisk_5.Controls.Add(Me.zgc_phsdisk5)
+        Me.Panel_physdisk_5.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_physdisk_5.Location = New System.Drawing.Point(0, 161)
+        Me.Panel_physdisk_5.Name = "Panel_physdisk_5"
+        Me.Panel_physdisk_5.Size = New System.Drawing.Size(506, 136)
+        Me.Panel_physdisk_5.TabIndex = 1
         '
-        'Avg
+        'zgc_phsdisk5
         '
-        Me.Avg.Text = "Average"
-        Me.Avg.Width = 91
+        Me.zgc_phsdisk5.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk5.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk5.Name = "zgc_phsdisk5"
+        Me.zgc_phsdisk5.ScrollGrace = 0
+        Me.zgc_phsdisk5.ScrollMaxX = 0
+        Me.zgc_phsdisk5.ScrollMaxY = 0
+        Me.zgc_phsdisk5.ScrollMaxY2 = 0
+        Me.zgc_phsdisk5.ScrollMinX = 0
+        Me.zgc_phsdisk5.ScrollMinY = 0
+        Me.zgc_phsdisk5.ScrollMinY2 = 0
+        Me.zgc_phsdisk5.Size = New System.Drawing.Size(506, 136)
+        Me.zgc_phsdisk5.TabIndex = 0
+        '
+        'Panel_physdisk_4
+        '
+        Me.Panel_physdisk_4.Controls.Add(Me.zgc_phsdisk4)
+        Me.Panel_physdisk_4.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_physdisk_4.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_physdisk_4.Name = "Panel_physdisk_4"
+        Me.Panel_physdisk_4.Size = New System.Drawing.Size(506, 161)
+        Me.Panel_physdisk_4.TabIndex = 0
+        '
+        'zgc_phsdisk4
+        '
+        Me.zgc_phsdisk4.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk4.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk4.Name = "zgc_phsdisk4"
+        Me.zgc_phsdisk4.ScrollGrace = 0
+        Me.zgc_phsdisk4.ScrollMaxX = 0
+        Me.zgc_phsdisk4.ScrollMaxY = 0
+        Me.zgc_phsdisk4.ScrollMaxY2 = 0
+        Me.zgc_phsdisk4.ScrollMinX = 0
+        Me.zgc_phsdisk4.ScrollMinY = 0
+        Me.zgc_phsdisk4.ScrollMinY2 = 0
+        Me.zgc_phsdisk4.Size = New System.Drawing.Size(506, 161)
+        Me.zgc_phsdisk4.TabIndex = 0
+        '
+        'TabPageOther
+        '
+        Me.TabPageOther.Controls.Add(Me.Panel_Oth_3)
+        Me.TabPageOther.Controls.Add(Me.Panel_Oth_2)
+        Me.TabPageOther.Controls.Add(Me.Panel_Oth_1)
+        Me.TabPageOther.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageOther.Name = "TabPageOther"
+        Me.TabPageOther.Size = New System.Drawing.Size(506, 484)
+        Me.TabPageOther.TabIndex = 4
+        Me.TabPageOther.Text = "Other"
+        Me.TabPageOther.UseVisualStyleBackColor = True
+        '
+        'Panel_Oth_3
+        '
+        Me.Panel_Oth_3.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_Oth_3.Location = New System.Drawing.Point(0, 273)
+        Me.Panel_Oth_3.Name = "Panel_Oth_3"
+        Me.Panel_Oth_3.Size = New System.Drawing.Size(506, 165)
+        Me.Panel_Oth_3.TabIndex = 2
+        '
+        'Panel_Oth_2
+        '
+        Me.Panel_Oth_2.Controls.Add(Me.zgc_oth_2)
+        Me.Panel_Oth_2.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_Oth_2.Location = New System.Drawing.Point(0, 133)
+        Me.Panel_Oth_2.Name = "Panel_Oth_2"
+        Me.Panel_Oth_2.Size = New System.Drawing.Size(506, 140)
+        Me.Panel_Oth_2.TabIndex = 1
+        '
+        'zgc_oth_2
+        '
+        Me.zgc_oth_2.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_oth_2.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_oth_2.Name = "zgc_oth_2"
+        Me.zgc_oth_2.ScrollGrace = 0
+        Me.zgc_oth_2.ScrollMaxX = 0
+        Me.zgc_oth_2.ScrollMaxY = 0
+        Me.zgc_oth_2.ScrollMaxY2 = 0
+        Me.zgc_oth_2.ScrollMinX = 0
+        Me.zgc_oth_2.ScrollMinY = 0
+        Me.zgc_oth_2.ScrollMinY2 = 0
+        Me.zgc_oth_2.Size = New System.Drawing.Size(506, 140)
+        Me.zgc_oth_2.TabIndex = 0
+        '
+        'Panel_Oth_1
+        '
+        Me.Panel_Oth_1.Controls.Add(Me.zgc_oth_1)
+        Me.Panel_Oth_1.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_Oth_1.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_Oth_1.Name = "Panel_Oth_1"
+        Me.Panel_Oth_1.Size = New System.Drawing.Size(506, 133)
+        Me.Panel_Oth_1.TabIndex = 0
+        '
+        'zgc_oth_1
+        '
+        Me.zgc_oth_1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_oth_1.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_oth_1.Name = "zgc_oth_1"
+        Me.zgc_oth_1.ScrollGrace = 0
+        Me.zgc_oth_1.ScrollMaxX = 0
+        Me.zgc_oth_1.ScrollMaxY = 0
+        Me.zgc_oth_1.ScrollMaxY2 = 0
+        Me.zgc_oth_1.ScrollMinX = 0
+        Me.zgc_oth_1.ScrollMinY = 0
+        Me.zgc_oth_1.ScrollMinY2 = 0
+        Me.zgc_oth_1.Size = New System.Drawing.Size(506, 133)
+        Me.zgc_oth_1.TabIndex = 0
+        '
+        'Panelr
+        '
+        Me.Panelr.Controls.Add(Me.TabControl1)
+        Me.Panelr.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.Panelr.Location = New System.Drawing.Point(0, 24)
+        Me.Panelr.Name = "Panelr"
+        Me.Panelr.Size = New System.Drawing.Size(514, 510)
+        Me.Panelr.TabIndex = 5
+        '
+        'TabPageDsk3
+        '
+        Me.TabPageDsk3.Controls.Add(Me.Panel_physdisk_9)
+        Me.TabPageDsk3.Controls.Add(Me.Panel_physdisk_8)
+        Me.TabPageDsk3.Controls.Add(Me.Panel_physdisk_7)
+        Me.TabPageDsk3.Location = New System.Drawing.Point(4, 22)
+        Me.TabPageDsk3.Name = "TabPageDsk3"
+        Me.TabPageDsk3.Size = New System.Drawing.Size(506, 484)
+        Me.TabPageDsk3.TabIndex = 5
+        Me.TabPageDsk3.Text = "PhysicalDisk3"
+        Me.TabPageDsk3.UseVisualStyleBackColor = True
+        '
+        'Panel_physdisk_7
+        '
+        Me.Panel_physdisk_7.Controls.Add(Me.zgc_phsdisk7)
+        Me.Panel_physdisk_7.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_physdisk_7.Location = New System.Drawing.Point(0, 0)
+        Me.Panel_physdisk_7.Name = "Panel_physdisk_7"
+        Me.Panel_physdisk_7.Size = New System.Drawing.Size(506, 142)
+        Me.Panel_physdisk_7.TabIndex = 0
+        '
+        'Panel_physdisk_8
+        '
+        Me.Panel_physdisk_8.Controls.Add(Me.zgc_phsdisk8)
+        Me.Panel_physdisk_8.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_physdisk_8.Location = New System.Drawing.Point(0, 142)
+        Me.Panel_physdisk_8.Name = "Panel_physdisk_8"
+        Me.Panel_physdisk_8.Size = New System.Drawing.Size(506, 175)
+        Me.Panel_physdisk_8.TabIndex = 1
+        '
+        'Panel_physdisk_9
+        '
+        Me.Panel_physdisk_9.Controls.Add(Me.zgc_phsdisk9)
+        Me.Panel_physdisk_9.Dock = System.Windows.Forms.DockStyle.Top
+        Me.Panel_physdisk_9.Location = New System.Drawing.Point(0, 317)
+        Me.Panel_physdisk_9.Name = "Panel_physdisk_9"
+        Me.Panel_physdisk_9.Size = New System.Drawing.Size(506, 167)
+        Me.Panel_physdisk_9.TabIndex = 2
+        '
+        'zgc_phsdisk7
+        '
+        Me.zgc_phsdisk7.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk7.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk7.Name = "zgc_phsdisk7"
+        Me.zgc_phsdisk7.ScrollGrace = 0
+        Me.zgc_phsdisk7.ScrollMaxX = 0
+        Me.zgc_phsdisk7.ScrollMaxY = 0
+        Me.zgc_phsdisk7.ScrollMaxY2 = 0
+        Me.zgc_phsdisk7.ScrollMinX = 0
+        Me.zgc_phsdisk7.ScrollMinY = 0
+        Me.zgc_phsdisk7.ScrollMinY2 = 0
+        Me.zgc_phsdisk7.Size = New System.Drawing.Size(506, 142)
+        Me.zgc_phsdisk7.TabIndex = 0
+        '
+        'zgc_phsdisk8
+        '
+        Me.zgc_phsdisk8.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk8.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk8.Name = "zgc_phsdisk8"
+        Me.zgc_phsdisk8.ScrollGrace = 0
+        Me.zgc_phsdisk8.ScrollMaxX = 0
+        Me.zgc_phsdisk8.ScrollMaxY = 0
+        Me.zgc_phsdisk8.ScrollMaxY2 = 0
+        Me.zgc_phsdisk8.ScrollMinX = 0
+        Me.zgc_phsdisk8.ScrollMinY = 0
+        Me.zgc_phsdisk8.ScrollMinY2 = 0
+        Me.zgc_phsdisk8.Size = New System.Drawing.Size(506, 175)
+        Me.zgc_phsdisk8.TabIndex = 0
+        '
+        'zgc_phsdisk9
+        '
+        Me.zgc_phsdisk9.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.zgc_phsdisk9.Location = New System.Drawing.Point(0, 0)
+        Me.zgc_phsdisk9.Name = "zgc_phsdisk9"
+        Me.zgc_phsdisk9.ScrollGrace = 0
+        Me.zgc_phsdisk9.ScrollMaxX = 0
+        Me.zgc_phsdisk9.ScrollMaxY = 0
+        Me.zgc_phsdisk9.ScrollMaxY2 = 0
+        Me.zgc_phsdisk9.ScrollMinX = 0
+        Me.zgc_phsdisk9.ScrollMinY = 0
+        Me.zgc_phsdisk9.ScrollMinY2 = 0
+        Me.zgc_phsdisk9.Size = New System.Drawing.Size(506, 167)
+        Me.zgc_phsdisk9.TabIndex = 0
         '
         'FmGraph
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(514, 534)
-        Me.Controls.Add(Me.Panel1)
+        Me.Controls.Add(Me.Panelr)
         Me.Controls.Add(Me.MenuStrip1)
         Me.Icon = CType(resources.GetObject("$this.Icon"), System.Drawing.Icon)
         Me.MainMenuStrip = Me.MenuStrip1
@@ -324,16 +813,35 @@ Partial Class FmGraph
         Me.Text = "Performance Graph"
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
-        Me.Panel1.ResumeLayout(False)
+        Me.TabPage1.ResumeLayout(False)
+        Me.Panel2.ResumeLayout(False)
+        Me.Panel3.ResumeLayout(False)
+        Me.Panel4.ResumeLayout(False)
+        Me.TabPage4.ResumeLayout(False)
+        Me.Panel5.ResumeLayout(False)
+        Me.Panel6.ResumeLayout(False)
+        Me.Panel7.ResumeLayout(False)
         Me.TabControl1.ResumeLayout(False)
-        Me.TabPage2.ResumeLayout(False)
+        Me.TabPagePerf.ResumeLayout(False)
         Me.Panel_Perf_CPU.ResumeLayout(False)
         Me.Panel_Perf_RAM.ResumeLayout(False)
         Me.Panel_Info.ResumeLayout(False)
-        Me.TabPage3.ResumeLayout(False)
+        Me.TabPageDsk1.ResumeLayout(False)
         Me.Panel_PhysDisk_2.ResumeLayout(False)
         Me.Panel_PhysDisk_3.ResumeLayout(False)
         Me.Panel_PhysDisk_1.ResumeLayout(False)
+        Me.TabPageDsk2.ResumeLayout(False)
+        Me.Panel_physdisk_6.ResumeLayout(False)
+        Me.Panel_physdisk_5.ResumeLayout(False)
+        Me.Panel_physdisk_4.ResumeLayout(False)
+        Me.TabPageOther.ResumeLayout(False)
+        Me.Panel_Oth_2.ResumeLayout(False)
+        Me.Panel_Oth_1.ResumeLayout(False)
+        Me.Panelr.ResumeLayout(False)
+        Me.TabPageDsk3.ResumeLayout(False)
+        Me.Panel_physdisk_7.ResumeLayout(False)
+        Me.Panel_physdisk_8.ResumeLayout(False)
+        Me.Panel_physdisk_9.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -343,25 +851,63 @@ Partial Class FmGraph
     Friend WithEvents FileToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents OpenToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents Panel1 As System.Windows.Forms.Panel
+    Friend WithEvents TabPage1 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel2 As System.Windows.Forms.Panel
+    Friend WithEvents ZedGraphControl1 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel3 As System.Windows.Forms.Panel
+    Friend WithEvents ZedGraphControl2 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel4 As System.Windows.Forms.Panel
+    Friend WithEvents ListView1 As System.Windows.Forms.ListView
+    Friend WithEvents ColumnHeader1 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader2 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader3 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents ColumnHeader4 As System.Windows.Forms.ColumnHeader
+    Friend WithEvents TabPage4 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel5 As System.Windows.Forms.Panel
+    Friend WithEvents ZedGraphControl3 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel6 As System.Windows.Forms.Panel
+    Friend WithEvents ZedGraphControl4 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel7 As System.Windows.Forms.Panel
+    Friend WithEvents ZedGraphControl5 As ZedGraph.ZedGraphControl
     Friend WithEvents TabControl1 As System.Windows.Forms.TabControl
-    Friend WithEvents TabPage2 As System.Windows.Forms.TabPage
-    Friend WithEvents zgc_cpu As ZedGraph.ZedGraphControl
-    Friend WithEvents TabPage3 As System.Windows.Forms.TabPage
-    Friend WithEvents Panel_Perf_RAM As System.Windows.Forms.Panel
+    Friend WithEvents TabPagePerf As System.Windows.Forms.TabPage
     Friend WithEvents Panel_Perf_CPU As System.Windows.Forms.Panel
+    Friend WithEvents zgc_cpu As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_Perf_RAM As System.Windows.Forms.Panel
     Friend WithEvents zgc_ram As ZedGraph.ZedGraphControl
-    Friend WithEvents Panel_PhysDisk_2 As System.Windows.Forms.Panel
-    Friend WithEvents Panel_PhysDisk_3 As System.Windows.Forms.Panel
-    Friend WithEvents Panel_PhysDisk_1 As System.Windows.Forms.Panel
-    Friend WithEvents zgc_phsdisk1 As ZedGraph.ZedGraphControl
-    Friend WithEvents zgc_phsdisk2 As ZedGraph.ZedGraphControl
-    Friend WithEvents zgc_phsdisk3 As ZedGraph.ZedGraphControl
     Friend WithEvents Panel_Info As System.Windows.Forms.Panel
     Friend WithEvents ListViewStats As System.Windows.Forms.ListView
     Friend WithEvents Metric As System.Windows.Forms.ColumnHeader
     Friend WithEvents Max As System.Windows.Forms.ColumnHeader
     Friend WithEvents Min As System.Windows.Forms.ColumnHeader
     Friend WithEvents Avg As System.Windows.Forms.ColumnHeader
+    Friend WithEvents TabPageDsk1 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel_PhysDisk_2 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk2 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_PhysDisk_3 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk3 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_PhysDisk_1 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk1 As ZedGraph.ZedGraphControl
+    Friend WithEvents TabPageDsk2 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel_physdisk_6 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk6 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_physdisk_5 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk5 As ZedGraph.ZedGraphControl
+    Friend WithEvents Panel_physdisk_4 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk4 As ZedGraph.ZedGraphControl
+    Friend WithEvents TabPageOther As System.Windows.Forms.TabPage
+    Friend WithEvents Panel_Oth_3 As System.Windows.Forms.Panel
+    Friend WithEvents Panel_Oth_2 As System.Windows.Forms.Panel
+    Friend WithEvents Panel_Oth_1 As System.Windows.Forms.Panel
+    Friend WithEvents Panelr As System.Windows.Forms.Panel
+    Friend WithEvents zgc_oth_1 As ZedGraph.ZedGraphControl
+    Friend WithEvents zgc_oth_2 As ZedGraph.ZedGraphControl
+    Friend WithEvents TabPageDsk3 As System.Windows.Forms.TabPage
+    Friend WithEvents Panel_physdisk_9 As System.Windows.Forms.Panel
+    Friend WithEvents Panel_physdisk_8 As System.Windows.Forms.Panel
+    Friend WithEvents Panel_physdisk_7 As System.Windows.Forms.Panel
+    Friend WithEvents zgc_phsdisk9 As ZedGraph.ZedGraphControl
+    Friend WithEvents zgc_phsdisk8 As ZedGraph.ZedGraphControl
+    Friend WithEvents zgc_phsdisk7 As ZedGraph.ZedGraphControl
 
 End Class

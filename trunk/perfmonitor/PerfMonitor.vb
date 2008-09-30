@@ -1,6 +1,6 @@
 Public Class PerfMonitor
 
-    Private cpu, mem, MemPages, NetBytesSec, dskTime, dskReadQ, dskWriteQ, diskReadBytes, diskWriteBytes As PerformanceCounter
+    Private cpu, mem, MemPages, NetBytesSec, dskTime, dskReadQ, dskWriteQ, diskReadBytes, diskWriteBytes, dskTime2, dskReadQ2, dskWriteQ2, diskReadBytes2, diskWriteBytes2, dskTime3, dskReadQ3, dskWriteQ3, diskReadBytes3, diskWriteBytes3 As PerformanceCounter
     Private totalMemory As Integer
     Private FirstRun As Boolean
     Private DiskInstance1 As String = "_Total"
@@ -47,13 +47,24 @@ Public Class PerfMonitor
 
         mem = New PerformanceCounter("Memory", "Available MBytes", "", Me.computername.Text)
         MemPages = New PerformanceCounter("Memory", "Pages Input/sec", "", Me.computername.Text)
-        'If Not Me.NetInstance Is Nothing Then NetBytesSec = New PerformanceCounter("Network Interface", "Bytes Total/sec", Me.NetInstance, Me.computername.Text)
         NetBytesSec = New PerformanceCounter("Network Interface", "Bytes Total/sec", "", Me.computername.Text)
         dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance1, Me.computername.Text)
         dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance1, Me.computername.Text)
         dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance1, Me.computername.Text)
         diskReadBytes = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance1, Me.computername.Text)
         diskWriteBytes = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance1, Me.computername.Text)
+
+        dskTime2 = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance2, Me.computername.Text)
+        dskReadQ2 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance2, Me.computername.Text)
+        dskWriteQ2 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance2, Me.computername.Text)
+        diskReadBytes2 = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance2, Me.computername.Text)
+        diskWriteBytes2 = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance2, Me.computername.Text)
+
+        dskTime3 = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance3, Me.computername.Text)
+        dskReadQ3 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance3, Me.computername.Text)
+        dskWriteQ3 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance3, Me.computername.Text)
+        diskReadBytes3 = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance3, Me.computername.Text)
+        diskWriteBytes3 = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance3, Me.computername.Text)
 
         Me.Text = Me.computername.Text.ToUpper
         Me.btnStart.Enabled = False
@@ -104,8 +115,8 @@ Public Class PerfMonitor
             PerfMonTimer.Stop()
             PerfMonTimer.Enabled = False
             MsgBox("An error occurred while requesting" & vbCr & _
-                               "performance information from " & Me.computername.Text & _
-                               vbCr & vbCr & "The application will be closed.", MsgBoxStyle.Critical, "Perf Mon Error")
+                   "performance information from " & Me.computername.Text & _
+                   vbCr & vbCr & "The application will be closed.", MsgBoxStyle.Critical, "Perf Mon Error")
             Me.Close()
             End
         End Try
@@ -127,35 +138,137 @@ Public Class PerfMonitor
             nicValue = Me.NetBytesSec.NextValue
         End If
 
-
         ' ----  % Disk Time  -------------
-        Dim dsktimeValue As Integer = CInt(dskTime.NextValue)
-        LabelDisk.Text = dsktimeValue & "%"
-        If dsktimeValue > 100 Then
-            dsktimeValue = 100
+        Dim dsktimeValue As Integer
+        Dim ReadQ As Single
+        Dim WriteQ As Single
+        Dim DiskReadKbSec As Integer
+        Dim DiskWriteKbSec As Integer
+        If Not Me.DiskInstance1 Is Nothing Then
+            dsktimeValue = CInt(dskTime.NextValue)
+            LabelDisk.Text = dsktimeValue & "%"
+            If dsktimeValue > 100 Then
+                dsktimeValue = 100
+            End If
+            '  Disk Read & Write
+            ReadQ = dskReadQ.NextValue
+            WriteQ = dskWriteQ.NextValue
+            DiskReadKbSec = CInt(Me.diskReadBytes.NextValue / 1024)
+            DiskWriteKbSec = CInt(Me.diskWriteBytes.NextValue / 1024)
+
+            UpdatePercentGraph(dsktimeValue, Pic3, dskColor)
         End If
 
-        '  Disk Read & Write
-        Dim ReadQ As Single = dskReadQ.NextValue
-        Dim WriteQ As Single = dskWriteQ.NextValue
-        Dim DiskReadKbSec As Integer = CInt(Me.diskReadBytes.NextValue / 1024)
-        Dim DiskWriteKbSec As Integer = CInt(Me.diskWriteBytes.NextValue / 1024)
+        Dim dsktimeValue2 As Integer
+        Dim ReadQ2 As Single
+        Dim WriteQ2 As Single
+        Dim DiskReadKbSec2 As Integer
+        Dim DiskWriteKbSec2 As Integer
+        If Not Me.DiskInstance2 Is Nothing Then
+            dsktimeValue2 = CInt(dskTime2.NextValue)
+            LabelDisk.Text = dsktimeValue2 & "%"
+            If dsktimeValue2 > 100 Then
+                dsktimeValue2 = 100
+            End If
 
+            '  Disk Read & Write
+            ReadQ2 = dskReadQ2.NextValue
+            WriteQ2 = dskWriteQ2.NextValue
+            DiskReadKbSec2 = CInt(Me.diskReadBytes2.NextValue / 1024)
+            DiskWriteKbSec2 = CInt(Me.diskWriteBytes2.NextValue / 1024)
+        End If
 
-        UpdatePercentGraph(dsktimeValue, Pic3, dskColor)
+        Dim dsktimeValue3 As Integer
+        Dim ReadQ3 As Single
+        Dim WriteQ3 As Single
+        Dim DiskReadKbSec3 As Integer
+        Dim DiskWriteKbSec3 As Integer
+        If Not Me.DiskInstance3 Is Nothing Then
+            dsktimeValue3 = CInt(dskTime3.NextValue)
+            LabelDisk.Text = dsktimeValue3 & "%"
+            If dsktimeValue3 > 100 Then
+                dsktimeValue3 = 100
+            End If
 
+            '  Disk Read & Write
+            ReadQ3 = dskReadQ3.NextValue
+            WriteQ3 = dskWriteQ3.NextValue
+            DiskReadKbSec3 = CInt(Me.diskReadBytes3.NextValue / 1024)
+            DiskWriteKbSec3 = CInt(Me.diskWriteBytes3.NextValue / 1024)
+        End If
 
 
         If Recording Then
-            Me.Recording_Write_Line(CInt(cpuvalue) & "," & _
-                                    CInt(memValue) & "," & _
-                                    CInt(mempagesValue) & "," & _
-                                    CInt(nicValue) & "," & _
-                                    CInt(dsktimeValue) & "," & _
-                                    ReadQ & "," & _
-                                    WriteQ & "," & _
-                                    DiskReadKbSec & "," & _
-                                    DiskWriteKbSec)
+
+            Dim sLine As String = CInt(cpuvalue) & "," & CInt(memValue) & ","
+
+            If Me._mempages Then
+                sLine = sLine & CInt(mempagesValue) & ","
+            Else
+                sLine = sLine & "0,"
+            End If
+            If Me._nic Then
+                sLine = sLine & CInt(nicValue) & ","
+            Else
+                sLine = sLine & "0,"
+            End If
+
+            If Not Me.DiskInstance1 Is Nothing Then
+                If Me._dsk1 Then
+                    sLine = sLine & CInt(dsktimeValue) & ","
+                Else
+                    sLine = sLine & "0,"
+                End If
+                If Me._dsk2 Then
+                    sLine = sLine & ReadQ & "," & WriteQ & ","
+                Else
+                    sLine = sLine & "0,0,"
+                End If
+                If Me._dsk3 Then
+                    sLine = sLine & DiskReadKbSec & "," & DiskWriteKbSec
+                Else
+                    sLine = sLine & "0,0"
+                End If
+            End If
+            If Not Me.DiskInstance2 Is Nothing Then
+                sLine = sLine & ","
+                If Me._dsk1 Then
+                    sLine = sLine & CInt(dsktimeValue2) & ","
+                Else
+                    sLine = sLine & "0,"
+                End If
+                If Me._dsk2 Then
+                    sLine = sLine & ReadQ2 & "," & WriteQ2 & ","
+                Else
+                    sLine = sLine & "0,0,"
+                End If
+                If Me._dsk3 Then
+                    sLine = sLine & DiskReadKbSec2 & "," & DiskWriteKbSec2
+                Else
+                    sLine = sLine & "0,0"
+                End If
+            End If
+            If Not Me.DiskInstance3 Is Nothing Then
+                sLine = sLine & ","
+                If Me._dsk1 Then
+                    sLine = sLine & CInt(dsktimeValue3) & ","
+                Else
+                    sLine = sLine & "0,"
+                End If
+                If Me._dsk2 Then
+                    sLine = sLine & ReadQ2 & "," & WriteQ3 & ","
+                Else
+                    sLine = sLine & "0,0,"
+                End If
+                If Me._dsk3 Then
+                    sLine = sLine & DiskReadKbSec2 & "," & DiskWriteKbSec3
+                Else
+                    sLine = sLine & "0,0"
+                End If
+            End If
+
+            Me.Recording_Write_Line(sLine)
+
         End If
 
         If FirstRun Then
@@ -250,9 +363,13 @@ Public Class PerfMonitor
             If rd.DialogResult = Windows.Forms.DialogResult.OK Then
                 TimeValue.Value = rd.NumericUpDown1.Value
 
+
+                ' Get Selected items for performance counters
+
                 _cpu = rd.cCPU.Checked
                 _mem = rd.cMem.Checked
                 _mempages = rd.cMemPages.Checked
+
                 If rd.cNic.Checked Then
                     _nic = True
                     Me.NetInstance = rd.comboNICInstance.Text
@@ -261,9 +378,36 @@ Public Class PerfMonitor
 
                 Dim i As Integer = 1
                 For Each item As String In rd.ListBoxDiskInstance.Items
-                    If i = 1 Then Me.DiskInstance1 = item
-                    If i = 2 Then Me.DiskInstance2 = item
-                    If i = 3 Then Me.DiskInstance3 = item
+                    If i = 1 Then
+                        Me.DiskInstance1 = item
+                        dskTime = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance1, Me.computername.Text)
+                        dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance1, Me.computername.Text)
+                        dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance1, Me.computername.Text)
+                        diskReadBytes = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance1, Me.computername.Text)
+                        diskWriteBytes = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance1, Me.computername.Text)
+                    End If
+
+                    If i = 2 Then
+                        Me.DiskInstance2 = item
+                        dskTime2 = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance2, Me.computername.Text)
+                        dskReadQ2 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance2, Me.computername.Text)
+                        dskWriteQ2 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance2, Me.computername.Text)
+                        diskReadBytes2 = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance2, Me.computername.Text)
+                        diskWriteBytes2 = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance2, Me.computername.Text)
+                    End If
+
+                    If i = 3 Then
+                        Me.DiskInstance3 = item
+                        dskTime3 = New PerformanceCounter("PhysicalDisk", "% Disk Time", Me.DiskInstance3, Me.computername.Text)
+                        dskReadQ3 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance3, Me.computername.Text)
+                        dskWriteQ3 = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance3, Me.computername.Text)
+                        diskReadBytes3 = New PerformanceCounter("PhysicalDisk", "Disk Read Bytes/sec", Me.DiskInstance3, Me.computername.Text)
+                        diskWriteBytes3 = New PerformanceCounter("PhysicalDisk", "Disk Write Bytes/sec", Me.DiskInstance3, Me.computername.Text)
+                    End If
+
+                    If i = 4 Then
+                        MsgBox("Max 3 PhysicalDisk Instances")
+                    End If
                     i = i + 1
                 Next
 
@@ -277,29 +421,30 @@ Public Class PerfMonitor
                 Me.RecordingFileName = path & "\Perfmon_" & UCase(computername.Text) & "_" & starttime & ".pff"
                 Writer = New System.IO.StreamWriter(Me.RecordingFileName, False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
-                'Writer.WriteLine("Time,% Processor Time\_Total,% Mem Used,% Disk Time\" & Me.DiskInstance & _
-                '                 ",Avg Read Queue\" & Me.DiskInstance & _
-                '                 ",Avg Write Queue\" & Me.DiskInstance & _
-                '                 ",Disk Read kbs\" & Me.DiskInstance & _
-                '                 ",Disk Write kbs\" & Me.DiskInstance)
+
                 Dim HeaderRow As String = "Time,CPU_%,RAM_%,Memory&Pages_InputPerSec,Network_BytesPerSec_" & Me.NetInstance
+
+                If Not Me.DiskInstance1 Is Nothing Then HeaderRow = HeaderRow & ",DiskTime_%_" & Me.DiskInstance1 & _
+                                                                                ",Read&Queue_Length_" & Me.DiskInstance1 & _
+                                                                                ",Write&Queue_Length_" & Me.DiskInstance1 & _
+                                                                                ",Disk&Read_kbs_" & Me.DiskInstance1 & _
+                                                                                ",Disk&Write_kbs_" & Me.DiskInstance1
+
                 If Not Me.DiskInstance2 Is Nothing Then HeaderRow = HeaderRow & ",DiskTime_%_" & Me.DiskInstance2 & _
                                                                                 ",Read&Queue_Length_" & Me.DiskInstance2 & _
                                                                                 ",Write&Queue_Length_" & Me.DiskInstance2 & _
-                                                                                ",Disk&Read_kbs" & Me.DiskInstance2 & _
+                                                                                ",Disk&Read_kbs_" & Me.DiskInstance2 & _
                                                                                 ",Disk&Write_kbs_" & Me.DiskInstance2
+
                 If Not Me.DiskInstance3 Is Nothing Then HeaderRow = HeaderRow & ",DiskTime_%_" & Me.DiskInstance3 & _
                                                                                 ",Read&Queue_Length_" & Me.DiskInstance3 & _
                                                                                 ",Write&Queue_Length_" & Me.DiskInstance3 & _
-                                                                                ",Disk&Read_kbs" & Me.DiskInstance3 & _
+                                                                                ",Disk&Read_kbs_" & Me.DiskInstance3 & _
                                                                                 ",Disk&Write_kbs_" & Me.DiskInstance3
-                Writer.WriteLine("Time,CPU_%,RAM_%,Memory&Pages_InputPerSec,Network_BytesPerSec_" & Me.NetInstance & _
-                                 ",DiskTime_%_" & Me.DiskInstance1 & _
-                                 ",Read&Queue_Length_" & Me.DiskInstance1 & _
-                                 ",Write&Queue_Length_" & Me.DiskInstance1 & _
-                                 ",Disk&Read_kbs" & Me.DiskInstance1 & _
-                                 ",Disk&Write_kbs_" & Me.DiskInstance1)
+                Writer.WriteLine(HeaderRow)
+
                 Writer.Flush()
+
                 Me.ToolTip1.SetToolTip(Me.RecordingButton, "stop capturing performance data")
                 Me.RecordingButton.Text = "stop recording"
                 Me.RecordingStatusLabel.Visible = True
@@ -330,7 +475,6 @@ Public Class PerfMonitor
         End If
     End Sub
     Private Sub Recording_Write_Line(ByVal Line As String)
-        'Writer.WriteLine(DateTime.Now.ToString("yyyyMMddhhmmss") & "," & Line)
         Writer.WriteLine(DateTime.Now & "," & Line)
     End Sub
 
