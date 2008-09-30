@@ -76,6 +76,12 @@ Public Class CurveSettings
             Case "ram"
                 _Filled = True
                 _colour = Color.FromArgb(120, 220, 20) ' green
+            Case "pages"
+                _Filled = True
+                _colour = Color.Chartreuse
+            Case "nic"
+                _Filled = True
+                _colour = Color.Black
             Case "diskpercent"
                 _Filled = True
                 _colour = Color.FromArgb(0, 120, 220) ' blue

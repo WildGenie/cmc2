@@ -8,6 +8,8 @@ Public Class FmGraph
 
     Private CPUCurve As CurveSettings
     Private RAMCurve As CurveSettings
+    Private MemPagesCurve As CurveSettings
+    Private NicCurve As CurveSettings
     Private PhysDiskPercentCurve As CurveSettings
     Private PhysDiskQueueReadCurve As CurveSettings
     Private PhysDiskQueueWriteCurve As CurveSettings
@@ -17,6 +19,7 @@ Public Class FmGraph
     Private _disk1Instance As String
     Private _disk2Instance As String
     Private _disk3Instance As String
+    Private _NICInstance As String
 
     ''' <summary>
     ''' Create datatable and read performance data from file into datatable
@@ -24,6 +27,17 @@ Public Class FmGraph
     ''' <param name="filename"></param>
     ''' <remarks></remarks>
     Private Sub Fill_DataTable(ByVal filename As String)
+
+        Dim sr As New System.IO.StreamReader(filename)
+        Computer = UCase(sr.ReadLine.Split(" ")(0))
+        Dim instanceLine() As String = sr.ReadLine.Split(",")
+
+        If instanceLine.Length = 6 OrElse instanceLine.Length = 8 Then
+            sr.Close()
+            Old_Fill_DataTable(filename)
+            Exit Sub
+        End If
+
         myData = New DataTable()
         myData.Columns.Add(New DataColumn("time", GetType(DateTime)))
         myData.Columns.Add(New DataColumn("cpu%", GetType(Double)))
@@ -35,10 +49,20 @@ Public Class FmGraph
         myData.Columns.Add(New DataColumn("diskWrite", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskReadKbSec", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskWriteKbSec", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk2%", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk2Read", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk2Write", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk2ReadKbSec", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk2WriteKbSec", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk3%", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk3Read", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk3Write", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk3ReadKbSec", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk3WriteKbSec", GetType(Double)))
 
-        Dim sr As New System.IO.StreamReader(filename)
-        Computer = UCase(sr.ReadLine.Split(" ")(0))
-        Dim instanceLine() As String = sr.ReadLine.Split(",")
+        'Dim sr As New System.IO.StreamReader(filename)
+        'Computer = UCase(sr.ReadLine.Split(" ")(0))
+        'Dim instanceLine() As String = sr.ReadLine.Split(",")
 
         ' 1 Time
         ' 2 CPU_%
@@ -52,17 +76,66 @@ Public Class FmGraph
         ' 9 Disk&Read_kbs0 C:
         '10 Disk&Write_kbs_0 C:
 
+        If instanceLine(4).Length > 21 Then
+            Me._NICInstance = instanceLine(4).Substring(21)
+        Else
+            Me._NICInstance = Nothing
+        End If
+
 
         If instanceLine.Length > 5 Then
-            Me._disk2Instance = instanceLine(6).Substring(instanceLine(6).LastIndexOf("_") + 1)
+            Me._disk1Instance = instanceLine(5).Substring(12) 'instanceLine(5).LastIndexOf("_") + 1)
+        Else
+            Me._disk1Instance = Nothing
         End If
 
         If instanceLine.Length > 10 Then
-            Me._disk2Instance = instanceLine(11).Substring(instanceLine(11).LastIndexOf("_") + 1)
+            Me._disk2Instance = instanceLine(10).Substring(12) 'instanceLine(10).LastIndexOf("_") + 1)
+        Else
+            Me._disk2Instance = Nothing
         End If
 
         If instanceLine.Length > 15 Then
-            Me._disk2Instance = instanceLine(16).Substring(instanceLine(16).LastIndexOf("_") + 1)
+            Me._disk3Instance = instanceLine(15).Substring(12) 'instanceLine(15).LastIndexOf("_") + 1)
+        Else
+            Me._disk3Instance = Nothing
+        End If
+
+        Do While Not sr.EndOfStream
+            Dim line() As String = sr.ReadLine.Split(",")
+            Dim dtNewRow As DataRow = myData.NewRow()
+            For i As Integer = 0 To line.Length - 1
+                dtNewRow.Item(i) = line(i)
+            Next
+            Try
+                myData.Rows.Add(dtNewRow)
+            Catch ex As Exception
+            End Try
+        Loop
+        sr.Close()
+
+
+
+    End Sub
+
+    Private Sub Old_Fill_DataTable(ByVal filename As String)
+        myData = New DataTable()
+        myData.Columns.Add(New DataColumn("time", GetType(DateTime)))
+        myData.Columns.Add(New DataColumn("cpu%", GetType(Double)))
+        myData.Columns.Add(New DataColumn("mem%", GetType(Double)))
+        myData.Columns.Add(New DataColumn("disk%", GetType(Double)))
+        myData.Columns.Add(New DataColumn("diskRead", GetType(Double)))
+        myData.Columns.Add(New DataColumn("diskWrite", GetType(Double)))
+        myData.Columns.Add(New DataColumn("diskReadKbSec", GetType(Double)))
+        myData.Columns.Add(New DataColumn("diskWriteKbSec", GetType(Double)))
+
+        Dim sr As New System.IO.StreamReader(filename)
+        Computer = UCase(sr.ReadLine.Split(" ")(0))
+        Dim instanceLine() As String = sr.ReadLine.Split(",")
+        Me._disk1Instance = instanceLine(3).Substring(instanceLine(3).LastIndexOf("\") + 1)
+        If instanceLine.Length >= 8 Then
+            'Me._diskReadMBInstance = instanceLine(6).Substring(instanceLine(6).LastIndexOf("\") + 1)
+            'Me._diskWriteMBInstance = instanceLine(7).Substring(instanceLine(7).LastIndexOf("\") + 1)
         End If
 
         Do While Not sr.EndOfStream
@@ -85,13 +158,14 @@ Public Class FmGraph
                                   ByVal YAxis2Title As String, _
                                   ByVal CPUGraph As Boolean, _
                                   ByVal RAMGraph As Boolean, _
+                                  ByVal PageGraph As Boolean, _
+                                  ByVal NetGraph As Boolean, _
+                                  ByVal DiskNumber As Integer, _
                                   ByVal DiskPercentGraph As Boolean, _
                                   ByVal DiskReadQueueGraph As Boolean, _
                                   ByVal DiskWriteQueueGraph As Boolean, _
                                   ByVal DiskReadRateGraph As Boolean, _
-                                  ByVal DiskWriteRateGraph As Boolean, _
-                                  ByVal LineTension As Single, _
-                                  ByVal LineWidth As Integer)
+                                  ByVal DiskWriteRateGraph As Boolean)
 
 
         Dim myPane As GraphPane = ZGC.GraphPane
@@ -163,26 +237,69 @@ Public Class FmGraph
         Dim wQList = New PointPairList()
         Dim ReadKbList = New PointPairList()
         Dim WriteKBList = New PointPairList()
+        Dim diskList2 = New PointPairList()
+        Dim rQList2 = New PointPairList()
+        Dim wQList2 = New PointPairList()
+        Dim ReadKbList2 = New PointPairList()
+        Dim WriteKBList2 = New PointPairList()
+        Dim diskList3 = New PointPairList()
+        Dim rQList3 = New PointPairList()
+        Dim wQList3 = New PointPairList()
+        Dim ReadKbList3 = New PointPairList()
+        Dim WriteKBList3 = New PointPairList()
 
-        'Dim MaxQueue As Double = 0
-        For Each row As DataRow In myData.Rows
-            Dim x As Double = New XDate(CDate(row(0))).XLDate
-            If Not row.IsNull(1) Then cpuList.add(x, row(1))
-            If Not row.IsNull(2) Then memList.add(x, row(2))
-            If Not row.IsNull(3) Then memPagesList.add(x, row(3))
-            If Not row.IsNull(4) Then NICList.add(x, row(4))
-            If Not row.IsNull(5) Then diskList.add(x, row(5))
-            If Not row.IsNull(6) Then rQList.add(x, row(6))
-            If Not row.IsNull(7) Then wQList.add(x, row(7))
-            If Not row.IsNull(8) Then ReadKbList.add(x, row(8))
-            If Not row.IsNull(9) Then WriteKBList.add(x, row(9))
-        Next
+
+        If myData.Columns.Count = 8 Then
+            ' used for previos version
+            For Each row As DataRow In myData.Rows
+                Dim x As Double = New XDate(CDate(row(0))).XLDate
+                If Not row.IsNull(1) Then cpuList.add(x, row(1))
+                If Not row.IsNull(2) Then memList.add(x, row(2))
+                If Not row.IsNull(3) Then diskList.add(x, row(3))
+                If Not row.IsNull(4) Then rQList.add(x, row(4))
+                If Not row.IsNull(5) Then wQList.add(x, row(5))
+                If Not row.IsNull(6) Then ReadKbList.add(x, row(6))
+                If Not row.IsNull(7) Then WriteKBList.add(x, row(7))
+            Next
+        Else
+            For Each row As DataRow In myData.Rows
+                Dim x As Double = New XDate(CDate(row(0))).XLDate
+                If Not row.IsNull(1) Then cpuList.add(x, row(1))
+                If Not row.IsNull(2) Then memList.add(x, row(2))
+                If Not row.IsNull(3) Then memPagesList.add(x, row(3))
+                If Not row.IsNull(4) Then NICList.add(x, row(4))
+                If Not row.IsNull(5) Then diskList.add(x, row(5))
+                If Not row.IsNull(6) Then rQList.add(x, row(6))
+                If Not row.IsNull(7) Then wQList.add(x, row(7))
+                If Not row.IsNull(8) Then ReadKbList.add(x, row(8))
+                If Not row.IsNull(9) Then WriteKBList.add(x, row(9))
+                If Not Me._disk2Instance = Nothing Then
+                    If Not row.IsNull(10) Then diskList2.add(x, row(10))
+                    If Not row.IsNull(11) Then rQList2.add(x, row(11))
+                    If Not row.IsNull(12) Then wQList2.add(x, row(12))
+                    If Not row.IsNull(13) Then ReadKbList2.add(x, row(13))
+                    If Not row.IsNull(14) Then WriteKBList2.add(x, row(14))
+                End If
+                If Not Me._disk3Instance = Nothing Then
+                    If Not row.IsNull(15) Then diskList3.add(x, row(15))
+                    If Not row.IsNull(16) Then rQList3.add(x, row(16))
+                    If Not row.IsNull(17) Then wQList3.add(x, row(17))
+                    If Not row.IsNull(18) Then ReadKbList3.add(x, row(18))
+                    If Not row.IsNull(19) Then WriteKBList3.add(x, row(19))
+                End If
+            Next
+        End If
 
 
         Dim Curve As LineItem
 
+        Dim PPList As PointPairList = Nothing
+
         If DiskReadRateGraph Then
-            Curve = myPane.AddCurve("Disk Read: " & Me._disk1Instance, ReadKbList, Me.PhysDiskIOReadCurve.LineColor, SymbolType.None)
+            If DiskNumber = 1 Then PPList = ReadKbList
+            If DiskNumber = 2 Then PPList = ReadKbList2
+            If DiskNumber = 3 Then PPList = ReadKbList3
+            Curve = myPane.AddCurve("Disk Read", PPList, Me.PhysDiskIOReadCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskIOReadCurve.LineTension
             Curve.Line.Width = Me.PhysDiskIOReadCurve.LineThickness
@@ -191,7 +308,10 @@ Public Class FmGraph
         End If
 
         If DiskWriteRateGraph Then
-            Curve = myPane.AddCurve("Disk Write: " & Me._disk1Instance, WriteKBList, Me.PhysDiskIOWriteCurve.LineColor, SymbolType.None)
+            If DiskNumber = 1 Then PPList = WriteKBList
+            If DiskNumber = 2 Then PPList = WriteKBList2
+            If DiskNumber = 3 Then PPList = WriteKBList3
+            Curve = myPane.AddCurve("Disk Write", PPList, Me.PhysDiskIOWriteCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskIOWriteCurve.LineTension
             Curve.Line.Width = Me.PhysDiskIOWriteCurve.LineThickness
@@ -200,7 +320,10 @@ Public Class FmGraph
         End If
 
         If DiskReadQueueGraph Then
-            Curve = myPane.AddCurve("Read Queue: " & Me._disk1Instance, rQList, Me.PhysDiskQueueReadCurve.LineColor, SymbolType.None)
+            If DiskNumber = 1 Then PPList = rQList
+            If DiskNumber = 2 Then PPList = rQList2
+            If DiskNumber = 3 Then PPList = rQList3
+            Curve = myPane.AddCurve("Read Queue", PPList, Me.PhysDiskQueueReadCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskQueueReadCurve.LineTension
             Curve.Line.Width = Me.PhysDiskQueueReadCurve.LineThickness
@@ -211,7 +334,10 @@ Public Class FmGraph
         End If
 
         If DiskWriteQueueGraph Then
-            Curve = myPane.AddCurve("Write Queue: " & Me._disk1Instance, wQList, Me.PhysDiskQueueWriteCurve.LineColor, SymbolType.None)
+            If DiskNumber = 1 Then PPList = wQList
+            If DiskNumber = 2 Then PPList = wQList2
+            If DiskNumber = 3 Then PPList = wQList3
+            Curve = myPane.AddCurve("Write Queue", PPList, Me.PhysDiskQueueWriteCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskQueueWriteCurve.LineTension
             Curve.Line.Width = Me.PhysDiskQueueWriteCurve.LineThickness
@@ -222,7 +348,10 @@ Public Class FmGraph
         End If
 
         If DiskPercentGraph Then
-            Curve = myPane.AddCurve("% Disk Time: " & Me._disk1Instance, diskList, Me.PhysDiskPercentCurve.LineColor, SymbolType.None)
+            If DiskNumber = 1 Then PPList = diskList
+            If DiskNumber = 2 Then PPList = diskList2
+            If DiskNumber = 3 Then PPList = diskList3
+            Curve = myPane.AddCurve("% Disk Time", PPList, Me.PhysDiskPercentCurve.LineColor, SymbolType.None)
             Curve.Line.IsSmooth = True
             Curve.Line.SmoothTension = Me.PhysDiskPercentCurve.LineTension
             Curve.Line.Width = Me.PhysDiskPercentCurve.LineThickness
@@ -231,6 +360,24 @@ Public Class FmGraph
 
             myPane.YAxis.Scale.Min = 0
             myPane.YAxis.Scale.Max = 105
+        End If
+
+        If NetGraph Then
+            Curve = myPane.AddCurve("Bytes/sec", NICList, Me.NicCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.NicCurve.LineTension
+            Curve.Line.Width = Me.NicCurve.LineThickness
+            Curve.Line.IsAntiAlias = True
+            If Me.NicCurve.Filled Then Curve.Line.Fill = New Fill(Me.NicCurve.LineColor)
+        End If
+
+        If PageGraph Then
+            Curve = myPane.AddCurve("Memory Pages/sec", memPagesList, Me.MemPagesCurve.LineColor, SymbolType.None)
+            Curve.Line.IsSmooth = True
+            Curve.Line.SmoothTension = Me.MemPagesCurve.LineTension
+            Curve.Line.Width = Me.MemPagesCurve.LineThickness
+            Curve.Line.IsAntiAlias = True
+            If Me.MemPagesCurve.Filled Then Curve.Line.Fill = New Fill(Me.MemPagesCurve.LineColor)
         End If
 
         If CPUGraph Then
@@ -349,11 +496,21 @@ Public Class FmGraph
             zgc_phsdisk1.GraphPane.CurveList.Clear()
             zgc_phsdisk2.GraphPane.CurveList.Clear()
             zgc_phsdisk3.GraphPane.CurveList.Clear()
+            zgc_phsdisk4.GraphPane.CurveList.Clear()
+            zgc_phsdisk5.GraphPane.CurveList.Clear()
+            zgc_phsdisk6.GraphPane.CurveList.Clear()
+            zgc_oth_1.GraphPane.CurveList.Clear()
+            zgc_oth_2.GraphPane.CurveList.Clear()
             zgc_cpu.Invalidate()
             zgc_ram.Invalidate()
+            zgc_oth_1.Invalidate()
+            zgc_oth_2.Invalidate()
             zgc_phsdisk1.Invalidate()
             zgc_phsdisk2.Invalidate()
             zgc_phsdisk3.Invalidate()
+            zgc_phsdisk4.Invalidate()
+            zgc_phsdisk5.Invalidate()
+            zgc_phsdisk6.Invalidate()
         End If
 
 
@@ -366,30 +523,33 @@ Public Class FmGraph
                 Return
             End If
         End If
-        CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, False, False, False, 0.2, 1)
-        CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, False, False, False, 0.2, 1)
-        CreateSingleGraph(zgc_phsdisk1, "Disk Utilisation", " % Percent", "", False, False, True, False, False, False, False, 0.2, 1)
-        CreateSingleGraph(zgc_phsdisk2, "Disk Queue Length", "Avg Queue Length", "", False, False, False, True, True, False, False, 0.2, 1)
-        CreateSingleGraph(zgc_phsdisk3, "Disk IO", "Kb/Second", "", False, False, False, False, False, True, True, 0.2, 1)
+        CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
+        CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
+
+        If Not Me._NICInstance Is Nothing Then
+            CreateSingleGraph(zgc_oth_1, "Network [" & Me._disk1Instance & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
+        End If
+
+        CreateSingleGraph(Me.zgc_oth_2, "Memory Paging", "Pages/sec", "", False, False, True, False, 0, False, False, False, False, False)
+
+        CreateSingleGraph(zgc_phsdisk1, "Disk Utilisation [" & Me._disk1Instance & "]", " % Percent", "", False, False, False, False, 1, True, False, False, False, False)
+        CreateSingleGraph(zgc_phsdisk2, "Disk Queue Length [" & Me._disk1Instance & "]", "Avg Queue Length", "", False, False, False, False, 1, False, True, True, False, False)
+        CreateSingleGraph(zgc_phsdisk3, "Disk IO [" & Me._disk1Instance & "]", "Kb/Second", "", False, False, False, False, 1, False, False, False, True, True)
+        If Not Me._disk2Instance Is Nothing Then
+            CreateSingleGraph(zgc_phsdisk4, "Disk Utilisation [" & Me._disk2Instance & "]", " % Percent", "", False, False, False, False, 2, True, False, False, False, False)
+            CreateSingleGraph(zgc_phsdisk5, "Disk Queue Length [" & Me._disk2Instance & "]", "Avg Queue Length", "", False, False, False, False, 2, False, True, True, False, False)
+            CreateSingleGraph(zgc_phsdisk6, "Disk IO [" & Me._disk2Instance & "]", "Kb/Second", "", False, False, False, False, 2, False, False, False, True, True)
+        End If
+        If Not Me._disk3Instance Is Nothing Then
+            CreateSingleGraph(zgc_phsdisk7, "Disk Utilisation [" & Me._disk3Instance & "]", " % Percent", "", False, False, False, False, 3, True, False, False, False, False)
+            CreateSingleGraph(zgc_phsdisk8, "Disk Queue Length [" & Me._disk3Instance & "]", "Avg Queue Length", "", False, False, False, False, 3, False, True, True, False, False)
+            CreateSingleGraph(zgc_phsdisk9, "Disk IO [" & Me._disk3Instance & "]", "Kb/Second", "", False, False, False, False, 3, False, False, False, True, True)
+        End If
+
         Me.Text = "Performance Graph: " & FileToOpen
 
     End Sub
 
-
-
-#Region "zedgraph help"
-    '#  In the Solution Explorer, right-click on the ZedGraphSample project and select "Add Reference..."
-    '# Pick the browse tab, and navigate to the zedGraph.dll (downloadable from here), and click OK
-    '# From View menu, select Toolbox, scroll down to the bottom of the toolbox window to see the "General" bar
-    '# If ZedGraphControl is not already available as an option, rightclick on the "General" bar, and select "Choose Items..."
-    '# Under ".Net Framework Components" tab, click browse
-    '# Navigate to the zedgraph.dll file, and click Open, Click OK
-    '# In the toolbox, left-click on the ZedGraphControl, go to your Form and click inside it to place a ZedGraphControl item.
-    '# With the ZedGraphControl selected in the form, under the View menu select "Properties Window"
-    '# Change the "(Name)" field for the ZedGraphControl to zgc_cpu (it would typically be 'zedGraphControl1').
-    '# Double click the Windows Form (not the ZedGraphControl), this will cause the window to switch to CodeView, with a template for Sub Form1_Load
-    '# Go to the top of the file (above the "Public Class Form1" declaration) and add Imports ZedGraph 
-#End Region
 
     Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
@@ -397,6 +557,10 @@ Public Class FmGraph
         Me.CPUCurve.Add("CPU", True)
         Me.RAMCurve = New CurveSettings
         Me.RAMCurve.Add("RAM", True)
+        Me.MemPagesCurve = New CurveSettings
+        Me.MemPagesCurve.Add("Pages", True)
+        Me.NicCurve = New CurveSettings
+        Me.NicCurve.Add("NIC", True)
         Me.PhysDiskPercentCurve = New CurveSettings
         Me.PhysDiskPercentCurve.Add("DiskPercent", True)
         Me.PhysDiskQueueReadCurve = New CurveSettings
@@ -449,21 +613,40 @@ Public Class FmGraph
     End Sub
 
     Private Sub FmGraph_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-        Me.Panel_Info.Height = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_Perf_CPU.Height = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_Perf_RAM.Height = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_PhysDisk_1.Height = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_PhysDisk_2.Height = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_PhysDisk_3.Height = (Me.TabControl1.Height - 26) / 3
+        Dim OneThirdHeight As Integer = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_Info.Height = OneThirdHeight
+        Me.Panel_Perf_CPU.Height = OneThirdHeight
+        Me.Panel_Perf_RAM.Height = OneThirdHeight
+        Me.Panel_Oth_1.Height = OneThirdHeight
+        Me.Panel_Oth_2.Height = OneThirdHeight
+        Me.Panel_Oth_3.Height = OneThirdHeight
+        Me.Panel_PhysDisk_1.Height = OneThirdHeight
+        Me.Panel_PhysDisk_2.Height = OneThirdHeight
+        Me.Panel_PhysDisk_3.Height = OneThirdHeight
+        Me.Panel_physdisk_4.Height = OneThirdHeight
+        Me.Panel_physdisk_5.Height = OneThirdHeight
+        Me.Panel_physdisk_6.Height = OneThirdHeight
+        Me.Panel_physdisk_7.Height = OneThirdHeight
+        Me.Panel_physdisk_8.Height = OneThirdHeight
+        Me.Panel_physdisk_9.Height = OneThirdHeight
     End Sub
 
-    Private Sub GraphPanelsVisible(ByVal Visible As Boolean)
+    Private Sub GraphPanelsVisible(ByVal IsVisible As Boolean)
         Me.Panel_Info.Height = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_Perf_CPU.Visible = Visible
-        Me.Panel_Perf_RAM.Visible = Visible
-        Me.Panel_PhysDisk_1.Visible = Visible
-        Me.Panel_PhysDisk_2.Visible = Visible
-        Me.Panel_PhysDisk_3.Visible = Visible
+        Me.Panel_Perf_CPU.Visible = IsVisible
+        Me.Panel_Perf_RAM.Visible = IsVisible
+        Me.Panel_PhysDisk_1.Visible = IsVisible
+        Me.Panel_PhysDisk_2.Visible = IsVisible
+        Me.Panel_PhysDisk_3.Visible = IsVisible
+        Me.Panel_physdisk_4.Visible = IsVisible
+        Me.Panel_physdisk_5.Visible = IsVisible
+        Me.Panel_physdisk_6.Visible = IsVisible
+        Me.Panel_physdisk_7.Visible = IsVisible
+        Me.Panel_physdisk_8.Visible = IsVisible
+        Me.Panel_physdisk_9.Visible = IsVisible
+        Me.Panel_Oth_1.Visible = IsVisible
+        Me.Panel_Oth_2.Visible = IsVisible
+        Me.Panel_Oth_3.Visible = IsVisible
     End Sub
 
 
@@ -504,6 +687,27 @@ Public Class FmGraph
         menuStrip.Items.Add(item)
     End Sub
     Private Sub diskioContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk3.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydiskIOPropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub disk2PercentContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk4.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydisk1PropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub disk2queueContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk5.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydiskqueuePropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub disk2ioContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk6.ContextMenuBuilder
         Dim item As ToolStripMenuItem = New ToolStripMenuItem
         item.Name = "phydiskIOPropsMenu"
         item.Text = "Properties"
