@@ -84,22 +84,26 @@ Public Class FmGraph
         ' 9 Disk&Read_kbs0 C:
         '10 Disk&Write_kbs_0 C:
 
+        ' cpu
         If instanceLine(1).Length = 7 Then ' new format
             Me._cpuActive = instanceLine(1).Substring(instanceLine(1).LastIndexOf("_") + 1) = "1"
         End If
 
+        ' ram
         If instanceLine(2).Length = 7 Then ' new format
             Me._memActive = instanceLine(2).Substring(instanceLine(2).LastIndexOf("_") + 1) = "1"
         End If
 
+        ' pages
+        If instanceLine(3).Length = 26 Then  ' new format
+            _MemPagesActive = instanceLine(3).Substring(instanceLine(3).LastIndexOf("_") + 1) = "1"
+        End If
+
+        ' nic
         If instanceLine(4).Length > 22 Then
             Me._NICInstance1 = instanceLine(4).Substring(20)
         Else
             Me._NICInstance1 = Nothing
-        End If
-
-        If instanceLine(3).Length = 26 Then  ' new format
-            _MemPagesActive = instanceLine(3).Substring(instanceLine(3).LastIndexOf("_") + 1) = "1"
         End If
 
         If instanceLine.Length > 6 Then
@@ -459,10 +463,10 @@ Public Class FmGraph
 
         If Not Me._MemPagesActive = False Then
             Try
-                item = New ListViewItem("Memory - Pages/sec")
-                item.SubItems.Add(CType(myData.Compute("MAX([mempages])", String.Empty), Single))
-                item.SubItems.Add(CType(myData.Compute("MIN([mempages])", String.Empty), Single))
-                item.SubItems.Add(CType(myData.Compute("AVG([mempages])", String.Empty), Single))
+                item = New ListViewItem("Memory - Pages input/sec")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([mempages])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([mempages])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([mempages])", String.Empty), Single), 0))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
@@ -622,10 +626,10 @@ Public Class FmGraph
 
     End Sub
 
+
     Private Sub PlotFileData(ByVal filename As String, ByVal UseCurrentData As Boolean)
 
-        GraphPanelsVisible(True)
-        If Me.Height < 500 Then Me.Height = 600
+        If Me.Height < 600 Then Me.Height = 625
 
         ' Clear Existing Graphs
         If Not myData Is Nothing Then
@@ -656,22 +660,18 @@ Public Class FmGraph
             ' Read New File data and plot graphs
             If Not filename Is Nothing Then
                 Fill_DataTable(filename)
+                TabShowHide()
             Else
                 MsgBox("Load New File", MsgBoxStyle.Critical, "No Data")
                 Return
             End If
         End If
-        CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
-        CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
 
-
+        If Me._cpuActive Then CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
+        If Me._memActive Then CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
 
         If Not Me._MemPagesActive = False Then
-            CreateSingleGraph(Me.zgc_Perf_3, "Memory Paging", "Pages/sec", "", False, False, True, False, 0, False, False, False, False, False)
-        End If
-
-        If Not Me._NICInstance1 Is Nothing Then
-            CreateSingleGraph(zgc_oth_1, "Network [" & Me._NICInstance1 & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
+            CreateSingleGraph(Me.zgc_Perf_3, "Memory Paging", "Pages input/sec", "", False, False, True, False, 0, False, False, False, False, False)
         End If
 
         If Not Me._disk1Instance Is Nothing Then
@@ -688,6 +688,10 @@ Public Class FmGraph
             CreateSingleGraph(zgc_phsdisk7, "% Disk Time [" & Me._disk3Instance & "]", "Percent", "", False, False, False, False, 3, True, False, False, False, False)
             CreateSingleGraph(zgc_phsdisk8, "Disk Queue Length [" & Me._disk3Instance & "]", "Avg Queue Length", "", False, False, False, False, 3, False, True, True, False, False)
             CreateSingleGraph(zgc_phsdisk9, "Disk IO [" & Me._disk3Instance & "]", "Kb/Second", "", False, False, False, False, 3, False, False, False, True, True)
+        End If
+
+        If Not Me._NICInstance1 Is Nothing Then
+            CreateSingleGraph(zgc_oth_1, "Network [" & Me._NICInstance1 & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
         End If
 
     End Sub
@@ -725,13 +729,14 @@ Public Class FmGraph
 
         If Not FileToOpen Is Nothing Then
             Me.Height = 625
-            GraphPanelsVisible(True)
+            'GraphPanelsVisible(True)
 
             Me.PlotFileData(FileToOpen, False)
             Me.GetStats()
 
         Else
-            GraphPanelsVisible(False)
+            TabShowHide()
+            'GraphPanelsVisible(False)
             Me.Height = 200
         End If
 
@@ -743,15 +748,17 @@ Public Class FmGraph
     ''' </summary>
     ''' <param name="sender"></param>
     ''' <param name="e"></param>
-    ''' <remarks>jesus, why is typing to difficult?</remarks>
+    ''' <remarks>why is typing to difficult-  is it the beer?</remarks>
     Private Sub OpenToolStripMenuItem_Click_1(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenToolStripMenuItem.Click
         Me.OpenFileDialog1.InitialDirectory = My.Computer.FileSystem.SpecialDirectories.MyDocuments
         Me.OpenFileDialog1.ShowDialog()
         Dim file As String
         file = Me.OpenFileDialog1.FileName
-
-        Me.PlotFileData(file, False)
-        Me.GetStats()
+        If Not String.IsNullOrEmpty(file) Then
+            TabShowHide()
+            Me.PlotFileData(file, False)
+            Me.GetStats()
+        End If
     End Sub
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
@@ -1008,7 +1015,48 @@ Public Class FmGraph
     End Sub
 
 
+    Private Sub TabShowHide()
 
+        HideTabPage(Me.TabPagePerf)
+        HideTabPage(Me.TabPageDsk1)
+        HideTabPage(Me.TabPageDsk2)
+        HideTabPage(Me.TabPageDsk3)
+        HideTabPage(Me.TabPageOther)
+
+        If Me._cpuActive OrElse Me._memActive OrElse Me._MemPagesActive Then
+            ShowTabPage(Me.TabPagePerf)
+        Else
+            HideTabPage(Me.TabPagePerf)
+        End If
+
+        If _disk1Instance Is Nothing Then
+            HideTabPage(Me.TabPageDsk1)
+        Else
+            ShowTabPage(Me.TabPageDsk1)
+        End If
+
+        If _disk2Instance Is Nothing Then
+            HideTabPage(Me.TabPageDsk2)
+        Else
+            ShowTabPage(Me.TabPageDsk2)
+        End If
+
+        If _disk3Instance Is Nothing Then
+            HideTabPage(Me.TabPageDsk3)
+        Else
+            ShowTabPage(Me.TabPageDsk3)
+        End If
+
+        If _NICInstance1 Is Nothing Then
+            HideTabPage(Me.TabPageOther)
+        Else
+            ShowTabPage(Me.TabPageOther)
+        End If
+
+
+        Me.TabControl1.SelectTab(Me.TabPageInfo)
+
+    End Sub
     ' Add/Remove Tab Pages
     Private Sub HideTabPage(ByVal tp As TabPage)
         If Me.TabControl1.TabPages.Contains(tp) Then Me.TabControl1.TabPages.Remove(tp)
@@ -1041,5 +1089,6 @@ Public Class FmGraph
         Me.TabControl1.TabPages(Index1) = tp2
         Me.TabControl1.TabPages(Index2) = tp1
     End Sub
+
 
 End Class
