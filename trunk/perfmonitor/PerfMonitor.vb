@@ -116,7 +116,7 @@ Public Class PerfMonitor
             PerfMonTimer.Enabled = False
             MsgBox("An error occurred while requesting" & vbCr & _
                    "performance information from " & Me.computername.Text & _
-                   vbCr & vbCr & "The application will be closed.", MsgBoxStyle.Critical, "Perf Mon Error")
+                   vbCr & vbCr & "The application will be closed.", MsgBoxStyle.Critical, "Performance Monitor Error")
             Me.Close()
             End
         End Try
@@ -130,7 +130,8 @@ Public Class PerfMonitor
         UpdatePercentGraph(memValue, Pic2, memColor)
 
         '  ---  Pages   ------------------
-        Dim mempagesValue As Single = Me.MemPages.NextValue
+        Dim mempagesValue As Single
+        If Me._mempages Then mempagesValue = Me.MemPages.NextValue
 
         '  ---  NIC   -----
         Dim nicValue As Single = 0
@@ -423,9 +424,32 @@ Public Class PerfMonitor
                 Writer = New System.IO.StreamWriter(Me.RecordingFileName, False)
                 Writer.WriteLine(computername.Text & " Recording started: " & DateTime.Now)
 
-                Dim HeaderRow As String = "Time,CPU_%,RAM_%,Memory&Pages_InputPerSec,Network_BytesPerSec_" & Me.NetInstance
+                'Dim HeaderRow As String = "Time,CPU_%,RAM_%,Memory&Pages_InputPerSec,Network_BytesPerSec_" & Me.NetInstance
 
-                If Not Me.DiskInstance1 Is Nothing Then HeaderRow = HeaderRow & ",DiskTime_%_" & Me.DiskInstance1 & _
+                Dim HeaderRow As String = "Time,"
+                If _cpu Then
+                    HeaderRow = HeaderRow & "CPU_%_1,"
+                Else
+                    HeaderRow = HeaderRow & "CPU_%_0,"
+                End If
+                If _mem Then
+                    HeaderRow = HeaderRow & "RAM_%_1,"
+                Else
+                    HeaderRow = HeaderRow & "RAM_%_0,"
+                End If
+                If _mempages Then
+                    HeaderRow = HeaderRow & "Memory&Pages_InputPerSec_1,"
+                Else
+                    HeaderRow = HeaderRow & "Memory&Pages_InputPerSec_0,"
+                End If
+                If _nic Then
+                    HeaderRow = HeaderRow & "Network_BytesPerSec_" & Me.NetInstance & ","
+                Else
+                    HeaderRow = HeaderRow & "Network_BytesPerSec_0,"
+                End If
+
+
+                If Not Me.DiskInstance1 Is Nothing Then HeaderRow = HeaderRow & "DiskTime_%_" & Me.DiskInstance1 & _
                                                                                 ",Read&Queue_Length_" & Me.DiskInstance1 & _
                                                                                 ",Write&Queue_Length_" & Me.DiskInstance1 & _
                                                                                 ",Disk&Read_kbs_" & Me.DiskInstance1 & _
