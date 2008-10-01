@@ -19,7 +19,11 @@ Public Class FmGraph
     Private _disk1Instance As String
     Private _disk2Instance As String
     Private _disk3Instance As String
-    Private _NICInstance As String
+    Private _NICInstance1 As String
+
+    Private _cpuActive As Boolean
+    Private _memActive As Boolean
+    Private _MemPagesActive As Boolean
 
     ''' <summary>
     ''' Create datatable and read performance data from file into datatable
@@ -69,9 +73,9 @@ Public Class FmGraph
         'Dim instanceLine() As String = sr.ReadLine.Split(",")
 
         ' 1 Time
-        ' 2 CPU_%
-        ' 3 RAM_% 
-        ' 4 Memory&Pages_InputPerSec
+        ' 2 CPU_%_x
+        ' 3 RAM_%_x
+        ' 4 Memory&Pages_InputPerSec_x
         ' 5 Network_BytesPerSec_Broadcom NetXtreme Gigabit Ethernet - Packet Scheduler Miniport
 
         ' 6 DiskTime_%_0 C:
@@ -80,14 +84,25 @@ Public Class FmGraph
         ' 9 Disk&Read_kbs0 C:
         '10 Disk&Write_kbs_0 C:
 
-        If instanceLine(4).Length > 21 Then
-            Me._NICInstance = instanceLine(4).Substring(20)
-        Else
-            Me._NICInstance = Nothing
+        If instanceLine(1).Length = 7 Then ' new format
+            Me._cpuActive = instanceLine(1).Substring(instanceLine(1).LastIndexOf("_") + 1) = "1"
         End If
 
+        If instanceLine(2).Length = 7 Then ' new format
+            Me._memActive = instanceLine(2).Substring(instanceLine(2).LastIndexOf("_") + 1) = "1"
+        End If
 
-        If instanceLine.Length > 5 Then
+        If instanceLine(4).Length > 22 Then
+            Me._NICInstance1 = instanceLine(4).Substring(20)
+        Else
+            Me._NICInstance1 = Nothing
+        End If
+
+        If instanceLine(3).Length = 26 Then  ' new format
+            _MemPagesActive = instanceLine(3).Substring(instanceLine(3).LastIndexOf("_") + 1) = "1"
+        End If
+
+        If instanceLine.Length > 6 Then
             Me._disk1Instance = instanceLine(5).Substring(11) 'instanceLine(5).LastIndexOf("_") + 1)
         Else
             Me._disk1Instance = Nothing
@@ -421,10 +436,11 @@ Public Class FmGraph
     Private Sub GetStats()
 
         Me.ListViewStats.Items.Clear()
+
         Dim item As ListViewItem
 
         Try
-            item = New ListViewItem("% Processor Time")
+            item = New ListViewItem("Processor - % Time")
             item.SubItems.Add(CInt(myData.Compute("MAX([cpu%])", String.Empty)))
             item.SubItems.Add(CInt(myData.Compute("MIN([cpu%])", String.Empty)))
             item.SubItems.Add(CInt(myData.Compute("AVG([cpu%])", String.Empty)))
@@ -433,7 +449,7 @@ Public Class FmGraph
         End Try
 
         Try
-            item = New ListViewItem("Physical Memory Usage")
+            item = New ListViewItem("Memory  - % Used")
             item.SubItems.Add(CInt(myData.Compute("MAX([mem%])", String.Empty)))
             item.SubItems.Add(CInt(myData.Compute("MIN([mem%])", String.Empty)))
             item.SubItems.Add(CInt(myData.Compute("AVG([mem%])", String.Empty)))
@@ -441,74 +457,78 @@ Public Class FmGraph
         Catch ex As Exception
         End Try
 
-        Try
-            item = New ListViewItem("Memory - Pages/sec")
-            item.SubItems.Add(CInt(myData.Compute("MAX([mempages])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("MIN([mempages])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("AVG([mempages])", String.Empty)))
-            Me.ListViewStats.Items.Add(item)
-        Catch ex As Exception
-        End Try
-
-        If Not Me._NICInstance Is Nothing Then
+        If Not Me._MemPagesActive = False Then
             Try
-                item = New ListViewItem("Network Bytes/sec (" & Me._NICInstance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([NicBytes])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([NicBytes])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([NicBytess])", String.Empty)))
+                item = New ListViewItem("Memory - Pages/sec")
+                item.SubItems.Add(CType(myData.Compute("MAX([mempages])", String.Empty), Single))
+                item.SubItems.Add(CType(myData.Compute("MIN([mempages])", String.Empty), Single))
+                item.SubItems.Add(CType(myData.Compute("AVG([mempages])", String.Empty), Single))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
         End If
 
-        Try
-            item = New ListViewItem("% Disk Time (" & Me._disk1Instance & ")")
-            item.SubItems.Add(CInt(myData.Compute("MAX([disk%])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("MIN([disk%])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("AVG([disk%])", String.Empty)))
-            Me.ListViewStats.Items.Add(item)
-        Catch ex As Exception
-        End Try
+        If Not Me._NICInstance1 Is Nothing Then
+            Try
+                item = New ListViewItem("Network - Bytes/sec (" & Me._NICInstance1 & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([NicBytes])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([NicBytes])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([NicBytes])", String.Empty), Single), 0))
+                Me.ListViewStats.Items.Add(item)
+            Catch ex As Exception
+            End Try
+        End If
 
-        Try
-            item = New ListViewItem("Disk Read Queue (" & Me._disk1Instance & ")")
-            item.SubItems.Add(CInt(myData.Compute("MAX([diskRead])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("MIN([diskRead])", String.Empty)))
-            item.SubItems.Add(CType(myData.Compute("AVG([diskRead])", String.Empty), Single))
-            Me.ListViewStats.Items.Add(item)
-        Catch ex As Exception
-        End Try
+        If Not Me._disk1Instance Is Nothing Then
+            Try
+                item = New ListViewItem("% Disk Time        (" & Me._disk1Instance & ")")
+                item.SubItems.Add(CInt(myData.Compute("MAX([disk%])", String.Empty)))
+                item.SubItems.Add(CInt(myData.Compute("MIN([disk%])", String.Empty)))
+                item.SubItems.Add(CInt(myData.Compute("AVG([disk%])", String.Empty)))
+                Me.ListViewStats.Items.Add(item)
+            Catch ex As Exception
+            End Try
 
-        Try
-            item = New ListViewItem("Disk Write Queue (" & Me._disk1Instance & ")")
-            item.SubItems.Add(CInt(myData.Compute("MAX([diskWrite])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("MIN([diskWrite])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("AVG([diskWrite])", String.Empty)))
-            Me.ListViewStats.Items.Add(item)
-        Catch ex As Exception
-        End Try
+            Try
+                item = New ListViewItem("Disk Read Queue    (" & Me._disk1Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([diskRead])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([diskRead])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([diskRead])", String.Empty), Single), 4))
+                Me.ListViewStats.Items.Add(item)
+            Catch ex As Exception
+            End Try
 
-        Try
-            item = New ListViewItem("Disk IO Read kb/s (" & Me._disk1Instance & ")")
-            item.SubItems.Add(CInt(myData.Compute("MAX([diskReadKbSec])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("MIN([diskReadKbSec])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("AVG([diskReadKbSec])", String.Empty)))
-            Me.ListViewStats.Items.Add(item)
-        Catch ex As Exception
-        End Try
+            Try
+                item = New ListViewItem("Disk Write Queue   (" & Me._disk1Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([diskWrite])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([diskWrite])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([diskWrite])", String.Empty), Single), 4))
+                Me.ListViewStats.Items.Add(item)
+            Catch ex As Exception
+            End Try
 
-        Try
-            item = New ListViewItem("Disk IO Write kb/s (" & Me._disk1Instance & ")")
-            item.SubItems.Add(CInt(myData.Compute("MAX([diskWriteKbSec])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("MIN([diskWriteKbSec])", String.Empty)))
-            item.SubItems.Add(CInt(myData.Compute("AVG([diskWriteKbSec])", String.Empty)))
-            Me.ListViewStats.Items.Add(item)
-        Catch ex As Exception
-        End Try
+            Try
+                item = New ListViewItem("Disk IO Read kb/s  (" & Me._disk1Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([diskReadKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([diskReadKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([diskReadKbSec])", String.Empty), Single), 0))
+                Me.ListViewStats.Items.Add(item)
+            Catch ex As Exception
+            End Try
+
+            Try
+                item = New ListViewItem("Disk IO Write kb/s (" & Me._disk1Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([diskWriteKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([diskWriteKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([diskWriteKbSec])", String.Empty), Single), 0))
+                Me.ListViewStats.Items.Add(item)
+            Catch ex As Exception
+            End Try
+        End If
 
         If Not Me._disk2Instance Is Nothing Then
             Try
-                item = New ListViewItem("% Disk Time (" & Me._disk2Instance & ")")
+                item = New ListViewItem("% Disk Time        (" & Me._disk2Instance & ")")
                 item.SubItems.Add(CInt(myData.Compute("MAX([disk2%])", String.Empty)))
                 item.SubItems.Add(CInt(myData.Compute("MIN([disk2%])", String.Empty)))
                 item.SubItems.Add(CInt(myData.Compute("AVG([disk2%])", String.Empty)))
@@ -517,37 +537,37 @@ Public Class FmGraph
             End Try
 
             Try
-                item = New ListViewItem("Disk Read Queue (" & Me._disk2Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk2Read])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk2Read])", String.Empty)))
-                item.SubItems.Add(CType(myData.Compute("AVG([disk2Read])", String.Empty), Single))
+                item = New ListViewItem("Disk Read Queue    (" & Me._disk2Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk2Read])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk2Read])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk2Read])", String.Empty), Single), 4))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
 
             Try
-                item = New ListViewItem("Disk Write Queue (" & Me._disk2Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk2Write])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk2Write])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([disk2Write])", String.Empty)))
+                item = New ListViewItem("Disk Write Queue   (" & Me._disk2Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk2Write])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk2Write])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk2Write])", String.Empty), Single), 4))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
 
             Try
-                item = New ListViewItem("Disk IO Read kb/s (" & Me._disk2Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk2ReadKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk2ReadKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([disk2ReadKbSec])", String.Empty)))
+                item = New ListViewItem("Disk IO Read kb/s  (" & Me._disk2Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk2ReadKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk2ReadKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk2ReadKbSec])", String.Empty), Single), 0))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
 
             Try
                 item = New ListViewItem("Disk IO Write kb/s (" & Me._disk2Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk2WriteKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk2WriteKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([disk2WriteKbSec])", String.Empty)))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk2WriteKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk2WriteKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk2WriteKbSec])", String.Empty), Single), 0))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
@@ -555,7 +575,7 @@ Public Class FmGraph
 
         If Not Me._disk3Instance Is Nothing Then
             Try
-                item = New ListViewItem("% Disk Time (" & Me._disk3Instance & ")")
+                item = New ListViewItem("% Disk Time        (" & Me._disk3Instance & ")")
                 item.SubItems.Add(CInt(myData.Compute("MAX([disk3%])", String.Empty)))
                 item.SubItems.Add(CInt(myData.Compute("MIN([disk3%])", String.Empty)))
                 item.SubItems.Add(CInt(myData.Compute("AVG([disk3%])", String.Empty)))
@@ -564,37 +584,37 @@ Public Class FmGraph
             End Try
 
             Try
-                item = New ListViewItem("Disk Read Queue (" & Me._disk3Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk3Read])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk3Read])", String.Empty)))
-                item.SubItems.Add(CType(myData.Compute("AVG([disk3Read])", String.Empty), Single))
+                item = New ListViewItem("Disk Read Queue    (" & Me._disk3Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk3Read])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk3Read])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk3Read])", String.Empty), Single), 4))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
 
             Try
-                item = New ListViewItem("Disk Write Queue (" & Me._disk3Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk3Write])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk3Write])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([disk3Write])", String.Empty)))
+                item = New ListViewItem("Disk Write Queue   (" & Me._disk3Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk3Write])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk3Write])", String.Empty), Single), 4))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk3Write])", String.Empty), Single), 4))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
 
             Try
-                item = New ListViewItem("Disk IO Read kb/s (" & Me._disk3Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk3ReadKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk3ReadKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([disk3ReadKbSec])", String.Empty)))
+                item = New ListViewItem("Disk IO Read kb/s  (" & Me._disk3Instance & ")")
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk3ReadKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk3ReadKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk3ReadKbSec])", String.Empty), Single), 0))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
 
             Try
                 item = New ListViewItem("Disk IO Write kb/s (" & Me._disk3Instance & ")")
-                item.SubItems.Add(CInt(myData.Compute("MAX([disk3WriteKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("MIN([disk3WriteKbSec])", String.Empty)))
-                item.SubItems.Add(CInt(myData.Compute("AVG([disk3WriteKbSec])", String.Empty)))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([disk3WriteKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([disk3WriteKbSec])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([disk3WriteKbSec])", String.Empty), Single), 0))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
@@ -618,11 +638,11 @@ Public Class FmGraph
             zgc_phsdisk5.GraphPane.CurveList.Clear()
             zgc_phsdisk6.GraphPane.CurveList.Clear()
             zgc_oth_1.GraphPane.CurveList.Clear()
-            zgc_oth_2.GraphPane.CurveList.Clear()
+            zgc_Perf_3.GraphPane.CurveList.Clear()
             zgc_cpu.Invalidate()
             zgc_ram.Invalidate()
             zgc_oth_1.Invalidate()
-            zgc_oth_2.Invalidate()
+            zgc_Perf_3.Invalidate()
             zgc_phsdisk1.Invalidate()
             zgc_phsdisk2.Invalidate()
             zgc_phsdisk3.Invalidate()
@@ -644,15 +664,21 @@ Public Class FmGraph
         CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
         CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
 
-        If Not Me._NICInstance Is Nothing Then
-            CreateSingleGraph(zgc_oth_1, "Network [" & Me._NICInstance & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
+
+
+        If Not Me._MemPagesActive = False Then
+            CreateSingleGraph(Me.zgc_Perf_3, "Memory Paging", "Pages/sec", "", False, False, True, False, 0, False, False, False, False, False)
         End If
 
-        CreateSingleGraph(Me.zgc_oth_2, "Memory Paging", "Pages/sec", "", False, False, True, False, 0, False, False, False, False, False)
+        If Not Me._NICInstance1 Is Nothing Then
+            CreateSingleGraph(zgc_oth_1, "Network [" & Me._NICInstance1 & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
+        End If
 
-        CreateSingleGraph(zgc_phsdisk1, "% Disk Time [" & Me._disk1Instance & "]", "Percent", "", False, False, False, False, 1, True, False, False, False, False)
-        CreateSingleGraph(zgc_phsdisk2, "Disk Queue Length [" & Me._disk1Instance & "]", "Avg Queue Length", "", False, False, False, False, 1, False, True, True, False, False)
-        CreateSingleGraph(zgc_phsdisk3, "Disk IO [" & Me._disk1Instance & "]", "Kb/Second", "", False, False, False, False, 1, False, False, False, True, True)
+        If Not Me._disk1Instance Is Nothing Then
+            CreateSingleGraph(zgc_phsdisk1, "% Disk Time [" & Me._disk1Instance & "]", "Percent", "", False, False, False, False, 1, True, False, False, False, False)
+            CreateSingleGraph(zgc_phsdisk2, "Disk Queue Length [" & Me._disk1Instance & "]", "Avg Queue Length", "", False, False, False, False, 1, False, True, True, False, False)
+            CreateSingleGraph(zgc_phsdisk3, "Disk IO [" & Me._disk1Instance & "]", "Kb/Second", "", False, False, False, False, 1, False, False, False, True, True)
+        End If
         If Not Me._disk2Instance Is Nothing Then
             CreateSingleGraph(zgc_phsdisk4, "% Disk Time [" & Me._disk2Instance & "]", "Percent", "", False, False, False, False, 2, True, False, False, False, False)
             CreateSingleGraph(zgc_phsdisk5, "Disk Queue Length [" & Me._disk2Instance & "]", "Avg Queue Length", "", False, False, False, False, 2, False, True, True, False, False)
@@ -698,7 +724,7 @@ Public Class FmGraph
 
 
         If Not FileToOpen Is Nothing Then
-            Me.Height = 600
+            Me.Height = 625
             GraphPanelsVisible(True)
 
             Me.PlotFileData(FileToOpen, False)
@@ -733,9 +759,10 @@ Public Class FmGraph
 
     Private Sub FmGraph_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
         Dim OneThirdHeight As Integer = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_Info.Height = OneThirdHeight
+        Me.Panel_Statistics.Height = 2 * OneThirdHeight
         Me.Panel_Perf_CPU.Height = OneThirdHeight
         Me.Panel_Perf_RAM.Height = OneThirdHeight
+        Me.Panel_Perf_3.Height = OneThirdHeight
         Me.Panel_Oth_1.Height = OneThirdHeight
         Me.Panel_Oth_2.Height = OneThirdHeight
         Me.Panel_Oth_3.Height = OneThirdHeight
@@ -751,9 +778,9 @@ Public Class FmGraph
     End Sub
 
     Private Sub GraphPanelsVisible(ByVal IsVisible As Boolean)
-        Me.Panel_Info.Height = (Me.TabControl1.Height - 26) / 3
         Me.Panel_Perf_CPU.Visible = IsVisible
         Me.Panel_Perf_RAM.Visible = IsVisible
+        Me.Panel_Perf_3.Visible = IsVisible
         Me.Panel_PhysDisk_1.Visible = IsVisible
         Me.Panel_PhysDisk_2.Visible = IsVisible
         Me.Panel_PhysDisk_3.Visible = IsVisible
@@ -787,6 +814,20 @@ Public Class FmGraph
     Private Sub ramContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_ram.ContextMenuBuilder
         Dim item As ToolStripMenuItem = New ToolStripMenuItem
         item.Name = "ramPropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub PagesContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_Perf_3.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "PagesPropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub NicContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_oth_1.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "NicPropsMenu"
         item.Text = "Properties"
         AddHandler item.Click, AddressOf Me.ShowSettings
         menuStrip.Items.Add(item)
@@ -833,6 +874,27 @@ Public Class FmGraph
         AddHandler item.Click, AddressOf Me.ShowSettings
         menuStrip.Items.Add(item)
     End Sub
+    Private Sub disk3PercentContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk7.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydisk1PropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub disk3queueContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk8.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydiskqueuePropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
+    Private Sub disk3ioContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_phsdisk9.ContextMenuBuilder
+        Dim item As ToolStripMenuItem = New ToolStripMenuItem
+        item.Name = "phydiskIOPropsMenu"
+        item.Text = "Properties"
+        AddHandler item.Click, AddressOf Me.ShowSettings
+        menuStrip.Items.Add(item)
+    End Sub
 
     Protected Sub ShowSettings(ByVal sender As Object, ByVal e As System.EventArgs)
 
@@ -847,10 +909,16 @@ Public Class FmGraph
         Select Case sender.name
             Case "cpuPropsMenu"
                 myCurve = Me.CPUCurve
-                cs.GroupBoxLine1.Text = "CPU"
+                cs.GroupBoxLine1.Text = "Processor"
             Case "ramPropsMenu"
                 myCurve = Me.RAMCurve
-                cs.GroupBoxLine1.Text = "RAM"
+                cs.GroupBoxLine1.Text = "Memory"
+            Case "PagesPropsMenu"
+                myCurve = Me.MemPagesCurve
+                cs.GroupBoxLine1.Text = "Memory Pages"
+            Case "NicPropsMenu"
+                myCurve = Me.NicCurve
+                cs.GroupBoxLine1.Text = "Network Interface"
             Case "phydisk1PropsMenu"
                 myCurve = Me.PhysDiskPercentCurve
                 cs.GroupBoxLine1.Text = "Disk %"
@@ -937,6 +1005,41 @@ Public Class FmGraph
             ' redraw the graph
             PlotFileData(Nothing, True)
         End If
+    End Sub
+
+
+
+    ' Add/Remove Tab Pages
+    Private Sub HideTabPage(ByVal tp As TabPage)
+        If Me.TabControl1.TabPages.Contains(tp) Then Me.TabControl1.TabPages.Remove(tp)
+    End Sub
+    Private Sub ShowTabPage(ByVal tp As TabPage)
+        ShowTabPage(tp, Me.TabControl1.TabPages.Count)
+    End Sub
+    Private Sub ShowTabPage(ByVal tp As TabPage, ByVal index As Integer)
+        If Me.TabControl1.TabPages.Contains(tp) Then Return
+        InsertTabPage(tp, index)
+    End Sub
+    Private Sub InsertTabPage(ByVal [tabpage] As TabPage, ByVal [index] As Integer)
+        If [index] < 0 Or [index] > Me.TabControl1.TabCount Then
+            Throw New ArgumentException("Index out of Range.")
+        End If
+        Me.TabControl1.TabPages.Add([tabpage])
+        If [index] < Me.TabControl1.TabCount - 1 Then
+            Do While Me.TabControl1.TabPages.IndexOf([tabpage]) <> [index]
+                SwapTabPages([tabpage], (Me.TabControl1.TabPages(Me.TabControl1.TabPages.IndexOf([tabpage]) - 1)))
+            Loop
+        End If
+        Me.TabControl1.SelectedTab = [tabpage]
+    End Sub
+    Private Sub SwapTabPages(ByVal tp1 As TabPage, ByVal tp2 As TabPage)
+        If Me.TabControl1.TabPages.Contains(tp1) = False Or Me.TabControl1.TabPages.Contains(tp2) = False Then
+            Throw New ArgumentException("TabPages must be in the TabCotrols TabPageCollection.")
+        End If
+        Dim Index1 As Integer = Me.TabControl1.TabPages.IndexOf(tp1)
+        Dim Index2 As Integer = Me.TabControl1.TabPages.IndexOf(tp2)
+        Me.TabControl1.TabPages(Index1) = tp2
+        Me.TabControl1.TabPages(Index2) = tp1
     End Sub
 
 End Class
