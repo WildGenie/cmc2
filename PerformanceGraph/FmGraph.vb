@@ -19,7 +19,7 @@ Public Class FmGraph
     ' data present indicators
     Private _cpuActive As Boolean
     Private _memActive As Boolean
-    Private _MemPagesActive As Boolean
+    Private _MemPagesInputActive As Boolean
 
 
     ''' <summary>
@@ -29,6 +29,15 @@ Public Class FmGraph
     ''' <remarks></remarks>
     Private Sub Fill_DataTable(ByVal filename As String)
 
+        ' Clear existing values
+        Me._MemPagesInputActive = False
+        Me._cpuActive = False
+        Me._memActive = False
+        _disk1Instance = Nothing
+        _disk2Instance = Nothing
+        _disk3Instance = Nothing
+        _NICInstance1 = Nothing
+
         ' Get computername & date from 1st line of file
         Dim sr As New System.IO.StreamReader(filename)
         Dim ArrInfo() As String = sr.ReadLine.Split(" ")
@@ -37,18 +46,18 @@ Public Class FmGraph
         ' Get metric/instance information from 2nd line
         Dim instanceLine() As String = sr.ReadLine.Split(",")
 
-        If instanceLine.Length = 6 OrElse instanceLine.Length = 8 Then
-            sr.Close()
-            Old_Fill_DataTable(filename)
-            Exit Sub
-        End If
 
         myData = New DataTable()
         myData.Columns.Add(New DataColumn("time", GetType(DateTime)))
         myData.Columns.Add(New DataColumn("cpu%", GetType(Double)))
         myData.Columns.Add(New DataColumn("mem%", GetType(Double)))
-        myData.Columns.Add(New DataColumn("memPages", GetType(Double)))
+        myData.Columns.Add(New DataColumn("memInputPages", GetType(Double)))
+        myData.Columns.Add(New DataColumn("spare1", GetType(Double)))
+        myData.Columns.Add(New DataColumn("spare2", GetType(Double)))
+        myData.Columns.Add(New DataColumn("spare3", GetType(Double)))
         myData.Columns.Add(New DataColumn("NicBytes", GetType(Double)))
+        myData.Columns.Add(New DataColumn("spare4", GetType(Double)))
+        myData.Columns.Add(New DataColumn("spare5", GetType(Double)))
         myData.Columns.Add(New DataColumn("disk%", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskRead", GetType(Double)))
         myData.Columns.Add(New DataColumn("diskWrite", GetType(Double)))
@@ -65,70 +74,102 @@ Public Class FmGraph
         myData.Columns.Add(New DataColumn("disk3ReadKbSec", GetType(Double)))
         myData.Columns.Add(New DataColumn("disk3WriteKbSec", GetType(Double)))
 
-        ' 1 Time
-        ' 2 CPU_%_x
-        ' 3 RAM_%_x
-        ' 4 Memory&Pages_InputPerSec_x
-        ' 5 Network_BytesPerSec_Broadcom NetXtreme Gigabit Ethernet - Packet Scheduler Miniport
 
-        ' 6 DiskTime_%_0 C:
-        ' 7 Read&Queue_Length_0 C:
-        ' 8 Write&Queue_Length_0 C:
-        ' 9 Disk&Read_kbs0 C:
-        '10 Disk&Write_kbs_0 C:
+        Dim ColCPU As Integer
+        Dim ColMem As Integer
+        Dim ColInputPages As Integer
+        Dim ColNic1 As Integer
+        Dim ColDskPercent1 As Integer
+        Dim ColDskPercent2 As Integer
+        Dim ColDskPercent3 As Integer
+        For i As Integer = 0 To instanceLine.Length - 1
+            Dim tmpString As String = Trim(instanceLine(i))
+            If tmpString = "CPU_%_1" OrElse tmpString = "% Processor Time\_Total" Then
+                _cpuActive = True
+                ColCPU = i
+            ElseIf tmpString = "CPU_%_0" Then
+                _cpuActive = False
+            ElseIf tmpString = "RAM_%_1" OrElse tmpString = "% Mem Used" Then
+                Me._memActive = True
+                ColMem = i
+            ElseIf tmpString = "RAM_%_0" Then
+                Me._memActive = False
+            ElseIf tmpString = "Memory&Pages_InputPerSec_1" Then
+                Me._MemPagesInputActive = True
+                ColInputPages = i
+            ElseIf tmpString = "Memory&Pages_InputPerSec_0" Then
+                Me._MemPagesInputActive = False
+            ElseIf tmpString = "Network_BytesPerSec_0" Then
+                Me._NICInstance1 = False
+            ElseIf tmpString.Contains("Network_BytesPerSec_") Then
+                Me._NICInstance1 = True
+                ColNic1 = i
+            ElseIf tmpString.Contains("DiskTime_%_") OrElse tmpString.Contains("% Disk Time\") Then
+                If String.IsNullOrEmpty(Me._disk1Instance) Then
+                    Me._disk1Instance = tmpString.Substring(11)
+                    ColDskPercent1 = i
+                ElseIf String.IsNullOrEmpty(Me._disk2Instance) Then
+                    Me._disk2Instance = tmpString.Substring(11)
+                    ColDskPercent2 = i
+                ElseIf String.IsNullOrEmpty(Me._disk3Instance) Then
+                    Me._disk3Instance = tmpString.Substring(11)
+                    ColDskPercent3 = i
+                End If
+            End If
+        Next
 
-        ' cpu
-        If instanceLine(1).Length = 7 Then ' new format
-            Me._cpuActive = instanceLine(1).Substring(instanceLine(1).LastIndexOf("_") + 1) = "1"
-        End If
+        If String.IsNullOrEmpty(Me._disk1Instance) Then Me._disk1Instance = Nothing
+        If String.IsNullOrEmpty(Me._disk2Instance) Then Me._disk2Instance = Nothing
+        If String.IsNullOrEmpty(Me._disk3Instance) Then Me._disk3Instance = Nothing
 
-        ' ram
-        If instanceLine(2).Length = 7 Then ' new format
-            Me._memActive = instanceLine(2).Substring(instanceLine(2).LastIndexOf("_") + 1) = "1"
-        End If
-
-        ' pages
-        If instanceLine(3).Length = 26 Then  ' new format
-            _MemPagesActive = instanceLine(3).Substring(instanceLine(3).LastIndexOf("_") + 1) = "1"
-        End If
-
-        ' nic
-        If instanceLine(4).Length > 22 Then
-            Me._NICInstance1 = instanceLine(4).Substring(20)
-        Else
-            Me._NICInstance1 = Nothing
-        End If
-
-        If instanceLine.Length > 6 Then
-            Me._disk1Instance = instanceLine(5).Substring(11) 'instanceLine(5).LastIndexOf("_") + 1)
-        Else
-            Me._disk1Instance = Nothing
-        End If
-
-        If instanceLine.Length > 10 Then
-            Me._disk2Instance = instanceLine(10).Substring(11) 'instanceLine(10).LastIndexOf("_") + 1)
-        Else
-            Me._disk2Instance = Nothing
-        End If
-
-        If instanceLine.Length > 15 Then
-            Me._disk3Instance = instanceLine(15).Substring(11) 'instanceLine(15).LastIndexOf("_") + 1)
-        Else
-            Me._disk3Instance = Nothing
-        End If
 
         Do While Not sr.EndOfStream
+
             Dim line() As String = sr.ReadLine.Split(",")
             Dim dtNewRow As DataRow = myData.NewRow()
-            For i As Integer = 0 To line.Length - 1
-                dtNewRow.Item(i) = line(i)
-            Next
+            ' For i As Integer = 0 To line.Length - 1
+            dtNewRow.Item("time") = line(0)
+            dtNewRow.Item("cpu%") = line(ColCPU)
+            dtNewRow.Item("mem%") = line(ColMem)
+            If Me._MemPagesInputActive Then dtNewRow.Item("memInputPages") = line(ColInputPages)
+            If Not Me._NICInstance1 Is Nothing Then dtNewRow.Item("NicBytes") = line(ColNic1)
+
+            If Not Me._disk1Instance Is Nothing Then
+                dtNewRow.Item("disk%") = line(ColDskPercent1)
+                dtNewRow.Item("diskRead") = line(ColDskPercent1 + 1)
+                dtNewRow.Item("diskWrite") = line(ColDskPercent1 + 2)
+                Try
+                    dtNewRow.Item("diskReadKbSec") = line(ColDskPercent1 + 3)
+                    dtNewRow.Item("diskWriteKbSec") = line(ColDskPercent1 + 4)
+                Catch ex As Exception
+                End Try
+            End If
+            If Not Me._disk2Instance Is Nothing Then
+                dtNewRow.Item("disk2%") = line(ColDskPercent2)
+                dtNewRow.Item("disk2Read") = line(ColDskPercent2 + 1)
+                dtNewRow.Item("disk2Write") = line(ColDskPercent2 + 2)
+                Try
+                    dtNewRow.Item("disk2ReadKbSec") = line(ColDskPercent2 + 3)
+                    dtNewRow.Item("disk2WriteKbSec") = line(ColDskPercent2 + 4)
+                Catch ex As Exception
+                End Try
+            End If
+            If Not Me._disk3Instance Is Nothing Then
+                dtNewRow.Item("disk3%") = line(ColDskPercent3)
+                dtNewRow.Item("disk3Read") = line(ColDskPercent3 + 1)
+                dtNewRow.Item("disk3Write") = line(ColDskPercent3 + 2)
+                dtNewRow.Item("disk3ReadKbSec") = line(ColDskPercent3 + 3)
+                dtNewRow.Item("disk3WriteKbSec") = line(ColDskPercent3 + 4)
+            End If
+            ' Next
             Try
                 myData.Rows.Add(dtNewRow)
             Catch ex As Exception
             End Try
+
         Loop
         sr.Close()
+
 
     End Sub
     Private Sub Old_Fill_DataTable(ByVal filename As String)
@@ -257,46 +298,34 @@ Public Class FmGraph
         Dim WriteKBList3 = New PointPairList()
 
 
-        If myData.Columns.Count = 8 Then
-            ' used for previos version
-            For Each row As DataRow In myData.Rows
-                Dim x As Double = New XDate(CDate(row(0))).XLDate
-                If Not row.IsNull(1) Then cpuList.add(x, row(1))
-                If Not row.IsNull(2) Then memList.add(x, row(2))
-                If Not row.IsNull(3) Then diskList.add(x, row(3))
-                If Not row.IsNull(4) Then rQList.add(x, row(4))
-                If Not row.IsNull(5) Then wQList.add(x, row(5))
-                If Not row.IsNull(6) Then ReadKbList.add(x, row(6))
-                If Not row.IsNull(7) Then WriteKBList.add(x, row(7))
-            Next
-        Else
-            For Each row As DataRow In myData.Rows
-                Dim x As Double = New XDate(CDate(row(0))).XLDate
-                If Not row.IsNull(1) Then cpuList.add(x, row(1))
-                If Not row.IsNull(2) Then memList.add(x, row(2))
-                If Not row.IsNull(3) Then memPagesList.add(x, row(3))
-                If Not row.IsNull(4) Then NICList.add(x, row(4))
-                If Not row.IsNull(5) Then diskList.add(x, row(5))
-                If Not row.IsNull(6) Then rQList.add(x, row(6))
-                If Not row.IsNull(7) Then wQList.add(x, row(7))
-                If Not row.IsNull(8) Then ReadKbList.add(x, row(8))
-                If Not row.IsNull(9) Then WriteKBList.add(x, row(9))
-                If Not Me._disk2Instance = Nothing Then
-                    If Not row.IsNull(10) Then diskList2.add(x, row(10))
-                    If Not row.IsNull(11) Then rQList2.add(x, row(11))
-                    If Not row.IsNull(12) Then wQList2.add(x, row(12))
-                    If Not row.IsNull(13) Then ReadKbList2.add(x, row(13))
-                    If Not row.IsNull(14) Then WriteKBList2.add(x, row(14))
-                End If
-                If Not Me._disk3Instance = Nothing Then
-                    If Not row.IsNull(15) Then diskList3.add(x, row(15))
-                    If Not row.IsNull(16) Then rQList3.add(x, row(16))
-                    If Not row.IsNull(17) Then wQList3.add(x, row(17))
-                    If Not row.IsNull(18) Then ReadKbList3.add(x, row(18))
-                    If Not row.IsNull(19) Then WriteKBList3.add(x, row(19))
-                End If
-            Next
-        End If
+        For Each row As DataRow In myData.Rows
+            Dim x As Double = New XDate(CDate(row(0))).XLDate
+            If Not row.IsNull("cpu%") Then cpuList.add(x, row("cpu%"))
+            If Not row.IsNull("mem%") Then memList.add(x, row("mem%"))
+            If Not row.IsNull("memInputPages") Then memPagesList.add(x, row("memInputPages"))
+            If Not row.IsNull("NicBytes") Then NICList.add(x, row("NicBytes"))
+            If Not Me._disk1Instance = Nothing Then
+                If Not row.IsNull("disk%") Then diskList.add(x, row("disk%"))
+                If Not row.IsNull("diskRead") Then rQList.add(x, row("diskRead"))
+                If Not row.IsNull("diskWrite") Then wQList.add(x, row("diskWrite"))
+                If Not row.IsNull("diskReadKbSec") Then ReadKbList.add(x, row("diskReadKbSec"))
+                If Not row.IsNull("diskWriteKbSec") Then WriteKBList.add(x, row("diskWriteKbSec"))
+            End If
+            If Not Me._disk2Instance = Nothing Then
+                If Not row.IsNull("disk2%") Then diskList2.add(x, row("disk2%"))
+                If Not row.IsNull("disk2Read") Then rQList2.add(x, row("disk2Read"))
+                If Not row.IsNull("disk2Write") Then wQList2.add(x, row("disk2Write"))
+                If Not row.IsNull("disk2ReadKbSec") Then ReadKbList2.add(x, row("disk2ReadKbSec"))
+                If Not row.IsNull("disk2WriteKbSec") Then WriteKBList2.add(x, row("disk2WriteKbSec"))
+            End If
+            If Not Me._disk3Instance = Nothing Then
+                If Not row.IsNull("disk3%") Then diskList3.add(x, row("disk3%"))
+                If Not row.IsNull("disk3Read") Then rQList3.add(x, row("disk3Read"))
+                If Not row.IsNull("disk3Write") Then wQList3.add(x, row("disk3Write"))
+                If Not row.IsNull("disk3ReadKbSec") Then ReadKbList3.add(x, row("disk3ReadKbSec"))
+                If Not row.IsNull("disk3WriteKbSec") Then WriteKBList3.add(x, row("disk3WriteKbSec"))
+            End If
+        Next
 
 
         Dim Curve As LineItem
@@ -451,12 +480,12 @@ Public Class FmGraph
         Catch ex As Exception
         End Try
 
-        If Not Me._MemPagesActive = False Then
+        If Not Me._MemPagesInputActive = False Then
             Try
                 item = New ListViewItem("Memory - Pages input/sec")
-                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([mempages])", String.Empty), Single), 0))
-                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([mempages])", String.Empty), Single), 0))
-                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([mempages])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MAX([memInputPages])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("MIN([memInputPages])", String.Empty), Single), 0))
+                item.SubItems.Add(FormatNumber(CType(myData.Compute("AVG([memInputPages])", String.Empty), Single), 0))
                 Me.ListViewStats.Items.Add(item)
             Catch ex As Exception
             End Try
@@ -667,7 +696,7 @@ Public Class FmGraph
         If Me._cpuActive Then CreateGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
         If Me._memActive Then CreateGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
 
-        If Not Me._MemPagesActive = False Then
+        If Not Me._MemPagesInputActive = False Then
             CreateGraph(Me.zgc_Perf_3, "Memory Paging", "Pages input/sec", "", False, False, True, False, 0, False, False, False, False, False)
         End If
 
@@ -692,6 +721,7 @@ Public Class FmGraph
         End If
 
     End Sub
+
 
 
 #Region "Form Management"
@@ -1022,7 +1052,7 @@ Public Class FmGraph
         HideTabPage(Me.TabPageDsk3)
         HideTabPage(Me.TabPageOther)
 
-        If Me._cpuActive OrElse Me._memActive OrElse Me._MemPagesActive Then
+        If Me._cpuActive OrElse Me._memActive OrElse Me._MemPagesInputActive Then
             ShowTabPage(Me.TabPagePerf)
         Else
             HideTabPage(Me.TabPagePerf)

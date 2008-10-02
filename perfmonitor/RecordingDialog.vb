@@ -28,8 +28,11 @@ Public Class RecordingDialog
     Private Sub comboNICInstance_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles comboNICInstance.SelectedIndexChanged
         If Me.comboNICInstance.Text = " - select instance -" Then
             cNic.Enabled = False
+            cNic.Checked = False
         Else
             cNic.Enabled = True
+            cNic.Checked = True
         End If
     End Sub
+
 End Class

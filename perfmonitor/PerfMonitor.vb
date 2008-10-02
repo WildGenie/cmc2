@@ -204,14 +204,14 @@ Public Class PerfMonitor
             Dim sLine As String = CInt(cpuvalue) & "," & CInt(memValue) & ","
 
             If Me._mempages Then
-                sLine = sLine & CInt(mempagesValue) & ","
+                sLine = sLine & CInt(mempagesValue) & ",,,,"
             Else
-                sLine = sLine & "0,"
+                sLine = sLine & "0,,,,"
             End If
-            If Me._nic Then
-                sLine = sLine & CInt(nicValue) & ","
+            If Me._nic1 Then
+                sLine = sLine & CInt(nicValue) & ",,,"
             Else
-                sLine = sLine & "0,"
+                sLine = sLine & "0,,,"
             End If
 
             If Not Me.DiskInstance1 Is Nothing Then
@@ -334,13 +334,13 @@ Public Class PerfMonitor
             dskReadQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Read Queue Length", Me.DiskInstance1, Me.computername.Text)
             dskWriteQ = New PerformanceCounter("PhysicalDisk", "Avg. Disk Write Queue Length", Me.DiskInstance1, Me.computername.Text)
         End If
-        
+
 
     End Sub
 
     Private Recording As Boolean = False
     Private Writer As System.IO.StreamWriter
-    Private _cpu, _mem, _mempages, _nic, _dsk1, _dsk2, _dsk3 As Boolean
+    Private _cpu, _mem, _mempages, _nic1, _dsk1, _dsk2, _dsk3 As Boolean
     Private Sub RecordingButton_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RecordingButton.Click
         If Recording = False Then
             Dim rd As New RecordingDialog
@@ -372,7 +372,7 @@ Public Class PerfMonitor
                 _mempages = rd.cMemPages.Checked
 
                 If rd.cNic.Checked Then
-                    _nic = True
+                    _nic1 = True
                     Me.NetInstance = rd.comboNICInstance.Text
                     NetBytesSec = New PerformanceCounter("Network Interface", "Bytes Total/sec", Me.NetInstance, Me.computername.Text)
                 End If
@@ -437,15 +437,17 @@ Public Class PerfMonitor
                 Else
                     HeaderRow = HeaderRow & "RAM_%_0,"
                 End If
+
                 If _mempages Then
-                    HeaderRow = HeaderRow & "Memory&Pages_InputPerSec_1,"
+                    HeaderRow = HeaderRow & "Memory&Pages_InputPerSec_1,,,,"
                 Else
-                    HeaderRow = HeaderRow & "Memory&Pages_InputPerSec_0,"
+                    HeaderRow = HeaderRow & "Memory&Pages_InputPerSec_0,,,,"
                 End If
-                If _nic Then
-                    HeaderRow = HeaderRow & "Network_BytesPerSec_" & Me.NetInstance & ","
+
+                If _nic1 Then
+                    HeaderRow = HeaderRow & "Network_BytesPerSec_" & Me.NetInstance & ",,,"
                 Else
-                    HeaderRow = HeaderRow & "Network_BytesPerSec_0,"
+                    HeaderRow = HeaderRow & "Network_BytesPerSec_0,,,"
                 End If
 
 
