@@ -428,7 +428,7 @@ Partial Class FmGraph
         Me.TabPagePerf.Location = New System.Drawing.Point(4, 22)
         Me.TabPagePerf.Name = "TabPagePerf"
         Me.TabPagePerf.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPagePerf.Size = New System.Drawing.Size(506, 487)
+        Me.TabPagePerf.Size = New System.Drawing.Size(506, 539)
         Me.TabPagePerf.TabIndex = 1
         Me.TabPagePerf.Text = "Performance"
         Me.TabPagePerf.UseVisualStyleBackColor = True
@@ -439,7 +439,7 @@ Partial Class FmGraph
         Me.Panel_Perf_RAM.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel_Perf_RAM.Location = New System.Drawing.Point(3, 147)
         Me.Panel_Perf_RAM.Name = "Panel_Perf_RAM"
-        Me.Panel_Perf_RAM.Size = New System.Drawing.Size(500, 167)
+        Me.Panel_Perf_RAM.Size = New System.Drawing.Size(500, 219)
         Me.Panel_Perf_RAM.TabIndex = 2
         '
         'zgc_ram
@@ -455,14 +455,14 @@ Partial Class FmGraph
         Me.zgc_ram.ScrollMinX = 0
         Me.zgc_ram.ScrollMinY = 0
         Me.zgc_ram.ScrollMinY2 = 0
-        Me.zgc_ram.Size = New System.Drawing.Size(500, 167)
+        Me.zgc_ram.Size = New System.Drawing.Size(500, 219)
         Me.zgc_ram.TabIndex = 0
         '
         'Panel_Perf_3
         '
         Me.Panel_Perf_3.Controls.Add(Me.zgc_Perf_3)
         Me.Panel_Perf_3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel_Perf_3.Location = New System.Drawing.Point(3, 314)
+        Me.Panel_Perf_3.Location = New System.Drawing.Point(3, 366)
         Me.Panel_Perf_3.Name = "Panel_Perf_3"
         Me.Panel_Perf_3.Size = New System.Drawing.Size(500, 170)
         Me.Panel_Perf_3.TabIndex = 3
@@ -515,7 +515,7 @@ Partial Class FmGraph
         Me.TabPageDsk1.Controls.Add(Me.Panel_PhysDisk_1)
         Me.TabPageDsk1.Location = New System.Drawing.Point(4, 22)
         Me.TabPageDsk1.Name = "TabPageDsk1"
-        Me.TabPageDsk1.Size = New System.Drawing.Size(506, 487)
+        Me.TabPageDsk1.Size = New System.Drawing.Size(506, 539)
         Me.TabPageDsk1.TabIndex = 2
         Me.TabPageDsk1.Text = "PhysicalDisk1"
         Me.TabPageDsk1.UseVisualStyleBackColor = True
@@ -526,7 +526,7 @@ Partial Class FmGraph
         Me.Panel_PhysDisk_2.Dock = System.Windows.Forms.DockStyle.Fill
         Me.Panel_PhysDisk_2.Location = New System.Drawing.Point(0, 131)
         Me.Panel_PhysDisk_2.Name = "Panel_PhysDisk_2"
-        Me.Panel_PhysDisk_2.Size = New System.Drawing.Size(506, 210)
+        Me.Panel_PhysDisk_2.Size = New System.Drawing.Size(506, 262)
         Me.Panel_PhysDisk_2.TabIndex = 2
         '
         'zgc_phsdisk2
@@ -541,14 +541,14 @@ Partial Class FmGraph
         Me.zgc_phsdisk2.ScrollMinX = 0
         Me.zgc_phsdisk2.ScrollMinY = 0
         Me.zgc_phsdisk2.ScrollMinY2 = 0
-        Me.zgc_phsdisk2.Size = New System.Drawing.Size(506, 210)
+        Me.zgc_phsdisk2.Size = New System.Drawing.Size(506, 262)
         Me.zgc_phsdisk2.TabIndex = 0
         '
         'Panel_PhysDisk_3
         '
         Me.Panel_PhysDisk_3.Controls.Add(Me.zgc_phsdisk3)
         Me.Panel_PhysDisk_3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel_PhysDisk_3.Location = New System.Drawing.Point(0, 341)
+        Me.Panel_PhysDisk_3.Location = New System.Drawing.Point(0, 393)
         Me.Panel_PhysDisk_3.Name = "Panel_PhysDisk_3"
         Me.Panel_PhysDisk_3.Size = New System.Drawing.Size(506, 146)
         Me.Panel_PhysDisk_3.TabIndex = 1
@@ -600,7 +600,7 @@ Partial Class FmGraph
         Me.TabPageDsk2.Controls.Add(Me.Panel_physdisk_4)
         Me.TabPageDsk2.Location = New System.Drawing.Point(4, 22)
         Me.TabPageDsk2.Name = "TabPageDsk2"
-        Me.TabPageDsk2.Size = New System.Drawing.Size(506, 487)
+        Me.TabPageDsk2.Size = New System.Drawing.Size(506, 539)
         Me.TabPageDsk2.TabIndex = 3
         Me.TabPageDsk2.Text = "PhysicalDisk2"
         Me.TabPageDsk2.UseVisualStyleBackColor = True
@@ -684,7 +684,7 @@ Partial Class FmGraph
         Me.TabPageDsk3.Controls.Add(Me.Panel_physdisk_7)
         Me.TabPageDsk3.Location = New System.Drawing.Point(4, 22)
         Me.TabPageDsk3.Name = "TabPageDsk3"
-        Me.TabPageDsk3.Size = New System.Drawing.Size(506, 487)
+        Me.TabPageDsk3.Size = New System.Drawing.Size(506, 539)
         Me.TabPageDsk3.TabIndex = 5
         Me.TabPageDsk3.Text = "PhysicalDisk3"
         Me.TabPageDsk3.UseVisualStyleBackColor = True
@@ -768,7 +768,7 @@ Partial Class FmGraph
         Me.TabPageOther.Controls.Add(Me.Panel_Oth_1)
         Me.TabPageOther.Location = New System.Drawing.Point(4, 22)
         Me.TabPageOther.Name = "TabPageOther"
-        Me.TabPageOther.Size = New System.Drawing.Size(506, 487)
+        Me.TabPageOther.Size = New System.Drawing.Size(506, 539)
         Me.TabPageOther.TabIndex = 4
         Me.TabPageOther.Text = "Network Interface"
         Me.TabPageOther.UseVisualStyleBackColor = True
@@ -776,7 +776,7 @@ Partial Class FmGraph
         'Panel_Oth_3
         '
         Me.Panel_Oth_3.Dock = System.Windows.Forms.DockStyle.Bottom
-        Me.Panel_Oth_3.Location = New System.Drawing.Point(0, 303)
+        Me.Panel_Oth_3.Location = New System.Drawing.Point(0, 355)
         Me.Panel_Oth_3.Name = "Panel_Oth_3"
         Me.Panel_Oth_3.Size = New System.Drawing.Size(506, 184)
         Me.Panel_Oth_3.TabIndex = 2
