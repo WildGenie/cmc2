@@ -1,29 +1,26 @@
 Imports ZedGraph
 
+''' <summary>
+''' Read in files containing cmc-performanceMonitor data
+''' and display statistics and graphs.
+''' </summary>
+''' <remarks></remarks>
 Public Class FmGraph
 
     Public FileToOpen As String
     Private myData As DataTable
-    Private Computer As String
 
-    Private CPUCurve As CurveSettings
-    Private RAMCurve As CurveSettings
-    Private MemPagesCurve As CurveSettings
-    Private NicCurve As CurveSettings
-    Private PhysDiskPercentCurve As CurveSettings
-    Private PhysDiskQueueReadCurve As CurveSettings
-    Private PhysDiskQueueWriteCurve As CurveSettings
-    Private PhysDiskIOReadCurve As CurveSettings
-    Private PhysDiskIOWriteCurve As CurveSettings
-
+    ' instance names + data present indicators
     Private _disk1Instance As String
     Private _disk2Instance As String
     Private _disk3Instance As String
     Private _NICInstance1 As String
 
+    ' data present indicators
     Private _cpuActive As Boolean
     Private _memActive As Boolean
     Private _MemPagesActive As Boolean
+
 
     ''' <summary>
     ''' Create datatable and read performance data from file into datatable
@@ -67,10 +64,6 @@ Public Class FmGraph
         myData.Columns.Add(New DataColumn("disk3Write", GetType(Double)))
         myData.Columns.Add(New DataColumn("disk3ReadKbSec", GetType(Double)))
         myData.Columns.Add(New DataColumn("disk3WriteKbSec", GetType(Double)))
-
-        'Dim sr As New System.IO.StreamReader(filename)
-        'Computer = UCase(sr.ReadLine.Split(" ")(0))
-        'Dim instanceLine() As String = sr.ReadLine.Split(",")
 
         ' 1 Time
         ' 2 CPU_%_x
@@ -137,10 +130,7 @@ Public Class FmGraph
         Loop
         sr.Close()
 
-
-
     End Sub
-
     Private Sub Old_Fill_DataTable(ByVal filename As String)
         myData = New DataTable()
         myData.Columns.Add(New DataColumn("time", GetType(DateTime)))
@@ -153,13 +143,8 @@ Public Class FmGraph
         myData.Columns.Add(New DataColumn("diskWriteKbSec", GetType(Double)))
 
         Dim sr As New System.IO.StreamReader(filename)
-        Computer = UCase(sr.ReadLine.Split(" ")(0))
         Dim instanceLine() As String = sr.ReadLine.Split(",")
         Me._disk1Instance = instanceLine(3).Substring(instanceLine(3).LastIndexOf("\") + 1)
-        If instanceLine.Length >= 8 Then
-            'Me._diskReadMBInstance = instanceLine(6).Substring(instanceLine(6).LastIndexOf("\") + 1)
-            'Me._diskWriteMBInstance = instanceLine(7).Substring(instanceLine(7).LastIndexOf("\") + 1)
-        End If
 
         Do While Not sr.EndOfStream
             Dim line() As String = sr.ReadLine.Split(",")
@@ -175,8 +160,7 @@ Public Class FmGraph
         sr.Close()
     End Sub
 
-
-    Private Sub CreateSingleGraph(ByVal ZGC As ZedGraphControl, _
+    Private Sub CreateGraph(ByVal ZGC As ZedGraphControl, _
                                   ByVal GraphTitle As String, _
                                   ByVal YAxis1Title As String, _
                                   ByVal YAxis2Title As String, _
@@ -437,6 +421,12 @@ Public Class FmGraph
 
         ZGC.AxisChange()
     End Sub
+
+    ''' <summary>
+    ''' Use the DataTable.Compute method to populate listviewbox
+    ''' with Max, Min, Avg values for the collected data.
+    ''' </summary>
+    ''' <remarks></remarks>
     Private Sub GetStats()
 
         Me.ListViewStats.Items.Clear()
@@ -626,7 +616,14 @@ Public Class FmGraph
 
     End Sub
 
-
+    ''' <summary>
+    ''' Clear existing graphs.
+    ''' Reload data if required.
+    ''' Call CreateGraph routine for active metrics.
+    ''' </summary>
+    ''' <param name="filename"></param>
+    ''' <param name="UseCurrentData"></param>
+    ''' <remarks></remarks>
     Private Sub PlotFileData(ByVal filename As String, ByVal UseCurrentData As Boolean)
 
         If Me.Height < 600 Then Me.Height = 625
@@ -667,56 +664,40 @@ Public Class FmGraph
             End If
         End If
 
-        If Me._cpuActive Then CreateSingleGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
-        If Me._memActive Then CreateSingleGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
+        If Me._cpuActive Then CreateGraph(zgc_cpu, "CPU Utilisation", " % Percent", "", True, False, False, False, 1, False, False, False, False, False)
+        If Me._memActive Then CreateGraph(zgc_ram, "Physical Memory Utilsation", "% Percent", "", False, True, False, False, 1, False, False, False, False, False)
 
         If Not Me._MemPagesActive = False Then
-            CreateSingleGraph(Me.zgc_Perf_3, "Memory Paging", "Pages input/sec", "", False, False, True, False, 0, False, False, False, False, False)
+            CreateGraph(Me.zgc_Perf_3, "Memory Paging", "Pages input/sec", "", False, False, True, False, 0, False, False, False, False, False)
         End If
 
         If Not Me._disk1Instance Is Nothing Then
-            CreateSingleGraph(zgc_phsdisk1, "% Disk Time [" & Me._disk1Instance & "]", "Percent", "", False, False, False, False, 1, True, False, False, False, False)
-            CreateSingleGraph(zgc_phsdisk2, "Disk Queue Length [" & Me._disk1Instance & "]", "Avg Queue Length", "", False, False, False, False, 1, False, True, True, False, False)
-            CreateSingleGraph(zgc_phsdisk3, "Disk IO [" & Me._disk1Instance & "]", "Kb/Second", "", False, False, False, False, 1, False, False, False, True, True)
+            CreateGraph(zgc_phsdisk1, "% Disk Time [" & Me._disk1Instance & "]", "Percent", "", False, False, False, False, 1, True, False, False, False, False)
+            CreateGraph(zgc_phsdisk2, "Disk Queue Length [" & Me._disk1Instance & "]", "Avg Queue Length", "", False, False, False, False, 1, False, True, True, False, False)
+            CreateGraph(zgc_phsdisk3, "Disk IO [" & Me._disk1Instance & "]", "Kb/Second", "", False, False, False, False, 1, False, False, False, True, True)
         End If
         If Not Me._disk2Instance Is Nothing Then
-            CreateSingleGraph(zgc_phsdisk4, "% Disk Time [" & Me._disk2Instance & "]", "Percent", "", False, False, False, False, 2, True, False, False, False, False)
-            CreateSingleGraph(zgc_phsdisk5, "Disk Queue Length [" & Me._disk2Instance & "]", "Avg Queue Length", "", False, False, False, False, 2, False, True, True, False, False)
-            CreateSingleGraph(zgc_phsdisk6, "Disk IO [" & Me._disk2Instance & "]", "Kb/Second", "", False, False, False, False, 2, False, False, False, True, True)
+            CreateGraph(zgc_phsdisk4, "% Disk Time [" & Me._disk2Instance & "]", "Percent", "", False, False, False, False, 2, True, False, False, False, False)
+            CreateGraph(zgc_phsdisk5, "Disk Queue Length [" & Me._disk2Instance & "]", "Avg Queue Length", "", False, False, False, False, 2, False, True, True, False, False)
+            CreateGraph(zgc_phsdisk6, "Disk IO [" & Me._disk2Instance & "]", "Kb/Second", "", False, False, False, False, 2, False, False, False, True, True)
         End If
         If Not Me._disk3Instance Is Nothing Then
-            CreateSingleGraph(zgc_phsdisk7, "% Disk Time [" & Me._disk3Instance & "]", "Percent", "", False, False, False, False, 3, True, False, False, False, False)
-            CreateSingleGraph(zgc_phsdisk8, "Disk Queue Length [" & Me._disk3Instance & "]", "Avg Queue Length", "", False, False, False, False, 3, False, True, True, False, False)
-            CreateSingleGraph(zgc_phsdisk9, "Disk IO [" & Me._disk3Instance & "]", "Kb/Second", "", False, False, False, False, 3, False, False, False, True, True)
+            CreateGraph(zgc_phsdisk7, "% Disk Time [" & Me._disk3Instance & "]", "Percent", "", False, False, False, False, 3, True, False, False, False, False)
+            CreateGraph(zgc_phsdisk8, "Disk Queue Length [" & Me._disk3Instance & "]", "Avg Queue Length", "", False, False, False, False, 3, False, True, True, False, False)
+            CreateGraph(zgc_phsdisk9, "Disk IO [" & Me._disk3Instance & "]", "Kb/Second", "", False, False, False, False, 3, False, False, False, True, True)
         End If
 
         If Not Me._NICInstance1 Is Nothing Then
-            CreateSingleGraph(zgc_oth_1, "Network [" & Me._NICInstance1 & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
+            CreateGraph(zgc_oth_1, "Network [" & Me._NICInstance1 & "]", "Bytes/sec", "", False, False, False, True, 0, False, False, False, False, False)
         End If
 
     End Sub
 
 
+#Region "Form Management"
     Private Sub FmGraph_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
 
-        Me.CPUCurve = New CurveSettings
-        Me.CPUCurve.Add("CPU", True)
-        Me.RAMCurve = New CurveSettings
-        Me.RAMCurve.Add("RAM", True)
-        Me.MemPagesCurve = New CurveSettings
-        Me.MemPagesCurve.Add("Pages", True)
-        Me.NicCurve = New CurveSettings
-        Me.NicCurve.Add("NIC", True)
-        Me.PhysDiskPercentCurve = New CurveSettings
-        Me.PhysDiskPercentCurve.Add("DiskPercent", True)
-        Me.PhysDiskQueueReadCurve = New CurveSettings
-        Me.PhysDiskQueueReadCurve.Add("DiskQueueRead", True)
-        Me.PhysDiskQueueWriteCurve = New CurveSettings
-        Me.PhysDiskQueueWriteCurve.Add("DiskQueueWrite", True)
-        Me.PhysDiskIOReadCurve = New CurveSettings
-        Me.PhysDiskIOReadCurve.Add("DiskIORead", True)
-        Me.PhysDiskIOWriteCurve = New CurveSettings
-        Me.PhysDiskIOWriteCurve.Add("DiskIOWrite", True)
+        Me.DimCurves()
 
         ' if arg passed, use as target file
         If Environment.GetCommandLineArgs().Length = 2 Then
@@ -742,6 +723,25 @@ Public Class FmGraph
 
 
     End Sub
+    Private Sub FmGraph_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
+        Dim OneThirdHeight As Integer = (Me.TabControl1.Height - 26) / 3
+        Me.Panel_Statistics.Height = 2 * OneThirdHeight
+        Me.Panel_Perf_CPU.Height = OneThirdHeight
+        Me.Panel_Perf_RAM.Height = OneThirdHeight
+        Me.Panel_Perf_3.Height = OneThirdHeight
+        Me.Panel_Oth_1.Height = OneThirdHeight
+        Me.Panel_Oth_2.Height = OneThirdHeight
+        Me.Panel_Oth_3.Height = OneThirdHeight
+        Me.Panel_PhysDisk_1.Height = OneThirdHeight
+        Me.Panel_PhysDisk_2.Height = OneThirdHeight
+        Me.Panel_PhysDisk_3.Height = OneThirdHeight
+        Me.Panel_physdisk_4.Height = OneThirdHeight
+        Me.Panel_physdisk_5.Height = OneThirdHeight
+        Me.Panel_physdisk_6.Height = OneThirdHeight
+        Me.Panel_physdisk_7.Height = OneThirdHeight
+        Me.Panel_physdisk_8.Height = OneThirdHeight
+        Me.Panel_physdisk_9.Height = OneThirdHeight
+    End Sub
 
     ''' <summary>
     ''' Launches open file dialog to open recorded data files
@@ -763,47 +763,43 @@ Public Class FmGraph
     Private Sub ExitToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ExitToolStripMenuItem.Click
         Me.Close()
     End Sub
+#End Region
 
-    Private Sub FmGraph_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
-        Dim OneThirdHeight As Integer = (Me.TabControl1.Height - 26) / 3
-        Me.Panel_Statistics.Height = 2 * OneThirdHeight
-        Me.Panel_Perf_CPU.Height = OneThirdHeight
-        Me.Panel_Perf_RAM.Height = OneThirdHeight
-        Me.Panel_Perf_3.Height = OneThirdHeight
-        Me.Panel_Oth_1.Height = OneThirdHeight
-        Me.Panel_Oth_2.Height = OneThirdHeight
-        Me.Panel_Oth_3.Height = OneThirdHeight
-        Me.Panel_PhysDisk_1.Height = OneThirdHeight
-        Me.Panel_PhysDisk_2.Height = OneThirdHeight
-        Me.Panel_PhysDisk_3.Height = OneThirdHeight
-        Me.Panel_physdisk_4.Height = OneThirdHeight
-        Me.Panel_physdisk_5.Height = OneThirdHeight
-        Me.Panel_physdisk_6.Height = OneThirdHeight
-        Me.Panel_physdisk_7.Height = OneThirdHeight
-        Me.Panel_physdisk_8.Height = OneThirdHeight
-        Me.Panel_physdisk_9.Height = OneThirdHeight
+#Region "Curve Settings"
+    ' instantiate curve settings
+    Private CPUCurve As CurveSettings
+    Private RAMCurve As CurveSettings
+    Private MemPagesCurve As CurveSettings
+    Private NicCurve As CurveSettings
+    Private PhysDiskPercentCurve As CurveSettings
+    Private PhysDiskQueueReadCurve As CurveSettings
+    Private PhysDiskQueueWriteCurve As CurveSettings
+    Private PhysDiskIOReadCurve As CurveSettings
+    Private PhysDiskIOWriteCurve As CurveSettings
+
+    Private Sub DimCurves()
+        Me.CPUCurve = New CurveSettings
+        Me.CPUCurve.Add("CPU", True)
+        Me.RAMCurve = New CurveSettings
+        Me.RAMCurve.Add("RAM", True)
+        Me.MemPagesCurve = New CurveSettings
+        Me.MemPagesCurve.Add("Pages", True)
+        Me.NicCurve = New CurveSettings
+        Me.NicCurve.Add("NIC", True)
+        Me.PhysDiskPercentCurve = New CurveSettings
+        Me.PhysDiskPercentCurve.Add("DiskPercent", True)
+        Me.PhysDiskQueueReadCurve = New CurveSettings
+        Me.PhysDiskQueueReadCurve.Add("DiskQueueRead", True)
+        Me.PhysDiskQueueWriteCurve = New CurveSettings
+        Me.PhysDiskQueueWriteCurve.Add("DiskQueueWrite", True)
+        Me.PhysDiskIOReadCurve = New CurveSettings
+        Me.PhysDiskIOReadCurve.Add("DiskIORead", True)
+        Me.PhysDiskIOWriteCurve = New CurveSettings
+        Me.PhysDiskIOWriteCurve.Add("DiskIOWrite", True)
     End Sub
+#End Region
 
-    Private Sub GraphPanelsVisible(ByVal IsVisible As Boolean)
-        Me.Panel_Perf_CPU.Visible = IsVisible
-        Me.Panel_Perf_RAM.Visible = IsVisible
-        Me.Panel_Perf_3.Visible = IsVisible
-        Me.Panel_PhysDisk_1.Visible = IsVisible
-        Me.Panel_PhysDisk_2.Visible = IsVisible
-        Me.Panel_PhysDisk_3.Visible = IsVisible
-        Me.Panel_physdisk_4.Visible = IsVisible
-        Me.Panel_physdisk_5.Visible = IsVisible
-        Me.Panel_physdisk_6.Visible = IsVisible
-        Me.Panel_physdisk_7.Visible = IsVisible
-        Me.Panel_physdisk_8.Visible = IsVisible
-        Me.Panel_physdisk_9.Visible = IsVisible
-        Me.Panel_Oth_1.Visible = IsVisible
-        Me.Panel_Oth_2.Visible = IsVisible
-        Me.Panel_Oth_3.Visible = IsVisible
-    End Sub
-
-
-
+#Region "Context Menu"
     Private Sub cpuContextMenuBuilder(ByVal control As ZedGraphControl, ByVal menuStrip As ContextMenuStrip, ByVal mousePt As Point, ByVal objState As ZedGraphControl.ContextMenuObjectState) Handles zgc_cpu.ContextMenuBuilder
         ' create a new menu item
         Dim item As ToolStripMenuItem = New ToolStripMenuItem
@@ -1013,9 +1009,12 @@ Public Class FmGraph
             PlotFileData(Nothing, True)
         End If
     End Sub
+#End Region
 
-
+#Region "Tab Control"
     Private Sub TabShowHide()
+
+        Me.TabControl1.Visible = False
 
         HideTabPage(Me.TabPagePerf)
         HideTabPage(Me.TabPageDsk1)
@@ -1056,6 +1055,8 @@ Public Class FmGraph
 
         Me.TabControl1.SelectTab(Me.TabPageInfo)
 
+        Me.TabControl1.Visible = True
+
     End Sub
     ' Add/Remove Tab Pages
     Private Sub HideTabPage(ByVal tp As TabPage)
@@ -1089,6 +1090,8 @@ Public Class FmGraph
         Me.TabControl1.TabPages(Index1) = tp2
         Me.TabControl1.TabPages(Index2) = tp1
     End Sub
+#End Region
+
 
 
 End Class
