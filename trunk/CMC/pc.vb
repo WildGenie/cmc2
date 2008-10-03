@@ -16,12 +16,14 @@ Public Class pc
     Public CurrentUserDomain As String
     Dim m_SID As String
     Public LastLogon As String
+    Protected Friend ScreenSaverActive As Boolean
     Public MacAddress As String
     Public NetworkAdaptorID As String
     Private _DomainRoleCode As Integer
     Private _DomainMember As Boolean
     Private _DomainName As String
     Private _64b As Boolean
+    Private _arrayListShares As ArrayList
 
 
     ''' <summary>
@@ -199,6 +201,15 @@ Public Class pc
         End Set
     End Property
 
+    Protected Friend Property ShareList() As ArrayList
+        Get
+            Return _arrayListShares
+        End Get
+        Set(ByVal value As ArrayList)
+            _arrayListShares = value
+        End Set
+    End Property
+
     Public Sub Clear()
         Name = Nothing
         Hostname = Nothing
@@ -221,6 +232,8 @@ Public Class pc
         _DomainRoleCode = Nothing
         _DomainMember = Nothing
         _DomainName = Nothing
+        _arrayListShares = Nothing
         TSEnabled = Nothing
+        ScreenSaverActive = Nothing
     End Sub
 End Class
