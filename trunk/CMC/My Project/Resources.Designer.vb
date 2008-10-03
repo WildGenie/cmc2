@@ -417,6 +417,20 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property vnclogo() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("vnclogo", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property vnclogo1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("vnclogo1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property wrench() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("wrench", resourceCulture)

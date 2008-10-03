@@ -164,6 +164,12 @@
     <Compile Include="SwInfo.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="VNCDialog.Designer.vb">
+      <DependentUpon>VNCDialog.vb</DependentUpon>
+    </Compile>
+    <Compile Include="VNCDialog.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="WinAPI_Window.vb" />
     <Compile Include="cmcUser.vb" />
     <Compile Include="pc.vb" />
@@ -235,6 +241,7 @@
     <Content Include="Resources\files\winvnc\winvnc4.exe" />
     <Content Include="Resources\files\winvnc\wm_hooks.dll" />
     <Content Include="Resources\files\XZip.dll" />
+    <None Include="Resources\vnclogo.png" />
     <None Include="Resources\user-16x16.png" />
     <None Include="Resources\Utilities-32x32.png" />
     <None Include="Resources\user-info-16x16.png" />
@@ -288,6 +295,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>SwInfo.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="VNCDialog.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>VNCDialog.vb</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include="Microsoft.Net.Framework.2.0">
@@ -310,37 +321,37 @@
   <ItemGroup>
     <PublishFile Include="changelog.txt">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="en-GB\CMC.resources">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
       <FileType>Satellite</FileType>
     </PublishFile>
     <PublishFile Include="My Project\Application.myapp">
       <Visible>False</Visible>
+      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\files\netdom.exe">
       <Visible>False</Visible>
+      <PublishState>Auto</PublishState>
       <Group>system</Group>
       <TargetPath>
       </TargetPath>
-      <PublishState>Auto</PublishState>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>

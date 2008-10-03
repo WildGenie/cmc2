@@ -2,12 +2,17 @@ Option Strict On
 
 Public Class wmiConnection
 
-    Dim DefaultNamespace As String
-    Dim wmiConnectionOptions As Management.ConnectionOptions
-    Dim objManagementObjectCollection As Management.ManagementObjectCollection
-    Dim wmiSearcher As Management.ManagementObjectSearcher
+    Private DefaultNamespace As String
+    Private wmiConnectionOptions As Management.ConnectionOptions
+    Private objManagementObjectCollection As Management.ManagementObjectCollection
+    Private wmiSearcher As Management.ManagementObjectSearcher
+    Private mConnectionResult As String
+
     Public Shared wmiScope As Management.ManagementScope
     Public Shared RegScope As Management.ManagementScope
+    Private mUsername As String
+    Private mPassword As String
+
 
     Public Sub SetupWMIConnectionOptions()
 
@@ -25,9 +30,9 @@ Public Class wmiConnection
                 .Authentication = System.Management.AuthenticationLevel.Packet
             End If
 
-            If Form1.AltUserCheckBox.Checked Then
-                .Username = Form1.sAltUsername
-                .Password = Form1.sAltPassword
+            If Not String.IsNullOrEmpty(Me.mUsername) Then
+                .Username = Me.mUsername
+                .Password = Me.mPassword
                 .EnablePrivileges = True
             Else
                 .Username = Nothing
@@ -47,8 +52,10 @@ Public Class wmiConnection
 
     End Sub
 
-    Public Function WMIConnect(ByVal strComputer As String) As Boolean
+    Public Function WMIConnect(ByVal strComputer As String, ByVal wmiUserName As String, ByVal wmiPassword As String) As Boolean
 
+        Me.mUsername = wmiUserName
+        Me.mPassword = wmiPassword
         SetupWMIConnectionOptions()
 
         Try
@@ -62,29 +69,36 @@ Public Class wmiConnection
 
         Catch ex As System.Management.ManagementException
             ' Failed to authenticate properly.
-            Form1.WriteLog(pc.Name & ": " & "AuthenticationFailure")
-            Form1.notification_label.Text = "Authentication Failure"
+            Me.mConnectionResult = "Authentication Failure"
             Return False
         Catch ex As System.Runtime.InteropServices.COMException
             ' Unable to connect to the RPC service on the remote machine.
-            Form1.WriteLog(pc.Name & ": " & "RPCServicesUnavailable")
-            Form1.notification_label.Text = "RPC Services Unavailable"
+            Me.mConnectionResult = "RPC Services Unavailable"
             Return False
         Catch ex As System.UnauthorizedAccessException
             ' User not authorized.
-            Form1.WriteLog(pc.Name & ": " & "UnauthorizedAccess")
-            Form1.notification_label.Text = "Unauthorized Access"
+            Me.mConnectionResult = "Unauthorized Access"
             Return False
         End Try
 
         'Check WMI Connection
         If wmiScope.IsConnected = True Then
+            Me.mConnectionResult = "Successful"
             Return True
         Else
             Return False
         End If
 
     End Function
+
+    Protected Friend Property ConnectionResult() As String
+        Get
+            Return mConnectionResult
+        End Get
+        Set(ByVal value As String)
+            mConnectionResult = value
+        End Set
+    End Property
 
     Public Function wmiQuery(ByVal QueryString As String) As Management.ManagementObjectCollection
 
