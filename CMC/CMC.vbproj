@@ -129,6 +129,9 @@
     <Import Include="System.Windows.Forms" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\admgmt\ListViewComparer.vb">
+      <Link>ListViewComparer.vb</Link>
+    </Compile>
     <Compile Include="appdeploy.Designer.vb">
       <DependentUpon>appdeploy.vb</DependentUpon>
     </Compile>

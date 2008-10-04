@@ -8,7 +8,13 @@ Public Class pc
     Public OSVersion As String
     Protected Friend SystemDirectory As String
     Protected Friend TSEnabled As Boolean
-    Protected Friend PhysicalMemory As Integer
+    Protected Friend CPU As String
+    Protected Friend PhysicalMemory As Double
+    Protected Friend LogicalDrives As Data.DataTable
+    Protected Friend Manufacturer As String
+    Protected Friend Model As String
+    Protected Friend ChassisType As String
+    Protected Friend SerialNumber As String
     Dim m_LastBootTime As String
     Public IEVersion As String
     Public IEProxy As String
