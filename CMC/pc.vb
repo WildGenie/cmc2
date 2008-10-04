@@ -19,6 +19,13 @@ Public Class pc
     Protected Friend ScreenSaverActive As Boolean
     Public MacAddress As String
     Public NetworkAdaptorID As String
+    Protected Friend SubnetMask As String
+    Protected Friend DefaultGateway As String
+    Protected Friend IsDHCP As Boolean
+    Protected Friend DHCPServer As String
+    Protected Friend DNSServers As ArrayList
+    Protected Friend DNSDomainSuffixSearchOrder As ArrayList
+    Protected Friend PrimaryDNSSuffix As String
     Private _DomainRoleCode As Integer
     Private _DomainMember As Boolean
     Private _DomainName As String

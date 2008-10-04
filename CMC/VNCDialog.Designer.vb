@@ -71,7 +71,7 @@ Partial Class VNCDialog
         'vncCombo
         '
         Me.vncCombo.FormattingEnabled = True
-        Me.vncCombo.Items.AddRange(New Object() {"Connect Only", "Install and Connect", "Install and Connect (No user prompt)"})
+        Me.vncCombo.Items.AddRange(New Object() {"Connect to existing VNC server", "Install VNC and connect", "Install VNC and connect (No user prompt)"})
         Me.vncCombo.Location = New System.Drawing.Point(12, 62)
         Me.vncCombo.Name = "vncCombo"
         Me.vncCombo.Size = New System.Drawing.Size(242, 21)
@@ -79,6 +79,7 @@ Partial Class VNCDialog
         '
         'PictureBox1
         '
+        Me.PictureBox1.ErrorImage = Nothing
         Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.vnclogo1
         Me.PictureBox1.Location = New System.Drawing.Point(3, 0)
         Me.PictureBox1.Name = "PictureBox1"
@@ -102,7 +103,7 @@ Partial Class VNCDialog
         '
         Me.Label1.AutoSize = True
         Me.Label1.Font = New System.Drawing.Font("Microsoft Sans Serif", 10.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label1.Location = New System.Drawing.Point(83, 16)
+        Me.Label1.Location = New System.Drawing.Point(75, 18)
         Me.Label1.Name = "Label1"
         Me.Label1.Size = New System.Drawing.Size(142, 17)
         Me.Label1.TabIndex = 3

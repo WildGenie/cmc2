@@ -158,6 +158,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property chart1() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("chart1", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property comment() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("comment", resourceCulture)
@@ -413,13 +420,6 @@ Namespace My.Resources
         Friend ReadOnly Property Utilities_32x32() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("Utilities-32x32", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property vnclogo() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("vnclogo", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property
