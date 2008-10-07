@@ -127,8 +127,10 @@ Public Class wmiConnection
     ' http://msdn2.microsoft.com/en-us/library/aa393664.aspx
 
     Public Function RegistryGetStringValue(ByVal machineName As String, _
-  ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String, _
-  ByVal valueName As String) As String
+                                           ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                           ByVal subKeyName As String, _
+                                           ByVal valueName As String) _
+                                           As String
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -145,13 +147,15 @@ Public Class wmiConnection
         If CInt(outParams.Properties("ReturnValue").Value) = 0 Then
             Return CStr(outParams.Properties.Item("sValue").Value)
         Else
-            Return ""
+            Return String.Empty
         End If
 
     End Function
     Public Function RegistryGetDWORDValue(ByVal machineName As String, _
-  ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String, _
-  ByVal valueName As String) As Integer
+                                          ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                          ByVal subKeyName As String, _
+                                          ByVal valueName As String) _
+                                          As Integer
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -172,7 +176,9 @@ Public Class wmiConnection
 
     End Function
     Public Function RegistryEnumKeys(ByVal machineName As String, _
-  ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) As Array
+                                     ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                     ByVal subKeyName As String) _
+                                     As Array
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -193,7 +199,9 @@ Public Class wmiConnection
 
     End Function
     Public Function RegistryEnumValues(ByVal machineName As String, _
-  ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) As Array
+                                       ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                       ByVal subKeyName As String) _
+                                       As Array
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -219,8 +227,11 @@ Public Class wmiConnection
 
     End Function
     Public Function RegistrySetStringValue(ByVal machineName As String, _
- ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String, _
- ByVal valueName As String, ByVal Value As String) As Boolean
+                                           ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                           ByVal subKeyName As String, _
+                                           ByVal valueName As String, _
+                                           ByVal Value As String) _
+                                           As Boolean
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -242,8 +253,11 @@ Public Class wmiConnection
 
     End Function
     Public Function RegistrySetDWORDValue(ByVal machineName As String, _
-ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String, _
-ByVal valueName As String, ByVal Value As Integer) As Boolean
+                                          ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                          ByVal subKeyName As String, _
+                                          ByVal valueName As String, _
+                                          ByVal Value As Integer) _
+                                          As Boolean
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -265,7 +279,10 @@ ByVal valueName As String, ByVal Value As Integer) As Boolean
 
     End Function
     Public Function RegistryCreateKey(ByVal machineName As String, _
-ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) As Boolean
+                                      ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                      ByVal subKeyName As String) _
+                                      As Boolean
+
         ' Creates all keys in subkey path if they do not already exist
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -285,7 +302,10 @@ ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) 
 
     End Function
     Public Function RegistryDeleteKey(ByVal machineName As String, _
-ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) As Boolean
+                                      ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                      ByVal subKeyName As String) _
+                                      As Boolean
+
         ' won't delete key containing subkeys
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -305,12 +325,13 @@ ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) 
 
     End Function
     Public Function RegistryDeleteKeyRecursive(ByVal machineName As String, _
-ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) As Boolean
+                                               ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                               ByVal subKeyName As String) _
+                                               As Boolean
 
         Dim arrSubKeys As Array = RegistryEnumKeys(machineName, registryHive, subKeyName)
         If arrSubKeys IsNot Nothing Then
-            Dim strSubKey As String
-            For Each strSubKey In arrSubKeys
+            For Each strSubKey As String In arrSubKeys
                 RegistryDeleteKeyRecursive(machineName, registryHive, subKeyName & "\" & strSubKey)
             Next
         End If
@@ -322,10 +343,10 @@ ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) 
         End If
 
     End Function
-
     Public Function RegistryDeleteValue(ByVal machineName As String, _
-ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String, _
-ByVal valuename As String) As Boolean
+                                        ByVal registryHive As Microsoft.Win32.RegistryHive, _
+                                        ByVal subKeyName As String, _
+                                        ByVal valuename As String) As Boolean
 
         Dim wmiReg As New Management.ManagementClass
         Dim inParams As Management.ManagementBaseObject
@@ -345,30 +366,29 @@ ByVal valuename As String) As Boolean
         End If
 
     End Function
-
     Public Function RegistryCheckKeyExists(ByVal machineName As String, _
       ByVal registryHive As Microsoft.Win32.RegistryHive, ByVal subKeyName As String) As Boolean
 
-        Dim PreviousKey As String
+        Dim PreviousKey As String = String.Empty
         Dim KeyToFind As String
-        If InStr(subKeyName, "\") = 0 Then
-            PreviousKey = ""
+
+        If Not subKeyName.Contains("\") Then
             KeyToFind = LCase(subKeyName)
         Else
-            Dim arrSubkeys() As String = Split(subKeyName, "\")
-            KeyToFind = LCase(arrSubkeys(arrSubkeys.Length - 1))
-            Array.Resize(arrSubkeys, arrSubkeys.Length - 1)
-            PreviousKey = Join(arrSubkeys, "\")
+            KeyToFind = subKeyName.Substring(subKeyName.LastIndexOf("\") + 1).ToLower
+            PreviousKey = subKeyName.Substring(0, subKeyName.LastIndexOf("\"))
         End If
 
         Dim exists As Boolean = False
         Dim arrKeys As Array = RegistryEnumKeys(machineName, registryHive, PreviousKey)
-        For Each key As String In arrKeys
-            If LCase(key) = KeyToFind Then
-                exists = True
-                Exit For
-            End If
-        Next
+        If Not arrKeys Is Nothing Then
+            For Each key As String In arrKeys
+                If key.ToLower = KeyToFind Then
+                    exists = True
+                    Exit For
+                End If
+            Next
+        End If
 
         Return exists
 

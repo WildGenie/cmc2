@@ -364,10 +364,6 @@
       <Project>{AE8FAA50-2E56-4EBA-ADE6-A10FC2576ACC}</Project>
       <Name>ad user manager</Name>
     </ProjectReference>
-    <ProjectReference Include="..\perfmonitor\performance monitor.vbproj">
-      <Project>{721EAF87-C559-480E-AE56-C4D7B1DD69CD}</Project>
-      <Name>performance monitor</Name>
-    </ProjectReference>
     <ProjectReference Include="..\PerformanceGraph\PerformanceGraph.vbproj">
       <Project>{1BF9242C-A749-4C3A-A692-C535C72EACC8}</Project>
       <Name>PerformanceGraph</Name>

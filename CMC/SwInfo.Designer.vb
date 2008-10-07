@@ -30,10 +30,12 @@ Partial Class SwInfo
         Me.Label4 = New System.Windows.Forms.Label
         Me.gbUninst = New System.Windows.Forms.GroupBox
         Me.btnUninstall = New System.Windows.Forms.Button
-        Me.swuninst = New System.Windows.Forms.TextBox
+        Me.swuninstsilent = New System.Windows.Forms.TextBox
         Me.Label14 = New System.Windows.Forms.Label
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.swURL = New System.Windows.Forms.LinkLabel
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
+        Me.Label1 = New System.Windows.Forms.Label
+        Me.swuninstall = New System.Windows.Forms.TextBox
         Me.swpath = New System.Windows.Forms.TextBox
         Me.swdate = New System.Windows.Forms.TextBox
         Me.swver = New System.Windows.Forms.TextBox
@@ -45,9 +47,11 @@ Partial Class SwInfo
         Me.Label11 = New System.Windows.Forms.Label
         Me.Label12 = New System.Windows.Forms.Label
         Me.Label13 = New System.Windows.Forms.Label
+        Me.swURL = New System.Windows.Forms.LinkLabel
         Me.GroupBox1.SuspendLayout()
         Me.gbUninst.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'GroupBox1
@@ -57,20 +61,21 @@ Partial Class SwInfo
         Me.GroupBox1.Controls.Add(Me.Label5)
         Me.GroupBox1.Controls.Add(Me.Label4)
         Me.GroupBox1.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.GroupBox1.Location = New System.Drawing.Point(16, 21)
+        Me.GroupBox1.Location = New System.Drawing.Point(16, 13)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(322, 95)
+        Me.GroupBox1.Size = New System.Drawing.Size(322, 79)
         Me.GroupBox1.TabIndex = 2
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Host Computer"
         '
         'swOS
         '
-        Me.swOS.Location = New System.Drawing.Point(122, 54)
+        Me.swOS.Location = New System.Drawing.Point(122, 48)
         Me.swOS.Name = "swOS"
         Me.swOS.ReadOnly = True
         Me.swOS.Size = New System.Drawing.Size(182, 20)
         Me.swOS.TabIndex = 3
+        Me.swOS.TabStop = False
         '
         'swHostname
         '
@@ -80,12 +85,13 @@ Partial Class SwInfo
         Me.swHostname.ReadOnly = True
         Me.swHostname.Size = New System.Drawing.Size(182, 20)
         Me.swHostname.TabIndex = 2
+        Me.swHostname.TabStop = False
         '
         'Label5
         '
         Me.Label5.AutoSize = True
         Me.Label5.ForeColor = System.Drawing.SystemColors.ControlText
-        Me.Label5.Location = New System.Drawing.Point(18, 56)
+        Me.Label5.Location = New System.Drawing.Point(18, 50)
         Me.Label5.Name = "Label5"
         Me.Label5.Size = New System.Drawing.Size(90, 13)
         Me.Label5.TabIndex = 1
@@ -104,7 +110,7 @@ Partial Class SwInfo
         'gbUninst
         '
         Me.gbUninst.Controls.Add(Me.btnUninstall)
-        Me.gbUninst.Controls.Add(Me.swuninst)
+        Me.gbUninst.Controls.Add(Me.swuninstsilent)
         Me.gbUninst.Controls.Add(Me.Label14)
         Me.gbUninst.ForeColor = System.Drawing.Color.RoyalBlue
         Me.gbUninst.Location = New System.Drawing.Point(16, 360)
@@ -112,7 +118,7 @@ Partial Class SwInfo
         Me.gbUninst.Size = New System.Drawing.Size(322, 82)
         Me.gbUninst.TabIndex = 3
         Me.gbUninst.TabStop = False
-        Me.gbUninst.Text = "Uninstall"
+        Me.gbUninst.Text = "Silent Uninstall"
         '
         'btnUninstall
         '
@@ -121,17 +127,19 @@ Partial Class SwInfo
         Me.btnUninstall.Name = "btnUninstall"
         Me.btnUninstall.Size = New System.Drawing.Size(87, 23)
         Me.btnUninstall.TabIndex = 4
+        Me.btnUninstall.TabStop = False
         Me.btnUninstall.Text = "Uninstall"
         Me.btnUninstall.UseVisualStyleBackColor = True
         '
-        'swuninst
+        'swuninstsilent
         '
-        Me.swuninst.Location = New System.Drawing.Point(122, 18)
-        Me.swuninst.Multiline = True
-        Me.swuninst.Name = "swuninst"
-        Me.swuninst.ReadOnly = True
-        Me.swuninst.Size = New System.Drawing.Size(182, 44)
-        Me.swuninst.TabIndex = 3
+        Me.swuninstsilent.Location = New System.Drawing.Point(122, 18)
+        Me.swuninstsilent.Multiline = True
+        Me.swuninstsilent.Name = "swuninstsilent"
+        Me.swuninstsilent.ReadOnly = True
+        Me.swuninstsilent.Size = New System.Drawing.Size(182, 44)
+        Me.swuninstsilent.TabIndex = 3
+        Me.swuninstsilent.TabStop = False
         '
         'Label14
         '
@@ -145,6 +153,9 @@ Partial Class SwInfo
         '
         'GroupBox2
         '
+        Me.GroupBox2.Controls.Add(Me.PictureBox1)
+        Me.GroupBox2.Controls.Add(Me.Label1)
+        Me.GroupBox2.Controls.Add(Me.swuninstall)
         Me.GroupBox2.Controls.Add(Me.swpath)
         Me.GroupBox2.Controls.Add(Me.swdate)
         Me.GroupBox2.Controls.Add(Me.swver)
@@ -158,22 +169,41 @@ Partial Class SwInfo
         Me.GroupBox2.Controls.Add(Me.Label13)
         Me.GroupBox2.Controls.Add(Me.swURL)
         Me.GroupBox2.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.GroupBox2.Location = New System.Drawing.Point(16, 133)
+        Me.GroupBox2.Location = New System.Drawing.Point(16, 103)
         Me.GroupBox2.Name = "GroupBox2"
-        Me.GroupBox2.Size = New System.Drawing.Size(322, 212)
+        Me.GroupBox2.Size = New System.Drawing.Size(322, 245)
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Software Properties"
         '
-        'swURL
+        'PictureBox1
         '
-        Me.swURL.AutoSize = True
-        Me.swURL.Location = New System.Drawing.Point(122, 183)
-        Me.swURL.Name = "swURL"
-        Me.swURL.Size = New System.Drawing.Size(31, 13)
-        Me.swURL.TabIndex = 11
-        Me.swURL.TabStop = True
-        Me.swURL.Text = "none"
+        Me.PictureBox1.ErrorImage = Global.CMC.My.Resources.Resources.package_green
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.package_green
+        Me.PictureBox1.Location = New System.Drawing.Point(284, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(20, 17)
+        Me.PictureBox1.TabIndex = 4
+        Me.PictureBox1.TabStop = False
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.ForeColor = System.Drawing.SystemColors.ControlText
+        Me.Label1.Location = New System.Drawing.Point(18, 215)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(77, 13)
+        Me.Label1.TabIndex = 13
+        Me.Label1.Text = "Uninstall String"
+        '
+        'swuninstall
+        '
+        Me.swuninstall.Location = New System.Drawing.Point(122, 212)
+        Me.swuninstall.Name = "swuninstall"
+        Me.swuninstall.ReadOnly = True
+        Me.swuninstall.Size = New System.Drawing.Size(182, 20)
+        Me.swuninstall.TabIndex = 12
+        Me.swuninstall.TabStop = False
         '
         'swpath
         '
@@ -182,6 +212,7 @@ Partial Class SwInfo
         Me.swpath.ReadOnly = True
         Me.swpath.Size = New System.Drawing.Size(182, 20)
         Me.swpath.TabIndex = 10
+        Me.swpath.TabStop = False
         '
         'swdate
         '
@@ -190,6 +221,7 @@ Partial Class SwInfo
         Me.swdate.ReadOnly = True
         Me.swdate.Size = New System.Drawing.Size(182, 20)
         Me.swdate.TabIndex = 9
+        Me.swdate.TabStop = False
         '
         'swver
         '
@@ -198,6 +230,7 @@ Partial Class SwInfo
         Me.swver.ReadOnly = True
         Me.swver.Size = New System.Drawing.Size(182, 20)
         Me.swver.TabIndex = 8
+        Me.swver.TabStop = False
         '
         'swpub
         '
@@ -206,6 +239,7 @@ Partial Class SwInfo
         Me.swpub.ReadOnly = True
         Me.swpub.Size = New System.Drawing.Size(182, 20)
         Me.swpub.TabIndex = 7
+        Me.swpub.TabStop = False
         '
         'swname
         '
@@ -214,6 +248,7 @@ Partial Class SwInfo
         Me.swname.ReadOnly = True
         Me.swname.Size = New System.Drawing.Size(182, 20)
         Me.swname.TabIndex = 6
+        Me.swname.TabStop = False
         '
         'Label8
         '
@@ -276,11 +311,21 @@ Partial Class SwInfo
         Me.Label13.TabIndex = 1
         Me.Label13.Text = "Software Publisher"
         '
+        'swURL
+        '
+        Me.swURL.AutoSize = True
+        Me.swURL.Location = New System.Drawing.Point(119, 186)
+        Me.swURL.Name = "swURL"
+        Me.swURL.Size = New System.Drawing.Size(31, 13)
+        Me.swURL.TabIndex = 11
+        Me.swURL.TabStop = True
+        Me.swURL.Text = "none"
+        '
         'SwInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(359, 456)
+        Me.ClientSize = New System.Drawing.Size(359, 454)
         Me.Controls.Add(Me.GroupBox2)
         Me.Controls.Add(Me.gbUninst)
         Me.Controls.Add(Me.GroupBox1)
@@ -295,6 +340,7 @@ Partial Class SwInfo
         Me.gbUninst.PerformLayout()
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -312,7 +358,7 @@ Partial Class SwInfo
     Friend WithEvents Label12 As System.Windows.Forms.Label
     Friend WithEvents Label13 As System.Windows.Forms.Label
     Friend WithEvents swOS As System.Windows.Forms.TextBox
-    Friend WithEvents swuninst As System.Windows.Forms.TextBox
+    Friend WithEvents swuninstsilent As System.Windows.Forms.TextBox
     Friend WithEvents swURL As System.Windows.Forms.LinkLabel
     Friend WithEvents swpath As System.Windows.Forms.TextBox
     Friend WithEvents swdate As System.Windows.Forms.TextBox
@@ -320,4 +366,7 @@ Partial Class SwInfo
     Friend WithEvents swpub As System.Windows.Forms.TextBox
     Friend WithEvents swname As System.Windows.Forms.TextBox
     Friend WithEvents btnUninstall As System.Windows.Forms.Button
+    Friend WithEvents Label1 As System.Windows.Forms.Label
+    Friend WithEvents swuninstall As System.Windows.Forms.TextBox
+    Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
 End Class

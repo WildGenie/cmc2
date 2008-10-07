@@ -26,11 +26,12 @@ Partial Class SvcInfo
         Me.OK_Button = New System.Windows.Forms.Button
         Me.Cancel_Button = New System.Windows.Forms.Button
         Me.gbGeneral = New System.Windows.Forms.GroupBox
+        Me.txtSvcAccount = New System.Windows.Forms.TextBox
         Me.txtSvcPath = New System.Windows.Forms.TextBox
         Me.txtSvcCaption = New System.Windows.Forms.TextBox
         Me.txtSvcName = New System.Windows.Forms.TextBox
-        Me.lblSvcAccount = New System.Windows.Forms.Label
         Me.Label7 = New System.Windows.Forms.Label
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.txtDescription = New System.Windows.Forms.TextBox
         Me.svcStartupCombo = New System.Windows.Forms.ComboBox
         Me.Label5 = New System.Windows.Forms.Label
@@ -40,19 +41,18 @@ Partial Class SvcInfo
         Me.Label1 = New System.Windows.Forms.Label
         Me.gbSvcStatus = New System.Windows.Forms.GroupBox
         Me.progBar = New System.Windows.Forms.ProgressBar
+        Me.picSvcStatus = New System.Windows.Forms.PictureBox
         Me.btnSvcResume = New System.Windows.Forms.Button
         Me.btnSvcPause = New System.Windows.Forms.Button
         Me.btnSvcStop = New System.Windows.Forms.Button
         Me.btnSvcStart = New System.Windows.Forms.Button
         Me.lblSvcStatus = New System.Windows.Forms.Label
         Me.Label6 = New System.Windows.Forms.Label
-        Me.picSvcStatus = New System.Windows.Forms.PictureBox
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.gbGeneral.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbSvcStatus.SuspendLayout()
         CType(Me.picSvcStatus, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -91,10 +91,10 @@ Partial Class SvcInfo
         '
         'gbGeneral
         '
+        Me.gbGeneral.Controls.Add(Me.txtSvcAccount)
         Me.gbGeneral.Controls.Add(Me.txtSvcPath)
         Me.gbGeneral.Controls.Add(Me.txtSvcCaption)
         Me.gbGeneral.Controls.Add(Me.txtSvcName)
-        Me.gbGeneral.Controls.Add(Me.lblSvcAccount)
         Me.gbGeneral.Controls.Add(Me.Label7)
         Me.gbGeneral.Controls.Add(Me.PictureBox1)
         Me.gbGeneral.Controls.Add(Me.txtDescription)
@@ -111,6 +111,15 @@ Partial Class SvcInfo
         Me.gbGeneral.TabStop = False
         Me.gbGeneral.Text = "General"
         '
+        'txtSvcAccount
+        '
+        Me.txtSvcAccount.BackColor = System.Drawing.SystemColors.Control
+        Me.txtSvcAccount.Location = New System.Drawing.Point(98, 215)
+        Me.txtSvcAccount.Name = "txtSvcAccount"
+        Me.txtSvcAccount.Size = New System.Drawing.Size(203, 20)
+        Me.txtSvcAccount.TabIndex = 15
+        Me.txtSvcAccount.TabStop = False
+        '
         'txtSvcPath
         '
         Me.txtSvcPath.Location = New System.Drawing.Point(16, 185)
@@ -118,6 +127,7 @@ Partial Class SvcInfo
         Me.txtSvcPath.ReadOnly = True
         Me.txtSvcPath.Size = New System.Drawing.Size(342, 20)
         Me.txtSvcPath.TabIndex = 14
+        Me.txtSvcPath.TabStop = False
         '
         'txtSvcCaption
         '
@@ -126,6 +136,7 @@ Partial Class SvcInfo
         Me.txtSvcCaption.ReadOnly = True
         Me.txtSvcCaption.Size = New System.Drawing.Size(260, 20)
         Me.txtSvcCaption.TabIndex = 13
+        Me.txtSvcCaption.TabStop = False
         '
         'txtSvcName
         '
@@ -134,15 +145,7 @@ Partial Class SvcInfo
         Me.txtSvcName.ReadOnly = True
         Me.txtSvcName.Size = New System.Drawing.Size(225, 20)
         Me.txtSvcName.TabIndex = 12
-        '
-        'lblSvcAccount
-        '
-        Me.lblSvcAccount.AutoSize = True
-        Me.lblSvcAccount.Location = New System.Drawing.Point(95, 218)
-        Me.lblSvcAccount.Name = "lblSvcAccount"
-        Me.lblSvcAccount.Size = New System.Drawing.Size(10, 13)
-        Me.lblSvcAccount.TabIndex = 11
-        Me.lblSvcAccount.Text = " "
+        Me.txtSvcName.TabStop = False
         '
         'Label7
         '
@@ -154,6 +157,15 @@ Partial Class SvcInfo
         Me.Label7.TabIndex = 10
         Me.Label7.Text = "Account:"
         '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.PictureBox1.Location = New System.Drawing.Point(328, 19)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(34, 34)
+        Me.PictureBox1.TabIndex = 3
+        Me.PictureBox1.TabStop = False
+        '
         'txtDescription
         '
         Me.txtDescription.Location = New System.Drawing.Point(98, 91)
@@ -162,6 +174,7 @@ Partial Class SvcInfo
         Me.txtDescription.ReadOnly = True
         Me.txtDescription.Size = New System.Drawing.Size(260, 72)
         Me.txtDescription.TabIndex = 9
+        Me.txtDescription.TabStop = False
         '
         'svcStartupCombo
         '
@@ -170,7 +183,7 @@ Partial Class SvcInfo
         Me.svcStartupCombo.Location = New System.Drawing.Point(98, 247)
         Me.svcStartupCombo.Name = "svcStartupCombo"
         Me.svcStartupCombo.Size = New System.Drawing.Size(203, 21)
-        Me.svcStartupCombo.TabIndex = 8
+        Me.svcStartupCombo.TabIndex = 2
         '
         'Label5
         '
@@ -245,15 +258,25 @@ Partial Class SvcInfo
         Me.progBar.Location = New System.Drawing.Point(106, 91)
         Me.progBar.Name = "progBar"
         Me.progBar.Size = New System.Drawing.Size(158, 18)
+        Me.progBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
         Me.progBar.TabIndex = 7
         Me.progBar.Visible = False
+        '
+        'picSvcStatus
+        '
+        Me.picSvcStatus.Image = Global.CMC.My.Resources.Resources._stop
+        Me.picSvcStatus.Location = New System.Drawing.Point(311, 11)
+        Me.picSvcStatus.Name = "picSvcStatus"
+        Me.picSvcStatus.Size = New System.Drawing.Size(32, 32)
+        Me.picSvcStatus.TabIndex = 6
+        Me.picSvcStatus.TabStop = False
         '
         'btnSvcResume
         '
         Me.btnSvcResume.Location = New System.Drawing.Point(268, 64)
         Me.btnSvcResume.Name = "btnSvcResume"
         Me.btnSvcResume.Size = New System.Drawing.Size(75, 23)
-        Me.btnSvcResume.TabIndex = 5
+        Me.btnSvcResume.TabIndex = 6
         Me.btnSvcResume.Text = "Resume"
         Me.btnSvcResume.UseVisualStyleBackColor = True
         '
@@ -262,7 +285,7 @@ Partial Class SvcInfo
         Me.btnSvcPause.Location = New System.Drawing.Point(187, 64)
         Me.btnSvcPause.Name = "btnSvcPause"
         Me.btnSvcPause.Size = New System.Drawing.Size(75, 23)
-        Me.btnSvcPause.TabIndex = 4
+        Me.btnSvcPause.TabIndex = 5
         Me.btnSvcPause.Text = "Pause"
         Me.btnSvcPause.UseVisualStyleBackColor = True
         '
@@ -271,7 +294,7 @@ Partial Class SvcInfo
         Me.btnSvcStop.Location = New System.Drawing.Point(106, 64)
         Me.btnSvcStop.Name = "btnSvcStop"
         Me.btnSvcStop.Size = New System.Drawing.Size(75, 23)
-        Me.btnSvcStop.TabIndex = 3
+        Me.btnSvcStop.TabIndex = 4
         Me.btnSvcStop.Text = "Stop"
         Me.btnSvcStop.UseVisualStyleBackColor = True
         '
@@ -280,7 +303,7 @@ Partial Class SvcInfo
         Me.btnSvcStart.Location = New System.Drawing.Point(25, 64)
         Me.btnSvcStart.Name = "btnSvcStart"
         Me.btnSvcStart.Size = New System.Drawing.Size(75, 23)
-        Me.btnSvcStart.TabIndex = 2
+        Me.btnSvcStart.TabIndex = 3
         Me.btnSvcStart.Text = "Start"
         Me.btnSvcStart.UseVisualStyleBackColor = True
         '
@@ -303,24 +326,6 @@ Partial Class SvcInfo
         Me.Label6.TabIndex = 0
         Me.Label6.Text = "Service Status:"
         '
-        'picSvcStatus
-        '
-        Me.picSvcStatus.Image = Global.CMC.My.Resources.Resources._stop
-        Me.picSvcStatus.Location = New System.Drawing.Point(311, 11)
-        Me.picSvcStatus.Name = "picSvcStatus"
-        Me.picSvcStatus.Size = New System.Drawing.Size(32, 32)
-        Me.picSvcStatus.TabIndex = 6
-        Me.picSvcStatus.TabStop = False
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.PictureBox1.Location = New System.Drawing.Point(328, 19)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(34, 34)
-        Me.PictureBox1.TabIndex = 3
-        Me.PictureBox1.TabStop = False
-        '
         'SvcInfo
         '
         Me.AcceptButton = Me.Cancel_Button
@@ -341,10 +346,10 @@ Partial Class SvcInfo
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.gbGeneral.ResumeLayout(False)
         Me.gbGeneral.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbSvcStatus.ResumeLayout(False)
         Me.gbSvcStatus.PerformLayout()
         CType(Me.picSvcStatus, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -367,12 +372,12 @@ Partial Class SvcInfo
     Friend WithEvents lblSvcStatus As System.Windows.Forms.Label
     Friend WithEvents Label6 As System.Windows.Forms.Label
     Friend WithEvents PictureBox1 As System.Windows.Forms.PictureBox
-    Friend WithEvents lblSvcAccount As System.Windows.Forms.Label
     Friend WithEvents Label7 As System.Windows.Forms.Label
     Friend WithEvents txtSvcPath As System.Windows.Forms.TextBox
     Friend WithEvents txtSvcCaption As System.Windows.Forms.TextBox
     Friend WithEvents txtSvcName As System.Windows.Forms.TextBox
     Friend WithEvents picSvcStatus As System.Windows.Forms.PictureBox
     Friend WithEvents progBar As System.Windows.Forms.ProgressBar
+    Friend WithEvents txtSvcAccount As System.Windows.Forms.TextBox
 
 End Class
