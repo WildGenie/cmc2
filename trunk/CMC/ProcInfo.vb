@@ -59,6 +59,8 @@ Public Class ProcInfo
         ' start the clock ticking
         Timer1.Start()
 
+        PictureBox2.Image = Drawing.Icon.ExtractAssociatedIcon(txtProcPath.Text).ToBitmap
+
     End Sub
 
     Private Sub Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Cancel_Button.Click

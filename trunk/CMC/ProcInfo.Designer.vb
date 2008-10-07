@@ -59,10 +59,12 @@ Partial Class ProcInfo
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.gbProcResources.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -91,6 +93,7 @@ Partial Class ProcInfo
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.PictureBox2)
         Me.GroupBox1.Controls.Add(Me.lblNoProcess)
         Me.GroupBox1.Controls.Add(Me.txtProcOwner)
         Me.GroupBox1.Controls.Add(Me.txtProcPath)
@@ -124,7 +127,7 @@ Partial Class ProcInfo
         Me.txtProcOwner.Name = "txtProcOwner"
         Me.txtProcOwner.ReadOnly = True
         Me.txtProcOwner.Size = New System.Drawing.Size(289, 20)
-        Me.txtProcOwner.TabIndex = 8
+        Me.txtProcOwner.TabIndex = 5
         '
         'txtProcPath
         '
@@ -132,23 +135,23 @@ Partial Class ProcInfo
         Me.txtProcPath.Name = "txtProcPath"
         Me.txtProcPath.ReadOnly = True
         Me.txtProcPath.Size = New System.Drawing.Size(289, 20)
-        Me.txtProcPath.TabIndex = 7
+        Me.txtProcPath.TabIndex = 4
         '
         'txtProcPid
         '
-        Me.txtProcPid.Location = New System.Drawing.Point(144, 73)
+        Me.txtProcPid.Location = New System.Drawing.Point(109, 73)
         Me.txtProcPid.Name = "txtProcPid"
         Me.txtProcPid.ReadOnly = True
         Me.txtProcPid.Size = New System.Drawing.Size(176, 20)
-        Me.txtProcPid.TabIndex = 6
+        Me.txtProcPid.TabIndex = 3
         '
         'txtProcName
         '
-        Me.txtProcName.Location = New System.Drawing.Point(144, 41)
+        Me.txtProcName.Location = New System.Drawing.Point(109, 41)
         Me.txtProcName.Name = "txtProcName"
         Me.txtProcName.ReadOnly = True
         Me.txtProcName.Size = New System.Drawing.Size(176, 20)
-        Me.txtProcName.TabIndex = 5
+        Me.txtProcName.TabIndex = 2
         '
         'Label6
         '
@@ -248,7 +251,7 @@ Partial Class ProcInfo
         Me.txtPeakPageFile.Name = "txtPeakPageFile"
         Me.txtPeakPageFile.ReadOnly = True
         Me.txtPeakPageFile.Size = New System.Drawing.Size(100, 20)
-        Me.txtPeakPageFile.TabIndex = 21
+        Me.txtPeakPageFile.TabIndex = 9
         '
         'wmiCheckbox
         '
@@ -261,6 +264,7 @@ Partial Class ProcInfo
         Me.wmiCheckbox.Name = "wmiCheckbox"
         Me.wmiCheckbox.Size = New System.Drawing.Size(44, 17)
         Me.wmiCheckbox.TabIndex = 20
+        Me.wmiCheckbox.TabStop = False
         Me.wmiCheckbox.Text = "wmi"
         Me.wmiCheckbox.UseVisualStyleBackColor = True
         Me.wmiCheckbox.Visible = False
@@ -282,7 +286,7 @@ Partial Class ProcInfo
         Me.txtPeakWorkingSet.Name = "txtPeakWorkingSet"
         Me.txtPeakWorkingSet.ReadOnly = True
         Me.txtPeakWorkingSet.Size = New System.Drawing.Size(100, 20)
-        Me.txtPeakWorkingSet.TabIndex = 8
+        Me.txtPeakWorkingSet.TabIndex = 7
         '
         'txtWorkingSet
         '
@@ -291,7 +295,7 @@ Partial Class ProcInfo
         Me.txtWorkingSet.Name = "txtWorkingSet"
         Me.txtWorkingSet.ReadOnly = True
         Me.txtWorkingSet.Size = New System.Drawing.Size(100, 20)
-        Me.txtWorkingSet.TabIndex = 14
+        Me.txtWorkingSet.TabIndex = 6
         '
         'Label13
         '
@@ -327,7 +331,7 @@ Partial Class ProcInfo
         Me.txtPageFile.Name = "txtPageFile"
         Me.txtPageFile.ReadOnly = True
         Me.txtPageFile.Size = New System.Drawing.Size(100, 20)
-        Me.txtPageFile.TabIndex = 10
+        Me.txtPageFile.TabIndex = 8
         '
         'Label11
         '
@@ -354,7 +358,7 @@ Partial Class ProcInfo
         Me.txtHandleCount.Name = "txtHandleCount"
         Me.txtHandleCount.ReadOnly = True
         Me.txtHandleCount.Size = New System.Drawing.Size(100, 20)
-        Me.txtHandleCount.TabIndex = 7
+        Me.txtHandleCount.TabIndex = 10
         '
         'Label4
         '
@@ -412,6 +416,15 @@ Partial Class ProcInfo
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
         '
+        'PictureBox2
+        '
+        Me.PictureBox2.ErrorImage = Nothing
+        Me.PictureBox2.Location = New System.Drawing.Point(295, 36)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(32, 32)
+        Me.PictureBox2.TabIndex = 10
+        Me.PictureBox2.TabStop = False
+        '
         'ProcInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -436,6 +449,7 @@ Partial Class ProcInfo
         Me.gbProcResources.ResumeLayout(False)
         Me.gbProcResources.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -475,5 +489,6 @@ Partial Class ProcInfo
     Friend WithEvents Label15 As System.Windows.Forms.Label
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtPeakPageFile As System.Windows.Forms.TextBox
+    Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
 
 End Class

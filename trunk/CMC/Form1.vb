@@ -171,7 +171,6 @@ Public Class Form1
     Friend WithEvents interactive As System.Windows.Forms.CheckBox
     Friend WithEvents newprocess As System.Windows.Forms.TextBox
     Private WithEvents services As System.Windows.Forms.TabPage
-    Friend WithEvents svc_datagrid As System.Windows.Forms.DataGridView
     Friend WithEvents Label30 As System.Windows.Forms.Label
     Friend WithEvents refreshsvc As System.Windows.Forms.Button
     Friend WithEvents network As System.Windows.Forms.TabPage
@@ -469,15 +468,6 @@ Public Class Form1
     Friend WithEvents BackgroundWorker_OS As System.ComponentModel.BackgroundWorker
     Friend WithEvents DataFetchPanel As System.Windows.Forms.Panel
     Friend WithEvents DataFetchPanelLabel As System.Windows.Forms.Label
-    Friend WithEvents column1 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column2 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column3 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Column4 As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents description As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AcceptPause As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents AcceptStop As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents PathName As System.Windows.Forms.DataGridViewTextBoxColumn
-    Friend WithEvents Account As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pLocation As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents sw_Wait_Panel As System.Windows.Forms.Panel
@@ -496,6 +486,19 @@ Public Class Form1
     Friend WithEvents Label33 As System.Windows.Forms.Label
     Friend WithEvents Label32 As System.Windows.Forms.Label
     Friend WithEvents DataFetchPanelLabel2 As System.Windows.Forms.Label
+    Friend WithEvents ListView_Services As System.Windows.Forms.ListView
+    Friend WithEvents svc_displayname As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_state As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_startup As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_name As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_description As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_acceptpause As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_acceptstop As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_pathname As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_account As System.Windows.Forms.ColumnHeader
+    Friend WithEvents svc_wait_panel As System.Windows.Forms.Panel
+    Friend WithEvents Label38 As System.Windows.Forms.Label
+    Friend WithEvents col_sw_unin As System.Windows.Forms.ColumnHeader
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -519,7 +522,6 @@ Public Class Form1
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(Form1))
-        Dim DataGridViewCellStyle3 As System.Windows.Forms.DataGridViewCellStyle = New System.Windows.Forms.DataGridViewCellStyle
         Me.ToolStripContainer1 = New System.Windows.Forms.ToolStripContainer
         Me.ButtonClear = New System.Windows.Forms.Button
         Me.ButtonExit = New System.Windows.Forms.Button
@@ -781,7 +783,7 @@ Public Class Form1
         Me.ShowUpdates = New System.Windows.Forms.CheckBox
         Me.processes = New System.Windows.Forms.TabPage
         Me.ListView_Processes = New System.Windows.Forms.ListView
-        Me.proc_name = New System.Windows.Forms.ColumnHeader
+        Me.proc_name = New System.Windows.Forms.ColumnHeader("(none)")
         Me.proc_id = New System.Windows.Forms.ColumnHeader
         Me.proc_mem = New System.Windows.Forms.ColumnHeader
         Me.proc_path = New System.Windows.Forms.ColumnHeader
@@ -793,9 +795,10 @@ Public Class Form1
         Me.mnuProcKill = New System.Windows.Forms.ToolStripMenuItem
         Me.mnuProcGoogle = New System.Windows.Forms.ToolStripMenuItem
         Me.mnuCopyPath = New System.Windows.Forms.ToolStripMenuItem
-        Me.Label7 = New System.Windows.Forms.Label
-        Me.get_processes_by_wmi_checkbox = New System.Windows.Forms.CheckBox
+        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ProcessRefresh = New System.Windows.Forms.Button
+        Me.get_processes_by_wmi_checkbox = New System.Windows.Forms.CheckBox
+        Me.Label7 = New System.Windows.Forms.Label
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
         Me.ScheduleButton = New System.Windows.Forms.Button
         Me.ScheduleTime = New System.Windows.Forms.TextBox
@@ -804,21 +807,25 @@ Public Class Form1
         Me.interactive = New System.Windows.Forms.CheckBox
         Me.newprocess = New System.Windows.Forms.TextBox
         Me.Label41 = New System.Windows.Forms.Label
-        Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.services = New System.Windows.Forms.TabPage
-        Me.svc_datagrid = New System.Windows.Forms.DataGridView
-        Me.column1 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column2 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column3 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Column4 = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.description = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.AcceptPause = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.AcceptStop = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.PathName = New System.Windows.Forms.DataGridViewTextBoxColumn
-        Me.Account = New System.Windows.Forms.DataGridViewTextBoxColumn
+        Me.svc_wait_panel = New System.Windows.Forms.Panel
+        Me.Label38 = New System.Windows.Forms.Label
+        Me.ListView_Services = New System.Windows.Forms.ListView
+        Me.svc_displayname = New System.Windows.Forms.ColumnHeader
+        Me.svc_state = New System.Windows.Forms.ColumnHeader
+        Me.svc_startup = New System.Windows.Forms.ColumnHeader
+        Me.svc_name = New System.Windows.Forms.ColumnHeader
+        Me.svc_description = New System.Windows.Forms.ColumnHeader
+        Me.svc_acceptpause = New System.Windows.Forms.ColumnHeader
+        Me.svc_acceptstop = New System.Windows.Forms.ColumnHeader
+        Me.svc_pathname = New System.Windows.Forms.ColumnHeader
+        Me.svc_account = New System.Windows.Forms.ColumnHeader
         Me.Label30 = New System.Windows.Forms.Label
         Me.refreshsvc = New System.Windows.Forms.Button
         Me.network = New System.Windows.Forms.TabPage
+        Me.nw_Wait_Panel = New System.Windows.Forms.Panel
+        Me.Label34 = New System.Windows.Forms.Label
+        Me.Label33 = New System.Windows.Forms.Label
         Me.AdaptorID = New System.Windows.Forms.TextBox
         Me.networkupdate = New System.Windows.Forms.Button
         Me.GroupBox6 = New System.Windows.Forms.GroupBox
@@ -852,6 +859,7 @@ Public Class Form1
         Me.hostname = New System.Windows.Forms.TextBox
         Me.os = New System.Windows.Forms.TabPage
         Me.DataFetchPanel = New System.Windows.Forms.Panel
+        Me.DataFetchPanelLabel2 = New System.Windows.Forms.Label
         Me.DataFetchPanelLabel = New System.Windows.Forms.Label
         Me.admanagement = New System.Windows.Forms.Button
         Me.cpu_info_lbl = New System.Windows.Forms.LinkLabel
@@ -1006,10 +1014,7 @@ Public Class Form1
         Me.BackgroundWorker_OS = New System.ComponentModel.BackgroundWorker
         Me.BackgroundWorker_NW = New System.ComponentModel.BackgroundWorker
         Me.Label32 = New System.Windows.Forms.Label
-        Me.nw_Wait_Panel = New System.Windows.Forms.Panel
-        Me.Label33 = New System.Windows.Forms.Label
-        Me.Label34 = New System.Windows.Forms.Label
-        Me.DataFetchPanelLabel2 = New System.Windows.Forms.Label
+        Me.col_sw_unin = New System.Windows.Forms.ColumnHeader
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1041,8 +1046,9 @@ Public Class Form1
         Me.ProcContextMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.services.SuspendLayout()
-        CType(Me.svc_datagrid, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.svc_wait_panel.SuspendLayout()
         Me.network.SuspendLayout()
+        Me.nw_Wait_Panel.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.os.SuspendLayout()
@@ -1063,7 +1069,6 @@ Public Class Form1
         Me.GroupBox9.SuspendLayout()
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
-        Me.nw_Wait_Panel.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -3358,9 +3363,11 @@ Public Class Form1
         '
         'swListView
         '
-        Me.swListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col_sw_name, Me.col_sw_ver, Me.col_sw_pub, Me.col_sw_date, Me.col_sw_loc, Me.col_sw_unins, Me.col_sw_url})
+        Me.swListView.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.swListView.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.col_sw_name, Me.col_sw_ver, Me.col_sw_pub, Me.col_sw_date, Me.col_sw_loc, Me.col_sw_unin, Me.col_sw_unins, Me.col_sw_url})
         Me.swListView.ContextMenuStrip = Me.swContextmenu
         Me.swListView.FullRowSelect = True
+        Me.swListView.GridLines = True
         Me.swListView.Location = New System.Drawing.Point(0, 27)
         Me.swListView.MultiSelect = False
         Me.swListView.Name = "swListView"
@@ -3397,11 +3404,13 @@ Public Class Form1
         '
         'col_sw_unins
         '
+        Me.col_sw_unins.DisplayIndex = 5
         Me.col_sw_unins.Text = "Unins"
         Me.col_sw_unins.Width = 0
         '
         'col_sw_url
         '
+        Me.col_sw_url.DisplayIndex = 6
         Me.col_sw_url.Text = "Web Site"
         Me.col_sw_url.Width = 0
         '
@@ -3470,9 +3479,9 @@ Public Class Form1
         '
         Me.processes.BackColor = System.Drawing.Color.Transparent
         Me.processes.Controls.Add(Me.ListView_Processes)
-        Me.processes.Controls.Add(Me.Label7)
-        Me.processes.Controls.Add(Me.get_processes_by_wmi_checkbox)
         Me.processes.Controls.Add(Me.ProcessRefresh)
+        Me.processes.Controls.Add(Me.get_processes_by_wmi_checkbox)
+        Me.processes.Controls.Add(Me.Label7)
         Me.processes.Controls.Add(Me.GroupBox1)
         Me.processes.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.processes.Location = New System.Drawing.Point(4, 22)
@@ -3488,9 +3497,12 @@ Public Class Form1
         Me.ListView_Processes.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.proc_name, Me.proc_id, Me.proc_mem, Me.proc_path})
         Me.ListView_Processes.ContextMenuStrip = Me.ProcContextMenu
         Me.ListView_Processes.FullRowSelect = True
-        Me.ListView_Processes.Location = New System.Drawing.Point(4, 22)
+        Me.ListView_Processes.GridLines = True
+        Me.ListView_Processes.Location = New System.Drawing.Point(4, 19)
+        Me.ListView_Processes.MultiSelect = False
         Me.ListView_Processes.Name = "ListView_Processes"
-        Me.ListView_Processes.Size = New System.Drawing.Size(374, 152)
+        Me.ListView_Processes.Size = New System.Drawing.Size(374, 155)
+        Me.ListView_Processes.SmallImageList = Me.ImageList1
         Me.ListView_Processes.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.ListView_Processes.TabIndex = 16
         Me.ListView_Processes.UseCompatibleStateImageBehavior = False
@@ -3566,6 +3578,48 @@ Public Class Form1
         Me.mnuCopyPath.Size = New System.Drawing.Size(133, 22)
         Me.mnuCopyPath.Text = "copy path"
         '
+        'ImageList1
+        '
+        Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
+        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
+        Me.ImageList1.Images.SetKeyName(0, "windows")
+        Me.ImageList1.Images.SetKeyName(1, "procform.ico")
+        Me.ImageList1.Images.SetKeyName(2, "win_apps.png")
+        Me.ImageList1.Images.SetKeyName(3, "svcStarted.png")
+        Me.ImageList1.Images.SetKeyName(4, "svcStopped.png")
+        Me.ImageList1.Images.SetKeyName(5, "Adobe.ico")
+        Me.ImageList1.Images.SetKeyName(6, "mcafee.png")
+        Me.ImageList1.Images.SetKeyName(7, "vmware.png")
+        Me.ImageList1.Images.SetKeyName(8, "vnc.png")
+        Me.ImageList1.Images.SetKeyName(9, "Internet Explorer.ico")
+        Me.ImageList1.Images.SetKeyName(10, "Quicktime.ico")
+        Me.ImageList1.Images.SetKeyName(11, "Nero.ico")
+        Me.ImageList1.Images.SetKeyName(12, "database_process.png")
+        '
+        'ProcessRefresh
+        '
+        Me.ProcessRefresh.Enabled = False
+        Me.ProcessRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.ProcessRefresh.Location = New System.Drawing.Point(331, 0)
+        Me.ProcessRefresh.Name = "ProcessRefresh"
+        Me.ProcessRefresh.Size = New System.Drawing.Size(48, 20)
+        Me.ProcessRefresh.TabIndex = 9
+        Me.ProcessRefresh.Text = "refresh"
+        '
+        'get_processes_by_wmi_checkbox
+        '
+        Me.get_processes_by_wmi_checkbox.AutoSize = True
+        Me.get_processes_by_wmi_checkbox.Checked = True
+        Me.get_processes_by_wmi_checkbox.CheckState = System.Windows.Forms.CheckState.Checked
+        Me.get_processes_by_wmi_checkbox.ForeColor = System.Drawing.Color.Gray
+        Me.get_processes_by_wmi_checkbox.Location = New System.Drawing.Point(206, 1)
+        Me.get_processes_by_wmi_checkbox.Name = "get_processes_by_wmi_checkbox"
+        Me.get_processes_by_wmi_checkbox.Size = New System.Drawing.Size(44, 17)
+        Me.get_processes_by_wmi_checkbox.TabIndex = 14
+        Me.get_processes_by_wmi_checkbox.Text = "wmi"
+        Me.get_processes_by_wmi_checkbox.UseVisualStyleBackColor = True
+        Me.get_processes_by_wmi_checkbox.Visible = False
+        '
         'Label7
         '
         Me.Label7.AutoSize = True
@@ -3575,30 +3629,6 @@ Public Class Form1
         Me.Label7.Size = New System.Drawing.Size(93, 13)
         Me.Label7.TabIndex = 15
         Me.Label7.Text = "right click for menu"
-        '
-        'get_processes_by_wmi_checkbox
-        '
-        Me.get_processes_by_wmi_checkbox.AutoSize = True
-        Me.get_processes_by_wmi_checkbox.Checked = True
-        Me.get_processes_by_wmi_checkbox.CheckState = System.Windows.Forms.CheckState.Checked
-        Me.get_processes_by_wmi_checkbox.ForeColor = System.Drawing.Color.Gray
-        Me.get_processes_by_wmi_checkbox.Location = New System.Drawing.Point(206, 3)
-        Me.get_processes_by_wmi_checkbox.Name = "get_processes_by_wmi_checkbox"
-        Me.get_processes_by_wmi_checkbox.Size = New System.Drawing.Size(44, 17)
-        Me.get_processes_by_wmi_checkbox.TabIndex = 14
-        Me.get_processes_by_wmi_checkbox.Text = "wmi"
-        Me.get_processes_by_wmi_checkbox.UseVisualStyleBackColor = True
-        Me.get_processes_by_wmi_checkbox.Visible = False
-        '
-        'ProcessRefresh
-        '
-        Me.ProcessRefresh.Enabled = False
-        Me.ProcessRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.ProcessRefresh.Location = New System.Drawing.Point(330, 0)
-        Me.ProcessRefresh.Name = "ProcessRefresh"
-        Me.ProcessRefresh.Size = New System.Drawing.Size(48, 20)
-        Me.ProcessRefresh.TabIndex = 9
-        Me.ProcessRefresh.Text = "refresh"
         '
         'GroupBox1
         '
@@ -3688,17 +3718,12 @@ Public Class Form1
         Me.Label41.TabIndex = 92
         Me.Label41.Text = "or"
         '
-        'ImageList1
-        '
-        Me.ImageList1.ColorDepth = System.Windows.Forms.ColorDepth.Depth8Bit
-        Me.ImageList1.ImageSize = New System.Drawing.Size(16, 16)
-        Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
-        '
         'services
         '
         Me.services.BackColor = System.Drawing.Color.Transparent
         Me.services.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
-        Me.services.Controls.Add(Me.svc_datagrid)
+        Me.services.Controls.Add(Me.svc_wait_panel)
+        Me.services.Controls.Add(Me.ListView_Services)
         Me.services.Controls.Add(Me.Label30)
         Me.services.Controls.Add(Me.refreshsvc)
         Me.services.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
@@ -3709,102 +3734,90 @@ Public Class Form1
         Me.services.Text = "Services"
         Me.services.UseVisualStyleBackColor = True
         '
-        'svc_datagrid
+        'svc_wait_panel
         '
-        Me.svc_datagrid.AllowUserToAddRows = False
-        Me.svc_datagrid.AllowUserToDeleteRows = False
-        Me.svc_datagrid.AllowUserToResizeRows = False
-        Me.svc_datagrid.BackgroundColor = System.Drawing.Color.WhiteSmoke
-        Me.svc_datagrid.CellBorderStyle = System.Windows.Forms.DataGridViewCellBorderStyle.None
-        Me.svc_datagrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.svc_datagrid.Columns.AddRange(New System.Windows.Forms.DataGridViewColumn() {Me.column1, Me.Column2, Me.Column3, Me.Column4, Me.description, Me.AcceptPause, Me.AcceptStop, Me.PathName, Me.Account})
-        Me.svc_datagrid.GridColor = System.Drawing.SystemColors.Window
-        Me.svc_datagrid.Location = New System.Drawing.Point(0, 21)
-        Me.svc_datagrid.MultiSelect = False
-        Me.svc_datagrid.Name = "svc_datagrid"
-        Me.svc_datagrid.ReadOnly = True
-        Me.svc_datagrid.RowHeadersVisible = False
-        DataGridViewCellStyle3.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.svc_datagrid.RowsDefaultCellStyle = DataGridViewCellStyle3
-        Me.svc_datagrid.RowTemplate.DefaultCellStyle.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionBackColor = System.Drawing.Color.DodgerBlue
-        Me.svc_datagrid.RowTemplate.DefaultCellStyle.SelectionForeColor = System.Drawing.Color.White
-        Me.svc_datagrid.RowTemplate.Height = 18
-        Me.svc_datagrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
-        Me.svc_datagrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.svc_datagrid.ShowCellToolTips = False
-        Me.svc_datagrid.ShowEditingIcon = False
-        Me.svc_datagrid.Size = New System.Drawing.Size(382, 223)
-        Me.svc_datagrid.TabIndex = 17
-        Me.svc_datagrid.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.svc_datagrid, "Double click for properties")
+        Me.svc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.svc_wait_panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.svc_wait_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.svc_wait_panel.Controls.Add(Me.Label38)
+        Me.svc_wait_panel.Location = New System.Drawing.Point(127, 104)
+        Me.svc_wait_panel.Name = "svc_wait_panel"
+        Me.svc_wait_panel.Size = New System.Drawing.Size(133, 48)
+        Me.svc_wait_panel.TabIndex = 74
+        Me.svc_wait_panel.Visible = False
         '
-        'column1
+        'Label38
         '
-        Me.column1.Frozen = True
-        Me.column1.HeaderText = "Display Name"
-        Me.column1.Name = "column1"
-        Me.column1.ReadOnly = True
-        Me.column1.Width = 256
+        Me.Label38.AutoSize = True
+        Me.Label38.BackColor = System.Drawing.Color.Transparent
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.ForeColor = System.Drawing.Color.White
+        Me.Label38.Location = New System.Drawing.Point(24, 17)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(100, 15)
+        Me.Label38.TabIndex = 0
+        Me.Label38.Text = "getting services..."
         '
-        'Column2
+        'ListView_Services
         '
-        Me.Column2.Frozen = True
-        Me.Column2.HeaderText = "State"
-        Me.Column2.Name = "Column2"
-        Me.Column2.ReadOnly = True
-        Me.Column2.Width = 60
+        Me.ListView_Services.BackColor = System.Drawing.Color.WhiteSmoke
+        Me.ListView_Services.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me.svc_displayname, Me.svc_state, Me.svc_startup, Me.svc_name, Me.svc_description, Me.svc_acceptpause, Me.svc_acceptstop, Me.svc_pathname, Me.svc_account})
+        Me.ListView_Services.ContextMenuStrip = Me.svccontextmenu
+        Me.ListView_Services.FullRowSelect = True
+        Me.ListView_Services.GridLines = True
+        Me.ListView_Services.Location = New System.Drawing.Point(1, 21)
+        Me.ListView_Services.MultiSelect = False
+        Me.ListView_Services.Name = "ListView_Services"
+        Me.ListView_Services.Size = New System.Drawing.Size(382, 227)
+        Me.ListView_Services.SmallImageList = Me.ImageList1
+        Me.ListView_Services.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.ListView_Services.TabIndex = 19
+        Me.ListView_Services.UseCompatibleStateImageBehavior = False
+        Me.ListView_Services.View = System.Windows.Forms.View.Details
         '
-        'Column3
+        'svc_displayname
         '
-        Me.Column3.Frozen = True
-        Me.Column3.HeaderText = "Startup"
-        Me.Column3.Name = "Column3"
-        Me.Column3.ReadOnly = True
-        Me.Column3.Width = 60
+        Me.svc_displayname.Text = "DisplayName"
+        Me.svc_displayname.Width = 210
         '
-        'Column4
+        'svc_state
         '
-        Me.Column4.Frozen = True
-        Me.Column4.HeaderText = "Name"
-        Me.Column4.Name = "Column4"
-        Me.Column4.ReadOnly = True
-        Me.Column4.Visible = False
+        Me.svc_state.Text = "State"
+        Me.svc_state.Width = 88
         '
-        'description
+        'svc_startup
         '
-        Me.description.HeaderText = "Description"
-        Me.description.Name = "description"
-        Me.description.ReadOnly = True
-        Me.description.Visible = False
+        Me.svc_startup.Text = "Startup"
         '
-        'AcceptPause
+        'svc_name
         '
-        Me.AcceptPause.HeaderText = "AcceptPause"
-        Me.AcceptPause.Name = "AcceptPause"
-        Me.AcceptPause.ReadOnly = True
-        Me.AcceptPause.Visible = False
+        Me.svc_name.Text = "name"
+        Me.svc_name.Width = 0
         '
-        'AcceptStop
+        'svc_description
         '
-        Me.AcceptStop.HeaderText = "AcceptStop"
-        Me.AcceptStop.Name = "AcceptStop"
-        Me.AcceptStop.ReadOnly = True
-        Me.AcceptStop.Visible = False
+        Me.svc_description.Text = "Description"
+        Me.svc_description.Width = 0
         '
-        'PathName
+        'svc_acceptpause
         '
-        Me.PathName.HeaderText = "PathName"
-        Me.PathName.Name = "PathName"
-        Me.PathName.ReadOnly = True
-        Me.PathName.Visible = False
+        Me.svc_acceptpause.Text = "Accepts pause"
+        Me.svc_acceptpause.Width = 0
         '
-        'Account
+        'svc_acceptstop
         '
-        Me.Account.HeaderText = "Account"
-        Me.Account.Name = "Account"
-        Me.Account.ReadOnly = True
-        Me.Account.Visible = False
+        Me.svc_acceptstop.Text = "Accepts Stop"
+        Me.svc_acceptstop.Width = 0
+        '
+        'svc_pathname
+        '
+        Me.svc_pathname.Text = "Path"
+        Me.svc_pathname.Width = 0
+        '
+        'svc_account
+        '
+        Me.svc_account.Text = "Account"
+        Me.svc_account.Width = 0
         '
         'Label30
         '
@@ -3848,6 +3861,42 @@ Public Class Form1
         Me.network.Size = New System.Drawing.Size(382, 247)
         Me.network.TabIndex = 8
         Me.network.Text = "Network"
+        '
+        'nw_Wait_Panel
+        '
+        Me.nw_Wait_Panel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.nw_Wait_Panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.nw_Wait_Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.nw_Wait_Panel.Controls.Add(Me.Label34)
+        Me.nw_Wait_Panel.Controls.Add(Me.Label33)
+        Me.nw_Wait_Panel.Location = New System.Drawing.Point(123, 89)
+        Me.nw_Wait_Panel.Name = "nw_Wait_Panel"
+        Me.nw_Wait_Panel.Size = New System.Drawing.Size(133, 72)
+        Me.nw_Wait_Panel.TabIndex = 72
+        Me.nw_Wait_Panel.Visible = False
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.White
+        Me.Label34.Location = New System.Drawing.Point(32, 39)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(78, 15)
+        Me.Label34.TabIndex = 1
+        Me.Label34.Text = "please wait..."
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.BackColor = System.Drawing.Color.Transparent
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.White
+        Me.Label33.Location = New System.Drawing.Point(32, 16)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(71, 15)
+        Me.Label33.TabIndex = 0
+        Me.Label33.Text = "getting data"
         '
         'AdaptorID
         '
@@ -4242,9 +4291,21 @@ Public Class Form1
         Me.DataFetchPanel.Controls.Add(Me.DataFetchPanelLabel)
         Me.DataFetchPanel.Location = New System.Drawing.Point(127, 55)
         Me.DataFetchPanel.Name = "DataFetchPanel"
-        Me.DataFetchPanel.Size = New System.Drawing.Size(133, 65)
+        Me.DataFetchPanel.Size = New System.Drawing.Size(133, 45)
         Me.DataFetchPanel.TabIndex = 71
         Me.DataFetchPanel.Visible = False
+        '
+        'DataFetchPanelLabel2
+        '
+        Me.DataFetchPanelLabel2.AutoSize = True
+        Me.DataFetchPanelLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.DataFetchPanelLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataFetchPanelLabel2.ForeColor = System.Drawing.Color.White
+        Me.DataFetchPanelLabel2.Location = New System.Drawing.Point(34, 35)
+        Me.DataFetchPanelLabel2.Name = "DataFetchPanelLabel2"
+        Me.DataFetchPanelLabel2.Size = New System.Drawing.Size(80, 15)
+        Me.DataFetchPanelLabel2.TabIndex = 1
+        Me.DataFetchPanelLabel2.Text = "getting data..."
         '
         'DataFetchPanelLabel
         '
@@ -4252,7 +4313,7 @@ Public Class Form1
         Me.DataFetchPanelLabel.BackColor = System.Drawing.Color.Transparent
         Me.DataFetchPanelLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataFetchPanelLabel.ForeColor = System.Drawing.Color.White
-        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(37, 16)
+        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(34, 19)
         Me.DataFetchPanelLabel.Name = "DataFetchPanelLabel"
         Me.DataFetchPanelLabel.Size = New System.Drawing.Size(76, 15)
         Me.DataFetchPanelLabel.TabIndex = 0
@@ -5892,53 +5953,11 @@ Public Class Form1
         Me.Label32.TabIndex = 0
         Me.Label32.Text = "getting data..."
         '
-        'nw_Wait_Panel
+        'col_sw_unin
         '
-        Me.nw_Wait_Panel.BackColor = System.Drawing.Color.DodgerBlue
-        Me.nw_Wait_Panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.nw_Wait_Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.nw_Wait_Panel.Controls.Add(Me.Label34)
-        Me.nw_Wait_Panel.Controls.Add(Me.Label33)
-        Me.nw_Wait_Panel.Location = New System.Drawing.Point(123, 89)
-        Me.nw_Wait_Panel.Name = "nw_Wait_Panel"
-        Me.nw_Wait_Panel.Size = New System.Drawing.Size(133, 72)
-        Me.nw_Wait_Panel.TabIndex = 72
-        Me.nw_Wait_Panel.Visible = False
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.BackColor = System.Drawing.Color.Transparent
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.ForeColor = System.Drawing.Color.White
-        Me.Label33.Location = New System.Drawing.Point(32, 16)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(71, 15)
-        Me.Label33.TabIndex = 0
-        Me.Label33.Text = "getting data"
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.ForeColor = System.Drawing.Color.White
-        Me.Label34.Location = New System.Drawing.Point(32, 39)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(78, 15)
-        Me.Label34.TabIndex = 1
-        Me.Label34.Text = "please wait..."
-        '
-        'DataFetchPanelLabel2
-        '
-        Me.DataFetchPanelLabel2.AutoSize = True
-        Me.DataFetchPanelLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.DataFetchPanelLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataFetchPanelLabel2.ForeColor = System.Drawing.Color.White
-        Me.DataFetchPanelLabel2.Location = New System.Drawing.Point(34, 38)
-        Me.DataFetchPanelLabel2.Name = "DataFetchPanelLabel2"
-        Me.DataFetchPanelLabel2.Size = New System.Drawing.Size(80, 15)
-        Me.DataFetchPanelLabel2.TabIndex = 1
-        Me.DataFetchPanelLabel2.Text = "getting data..."
+        Me.col_sw_unin.DisplayIndex = 7
+        Me.col_sw_unin.Text = "unin"
+        Me.col_sw_unin.Width = 0
         '
         'Form1
         '
@@ -6023,9 +6042,12 @@ Public Class Form1
         Me.GroupBox1.PerformLayout()
         Me.services.ResumeLayout(False)
         Me.services.PerformLayout()
-        CType(Me.svc_datagrid, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.svc_wait_panel.ResumeLayout(False)
+        Me.svc_wait_panel.PerformLayout()
         Me.network.ResumeLayout(False)
         Me.network.PerformLayout()
+        Me.nw_Wait_Panel.ResumeLayout(False)
+        Me.nw_Wait_Panel.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
@@ -6059,8 +6081,6 @@ Public Class Form1
         Me.GroupBox9.PerformLayout()
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
-        Me.nw_Wait_Panel.ResumeLayout(False)
-        Me.nw_Wait_Panel.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -6083,6 +6103,7 @@ Public Class Form1
     Private FormCleared As Boolean
     Private VNC_INSTALL_RUNNING As Boolean = False
     Private iTabIndex As Integer
+    Private ListView_SelectedItem_Colour As Color = Color.DodgerBlue
 
     ' Load Application and get settings
     Private Sub Form1_Load(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MyBase.Load
@@ -6390,8 +6411,8 @@ Public Class Form1
 
     End Sub
 
-    ' GO BUTTON....
-    Private MainThreadRunning As Boolean
+        ' GO BUTTON....
+        Private MainThreadRunning As Boolean
     Private Sub GO_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles GO_Button.Click
 
         ' disable the Go button to prevent double press.
@@ -6428,7 +6449,7 @@ Public Class Form1
         ' Display the connection status notification panel.
         Me.DataFetchPanelLabel.Text = "connecting..."
         Me.DataFetchPanelLabel2.Visible = False
-        Me.DataFetchPanelLabel.Height = 45
+        Me.DataFetchPanel.Height = 45
         Me.DataFetchPanel.Visible = True
         Me.DataFetchPanel.Refresh()
 
@@ -6483,7 +6504,7 @@ Public Class Form1
             ' Hardware , Network, Services, Processes
             If My.Settings.hw Then Me.RefreshHardware()
             If My.Settings.nw Then WMINetwork()
-            If My.Settings.sv Then GetSVClist()
+            If My.Settings.sv Then Me.RefreshServices()
             If My.Settings.pr Then RefreshProcesses()
 
 
@@ -7898,7 +7919,6 @@ Public Class Form1
 #Region "SERVICES"
 
     ' Currently selected service
-    Protected Friend sGridRowNumber As Integer
     Dim sGridCaption As String
     Dim sGridState As String
     Dim sGridStartMode As String
@@ -7908,89 +7928,168 @@ Public Class Form1
     Dim sGridCanStop As String
     Dim sGridPath As String
     Dim sGridAccount As String
+    Private SvcDataTable As DataTable
+    Private m_Svc_SortingColumn As ColumnHeader ' The listview column currently used for sorting.
 
     Private Sub refreshsvc_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles refreshsvc.Click
-        svc_datagrid.Rows.Clear()
-        svc_datagrid.Cursor = Cursors.AppStarting
-        Panel2.Text = "getting services..."
-
-        GetSVClist()
-
-        svc_datagrid.Sort(column1, ComponentModel.ListSortDirection.Ascending)
-        svc_datagrid.ClearSelection()
-        svc_datagrid.Focus()
-        svc_datagrid.Cursor = Cursors.Default
-        Panel2.Text = "ready"
+        RefreshServices()
+        ' take accept function away from refresh button once run
+        ' to allow opening service props dialog with enter key.
+        Me.AcceptButton = Nothing
     End Sub
-    Public Sub GetSVClist()
+    Private Sub RefreshServices()
+
+        Me.svc_wait_panel.Visible = True
+
+        Me.SvcDataTable = Nothing
+        Me.ListView_Services.Items.Clear()
+
+        ' although column 0 is presorted, next 4 lines cause reverse sort on FIRST click
+        Me.ListView_Services.Columns(0).Text = ".Name"
+        Me.ListView_Services.Columns(1).Text = "State"
+        Me.ListView_Services.Columns(2).Text = "Startup"
+        Me.m_Svc_SortingColumn = Me.ListView_Services.Columns(0)
+
+        ' Create new backgroundworker to query pc for services and load them into datatable.
+        Dim BackgroundWorker_Svc As New BackgroundWorker
+        With BackgroundWorker_Svc
+            AddHandler .DoWork, New System.ComponentModel.DoWorkEventHandler(AddressOf Me.LoadServicesIntoDataTable)
+            ' once completed, load the datatable contents into the listview.
+            AddHandler .RunWorkerCompleted, New System.ComponentModel.RunWorkerCompletedEventHandler(AddressOf Me.BackgroundWorker_Svc_Completed)
+            BackgroundWorker_Svc.RunWorkerAsync()
+        End With
+
+    End Sub
+    Private Sub BackgroundWorker_Svc_Completed(ByVal sender As Object, ByVal e As RunWorkerCompletedEventArgs)
+        Me.FillSvcListViewFromDataTable()
+        Me.svc_wait_panel.Visible = False
+        Me.ListView_Services.Focus()
+    End Sub
+
+    Private Sub LoadServicesIntoDataTable(ByVal sender As Object, ByVal e As DoWorkEventArgs)
+
+        SvcDataTable = New Data.DataTable
+
+        With Me.SvcDataTable.Columns
+            .Add(New DataColumn("s_DisplayName", GetType(String)))
+            .Add(New DataColumn("s_State", GetType(String)))
+            .Add(New DataColumn("s_Startup", GetType(String)))
+            .Add(New DataColumn("s_Name", GetType(String)))
+            .Add(New DataColumn("s_Description", GetType(String)))
+            .Add(New DataColumn("s_AcceptPause", GetType(String)))
+            .Add(New DataColumn("s_AcceptStop", GetType(String)))
+            .Add(New DataColumn("s_Path", GetType(String)))
+            .Add(New DataColumn("s_Account", GetType(String)))
+        End With
 
         Try
-            Dim queryCollection As ManagementObjectCollection
-            Dim svc As ManagementObject
-            queryCollection = wmi.wmiQuery _
+            Dim queryCollection As ManagementObjectCollection = wmi.wmiQuery _
                   ("SELECT Caption, Name, State, StartMode, Description, AcceptPause, AcceptStop, PathName, StartName FROM Win32_Service")
-            For Each svc In queryCollection
-                svc_datagrid.Rows.Add(svc("caption").ToString(), _
-                                      svc("state").ToString(), _
-                                      svc("StartMode").ToString(), _
-                                      svc("name").ToString(), _
-                                      CStr(svc("Description")), _
-                                      svc("acceptpause").ToString, _
-                                      svc("acceptstop").ToString, _
-                                      svc("pathName").ToString, _
-                                      svc("startName").ToString)
+            For Each m As ManagementObject In queryCollection
+
+                Dim dtrow As DataRow = SvcDataTable.NewRow
+                With dtrow
+                    .Item("s_DisplayName") = m("Caption").ToString()
+                    .Item("s_State") = CStr(m("state"))
+                    .Item("s_Startup") = CStr(m("startmode"))
+                    .Item("s_Name") = CStr(m("name"))
+                    .Item("s_Description") = CStr(m("Description"))
+                    .Item("s_AcceptPause") = CStr(m("AcceptPause"))
+                    .Item("s_AcceptStop") = CStr(m("AcceptStop"))
+                    .Item("s_Path") = CStr(m("PathName"))
+                    .Item("s_Account") = CStr(m("StartName"))
+                End With
+                SvcDataTable.Rows.Add(dtrow)
             Next
 
-            
         Catch ex As Exception
-            MsgBox("An error occurred: " & ex.Message)
+            MsgBox("An error occurred loading service information: " & vbCr & ex.Message, MsgBoxStyle.Critical, "Service Info Failure")
         End Try
 
     End Sub
-    Public Sub UpdateSelectedService(ByVal Row As Integer)
+    Private Sub FillSvcListViewFromDataTable()
+
+        ' Add datatable items to ListView
+        For Each row As DataRow In Me.SvcDataTable.Rows
+
+            If row(0) Is DBNull.Value Then row(0) = String.Empty
+            If row(1) Is DBNull.Value Then row(1) = String.Empty
+            If row(2) Is DBNull.Value Then row(2) = String.Empty
+            If row(3) Is DBNull.Value Then row(3) = String.Empty
+            If row(4) Is DBNull.Value Then row(4) = String.Empty
+            If row(5) Is DBNull.Value Then row(5) = String.Empty
+            If row(6) Is DBNull.Value Then row(6) = String.Empty
+            If row(7) Is DBNull.Value Then row(7) = String.Empty
+            If row(8) Is DBNull.Value Then row(8) = String.Empty
+
+            Dim imageindex As Integer = 3
+            If row(1).ToLower = "stopped" Then
+                imageindex = 4
+            End If
+
+            ' Add item to ListView with image
+            Dim svcItem As New ListViewItem(New String() {row(0), row(1), row(2), row(3), row(4), row(5), row(6), row(7), row(8)}, imageindex)
+            Me.ListView_Services.Items.Add(svcItem)
+
+        Next
+
+    End Sub
+
+    Private Sub UpdateServiceDetail(ByVal ServiceName As String, ByVal Column As ServiceColumn, ByVal NewValue As String)
+
+        ' rather than modifying item in datatable, then reloading datatable into listview,
+        ' just edit individual entries in datatable and listview.
+
+        ' scroll through datatable rows until matching entry found
+        For Each row As DataRow In Me.SvcDataTable.Rows
+            If row(0).ToString.ToLower = ServiceName.ToLower Then
+                row.Item(Column) = NewValue
+                Exit For
+            End If
+        Next
+
+        ' update individual item in listview row.
+        For Each row As ListViewItem In Me.ListView_Services.Items
+            If row.SubItems(ServiceColumn.Name).Text.ToLower = ServiceName.ToLower Then
+                row.SubItems(Column).Text = NewValue
+            End If
+        Next
+
+    End Sub
+    Private Enum ServiceColumn
+        DisplayName = 0
+        State = 1
+        Startup = 2
+        Name = 3
+        Description = 4
+        AcceptPause = 5
+        AcceptStop = 6
+        Path = 7
+        Account = 8
+    End Enum
+
+    Protected Friend Sub UpdateSelectedService(ByVal servicename As String)
 
         Try
             Dim queryCollection As ManagementObjectCollection
             Dim svc As ManagementObject
             queryCollection = wmi.wmiQuery _
-                  ("SELECT State, Startmode FROM Win32_Service WHERE Name ='" & Me.sGridName & "'")
+                  ("SELECT State, Startmode FROM Win32_Service WHERE Name ='" & servicename & "'")
 
             For Each svc In queryCollection
-                svc_datagrid(1, Row).Value = svc("state").ToString()
-                svc_datagrid(2, Row).Value = svc("StartMode").ToString()
+                Dim NewState As String = svc("state").ToString()
+                Dim NewStartMode As String = svc("StartMode").ToString()
+                Me.UpdateServiceDetail(servicename, ServiceColumn.State, NewState)
+                Me.UpdateServiceDetail(servicename, ServiceColumn.Startup, NewStartMode)
+                Me.sGridState = NewState
+                Me.sGridStartMode = NewStartMode
             Next
-
-            svc_datagrid.Sort(column1, ComponentModel.ListSortDirection.Ascending)
-            svc_datagrid.ClearSelection()
-            svc_datagrid.Focus()
         Catch ex As Exception
-            MsgBox("An error occurred: " & ex.Message)
+            MsgBox("error getting service info:" & vbCr & ex.Message, MsgBoxStyle.Critical, "Service Error")
         End Try
 
 
     End Sub
-    Public Function Get_ServiceStartMode(ByVal ServiceName As String) As String
-
-        Dim startMode As String = String.Empty
-        Try
-            Dim queryCollection As ManagementObjectCollection
-            Dim svc As ManagementObject
-            queryCollection = wmi.wmiQuery _
-                  ("SELECT State, Startmode FROM Win32_Service WHERE Name ='" & ServiceName & "'")
-
-            For Each svc In queryCollection
-                startMode = svc("StartMode").ToString()
-            Next
-
-            svc_datagrid.Sort(column1, ComponentModel.ListSortDirection.Ascending)
-            svc_datagrid.ClearSelection()
-            svc_datagrid.Focus()
-        Catch ex As Exception
-        End Try
-
-        Return startMode
-
-    End Function
     Public Function Get_ServiceState(ByVal ServiceName As String) As String
 
         Dim serviceState As String = String.Empty
@@ -7998,15 +8097,12 @@ Public Class Form1
             Dim queryCollection As ManagementObjectCollection
             Dim svc As ManagementObject
             queryCollection = wmi.wmiQuery _
-                  ("SELECT State, Startmode FROM Win32_Service WHERE Name ='" & ServiceName & "'")
+                  ("SELECT State FROM Win32_Service WHERE Name ='" & ServiceName & "'")
 
             For Each svc In queryCollection
                 serviceState = svc("State").ToString()
             Next
 
-            svc_datagrid.Sort(column1, ComponentModel.ListSortDirection.Ascending)
-            svc_datagrid.ClearSelection()
-            svc_datagrid.Focus()
         Catch ex As Exception
         End Try
 
@@ -8015,47 +8111,138 @@ Public Class Form1
     End Function
 
     ' Service Controls
-    Private Overloads Sub StopService()
-        StopService(Me.sGridName)
-    End Sub
-    Public Overloads Sub StopService(ByVal servicename As String)
+    Protected Friend Function ServiceControl(ByVal servicename As String, ByVal iParam As WMIServiceParameter) As Integer
+
+        Dim Param As String = String.Empty
+        Select Case iParam
+            Case WMIServiceParameter.StartService
+                Param = "StartService"
+            Case WMIServiceParameter.StopService
+                Param = "StopService"
+            Case WMIServiceParameter.DeleteService
+                Param = "Delete"
+        End Select
+
+        Dim returnvalue As Integer = -1
         Try
-            Dim queryCollection As ManagementObjectCollection
             Dim m As ManagementObject
             Dim outparams As ManagementBaseObject
-            queryCollection = wmi.wmiQuery("SELECT * FROM Win32_Service Where Name ='" & servicename & "'")
+            Dim queryCollection As ManagementObjectCollection = wmi.wmiQuery _
+                                 ("SELECT name FROM Win32_Service Where Name ='" & servicename & "'")
             For Each m In queryCollection
-                outparams = m.InvokeMethod("StopService", Nothing, Nothing)
+                outparams = m.InvokeMethod(Param, Nothing, Nothing)
                 System.Threading.Thread.Sleep(500)
-                If outparams.Properties("ReturnValue").Value <> 0 Then
-                    MsgBox("error stopping service: " & servicename & vbCrLf & "error:" & outparams.Properties("ReturnValue").Value)
-                    'Debug.Print("error stopping service: " & servicename & vbCrLf & "error:" & outparams.Properties("ReturnValue").Value)
-                End If
+                returnvalue = outparams.Properties("ReturnValue").Value
             Next
         Catch ex As Exception
-            MsgBox("An error occurred: " & ex.Message)
+            returnvalue = -1
         End Try
+
+    End Function
+    Public Enum WMIServiceParameter
+        StartService = 1
+        StopService = 2
+        DeleteService = 4
+        ModeAutomatic = 8
+        ModeManual = 16
+        ModeDisabled = 32
+    End Enum
+    Protected Friend ReadOnly Property WMI_SvcReturnCodeDefinition(ByVal code As Integer) As String
+        Get
+            Dim output As String = Nothing
+            Select Case code
+                Case 1
+                    output = "The request is not supported."
+                Case 2
+                    output = "The user did not have the necessary access."
+                Case 3
+                    output = "The service cannot be started because it depends " & _
+                             "on other services that are not running."
+                Case 4
+                    output = "The requested control code is not valid, or " & _
+                             "it is unacceptable to the service."
+                Case 5
+                    output = "The requested control code cannot be sent to " & _
+                              "the service because the state of the service."
+                Case 6
+                    output = "The service has not been started."
+                Case 7
+                    output = "The service did not respond to the start request " & _
+                             "in a timely fashion."
+                Case 8
+                    output = "Unknown failure when starting the service."
+                Case 9
+                    output = "The directory path to the service executable was not found."
+                Case 10
+                    output = "The service is already running"
+                Case 11
+                    output = "The database to add a new service is locked."
+                Case 12
+                    output = "A dependency for which this service relies on " & _
+                             "has been removed from the system."
+                Case 13
+                    output = "The service failed to find the service needed " & _
+                             "from a dependent service."
+                Case 14
+                    output = "The service has been disabled from the system."
+                Case 15
+                    output = "The service does not have the correct authentication " & _
+                             "to run on the system."
+                Case 16
+                    output = "This service is being removed from the system."
+                Case 17
+                    output = "There is no execution thread for the service."
+                Case 18
+                    output = "There are circular dependencies when starting the service."
+                Case 19
+                    output = "There is a service running under the same name."
+                Case 20
+                    output = "There are invalid characters in the name of the service."
+                Case 21
+                    output = "Invalid parameters have been passed to the service."
+                Case 22
+                    output = "The account, which this service is to run under is " & _
+                             "either invalid or lacks the permissions to run the service."
+                Case 23
+                    output = "The service exists in the database of services " & _
+                             "available from the system."
+                Case 24
+                    output = "The service is currently paused in the system."
+                Case Else
+                    output = "Unknown return code [" & code & "]"
+            End Select
+            Return output
+        End Get
+    End Property
+
+    ' not used and not working!!!
+    Public Shared Function UninstallService(ByVal ServiceName As String) As Integer
+        Dim objPath As String = String.Format("Win32_Service.Name='{0}'", ServiceName)
+        Dim service As ManagementObject = New ManagementObject(New ManagementPath(objPath))
+        Try
+            Dim outParams As ManagementBaseObject = service.InvokeMethod("delete", Nothing, Nothing)
+            Return outParams("ReturnValue").Value
+        Catch ex As Exception
+            If ((ex.Message.ToLower.Trim = "not found") _
+                        OrElse (ex.GetHashCode = 41149443)) Then
+                Return "ServiceNotFound"
+            Else
+                Throw ex
+            End If
+        End Try
+    End Function
+
+    Private Overloads Sub StopService()
+        Dim retval As Integer = Me.ServiceControl(Me.sGridName, WMIServiceParameter.StopService)
+        If retval <> 0 Then
+            MsgBox("There was an error stopping the " & Me.sGridName & " service." & vbCr & Me.WMI_SvcReturnCodeDefinition(retval), MsgBoxStyle.Critical, "Service Control Error")
+        End If
     End Sub
     Public Overloads Sub StartService()
-        StartService(Me.sGridName)
-    End Sub
-    Public Overloads Sub StartService(ByVal servicename As String)
-        Try
-            Dim queryCollection As ManagementObjectCollection
-            Dim m As ManagementObject
-            Dim outparams As ManagementBaseObject
-            queryCollection = wmi.wmiQuery("SELECT name FROM Win32_Service Where Name ='" & servicename & "'")
-            For Each m In queryCollection
-                outparams = m.InvokeMethod("StartService", Nothing, Nothing)
-                System.Threading.Thread.Sleep(500)
-                If outparams.Properties("ReturnValue").Value <> 0 Then
-                    MsgBox("error starting service: " & servicename & vbCrLf & "error:" & outparams.Properties("ReturnValue").Value)
-                    'Debug.Print("error starting service: " & servicename & vbCrLf & "error:" & outparams.Properties("ReturnValue").Value)
-                End If
-            Next
-        Catch ex As Exception
-            MsgBox("An error occurred: " & ex.Message)
-        End Try
+        Dim retval As Integer = Me.ServiceControl(Me.sGridName, WMIServiceParameter.StartService)
+        If retval <> 0 Then
+            MsgBox("There was an error starting the " & Me.sGridName & " service." & vbCr & Me.WMI_SvcReturnCodeDefinition(retval), MsgBoxStyle.Critical, "Service Control Error")
+        End If
     End Sub
     Protected Friend Sub Service_ChangeStartMode(ByVal servicename As String, ByVal NewStartMode As String)
         If NewStartMode <> "Automatic" AndAlso NewStartMode <> "Manual" AndAlso NewStartMode <> "Disabled" Then
@@ -8072,7 +8259,7 @@ Public Class Form1
             For Each m In queryCollection
                 inParams = m.GetMethodParameters("ChangeStartMode")
                 inParams("StartMode") = NewStartMode
-                'Dim StartMode() As Object = New Object() {"Manual"}
+                'Dim StartMode() As ManagementBaseObject = New Object() {"Manual"}
                 outParams = m.InvokeMethod("ChangeStartMode", inParams, Nothing)
                 If outParams.Properties("ReturnValue").Value <> 0 Then
                     result = Convert.ToInt32(outParams("returnValue"))
@@ -8108,8 +8295,8 @@ Public Class Form1
     End Sub
 
     Private Overloads Sub restartservice(ByVal servicename As String)
-        Dim reStartService As New ServiceProcess.ServiceController
 
+        Dim reStartService As New ServiceProcess.ServiceController
         reStartService.MachineName = PC.Name
         reStartService.ServiceName = servicename
 
@@ -8121,18 +8308,42 @@ Public Class Form1
         Catch ex As Exception
             MsgBox(Err.Description & vbCrLf & "error code: " & Err.Number)
         End Try
+
     End Sub
     Private Overloads Sub RestartService()
         restartservice(Me.sGridName)
     End Sub
     Private Sub RemoveService()
-        svc_datagrid.Refresh()
+
+        'svc_datagrid.Refresh()
         Panel2.Text = "removing " & Me.sGridName & " service..."
         Me.Cursor = Cursors.WaitCursor
 
         Try
             Dim strRemoveService As String = "SC \\" & PC.Name & " delete " & Me.sGridName
-            Shell(strRemoveService, 0, True, 10)
+            Shell(strRemoveService, 0, True, 15)
+            'If UninstallService(Me.sGridName) = 0 Then
+            '    MsgBox("Success")
+            'Else
+            '    MsgBox("Fail")
+            'End If
+
+
+            ' scroll through datatable rows until matching entry found
+            For Each row As DataRow In Me.SvcDataTable.Rows
+                If row(0).ToString.ToLower = Me.sGridName.ToLower Then
+                    row.Delete()
+                    Exit For
+                End If
+            Next
+
+            ' update individual item in listview row.
+            For Each row As ListViewItem In Me.ListView_Services.Items
+                If row.SubItems(ServiceColumn.Name).Text.ToLower = Me.sGridName.ToLower Then
+                    row.Remove()
+                End If
+            Next
+
         Catch ex As Exception
             MsgBox(Err.Description & vbCrLf & "error code: " & Err.Number)
         End Try
@@ -8141,14 +8352,15 @@ Public Class Form1
         Me.Cursor = Cursors.Default
 
     End Sub
-    Private Overloads Sub ChangeServiceStartmode(ByVal strStartMode As String)
-        ChangeServiceStartmode(Me.sGridName, strStartMode)
+    Private Overloads Sub ChangeServiceStartmode_SC(ByVal strStartMode As String)
+        ChangeServiceStartmode_SC(Me.sGridName, strStartMode)
     End Sub
-    Private Overloads Sub ChangeServiceStartmode(ByVal ServiceName As String, ByVal strStartMode As String)
-        svc_datagrid.Refresh()
+    Private Overloads Sub ChangeServiceStartmode_SC(ByVal ServiceName As String, ByVal strStartMode As String)
+
         Try
             Dim strChangeService As String = "SC \\" & PC.Name & " config " & ServiceName & " start= " & strStartMode
             Shell(strChangeService, 0, True)
+            Me.UpdateSelectedService(ServiceName)
         Catch ex As Exception
             MsgBox(Err.Description & vbCrLf & "error code: " & Err.Number)
         End Try
@@ -8157,30 +8369,41 @@ Public Class Form1
 
     End Sub
 
+
     ' Context menu setup
-    Private Sub svc_datagrid_MouseDown(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles svc_datagrid.MouseDown
+    Private Sub ListView_Services_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListView_Services.SelectedIndexChanged
 
-        If e.Button = Windows.Forms.MouseButtons.Right Then
-            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
 
-            If hti.Type = DataGridViewHitTestType.Cell Then
-                svc_datagrid.ClearSelection()
-                svc_datagrid(hti.ColumnIndex, hti.RowIndex).Selected = True
+        ' part 1 of choosing selected item colour scheme
+        For Each item As ListViewItem In Me.ListView_Services.Items
+            item.BackColor = Color.WhiteSmoke
+            item.ForeColor = Color.Black
+        Next
 
-                Me.sGridRowNumber = hti.RowIndex
-                Me.sGridCaption = svc_datagrid(0, hti.RowIndex).Value
-                Me.sGridState = svc_datagrid(1, hti.RowIndex).Value
-                Me.sGridStartMode = svc_datagrid(2, hti.RowIndex).Value
-                Me.sGridName = svc_datagrid(3, hti.RowIndex).Value
-                Me.sGridDescription = svc_datagrid(4, hti.RowIndex).Value
-                Me.sGridCanPause = svc_datagrid(5, hti.RowIndex).Value
-                Me.sGridCanStop = svc_datagrid(6, hti.RowIndex).Value
-                Me.sGridPath = svc_datagrid(7, hti.RowIndex).Value
-                Me.sGridAccount = svc_datagrid(8, hti.RowIndex).Value
 
-                svcname.Text = Me.sGridCaption
+        'Me.sGridRowNumber = Me.ListView_Services.SelectedItems(0)
+
+        If Not Me.ListView_Services.SelectedItems Is Nothing Then
+            For Each svcItem As ListViewItem In Me.ListView_Services.SelectedItems
+
+                ' part 2 of choosing selected item colour scheme
+                svcItem.Selected = False
+                svcItem.BackColor = ListView_SelectedItem_Colour 'Color.Firebrick 'dodgerblue
+                svcItem.ForeColor = Color.White
+
+                Me.sGridCaption = svcItem.SubItems(0).Text
+                Me.sGridState = svcItem.SubItems(1).Text
+                Me.sGridStartMode = svcItem.SubItems(2).Text
+                Me.sGridName = svcItem.SubItems(3).Text
+                Me.sGridDescription = svcItem.SubItems(4).Text
+                Me.sGridCanPause = svcItem.SubItems(5).Text
+                Me.sGridCanStop = svcItem.SubItems(6).Text
+                Me.sGridPath = svcItem.SubItems(7).Text
+                Me.sGridAccount = svcItem.SubItems(8).Text
+
 
                 ' Prepare Context Menu
+                svcname.Text = Me.sGridCaption
 
                 If Me.sGridStartMode = "Disabled" Then
                     svcstart.Enabled = False
@@ -8220,71 +8443,19 @@ Public Class Form1
                     AutomaticMenu.Checked = False
                     ManualMenu.Checked = False
                 End If
-
-                Me.svccontextmenu.Show(Me.svc_datagrid, New Point(e.X, e.Y))
-            End If
-
-        ElseIf e.Button = Windows.Forms.MouseButtons.Left Then
-
-            Dim hti As DataGridView.HitTestInfo = sender.HitTest(e.X, e.Y)
-            If hti.Type = DataGridViewHitTestType.Cell Then
-                svc_datagrid.ClearSelection()
-                svc_datagrid(hti.ColumnIndex, hti.RowIndex).Selected = True
-                'svc_datagrid.Rows(hti.RowIndex).Selected = True
-
-                Me.sGridRowNumber = hti.RowIndex
-                Me.sGridCaption = svc_datagrid(0, hti.RowIndex).Value
-                Me.sGridState = svc_datagrid(1, hti.RowIndex).Value
-                Me.sGridStartMode = svc_datagrid(2, hti.RowIndex).Value
-                Me.sGridName = svc_datagrid(3, hti.RowIndex).Value
-                Me.sGridDescription = svc_datagrid(4, hti.RowIndex).Value
-                Me.sGridCanPause = svc_datagrid(5, hti.RowIndex).Value
-                Me.sGridCanStop = svc_datagrid(6, hti.RowIndex).Value
-                Me.sGridPath = svc_datagrid(7, hti.RowIndex).Value
-                Me.sGridAccount = svc_datagrid(8, hti.RowIndex).Value
-
-            End If
+            Next
         End If
 
-
     End Sub
-    Private Sub svc_datagrid_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles svc_datagrid.KeyDown
-
-        If e.KeyCode = Keys.Enter Then
-
-            ' get current selected row.
-            Dim iRow As DataGridViewRow = svc_datagrid.CurrentRow
-            svc_datagrid.ClearSelection()
-            svc_datagrid(2, iRow.Index).Selected = True
-
-            Me.sGridRowNumber = Me.svc_datagrid.SelectedRows(0).Index
-            Me.sGridCaption = svc_datagrid(0, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridState = svc_datagrid(1, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridStartMode = svc_datagrid(2, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridName = svc_datagrid(3, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridDescription = svc_datagrid(4, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridCanPause = svc_datagrid(5, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridCanStop = svc_datagrid(6, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridPath = svc_datagrid(7, Me.svc_datagrid.SelectedRows(0).Index).Value
-            Me.sGridAccount = svc_datagrid(8, Me.svc_datagrid.SelectedRows(0).Index).Value
-
-            ' load service proprties form as dialog - wait for exit.
-            LoadServicePropertiesForm()
-
-            ' by default enter key causes selection to move 
-            ' to the next row down.
-            ' this is a crap effort to retain existing selection.
-            svc_datagrid.ClearSelection()
-            Try
-                svc_datagrid(2, iRow.Index - 1).Selected = True
-            Catch ex As Exception
-            End Try
-
-        End If
-    End Sub
-    Private Sub svc_datagrid_CellDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.DataGridViewCellEventArgs) Handles svc_datagrid.CellDoubleClick
+    Private Sub ListView_Services_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListView_Services.MouseDoubleClick
         LoadServicePropertiesForm()
     End Sub
+    Private Sub ListView_Services_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles ListView_Services.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            LoadServicePropertiesForm()
+        End If
+    End Sub
+
     Private Sub LoadServicePropertiesForm()
 
         Dim si As New SvcInfo
@@ -8294,7 +8465,7 @@ Public Class Form1
         si.txtSvcName.Text = Me.sGridName
         si.txtSvcPath.Text = Me.sGridPath
         si.lblSvcStatus.Text = Me.sGridState
-        si.lblSvcAccount.Text = Me.sGridAccount
+        si.txtSvcAccount.Text = Me.sGridAccount
         si.txtDescription.Text = Me.sGridDescription
         si.CanPause = CBool(Me.sGridCanPause)
         si.CanStop = CBool(Me.sGridCanStop)
@@ -8330,7 +8501,7 @@ Public Class Form1
         Loop
         svcthread.Join()
 
-        GetServiceState(Me.sGridName)
+        Me.UpdateSelectedService(Me.sGridName)
         WriteLog(PC.Name & " - stop service: " & Me.sGridName)
         Panel2.Text = "ready"
         Me.Cursor = Cursors.Default
@@ -8349,7 +8520,7 @@ Public Class Form1
         Loop
         svcthread.Join()
 
-        GetServiceState(Me.sGridName)
+        Me.UpdateSelectedService(Me.sGridName)
         WriteLog(PC.Name & " - start service: " & Me.sGridName)
         Panel2.Text = "ready "
         Me.Cursor = Cursors.Default
@@ -8369,7 +8540,7 @@ Public Class Form1
         Loop
         svcthread.Join()
 
-        GetServiceState(Me.sGridName)
+        Me.UpdateSelectedService(Me.sGridName)
         WriteLog(PC.Name & " - restart service: " & Me.sGridName)
         Panel2.Text = "ready "
         Me.Cursor = Cursors.Default
@@ -8417,81 +8588,64 @@ Public Class Form1
         si.ShowDialog()
     End Sub
     Private Sub DeleteServiceToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DeleteServiceToolStripMenuItem.Click
+
         If MsgBox("Are you sure you want to delete" & vbCrLf & _
                         "the selected service?", 36, "DELETE  " _
                         & UCase(Me.sGridName) & " ?") = MsgBoxResult.Yes Then
 
             RemoveService()
-            Me.svc_datagrid.Rows.Clear()
-            GetSVClist()
-
             WriteLog(PC.Name & " - delete service: " & Me.sGridName)
         End If
     End Sub
-    Private Sub GetServiceState(ByVal sService As String)
-
-        Dim svc As New ServiceProcess.ServiceController
-        svc.MachineName = PC.Name
-        svc.ServiceName = sService
-
-        Try
-            svc_datagrid.Item(1, Me.sGridRowNumber).Value = svc.Status
-        Catch ex As Exception
-        End Try
-
-
-    End Sub
     Private Sub RefreshMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshMenu.Click
-        GetSVClist()
+        Me.RefreshServices()
     End Sub
 
     Private Sub AutomaticMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles AutomaticMenu.Click
 
         If AutomaticMenu.Checked = True Then Exit Sub
+        Me.Cursor = Cursors.WaitCursor
+
         Try
-            Me.Cursor = Cursors.WaitCursor
-            'ChangeServiceStartmode("auto")
-            Service_ChangeStartMode(Me.sGridName, "Automatic")
-            svc_datagrid.Item(2, Me.sGridRowNumber).Value = "Auto"
-            Me.Cursor = Cursors.Default
+            Me.Service_ChangeStartMode(Me.sGridName, "Automatic")
+            Me.UpdateSelectedService(Me.sGridName)
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
             MsgBox("Startmode change failed:" & vbCrLf & Err.Number & vbCrLf & Err.Description)
         End Try
 
-
-        'GetSVClist()
-
+        Me.Cursor = Cursors.Default
 
     End Sub
     Private Sub ManualMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ManualMenu.Click
 
         If ManualMenu.Checked = True Then Exit Sub
 
+        Me.Cursor = Cursors.WaitCursor
+
         Try
-            Me.Cursor = Cursors.WaitCursor
-            ChangeServiceStartmode("demand")
-            svc_datagrid.Item(2, Me.sGridRowNumber).Value = "Manual"
-            Me.Cursor = Cursors.Default
+            Me.Service_ChangeStartMode(Me.sGridName, "Manual")
+            Me.UpdateSelectedService(Me.sGridName)
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
             MsgBox("Startmode change failed:" & vbCrLf & Err.Number & vbCrLf & Err.Description)
         End Try
+
+        Me.Cursor = Cursors.Default
 
     End Sub
     Private Sub DisabledMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DisabledMenu.Click
 
         If DisabledMenu.Checked = True Then Exit Sub
 
+        Me.Cursor = Cursors.WaitCursor
+
         Try
-            Me.Cursor = Cursors.WaitCursor
-            ChangeServiceStartmode("disabled")
-            svc_datagrid.Item(2, Me.sGridRowNumber).Value = "Disabled"
-            Me.Cursor = Cursors.Default
+            Me.Service_ChangeStartMode(Me.sGridName, "Disabled")
+            Me.UpdateSelectedService(Me.sGridName)
         Catch ex As Exception
-            Me.Cursor = Cursors.Default
             MsgBox("Startmode change failed:" & vbCrLf & Err.Number & vbCrLf & Err.Description)
         End Try
+
+        Me.Cursor = Cursors.Default
 
     End Sub
 
@@ -8501,6 +8655,50 @@ Public Class Form1
         End If
     End Sub
 
+    ' Sort using the clicked column.
+    Private Sub ListView_Services_ColumnSort(ByVal sender As System.Object, ByVal e As System.Windows.Forms.ColumnClickEventArgs) Handles ListView_Services.ColumnClick
+        ' Get the new sorting column.
+        Dim new_sorting_column As ColumnHeader = Me.ListView_Services.Columns(e.Column)
+
+        ' Figure out the new sorting order.
+        Dim sort_order As System.Windows.Forms.SortOrder
+        If m_Svc_SortingColumn Is Nothing Then
+            ' New column. Sort ascending.
+            sort_order = SortOrder.Ascending
+        Else
+            ' See if this is the same column.
+            If new_sorting_column.Equals(m_Svc_SortingColumn) Then
+                ' Same column. Switch the sort order.
+                If m_Svc_SortingColumn.Text.StartsWith(".") Then
+                    sort_order = SortOrder.Descending
+                Else
+                    sort_order = SortOrder.Ascending
+                End If
+            Else
+                ' New column. Sort ascending.
+                sort_order = SortOrder.Ascending
+            End If
+
+            ' Remove the old sort indicator.
+            m_Svc_SortingColumn.Text = m_Svc_SortingColumn.Text.Substring(1)
+        End If
+
+        ' Display the new sort order.
+        m_Svc_SortingColumn = new_sorting_column
+        If sort_order = SortOrder.Ascending Then
+            m_Svc_SortingColumn.Text = "." & m_Svc_SortingColumn.Text
+        Else
+            m_Svc_SortingColumn.Text = " " & m_Svc_SortingColumn.Text
+        End If
+
+        ' Create a comparer.
+        Me.ListView_Services.ListViewItemSorter = New _
+            ListViewComparer(e.Column, sort_order)
+
+        ' Sort.
+        Me.ListView_Services.Sort()
+    End Sub
+
 #End Region
 
 #Region "PROCESSES"
@@ -8508,11 +8706,14 @@ Public Class Form1
     Protected Friend pGrid_Name As String
     Protected Friend pGrid_ID As String
     Protected Friend pGrid_Path As String
-    Private ProcDataTable As Data.DataTable
-    Private m_SortingColumn As ColumnHeader ' The listview column currently used for sorting.
+    Private ProcDataTable As DataTable
+    Private m_Proc_SortingColumn As ColumnHeader ' The listview column currently used for sorting.
 
     Private Sub ProcessRefresh_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ProcessRefresh.Click
         RefreshProcesses()
+        ' take accept function away from refresh button once run
+        ' to allow opening process props dialog with enter key.
+        Me.AcceptButton = Nothing
     End Sub
     Private Sub RefreshProcesses()
         Me.ProcessRefresh.Enabled = False
@@ -8521,7 +8722,7 @@ Public Class Form1
         ListView_Processes.Columns(0).Text = ".Name"
         ListView_Processes.Columns(1).Text = "PID"
         ListView_Processes.Columns(2).Text = "Memory Usage (kb)"
-        Me.m_SortingColumn = ListView_Processes.Columns(0)
+        Me.m_Proc_SortingColumn = ListView_Processes.Columns(0)
 
         Me.ListView_Processes.Items.Clear()
         Dim Processes_BackgroundWorker As New System.ComponentModel.BackgroundWorker
@@ -8539,8 +8740,8 @@ Public Class Form1
     End Sub
     Private Sub GetProcesses(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
 
-        ProcDataTable = New Data.DataTable
-        Dim dtrow As Data.DataRow
+        ProcDataTable = New DataTable
+        Dim dtrow As DataRow
         With ProcDataTable.Columns
             .Add(New DataColumn("Name", GetType(String)))
             .Add(New DataColumn("ID", GetType(Integer)))
@@ -8596,17 +8797,32 @@ Public Class Form1
         ' Add datatable items to ListView
         For Each row As DataRow In ProcDataTable.Rows
 
-
             If row(0) Is DBNull.Value Then row(0) = String.Empty
             If row(1) Is DBNull.Value Then row(1) = 0
             If row(2) Is DBNull.Value Then row(2) = 0
             If row(3) Is DBNull.Value Then row(3) = String.Empty
 
+            Dim imageindex As Integer = 1
+            If row(0).ToLower = "system" OrElse row(0).ToLower = "csrss.exe" _
+                 OrElse row(0).ToLower = "system idle process" Then
+                imageindex = 0
+                'ElseIf row(0).tolower.contains("adobe") Then
+                '    imageindex = 5
+                'ElseIf row(0).tolower.contains("mcafee") OrElse row(0).tolower.contains("network associates") OrElse row(0).tolower.contains("mcshield") Then
+                '    imageindex = 6
+                'ElseIf row(0).tolower.contains("vmware") Then
+                '    imageindex = 7
+                'ElseIf row(0).tolower.contains("vnc") Then
+                '    imageindex = 8
+                'ElseIf row(0).tolower.contains("sql") Then
+                '    imageindex = 12
+            End If
 
-            ' Add item to ListView
-            Dim pItem As New ListViewItem(New String() {row(0), row(1), row(2), row(3)})
+            ' Add item to ListView with image
+            Dim pItem As New ListViewItem(New String() {row(0), row(1), row(2), row(3)}, imageindex)
             Me.ListView_Processes.Items.Add(pItem)
         Next
+
     End Sub
 
     Public Function ProcessOwnerById(ByVal ProcessID As Integer) As String
@@ -8655,6 +8871,7 @@ Public Class Form1
 
     End Function
 
+
     ' activate menus/controls
     Private Sub ListView_Processes_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListView_Processes.SelectedIndexChanged
 
@@ -8671,7 +8888,8 @@ Public Class Form1
                 Me.pGrid_Path = pItem.SubItems(3).Text
 
                 ' part 2 of choosing selected item colour scheme
-                pItem.BackColor = Color.DodgerBlue
+                pItem.Selected = False
+                pItem.BackColor = ListView_SelectedItem_Colour 'Color.Firebrick 'dodgerblue
                 pItem.ForeColor = Color.White
             Next
         End If
@@ -8700,6 +8918,13 @@ Public Class Form1
         ' load process proprties form as dialog - wait for exit.
         ShowProcessInfoDialog()
     End Sub
+    Private Sub ListView_Processes_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles ListView_Processes.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            ' load process proprties form as dialog - wait for exit.
+            ShowProcessInfoDialog()
+        End If
+    End Sub
+
     Private Sub ShowProcessInfoDialog()
         Dim pi As New ProcInfo
         pi.AcceptButton = pi.CancelButton
@@ -8828,14 +9053,14 @@ Public Class Form1
 
         ' Figure out the new sorting order.
         Dim sort_order As System.Windows.Forms.SortOrder
-        If m_SortingColumn Is Nothing Then
+        If m_Proc_SortingColumn Is Nothing Then
             ' New column. Sort ascending.
             sort_order = SortOrder.Ascending
         Else
             ' See if this is the same column.
-            If new_sorting_column.Equals(m_SortingColumn) Then
+            If new_sorting_column.Equals(m_Proc_SortingColumn) Then
                 ' Same column. Switch the sort order.
-                If m_SortingColumn.Text.StartsWith(".") Then
+                If m_Proc_SortingColumn.Text.StartsWith(".") Then
                     sort_order = SortOrder.Descending
                 Else
                     sort_order = SortOrder.Ascending
@@ -8846,15 +9071,15 @@ Public Class Form1
             End If
 
             ' Remove the old sort indicator.
-            m_SortingColumn.Text = m_SortingColumn.Text.Substring(1)
+            m_Proc_SortingColumn.Text = m_Proc_SortingColumn.Text.Substring(1)
         End If
 
         ' Display the new sort order.
-        m_SortingColumn = new_sorting_column
+        m_Proc_SortingColumn = new_sorting_column
         If sort_order = SortOrder.Ascending Then
-            m_SortingColumn.Text = "." & m_SortingColumn.Text
+            m_Proc_SortingColumn.Text = "." & m_Proc_SortingColumn.Text
         Else
-            m_SortingColumn.Text = " " & m_SortingColumn.Text
+            m_Proc_SortingColumn.Text = " " & m_Proc_SortingColumn.Text
         End If
 
         ' Create a comparer.
@@ -8869,6 +9094,16 @@ Public Class Form1
 
 #Region "SOFTWARE"
 
+    Dim swDataTable As Data.DataTable
+    Protected Friend swGrid_Name As String
+    Protected Friend swGrid_version As String
+    Protected Friend swGrid_Date As String
+    Protected Friend swGrid_Pub As String
+    Protected Friend swGrid_Location As String
+    Protected Friend swGrid_Uninst As String
+    Protected Friend swGrid_UninstSilent As String
+    Protected Friend swGrid_URL As String
+
     Private Sub software_button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles software_button.Click
 
         Me.swListView.Items.Clear()
@@ -8878,9 +9113,14 @@ Public Class Form1
 
         BackgroundWorker_SW.RunWorkerAsync()
 
+        ' take accept function away from refresh button once run
+        ' to allow opening software properties dialog with enter key.
+        Me.AcceptButton = Nothing
+        Me.swListView.Focus()
+
     End Sub
 
-    Private Sub BackgroundWorker1_DoWork(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker_SW.DoWork
+    Private Sub GetSoftware(ByVal sender As System.Object, ByVal e As System.ComponentModel.DoWorkEventArgs) Handles BackgroundWorker_SW.DoWork
 
         swDataTable = New Data.DataTable
         swDataTable.Columns.Add(New Data.DataColumn("name", GetType(String)))
@@ -8888,34 +9128,66 @@ Public Class Form1
         swDataTable.Columns.Add(New Data.DataColumn("publisher", GetType(String)))
         swDataTable.Columns.Add(New Data.DataColumn("installdate", GetType(String)))
         swDataTable.Columns.Add(New Data.DataColumn("installlocation", GetType(String)))
+        swDataTable.Columns.Add(New Data.DataColumn("uninstallString", GetType(String)))
         swDataTable.Columns.Add(New Data.DataColumn("uninstallSilentString", GetType(String)))
         swDataTable.Columns.Add(New Data.DataColumn("urlinfoabout", GetType(String)))
 
         'On Error Resume Next
 
         Dim strkeypath As String = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
-        Dim oReg As RegistryKey = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name)
-        Dim arrSubkeys As Array = oReg.OpenSubKey(strkeypath).GetSubKeyNames
+        Dim arrSubkeys As Array = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath)
 
         For Each objsubkey As String In arrSubkeys
-
             Dim strsubpath As String = strkeypath & "\" & objsubkey
-            Dim strvalue As String = oReg.OpenSubKey(strsubpath).GetValue("DisplayName")
+
+            Dim strvalue As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayName")
             If Not String.IsNullOrEmpty(strvalue) Then
 
                 ' Get additional attributes
-                Dim DisplayVersion As String = oReg.OpenSubKey(strsubpath).GetValue("DisplayVersion")
-                Dim Publisher As String = oReg.OpenSubKey(strsubpath).GetValue("Publisher")
-                Dim Installdate As String = oReg.OpenSubKey(strsubpath).GetValue("InstallDate")
-                Dim installlocation As String = oReg.OpenSubKey(strsubpath).GetValue("InstallLocation")
-                Dim uninstallSilentString As String = oReg.OpenSubKey(strsubpath).GetValue("QuietUninstallString")
-                Dim urlinfoabout As String = oReg.OpenSubKey(strsubpath).GetValue("URLInfoAbout")
+                Dim DisplayVersion As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayVersion")
+                Dim Publisher As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "Publisher")
+                Dim Installdate As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "InstallDate")
+                Dim installlocation As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "InstallLocation")
+                Dim uninstallString As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "UninstallString")
+                Dim uninstallSilentString As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "QuietUninstallString")
+                Dim urlinfoabout As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "URLInfoAbout")
 
                 ' Add item to datatable
-                swDataTable.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallSilentString, urlinfoabout)
-            End If
+                swDataTable.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallString, uninstallSilentString, urlinfoabout)
 
+            End If
         Next
+
+        ' Check 64bit os location
+        strkeypath = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+        If wmi.RegistryCheckKeyExists(PC.Name, RegistryHive.LocalMachine, strkeypath) Then
+
+            PC.x64 = True
+
+            arrSubkeys = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath)
+
+            For Each objsubkey As String In arrSubkeys
+                Dim strsubpath As String = strkeypath & "\" & objsubkey
+
+                Dim strvalue As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayName")
+                If Not String.IsNullOrEmpty(strvalue) Then
+
+                    ' Get additional attributes
+                    Dim DisplayVersion As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayVersion")
+                    Dim Publisher As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "Publisher")
+                    Dim Installdate As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "InstallDate")
+                    Dim installlocation As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "InstallLocation")
+                    Dim uninstallString As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "UninstallString")
+                    Dim uninstallSilentstring As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "QuietUninstallString")
+                    Dim urlinfoabout As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "URLInfoAbout")
+
+                    ' Add item to datatable
+                    swDataTable.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallString, uninstallSilentstring, urlinfoabout)
+
+                End If
+            Next
+        End If
+
     End Sub
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker_SW.RunWorkerCompleted
         Me.FillSwListView(ShowUpdates.Checked)
@@ -8928,9 +9200,9 @@ Public Class Form1
         For Each row As Data.DataRow In swDataTable.Rows
 
             ' check each attribute and replace null values with empty string
-            Dim s(6) As String
+            Dim s(7) As String
             If Not row(0) Is DBNull.Value Then
-                For i As Integer = 0 To 6
+                For i As Integer = 0 To 7
                     If Not row(i) Is DBNull.Value Then
                         s(i) = row(i)
                     Else
@@ -8942,48 +9214,19 @@ Public Class Form1
             ' Add item to ListView
             If s(0).Contains("Windows") And (s(0).Contains("Update") Or s(0).Contains("Hotfix")) Then
                 If IncludeUpdates Then
-                    Dim swItem As New ListViewItem(New String() {s(0), s(1), s(2), s(3), s(4), s(5), s(6)})
+                    Dim swItem As New ListViewItem(New String() {s(0), s(1), s(2), s(3), s(4), s(5), s(6), s(7)})
                     Me.swListView.Items.Add(swItem)
                 End If
             Else
                 'Dim swItem As New ListViewItem(New String() {s1, s2, s3, s4, s5, s6, s7})
-                Dim swItem As New ListViewItem(New String() {s(0), s(1), s(2), s(3), s(4), s(5), s(6)})
+                Dim swItem As New ListViewItem(New String() {s(0), s(1), s(2), s(3), s(4), s(5), s(6), s(7)})
                 Me.swListView.Items.Add(swItem)
             End If
-            
+
         Next
 
     End Sub
 
-    Dim swDataTable As Data.DataTable
-    Public Sub Software_WMI()
-
-        On Error Resume Next
-
-        Dim strkeypath As String = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
-        Dim arrSubkeys As Array = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath)
-        For Each objsubkey As String In arrSubkeys
-            Dim strsubpath As String = strkeypath & "\" & objsubkey
-
-            Dim strvalue As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayName")
-            If Not String.IsNullOrEmpty(strvalue) Then
-
-                ' Get additional attributes
-                Dim DisplayVersion As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayVersion")
-                Dim Publisher As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "Publisher")
-                Dim Installdate As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "InstallDate")
-                Dim installlocation As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "InstallLocation")
-                Dim uninstallSilentstring As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "QuietUninstallString")
-                Dim urlinfoabout As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "URLInfoAbout")
-
-                ' Add item to ListView
-                Dim swItem As New ListViewItem(New String() {strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallSilentstring, urlinfoabout})
-                Me.swListView.Items.Add(swItem)
-
-            End If
-        Next
-
-    End Sub
     Private Sub Software_API()
 
         swDataTable = New Data.DataTable
@@ -9015,10 +9258,6 @@ Public Class Form1
                 Dim uninstallSilentString As String = oReg.OpenSubKey(strsubpath).GetValue("QuietUninstallString")
                 Dim urlinfoabout As String = oReg.OpenSubKey(strsubpath).GetValue("URLInfoAbout")
 
-                '' Add item to ListView
-                'Dim swItem As New ListViewItem(New String() {strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallSilentString, urlinfoabout})
-                'Me.swListView.Items.Add(swItem)
-
                 ' Add item to datatable
                 swDataTable.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallSilentString, urlinfoabout)
             End If
@@ -9026,14 +9265,6 @@ Public Class Form1
         Next
 
     End Sub
-
-    Protected Friend swGrid_Name As String
-    Protected Friend swGrid_version As String
-    Protected Friend swGrid_Date As String
-    Protected Friend swGrid_Pub As String
-    Protected Friend swGrid_Location As String
-    Protected Friend swGrid_Uninst As String
-    Protected Friend swGrid_URL As String
 
     ''' <summary>
     ''' Open the SwInfo Form (Dialog) and populate with selected software info.
@@ -9058,20 +9289,26 @@ Public Class Form1
         sw.swdate.Text = swGrid_Date
         sw.swpath.Text = swGrid_Location
         sw.swpub.Text = Me.swGrid_Pub
-        sw.swuninst.Text = Me.swGrid_Uninst
+        sw.swver.Text = Me.swGrid_version
+        sw.swuninstall.Text = Me.swGrid_Uninst
+        sw.swuninstsilent.Text = Me.swGrid_UninstSilent
+
+        If Me.swGrid_Uninst.ToLower.StartsWith("msiexec") Then
+            sw.swuninstsilent.Text = "msiexec /x " & Me.swGrid_Uninst.Substring(Me.swGrid_Uninst.IndexOf("{")) & " /qn"
+        End If
+
         If String.IsNullOrEmpty(Me.swGrid_URL) Then
             sw.swURL.Text = ""
         Else
             sw.swURL.Text = Me.swGrid_URL
         End If
-        sw.swver.Text = Me.swGrid_version
-        sw.swuninst.Text = Me.swGrid_Uninst
 
-        If String.IsNullOrEmpty(Me.swGrid_Uninst) Then
-            sw.btnUninstall.Enabled = False
-        Else
-            sw.btnUninstall.Enabled = True
-        End If
+        sw.btnUninstall.Enabled = Not String.IsNullOrEmpty(sw.swuninstsilent.Text)
+        'If String.IsNullOrEmpty(sw.swuninstsilent.Text) Then
+        '    sw.btnUninstall.Enabled = False
+        'Else
+        '    sw.btnUninstall.Enabled = True
+        'End If
 
         sw.Show()
     End Sub
@@ -9104,18 +9341,32 @@ Public Class Form1
     End Sub
 
     Private Sub swListView_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles swListView.SelectedIndexChanged
+
+        ' part 1 of choosing selected item colour scheme
+        For Each item As ListViewItem In Me.swListView.Items
+            item.BackColor = Color.WhiteSmoke
+            item.ForeColor = Color.Black
+        Next
+
         If Not swListView.SelectedItems Is Nothing Then
             For Each swItem As ListViewItem In Me.swListView.SelectedItems
+
+                ' part 2 of choosing selected item colour scheme
+                swItem.Selected = False
+                swItem.BackColor = ListView_SelectedItem_Colour 'Color.Firebrick 'dodgerblue
+                swItem.ForeColor = Color.White
+
                 Me.swGrid_Name = swItem.SubItems(0).Text
                 Me.swGrid_version = swItem.SubItems(1).Text
                 Me.swGrid_Pub = swItem.SubItems(2).Text
                 Me.swGrid_Date = swItem.SubItems(3).Text
                 Me.swGrid_Location = swItem.SubItems(4).Text
                 Me.swGrid_Uninst = swItem.SubItems(5).Text
+                Me.swGrid_UninstSilent = swItem.SubItems(6).Text
                 Me.swGrid_URL = swItem.SubItems(6).Text
 
                 Me.mnuSwName.Text = Me.swGrid_Name
-                If String.IsNullOrEmpty(Me.swGrid_Uninst) Then
+                If String.IsNullOrEmpty(Me.swGrid_UninstSilent) Then
                     mnuSwUninst.Enabled = False
                 Else
                     mnuSwUninst.Enabled = True
@@ -9128,11 +9379,17 @@ Public Class Form1
             Me.swGrid_Date = Nothing
             Me.swGrid_Location = Nothing
             Me.swGrid_Uninst = Nothing
+            Me.swGrid_UninstSilent = Nothing
             Me.swGrid_URL = Nothing
         End If
     End Sub
     Private Sub swListView_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles swListView.MouseDoubleClick
         OpenSoftwarePropertiesDialog()
+    End Sub
+    Private Sub swListView_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles swListView.KeyDown
+        If e.KeyCode = Keys.Enter Then
+            OpenSoftwarePropertiesDialog()
+        End If
     End Sub
 
     Private Sub ShowUpdates_CheckedChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ShowUpdates.CheckedChanged
@@ -11303,7 +11560,7 @@ Public Class Form1
             If AltUserCheckBox.Checked Then
                 Dim impersonator As New Impersonation
                 If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
-                    ChangeServiceStartmode("demand")
+                    ChangeServiceStartmode_SC("demand")
                     System.Threading.Thread.Sleep(1000)
                     ServiceControlStartService(PC.Name, "Messenger")
                     System.Threading.Thread.Sleep(1000)
@@ -11315,7 +11572,7 @@ Public Class Form1
                     impersonator.undoImpersonation()
                 End If
             Else
-                ChangeServiceStartmode("demand")
+                Me.ChangeServiceStartmode_SC("demand")
                 System.Threading.Thread.Sleep(1000)
                 ServiceControlStartService(PC.Name, "Messenger")
                 System.Threading.Thread.Sleep(1000)
@@ -12387,24 +12644,24 @@ Public Class Form1
             exportFile.WriteLine("DNS suffix search order" & vbTab & sfx1.Text)
         End If
 
-        If svc_datagrid.Rows.Count <> 0 Then
-            exportFile.WriteLine()
-            exportFile.WriteLine("--------------    Services   ----------------")
-            exportFile.WriteLine()
-            Dim i As Integer
-            Dim cella As DataGridViewCell
-            Dim cellb As DataGridViewCell
-            Dim cellc As DataGridViewCell
-            For i = 0 To svc_datagrid.RowCount
-                Try
-                    cella = svc_datagrid(0, i)
-                    cellb = svc_datagrid(1, i)
-                    cellc = svc_datagrid(2, i)
-                    exportFile.WriteLine(cella.Value & vbTab & cellb.Value & vbTab & cellc.Value)
-                Catch ex As Exception
-                End Try
-            Next
-        End If
+        'If svc_datagrid.Rows.Count <> 0 Then
+        '    exportFile.WriteLine()
+        '    exportFile.WriteLine("--------------    Services   ----------------")
+        '    exportFile.WriteLine()
+        '    Dim i As Integer
+        '    Dim cella As DataGridViewCell
+        '    Dim cellb As DataGridViewCell
+        '    Dim cellc As DataGridViewCell
+        '    For i = 0 To svc_datagrid.RowCount
+        '        Try
+        '            cella = svc_datagrid(0, i)
+        '            cellb = svc_datagrid(1, i)
+        '            cellc = svc_datagrid(2, i)
+        '            exportFile.WriteLine(cella.Value & vbTab & cellb.Value & vbTab & cellc.Value)
+        '        Catch ex As Exception
+        '        End Try
+        '    Next
+        'End If
 
         'If processgrid.Rows.Count <> 0 Then
         '    exportFile.WriteLine()
@@ -13442,23 +13699,27 @@ Public Class Form1
             Return
         End If
 
-        ChangeServiceStartmode("TlntSvr", "demand")
+        ChangeServiceStartmode_SC("TlntSvr", "demand")
         System.Threading.Thread.Sleep(1000)
-        StartService("TlntSvr")
 
-        Dim p As New Process
-        Dim pi As ProcessStartInfo = New ProcessStartInfo
-        pi.FileName = "telnet"
-        pi.Arguments = strComputer
-        p.StartInfo = pi
-        p.Start()
+        If Me.ServiceControl("TlntSvr", WMIServiceParameter.StartService) = 0 Then
+            Dim p As New Process
+            Dim pi As ProcessStartInfo = New ProcessStartInfo
+            pi.FileName = "telnet"
+            pi.Arguments = strComputer
+            p.StartInfo = pi
+            p.Start()
 
-        Do While p.HasExited = False
-            Thread.Sleep(2000)
-        Loop
+            Do While p.HasExited = False
+                Thread.Sleep(2000)
+            Loop
 
-        ServiceControlStopService(strComputer, "TlntSvr")
-        ChangeServiceStartmode("TlntSvr", "disabled")
+            Me.ServiceControl("TlntSvr", WMIServiceParameter.StopService)
+        Else
+
+        End If
+
+        ChangeServiceStartmode_SC("TlntSvr", "disabled")
 
     End Sub
     Private Sub cmcPSEXEC(ByVal psCommand As String, ByVal visible As Integer, ByVal waituntilfinished As Boolean, Optional ByVal Cmd_C_K As String = "K")
@@ -14024,11 +14285,13 @@ Public Class Form1
             clearHW()
 
             ' Service Tab
-            svc_datagrid.Rows.Clear()
+            Me.ListView_Services.Items.Clear()
+            Me.SvcDataTable = Nothing
 
             ' Process Tab
             newprocess.Text = ""
             Me.ListView_Processes.Items.Clear()
+            Me.ProcDataTable = Nothing
             Me.pGrid_ID = ""
             Me.pGrid_Name = ""
             Me.pGrid_Path = ""
@@ -14861,8 +15124,6 @@ Public Class Form1
         End If
 
     End Sub
-
-
 
 End Class
 
