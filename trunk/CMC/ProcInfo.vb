@@ -59,7 +59,11 @@ Public Class ProcInfo
         ' start the clock ticking
         Timer1.Start()
 
-        PictureBox2.Image = Drawing.Icon.ExtractAssociatedIcon(txtProcPath.Text).ToBitmap
+        Try
+            PictureBox2.Image = Drawing.Icon.ExtractAssociatedIcon(txtProcPath.Text).ToBitmap
+        Catch ex As Exception
+        End Try
+
 
     End Sub
 

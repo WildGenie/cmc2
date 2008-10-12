@@ -315,6 +315,7 @@ Partial Class SwInfo
         '
         Me.swURL.AutoSize = True
         Me.swURL.Location = New System.Drawing.Point(119, 186)
+        Me.swURL.MaximumSize = New System.Drawing.Size(180, 13)
         Me.swURL.Name = "swURL"
         Me.swURL.Size = New System.Drawing.Size(31, 13)
         Me.swURL.TabIndex = 11
