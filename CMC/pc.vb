@@ -37,6 +37,9 @@ Public Class pc
     Private _DomainName As String
     Private _64b As Boolean
     Private _arrayListShares As ArrayList
+    Protected Friend GPODebugSetting As String
+
+
 
 
     ''' <summary>

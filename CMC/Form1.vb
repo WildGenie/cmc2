@@ -8,6 +8,7 @@ Imports Microsoft.Win32
 Imports System.DirectoryServices
 Imports System.ComponentModel
 
+'http://www.goodiebag.tv/episodes/11_progress_bars.htm
 
 
 Public Class Form1
@@ -471,7 +472,6 @@ Public Class Form1
     Friend WithEvents pName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pLocation As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents sw_Wait_Panel As System.Windows.Forms.Panel
-    Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents Label19 As System.Windows.Forms.Label
     Friend WithEvents BackgroundWorker_NW As System.ComponentModel.BackgroundWorker
     Friend WithEvents ToolStripButton1 As System.Windows.Forms.ToolStripButton
@@ -499,6 +499,11 @@ Public Class Form1
     Friend WithEvents svc_wait_panel As System.Windows.Forms.Panel
     Friend WithEvents Label38 As System.Windows.Forms.Label
     Friend WithEvents col_sw_unin As System.Windows.Forms.ColumnHeader
+    Friend WithEvents proc_wait_panel As System.Windows.Forms.Panel
+    Friend WithEvents Label36 As System.Windows.Forms.Label
+    Friend WithEvents sw_ProgressBar As System.Windows.Forms.ProgressBar
+    Friend WithEvents sw_Cancel_Button As System.Windows.Forms.Button
+    Friend WithEvents Label28 As System.Windows.Forms.Label
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -764,6 +769,8 @@ Public Class Form1
         Me.software = New System.Windows.Forms.TabPage
         Me.sw_Wait_Panel = New System.Windows.Forms.Panel
         Me.Label28 = New System.Windows.Forms.Label
+        Me.sw_Cancel_Button = New System.Windows.Forms.Button
+        Me.sw_ProgressBar = New System.Windows.Forms.ProgressBar
         Me.Label19 = New System.Windows.Forms.Label
         Me.swListView = New System.Windows.Forms.ListView
         Me.col_sw_name = New System.Windows.Forms.ColumnHeader
@@ -771,6 +778,7 @@ Public Class Form1
         Me.col_sw_pub = New System.Windows.Forms.ColumnHeader
         Me.col_sw_date = New System.Windows.Forms.ColumnHeader
         Me.col_sw_loc = New System.Windows.Forms.ColumnHeader
+        Me.col_sw_unin = New System.Windows.Forms.ColumnHeader
         Me.col_sw_unins = New System.Windows.Forms.ColumnHeader
         Me.col_sw_url = New System.Windows.Forms.ColumnHeader
         Me.swContextmenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
@@ -782,6 +790,8 @@ Public Class Form1
         Me.software_button = New System.Windows.Forms.Button
         Me.ShowUpdates = New System.Windows.Forms.CheckBox
         Me.processes = New System.Windows.Forms.TabPage
+        Me.proc_wait_panel = New System.Windows.Forms.Panel
+        Me.Label36 = New System.Windows.Forms.Label
         Me.ListView_Processes = New System.Windows.Forms.ListView
         Me.proc_name = New System.Windows.Forms.ColumnHeader("(none)")
         Me.proc_id = New System.Windows.Forms.ColumnHeader
@@ -1014,7 +1024,6 @@ Public Class Form1
         Me.BackgroundWorker_OS = New System.ComponentModel.BackgroundWorker
         Me.BackgroundWorker_NW = New System.ComponentModel.BackgroundWorker
         Me.Label32 = New System.Windows.Forms.Label
-        Me.col_sw_unin = New System.Windows.Forms.ColumnHeader
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1043,6 +1052,7 @@ Public Class Form1
         Me.sw_Wait_Panel.SuspendLayout()
         Me.swContextmenu.SuspendLayout()
         Me.processes.SuspendLayout()
+        Me.proc_wait_panel.SuspendLayout()
         Me.ProcContextMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.services.SuspendLayout()
@@ -3330,10 +3340,12 @@ Public Class Form1
         Me.sw_Wait_Panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
         Me.sw_Wait_Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.sw_Wait_Panel.Controls.Add(Me.Label28)
+        Me.sw_Wait_Panel.Controls.Add(Me.sw_Cancel_Button)
+        Me.sw_Wait_Panel.Controls.Add(Me.sw_ProgressBar)
         Me.sw_Wait_Panel.Controls.Add(Me.Label19)
         Me.sw_Wait_Panel.Location = New System.Drawing.Point(124, 97)
         Me.sw_Wait_Panel.Name = "sw_Wait_Panel"
-        Me.sw_Wait_Panel.Size = New System.Drawing.Size(146, 81)
+        Me.sw_Wait_Panel.Size = New System.Drawing.Size(146, 90)
         Me.sw_Wait_Panel.TabIndex = 72
         Me.sw_Wait_Panel.Visible = False
         '
@@ -3343,11 +3355,27 @@ Public Class Form1
         Me.Label28.BackColor = System.Drawing.Color.Transparent
         Me.Label28.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label28.ForeColor = System.Drawing.Color.White
-        Me.Label28.Location = New System.Drawing.Point(32, 50)
+        Me.Label28.Location = New System.Drawing.Point(49, 11)
         Me.Label28.Name = "Label28"
-        Me.Label28.Size = New System.Drawing.Size(78, 15)
-        Me.Label28.TabIndex = 73
-        Me.Label28.Text = "please wait..."
+        Me.Label28.Size = New System.Drawing.Size(44, 15)
+        Me.Label28.TabIndex = 76
+        Me.Label28.Text = "getting"
+        '
+        'sw_Cancel_Button
+        '
+        Me.sw_Cancel_Button.Location = New System.Drawing.Point(44, 66)
+        Me.sw_Cancel_Button.Name = "sw_Cancel_Button"
+        Me.sw_Cancel_Button.Size = New System.Drawing.Size(53, 20)
+        Me.sw_Cancel_Button.TabIndex = 75
+        Me.sw_Cancel_Button.Text = "cancel"
+        Me.sw_Cancel_Button.UseVisualStyleBackColor = True
+        '
+        'sw_ProgressBar
+        '
+        Me.sw_ProgressBar.Location = New System.Drawing.Point(11, 47)
+        Me.sw_ProgressBar.Name = "sw_ProgressBar"
+        Me.sw_ProgressBar.Size = New System.Drawing.Size(124, 16)
+        Me.sw_ProgressBar.TabIndex = 74
         '
         'Label19
         '
@@ -3355,11 +3383,11 @@ Public Class Form1
         Me.Label19.BackColor = System.Drawing.Color.Transparent
         Me.Label19.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label19.ForeColor = System.Drawing.Color.White
-        Me.Label19.Location = New System.Drawing.Point(11, 27)
+        Me.Label19.Location = New System.Drawing.Point(11, 28)
         Me.Label19.Name = "Label19"
-        Me.Label19.Size = New System.Drawing.Size(123, 15)
+        Me.Label19.Size = New System.Drawing.Size(122, 15)
         Me.Label19.TabIndex = 0
-        Me.Label19.Text = "getting installed apps"
+        Me.Label19.Text = "installed applications"
         '
         'swListView
         '
@@ -3401,6 +3429,12 @@ Public Class Form1
         '
         Me.col_sw_loc.Text = "Install Location"
         Me.col_sw_loc.Width = 0
+        '
+        'col_sw_unin
+        '
+        Me.col_sw_unin.DisplayIndex = 7
+        Me.col_sw_unin.Text = "unin"
+        Me.col_sw_unin.Width = 0
         '
         'col_sw_unins
         '
@@ -3478,6 +3512,7 @@ Public Class Form1
         'processes
         '
         Me.processes.BackColor = System.Drawing.Color.Transparent
+        Me.processes.Controls.Add(Me.proc_wait_panel)
         Me.processes.Controls.Add(Me.ListView_Processes)
         Me.processes.Controls.Add(Me.ProcessRefresh)
         Me.processes.Controls.Add(Me.get_processes_by_wmi_checkbox)
@@ -3490,6 +3525,30 @@ Public Class Form1
         Me.processes.TabIndex = 1
         Me.processes.Text = "Processes"
         Me.processes.UseVisualStyleBackColor = True
+        '
+        'proc_wait_panel
+        '
+        Me.proc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.proc_wait_panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.proc_wait_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.proc_wait_panel.Controls.Add(Me.Label36)
+        Me.proc_wait_panel.Location = New System.Drawing.Point(121, 72)
+        Me.proc_wait_panel.Name = "proc_wait_panel"
+        Me.proc_wait_panel.Size = New System.Drawing.Size(150, 48)
+        Me.proc_wait_panel.TabIndex = 75
+        Me.proc_wait_panel.Visible = False
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.BackColor = System.Drawing.Color.Transparent
+        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.ForeColor = System.Drawing.Color.White
+        Me.Label36.Location = New System.Drawing.Point(24, 17)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(112, 15)
+        Me.Label36.TabIndex = 0
+        Me.Label36.Text = "getting processes..."
         '
         'ListView_Processes
         '
@@ -4313,7 +4372,7 @@ Public Class Form1
         Me.DataFetchPanelLabel.BackColor = System.Drawing.Color.Transparent
         Me.DataFetchPanelLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataFetchPanelLabel.ForeColor = System.Drawing.Color.White
-        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(34, 19)
+        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(34, 16)
         Me.DataFetchPanelLabel.Name = "DataFetchPanelLabel"
         Me.DataFetchPanelLabel.Size = New System.Drawing.Size(76, 15)
         Me.DataFetchPanelLabel.TabIndex = 0
@@ -5005,7 +5064,7 @@ Public Class Form1
         Me.lbl_debug.Enabled = False
         Me.lbl_debug.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lbl_debug.LinkColor = System.Drawing.Color.Gray
-        Me.lbl_debug.Location = New System.Drawing.Point(240, 49)
+        Me.lbl_debug.Location = New System.Drawing.Point(297, 53)
         Me.lbl_debug.Name = "lbl_debug"
         Me.lbl_debug.Size = New System.Drawing.Size(67, 12)
         Me.lbl_debug.TabIndex = 106
@@ -5932,6 +5991,8 @@ Public Class Form1
         '
         'BackgroundWorker_SW
         '
+        Me.BackgroundWorker_SW.WorkerReportsProgress = True
+        Me.BackgroundWorker_SW.WorkerSupportsCancellation = True
         '
         'BackgroundWorker_OS
         '
@@ -5952,12 +6013,6 @@ Public Class Form1
         Me.Label32.Size = New System.Drawing.Size(80, 15)
         Me.Label32.TabIndex = 0
         Me.Label32.Text = "getting data..."
-        '
-        'col_sw_unin
-        '
-        Me.col_sw_unin.DisplayIndex = 7
-        Me.col_sw_unin.Text = "unin"
-        Me.col_sw_unin.Width = 0
         '
         'Form1
         '
@@ -6037,6 +6092,8 @@ Public Class Form1
         Me.swContextmenu.ResumeLayout(False)
         Me.processes.ResumeLayout(False)
         Me.processes.PerformLayout()
+        Me.proc_wait_panel.ResumeLayout(False)
+        Me.proc_wait_panel.PerformLayout()
         Me.ProcContextMenu.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
@@ -8717,6 +8774,7 @@ Public Class Form1
     End Sub
     Private Sub RefreshProcesses()
         Me.ProcessRefresh.Enabled = False
+        Me.proc_wait_panel.Visible = True
         Me.Panel2.Text = "enumerating running processes..."
 
         ListView_Processes.Columns(0).Text = ".Name"
@@ -8735,6 +8793,7 @@ Public Class Form1
     Public Sub ProcessesWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
         Me.FillProcessListView()
         Me.ListView_Processes.Focus()
+        Me.proc_wait_panel.Visible = False
         Me.Panel2.Text = "ready"
         Me.ProcessRefresh.Enabled = True
     End Sub
@@ -8937,14 +8996,18 @@ Public Class Form1
 
     ' context menu items
     Private Sub mnuProcKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuProcKill.Click
-        Me.Cursor = Cursors.WaitCursor
-        If WMI_Kill_Process() Then
-            ListView_Processes.SelectedItems(0).Remove()
-            Me.pGrid_Name = Nothing
-            Me.pGrid_ID = Nothing
-            Me.pGrid_Path = Nothing
+        If Not Me.ListView_Processes.SelectedItems Is Nothing Then
+            Me.Cursor = Cursors.WaitCursor
+            If WMI_Kill_Process() Then
+                For Each item As ListViewItem In ListView_Processes.SelectedItems
+                    item.Remove()
+                Next
+                Me.pGrid_Name = Nothing
+                Me.pGrid_ID = Nothing
+                Me.pGrid_Path = Nothing
+            End If
+            Me.Cursor = Cursors.Default
         End If
-        Me.Cursor = Cursors.Default
     End Sub
     Private Sub mnuProcGoogle_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuProcGoogle.Click
         On Error Resume Next
@@ -9111,6 +9174,8 @@ Public Class Form1
         sw_Wait_Panel.Visible = True
         sw_Wait_Panel.Refresh()
 
+        Me.sw_ProgressBar.Value = 0
+
         BackgroundWorker_SW.RunWorkerAsync()
 
         ' take accept function away from refresh button once run
@@ -9134,8 +9199,22 @@ Public Class Form1
 
         'On Error Resume Next
 
+        ' 32bit uninstall items
         Dim strkeypath As String = "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall"
         Dim arrSubkeys As Array = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath)
+        Dim total_items As Integer = arrSubkeys.Length
+
+        ' Check 64bit os location
+        Dim arrSubkeys64 As Array = Nothing
+        Dim strkeypath64 As String = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
+        If wmi.RegistryCheckKeyExists(PC.Name, RegistryHive.LocalMachine, strkeypath64) Then
+            PC.x64 = True
+            arrSubkeys64 = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath64)
+            total_items = total_items + arrSubkeys64.Length
+        End If
+
+        Dim progresstotal As Single = 0
+        ' MsgBox(total_items)
 
         For Each objsubkey As String In arrSubkeys
             Dim strsubpath As String = strkeypath & "\" & objsubkey
@@ -9156,18 +9235,18 @@ Public Class Form1
                 swDataTable.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallString, uninstallSilentString, urlinfoabout)
 
             End If
+
+            progresstotal += 100 / total_items
+            Me.BackgroundWorker_SW.ReportProgress(CInt(progresstotal)) '90 / arrSubkeys.Length)
+
+            If Me.BackgroundWorker_SW.CancellationPending Then Exit Sub
+
         Next
 
-        ' Check 64bit os location
-        strkeypath = "SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Uninstall"
-        If wmi.RegistryCheckKeyExists(PC.Name, RegistryHive.LocalMachine, strkeypath) Then
 
-            PC.x64 = True
-
-            arrSubkeys = wmi.RegistryEnumKeys(PC.Name, RegistryHive.LocalMachine, strkeypath)
-
-            For Each objsubkey As String In arrSubkeys
-                Dim strsubpath As String = strkeypath & "\" & objsubkey
+        If Not arrSubkeys64 Is Nothing Then
+            For Each objsubkey As String In arrSubkeys64
+                Dim strsubpath As String = strkeypath64 & "\" & objsubkey
 
                 Dim strvalue As String = wmi.RegistryGetStringValue(PC.Name, RegistryHive.LocalMachine, strsubpath, "DisplayName")
                 If Not String.IsNullOrEmpty(strvalue) Then
@@ -9185,9 +9264,20 @@ Public Class Form1
                     swDataTable.Rows.Add(strvalue, DisplayVersion, Publisher, Installdate, installlocation, uninstallString, uninstallSilentstring, urlinfoabout)
 
                 End If
+                progresstotal += 100 / total_items
+                Me.BackgroundWorker_SW.ReportProgress(CInt(progresstotal))
+
+                If Me.BackgroundWorker_SW.CancellationPending Then Exit Sub
             Next
         End If
 
+    End Sub
+
+    Private Sub BackgroundWorker_SW_ProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker_SW.ProgressChanged
+        Me.sw_ProgressBar.Value = e.ProgressPercentage
+    End Sub
+    Private Sub sw_Cancel_Button_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles sw_Cancel_Button.Click
+        Me.BackgroundWorker_SW.CancelAsync()
     End Sub
     Private Sub BackgroundWorker1_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker_SW.RunWorkerCompleted
         Me.FillSwListView(ShowUpdates.Checked)
@@ -9280,8 +9370,6 @@ Public Class Form1
         sw.Location = New Drawing.Point(X + 20, Y - 10)
         sw.StartPosition = FormStartPosition.Manual
 
-
-
         sw.Text = swGrid_Name & " Properties"
         sw.swHostname.Text = PC.Name
         sw.swOS.Text = PC.OperatingSystem.Replace("(R)", "")
@@ -9304,13 +9392,9 @@ Public Class Form1
         End If
 
         sw.btnUninstall.Enabled = Not String.IsNullOrEmpty(sw.swuninstsilent.Text)
-        'If String.IsNullOrEmpty(sw.swuninstsilent.Text) Then
-        '    sw.btnUninstall.Enabled = False
-        'Else
-        '    sw.btnUninstall.Enabled = True
-        'End If
 
         sw.Show()
+
     End Sub
     Private Sub mnuSwProps_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuSwProps.Click
         OpenSoftwarePropertiesDialog()
@@ -9325,18 +9409,15 @@ Public Class Form1
     ''' <param name="UninstallString"></param>
     ''' <remarks></remarks>
     Public Sub UninstallSoftware(ByVal Computer As String, ByVal UninstallString As String)
-        'MsgBox("This feature is not yet implemented." & vbCr & _
-        '       "Please be patient (or ask nicely if" & vbCrLf & _
-        '       "you are particularly desparate).", MsgBoxStyle.Information, "Your patience is appreciated")
-
-        'Exit Sub
         If Not String.IsNullOrEmpty(UninstallString) Then
             If UninstallString.ToLower.StartsWith("msiexec") Then
                 UninstallString = "msiexec /x " & UninstallString.Substring(UninstallString.IndexOf("{")) & " /qn"
             End If
         End If
 
-        RemoteExec(Computer, UninstallString, False)
+        If RemoteExec(Computer, UninstallString, False) <> 0 Then
+            MsgBox("uninstall initiated successfully", MsgBoxStyle.Information, "CMC - Software Removal")
+        End If
 
     End Sub
 
@@ -9363,7 +9444,7 @@ Public Class Form1
                 Me.swGrid_Location = swItem.SubItems(4).Text
                 Me.swGrid_Uninst = swItem.SubItems(5).Text
                 Me.swGrid_UninstSilent = swItem.SubItems(6).Text
-                Me.swGrid_URL = swItem.SubItems(6).Text
+                Me.swGrid_URL = swItem.SubItems(7).Text
 
                 Me.mnuSwName.Text = Me.swGrid_Name
                 If String.IsNullOrEmpty(Me.swGrid_UninstSilent) Then
@@ -11328,10 +11409,11 @@ Public Class Form1
             End If
             Dim sDebug As String = "None"
 
-            Dim i As Integer = RegistryKey.OpenRemoteBaseKey _
-                        (RegistryHive.LocalMachine, PC.Name). _
-                        OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon"). _
-                        GetValue("UserEnvDebugLevel", 0)
+            Dim i As Integer = 0
+            i = wmi.RegistryGetDWORDValue(PC.Name, RegistryHive.LocalMachine, "Software\Microsoft\Windows NT\CurrentVersion\Winlogon", "UserEnvDebugLevel")
+            If i = -1 Then
+                i = 0
+            End If
 
             Select Case i
                 Case 0
@@ -11345,7 +11427,7 @@ Public Class Form1
                 Case 131072
                     sDebug = "Debugger"
                 Case 65537
-                    sDebug = "Normal|Logfile" ' [default setting]
+                    sDebug = "Normal|Logfile" ' [default on setting]
                 Case 65538
                     sDebug = "Verbose|Logfile"
                 Case 196610
@@ -11375,51 +11457,29 @@ Public Class Form1
                     sDebug = 196610
             End Select
 
-            RegistryKey.OpenRemoteBaseKey _
-                                    (RegistryHive.LocalMachine, PC.Name). _
-                                    OpenSubKey("Software\Microsoft\Windows NT\CurrentVersion\Winlogon", True). _
-                                    SetValue("UserEnvDebugLevel", sDebug, RegistryValueKind.DWord)
+            wmi.RegistrySetDWORDValue _
+                    (PC.Name, RegistryHive.LocalMachine, _
+                    "Software\Microsoft\Windows NT\CurrentVersion\Winlogon", _
+                    "UserEnvDebugLevel", _
+                    sDebug)
         End Set
     End Property
 
-    ' Get gpo debug setting when GPO tab activated.
-    Private Sub gpo_Paint(ByVal sender As Object, ByVal e As System.Windows.Forms.PaintEventArgs) Handles gpo.Paint
-        If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
-            gpoDebugCombo.Text = String.Empty
-            If AltUserCheckBox.Checked Then
-                Dim impersonator As New Impersonation
-                If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
-                    gpoDebugCombo.SelectedText = GPODebugSetting
-                    impersonator.undoImpersonation()
-                End If
-            Else
-                gpoDebugCombo.SelectedText = GPODebugSetting
-            End If
 
-        End If
-    End Sub
     Private Sub gpoDebugCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles gpoDebugCombo.SelectedIndexChanged
-        Me.Cursor = Cursors.WaitCursor
-        Try
-            Dim NewDebug As String = gpoDebugCombo.SelectedItem
+        If gpoDebugCombo.SelectedText <> PC.GPODebugSetting Then
+            Me.Cursor = Cursors.WaitCursor
+            Try
+                Dim NewDebug As String = gpoDebugCombo.SelectedItem
 
-            If AltUserCheckBox.Checked Then
-                Dim impersonator As New Impersonation
-                If impersonator.impersonateValidUser(Me.sAltDomainUser, Me.sAltDomain, Me.sAltPassword) Then
-                    GPODebugSetting = NewDebug
-                    impersonator.undoImpersonation()
-                End If
-            Else
                 GPODebugSetting = NewDebug
-            End If
+                gpoDebugCombo.Text = GPODebugSetting
 
-
-
-            gpoDebugCombo.Text = GPODebugSetting
-        Catch ex As Exception
-            MsgBox(ex.Message)
-        End Try
-        Me.Cursor = Cursors.Default
+            Catch ex As Exception
+                MsgBox(ex.Message)
+            End Try
+            Me.Cursor = Cursors.Default
+        End If
     End Sub
     ' Open existing gpo debug file
     Private Sub lbl_debug_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles lbl_debug.LinkClicked
@@ -11446,7 +11506,7 @@ Public Class Form1
         p.Start()
     End Sub
 
-    Sub ClearGPOTab()
+    Private Sub ClearGPOTab()
         GPODataGrid.Rows.Clear()
         gpoDebugCombo.Text = ""
         gprefresh.Enabled = False
@@ -11457,7 +11517,7 @@ Public Class Form1
         lbl_debug.Enabled = False
     End Sub
 
-    Sub GPO_EnableItems()
+    Private Sub GPO_EnableItems()
         '       If PC.DomainMember Then
         gprefresh.Enabled = True
         lbl_rsop.Enabled = True
@@ -11466,6 +11526,42 @@ Public Class Form1
         btn_gpo_policies.Enabled = True
         lbl_localgpo.Enabled = True
         lbl_debug.Enabled = True
+    End Sub
+
+    Private Sub GetCurrentDebugSetting()
+
+        If ConnectionExists AndAlso gpoDebugCombo.Text = "" Then
+
+            Dim gpo_BackgroundWorker As New System.ComponentModel.BackgroundWorker
+            With gpo_BackgroundWorker
+                AddHandler .DoWork, New System.ComponentModel.DoWorkEventHandler(AddressOf Me.do_work_getDebugSetting)
+                AddHandler .RunWorkerCompleted, New System.ComponentModel.RunWorkerCompletedEventHandler(AddressOf Me.gpo_backgroundworker_completed)
+                .RunWorkerAsync()
+            End With
+
+        End If
+
+    End Sub
+    Private Sub do_work_getDebugSetting(ByVal sender As Object, ByVal e As System.ComponentModel.DoWorkEventArgs)
+
+        PC.GPODebugSetting = GPODebugSetting
+
+        Me.lbl_debug.Enabled = False
+        If PC.GPODebugSetting = "None" Then
+            Me.lbl_debug.Enabled = False
+        Else
+            Dim logfilepath As String = "\\" & PC.Name & "\" & Replace(PC.SystemDirectory, ":", "$") & "\Debug\UserMode\Userenv.log"
+            Try
+                If System.IO.File.Exists(logfilepath) Then
+                    Me.lbl_debug.Enabled = True
+                End If
+            Catch ex As Exception
+            End Try
+        End If
+        
+    End Sub
+    Private Sub gpo_backgroundworker_completed(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
+        gpoDebugCombo.Text = PC.GPODebugSetting
     End Sub
 
 
@@ -14229,11 +14325,7 @@ Public Class Form1
                 Me.AcceptButton = Nothing
             Case "gpo"
                 Me.AcceptButton = Nothing
-                If gpoDebugCombo.Text = String.Empty Then
-                    gpupdateChoice.SelectedIndex = 2
-                    gpoDebugCombo.SelectedText = GPODebugSetting
-                End If
-
+                GetCurrentDebugSetting()
             Case Else
                 Me.AcceptButton = GO_Button
         End Select
@@ -15124,6 +15216,7 @@ Public Class Form1
         End If
 
     End Sub
+
 
 End Class
 
