@@ -2,6 +2,7 @@ Imports System
 Imports System.DirectoryServices
 Imports system.directoryservices.ActiveDirectory
 Imports System.Data
+Imports Microsoft.Win32
 
 
 Public Class ADmgmt
@@ -49,6 +50,12 @@ Public Class ADmgmt
 
         Panel2.Size = New System.Drawing.Size(410, 0) '410, 320
         Me.Size = New System.Drawing.Size(426, 264) '426, 584
+
+        Dim rKey As RegistryKey = Registry.CurrentUser.OpenSubKey("software\Forman")
+        If rKey Is Nothing Then
+            ' App regkey does not exist, so create key.
+            Registry.CurrentUser.OpenSubKey("Software", True).CreateSubKey("Forman")
+        End If
 
         Me.Loading = True
         Me.Visible = False

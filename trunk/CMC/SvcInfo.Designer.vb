@@ -254,11 +254,11 @@ Partial Class SvcInfo
         '
         'progBar
         '
-        Me.progBar.ForeColor = System.Drawing.Color.DeepSkyBlue
+        Me.progBar.ForeColor = System.Drawing.Color.DodgerBlue
         Me.progBar.Location = New System.Drawing.Point(106, 91)
         Me.progBar.Name = "progBar"
         Me.progBar.Size = New System.Drawing.Size(158, 18)
-        Me.progBar.Style = System.Windows.Forms.ProgressBarStyle.Marquee
+        Me.progBar.Style = System.Windows.Forms.ProgressBarStyle.Continuous
         Me.progBar.TabIndex = 7
         Me.progBar.Visible = False
         '

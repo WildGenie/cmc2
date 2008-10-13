@@ -35,8 +35,6 @@ Public Class SvcInfo
         With Me.progBar
             .Visible = True
             .Value = 0
-            .ForeColor = Color.DeepSkyBlue
-            .Style = ProgressBarStyle.Blocks
         End With
 
         Dim retval As Integer = Form1.ServiceControl(Me.txtSvcName.Text, Form1.WMIServiceParameter.StartService)
