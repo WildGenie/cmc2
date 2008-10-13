@@ -28,3 +28,13 @@ E:\dotnet projects\! vb\cmc\remoteregedit\obj\Release\RemoteRegedit.Resources.re
 E:\dotnet projects\! vb\cmc\remoteregedit\obj\Release\remoteregedit.vbproj.GenerateResource.Cache
 E:\dotnet projects\! vb\cmc\remoteregedit\obj\Release\RemReg.exe
 E:\dotnet projects\! vb\cmc\remoteregedit\obj\Release\RemReg.pdb
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\bin\Debug\RemReg.exe
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\bin\Debug\RemReg.pdb
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\ResolveAssemblyReference.cache
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.AboutBox1.resources
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.Edit.resources
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.RegForm.resources
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.Resources.resources
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\remoteregedit.vbproj.GenerateResource.Cache
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemReg.exe
+E:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemReg.pdb
