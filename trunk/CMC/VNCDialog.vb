@@ -24,11 +24,18 @@ Public Class VNCDialog
         If Me.vncCombo.SelectedIndex >= 1 AndAlso Me.IsWMIConnected = False Then
             MsgBox("You need to make a connection to the computer" & vbCr & "before you can install VNC.", MsgBoxStyle.Critical, "CMC - VNC Connection")
             Me.vncCombo.SelectedIndex = 0
+            Exit Sub
         End If
 
         If Me.vncCombo.SelectedIndex = 1 AndAlso Me.IsLoggedOn = False Then
             If MsgBox("No one is logged on to the remote computer." & vbCr & vbCr & "Are you sure you want to prompt for a connection?.", 36, "CMC - VNC Connection") = vbNo Then
                 Me.vncCombo.SelectedIndex = 2
+            End If
+        End If
+
+        If Me.vncCombo.SelectedIndex = 2 AndAlso Me.IsLoggedOn = True Then
+            If MsgBox("You should have permission from the person logged on to the remote computer" & vbCr & "before making a connection." & vbCr & vbCr & "Do you want to prompt the user to accept the connection?", 36, "CMC - VNC Connection") = vbYes Then
+                Me.vncCombo.SelectedIndex = 1
             End If
         End If
 
