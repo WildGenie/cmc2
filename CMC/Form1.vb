@@ -6556,6 +6556,8 @@ Public Class Form1
         Me.DataFetchPanel.Visible = True
         Me.DataFetchPanel.Refresh()
 
+        ButtonClear.Enabled = False
+
         Me.BackgroundWorker_OS.RunWorkerAsync()
 
     End Sub
@@ -6671,6 +6673,7 @@ Public Class Form1
         End If
 
         Me.GO_Button.Enabled = True
+        Me.ButtonClear.Enabled = True
         Me.Refresh()
 
     End Sub
@@ -8612,8 +8615,9 @@ Public Class Form1
         Me.Label_SvcAction.Text = "Stopping " & Me.sGridCaption
         Me.ProgressBar_SvcAction.Value = 0
         Me.Panel_SvcAction.Visible = True
+        Me.Panel_SvcAction.Refresh()
 
-        Dim retval As Integer = Me.ServiceControl(Me.sGridName, Form1.WMIServiceParameter.StopService)
+        Dim retval As Integer = Me.ServiceControl(Me.sGridName, WMIServiceParameter.StopService)
         If retval <> 0 Then
             Me.Cursor = Cursors.Default
             MsgBox(Me.WMI_SvcReturnCodeDefinition(retval), MsgBoxStyle.Critical, "Error")
@@ -8678,8 +8682,9 @@ Public Class Form1
         Me.Label_SvcAction.Text = "Starting " & Me.sGridCaption
         Me.ProgressBar_SvcAction.Value = 0
         Me.Panel_SvcAction.Visible = True
+        Me.Panel_SvcAction.Refresh()
 
-        Dim retval As Integer = Me.ServiceControl(Me.sGridName, Form1.WMIServiceParameter.StartService)
+        Dim retval As Integer = Me.ServiceControl(Me.sGridName, WMIServiceParameter.StartService)
         If retval <> 0 Then
             MsgBox(Me.WMI_SvcReturnCodeDefinition(retval), MsgBoxStyle.Critical, "Error")
             Me.Cursor = Cursors.Default
@@ -8746,8 +8751,9 @@ Public Class Form1
         Me.Label_SvcAction.Text = "Stopping " & Me.sGridCaption
         Me.ProgressBar_SvcAction.Value = 0
         Me.Panel_SvcAction.Visible = True
+        Me.Panel_SvcAction.Refresh()
 
-        Dim retval As Integer = Me.ServiceControl(Me.sGridName, Form1.WMIServiceParameter.StopService)
+        Dim retval As Integer = Me.ServiceControl(Me.sGridName, WMIServiceParameter.StopService)
         If retval <> 0 Then
             Me.Cursor = Cursors.Default
             MsgBox(Me.WMI_SvcReturnCodeDefinition(retval), MsgBoxStyle.Critical, "Error")
@@ -8784,9 +8790,9 @@ Public Class Form1
 
             Me.Label_SvcAction.Text = "Starting " & Me.sGridCaption
             Me.ProgressBar_SvcAction.Value = 0
-            Me.Panel_SvcAction.Visible = True
+            Me.Panel_SvcAction.Refresh()
 
-            retval = Me.ServiceControl(Me.sGridName, Form1.WMIServiceParameter.StartService)
+            retval = Me.ServiceControl(Me.sGridName, WMIServiceParameter.StartService)
             If retval <> 0 Then
                 MsgBox(Me.WMI_SvcReturnCodeDefinition(retval), MsgBoxStyle.Critical, "Error")
                 Me.Cursor = Cursors.Default
@@ -14603,6 +14609,12 @@ Public Class Form1
     End Sub
     Public Sub ClearBoxes()
 
+        'If Me.BackgroundWorker_OS.IsBusy Then
+        '    If MsgBox("Background process is still busy and" & vbCr & "may be hung" & vbCr & vbCr & "Please close and restart CMC", MsgBoxStyle.Exclamation, "CMC") Then
+        '        End
+        '    End If
+        'End If
+
         If FormCleared = False Then
 
             ' Disable Menu Items
@@ -14711,7 +14723,8 @@ Public Class Form1
 
         End If
 
-        Me.DataFetchPanel.Visible = False
+
+        'Me.DataFetchPanel.Visible = False
         GO_Button.Enabled = True
         Me.sDrivesInUse = ""
         Me.AcceptButton = GO_Button
