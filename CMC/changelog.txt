@@ -4,7 +4,23 @@ ToDo
 ' enum subkeys error when no subkeys - write test value?
 
 ====================================================================================================
-currrentuser\Software\Sysinternals\PsExec EulaAccepted DWORD 1
+14/10/2008
+feature:  Progress bar added for stopping, starting service from context menu.
+feature:  Kill process context menu item - improved checking and updating.
+
+12/10/2008
+feature:  sw now enumerates 64bit apps.
+feature:  sw enumeration added progress bar and cancel button.
+
+11/10/2008
+feature:  Services and Processes changed to listview from datagrid, with icon display.
+
+aug-sep 2008
+feature:  Many changes implemented. Notably...
+          Background workers implemented for os, hw, nw, svc, proc,sw.
+          admgmt integration.
+          perfmonitor integration.
+          vnc methods improved.
 
 13/08/2008
 feature:  Process information now displayed on new dialog form. Includes continuously updated 

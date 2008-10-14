@@ -478,17 +478,10 @@ Public Class ADmgmt
         Me.ea14.Text = String.Empty
         Me.ea15.Text = String.Empty
 
-        'For Each tb As Control In GroupBox3.Controls
-        '    If tb.Name.Substring(1, 2).ToString = "ea" Then
-        '        tb.Text = String.Empty
-        '    End If
-        'Next
-
         Me.lbMemberOf.Items.Clear()
 
         CurrentGroupName = String.Empty
-        'FmGroupMembers.MembersListView.Items.Clear()
-        'Me.btnExportUsers.Enabled = False
+
     End Sub
 
 
