@@ -132,7 +132,7 @@ Public Class FmGraph
             dtNewRow.Item("cpu%") = line(ColCPU)
             dtNewRow.Item("mem%") = line(ColMem)
             If Me._MemPagesInputActive Then dtNewRow.Item("memInputPages") = line(ColInputPages)
-            If Not Me._NICInstance1 Is Nothing Then dtNewRow.Item("NicBytes") = line(ColNic1)
+            If Me._NICInstance1 Then dtNewRow.Item("NicBytes") = line(ColNic1)
 
             If Not Me._disk1Instance Is Nothing Then
                 dtNewRow.Item("disk%") = line(ColDskPercent1)

@@ -821,6 +821,9 @@ Public Class Form1
         Me.newprocess = New System.Windows.Forms.TextBox
         Me.Label41 = New System.Windows.Forms.Label
         Me.services = New System.Windows.Forms.TabPage
+        Me.Panel_SvcAction = New System.Windows.Forms.Panel
+        Me.ProgressBar_SvcAction = New System.Windows.Forms.ProgressBar
+        Me.Label_SvcAction = New System.Windows.Forms.Label
         Me.svc_wait_panel = New System.Windows.Forms.Panel
         Me.Label38 = New System.Windows.Forms.Label
         Me.ListView_Services = New System.Windows.Forms.ListView
@@ -1027,9 +1030,6 @@ Public Class Form1
         Me.BackgroundWorker_OS = New System.ComponentModel.BackgroundWorker
         Me.BackgroundWorker_NW = New System.ComponentModel.BackgroundWorker
         Me.Label32 = New System.Windows.Forms.Label
-        Me.Panel_SvcAction = New System.Windows.Forms.Panel
-        Me.Label_SvcAction = New System.Windows.Forms.Label
-        Me.ProgressBar_SvcAction = New System.Windows.Forms.ProgressBar
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1062,6 +1062,7 @@ Public Class Form1
         Me.ProcContextMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.services.SuspendLayout()
+        Me.Panel_SvcAction.SuspendLayout()
         Me.svc_wait_panel.SuspendLayout()
         Me.network.SuspendLayout()
         Me.nw_Wait_Panel.SuspendLayout()
@@ -1085,7 +1086,6 @@ Public Class Form1
         Me.GroupBox9.SuspendLayout()
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
-        Me.Panel_SvcAction.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -1143,41 +1143,41 @@ Public Class Form1
         Me.svcname.Font = New System.Drawing.Font("Tahoma", 7.5!)
         Me.svcname.ForeColor = System.Drawing.Color.SteelBlue
         Me.svcname.Name = "svcname"
-        Me.svcname.Size = New System.Drawing.Size(151, 22)
+        Me.svcname.Size = New System.Drawing.Size(152, 22)
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(148, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(149, 6)
         '
         'svcstop
         '
         Me.svcstop.Name = "svcstop"
-        Me.svcstop.Size = New System.Drawing.Size(151, 22)
+        Me.svcstop.Size = New System.Drawing.Size(152, 22)
         Me.svcstop.Text = "stop..."
         '
         'svcstart
         '
         Me.svcstart.Name = "svcstart"
-        Me.svcstart.Size = New System.Drawing.Size(151, 22)
+        Me.svcstart.Size = New System.Drawing.Size(152, 22)
         Me.svcstart.Text = "start..."
         '
         'svcrestart
         '
         Me.svcrestart.Name = "svcrestart"
-        Me.svcrestart.Size = New System.Drawing.Size(151, 22)
+        Me.svcrestart.Size = New System.Drawing.Size(152, 22)
         Me.svcrestart.Text = "restart..."
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(148, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(149, 6)
         '
         'startmode
         '
         Me.startmode.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutomaticMenu, Me.ManualMenu, Me.DisabledMenu})
         Me.startmode.Name = "startmode"
-        Me.startmode.Size = New System.Drawing.Size(151, 22)
+        Me.startmode.Size = New System.Drawing.Size(152, 22)
         Me.startmode.Text = "start mode..."
         '
         'AutomaticMenu
@@ -1201,42 +1201,42 @@ Public Class Form1
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(148, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(149, 6)
         '
         'mnuSvcProperties
         '
         Me.mnuSvcProperties.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.mnuSvcProperties.Name = "mnuSvcProperties"
-        Me.mnuSvcProperties.Size = New System.Drawing.Size(151, 22)
+        Me.mnuSvcProperties.Size = New System.Drawing.Size(152, 22)
         Me.mnuSvcProperties.Text = "Properties"
         Me.mnuSvcProperties.ToolTipText = "Show extended properties"
         '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
-        Me.ToolStripSeparator25.Size = New System.Drawing.Size(148, 6)
+        Me.ToolStripSeparator25.Size = New System.Drawing.Size(149, 6)
         '
         'GoogleLookupToolStripMenuItem
         '
         Me.GoogleLookupToolStripMenuItem.Name = "GoogleLookupToolStripMenuItem"
-        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.GoogleLookupToolStripMenuItem.Text = "google lookup"
         '
         'DeleteServiceToolStripMenuItem
         '
         Me.DeleteServiceToolStripMenuItem.Name = "DeleteServiceToolStripMenuItem"
-        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
         Me.DeleteServiceToolStripMenuItem.Text = "delete service"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(148, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(149, 6)
         '
         'RefreshMenu
         '
         Me.RefreshMenu.Name = "RefreshMenu"
-        Me.RefreshMenu.Size = New System.Drawing.Size(151, 22)
+        Me.RefreshMenu.Size = New System.Drawing.Size(152, 22)
         Me.RefreshMenu.Text = "refresh"
         '
         'Label11
@@ -3805,6 +3805,38 @@ Public Class Form1
         Me.services.Text = "Services"
         Me.services.UseVisualStyleBackColor = True
         '
+        'Panel_SvcAction
+        '
+        Me.Panel_SvcAction.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel_SvcAction.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.Panel_SvcAction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Panel_SvcAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_SvcAction.Controls.Add(Me.ProgressBar_SvcAction)
+        Me.Panel_SvcAction.Controls.Add(Me.Label_SvcAction)
+        Me.Panel_SvcAction.Location = New System.Drawing.Point(46, 158)
+        Me.Panel_SvcAction.Name = "Panel_SvcAction"
+        Me.Panel_SvcAction.Size = New System.Drawing.Size(292, 71)
+        Me.Panel_SvcAction.TabIndex = 75
+        Me.Panel_SvcAction.Visible = False
+        '
+        'ProgressBar_SvcAction
+        '
+        Me.ProgressBar_SvcAction.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.ProgressBar_SvcAction.Location = New System.Drawing.Point(39, 39)
+        Me.ProgressBar_SvcAction.Name = "ProgressBar_SvcAction"
+        Me.ProgressBar_SvcAction.Size = New System.Drawing.Size(215, 19)
+        Me.ProgressBar_SvcAction.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ProgressBar_SvcAction.TabIndex = 1
+        '
+        'Label_SvcAction
+        '
+        Me.Label_SvcAction.AutoSize = True
+        Me.Label_SvcAction.Location = New System.Drawing.Point(37, 15)
+        Me.Label_SvcAction.Name = "Label_SvcAction"
+        Me.Label_SvcAction.Size = New System.Drawing.Size(86, 13)
+        Me.Label_SvcAction.TabIndex = 0
+        Me.Label_SvcAction.Text = "Label_SvcAction"
+        '
         'svc_wait_panel
         '
         Me.svc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
@@ -4384,7 +4416,7 @@ Public Class Form1
         Me.DataFetchPanelLabel.BackColor = System.Drawing.Color.Transparent
         Me.DataFetchPanelLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.DataFetchPanelLabel.ForeColor = System.Drawing.Color.White
-        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(39, 16)
+        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(37, 15)
         Me.DataFetchPanelLabel.Name = "DataFetchPanelLabel"
         Me.DataFetchPanelLabel.Size = New System.Drawing.Size(76, 15)
         Me.DataFetchPanelLabel.TabIndex = 0
@@ -6026,38 +6058,6 @@ Public Class Form1
         Me.Label32.TabIndex = 0
         Me.Label32.Text = "getting data..."
         '
-        'Panel_SvcAction
-        '
-        Me.Panel_SvcAction.BackColor = System.Drawing.SystemColors.Control
-        Me.Panel_SvcAction.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.Panel_SvcAction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Panel_SvcAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel_SvcAction.Controls.Add(Me.ProgressBar_SvcAction)
-        Me.Panel_SvcAction.Controls.Add(Me.Label_SvcAction)
-        Me.Panel_SvcAction.Location = New System.Drawing.Point(46, 158)
-        Me.Panel_SvcAction.Name = "Panel_SvcAction"
-        Me.Panel_SvcAction.Size = New System.Drawing.Size(292, 71)
-        Me.Panel_SvcAction.TabIndex = 75
-        Me.Panel_SvcAction.Visible = False
-        '
-        'Label_SvcAction
-        '
-        Me.Label_SvcAction.AutoSize = True
-        Me.Label_SvcAction.Location = New System.Drawing.Point(37, 15)
-        Me.Label_SvcAction.Name = "Label_SvcAction"
-        Me.Label_SvcAction.Size = New System.Drawing.Size(86, 13)
-        Me.Label_SvcAction.TabIndex = 0
-        Me.Label_SvcAction.Text = "Label_SvcAction"
-        '
-        'ProgressBar_SvcAction
-        '
-        Me.ProgressBar_SvcAction.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.ProgressBar_SvcAction.Location = New System.Drawing.Point(39, 39)
-        Me.ProgressBar_SvcAction.Name = "ProgressBar_SvcAction"
-        Me.ProgressBar_SvcAction.Size = New System.Drawing.Size(215, 19)
-        Me.ProgressBar_SvcAction.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.ProgressBar_SvcAction.TabIndex = 1
-        '
         'Form1
         '
         Me.AcceptButton = Me.GO_Button
@@ -6143,6 +6143,8 @@ Public Class Form1
         Me.GroupBox1.PerformLayout()
         Me.services.ResumeLayout(False)
         Me.services.PerformLayout()
+        Me.Panel_SvcAction.ResumeLayout(False)
+        Me.Panel_SvcAction.PerformLayout()
         Me.svc_wait_panel.ResumeLayout(False)
         Me.svc_wait_panel.PerformLayout()
         Me.network.ResumeLayout(False)
@@ -6182,8 +6184,6 @@ Public Class Form1
         Me.GroupBox9.PerformLayout()
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
-        Me.Panel_SvcAction.ResumeLayout(False)
-        Me.Panel_SvcAction.PerformLayout()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -6785,6 +6785,7 @@ Public Class Form1
         End If
     End Sub
 
+
 #Region "OS"
 
     ''' <summary>
@@ -6941,7 +6942,7 @@ Public Class Form1
         Catch ex As Exception
             Return String.Empty
         End Try
-        
+
     End Function
 
     ''' <summary>
@@ -8244,6 +8245,8 @@ Public Class Form1
             returnvalue = -1
         End Try
 
+        Return returnvalue
+
     End Function
     Public Enum WMIServiceParameter
         StartService = 1
@@ -8253,6 +8256,66 @@ Public Class Form1
         ModeManual = 16
         ModeDisabled = 32
     End Enum
+    Protected Friend ReadOnly Property WMI_ServiceDeleteReturnCode(ByVal code As Integer) As String
+        Get
+            Dim Result As String
+            Select Case code
+                Case 0
+                    Result = "Success"
+                Case 1
+                    Result = "Not Supported"
+                Case 2
+                    Result = "Access Denied"
+                Case 3
+                    Result = "Dependent Services Running"
+                Case 4
+                    Result = "Invalid Service Control"
+                Case 5
+                    Result = "Service Cannot Accept Control"
+                Case 6
+                    Result = "Service Not Active"
+                Case 7
+                    Result = "Service Request Timeout"
+                Case 8
+                    Result = "Unknown Failure"
+                Case 9
+                    Result = "Path Not Found"
+                Case 10
+                    Result = "Service Already Running"
+                Case 11
+                    Result = "Service Database Locked"
+                Case 12
+                    Result = "Service Dependency Deleted"
+                Case 13
+                    Result = "Service Dependency Failure"
+                Case 14
+                    Result = "Service Disabled"
+                Case 15
+                    Result = "Service Logon Failure"
+                Case 16
+                    Result = "Service Marked For Deletion"
+                Case 17
+                    Result = "Service No Thread"
+                Case 18
+                    Result = "Status Circular Dependency"
+                Case 19
+                    Result = "Status Duplicate Name"
+                Case 20
+                    Result = "Status Invalid Name"
+                Case 21
+                    Result = "Status Invalid Parameter"
+                Case 22
+                    Result = "Status Invalid Service Account"
+                Case 23
+                    Result = "Status Service Exists"
+                Case 24
+                    Result = "Service Already Paused"
+                Case Else
+                    Result = "Unknown Error"
+            End Select
+            Return Result
+        End Get
+    End Property
     Protected Friend ReadOnly Property WMI_SvcReturnCodeDefinition(ByVal code As Integer) As String
         Get
             Dim output As String = Nothing
@@ -8426,29 +8489,54 @@ Public Class Form1
         Me.Cursor = Cursors.WaitCursor
 
         Try
-            Dim strRemoveService As String = "SC \\" & PC.Name & " delete " & Me.sGridName
-            Shell(strRemoveService, 0, True, 15)
-            'If UninstallService(Me.sGridName) = 0 Then
-            '    MsgBox("Success")
-            'Else
-            '    MsgBox("Fail")
-            'End If
+            'Dim strRemoveService As String = "SC \\" & PC.Name & " delete " & Me.sGridName
+            ' Shell(strRemoveService, 0, True, 15)
 
 
-            ' scroll through datatable rows until matching entry found
-            For Each row As DataRow In Me.SvcDataTable.Rows
-                If row(0).ToString.ToLower = Me.sGridName.ToLower Then
-                    row.Delete()
-                    Exit For
-                End If
+            If Me.sGridState = "Running" Then
+                Me.StopServiceProgress()
+            End If
+
+            If Not Me.Get_ServiceState(Me.sGridName) = "Stopped" Then
+                Panel2.Text = "ready"
+                Me.Cursor = Cursors.Default
+                Exit Sub
+            End If
+
+            Dim returnvalue As Integer = -1
+            Dim m As ManagementObject
+            Dim outparams As ManagementBaseObject
+            Dim queryCollection As ManagementObjectCollection
+            queryCollection = wmi.wmiQuery("SELECT * FROM Win32_Service WHERE Name ='" & Me.sGridName & "'")
+            For Each m In queryCollection
+                outparams = m.InvokeMethod("Delete", Nothing, Nothing)
+                returnvalue = outparams("ReturnValue")
             Next
 
-            ' update individual item in listview row.
-            For Each row As ListViewItem In Me.ListView_Services.Items
-                If row.SubItems(ServiceColumn.Name).Text.ToLower = Me.sGridName.ToLower Then
-                    row.Remove()
-                End If
-            Next
+            If returnvalue = 0 Then
+                Panel2.Text = Me.sGridName.ToLower & " service deleted"
+
+                ' scroll through datatable rows until matching entry found
+                For Each row As DataRow In Me.SvcDataTable.Rows
+                    If row(0).ToString.ToLower = Me.sGridName.ToLower Then
+                        row.Delete()
+                        Exit For
+                    End If
+                Next
+
+                ' update individual item in listview row.
+                For Each row As ListViewItem In Me.ListView_Services.Items
+                    If row.SubItems(ServiceColumn.Name).Text.ToLower = Me.sGridName.ToLower Then
+                        row.Remove()
+                    End If
+                Next
+
+            Else
+                MsgBox("Delete Failed" & vbCr & WMI_ServiceDeleteReturnCode(returnvalue))
+            End If
+
+
+
 
         Catch ex As Exception
             MsgBox(Err.Description & vbCrLf & "error code: " & Err.Number)
@@ -8594,23 +8682,14 @@ Public Class Form1
 
     ' Context menu selections
     Private Sub svcstop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles svcstop.Click
+
         Me.Refresh()
         Me.Cursor = Cursors.WaitCursor
-        'Panel2.Text = "stopping " & Me.sGridName & ".  please wait..."
+        Me.StopServiceProgress()
+        Me.Cursor = Cursors.Default
 
-        'Dim svcthread As New System.Threading.Thread(AddressOf StopService)
-        'svcthread.Start()
-        'Dim count As Integer = 0
-        'Do While svcthread.IsAlive And count < 10
-        '    System.Threading.Thread.Sleep(1000)
-        '    count = count + 1
-        'Loop
-        'svcthread.Join()
-
-        'Me.UpdateSelectedService(Me.sGridName)
-        'WriteLog(PC.Name & " - stop service: " & Me.sGridName)
-        'Panel2.Text = "ready"
-        'Me.Cursor = Cursors.Default
+    End Sub
+    Private Sub StopServiceProgress()
 
         Me.Label_SvcAction.Text = "Stopping " & Me.sGridCaption
         Me.ProgressBar_SvcAction.Value = 0
@@ -8650,15 +8729,11 @@ Public Class Form1
             System.Threading.Thread.Sleep(20)
         Loop
 
-        If svcStatus = "Stopped" Then
-            'Me.btnSvcStop.Enabled = True
-        Else
+        If Not svcStatus = "Stopped" Then
             MsgBox("Unable to stop service within time." & vbCr & vbCr & "Check the event log", MsgBoxStyle.Critical, "Service Stop Failed")
         End If
 
         Me.Panel_SvcAction.Visible = False
-        Me.Cursor = Cursors.Default
-
     End Sub
     Private Sub svcstart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles svcstart.Click
         Me.Refresh()
@@ -9141,27 +9216,24 @@ Public Class Form1
         Return domain & "\" & user
 
     End Function
-    Private Function WMI_Kill_Process() As Boolean
+    Protected Friend Function WMI_Kill_Process(ByVal PID As Integer) As Boolean
 
         Try
+
             Dim queryCollection As ManagementObjectCollection
             Dim m As ManagementObject
-            queryCollection = wmi.wmiQuery("SELECT * FROM Win32_Process WHERE Handle = '" & pGrid_ID & "'")
+            queryCollection = wmi.wmiQuery("SELECT * FROM Win32_Process WHERE Handle = '" & pGrid_ID.ToString & "'")
 
             If queryCollection.Count = 1 Then
                 For Each m In queryCollection
                     m.InvokeMethod("Terminate", Nothing)
-                    WriteLog(PC.Name & " - process killed " & m("Name").ToString)
                 Next
                 Return True
             Else
-                Panel2.Text = "kill failed"
                 Return False
             End If
 
         Catch ex As Exception
-            Panel2.Text = "process kill failed"
-            WriteLog(PC.Name & " - Process Kill failed: " & ex.Message)
             Return False
         End Try
 
@@ -9211,13 +9283,17 @@ Public Class Form1
 
     End Sub
     Private Sub ListView_Processes_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListView_Processes.MouseDoubleClick
-        ' load process proprties form as dialog - wait for exit.
-        ShowProcessInfoDialog()
+        If Not String.IsNullOrEmpty(Me.pGrid_Name) Then
+            ' load process proprties form as dialog - wait for exit.
+            ShowProcessInfoDialog()
+        End If
     End Sub
     Private Sub ListView_Processes_KeyDown(ByVal sender As Object, ByVal e As System.Windows.Forms.KeyEventArgs) Handles ListView_Processes.KeyDown
         If e.KeyCode = Keys.Enter Then
-            ' load process proprties form as dialog - wait for exit.
-            ShowProcessInfoDialog()
+            If Not String.IsNullOrEmpty(Me.pGrid_Name) Then
+                ' load process proprties form as dialog - wait for exit.
+                ShowProcessInfoDialog()
+            End If
         End If
     End Sub
 
@@ -9233,9 +9309,12 @@ Public Class Form1
 
     ' context menu items
     Private Sub mnuProcKill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles mnuProcKill.Click
+
+        Me.Refresh()
+
         If Not Me.ListView_Processes.SelectedItems Is Nothing Then
             Me.Cursor = Cursors.WaitCursor
-            If WMI_Kill_Process() Then
+            If WMI_Kill_Process(Me.pGrid_ID) Then
 
                 Dim processalive As Boolean = True
                 Dim count As Integer = 0
@@ -11822,7 +11901,7 @@ Public Class Form1
             Catch ex As Exception
             End Try
         End If
-        
+
     End Sub
     Private Sub gpo_backgroundworker_completed(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs)
         gpoDebugCombo.Text = PC.GPODebugSetting
@@ -13434,7 +13513,7 @@ Public Class Form1
     End Sub
     Private Sub LinkLabel1_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel1.LinkClicked
         'WriteLog("support email link selected")
-        System.Diagnostics.Process.Start("mailto:support@computermanagementconsole.co.uk")
+        System.Diagnostics.Process.Start("mailto:cmchelpline@gmail.com")
     End Sub
     Private Sub LinkLabel2_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles LinkLabel2.LinkClicked
         'WriteLog("http link selected")
@@ -13490,7 +13569,7 @@ Public Class Form1
         Return running
 
     End Function
-    Private Function IsProcessRunning(ByVal ProcessID As Integer) As Boolean
+    Protected Friend Function IsProcessRunning(ByVal ProcessID As Integer) As Boolean
         On Error Resume Next
         Dim running As Boolean = False
         Dim m As ManagementObject
