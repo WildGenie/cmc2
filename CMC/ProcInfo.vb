@@ -133,15 +133,51 @@ Public Class ProcInfo
         ' Me.txtCPUTime.Text = Process.GetProcessById(CInt(Me.txtProcPid.Text), pc.Name).TotalProcessorTime.Seconds
     End Sub
 
-    Private Function GetPeakWorkingSetKB(ByVal Computer As String, ByVal PID As Integer) As Long
-        Try
-            Return Process.GetProcessById(PID, Computer).PeakWorkingSet64 / 1024
-        Catch ex As Exception
-            Return 0
-        End Try
-    End Function
+    Private Sub Button_Kill_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button_Kill.Click
 
+        Me.Button_Kill.Enabled = False
+        Me.gbProcResources.Enabled = False
 
+        If Form1.WMI_Kill_Process(CInt(Me.txtProcPid.Text)) Then
+
+            Dim processalive As Boolean = True
+            Dim count As Integer = 0
+
+            Do While processalive
+                processalive = Form1.IsProcessRunning(CInt(Me.txtProcPid.Text))
+                System.Threading.Thread.Sleep(1000)
+                count += 1
+                If count > 10 Then
+                    Exit Do
+                End If
+            Loop
+
+            If Not processalive Then
+
+                Timer1.Stop()
+                Me.lblNoProcess.Text = "Process Terminated Successfully"
+                Me.lblNoProcess.Visible = True
+
+                ' remove row from listview_processes.
+                For Each row As ListViewItem In Form1.ListView_Processes.Items
+                    If row.SubItems(1).Text = Me.txtProcPid.Text Then
+                        row.Remove()
+                        Exit For
+                    End If
+                Next
+
+                Form1.pGrid_Name = Nothing
+                Form1.pGrid_ID = Nothing
+                Form1.pGrid_Path = Nothing
+            Else
+                ''  Panel2.Text = "process not yet terminated"
+                MsgBox("Process was successfully sent a kill command" & vbCr & "but is still running", MsgBoxStyle.Information, "CMC - Kill Process")
+            End If
+        Else
+            MsgBox("Process kill command failed" & vbCr & "see log for details", MsgBoxStyle.Exclamation, "CMC - Kill Process")
+        End If
+
+    End Sub
 End Class
 
 

@@ -27,6 +27,7 @@ Partial Class ProcInfo
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
         Me.Cancel_Button = New System.Windows.Forms.Button
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.PictureBox2 = New System.Windows.Forms.PictureBox
         Me.lblNoProcess = New System.Windows.Forms.Label
         Me.txtProcOwner = New System.Windows.Forms.TextBox
         Me.txtProcPath = New System.Windows.Forms.TextBox
@@ -59,12 +60,12 @@ Partial Class ProcInfo
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
-        Me.PictureBox2 = New System.Windows.Forms.PictureBox
+        Me.Button_Kill = New System.Windows.Forms.Button
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.gbProcResources.SuspendLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'TableLayoutPanel1
@@ -74,7 +75,7 @@ Partial Class ProcInfo
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.ColumnStyles.Add(New System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
         Me.TableLayoutPanel1.Controls.Add(Me.Cancel_Button, 1, 0)
-        Me.TableLayoutPanel1.Location = New System.Drawing.Point(206, 409)
+        Me.TableLayoutPanel1.Location = New System.Drawing.Point(206, 430)
         Me.TableLayoutPanel1.Name = "TableLayoutPanel1"
         Me.TableLayoutPanel1.RowCount = 1
         Me.TableLayoutPanel1.RowStyles.Add(New System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50.0!))
@@ -93,6 +94,7 @@ Partial Class ProcInfo
         '
         'GroupBox1
         '
+        Me.GroupBox1.Controls.Add(Me.Button_Kill)
         Me.GroupBox1.Controls.Add(Me.PictureBox2)
         Me.GroupBox1.Controls.Add(Me.lblNoProcess)
         Me.GroupBox1.Controls.Add(Me.txtProcOwner)
@@ -105,10 +107,19 @@ Partial Class ProcInfo
         Me.GroupBox1.Controls.Add(Me.Label10)
         Me.GroupBox1.Location = New System.Drawing.Point(12, 12)
         Me.GroupBox1.Name = "GroupBox1"
-        Me.GroupBox1.Size = New System.Drawing.Size(337, 213)
+        Me.GroupBox1.Size = New System.Drawing.Size(337, 225)
         Me.GroupBox1.TabIndex = 1
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Process Information"
+        '
+        'PictureBox2
+        '
+        Me.PictureBox2.ErrorImage = Nothing
+        Me.PictureBox2.Location = New System.Drawing.Point(295, 36)
+        Me.PictureBox2.Name = "PictureBox2"
+        Me.PictureBox2.Size = New System.Drawing.Size(32, 32)
+        Me.PictureBox2.TabIndex = 10
+        Me.PictureBox2.TabStop = False
         '
         'lblNoProcess
         '
@@ -123,7 +134,7 @@ Partial Class ProcInfo
         '
         'txtProcOwner
         '
-        Me.txtProcOwner.Location = New System.Drawing.Point(31, 173)
+        Me.txtProcOwner.Location = New System.Drawing.Point(31, 170)
         Me.txtProcOwner.Name = "txtProcOwner"
         Me.txtProcOwner.ReadOnly = True
         Me.txtProcOwner.Size = New System.Drawing.Size(289, 20)
@@ -156,7 +167,7 @@ Partial Class ProcInfo
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(28, 155)
+        Me.Label6.Location = New System.Drawing.Point(28, 152)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(79, 13)
         Me.Label6.TabIndex = 4
@@ -220,7 +231,7 @@ Partial Class ProcInfo
         Me.gbProcResources.Controls.Add(Me.Label5)
         Me.gbProcResources.Controls.Add(Me.Label3)
         Me.gbProcResources.Controls.Add(Me.Label1)
-        Me.gbProcResources.Location = New System.Drawing.Point(12, 231)
+        Me.gbProcResources.Location = New System.Drawing.Point(12, 250)
         Me.gbProcResources.Name = "gbProcResources"
         Me.gbProcResources.Size = New System.Drawing.Size(337, 170)
         Me.gbProcResources.TabIndex = 4
@@ -410,27 +421,29 @@ Partial Class ProcInfo
         Me.lblTick.AutoSize = True
         Me.lblTick.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTick.ForeColor = System.Drawing.SystemColors.ControlDark
-        Me.lblTick.Location = New System.Drawing.Point(12, 404)
+        Me.lblTick.Location = New System.Drawing.Point(12, 423)
         Me.lblTick.Name = "lblTick"
         Me.lblTick.Size = New System.Drawing.Size(45, 13)
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
         '
-        'PictureBox2
+        'Button_Kill
         '
-        Me.PictureBox2.ErrorImage = Nothing
-        Me.PictureBox2.Location = New System.Drawing.Point(295, 36)
-        Me.PictureBox2.Name = "PictureBox2"
-        Me.PictureBox2.Size = New System.Drawing.Size(32, 32)
-        Me.PictureBox2.TabIndex = 10
-        Me.PictureBox2.TabStop = False
+        Me.Button_Kill.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_Kill.Location = New System.Drawing.Point(125, 196)
+        Me.Button_Kill.Name = "Button_Kill"
+        Me.Button_Kill.Size = New System.Drawing.Size(75, 23)
+        Me.Button_Kill.TabIndex = 11
+        Me.Button_Kill.TabStop = False
+        Me.Button_Kill.Text = "Kill Process"
+        Me.Button_Kill.UseVisualStyleBackColor = True
         '
         'ProcInfo
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.CancelButton = Me.Cancel_Button
-        Me.ClientSize = New System.Drawing.Size(364, 450)
+        Me.ClientSize = New System.Drawing.Size(364, 471)
         Me.Controls.Add(Me.lblTick)
         Me.Controls.Add(Me.gbProcResources)
         Me.Controls.Add(Me.GroupBox1)
@@ -446,10 +459,10 @@ Partial Class ProcInfo
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
+        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.gbProcResources.ResumeLayout(False)
         Me.gbProcResources.PerformLayout()
         CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -490,5 +503,6 @@ Partial Class ProcInfo
     Friend WithEvents Label14 As System.Windows.Forms.Label
     Friend WithEvents txtPeakPageFile As System.Windows.Forms.TextBox
     Friend WithEvents PictureBox2 As System.Windows.Forms.PictureBox
+    Friend WithEvents Button_Kill As System.Windows.Forms.Button
 
 End Class
