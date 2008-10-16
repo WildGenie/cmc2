@@ -6359,6 +6359,11 @@ Public Class Form1
             Registry.CurrentUser.OpenSubKey("Software", True).CreateSubKey("Forman")
             ' create default history size now as this is the only time it will be set
             Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("HistorySize", 40, RegistryValueKind.DWord)
+            Try
+                ' set performancegraph as default for permonitorfile
+                Registry.ClassesRoot.OpenSubKey("Perfmonitor.Datafile\Shell\Open\Command", True).SetValue("", Chr(34) & "C:\\program files\\cmc\\performancegraph.exe" & Chr(34) & " " & Chr(34) & "%1" & Chr(34), RegistryValueKind.String)
+            Catch ex As Exception
+            End Try
         End If
 
 
@@ -12111,12 +12116,6 @@ Public Class Form1
             Exit Sub
         End If
 
-        'If PC.OS <> "NT" AndAlso PC.OS <> "Windows 2000" Then
-        'Shell("cmd /c msg * /server:" & PC.Name & " /v " & strMessage, 0, True)
-        'Else
-        'MsgBox("Can't use msg command on older version of windows")
-        'End If
-
         Dim myProcess As Process = New Process()
         Dim s As String
         Dim exittime As String
@@ -12127,7 +12126,6 @@ Public Class Form1
         '' add an Exited event handler
         'myProcess.EnableRaisingEvents = True
         'AddHandler myProcess.Exited, AddressOf Me.ProcessExited
-
         myProcess.StartInfo.RedirectStandardInput = True
         myProcess.StartInfo.RedirectStandardOutput = True
         myProcess.StartInfo.RedirectStandardError = True
@@ -12154,12 +12152,14 @@ Public Class Form1
         myProcess.Close()
 
         If Not exitcode = 0 Then
-            MsgBox(s)
+            Panel2.Text = "message send failed - see log"
+            WriteLog("message send failed - " & s)
         Else
             If InStr(s, "Async message sent to ") Then
-                MsgBox("Msg sent OK")
+                Panel2.Text = "message sent successfully"
             Else
-                MsgBox(s)
+                Panel2.Text = "message send failed - see log"
+                WriteLog("message send failed - " & s)
             End If
         End If
 
