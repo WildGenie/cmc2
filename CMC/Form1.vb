@@ -8845,6 +8845,7 @@ Public Class Form1
 
             svcStatus = Me.Get_ServiceState(Me.sGridName)
             Me.UpdateSelectedService(Me.sGridName)
+            Me.Refresh()
 
             System.Threading.Thread.Sleep(400)
             Me.ProgressBar_SvcAction.Increment(100 / 30)
@@ -8884,6 +8885,7 @@ Public Class Form1
 
                 svcStatus = Me.Get_ServiceState(Me.sGridName)
                 Me.UpdateSelectedService(Me.sGridName)
+                Me.Refresh()
 
                 System.Threading.Thread.Sleep(400)
                 Me.ProgressBar_SvcAction.Increment(100 / 30)
@@ -9363,12 +9365,10 @@ Public Class Form1
         My.Computer.Clipboard.SetText(Me.pGrid_Path)
     End Sub
     Private Sub mnuProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropertiesToolStripMenuItem.Click
-        Dim pi As New ProcInfo
-        pi.Text = Me.pGrid_Name & " Properties"
-        pi.txtProcName.Text = Me.pGrid_Name
-        pi.txtProcPath.Text = Me.pGrid_Path
-        pi.txtProcPid.Text = Me.pGrid_ID
-        pi.ShowDialog()
+        Me.Refresh()
+        Dim pinfo As New System.Threading.Thread(AddressOf ShowProcessInfoDialog)
+        pinfo.Start()
+        'Me.ShowProcessInfoDialog()
     End Sub
 
     ' Create New process
