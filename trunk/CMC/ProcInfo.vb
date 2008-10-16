@@ -24,40 +24,44 @@ Public Class ProcInfo
         KBDivider = 1
         GetProcessStats()
 
+        If Not Me.lblNoProcess.Text = "Process Not Found" Then
 
-        ' determine refresh rate according to initial time taken to process
-        totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 4)
-        If totaltime < 0.4 Then
-            Timer1.Interval = 2000
-        ElseIf totaltime < 1 Then
-            Timer1.Interval = 4000
-        ElseIf totaltime < 2 Then
-            Timer1.Interval = 5000
-        ElseIf totaltime < 4 Then
-            Timer1.Interval = 10000
-        ElseIf totaltime < 8 Then
-            Timer1.Interval = 15000
-        Else
-            Timer1.Interval = CInt(totaltime) * 4000
+            ' determine refresh rate according to initial time taken to process
+            totaltime = Microsoft.VisualBasic.Left(Microsoft.VisualBasic.DateAndTime.Timer - start, 4)
+            If totaltime < 0.4 Then
+                Timer1.Interval = 2000
+            ElseIf totaltime < 1 Then
+                Timer1.Interval = 4000
+            ElseIf totaltime < 2 Then
+                Timer1.Interval = 5000
+            ElseIf totaltime < 4 Then
+                Timer1.Interval = 10000
+            ElseIf totaltime < 8 Then
+                Timer1.Interval = 15000
+            Else
+                Timer1.Interval = CInt(totaltime) * 4000
+            End If
+            Me.lblTick.Text = "Refresh Rate: " & (Timer1.Interval / 1000).ToString & " s"
+
+
+            ' wmi provider appears to change unit for some items/os's 
+            ' from bytes to kb (or something)
+            ' so need to add custom divisor for some items.
+            ' WorkingSet always seems to be accurate, so use that as 
+            ' a basis for checking...
+            ' determine correct value for PeakWorkingSet and pagefile
+            If CInt(Me.txtPeakWorkingSet.Text) / CInt(Me.txtWorkingSet.Text) > 1000 Then
+                KBDivider = 1024
+                Me.txtPeakWorkingSet.Text = CInt(Me.txtPeakWorkingSet.Text / KBDivider)
+                Me.txtPageFile.Text = CInt(Me.txtPageFile.Text / KBDivider)
+                Me.txtPeakPageFile.Text = CInt(Me.txtPeakPageFile.Text / KBDivider)
+            End If
+
+            ' start the clock ticking
+            Timer1.Start()
+
         End If
-        Me.lblTick.Text = "Refresh Rate: " & (Timer1.Interval / 1000).ToString & " s"
 
-
-        ' wmi provider appears to change unit for some items/os's 
-        ' from bytes to kb (or something)
-        ' so need to add custom divisor for some items.
-        ' WorkingSet always seems to be accurate, so use that as 
-        ' a basis for checking...
-        ' determine correct value for PeakWorkingSet and pagefile
-        If CInt(Me.txtPeakWorkingSet.Text) / CInt(Me.txtWorkingSet.Text) > 1000 Then
-            KBDivider = 1024
-            Me.txtPeakWorkingSet.Text = CInt(Me.txtPeakWorkingSet.Text / KBDivider)
-            Me.txtPageFile.Text = CInt(Me.txtPageFile.Text / KBDivider)
-            Me.txtPeakPageFile.Text = CInt(Me.txtPeakPageFile.Text / KBDivider)
-        End If
-
-        ' start the clock ticking
-        Timer1.Start()
 
         Try
             PictureBox2.Image = Drawing.Icon.ExtractAssociatedIcon(txtProcPath.Text).ToBitmap

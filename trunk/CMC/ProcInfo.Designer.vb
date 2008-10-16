@@ -27,6 +27,7 @@ Partial Class ProcInfo
         Me.TableLayoutPanel1 = New System.Windows.Forms.TableLayoutPanel
         Me.Cancel_Button = New System.Windows.Forms.Button
         Me.GroupBox1 = New System.Windows.Forms.GroupBox
+        Me.Button_Kill = New System.Windows.Forms.Button
         Me.PictureBox2 = New System.Windows.Forms.PictureBox
         Me.lblNoProcess = New System.Windows.Forms.Label
         Me.txtProcOwner = New System.Windows.Forms.TextBox
@@ -60,7 +61,6 @@ Partial Class ProcInfo
         Me.Timer1 = New System.Windows.Forms.Timer(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.lblTick = New System.Windows.Forms.Label
-        Me.Button_Kill = New System.Windows.Forms.Button
         Me.TableLayoutPanel1.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         CType(Me.PictureBox2, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -112,6 +112,19 @@ Partial Class ProcInfo
         Me.GroupBox1.TabStop = False
         Me.GroupBox1.Text = "Process Information"
         '
+        'Button_Kill
+        '
+        Me.Button_Kill.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button_Kill.Image = Global.CMC.My.Resources.Resources.cancel
+        Me.Button_Kill.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft
+        Me.Button_Kill.Location = New System.Drawing.Point(225, 194)
+        Me.Button_Kill.Name = "Button_Kill"
+        Me.Button_Kill.Size = New System.Drawing.Size(96, 25)
+        Me.Button_Kill.TabIndex = 11
+        Me.Button_Kill.TabStop = False
+        Me.Button_Kill.Text = "   Kill Process"
+        Me.Button_Kill.UseVisualStyleBackColor = True
+        '
         'PictureBox2
         '
         Me.PictureBox2.ErrorImage = Nothing
@@ -134,7 +147,7 @@ Partial Class ProcInfo
         '
         'txtProcOwner
         '
-        Me.txtProcOwner.Location = New System.Drawing.Point(31, 170)
+        Me.txtProcOwner.Location = New System.Drawing.Point(31, 167)
         Me.txtProcOwner.Name = "txtProcOwner"
         Me.txtProcOwner.ReadOnly = True
         Me.txtProcOwner.Size = New System.Drawing.Size(289, 20)
@@ -167,7 +180,7 @@ Partial Class ProcInfo
         'Label6
         '
         Me.Label6.AutoSize = True
-        Me.Label6.Location = New System.Drawing.Point(28, 152)
+        Me.Label6.Location = New System.Drawing.Point(28, 149)
         Me.Label6.Name = "Label6"
         Me.Label6.Size = New System.Drawing.Size(79, 13)
         Me.Label6.TabIndex = 4
@@ -426,17 +439,6 @@ Partial Class ProcInfo
         Me.lblTick.Size = New System.Drawing.Size(45, 13)
         Me.lblTick.TabIndex = 5
         Me.lblTick.Text = "Label12"
-        '
-        'Button_Kill
-        '
-        Me.Button_Kill.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button_Kill.Location = New System.Drawing.Point(125, 196)
-        Me.Button_Kill.Name = "Button_Kill"
-        Me.Button_Kill.Size = New System.Drawing.Size(75, 23)
-        Me.Button_Kill.TabIndex = 11
-        Me.Button_Kill.TabStop = False
-        Me.Button_Kill.Text = "Kill Process"
-        Me.Button_Kill.UseVisualStyleBackColor = True
         '
         'ProcInfo
         '
