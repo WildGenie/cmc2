@@ -6359,13 +6359,22 @@ Public Class Form1
             Registry.CurrentUser.OpenSubKey("Software", True).CreateSubKey("Forman")
             ' create default history size now as this is the only time it will be set
             Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("HistorySize", 40, RegistryValueKind.DWord)
-            Try
-                ' set performancegraph as default for permonitorfile
-                Registry.ClassesRoot.OpenSubKey("Perfmonitor.Datafile\Shell\Open\Command", True).SetValue("", Chr(34) & "C:\\program files\\cmc\\performancegraph.exe" & Chr(34) & " " & Chr(34) & "%1" & Chr(34), RegistryValueKind.String)
-            Catch ex As Exception
-            End Try
         End If
 
+        ' Check whether running a new version
+        Dim thisversion As String = My.Application.Info.Version.Major & "." & _
+        My.Application.Info.Version.Minor & "." & _
+        My.Application.Info.Version.Build & "." & _
+        My.Application.Info.Version.Revision
+
+        Dim regver As String = Registry.CurrentUser.OpenSubKey("software\Forman").GetValue("cmcversion")
+        If regver Is Nothing Then
+            Me.NewVersion()
+            Registry.CurrentUser.OpenSubKey("software\Forman", True).SetValue("cmcversion", thisversion)
+        ElseIf regver <> thisversion Then
+            Me.NewVersion()
+            Registry.CurrentUser.OpenSubKey("software\Forman", True).SetValue("cmcversion", thisversion)
+        End If
 
         ' check individual values exist
 
@@ -6403,6 +6412,19 @@ Public Class Form1
         End If
         Me.LogFilePath = Registry.CurrentUser.OpenSubKey("Software\Forman").GetValue("LogFile")
 
+
+    End Sub
+
+    Private Sub NewVersion()
+
+        If File.Exists(My.Application.Info.DirectoryPath & "\files\perfmongraph.reg") Then
+            Try
+                Shell("regedit /s " & Chr(34) & My.Application.Info.DirectoryPath & "\files\perfmongraph.reg" & Chr(34), AppWinStyle.Hide, False)
+            Catch ex As Exception
+                'MsgBox("Run as administrator")
+            End Try
+
+        End If
 
     End Sub
 
@@ -9246,7 +9268,6 @@ Public Class Form1
 
     End Function
 
-
     ' activate menus/controls
     Private Sub ListView_Processes_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListView_Processes.SelectedIndexChanged
 
@@ -9311,6 +9332,7 @@ Public Class Form1
         pi.txtProcName.Text = Me.pGrid_Name
         pi.txtProcPath.Text = Me.pGrid_Path
         pi.txtProcPid.Text = Me.pGrid_ID
+        pi.Button_Kill.Enabled = mnuProcKill.Enabled
         pi.ShowDialog()
     End Sub
 
