@@ -4,6 +4,10 @@ ToDo
 ' enum subkeys error when no subkeys - write test value?
 
 ====================================================================================================
+16/10/2008
+code:     Added new version check to add cutom reg settings etc.
+bugfix:   Minor fixes/improvements to processes and services.
+
 14/10/2008
 feature:  Progress bar added for stopping, starting service from context menu.
 feature:  Kill process context menu item - improved checking and updating.
