@@ -507,6 +507,7 @@ Public Class Form1
     Friend WithEvents Panel_SvcAction As System.Windows.Forms.Panel
     Friend WithEvents ProgressBar_SvcAction As System.Windows.Forms.ProgressBar
     Friend WithEvents Label_SvcAction As System.Windows.Forms.Label
+    Friend WithEvents Textbox_ComputerName As System.Windows.Forms.TextBox
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -1030,6 +1031,7 @@ Public Class Form1
         Me.BackgroundWorker_OS = New System.ComponentModel.BackgroundWorker
         Me.BackgroundWorker_NW = New System.ComponentModel.BackgroundWorker
         Me.Label32 = New System.Windows.Forms.Label
+        Me.Textbox_ComputerName = New System.Windows.Forms.TextBox
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1143,41 +1145,41 @@ Public Class Form1
         Me.svcname.Font = New System.Drawing.Font("Tahoma", 7.5!)
         Me.svcname.ForeColor = System.Drawing.Color.SteelBlue
         Me.svcname.Name = "svcname"
-        Me.svcname.Size = New System.Drawing.Size(152, 22)
+        Me.svcname.Size = New System.Drawing.Size(151, 22)
         '
         'ToolStripSeparator5
         '
         Me.ToolStripSeparator5.Name = "ToolStripSeparator5"
-        Me.ToolStripSeparator5.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator5.Size = New System.Drawing.Size(148, 6)
         '
         'svcstop
         '
         Me.svcstop.Name = "svcstop"
-        Me.svcstop.Size = New System.Drawing.Size(152, 22)
+        Me.svcstop.Size = New System.Drawing.Size(151, 22)
         Me.svcstop.Text = "stop..."
         '
         'svcstart
         '
         Me.svcstart.Name = "svcstart"
-        Me.svcstart.Size = New System.Drawing.Size(152, 22)
+        Me.svcstart.Size = New System.Drawing.Size(151, 22)
         Me.svcstart.Text = "start..."
         '
         'svcrestart
         '
         Me.svcrestart.Name = "svcrestart"
-        Me.svcrestart.Size = New System.Drawing.Size(152, 22)
+        Me.svcrestart.Size = New System.Drawing.Size(151, 22)
         Me.svcrestart.Text = "restart..."
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(148, 6)
         '
         'startmode
         '
         Me.startmode.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AutomaticMenu, Me.ManualMenu, Me.DisabledMenu})
         Me.startmode.Name = "startmode"
-        Me.startmode.Size = New System.Drawing.Size(152, 22)
+        Me.startmode.Size = New System.Drawing.Size(151, 22)
         Me.startmode.Text = "start mode..."
         '
         'AutomaticMenu
@@ -1201,42 +1203,42 @@ Public Class Form1
         'ToolStripSeparator7
         '
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
-        Me.ToolStripSeparator7.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator7.Size = New System.Drawing.Size(148, 6)
         '
         'mnuSvcProperties
         '
         Me.mnuSvcProperties.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
         Me.mnuSvcProperties.Name = "mnuSvcProperties"
-        Me.mnuSvcProperties.Size = New System.Drawing.Size(152, 22)
+        Me.mnuSvcProperties.Size = New System.Drawing.Size(151, 22)
         Me.mnuSvcProperties.Text = "Properties"
         Me.mnuSvcProperties.ToolTipText = "Show extended properties"
         '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
-        Me.ToolStripSeparator25.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator25.Size = New System.Drawing.Size(148, 6)
         '
         'GoogleLookupToolStripMenuItem
         '
         Me.GoogleLookupToolStripMenuItem.Name = "GoogleLookupToolStripMenuItem"
-        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.GoogleLookupToolStripMenuItem.Text = "google lookup"
         '
         'DeleteServiceToolStripMenuItem
         '
         Me.DeleteServiceToolStripMenuItem.Name = "DeleteServiceToolStripMenuItem"
-        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(152, 22)
+        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
         Me.DeleteServiceToolStripMenuItem.Text = "delete service"
         '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
-        Me.ToolStripSeparator8.Size = New System.Drawing.Size(149, 6)
+        Me.ToolStripSeparator8.Size = New System.Drawing.Size(148, 6)
         '
         'RefreshMenu
         '
         Me.RefreshMenu.Name = "RefreshMenu"
-        Me.RefreshMenu.Size = New System.Drawing.Size(152, 22)
+        Me.RefreshMenu.Size = New System.Drawing.Size(151, 22)
         Me.RefreshMenu.Text = "refresh"
         '
         'Label11
@@ -6058,6 +6060,18 @@ Public Class Form1
         Me.Label32.TabIndex = 0
         Me.Label32.Text = "getting data..."
         '
+        'Textbox_ComputerName
+        '
+        Me.Textbox_ComputerName.BackColor = System.Drawing.Color.LightSkyBlue
+        Me.Textbox_ComputerName.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.Textbox_ComputerName.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Textbox_ComputerName.Location = New System.Drawing.Point(7, 40)
+        Me.Textbox_ComputerName.Name = "Textbox_ComputerName"
+        Me.Textbox_ComputerName.ReadOnly = True
+        Me.Textbox_ComputerName.Size = New System.Drawing.Size(111, 15)
+        Me.Textbox_ComputerName.TabIndex = 59
+        Me.Textbox_ComputerName.Visible = False
+        '
         'Form1
         '
         Me.AcceptButton = Me.GO_Button
@@ -6065,6 +6079,7 @@ Public Class Form1
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.SystemColors.Control
         Me.ClientSize = New System.Drawing.Size(397, 413)
+        Me.Controls.Add(Me.Textbox_ComputerName)
         Me.Controls.Add(Me.ButtonClear)
         Me.Controls.Add(Me.computername)
         Me.Controls.Add(Me.Button1)
@@ -6547,6 +6562,8 @@ Public Class Form1
 
         ' disable the Go button to prevent double press.
         GO_Button.Enabled = False
+        Me.Textbox_ComputerName.Text = Me.computername.Text
+        Me.Textbox_ComputerName.Visible = True
 
         ' Me.Cursor = Cursors.WaitCursor
         computername.Text = Trim(computername.Text.ToLower)
@@ -6564,7 +6581,9 @@ Public Class Form1
         ' ping the computer to confirm connectivity
         If Not PingClass.TryPing(PC.Name) Then
             Panel2.Text = "connection failed. check the computer is online."
-            GO_Button.Enabled = True
+            Me.GO_Button.Enabled = True
+            Me.Textbox_ComputerName.Visible = False
+            Me.Textbox_ComputerName.Text = String.Empty
             Me.Refresh()
             Exit Sub
         End If
@@ -6700,6 +6719,8 @@ Public Class Form1
         End If
 
         Me.GO_Button.Enabled = True
+        Me.Textbox_ComputerName.Visible = False
+        Me.Textbox_ComputerName.Text = String.Empty
         Me.ButtonClear.Enabled = True
         Me.Refresh()
 
