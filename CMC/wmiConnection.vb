@@ -115,10 +115,10 @@ Public Class wmiConnection
             queryCollection = searcher.Get()
             Return queryCollection
         Catch
-            MsgBox("Not Connected")
-            Form1.ClearBoxes()
-            Dim queryCollection As Management.ManagementObjectCollection
-            queryCollection = Nothing
+            'MsgBox("Not Connected")
+            'Form1.LostConnection()
+            'Form1.ClearBoxes()
+            Dim queryCollection As Management.ManagementObjectCollection = Nothing
             Return queryCollection
         End Try
 
