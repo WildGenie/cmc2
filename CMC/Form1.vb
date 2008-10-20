@@ -6468,8 +6468,10 @@ Public Class Form1
             altusername_TextBox.Enabled = True
             altPassword_TextBox.Enabled = True
             altPassword_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular)
-            altusername_TextBox.BackColor = Color.LightSkyBlue 'Color.PaleGoldenrod
-            altPassword_TextBox.BackColor = Color.LightSkyBlue 'Color.PaleGoldenrod
+            altusername_TextBox.BackColor = Color.PaleGoldenrod
+            altPassword_TextBox.BackColor = Color.PaleGoldenrod
+            'altusername_TextBox.ForeColor = Color.White
+            'altPassword_TextBox.ForeColor = Color.White
             altusername_TextBox.Text = SettingAltUser.Text
             altPassword_TextBox.Text = SettingAltPass.Text
             If GO_Button.Text <> "" Then GO_Button.Enabled = True
@@ -6482,6 +6484,8 @@ Public Class Form1
             altPassword_TextBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular)
             altusername_TextBox.BackColor = Color.WhiteSmoke
             altPassword_TextBox.BackColor = Color.WhiteSmoke
+            'altusername_TextBox.ForeColor = Color.Black
+            'altPassword_TextBox.ForeColor = Color.Black
         End If
 
     End Sub
