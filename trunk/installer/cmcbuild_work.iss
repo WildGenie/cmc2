@@ -2,7 +2,7 @@
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
 AppId={{9FF72B3F-AD81-4E19-A86E-4BC75E6FC5C9}
 AppName=CMC
-AppVerName=CMC 2.6.29.1015
+AppVerName=CMC 2.6.30.1018
 AppPublisher=Peter Forman
 DefaultDirName={pf}\CMC
 DefaultGroupName=CMC
