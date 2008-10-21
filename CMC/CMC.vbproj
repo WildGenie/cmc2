@@ -221,9 +221,7 @@
     <None Include="Resources\chart.png" />
     <None Include="Resources\chart_accept.png" />
     <None Include="Resources\chart1.png" />
-    <None Include="Resources\computer1.png" />
-    <None Include="Resources\computer_accept.png" />
-    <None Include="Resources\computer_remove.png" />
+    <None Include="Resources\Dell-Display-32x32.png" />
     <Content Include="Resources\files\netdom.exe">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
