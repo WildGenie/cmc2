@@ -179,13 +179,6 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property computer_accept() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("computer_accept", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
         Friend ReadOnly Property computer_link() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("computer_link", resourceCulture)
@@ -193,16 +186,9 @@ Namespace My.Resources
             End Get
         End Property
         
-        Friend ReadOnly Property computer_remove() As System.Drawing.Bitmap
+        Friend ReadOnly Property Dell_Display_32x32() As System.Drawing.Bitmap
             Get
-                Dim obj As Object = ResourceManager.GetObject("computer_remove", resourceCulture)
-                Return CType(obj,System.Drawing.Bitmap)
-            End Get
-        End Property
-        
-        Friend ReadOnly Property computer1() As System.Drawing.Bitmap
-            Get
-                Dim obj As Object = ResourceManager.GetObject("computer1", resourceCulture)
+                Dim obj As Object = ResourceManager.GetObject("Dell-Display-32x32", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

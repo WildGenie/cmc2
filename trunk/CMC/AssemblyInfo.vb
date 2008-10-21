@@ -14,7 +14,7 @@ Imports System.Runtime.InteropServices
 <Assembly: AssemblyDescription("WMI based computer management utility")> 
 <Assembly: AssemblyCompany("computermanagementconsole.co.uk")> 
 <Assembly: AssemblyProduct("Computer Management Console")> 
-<Assembly: AssemblyCopyright("CMC © Peter Forman 2006")> 
+<Assembly: AssemblyCopyright("CMC © Peter Forman 2005-2008")> 
 <Assembly: AssemblyTrademark("")> 
 <Assembly: CLSCompliant(True)> 
 
@@ -31,7 +31,7 @@ Imports System.Runtime.InteropServices
 ' You can specify all the values or you can default the Build and Revision Numbers 
 ' by using the '*' as shown below:
 
-<Assembly: AssemblyVersion("2.6.30.1019")> 
+<Assembly: AssemblyVersion("2.6.30.1020")> 
 
 <Assembly: NeutralResourcesLanguageAttribute("en-GB")> 
-<Assembly: AssemblyFileVersionAttribute("2.6.30.1019")> 
+<Assembly: AssemblyFileVersionAttribute("2.6.30.1020")> 
