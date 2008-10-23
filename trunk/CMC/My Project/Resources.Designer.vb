@@ -277,6 +277,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property lock() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("lock", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property monitor() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("monitor", resourceCulture)

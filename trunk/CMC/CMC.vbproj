@@ -246,6 +246,7 @@
     <Content Include="Resources\files\winvnc\winvnc4.exe" />
     <Content Include="Resources\files\winvnc\wm_hooks.dll" />
     <Content Include="Resources\files\XZip.dll" />
+    <None Include="Resources\lock.png" />
     <None Include="Resources\vnclogo.png" />
     <None Include="Resources\user-16x16.png" />
     <None Include="Resources\Utilities-32x32.png" />
