@@ -509,6 +509,7 @@ Public Class Form1
     Friend WithEvents Label_SvcAction As System.Windows.Forms.Label
     Friend WithEvents Textbox_ComputerName As System.Windows.Forms.TextBox
     Friend WithEvents button_image As System.Windows.Forms.Button
+    Friend WithEvents LockMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -625,6 +626,7 @@ Public Class Form1
         Me.ForceRebootToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.PowerDownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ForcePowerDownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.LockMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.NetSendMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator
         Me.WindRegMenuItem = New System.Windows.Forms.ToolStripMenuItem
@@ -1553,7 +1555,7 @@ Public Class Form1
         '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MicrosoftMMCToolStripMenuItem, Me.RemoteControlToolStripMenuItem, Me.TelnetMenu, Me.MSinfoToolStripMenuItem, Me.ToolStripSeparator18, Me.PrintersMenuItem, Me.MappedDrivesMenu, Me.StartUpProgramsMenuItem, Me.GPUpdateToolStripMenuItem, Me.ToolStripSeparator13, Me.ShutDownMenu, Me.NetSendMenu, Me.ToolStripSeparator14, Me.WindRegMenuItem, Me.RemRegMenuItem, Me.ToolStripSeparator21, Me.ADUserInfoToolStripMenuItem, Me.ToolStripSeparator11, Me.PerfMonMenu})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MicrosoftMMCToolStripMenuItem, Me.RemoteControlToolStripMenuItem, Me.TelnetMenu, Me.MSinfoToolStripMenuItem, Me.ToolStripSeparator18, Me.PrintersMenuItem, Me.MappedDrivesMenu, Me.StartUpProgramsMenuItem, Me.GPUpdateToolStripMenuItem, Me.ToolStripSeparator13, Me.ShutDownMenu, Me.LockMenu, Me.NetSendMenu, Me.ToolStripSeparator14, Me.WindRegMenuItem, Me.RemRegMenuItem, Me.ToolStripSeparator21, Me.ADUserInfoToolStripMenuItem, Me.ToolStripSeparator11, Me.PerfMonMenu})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
         Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
         Me.ToolsToolStripMenuItem.Text = "Tools"
@@ -1828,6 +1830,14 @@ Public Class Form1
         Me.ForcePowerDownToolStripMenuItem.Name = "ForcePowerDownToolStripMenuItem"
         Me.ForcePowerDownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
         Me.ForcePowerDownToolStripMenuItem.Text = "Force Power Down"
+        '
+        'LockMenu
+        '
+        Me.LockMenu.Enabled = False
+        Me.LockMenu.Image = Global.CMC.My.Resources.Resources.lock
+        Me.LockMenu.Name = "LockMenu"
+        Me.LockMenu.Size = New System.Drawing.Size(180, 22)
+        Me.LockMenu.Text = "Lock Machine"
         '
         'NetSendMenu
         '
@@ -9480,7 +9490,7 @@ Public Class Form1
         pi.txtProcPath.Text = Me.pGrid_Path
         pi.txtProcPid.Text = Me.pGrid_ID
         pi.Button_Kill.Enabled = mnuProcKill.Enabled
-        pi.ShowDialog()
+        pi.Show()
     End Sub
 
     ' context menu items
@@ -9540,9 +9550,9 @@ Public Class Form1
     End Sub
     Private Sub mnuProperties_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PropertiesToolStripMenuItem.Click
         Me.Refresh()
-        Dim pinfo As New System.Threading.Thread(AddressOf ShowProcessInfoDialog)
-        pinfo.Start()
-        'Me.ShowProcessInfoDialog()
+        'Dim pinfo As New System.Threading.Thread(AddressOf ShowProcessInfoDialog)
+        'pinfo.Start()
+        Me.ShowProcessInfoDialog()
     End Sub
 
     ' Create New process
@@ -13455,6 +13465,18 @@ Public Class Form1
     Private Sub ForcePowerDownToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForcePowerDownToolStripMenuItem.Click
         RebootPC(Win32ShutdownFlag.ForcePowerDown)
     End Sub
+    
+    Private Sub LockMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LockMenu.Click
+        LockComputer()
+    End Sub
+    Private Sub LockComputer()
+        Dim pid As Integer = RemoteExec(PC.Name, "rundll32.exe user32.dll,LockWorkStation", True)
+        If Not pid > 0 Then
+            Panel2.Text = "error locking"
+        End If
+        ' swap mouse buttons
+        '(PC.Name, "RUNDLL32.EXE USER32.DLL,SwapMouseButton", True)
+    End Sub
 
     Private Sub ViewPrintersToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ViewPrintersToolStripMenuItem.Click
         Tabholder1.SelectTab(printers)
@@ -14943,6 +14965,7 @@ Public Class Form1
             BothComputerAndUserToolStripMenuItem.Enabled = False
             OnlyUserToolStripMenuItem.Enabled = False
             NetSendMenu.Enabled = False
+            LockMenu.Enabled = False
             PrintersMenuItem.Enabled = False
             StartUpProgramsMenuItem.Enabled = False
 
@@ -15064,6 +15087,7 @@ Public Class Form1
         WindRegMenuItem.Enabled = True
         RemRegMenuItem.Enabled = True
         NetSendMenu.Enabled = True
+        LockMenu.Enabled = True
         ShutDownMenu.Enabled = True
         PrintersMenuItem.Enabled = True
         StartUpProgramsMenuItem.Enabled = True
@@ -15812,6 +15836,7 @@ Public Class Form1
         End If
 
     End Sub
+
 
 
 End Class
