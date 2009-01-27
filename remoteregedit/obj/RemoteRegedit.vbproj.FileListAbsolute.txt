@@ -58,3 +58,23 @@ C:\DATA\dotnet projects\cmc\trunk\remoteregedit\obj\Release\RemoteRegedit.Resour
 C:\DATA\dotnet projects\cmc\trunk\remoteregedit\obj\Release\remoteregedit.vbproj.GenerateResource.Cache
 C:\DATA\dotnet projects\cmc\trunk\remoteregedit\obj\Release\RemReg.exe
 C:\DATA\dotnet projects\cmc\trunk\remoteregedit\obj\Release\RemReg.pdb
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\RemReg.exe
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\RemReg.pdb
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\bin\Debug\RemReg.exe
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\bin\Debug\RemReg.pdb
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\ResolveAssemblyReference.cache
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.AboutBox1.resources
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.Edit.resources
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.RegForm.resources
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.Resources.resources
+C:\Users\Peter Forman\Desktop\cmc\trunk\remoteregedit\obj\Debug\remoteregedit.vbproj.GenerateResource.Cache
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\bin\Debug\RemReg.exe
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\bin\Debug\RemReg.pdb
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\ResolveAssemblyReference.cache
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.AboutBox1.resources
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.Edit.resources
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.RegForm.resources
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemoteRegedit.Resources.resources
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\remoteregedit.vbproj.GenerateResource.Cache
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemReg.exe
+D:\dotnet projects\! vb\cmc\trunk\remoteregedit\obj\Debug\RemReg.pdb

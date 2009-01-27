@@ -80,7 +80,7 @@ Partial Class VNCDialog
         'PictureBox1
         '
         Me.PictureBox1.ErrorImage = Nothing
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.vnclogo1
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.png_w_vnc
         Me.PictureBox1.Location = New System.Drawing.Point(3, 0)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(50, 45)

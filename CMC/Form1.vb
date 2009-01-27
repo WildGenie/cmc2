@@ -25,10 +25,8 @@ Public Class Form1
     Friend WithEvents mmcToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents evntToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents usrsToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents cmdToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents regToolStripButton As System.Windows.Forms.ToolStripButton
-    Friend WithEvents ToolStripSeparator2 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents zenToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents rdpToolStripButton As System.Windows.Forms.ToolStripButton
     Friend WithEvents vncToolStripButton As System.Windows.Forms.ToolStripButton
@@ -241,7 +239,6 @@ Public Class Form1
     Friend WithEvents ShutDownMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TurnOffToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents RestartToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents LogOffToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ToolStripSeparator14 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents previewbutton As System.Windows.Forms.Button
     Friend WithEvents test As System.Windows.Forms.TabPage
@@ -257,7 +254,6 @@ Public Class Form1
     Friend WithEvents Label48 As System.Windows.Forms.Label
     Friend WithEvents Label47 As System.Windows.Forms.Label
     Friend WithEvents Label46 As System.Windows.Forms.Label
-    Friend WithEvents StartUpProgramsMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents startupName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents startupCommand As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents startupLocation As System.Windows.Forms.DataGridViewTextBoxColumn
@@ -280,12 +276,7 @@ Public Class Form1
     Friend WithEvents ToolStripSeparator16 As System.Windows.Forms.ToolStripSeparator
     Friend WithEvents ptrrefresh As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents DeletePrinterMenu As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ToolStripSeparator18 As System.Windows.Forms.ToolStripSeparator
-    Friend WithEvents PrintersMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents ViewPrintersToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
-    Friend WithEvents PrintServerPropertiesToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents Label50 As System.Windows.Forms.Label
-    Friend WithEvents MappedDrivesMenu As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents addshare As System.Windows.Forms.Button
     Friend WithEvents delete_Share As System.Windows.Forms.Button
     Friend WithEvents critical As System.Windows.Forms.RadioButton
@@ -508,8 +499,13 @@ Public Class Form1
     Friend WithEvents ProgressBar_SvcAction As System.Windows.Forms.ProgressBar
     Friend WithEvents Label_SvcAction As System.Windows.Forms.Label
     Friend WithEvents Textbox_ComputerName As System.Windows.Forms.TextBox
-    Friend WithEvents button_image As System.Windows.Forms.Button
     Friend WithEvents LockMenu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents ToolStripSeparator1 As System.Windows.Forms.ToolStripSeparator
+    Friend WithEvents GroupBox2 As System.Windows.Forms.GroupBox
+    Friend WithEvents RadioButton_remreg As System.Windows.Forms.RadioButton
+    Friend WithEvents RadioButton_regedit As System.Windows.Forms.RadioButton
+    Friend WithEvents LogOffMenu As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents RefreshToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -548,12 +544,8 @@ Public Class Form1
         Me.ManualMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.DisabledMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator7 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuSvcProperties = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator25 = New System.Windows.Forms.ToolStripSeparator
-        Me.GoogleLookupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.DeleteServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator8 = New System.Windows.Forms.ToolStripSeparator
-        Me.RefreshMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.Label11 = New System.Windows.Forms.Label
         Me.GO_Button = New System.Windows.Forms.Button
         Me.AltUserCheckBox = New System.Windows.Forms.CheckBox
@@ -566,107 +558,31 @@ Public Class Form1
         Me.PingButton = New System.Windows.Forms.Button
         Me.altPassword_TextBox = New System.Windows.Forms.TextBox
         Me.ToolStrip1 = New System.Windows.Forms.ToolStrip
-        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
-        Me.mmcToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.evntToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.usrsToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
-        Me.regToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.cmdToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.ToolStripSeparator2 = New System.Windows.Forms.ToolStripSeparator
-        Me.zenToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.rdpToolStripButton = New System.Windows.Forms.ToolStripButton
-        Me.vncToolStripButton = New System.Windows.Forms.ToolStripButton
         Me.MenuStrip1 = New System.Windows.Forms.MenuStrip
         Me.FileToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator3 = New System.Windows.Forms.ToolStripSeparator
-        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AppendToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.toolStripSeparator4 = New System.Windows.Forms.ToolStripSeparator
-        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MicrosoftMMCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ComputerManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.EventViewerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.LocalUsersAndGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ServicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.SharedFoldersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoteControlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoteDesktopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoteDesktopConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RDPConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.EnableRDPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.DisableRDPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.VNCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ConnectOnlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.InstallAndConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.InstallAndConnectNoUserPromptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ZenworksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemoteAssistanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TelnetMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.MSinfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolStripSeparator18 = New System.Windows.Forms.ToolStripSeparator
-        Me.PrintersMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ViewPrintersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PrintServerPropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MappedDrivesMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.StartUpProgramsMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.GPUpdateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.BothComputerAndUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OnlyComputerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OnlyUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator13 = New System.Windows.Forms.ToolStripSeparator
-        Me.ShutDownMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.LogOffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.TurnOffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RestartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ForceLogoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ForceRebootToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PowerDownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ForcePowerDownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.LockMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.NetSendMenu = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator14 = New System.Windows.Forms.ToolStripSeparator
-        Me.WindRegMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.RemRegMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator21 = New System.Windows.Forms.ToolStripSeparator
-        Me.ADUserInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator11 = New System.Windows.Forms.ToolStripSeparator
-        Me.PerfMonMenu = New System.Windows.Forms.ToolStripMenuItem
-        Me.PerformanceMonitorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ViewRecordedDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.GoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.OperatingSystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.NetworkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ServicesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
-        Me.ProcessesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.PrintersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MappedDrivesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.SoftwareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.DeployToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ADUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.GroupPolicyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MessageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.StartupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.TestToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.OptionsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.Prefs_Menu = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator9 = New System.Windows.Forms.ToolStripSeparator
-        Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.MultiThreadMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ToolbarEnabled = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator10 = New System.Windows.Forms.ToolStripSeparator
-        Me.ViewLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.ClearLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator15 = New System.Windows.Forms.ToolStripSeparator
-        Me.ClearHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.HelpToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
-        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.SaveFileDialog1 = New System.Windows.Forms.SaveFileDialog
         Me.options = New System.Windows.Forms.TabPage
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox
+        Me.RadioButton_remreg = New System.Windows.Forms.RadioButton
+        Me.RadioButton_regedit = New System.Windows.Forms.RadioButton
         Me.GroupBox13 = New System.Windows.Forms.GroupBox
         Me.psexecbrowse = New System.Windows.Forms.Button
         Me.downloadpsexec = New System.Windows.Forms.Button
@@ -712,7 +628,6 @@ Public Class Form1
         Me.netsendradio = New System.Windows.Forms.RadioButton
         Me.Label35 = New System.Windows.Forms.Label
         Me.netsendCancel = New System.Windows.Forms.Button
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.aduser = New System.Windows.Forms.TabPage
         Me.adpanel = New System.Windows.Forms.Panel
         Me.profileGroupBox = New System.Windows.Forms.GroupBox
@@ -727,7 +642,6 @@ Public Class Form1
         Me.Label20 = New System.Windows.Forms.Label
         Me.TerminalServicesProfilePath = New System.Windows.Forms.TextBox
         Me.Label22 = New System.Windows.Forms.Label
-        Me.btn_dsa = New System.Windows.Forms.Button
         Me.telephonenumber = New System.Windows.Forms.TextBox
         Me.txtCompany = New System.Windows.Forms.TextBox
         Me.Label54 = New System.Windows.Forms.Label
@@ -797,8 +711,6 @@ Public Class Form1
         Me.software_button = New System.Windows.Forms.Button
         Me.ShowUpdates = New System.Windows.Forms.CheckBox
         Me.processes = New System.Windows.Forms.TabPage
-        Me.proc_wait_panel = New System.Windows.Forms.Panel
-        Me.Label36 = New System.Windows.Forms.Label
         Me.ListView_Processes = New System.Windows.Forms.ListView
         Me.proc_name = New System.Windows.Forms.ColumnHeader("(none)")
         Me.proc_id = New System.Windows.Forms.ColumnHeader
@@ -807,11 +719,8 @@ Public Class Form1
         Me.ProcContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.procMenuHeader = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator24 = New System.Windows.Forms.ToolStripSeparator
-        Me.PropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator26 = New System.Windows.Forms.ToolStripSeparator
-        Me.mnuProcKill = New System.Windows.Forms.ToolStripMenuItem
-        Me.mnuProcGoogle = New System.Windows.Forms.ToolStripMenuItem
-        Me.mnuCopyPath = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolStripSeparator1 = New System.Windows.Forms.ToolStripSeparator
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ProcessRefresh = New System.Windows.Forms.Button
         Me.get_processes_by_wmi_checkbox = New System.Windows.Forms.CheckBox
@@ -825,11 +734,6 @@ Public Class Form1
         Me.newprocess = New System.Windows.Forms.TextBox
         Me.Label41 = New System.Windows.Forms.Label
         Me.services = New System.Windows.Forms.TabPage
-        Me.Panel_SvcAction = New System.Windows.Forms.Panel
-        Me.ProgressBar_SvcAction = New System.Windows.Forms.ProgressBar
-        Me.Label_SvcAction = New System.Windows.Forms.Label
-        Me.svc_wait_panel = New System.Windows.Forms.Panel
-        Me.Label38 = New System.Windows.Forms.Label
         Me.ListView_Services = New System.Windows.Forms.ListView
         Me.svc_displayname = New System.Windows.Forms.ColumnHeader
         Me.svc_state = New System.Windows.Forms.ColumnHeader
@@ -843,9 +747,6 @@ Public Class Form1
         Me.Label30 = New System.Windows.Forms.Label
         Me.refreshsvc = New System.Windows.Forms.Button
         Me.network = New System.Windows.Forms.TabPage
-        Me.nw_Wait_Panel = New System.Windows.Forms.Panel
-        Me.Label34 = New System.Windows.Forms.Label
-        Me.Label33 = New System.Windows.Forms.Label
         Me.AdaptorID = New System.Windows.Forms.TextBox
         Me.networkupdate = New System.Windows.Forms.Button
         Me.GroupBox6 = New System.Windows.Forms.GroupBox
@@ -878,20 +779,15 @@ Public Class Form1
         Me.macaddress = New System.Windows.Forms.TextBox
         Me.hostname = New System.Windows.Forms.TextBox
         Me.os = New System.Windows.Forms.TabPage
-        Me.DataFetchPanel = New System.Windows.Forms.Panel
-        Me.button_image = New System.Windows.Forms.Button
-        Me.DataFetchPanelLabel2 = New System.Windows.Forms.Label
-        Me.DataFetchPanelLabel = New System.Windows.Forms.Label
         Me.admanagement = New System.Windows.Forms.Button
-        Me.cpu_info_lbl = New System.Windows.Forms.LinkLabel
         Me.ie = New System.Windows.Forms.TextBox
         Me.proxyset = New System.Windows.Forms.Button
         Me.Label_IP = New System.Windows.Forms.TextBox
-        Me.adbutton = New System.Windows.Forms.Button
         Me.ielabel = New System.Windows.Forms.Label
         Me.Hardware = New System.Windows.Forms.GroupBox
         Me.audio_label = New System.Windows.Forms.LinkLabel
         Me.video_label = New System.Windows.Forms.LinkLabel
+        Me.cpu_info_lbl = New System.Windows.Forms.LinkLabel
         Me.hdCombo = New System.Windows.Forms.ComboBox
         Me.cpuBox = New System.Windows.Forms.TextBox
         Me.RAMBox = New System.Windows.Forms.TextBox
@@ -900,10 +796,7 @@ Public Class Form1
         Me.chassis = New System.Windows.Forms.TextBox
         Me.HWButton = New System.Windows.Forms.Button
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
-        Me.delete_Share = New System.Windows.Forms.Button
-        Me.addshare = New System.Windows.Forms.Button
         Me.ListBox_Shares = New System.Windows.Forms.ListBox
-        Me.Button_openshare = New System.Windows.Forms.Button
         Me.Label_User = New System.Windows.Forms.TextBox
         Me.Label_Boot = New System.Windows.Forms.TextBox
         Me.Label_Ver = New System.Windows.Forms.TextBox
@@ -926,11 +819,11 @@ Public Class Form1
         Me.pName = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.pLocation = New System.Windows.Forms.DataGridViewTextBoxColumn
         Me.mappeddrivesGroupBox = New System.Windows.Forms.GroupBox
+        Me.mappings = New System.Windows.Forms.ListBox
         Me.deletemappeddrive = New System.Windows.Forms.Button
         Me.addmappeddrive_button = New System.Windows.Forms.Button
         Me.addmappeddrive_letter = New System.Windows.Forms.TextBox
         Me.addmappeddrive_path = New System.Windows.Forms.TextBox
-        Me.mappings = New System.Windows.Forms.ListBox
         Me.Label50 = New System.Windows.Forms.Label
         Me.MappedDrivesButton = New System.Windows.Forms.Button
         Me.printerRefresh = New System.Windows.Forms.Button
@@ -1026,7 +919,6 @@ Public Class Form1
         Me.ptrrefresh = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripSeparator19 = New System.Windows.Forms.ToolStripSeparator
         Me.computername = New System.Windows.Forms.ComboBox
-        Me.Button1 = New System.Windows.Forms.Button
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
         Me.gpoContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
         Me.script_openContainer = New System.Windows.Forms.ToolStripMenuItem
@@ -1036,6 +928,106 @@ Public Class Form1
         Me.BackgroundWorker_NW = New System.ComponentModel.BackgroundWorker
         Me.Label32 = New System.Windows.Forms.Label
         Me.Textbox_ComputerName = New System.Windows.Forms.TextBox
+        Me.Button1 = New System.Windows.Forms.Button
+        Me.ToolStripButton1 = New System.Windows.Forms.ToolStripButton
+        Me.mmcToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.evntToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.usrsToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.regToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.cmdToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.zenToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.rdpToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.vncToolStripButton = New System.Windows.Forms.ToolStripButton
+        Me.NewToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ClearToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.SaveToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AppendToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MicrosoftMMCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ComputerManagementToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.EventViewerToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.LocalUsersAndGroupsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ServicesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.SharedFoldersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemoteControlToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemoteDesktopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemoteDesktopConnectionToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RDPConsoleToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.EnableRDPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DisableRDPToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.VNCToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ConnectOnlyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.InstallAndConnectToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.InstallAndConnectNoUserPromptToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ZenworksToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemoteAssistanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.TelnetMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.MSinfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ShutDownMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.TurnOffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RestartToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ForceLogoffToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ForceRebootToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.PowerDownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ForcePowerDownToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.LogOffMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.LockMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.NetSendMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.WindRegMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RemRegMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ADUserInfoToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.PerfMonMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.PerformanceMonitorToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ViewRecordedDataToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.OperatingSystemToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.NetworkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ServicesToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.ProcessesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.PrintersToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MappedDrivesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.SoftwareToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DeployToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ADUserToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.GroupPolicyToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MessageToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.StartupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolsToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
+        Me.Prefs_Menu = New System.Windows.Forms.ToolStripMenuItem
+        Me.AlwaysOnTopToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.MultiThreadMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ToolbarEnabled = New System.Windows.Forms.ToolStripMenuItem
+        Me.ViewLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ClearLogToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.ClearHistoryToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.AboutToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DataFetchPanel = New System.Windows.Forms.Panel
+        Me.DataFetchPanelLabel2 = New System.Windows.Forms.Label
+        Me.DataFetchPanelLabel = New System.Windows.Forms.Label
+        Me.adbutton = New System.Windows.Forms.Button
+        Me.delete_Share = New System.Windows.Forms.Button
+        Me.addshare = New System.Windows.Forms.Button
+        Me.Button_openshare = New System.Windows.Forms.Button
+        Me.nw_Wait_Panel = New System.Windows.Forms.Panel
+        Me.Label34 = New System.Windows.Forms.Label
+        Me.Label33 = New System.Windows.Forms.Label
+        Me.Panel_SvcAction = New System.Windows.Forms.Panel
+        Me.ProgressBar_SvcAction = New System.Windows.Forms.ProgressBar
+        Me.Label_SvcAction = New System.Windows.Forms.Label
+        Me.svc_wait_panel = New System.Windows.Forms.Panel
+        Me.Label38 = New System.Windows.Forms.Label
+        Me.mnuSvcProperties = New System.Windows.Forms.ToolStripMenuItem
+        Me.GoogleLookupToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.DeleteServiceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.RefreshMenu = New System.Windows.Forms.ToolStripMenuItem
+        Me.proc_wait_panel = New System.Windows.Forms.Panel
+        Me.Label36 = New System.Windows.Forms.Label
+        Me.PropertiesToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuCopyPath = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuProcGoogle = New System.Windows.Forms.ToolStripMenuItem
+        Me.mnuProcKill = New System.Windows.Forms.ToolStripMenuItem
+        Me.RefreshToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
+        Me.btn_dsa = New System.Windows.Forms.Button
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1044,6 +1036,7 @@ Public Class Form1
         Me.ToolStrip1.SuspendLayout()
         Me.MenuStrip1.SuspendLayout()
         Me.options.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
         Me.GroupBox13.SuspendLayout()
         Me.GroupBox12.SuspendLayout()
         Me.GroupBox7.SuspendLayout()
@@ -1051,7 +1044,6 @@ Public Class Form1
         Me.GroupBox4.SuspendLayout()
         Me.message.SuspendLayout()
         Me.GroupBox8.SuspendLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.aduser.SuspendLayout()
         Me.adpanel.SuspendLayout()
         Me.profileGroupBox.SuspendLayout()
@@ -1064,18 +1056,13 @@ Public Class Form1
         Me.sw_Wait_Panel.SuspendLayout()
         Me.swContextmenu.SuspendLayout()
         Me.processes.SuspendLayout()
-        Me.proc_wait_panel.SuspendLayout()
         Me.ProcContextMenu.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
         Me.services.SuspendLayout()
-        Me.Panel_SvcAction.SuspendLayout()
-        Me.svc_wait_panel.SuspendLayout()
         Me.network.SuspendLayout()
-        Me.nw_Wait_Panel.SuspendLayout()
         Me.GroupBox6.SuspendLayout()
         Me.GroupBox5.SuspendLayout()
         Me.os.SuspendLayout()
-        Me.DataFetchPanel.SuspendLayout()
         Me.Hardware.SuspendLayout()
         Me.GroupBox3.SuspendLayout()
         Me.Tabholder1.SuspendLayout()
@@ -1092,6 +1079,12 @@ Public Class Form1
         Me.GroupBox9.SuspendLayout()
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
+        Me.DataFetchPanel.SuspendLayout()
+        Me.nw_Wait_Panel.SuspendLayout()
+        Me.Panel_SvcAction.SuspendLayout()
+        Me.svc_wait_panel.SuspendLayout()
+        Me.proc_wait_panel.SuspendLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -1116,9 +1109,9 @@ Public Class Form1
         Me.ButtonClear.DialogResult = System.Windows.Forms.DialogResult.Cancel
         Me.ButtonClear.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
         Me.ButtonClear.ForeColor = System.Drawing.SystemColors.Window
-        Me.ButtonClear.Location = New System.Drawing.Point(324, 362)
+        Me.ButtonClear.Location = New System.Drawing.Point(314, 359)
         Me.ButtonClear.Name = "ButtonClear"
-        Me.ButtonClear.Size = New System.Drawing.Size(38, 30)
+        Me.ButtonClear.Size = New System.Drawing.Size(40, 33)
         Me.ButtonClear.TabIndex = 43
         Me.ButtonClear.TabStop = False
         Me.ButtonClear.Text = "clear"
@@ -1130,9 +1123,9 @@ Public Class Form1
         Me.ButtonExit.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch
         Me.ButtonExit.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
         Me.ButtonExit.ForeColor = System.Drawing.Color.White
-        Me.ButtonExit.Location = New System.Drawing.Point(362, 362)
+        Me.ButtonExit.Location = New System.Drawing.Point(355, 359)
         Me.ButtonExit.Name = "ButtonExit"
-        Me.ButtonExit.Size = New System.Drawing.Size(34, 30)
+        Me.ButtonExit.Size = New System.Drawing.Size(40, 33)
         Me.ButtonExit.TabIndex = 38
         Me.ButtonExit.TabStop = False
         Me.ButtonExit.Text = "exit"
@@ -1209,41 +1202,15 @@ Public Class Form1
         Me.ToolStripSeparator7.Name = "ToolStripSeparator7"
         Me.ToolStripSeparator7.Size = New System.Drawing.Size(148, 6)
         '
-        'mnuSvcProperties
-        '
-        Me.mnuSvcProperties.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
-        Me.mnuSvcProperties.Name = "mnuSvcProperties"
-        Me.mnuSvcProperties.Size = New System.Drawing.Size(151, 22)
-        Me.mnuSvcProperties.Text = "Properties"
-        Me.mnuSvcProperties.ToolTipText = "Show extended properties"
-        '
         'ToolStripSeparator25
         '
         Me.ToolStripSeparator25.Name = "ToolStripSeparator25"
         Me.ToolStripSeparator25.Size = New System.Drawing.Size(148, 6)
         '
-        'GoogleLookupToolStripMenuItem
-        '
-        Me.GoogleLookupToolStripMenuItem.Name = "GoogleLookupToolStripMenuItem"
-        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
-        Me.GoogleLookupToolStripMenuItem.Text = "google lookup"
-        '
-        'DeleteServiceToolStripMenuItem
-        '
-        Me.DeleteServiceToolStripMenuItem.Name = "DeleteServiceToolStripMenuItem"
-        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
-        Me.DeleteServiceToolStripMenuItem.Text = "delete service"
-        '
         'ToolStripSeparator8
         '
         Me.ToolStripSeparator8.Name = "ToolStripSeparator8"
         Me.ToolStripSeparator8.Size = New System.Drawing.Size(148, 6)
-        '
-        'RefreshMenu
-        '
-        Me.RefreshMenu.Name = "RefreshMenu"
-        Me.RefreshMenu.Size = New System.Drawing.Size(151, 22)
-        Me.RefreshMenu.Text = "refresh"
         '
         'Label11
         '
@@ -1291,7 +1258,7 @@ Public Class Form1
         '
         Me.notification_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!)
         Me.notification_label.ForeColor = System.Drawing.Color.Red
-        Me.notification_label.Location = New System.Drawing.Point(21, 65)
+        Me.notification_label.Location = New System.Drawing.Point(28, 65)
         Me.notification_label.Name = "notification_label"
         Me.notification_label.Size = New System.Drawing.Size(248, 16)
         Me.notification_label.TabIndex = 39
@@ -1326,11 +1293,11 @@ Public Class Form1
         'StatusBar1
         '
         Me.StatusBar1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.StatusBar1.Location = New System.Drawing.Point(0, 394)
+        Me.StatusBar1.Location = New System.Drawing.Point(0, 396)
         Me.StatusBar1.Name = "StatusBar1"
         Me.StatusBar1.Panels.AddRange(New System.Windows.Forms.StatusBarPanel() {Me.Panel1, Me.Panel2, Me.Panel3})
         Me.StatusBar1.ShowPanels = True
-        Me.StatusBar1.Size = New System.Drawing.Size(397, 19)
+        Me.StatusBar1.Size = New System.Drawing.Size(397, 20)
         Me.StatusBar1.SizingGrip = False
         Me.StatusBar1.TabIndex = 40
         '
@@ -1367,120 +1334,13 @@ Public Class Form1
         Me.ToolStrip1.GripMargin = New System.Windows.Forms.Padding(0)
         Me.ToolStrip1.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden
         Me.ToolStrip1.ImageScalingSize = New System.Drawing.Size(30, 30)
-        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.mmcToolStripButton, Me.evntToolStripButton, Me.usrsToolStripButton, Me.ToolStripSeparator1, Me.regToolStripButton, Me.cmdToolStripButton, Me.ToolStripSeparator2, Me.zenToolStripButton, Me.rdpToolStripButton, Me.vncToolStripButton})
-        Me.ToolStrip1.Location = New System.Drawing.Point(0, 360)
+        Me.ToolStrip1.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripButton1, Me.mmcToolStripButton, Me.evntToolStripButton, Me.usrsToolStripButton, Me.regToolStripButton, Me.cmdToolStripButton, Me.zenToolStripButton, Me.rdpToolStripButton, Me.vncToolStripButton})
+        Me.ToolStrip1.Location = New System.Drawing.Point(0, 357)
         Me.ToolStrip1.Name = "ToolStrip1"
         Me.ToolStrip1.Padding = New System.Windows.Forms.Padding(0)
         Me.ToolStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
-        Me.ToolStrip1.Size = New System.Drawing.Size(397, 34)
+        Me.ToolStrip1.Size = New System.Drawing.Size(397, 39)
         Me.ToolStrip1.TabIndex = 0
-        '
-        'ToolStripButton1
-        '
-        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.ToolStripButton1.Image = Global.CMC.My.Resources.Resources.chart1
-        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.ToolStripButton1.Name = "ToolStripButton1"
-        Me.ToolStripButton1.Size = New System.Drawing.Size(34, 31)
-        Me.ToolStripButton1.Text = "PerfMonitor"
-        Me.ToolStripButton1.ToolTipText = "performance monitoring"
-        '
-        'mmcToolStripButton
-        '
-        Me.mmcToolStripButton.AutoSize = False
-        Me.mmcToolStripButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
-        Me.mmcToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.mmcToolStripButton.Image = CType(resources.GetObject("mmcToolStripButton.Image"), System.Drawing.Image)
-        Me.mmcToolStripButton.ImageTransparentColor = System.Drawing.Color.Maroon
-        Me.mmcToolStripButton.Name = "mmcToolStripButton"
-        Me.mmcToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.mmcToolStripButton.Text = "MMC"
-        Me.mmcToolStripButton.ToolTipText = "remote management console"
-        '
-        'evntToolStripButton
-        '
-        Me.evntToolStripButton.AutoSize = False
-        Me.evntToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.evntToolStripButton.Image = CType(resources.GetObject("evntToolStripButton.Image"), System.Drawing.Image)
-        Me.evntToolStripButton.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.evntToolStripButton.Name = "evntToolStripButton"
-        Me.evntToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.evntToolStripButton.Text = "evntToolStripButton"
-        Me.evntToolStripButton.ToolTipText = "remote event viewer"
-        '
-        'usrsToolStripButton
-        '
-        Me.usrsToolStripButton.AutoSize = False
-        Me.usrsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.usrsToolStripButton.Image = CType(resources.GetObject("usrsToolStripButton.Image"), System.Drawing.Image)
-        Me.usrsToolStripButton.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.usrsToolStripButton.Name = "usrsToolStripButton"
-        Me.usrsToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.usrsToolStripButton.Text = "usrsToolStripButton"
-        Me.usrsToolStripButton.ToolTipText = "remote users and groups console"
-        '
-        'ToolStripSeparator1
-        '
-        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(6, 34)
-        '
-        'regToolStripButton
-        '
-        Me.regToolStripButton.AutoSize = False
-        Me.regToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.regToolStripButton.Image = CType(resources.GetObject("regToolStripButton.Image"), System.Drawing.Image)
-        Me.regToolStripButton.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(211, Byte), Integer), CType(CType(213, Byte), Integer), CType(CType(214, Byte), Integer))
-        Me.regToolStripButton.Name = "regToolStripButton"
-        Me.regToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.regToolStripButton.Text = "remote registry editor"
-        '
-        'cmdToolStripButton
-        '
-        Me.cmdToolStripButton.AutoSize = False
-        Me.cmdToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.cmdToolStripButton.Image = CType(resources.GetObject("cmdToolStripButton.Image"), System.Drawing.Image)
-        Me.cmdToolStripButton.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.cmdToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.cmdToolStripButton.Name = "cmdToolStripButton"
-        Me.cmdToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.cmdToolStripButton.Text = "remote cmd window"
-        Me.cmdToolStripButton.ToolTipText = "remote cmd"
-        '
-        'ToolStripSeparator2
-        '
-        Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(6, 34)
-        '
-        'zenToolStripButton
-        '
-        Me.zenToolStripButton.AutoSize = False
-        Me.zenToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.zenToolStripButton.Enabled = False
-        Me.zenToolStripButton.Image = CType(resources.GetObject("zenToolStripButton.Image"), System.Drawing.Image)
-        Me.zenToolStripButton.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.zenToolStripButton.Name = "zenToolStripButton"
-        Me.zenToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.zenToolStripButton.Text = "remote control using zenworks"
-        '
-        'rdpToolStripButton
-        '
-        Me.rdpToolStripButton.AutoSize = False
-        Me.rdpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.rdpToolStripButton.Image = CType(resources.GetObject("rdpToolStripButton.Image"), System.Drawing.Image)
-        Me.rdpToolStripButton.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(210, Byte), Integer), CType(CType(210, Byte), Integer), CType(CType(210, Byte), Integer))
-        Me.rdpToolStripButton.Name = "rdpToolStripButton"
-        Me.rdpToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.rdpToolStripButton.Text = "remote desktop"
-        '
-        'vncToolStripButton
-        '
-        Me.vncToolStripButton.AutoSize = False
-        Me.vncToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
-        Me.vncToolStripButton.Image = CType(resources.GetObject("vncToolStripButton.Image"), System.Drawing.Image)
-        Me.vncToolStripButton.ImageTransparentColor = System.Drawing.Color.FromArgb(CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer), CType(CType(204, Byte), Integer))
-        Me.vncToolStripButton.Name = "vncToolStripButton"
-        Me.vncToolStripButton.Size = New System.Drawing.Size(34, 34)
-        Me.vncToolStripButton.Text = "vnc remote control"
         '
         'MenuStrip1
         '
@@ -1501,258 +1361,29 @@ Public Class Form1
         Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
-        'NewToolStripMenuItem
-        '
-        Me.NewToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_add
-        Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
-        Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.NewToolStripMenuItem.Text = "&New"
-        '
-        'ClearToolStripMenuItem
-        '
-        Me.ClearToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_form
-        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
-        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.ClearToolStripMenuItem.Text = "Clear"
-        '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
         Me.ToolStripSeparator3.Size = New System.Drawing.Size(168, 6)
-        '
-        'SaveToolStripMenuItem
-        '
-        Me.SaveToolStripMenuItem.Enabled = False
-        Me.SaveToolStripMenuItem.Image = CType(resources.GetObject("SaveToolStripMenuItem.Image"), System.Drawing.Image)
-        Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
-        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
-        Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
-        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.SaveToolStripMenuItem.Text = "Save to file..."
-        '
-        'AppendToolStripMenuItem
-        '
-        Me.AppendToolStripMenuItem.Enabled = False
-        Me.AppendToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_save
-        Me.AppendToolStripMenuItem.Name = "AppendToolStripMenuItem"
-        Me.AppendToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.AppendToolStripMenuItem.Text = "Append to file..."
         '
         'toolStripSeparator4
         '
         Me.toolStripSeparator4.Name = "toolStripSeparator4"
         Me.toolStripSeparator4.Size = New System.Drawing.Size(168, 6)
         '
-        'ExitToolStripMenuItem
-        '
-        Me.ExitToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.door_out
-        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
-        Me.ExitToolStripMenuItem.Text = "E&xit"
-        '
         'ToolsToolStripMenuItem
         '
-        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MicrosoftMMCToolStripMenuItem, Me.RemoteControlToolStripMenuItem, Me.TelnetMenu, Me.MSinfoToolStripMenuItem, Me.ToolStripSeparator18, Me.PrintersMenuItem, Me.MappedDrivesMenu, Me.StartUpProgramsMenuItem, Me.GPUpdateToolStripMenuItem, Me.ToolStripSeparator13, Me.ShutDownMenu, Me.LockMenu, Me.NetSendMenu, Me.ToolStripSeparator14, Me.WindRegMenuItem, Me.RemRegMenuItem, Me.ToolStripSeparator21, Me.ADUserInfoToolStripMenuItem, Me.ToolStripSeparator11, Me.PerfMonMenu})
+        Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MicrosoftMMCToolStripMenuItem, Me.RemoteControlToolStripMenuItem, Me.TelnetMenu, Me.MSinfoToolStripMenuItem, Me.GPUpdateToolStripMenuItem, Me.ToolStripSeparator13, Me.ShutDownMenu, Me.LogOffMenu, Me.LockMenu, Me.NetSendMenu, Me.ToolStripSeparator14, Me.WindRegMenuItem, Me.RemRegMenuItem, Me.ToolStripSeparator21, Me.ADUserInfoToolStripMenuItem, Me.ToolStripSeparator11, Me.PerfMonMenu})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(45, 20)
-        Me.ToolsToolStripMenuItem.Text = "Tools"
-        '
-        'MicrosoftMMCToolStripMenuItem
-        '
-        Me.MicrosoftMMCToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComputerManagementToolStripMenuItem, Me.EventViewerToolStripMenuItem, Me.LocalUsersAndGroupsToolStripMenuItem, Me.ServicesToolStripMenuItem, Me.SharedFoldersToolStripMenuItem})
-        Me.MicrosoftMMCToolStripMenuItem.Enabled = False
-        Me.MicrosoftMMCToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.wrench_orange
-        Me.MicrosoftMMCToolStripMenuItem.Name = "MicrosoftMMCToolStripMenuItem"
-        Me.MicrosoftMMCToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.MicrosoftMMCToolStripMenuItem.Text = "Microsoft MMC"
-        '
-        'ComputerManagementToolStripMenuItem
-        '
-        Me.ComputerManagementToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.wrench
-        Me.ComputerManagementToolStripMenuItem.Name = "ComputerManagementToolStripMenuItem"
-        Me.ComputerManagementToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
-        Me.ComputerManagementToolStripMenuItem.Text = "Computer Management"
-        '
-        'EventViewerToolStripMenuItem
-        '
-        Me.EventViewerToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_error
-        Me.EventViewerToolStripMenuItem.Name = "EventViewerToolStripMenuItem"
-        Me.EventViewerToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
-        Me.EventViewerToolStripMenuItem.Text = "Event Viewer"
-        '
-        'LocalUsersAndGroupsToolStripMenuItem
-        '
-        Me.LocalUsersAndGroupsToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.group
-        Me.LocalUsersAndGroupsToolStripMenuItem.Name = "LocalUsersAndGroupsToolStripMenuItem"
-        Me.LocalUsersAndGroupsToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
-        Me.LocalUsersAndGroupsToolStripMenuItem.Text = "Local Users and Groups"
-        '
-        'ServicesToolStripMenuItem
-        '
-        Me.ServicesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.table
-        Me.ServicesToolStripMenuItem.Name = "ServicesToolStripMenuItem"
-        Me.ServicesToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
-        Me.ServicesToolStripMenuItem.Text = "Services"
-        '
-        'SharedFoldersToolStripMenuItem
-        '
-        Me.SharedFoldersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.folder_user
-        Me.SharedFoldersToolStripMenuItem.Name = "SharedFoldersToolStripMenuItem"
-        Me.SharedFoldersToolStripMenuItem.Size = New System.Drawing.Size(188, 22)
-        Me.SharedFoldersToolStripMenuItem.Text = "Shared Folders"
-        '
-        'RemoteControlToolStripMenuItem
-        '
-        Me.RemoteControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteDesktopToolStripMenuItem, Me.VNCToolStripMenuItem, Me.ZenworksToolStripMenuItem, Me.RemoteAssistanceToolStripMenuItem})
-        Me.RemoteControlToolStripMenuItem.Enabled = False
-        Me.RemoteControlToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.monitor_lightning
-        Me.RemoteControlToolStripMenuItem.Name = "RemoteControlToolStripMenuItem"
-        Me.RemoteControlToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.RemoteControlToolStripMenuItem.Text = "Remote Control"
-        '
-        'RemoteDesktopToolStripMenuItem
-        '
-        Me.RemoteDesktopToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteDesktopConnectionToolStripMenuItem, Me.RDPConsoleToolStripMenuItem, Me.EnableRDPToolStripMenuItem, Me.DisableRDPToolStripMenuItem})
-        Me.RemoteDesktopToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.monitor
-        Me.RemoteDesktopToolStripMenuItem.Name = "RemoteDesktopToolStripMenuItem"
-        Me.RemoteDesktopToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.RemoteDesktopToolStripMenuItem.Text = "Remote Desktop"
-        '
-        'RemoteDesktopConnectionToolStripMenuItem
-        '
-        Me.RemoteDesktopConnectionToolStripMenuItem.Name = "RemoteDesktopConnectionToolStripMenuItem"
-        Me.RemoteDesktopConnectionToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.RemoteDesktopConnectionToolStripMenuItem.Text = "RDP Connection"
-        '
-        'RDPConsoleToolStripMenuItem
-        '
-        Me.RDPConsoleToolStripMenuItem.Name = "RDPConsoleToolStripMenuItem"
-        Me.RDPConsoleToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.RDPConsoleToolStripMenuItem.Text = "RDP (Console)"
-        '
-        'EnableRDPToolStripMenuItem
-        '
-        Me.EnableRDPToolStripMenuItem.Enabled = False
-        Me.EnableRDPToolStripMenuItem.Name = "EnableRDPToolStripMenuItem"
-        Me.EnableRDPToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.EnableRDPToolStripMenuItem.Text = "Enable RDP"
-        '
-        'DisableRDPToolStripMenuItem
-        '
-        Me.DisableRDPToolStripMenuItem.Enabled = False
-        Me.DisableRDPToolStripMenuItem.Name = "DisableRDPToolStripMenuItem"
-        Me.DisableRDPToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
-        Me.DisableRDPToolStripMenuItem.Text = "Disable RDP"
-        '
-        'VNCToolStripMenuItem
-        '
-        Me.VNCToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConnectOnlyToolStripMenuItem, Me.InstallAndConnectToolStripMenuItem, Me.InstallAndConnectNoUserPromptToolStripMenuItem})
-        Me.VNCToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.monitor_go
-        Me.VNCToolStripMenuItem.Name = "VNCToolStripMenuItem"
-        Me.VNCToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.VNCToolStripMenuItem.Text = "VNC"
-        '
-        'ConnectOnlyToolStripMenuItem
-        '
-        Me.ConnectOnlyToolStripMenuItem.Name = "ConnectOnlyToolStripMenuItem"
-        Me.ConnectOnlyToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.ConnectOnlyToolStripMenuItem.Text = "Connect Only"
-        '
-        'InstallAndConnectToolStripMenuItem
-        '
-        Me.InstallAndConnectToolStripMenuItem.Name = "InstallAndConnectToolStripMenuItem"
-        Me.InstallAndConnectToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.InstallAndConnectToolStripMenuItem.Text = "Install and Connect"
-        '
-        'InstallAndConnectNoUserPromptToolStripMenuItem
-        '
-        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Name = "InstallAndConnectNoUserPromptToolStripMenuItem"
-        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
-        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Text = "Install and Connect - No User Prompt"
-        '
-        'ZenworksToolStripMenuItem
-        '
-        Me.ZenworksToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.picture_key
-        Me.ZenworksToolStripMenuItem.Name = "ZenworksToolStripMenuItem"
-        Me.ZenworksToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.ZenworksToolStripMenuItem.Text = "Zenworks"
-        '
-        'RemoteAssistanceToolStripMenuItem
-        '
-        Me.RemoteAssistanceToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.keyboard
-        Me.RemoteAssistanceToolStripMenuItem.Name = "RemoteAssistanceToolStripMenuItem"
-        Me.RemoteAssistanceToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.RemoteAssistanceToolStripMenuItem.Text = "Remote Assistance"
-        '
-        'TelnetMenu
-        '
-        Me.TelnetMenu.Enabled = False
-        Me.TelnetMenu.Image = Global.CMC.My.Resources.Resources.application_osx_terminal
-        Me.TelnetMenu.Name = "TelnetMenu"
-        Me.TelnetMenu.Size = New System.Drawing.Size(180, 22)
-        Me.TelnetMenu.Text = "Telnet"
-        '
-        'MSinfoToolStripMenuItem
-        '
-        Me.MSinfoToolStripMenuItem.Enabled = False
-        Me.MSinfoToolStripMenuItem.Image = Global.CMC.My.Resources.Resources._0029
-        Me.MSinfoToolStripMenuItem.Name = "MSinfoToolStripMenuItem"
-        Me.MSinfoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.MSinfoToolStripMenuItem.Text = "MSinfo"
-        '
-        'ToolStripSeparator18
-        '
-        Me.ToolStripSeparator18.Name = "ToolStripSeparator18"
-        Me.ToolStripSeparator18.Size = New System.Drawing.Size(177, 6)
-        '
-        'PrintersMenuItem
-        '
-        Me.PrintersMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ViewPrintersToolStripMenuItem, Me.PrintServerPropertiesToolStripMenuItem})
-        Me.PrintersMenuItem.Enabled = False
-        Me.PrintersMenuItem.Image = Global.CMC.My.Resources.Resources.printer
-        Me.PrintersMenuItem.Name = "PrintersMenuItem"
-        Me.PrintersMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.PrintersMenuItem.Text = "Printers"
-        '
-        'ViewPrintersToolStripMenuItem
-        '
-        Me.ViewPrintersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.printer
-        Me.ViewPrintersToolStripMenuItem.Name = "ViewPrintersToolStripMenuItem"
-        Me.ViewPrintersToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.ViewPrintersToolStripMenuItem.Text = "View Printers"
-        '
-        'PrintServerPropertiesToolStripMenuItem
-        '
-        Me.PrintServerPropertiesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.server
-        Me.PrintServerPropertiesToolStripMenuItem.Name = "PrintServerPropertiesToolStripMenuItem"
-        Me.PrintServerPropertiesToolStripMenuItem.Size = New System.Drawing.Size(179, 22)
-        Me.PrintServerPropertiesToolStripMenuItem.Text = "Print Server Properties"
-        '
-        'MappedDrivesMenu
-        '
-        Me.MappedDrivesMenu.Enabled = False
-        Me.MappedDrivesMenu.Image = Global.CMC.My.Resources.Resources.drive_network
-        Me.MappedDrivesMenu.Name = "MappedDrivesMenu"
-        Me.MappedDrivesMenu.Size = New System.Drawing.Size(180, 22)
-        Me.MappedDrivesMenu.Text = "Mapped Drives"
-        '
-        'StartUpProgramsMenuItem
-        '
-        Me.StartUpProgramsMenuItem.Enabled = False
-        Me.StartUpProgramsMenuItem.Image = Global.CMC.My.Resources.Resources.application_cascade
-        Me.StartUpProgramsMenuItem.Name = "StartUpProgramsMenuItem"
-        Me.StartUpProgramsMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.StartUpProgramsMenuItem.Text = "StartUp Programs"
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(58, 20)
+        Me.ToolsToolStripMenuItem.Text = "Manage"
         '
         'GPUpdateToolStripMenuItem
         '
         Me.GPUpdateToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.BothComputerAndUserToolStripMenuItem, Me.OnlyComputerToolStripMenuItem, Me.OnlyUserToolStripMenuItem})
         Me.GPUpdateToolStripMenuItem.Enabled = False
         Me.GPUpdateToolStripMenuItem.Name = "GPUpdateToolStripMenuItem"
-        Me.GPUpdateToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.GPUpdateToolStripMenuItem.Size = New System.Drawing.Size(181, 24)
         Me.GPUpdateToolStripMenuItem.Text = "GPUpdate"
         '
         'BothComputerAndUserToolStripMenuItem
@@ -1778,136 +1409,22 @@ Public Class Form1
         'ToolStripSeparator13
         '
         Me.ToolStripSeparator13.Name = "ToolStripSeparator13"
-        Me.ToolStripSeparator13.Size = New System.Drawing.Size(177, 6)
-        '
-        'ShutDownMenu
-        '
-        Me.ShutDownMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.LogOffToolStripMenuItem, Me.TurnOffToolStripMenuItem, Me.RestartToolStripMenuItem, Me.ForceLogoffToolStripMenuItem, Me.ForceRebootToolStripMenuItem, Me.PowerDownToolStripMenuItem, Me.ForcePowerDownToolStripMenuItem})
-        Me.ShutDownMenu.Enabled = False
-        Me.ShutDownMenu.Image = Global.CMC.My.Resources.Resources.exclamation
-        Me.ShutDownMenu.Name = "ShutDownMenu"
-        Me.ShutDownMenu.Size = New System.Drawing.Size(180, 22)
-        Me.ShutDownMenu.Text = "Shut Down"
-        '
-        'LogOffToolStripMenuItem
-        '
-        Me.LogOffToolStripMenuItem.Name = "LogOffToolStripMenuItem"
-        Me.LogOffToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.LogOffToolStripMenuItem.Text = "Log Off"
-        '
-        'TurnOffToolStripMenuItem
-        '
-        Me.TurnOffToolStripMenuItem.Name = "TurnOffToolStripMenuItem"
-        Me.TurnOffToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.TurnOffToolStripMenuItem.Text = "Shutdown"
-        '
-        'RestartToolStripMenuItem
-        '
-        Me.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem"
-        Me.RestartToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.RestartToolStripMenuItem.Text = "Reboot"
-        '
-        'ForceLogoffToolStripMenuItem
-        '
-        Me.ForceLogoffToolStripMenuItem.Name = "ForceLogoffToolStripMenuItem"
-        Me.ForceLogoffToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.ForceLogoffToolStripMenuItem.Text = "Force Logoff"
-        '
-        'ForceRebootToolStripMenuItem
-        '
-        Me.ForceRebootToolStripMenuItem.Name = "ForceRebootToolStripMenuItem"
-        Me.ForceRebootToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.ForceRebootToolStripMenuItem.Text = "Force Reboot"
-        '
-        'PowerDownToolStripMenuItem
-        '
-        Me.PowerDownToolStripMenuItem.Name = "PowerDownToolStripMenuItem"
-        Me.PowerDownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.PowerDownToolStripMenuItem.Text = "Power Down"
-        '
-        'ForcePowerDownToolStripMenuItem
-        '
-        Me.ForcePowerDownToolStripMenuItem.Name = "ForcePowerDownToolStripMenuItem"
-        Me.ForcePowerDownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
-        Me.ForcePowerDownToolStripMenuItem.Text = "Force Power Down"
-        '
-        'LockMenu
-        '
-        Me.LockMenu.Enabled = False
-        Me.LockMenu.Image = Global.CMC.My.Resources.Resources.lock
-        Me.LockMenu.Name = "LockMenu"
-        Me.LockMenu.Size = New System.Drawing.Size(180, 22)
-        Me.LockMenu.Text = "Lock Machine"
-        '
-        'NetSendMenu
-        '
-        Me.NetSendMenu.Enabled = False
-        Me.NetSendMenu.Image = Global.CMC.My.Resources.Resources.comment
-        Me.NetSendMenu.Name = "NetSendMenu"
-        Me.NetSendMenu.Size = New System.Drawing.Size(180, 22)
-        Me.NetSendMenu.Text = "Send Message"
+        Me.ToolStripSeparator13.Size = New System.Drawing.Size(178, 6)
         '
         'ToolStripSeparator14
         '
         Me.ToolStripSeparator14.Name = "ToolStripSeparator14"
-        Me.ToolStripSeparator14.Size = New System.Drawing.Size(177, 6)
-        '
-        'WindRegMenuItem
-        '
-        Me.WindRegMenuItem.Enabled = False
-        Me.WindRegMenuItem.Image = Global.CMC.My.Resources.Resources.regedit
-        Me.WindRegMenuItem.ImageTransparentColor = System.Drawing.Color.White
-        Me.WindRegMenuItem.Name = "WindRegMenuItem"
-        Me.WindRegMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.WindRegMenuItem.Text = "windows registry editor"
-        '
-        'RemRegMenuItem
-        '
-        Me.RemRegMenuItem.Enabled = False
-        Me.RemRegMenuItem.Image = Global.CMC.My.Resources.Resources.regedit
-        Me.RemRegMenuItem.ImageTransparentColor = System.Drawing.Color.White
-        Me.RemRegMenuItem.Name = "RemRegMenuItem"
-        Me.RemRegMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.RemRegMenuItem.Text = "remote registry editor"
+        Me.ToolStripSeparator14.Size = New System.Drawing.Size(178, 6)
         '
         'ToolStripSeparator21
         '
         Me.ToolStripSeparator21.Name = "ToolStripSeparator21"
-        Me.ToolStripSeparator21.Size = New System.Drawing.Size(177, 6)
-        '
-        'ADUserInfoToolStripMenuItem
-        '
-        Me.ADUserInfoToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.user_16x16
-        Me.ADUserInfoToolStripMenuItem.Name = "ADUserInfoToolStripMenuItem"
-        Me.ADUserInfoToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ADUserInfoToolStripMenuItem.Text = "ad user manager"
+        Me.ToolStripSeparator21.Size = New System.Drawing.Size(178, 6)
         '
         'ToolStripSeparator11
         '
         Me.ToolStripSeparator11.Name = "ToolStripSeparator11"
-        Me.ToolStripSeparator11.Size = New System.Drawing.Size(177, 6)
-        '
-        'PerfMonMenu
-        '
-        Me.PerfMonMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PerformanceMonitorToolStripMenuItem, Me.ViewRecordedDataToolStripMenuItem})
-        Me.PerfMonMenu.Image = Global.CMC.My.Resources.Resources.chart
-        Me.PerfMonMenu.Name = "PerfMonMenu"
-        Me.PerfMonMenu.Size = New System.Drawing.Size(180, 22)
-        Me.PerfMonMenu.Text = "performance monitor"
-        '
-        'PerformanceMonitorToolStripMenuItem
-        '
-        Me.PerformanceMonitorToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.chart
-        Me.PerformanceMonitorToolStripMenuItem.Name = "PerformanceMonitorToolStripMenuItem"
-        Me.PerformanceMonitorToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.PerformanceMonitorToolStripMenuItem.Text = "performance monitor"
-        '
-        'ViewRecordedDataToolStripMenuItem
-        '
-        Me.ViewRecordedDataToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.chart_accept
-        Me.ViewRecordedDataToolStripMenuItem.Name = "ViewRecordedDataToolStripMenuItem"
-        Me.ViewRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
-        Me.ViewRecordedDataToolStripMenuItem.Text = "view recorded data"
+        Me.ToolStripSeparator11.Size = New System.Drawing.Size(178, 6)
         '
         'GoToolStripMenuItem
         '
@@ -1916,101 +1433,10 @@ Public Class Form1
         Me.GoToolStripMenuItem.Size = New System.Drawing.Size(62, 20)
         Me.GoToolStripMenuItem.Text = "Navigate"
         '
-        'OperatingSystemToolStripMenuItem
-        '
-        Me.OperatingSystemToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.computer
-        Me.OperatingSystemToolStripMenuItem.Name = "OperatingSystemToolStripMenuItem"
-        Me.OperatingSystemToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.OperatingSystemToolStripMenuItem.Text = "Operating System"
-        '
-        'NetworkToolStripMenuItem
-        '
-        Me.NetworkToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.computer_link
-        Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
-        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.NetworkToolStripMenuItem.Text = "Network"
-        '
-        'ServicesToolStripMenuItem1
-        '
-        Me.ServicesToolStripMenuItem1.Image = Global.CMC.My.Resources.Resources.table
-        Me.ServicesToolStripMenuItem1.Name = "ServicesToolStripMenuItem1"
-        Me.ServicesToolStripMenuItem1.Size = New System.Drawing.Size(157, 22)
-        Me.ServicesToolStripMenuItem1.Text = "Services"
-        '
-        'ProcessesToolStripMenuItem
-        '
-        Me.ProcessesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.table_gear
-        Me.ProcessesToolStripMenuItem.Name = "ProcessesToolStripMenuItem"
-        Me.ProcessesToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.ProcessesToolStripMenuItem.Text = "Processes"
-        '
-        'PrintersToolStripMenuItem
-        '
-        Me.PrintersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.printer
-        Me.PrintersToolStripMenuItem.Name = "PrintersToolStripMenuItem"
-        Me.PrintersToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.PrintersToolStripMenuItem.Text = "Printers"
-        '
-        'MappedDrivesToolStripMenuItem
-        '
-        Me.MappedDrivesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.drive_network
-        Me.MappedDrivesToolStripMenuItem.Name = "MappedDrivesToolStripMenuItem"
-        Me.MappedDrivesToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.MappedDrivesToolStripMenuItem.Text = "Mapped Drives"
-        '
-        'SoftwareToolStripMenuItem
-        '
-        Me.SoftwareToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.package_green
-        Me.SoftwareToolStripMenuItem.Name = "SoftwareToolStripMenuItem"
-        Me.SoftwareToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.SoftwareToolStripMenuItem.Text = "Software"
-        '
-        'DeployToolStripMenuItem
-        '
-        Me.DeployToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_get
-        Me.DeployToolStripMenuItem.Name = "DeployToolStripMenuItem"
-        Me.DeployToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.DeployToolStripMenuItem.Text = "Deploy"
-        '
-        'ADUserToolStripMenuItem
-        '
-        Me.ADUserToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.group_key
-        Me.ADUserToolStripMenuItem.Name = "ADUserToolStripMenuItem"
-        Me.ADUserToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.ADUserToolStripMenuItem.Text = "AD User"
-        '
-        'GroupPolicyToolStripMenuItem
-        '
-        Me.GroupPolicyToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page
-        Me.GroupPolicyToolStripMenuItem.Name = "GroupPolicyToolStripMenuItem"
-        Me.GroupPolicyToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.GroupPolicyToolStripMenuItem.Text = "Group Policy"
-        '
-        'MessageToolStripMenuItem
-        '
-        Me.MessageToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.comment
-        Me.MessageToolStripMenuItem.Name = "MessageToolStripMenuItem"
-        Me.MessageToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.MessageToolStripMenuItem.Text = "Message"
-        '
-        'StartupToolStripMenuItem
-        '
-        Me.StartupToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_cascade
-        Me.StartupToolStripMenuItem.Name = "StartupToolStripMenuItem"
-        Me.StartupToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
-        Me.StartupToolStripMenuItem.Text = "Startup"
-        '
-        'ToolsToolStripMenuItem1
-        '
-        Me.ToolsToolStripMenuItem1.Image = Global.CMC.My.Resources.Resources.wrench_orange
-        Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
-        Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(157, 22)
-        Me.ToolsToolStripMenuItem1.Text = "Tools"
-        '
         'TestToolStripMenuItem
         '
         Me.TestToolStripMenuItem.Name = "TestToolStripMenuItem"
-        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(157, 22)
+        Me.TestToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
         Me.TestToolStripMenuItem.Text = "Test"
         Me.TestToolStripMenuItem.Visible = False
         '
@@ -2021,78 +1447,20 @@ Public Class Form1
         Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(55, 20)
         Me.OptionsToolStripMenuItem.Text = "Options"
         '
-        'Prefs_Menu
-        '
-        Me.Prefs_Menu.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold)
-        Me.Prefs_Menu.Image = Global.CMC.My.Resources.Resources.wrench
-        Me.Prefs_Menu.Name = "Prefs_Menu"
-        Me.Prefs_Menu.Size = New System.Drawing.Size(193, 22)
-        Me.Prefs_Menu.Text = "Preferences"
-        '
         'ToolStripSeparator9
         '
         Me.ToolStripSeparator9.Name = "ToolStripSeparator9"
         Me.ToolStripSeparator9.Size = New System.Drawing.Size(190, 6)
-        '
-        'AlwaysOnTopToolStripMenuItem
-        '
-        Me.AlwaysOnTopToolStripMenuItem.CheckOnClick = True
-        Me.AlwaysOnTopToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
-        Me.AlwaysOnTopToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_get
-        Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
-        Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-                    Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.AlwaysOnTopToolStripMenuItem.Text = "Always on top"
-        Me.AlwaysOnTopToolStripMenuItem.ToolTipText = "remain visible when window focus lost"
-        '
-        'MultiThreadMenuItem
-        '
-        Me.MultiThreadMenuItem.Image = Global.CMC.My.Resources.Resources.arrow_join
-        Me.MultiThreadMenuItem.Name = "MultiThreadMenuItem"
-        Me.MultiThreadMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.MultiThreadMenuItem.Text = "No Multithread"
-        '
-        'ToolbarEnabled
-        '
-        Me.ToolbarEnabled.CheckOnClick = True
-        Me.ToolbarEnabled.Image = Global.CMC.My.Resources.Resources.application_view_tile
-        Me.ToolbarEnabled.Name = "ToolbarEnabled"
-        Me.ToolbarEnabled.Size = New System.Drawing.Size(193, 22)
-        Me.ToolbarEnabled.Text = "Toolbar always enabled"
         '
         'ToolStripSeparator10
         '
         Me.ToolStripSeparator10.Name = "ToolStripSeparator10"
         Me.ToolStripSeparator10.Size = New System.Drawing.Size(190, 6)
         '
-        'ViewLogToolStripMenuItem
-        '
-        Me.ViewLogToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page
-        Me.ViewLogToolStripMenuItem.Name = "ViewLogToolStripMenuItem"
-        Me.ViewLogToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
-                    Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
-        Me.ViewLogToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.ViewLogToolStripMenuItem.Text = "View Log"
-        '
-        'ClearLogToolStripMenuItem
-        '
-        Me.ClearLogToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_delete
-        Me.ClearLogToolStripMenuItem.Name = "ClearLogToolStripMenuItem"
-        Me.ClearLogToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.ClearLogToolStripMenuItem.Text = "Clear Log"
-        '
         'ToolStripSeparator15
         '
         Me.ToolStripSeparator15.Name = "ToolStripSeparator15"
         Me.ToolStripSeparator15.Size = New System.Drawing.Size(190, 6)
-        '
-        'ClearHistoryToolStripMenuItem
-        '
-        Me.ClearHistoryToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_lightning
-        Me.ClearHistoryToolStripMenuItem.Name = "ClearHistoryToolStripMenuItem"
-        Me.ClearHistoryToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
-        Me.ClearHistoryToolStripMenuItem.Text = "Clear History"
         '
         'HelpToolStripMenuItem
         '
@@ -2100,14 +1468,6 @@ Public Class Form1
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
         Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(41, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
-        '
-        'AboutToolStripMenuItem
-        '
-        Me.AboutToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.information
-        Me.AboutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
-        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(111, 22)
-        Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'SaveFileDialog1
         '
@@ -2118,6 +1478,7 @@ Public Class Form1
         '
         'options
         '
+        Me.options.Controls.Add(Me.GroupBox2)
         Me.options.Controls.Add(Me.GroupBox13)
         Me.options.Controls.Add(Me.GroupBox12)
         Me.options.Controls.Add(Me.PrefCancel)
@@ -2131,14 +1492,47 @@ Public Class Form1
         Me.options.Text = "Options"
         Me.options.UseVisualStyleBackColor = True
         '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.RadioButton_remreg)
+        Me.GroupBox2.Controls.Add(Me.RadioButton_regedit)
+        Me.GroupBox2.Location = New System.Drawing.Point(218, 88)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(148, 65)
+        Me.GroupBox2.TabIndex = 32
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "toolbar registry editor"
+        '
+        'RadioButton_remreg
+        '
+        Me.RadioButton_remreg.AutoSize = True
+        Me.RadioButton_remreg.Checked = True
+        Me.RadioButton_remreg.Location = New System.Drawing.Point(13, 36)
+        Me.RadioButton_remreg.Name = "RadioButton_remreg"
+        Me.RadioButton_remreg.Size = New System.Drawing.Size(122, 17)
+        Me.RadioButton_remreg.TabIndex = 1
+        Me.RadioButton_remreg.TabStop = True
+        Me.RadioButton_remreg.Text = "remote registry editor"
+        Me.RadioButton_remreg.UseVisualStyleBackColor = True
+        '
+        'RadioButton_regedit
+        '
+        Me.RadioButton_regedit.AutoSize = True
+        Me.RadioButton_regedit.Location = New System.Drawing.Point(13, 19)
+        Me.RadioButton_regedit.Name = "RadioButton_regedit"
+        Me.RadioButton_regedit.Size = New System.Drawing.Size(57, 17)
+        Me.RadioButton_regedit.TabIndex = 0
+        Me.RadioButton_regedit.Text = "regedit"
+        Me.RadioButton_regedit.UseVisualStyleBackColor = True
+        '
         'GroupBox13
         '
         Me.GroupBox13.Controls.Add(Me.psexecbrowse)
         Me.GroupBox13.Controls.Add(Me.downloadpsexec)
         Me.GroupBox13.Controls.Add(Me.psexecpath)
-        Me.GroupBox13.Location = New System.Drawing.Point(7, 193)
+        Me.GroupBox13.Location = New System.Drawing.Point(6, 167)
         Me.GroupBox13.Name = "GroupBox13"
-        Me.GroupBox13.Size = New System.Drawing.Size(212, 39)
+        Me.GroupBox13.Size = New System.Drawing.Size(360, 39)
         Me.GroupBox13.TabIndex = 31
         Me.GroupBox13.TabStop = False
         Me.GroupBox13.Text = "psexec location"
@@ -2156,7 +1550,7 @@ Public Class Form1
         'downloadpsexec
         '
         Me.downloadpsexec.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.downloadpsexec.Location = New System.Drawing.Point(151, 13)
+        Me.downloadpsexec.Location = New System.Drawing.Point(298, 13)
         Me.downloadpsexec.Name = "downloadpsexec"
         Me.downloadpsexec.Size = New System.Drawing.Size(53, 20)
         Me.downloadpsexec.TabIndex = 12
@@ -2168,7 +1562,7 @@ Public Class Form1
         Me.psexecpath.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.psexecpath.Location = New System.Drawing.Point(27, 15)
         Me.psexecpath.Name = "psexecpath"
-        Me.psexecpath.Size = New System.Drawing.Size(118, 17)
+        Me.psexecpath.Size = New System.Drawing.Size(265, 17)
         Me.psexecpath.TabIndex = 10
         '
         'GroupBox12
@@ -2645,15 +2039,6 @@ Public Class Form1
         Me.netsendCancel.Text = "cancel"
         Me.netsendCancel.UseVisualStyleBackColor = True
         '
-        'PictureBox1
-        '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.comment
-        Me.PictureBox1.Location = New System.Drawing.Point(222, 220)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(18, 18)
-        Me.PictureBox1.TabIndex = 18
-        Me.PictureBox1.TabStop = False
-        '
         'aduser
         '
         Me.aduser.Controls.Add(Me.adpanel)
@@ -2827,19 +2212,6 @@ Public Class Form1
         Me.Label22.Size = New System.Drawing.Size(56, 13)
         Me.Label22.TabIndex = 0
         Me.Label22.Text = "user folder"
-        '
-        'btn_dsa
-        '
-        Me.btn_dsa.Enabled = False
-        Me.btn_dsa.FlatAppearance.BorderSize = 0
-        Me.btn_dsa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.btn_dsa.Image = Global.CMC.My.Resources.Resources.book_open
-        Me.btn_dsa.Location = New System.Drawing.Point(176, 23)
-        Me.btn_dsa.Name = "btn_dsa"
-        Me.btn_dsa.Size = New System.Drawing.Size(20, 20)
-        Me.btn_dsa.TabIndex = 37
-        Me.ToolTip1.SetToolTip(Me.btn_dsa, "AD Users & Computers")
-        Me.btn_dsa.UseVisualStyleBackColor = True
         '
         'telephonenumber
         '
@@ -3358,7 +2730,6 @@ Public Class Form1
         'sw_Wait_Panel
         '
         Me.sw_Wait_Panel.BackColor = System.Drawing.Color.DodgerBlue
-        Me.sw_Wait_Panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
         Me.sw_Wait_Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
         Me.sw_Wait_Panel.Controls.Add(Me.Label28)
         Me.sw_Wait_Panel.Controls.Add(Me.sw_Cancel_Button)
@@ -3519,11 +2890,11 @@ Public Class Form1
         '
         Me.software_button.Enabled = False
         Me.software_button.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.software_button.Location = New System.Drawing.Point(317, 1)
+        Me.software_button.Location = New System.Drawing.Point(296, 3)
         Me.software_button.Name = "software_button"
-        Me.software_button.Size = New System.Drawing.Size(48, 20)
+        Me.software_button.Size = New System.Drawing.Size(81, 22)
         Me.software_button.TabIndex = 50
-        Me.software_button.Text = "refresh"
+        Me.software_button.Text = "get software"
         '
         'ShowUpdates
         '
@@ -3552,30 +2923,6 @@ Public Class Form1
         Me.processes.Text = "Processes"
         Me.processes.UseVisualStyleBackColor = True
         '
-        'proc_wait_panel
-        '
-        Me.proc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
-        Me.proc_wait_panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.proc_wait_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.proc_wait_panel.Controls.Add(Me.Label36)
-        Me.proc_wait_panel.Location = New System.Drawing.Point(121, 72)
-        Me.proc_wait_panel.Name = "proc_wait_panel"
-        Me.proc_wait_panel.Size = New System.Drawing.Size(150, 48)
-        Me.proc_wait_panel.TabIndex = 75
-        Me.proc_wait_panel.Visible = False
-        '
-        'Label36
-        '
-        Me.Label36.AutoSize = True
-        Me.Label36.BackColor = System.Drawing.Color.Transparent
-        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label36.ForeColor = System.Drawing.Color.White
-        Me.Label36.Location = New System.Drawing.Point(24, 17)
-        Me.Label36.Name = "Label36"
-        Me.Label36.Size = New System.Drawing.Size(112, 15)
-        Me.Label36.TabIndex = 0
-        Me.Label36.Text = "getting processes..."
-        '
         'ListView_Processes
         '
         Me.ListView_Processes.BackColor = System.Drawing.Color.WhiteSmoke
@@ -3583,7 +2930,7 @@ Public Class Form1
         Me.ListView_Processes.ContextMenuStrip = Me.ProcContextMenu
         Me.ListView_Processes.FullRowSelect = True
         Me.ListView_Processes.GridLines = True
-        Me.ListView_Processes.Location = New System.Drawing.Point(4, 19)
+        Me.ListView_Processes.Location = New System.Drawing.Point(4, 22)
         Me.ListView_Processes.MultiSelect = False
         Me.ListView_Processes.Name = "ListView_Processes"
         Me.ListView_Processes.Size = New System.Drawing.Size(374, 155)
@@ -3616,9 +2963,9 @@ Public Class Form1
         '
         'ProcContextMenu
         '
-        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.procMenuHeader, Me.ToolStripSeparator24, Me.PropertiesToolStripMenuItem, Me.ToolStripSeparator26, Me.mnuProcKill, Me.mnuProcGoogle, Me.mnuCopyPath})
+        Me.ProcContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.procMenuHeader, Me.ToolStripSeparator24, Me.PropertiesToolStripMenuItem, Me.ToolStripSeparator26, Me.mnuCopyPath, Me.mnuProcGoogle, Me.mnuProcKill, Me.ToolStripSeparator1, Me.RefreshToolStripMenuItem})
         Me.ProcContextMenu.Name = "ProcContextMenu"
-        Me.ProcContextMenu.Size = New System.Drawing.Size(134, 126)
+        Me.ProcContextMenu.Size = New System.Drawing.Size(134, 154)
         '
         'procMenuHeader
         '
@@ -3631,58 +2978,41 @@ Public Class Form1
         Me.ToolStripSeparator24.Name = "ToolStripSeparator24"
         Me.ToolStripSeparator24.Size = New System.Drawing.Size(130, 6)
         '
-        'PropertiesToolStripMenuItem
-        '
-        Me.PropertiesToolStripMenuItem.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
-        Me.PropertiesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.stats_info
-        Me.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem"
-        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
-        Me.PropertiesToolStripMenuItem.Text = "Properties"
-        '
         'ToolStripSeparator26
         '
         Me.ToolStripSeparator26.Name = "ToolStripSeparator26"
         Me.ToolStripSeparator26.Size = New System.Drawing.Size(130, 6)
         '
-        'mnuProcKill
+        'ToolStripSeparator1
         '
-        Me.mnuProcKill.Image = Global.CMC.My.Resources.Resources.cancel
-        Me.mnuProcKill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
-        Me.mnuProcKill.Name = "mnuProcKill"
-        Me.mnuProcKill.Size = New System.Drawing.Size(133, 22)
-        Me.mnuProcKill.Text = "kill process"
-        '
-        'mnuProcGoogle
-        '
-        Me.mnuProcGoogle.Name = "mnuProcGoogle"
-        Me.mnuProcGoogle.Size = New System.Drawing.Size(133, 22)
-        Me.mnuProcGoogle.Text = "google..."
-        '
-        'mnuCopyPath
-        '
-        Me.mnuCopyPath.Name = "mnuCopyPath"
-        Me.mnuCopyPath.Size = New System.Drawing.Size(133, 22)
-        Me.mnuCopyPath.Text = "copy path"
+        Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(130, 6)
         '
         'ImageList1
         '
         Me.ImageList1.ImageStream = CType(resources.GetObject("ImageList1.ImageStream"), System.Windows.Forms.ImageListStreamer)
         Me.ImageList1.TransparentColor = System.Drawing.Color.Transparent
         Me.ImageList1.Images.SetKeyName(0, "windows")
-        Me.ImageList1.Images.SetKeyName(1, "procform.ico")
+        Me.ImageList1.Images.SetKeyName(1, "png_t_proc2_16.png")
         Me.ImageList1.Images.SetKeyName(2, "win_apps.png")
-        Me.ImageList1.Images.SetKeyName(3, "svcStarted.png")
-        Me.ImageList1.Images.SetKeyName(4, "svcStopped.png")
+        Me.ImageList1.Images.SetKeyName(3, "png_t_cogG_10.png")
+        Me.ImageList1.Images.SetKeyName(4, "png_t_cogGry_10.png")
+        Me.ImageList1.Images.SetKeyName(5, "procform.ico")
+        Me.ImageList1.Images.SetKeyName(6, "svcStopped.png")
+        Me.ImageList1.Images.SetKeyName(7, "svcStarted.png")
+        Me.ImageList1.Images.SetKeyName(8, "png_t_proc_16.png")
+        Me.ImageList1.Images.SetKeyName(9, "png_t_cogG_12.png")
+        Me.ImageList1.Images.SetKeyName(10, "png_t_cogR_12.png")
         '
         'ProcessRefresh
         '
         Me.ProcessRefresh.Enabled = False
         Me.ProcessRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.ProcessRefresh.Location = New System.Drawing.Point(331, 0)
+        Me.ProcessRefresh.Location = New System.Drawing.Point(296, 0)
         Me.ProcessRefresh.Name = "ProcessRefresh"
-        Me.ProcessRefresh.Size = New System.Drawing.Size(48, 20)
+        Me.ProcessRefresh.Size = New System.Drawing.Size(81, 22)
         Me.ProcessRefresh.TabIndex = 9
-        Me.ProcessRefresh.Text = "refresh"
+        Me.ProcessRefresh.Text = "get processes"
         '
         'get_processes_by_wmi_checkbox
         '
@@ -3813,62 +3143,6 @@ Public Class Form1
         Me.services.Text = "Services"
         Me.services.UseVisualStyleBackColor = True
         '
-        'Panel_SvcAction
-        '
-        Me.Panel_SvcAction.BackColor = System.Drawing.SystemColors.Control
-        Me.Panel_SvcAction.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.Panel_SvcAction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.Panel_SvcAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Panel_SvcAction.Controls.Add(Me.ProgressBar_SvcAction)
-        Me.Panel_SvcAction.Controls.Add(Me.Label_SvcAction)
-        Me.Panel_SvcAction.Location = New System.Drawing.Point(46, 158)
-        Me.Panel_SvcAction.Name = "Panel_SvcAction"
-        Me.Panel_SvcAction.Size = New System.Drawing.Size(292, 71)
-        Me.Panel_SvcAction.TabIndex = 75
-        Me.Panel_SvcAction.Visible = False
-        '
-        'ProgressBar_SvcAction
-        '
-        Me.ProgressBar_SvcAction.ForeColor = System.Drawing.Color.DodgerBlue
-        Me.ProgressBar_SvcAction.Location = New System.Drawing.Point(39, 39)
-        Me.ProgressBar_SvcAction.Name = "ProgressBar_SvcAction"
-        Me.ProgressBar_SvcAction.Size = New System.Drawing.Size(215, 19)
-        Me.ProgressBar_SvcAction.Style = System.Windows.Forms.ProgressBarStyle.Continuous
-        Me.ProgressBar_SvcAction.TabIndex = 1
-        '
-        'Label_SvcAction
-        '
-        Me.Label_SvcAction.AutoSize = True
-        Me.Label_SvcAction.Location = New System.Drawing.Point(37, 15)
-        Me.Label_SvcAction.Name = "Label_SvcAction"
-        Me.Label_SvcAction.Size = New System.Drawing.Size(86, 13)
-        Me.Label_SvcAction.TabIndex = 0
-        Me.Label_SvcAction.Text = "Label_SvcAction"
-        '
-        'svc_wait_panel
-        '
-        Me.svc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
-        Me.svc_wait_panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.svc_wait_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.svc_wait_panel.Controls.Add(Me.Label38)
-        Me.svc_wait_panel.Location = New System.Drawing.Point(127, 104)
-        Me.svc_wait_panel.Name = "svc_wait_panel"
-        Me.svc_wait_panel.Size = New System.Drawing.Size(133, 48)
-        Me.svc_wait_panel.TabIndex = 74
-        Me.svc_wait_panel.Visible = False
-        '
-        'Label38
-        '
-        Me.Label38.AutoSize = True
-        Me.Label38.BackColor = System.Drawing.Color.Transparent
-        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label38.ForeColor = System.Drawing.Color.White
-        Me.Label38.Location = New System.Drawing.Point(24, 17)
-        Me.Label38.Name = "Label38"
-        Me.Label38.Size = New System.Drawing.Size(100, 15)
-        Me.Label38.TabIndex = 0
-        Me.Label38.Text = "getting services..."
-        '
         'ListView_Services
         '
         Me.ListView_Services.BackColor = System.Drawing.Color.WhiteSmoke
@@ -3876,10 +3150,10 @@ Public Class Form1
         Me.ListView_Services.ContextMenuStrip = Me.svccontextmenu
         Me.ListView_Services.FullRowSelect = True
         Me.ListView_Services.GridLines = True
-        Me.ListView_Services.Location = New System.Drawing.Point(1, 21)
+        Me.ListView_Services.Location = New System.Drawing.Point(1, 26)
         Me.ListView_Services.MultiSelect = False
         Me.ListView_Services.Name = "ListView_Services"
-        Me.ListView_Services.Size = New System.Drawing.Size(382, 227)
+        Me.ListView_Services.Size = New System.Drawing.Size(382, 222)
         Me.ListView_Services.SmallImageList = Me.ImageList1
         Me.ListView_Services.Sorting = System.Windows.Forms.SortOrder.Ascending
         Me.ListView_Services.TabIndex = 19
@@ -3947,11 +3221,11 @@ Public Class Form1
         Me.refreshsvc.Enabled = False
         Me.refreshsvc.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.refreshsvc.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.refreshsvc.Location = New System.Drawing.Point(336, 0)
+        Me.refreshsvc.Location = New System.Drawing.Point(315, 2)
         Me.refreshsvc.Name = "refreshsvc"
-        Me.refreshsvc.Size = New System.Drawing.Size(47, 20)
+        Me.refreshsvc.Size = New System.Drawing.Size(67, 22)
         Me.refreshsvc.TabIndex = 13
-        Me.refreshsvc.Text = "refresh"
+        Me.refreshsvc.Text = "get services"
         '
         'network
         '
@@ -3974,42 +3248,6 @@ Public Class Form1
         Me.network.TabIndex = 8
         Me.network.Text = "Network"
         '
-        'nw_Wait_Panel
-        '
-        Me.nw_Wait_Panel.BackColor = System.Drawing.Color.DodgerBlue
-        Me.nw_Wait_Panel.BackgroundImage = Global.CMC.My.Resources.Resources.Utilities_32x32
-        Me.nw_Wait_Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.nw_Wait_Panel.Controls.Add(Me.Label34)
-        Me.nw_Wait_Panel.Controls.Add(Me.Label33)
-        Me.nw_Wait_Panel.Location = New System.Drawing.Point(123, 89)
-        Me.nw_Wait_Panel.Name = "nw_Wait_Panel"
-        Me.nw_Wait_Panel.Size = New System.Drawing.Size(133, 72)
-        Me.nw_Wait_Panel.TabIndex = 72
-        Me.nw_Wait_Panel.Visible = False
-        '
-        'Label34
-        '
-        Me.Label34.AutoSize = True
-        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label34.ForeColor = System.Drawing.Color.White
-        Me.Label34.Location = New System.Drawing.Point(32, 39)
-        Me.Label34.Name = "Label34"
-        Me.Label34.Size = New System.Drawing.Size(78, 15)
-        Me.Label34.TabIndex = 1
-        Me.Label34.Text = "please wait..."
-        '
-        'Label33
-        '
-        Me.Label33.AutoSize = True
-        Me.Label33.BackColor = System.Drawing.Color.Transparent
-        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Label33.ForeColor = System.Drawing.Color.White
-        Me.Label33.Location = New System.Drawing.Point(32, 16)
-        Me.Label33.Name = "Label33"
-        Me.Label33.Size = New System.Drawing.Size(71, 15)
-        Me.Label33.TabIndex = 0
-        Me.Label33.Text = "getting data"
-        '
         'AdaptorID
         '
         Me.AdaptorID.BackColor = System.Drawing.SystemColors.Control
@@ -4019,7 +3257,7 @@ Public Class Form1
         Me.AdaptorID.Location = New System.Drawing.Point(9, 3)
         Me.AdaptorID.Multiline = True
         Me.AdaptorID.Name = "AdaptorID"
-        Me.AdaptorID.Size = New System.Drawing.Size(310, 27)
+        Me.AdaptorID.Size = New System.Drawing.Size(275, 27)
         Me.AdaptorID.TabIndex = 33
         Me.AdaptorID.TabStop = False
         '
@@ -4028,11 +3266,11 @@ Public Class Form1
         Me.networkupdate.Enabled = False
         Me.networkupdate.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.networkupdate.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.networkupdate.Location = New System.Drawing.Point(325, 5)
+        Me.networkupdate.Location = New System.Drawing.Point(303, 5)
         Me.networkupdate.Name = "networkupdate"
-        Me.networkupdate.Size = New System.Drawing.Size(48, 20)
+        Me.networkupdate.Size = New System.Drawing.Size(70, 25)
         Me.networkupdate.TabIndex = 31
-        Me.networkupdate.Text = "refresh"
+        Me.networkupdate.Text = "get network"
         Me.networkupdate.UseVisualStyleBackColor = True
         '
         'GroupBox6
@@ -4369,7 +3607,6 @@ Public Class Form1
         Me.os.BackColor = System.Drawing.Color.Transparent
         Me.os.Controls.Add(Me.DataFetchPanel)
         Me.os.Controls.Add(Me.admanagement)
-        Me.os.Controls.Add(Me.cpu_info_lbl)
         Me.os.Controls.Add(Me.ie)
         Me.os.Controls.Add(Me.proxyset)
         Me.os.Controls.Add(Me.Label_IP)
@@ -4398,58 +3635,6 @@ Public Class Form1
         Me.os.Text = "OS"
         Me.os.UseVisualStyleBackColor = True
         '
-        'DataFetchPanel
-        '
-        Me.DataFetchPanel.BackColor = System.Drawing.Color.DodgerBlue
-        Me.DataFetchPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
-        Me.DataFetchPanel.Controls.Add(Me.button_image)
-        Me.DataFetchPanel.Controls.Add(Me.DataFetchPanelLabel2)
-        Me.DataFetchPanel.Controls.Add(Me.DataFetchPanelLabel)
-        Me.DataFetchPanel.Location = New System.Drawing.Point(126, 56)
-        Me.DataFetchPanel.Name = "DataFetchPanel"
-        Me.DataFetchPanel.Size = New System.Drawing.Size(133, 67)
-        Me.DataFetchPanel.TabIndex = 71
-        Me.DataFetchPanel.Visible = False
-        '
-        'button_image
-        '
-        Me.button_image.BackColor = System.Drawing.Color.Transparent
-        Me.button_image.Enabled = False
-        Me.button_image.FlatAppearance.BorderSize = 0
-        Me.button_image.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.button_image.Image = Global.CMC.My.Resources.Resources.Dell_Display_32x32
-        Me.button_image.Location = New System.Drawing.Point(-1, -4)
-        Me.button_image.Margin = New System.Windows.Forms.Padding(0)
-        Me.button_image.Name = "button_image"
-        Me.button_image.Size = New System.Drawing.Size(36, 36)
-        Me.button_image.TabIndex = 2
-        Me.button_image.TabStop = False
-        Me.button_image.UseVisualStyleBackColor = False
-        '
-        'DataFetchPanelLabel2
-        '
-        Me.DataFetchPanelLabel2.AutoSize = True
-        Me.DataFetchPanelLabel2.BackColor = System.Drawing.Color.Transparent
-        Me.DataFetchPanelLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataFetchPanelLabel2.ForeColor = System.Drawing.Color.White
-        Me.DataFetchPanelLabel2.Location = New System.Drawing.Point(34, 35)
-        Me.DataFetchPanelLabel2.Name = "DataFetchPanelLabel2"
-        Me.DataFetchPanelLabel2.Size = New System.Drawing.Size(78, 15)
-        Me.DataFetchPanelLabel2.TabIndex = 1
-        Me.DataFetchPanelLabel2.Text = "please wait..."
-        '
-        'DataFetchPanelLabel
-        '
-        Me.DataFetchPanelLabel.AutoSize = True
-        Me.DataFetchPanelLabel.BackColor = System.Drawing.Color.Transparent
-        Me.DataFetchPanelLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.DataFetchPanelLabel.ForeColor = System.Drawing.Color.White
-        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(37, 15)
-        Me.DataFetchPanelLabel.Name = "DataFetchPanelLabel"
-        Me.DataFetchPanelLabel.Size = New System.Drawing.Size(67, 15)
-        Me.DataFetchPanelLabel.TabIndex = 0
-        Me.DataFetchPanelLabel.Text = "connecting"
-        '
         'admanagement
         '
         Me.admanagement.AccessibleRole = System.Windows.Forms.AccessibleRole.None
@@ -4463,22 +3648,6 @@ Public Class Form1
         Me.admanagement.TabStop = False
         Me.admanagement.Text = "ad mgr"
         Me.admanagement.UseVisualStyleBackColor = True
-        '
-        'cpu_info_lbl
-        '
-        Me.cpu_info_lbl.ActiveLinkColor = System.Drawing.Color.MediumPurple
-        Me.cpu_info_lbl.AutoSize = True
-        Me.cpu_info_lbl.BackColor = System.Drawing.SystemColors.Window
-        Me.cpu_info_lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.cpu_info_lbl.LinkColor = System.Drawing.Color.DodgerBlue
-        Me.cpu_info_lbl.Location = New System.Drawing.Point(342, 198)
-        Me.cpu_info_lbl.Name = "cpu_info_lbl"
-        Me.cpu_info_lbl.Size = New System.Drawing.Size(17, 9)
-        Me.cpu_info_lbl.TabIndex = 69
-        Me.cpu_info_lbl.TabStop = True
-        Me.cpu_info_lbl.Text = "info"
-        Me.ToolTip1.SetToolTip(Me.cpu_info_lbl, "get detailed cpu information")
-        Me.cpu_info_lbl.Visible = False
         '
         'ie
         '
@@ -4513,20 +3682,6 @@ Public Class Form1
         Me.Label_IP.TabIndex = 66
         Me.Label_IP.TabStop = False
         '
-        'adbutton
-        '
-        Me.adbutton.Enabled = False
-        Me.adbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.adbutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.adbutton.Image = Global.CMC.My.Resources.Resources.user_info_16x16
-        Me.adbutton.Location = New System.Drawing.Point(269, 101)
-        Me.adbutton.Name = "adbutton"
-        Me.adbutton.Size = New System.Drawing.Size(22, 22)
-        Me.adbutton.TabIndex = 65
-        Me.adbutton.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.adbutton, "AD User Profile")
-        Me.adbutton.UseVisualStyleBackColor = True
-        '
         'ielabel
         '
         Me.ielabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
@@ -4542,6 +3697,7 @@ Public Class Form1
         '
         Me.Hardware.Controls.Add(Me.audio_label)
         Me.Hardware.Controls.Add(Me.video_label)
+        Me.Hardware.Controls.Add(Me.cpu_info_lbl)
         Me.Hardware.Controls.Add(Me.hdCombo)
         Me.Hardware.Controls.Add(Me.cpuBox)
         Me.Hardware.Controls.Add(Me.RAMBox)
@@ -4555,7 +3711,6 @@ Public Class Form1
         Me.Hardware.Size = New System.Drawing.Size(218, 112)
         Me.Hardware.TabIndex = 61
         Me.Hardware.TabStop = False
-        Me.Hardware.Text = "Hardware"
         '
         'audio_label
         '
@@ -4563,7 +3718,7 @@ Public Class Form1
         Me.audio_label.AutoSize = True
         Me.audio_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
         Me.audio_label.LinkColor = System.Drawing.Color.DimGray
-        Me.audio_label.Location = New System.Drawing.Point(108, 7)
+        Me.audio_label.Location = New System.Drawing.Point(83, 8)
         Me.audio_label.Name = "audio_label"
         Me.audio_label.Size = New System.Drawing.Size(23, 9)
         Me.audio_label.TabIndex = 65
@@ -4578,7 +3733,7 @@ Public Class Form1
         Me.video_label.AutoSize = True
         Me.video_label.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!)
         Me.video_label.LinkColor = System.Drawing.Color.DimGray
-        Me.video_label.Location = New System.Drawing.Point(81, 7)
+        Me.video_label.Location = New System.Drawing.Point(56, 8)
         Me.video_label.Name = "video_label"
         Me.video_label.Size = New System.Drawing.Size(23, 9)
         Me.video_label.TabIndex = 64
@@ -4586,6 +3741,22 @@ Public Class Form1
         Me.video_label.Text = "video"
         Me.ToolTip1.SetToolTip(Me.video_label, "video controller information")
         Me.video_label.Visible = False
+        '
+        'cpu_info_lbl
+        '
+        Me.cpu_info_lbl.ActiveLinkColor = System.Drawing.Color.MediumPurple
+        Me.cpu_info_lbl.AutoSize = True
+        Me.cpu_info_lbl.BackColor = System.Drawing.SystemColors.Window
+        Me.cpu_info_lbl.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.cpu_info_lbl.LinkColor = System.Drawing.Color.DimGray
+        Me.cpu_info_lbl.Location = New System.Drawing.Point(33, 8)
+        Me.cpu_info_lbl.Name = "cpu_info_lbl"
+        Me.cpu_info_lbl.Size = New System.Drawing.Size(17, 9)
+        Me.cpu_info_lbl.TabIndex = 69
+        Me.cpu_info_lbl.TabStop = True
+        Me.cpu_info_lbl.Text = "cpu"
+        Me.ToolTip1.SetToolTip(Me.cpu_info_lbl, "get detailed cpu information")
+        Me.cpu_info_lbl.Visible = False
         '
         'hdCombo
         '
@@ -4662,12 +3833,12 @@ Public Class Form1
         Me.HWButton.Enabled = False
         Me.HWButton.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.HWButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.HWButton.Location = New System.Drawing.Point(160, 1)
+        Me.HWButton.Location = New System.Drawing.Point(143, 1)
         Me.HWButton.Name = "HWButton"
-        Me.HWButton.Size = New System.Drawing.Size(48, 20)
+        Me.HWButton.Size = New System.Drawing.Size(65, 22)
         Me.HWButton.TabIndex = 14
         Me.HWButton.TabStop = False
-        Me.HWButton.Text = "refresh"
+        Me.HWButton.Text = "Hardware"
         Me.ToolTip1.SetToolTip(Me.HWButton, "load hardware information")
         '
         'GroupBox3
@@ -4684,39 +3855,6 @@ Public Class Form1
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Shares"
         '
-        'delete_Share
-        '
-        Me.delete_Share.Enabled = False
-        Me.delete_Share.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark
-        Me.delete_Share.FlatAppearance.BorderSize = 0
-        Me.delete_Share.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Khaki
-        Me.delete_Share.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.delete_Share.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.delete_Share.Image = Global.CMC.My.Resources.Resources.folder_delete
-        Me.delete_Share.Location = New System.Drawing.Point(74, 12)
-        Me.delete_Share.Name = "delete_Share"
-        Me.delete_Share.Size = New System.Drawing.Size(18, 18)
-        Me.delete_Share.TabIndex = 3
-        Me.delete_Share.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.delete_Share, "delete selected share")
-        Me.delete_Share.UseVisualStyleBackColor = True
-        '
-        'addshare
-        '
-        Me.addshare.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark
-        Me.addshare.FlatAppearance.BorderSize = 0
-        Me.addshare.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Khaki
-        Me.addshare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.addshare.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addshare.Image = Global.CMC.My.Resources.Resources.folder_add
-        Me.addshare.Location = New System.Drawing.Point(49, 12)
-        Me.addshare.Name = "addshare"
-        Me.addshare.Size = New System.Drawing.Size(18, 18)
-        Me.addshare.TabIndex = 2
-        Me.addshare.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.addshare, "add a new share")
-        Me.addshare.UseVisualStyleBackColor = True
-        '
         'ListBox_Shares
         '
         Me.ListBox_Shares.BackColor = System.Drawing.SystemColors.Window
@@ -4727,18 +3865,6 @@ Public Class Form1
         Me.ListBox_Shares.Sorted = True
         Me.ListBox_Shares.TabIndex = 0
         Me.ListBox_Shares.TabStop = False
-        '
-        'Button_openshare
-        '
-        Me.Button_openshare.Enabled = False
-        Me.Button_openshare.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.Button_openshare.Image = CType(resources.GetObject("Button_openshare.Image"), System.Drawing.Image)
-        Me.Button_openshare.Location = New System.Drawing.Point(113, 8)
-        Me.Button_openshare.Name = "Button_openshare"
-        Me.Button_openshare.Size = New System.Drawing.Size(28, 28)
-        Me.Button_openshare.TabIndex = 1
-        Me.Button_openshare.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.Button_openshare, "open selected share")
         '
         'Label_User
         '
@@ -4922,7 +4048,7 @@ Public Class Form1
         Me.addptr4all.AutoSize = True
         Me.addptr4all.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.addptr4all.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.addptr4all.Location = New System.Drawing.Point(204, 96)
+        Me.addptr4all.Location = New System.Drawing.Point(204, 92)
         Me.addptr4all.Name = "addptr4all"
         Me.addptr4all.Size = New System.Drawing.Size(88, 16)
         Me.addptr4all.TabIndex = 11
@@ -4931,7 +4057,7 @@ Public Class Form1
         '
         'AddPrinterButton
         '
-        Me.AddPrinterButton.Location = New System.Drawing.Point(147, 93)
+        Me.AddPrinterButton.Location = New System.Drawing.Point(147, 89)
         Me.AddPrinterButton.Name = "AddPrinterButton"
         Me.AddPrinterButton.Size = New System.Drawing.Size(35, 20)
         Me.AddPrinterButton.TabIndex = 10
@@ -4942,7 +4068,7 @@ Public Class Form1
         '
         Me.addthisprinter.BackColor = System.Drawing.SystemColors.Control
         Me.addthisprinter.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
-        Me.addthisprinter.Location = New System.Drawing.Point(20, 93)
+        Me.addthisprinter.Location = New System.Drawing.Point(20, 89)
         Me.addthisprinter.Name = "addthisprinter"
         Me.addthisprinter.Size = New System.Drawing.Size(124, 20)
         Me.addthisprinter.TabIndex = 7
@@ -4968,7 +4094,7 @@ Public Class Form1
         Me.printerGrid.RowTemplate.Height = 14
         Me.printerGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
         Me.printerGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect
-        Me.printerGrid.Size = New System.Drawing.Size(292, 84)
+        Me.printerGrid.Size = New System.Drawing.Size(292, 81)
         Me.printerGrid.TabIndex = 2
         Me.printerGrid.TabStop = False
         '
@@ -4988,26 +4114,36 @@ Public Class Form1
         '
         'mappeddrivesGroupBox
         '
+        Me.mappeddrivesGroupBox.Controls.Add(Me.mappings)
         Me.mappeddrivesGroupBox.Controls.Add(Me.deletemappeddrive)
         Me.mappeddrivesGroupBox.Controls.Add(Me.addmappeddrive_button)
         Me.mappeddrivesGroupBox.Controls.Add(Me.addmappeddrive_letter)
         Me.mappeddrivesGroupBox.Controls.Add(Me.addmappeddrive_path)
-        Me.mappeddrivesGroupBox.Controls.Add(Me.mappings)
         Me.mappeddrivesGroupBox.Controls.Add(Me.Label50)
         Me.mappeddrivesGroupBox.Controls.Add(Me.MappedDrivesButton)
         Me.mappeddrivesGroupBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mappeddrivesGroupBox.Location = New System.Drawing.Point(11, 122)
+        Me.mappeddrivesGroupBox.Location = New System.Drawing.Point(8, 118)
         Me.mappeddrivesGroupBox.Name = "mappeddrivesGroupBox"
-        Me.mappeddrivesGroupBox.Size = New System.Drawing.Size(361, 119)
+        Me.mappeddrivesGroupBox.Size = New System.Drawing.Size(369, 123)
         Me.mappeddrivesGroupBox.TabIndex = 5
         Me.mappeddrivesGroupBox.TabStop = False
         Me.mappeddrivesGroupBox.Text = "persistent mapped drives"
+        '
+        'mappings
+        '
+        Me.mappings.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.mappings.FormattingEnabled = True
+        Me.mappings.Location = New System.Drawing.Point(7, 25)
+        Me.mappings.Name = "mappings"
+        Me.mappings.Size = New System.Drawing.Size(292, 56)
+        Me.mappings.TabIndex = 3
+        Me.mappings.TabStop = False
         '
         'deletemappeddrive
         '
         Me.deletemappeddrive.Enabled = False
         Me.deletemappeddrive.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.deletemappeddrive.Location = New System.Drawing.Point(306, 79)
+        Me.deletemappeddrive.Location = New System.Drawing.Point(306, 84)
         Me.deletemappeddrive.Name = "deletemappeddrive"
         Me.deletemappeddrive.Size = New System.Drawing.Size(48, 19)
         Me.deletemappeddrive.TabIndex = 8
@@ -5018,7 +4154,7 @@ Public Class Form1
         '
         Me.addmappeddrive_button.Enabled = False
         Me.addmappeddrive_button.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.addmappeddrive_button.Location = New System.Drawing.Point(262, 79)
+        Me.addmappeddrive_button.Location = New System.Drawing.Point(262, 84)
         Me.addmappeddrive_button.Name = "addmappeddrive_button"
         Me.addmappeddrive_button.Size = New System.Drawing.Size(37, 19)
         Me.addmappeddrive_button.TabIndex = 7
@@ -5028,7 +4164,7 @@ Public Class Form1
         'addmappeddrive_letter
         '
         Me.addmappeddrive_letter.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.addmappeddrive_letter.Location = New System.Drawing.Point(7, 79)
+        Me.addmappeddrive_letter.Location = New System.Drawing.Point(7, 84)
         Me.addmappeddrive_letter.MaxLength = 1
         Me.addmappeddrive_letter.Name = "addmappeddrive_letter"
         Me.addmappeddrive_letter.Size = New System.Drawing.Size(26, 20)
@@ -5037,27 +4173,17 @@ Public Class Form1
         'addmappeddrive_path
         '
         Me.addmappeddrive_path.BackColor = System.Drawing.Color.WhiteSmoke
-        Me.addmappeddrive_path.Location = New System.Drawing.Point(39, 79)
+        Me.addmappeddrive_path.Location = New System.Drawing.Point(39, 84)
         Me.addmappeddrive_path.Name = "addmappeddrive_path"
         Me.addmappeddrive_path.Size = New System.Drawing.Size(217, 20)
         Me.addmappeddrive_path.TabIndex = 6
-        '
-        'mappings
-        '
-        Me.mappings.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.mappings.FormattingEnabled = True
-        Me.mappings.Location = New System.Drawing.Point(7, 20)
-        Me.mappings.Name = "mappings"
-        Me.mappings.Size = New System.Drawing.Size(292, 56)
-        Me.mappings.TabIndex = 3
-        Me.mappings.TabStop = False
         '
         'Label50
         '
         Me.Label50.AutoSize = True
         Me.Label50.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.Label50.ForeColor = System.Drawing.Color.RoyalBlue
-        Me.Label50.Location = New System.Drawing.Point(76, 102)
+        Me.Label50.Location = New System.Drawing.Point(76, 106)
         Me.Label50.Name = "Label50"
         Me.Label50.Size = New System.Drawing.Size(205, 12)
         Me.Label50.TabIndex = 4
@@ -5068,11 +4194,11 @@ Public Class Form1
         Me.MappedDrivesButton.Enabled = False
         Me.MappedDrivesButton.FlatStyle = System.Windows.Forms.FlatStyle.System
         Me.MappedDrivesButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.MappedDrivesButton.Location = New System.Drawing.Point(306, 20)
+        Me.MappedDrivesButton.Location = New System.Drawing.Point(267, 0)
         Me.MappedDrivesButton.Name = "MappedDrivesButton"
-        Me.MappedDrivesButton.Size = New System.Drawing.Size(49, 23)
+        Me.MappedDrivesButton.Size = New System.Drawing.Size(96, 22)
         Me.MappedDrivesButton.TabIndex = 1
-        Me.MappedDrivesButton.Text = "refresh"
+        Me.MappedDrivesButton.Text = "get mapped drives"
         Me.ToolTip1.SetToolTip(Me.MappedDrivesButton, "list currently logged on uer's mapped drives")
         Me.MappedDrivesButton.UseVisualStyleBackColor = True
         '
@@ -5080,11 +4206,11 @@ Public Class Form1
         '
         Me.printerRefresh.Enabled = False
         Me.printerRefresh.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.printerRefresh.Location = New System.Drawing.Point(327, 6)
+        Me.printerRefresh.Location = New System.Drawing.Point(316, 6)
         Me.printerRefresh.Name = "printerRefresh"
-        Me.printerRefresh.Size = New System.Drawing.Size(49, 23)
+        Me.printerRefresh.Size = New System.Drawing.Size(60, 25)
         Me.printerRefresh.TabIndex = 0
-        Me.printerRefresh.Text = "refresh"
+        Me.printerRefresh.Text = "get printers"
         Me.printerRefresh.UseVisualStyleBackColor = True
         '
         'gpo
@@ -6026,16 +5152,6 @@ Public Class Form1
         Me.computername.Size = New System.Drawing.Size(134, 24)
         Me.computername.TabIndex = 0
         '
-        'Button1
-        '
-        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.Button1.Location = New System.Drawing.Point(4, 65)
-        Me.Button1.Name = "Button1"
-        Me.Button1.Size = New System.Drawing.Size(14, 15)
-        Me.Button1.TabIndex = 58
-        Me.Button1.Text = "<"
-        Me.Button1.UseVisualStyleBackColor = True
-        '
         'ToolTip1
         '
         Me.ToolTip1.AutoPopDelay = 10000
@@ -6098,13 +5214,905 @@ Public Class Form1
         Me.Textbox_ComputerName.TabIndex = 59
         Me.Textbox_ComputerName.Visible = False
         '
+        'Button1
+        '
+        Me.Button1.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.0!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Button1.Image = Global.CMC.My.Resources.Resources.png_t_arrow_101
+        Me.Button1.Location = New System.Drawing.Point(4, 66)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(15, 15)
+        Me.Button1.TabIndex = 58
+        Me.Button1.UseVisualStyleBackColor = True
+        '
+        'ToolStripButton1
+        '
+        Me.ToolStripButton1.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.ToolStripButton1.Image = Global.CMC.My.Resources.Resources.png_w_perf
+        Me.ToolStripButton1.ImageTransparentColor = System.Drawing.Color.White
+        Me.ToolStripButton1.Name = "ToolStripButton1"
+        Me.ToolStripButton1.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.ToolStripButton1.Size = New System.Drawing.Size(36, 36)
+        Me.ToolStripButton1.Text = "PerfMonitor"
+        Me.ToolStripButton1.ToolTipText = "performance monitoring"
+        '
+        'mmcToolStripButton
+        '
+        Me.mmcToolStripButton.AutoSize = False
+        Me.mmcToolStripButton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center
+        Me.mmcToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.mmcToolStripButton.Image = CType(resources.GetObject("mmcToolStripButton.Image"), System.Drawing.Image)
+        Me.mmcToolStripButton.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.mmcToolStripButton.Name = "mmcToolStripButton"
+        Me.mmcToolStripButton.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.mmcToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.mmcToolStripButton.Text = "MMC"
+        Me.mmcToolStripButton.ToolTipText = "remote management console"
+        '
+        'evntToolStripButton
+        '
+        Me.evntToolStripButton.AutoSize = False
+        Me.evntToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.evntToolStripButton.Image = Global.CMC.My.Resources.Resources.png_w_evnt1
+        Me.evntToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.evntToolStripButton.Name = "evntToolStripButton"
+        Me.evntToolStripButton.Padding = New System.Windows.Forms.Padding(0, 0, 1, 0)
+        Me.evntToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.evntToolStripButton.Text = "evntToolStripButton"
+        Me.evntToolStripButton.ToolTipText = "remote event viewer"
+        '
+        'usrsToolStripButton
+        '
+        Me.usrsToolStripButton.AutoSize = False
+        Me.usrsToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.usrsToolStripButton.Image = Global.CMC.My.Resources.Resources.png_t_usersG_32
+        Me.usrsToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.usrsToolStripButton.Name = "usrsToolStripButton"
+        Me.usrsToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.usrsToolStripButton.Text = "usrsToolStripButton"
+        Me.usrsToolStripButton.ToolTipText = "remote users and groups console"
+        '
+        'regToolStripButton
+        '
+        Me.regToolStripButton.AutoSize = False
+        Me.regToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.regToolStripButton.Image = Global.CMC.My.Resources.Resources.png_t_reg2
+        Me.regToolStripButton.ImageAlign = System.Drawing.ContentAlignment.BottomLeft
+        Me.regToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.regToolStripButton.Name = "regToolStripButton"
+        Me.regToolStripButton.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.regToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.regToolStripButton.ToolTipText = "registry editor"
+        '
+        'cmdToolStripButton
+        '
+        Me.cmdToolStripButton.AutoSize = False
+        Me.cmdToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.cmdToolStripButton.Image = CType(resources.GetObject("cmdToolStripButton.Image"), System.Drawing.Image)
+        Me.cmdToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.cmdToolStripButton.Name = "cmdToolStripButton"
+        Me.cmdToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.cmdToolStripButton.Text = "remote cmd window"
+        Me.cmdToolStripButton.ToolTipText = "remote cmd"
+        '
+        'zenToolStripButton
+        '
+        Me.zenToolStripButton.AutoSize = False
+        Me.zenToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.zenToolStripButton.Enabled = False
+        Me.zenToolStripButton.Image = CType(resources.GetObject("zenToolStripButton.Image"), System.Drawing.Image)
+        Me.zenToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.zenToolStripButton.Name = "zenToolStripButton"
+        Me.zenToolStripButton.Padding = New System.Windows.Forms.Padding(0, 0, 2, 0)
+        Me.zenToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.zenToolStripButton.Text = "remote control using zenworks"
+        '
+        'rdpToolStripButton
+        '
+        Me.rdpToolStripButton.AutoSize = False
+        Me.rdpToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.rdpToolStripButton.Image = CType(resources.GetObject("rdpToolStripButton.Image"), System.Drawing.Image)
+        Me.rdpToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.rdpToolStripButton.Name = "rdpToolStripButton"
+        Me.rdpToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.rdpToolStripButton.Text = "remote desktop"
+        '
+        'vncToolStripButton
+        '
+        Me.vncToolStripButton.AutoSize = False
+        Me.vncToolStripButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image
+        Me.vncToolStripButton.Image = CType(resources.GetObject("vncToolStripButton.Image"), System.Drawing.Image)
+        Me.vncToolStripButton.ImageTransparentColor = System.Drawing.Color.White
+        Me.vncToolStripButton.Name = "vncToolStripButton"
+        Me.vncToolStripButton.Size = New System.Drawing.Size(34, 34)
+        Me.vncToolStripButton.Text = "vnc remote control"
+        '
+        'NewToolStripMenuItem
+        '
+        Me.NewToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.cmc
+        Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
+        Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.NewToolStripMenuItem.Text = "&New"
+        '
+        'ClearToolStripMenuItem
+        '
+        Me.ClearToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_clear_16
+        Me.ClearToolStripMenuItem.Name = "ClearToolStripMenuItem"
+        Me.ClearToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+                    Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
+        Me.ClearToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ClearToolStripMenuItem.Text = "Clear"
+        '
+        'SaveToolStripMenuItem
+        '
+        Me.SaveToolStripMenuItem.Enabled = False
+        Me.SaveToolStripMenuItem.Image = CType(resources.GetObject("SaveToolStripMenuItem.Image"), System.Drawing.Image)
+        Me.SaveToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
+        Me.SaveToolStripMenuItem.Name = "SaveToolStripMenuItem"
+        Me.SaveToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.S), System.Windows.Forms.Keys)
+        Me.SaveToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.SaveToolStripMenuItem.Text = "Save to file..."
+        '
+        'AppendToolStripMenuItem
+        '
+        Me.AppendToolStripMenuItem.Enabled = False
+        Me.AppendToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_save
+        Me.AppendToolStripMenuItem.Name = "AppendToolStripMenuItem"
+        Me.AppendToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.AppendToolStripMenuItem.Text = "Append to file..."
+        '
+        'ExitToolStripMenuItem
+        '
+        Me.ExitToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_delete_16
+        Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
+        Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.X), System.Windows.Forms.Keys)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
+        Me.ExitToolStripMenuItem.Text = "E&xit"
+        '
+        'MicrosoftMMCToolStripMenuItem
+        '
+        Me.MicrosoftMMCToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ComputerManagementToolStripMenuItem, Me.EventViewerToolStripMenuItem, Me.LocalUsersAndGroupsToolStripMenuItem, Me.ServicesToolStripMenuItem, Me.SharedFoldersToolStripMenuItem})
+        Me.MicrosoftMMCToolStripMenuItem.Enabled = False
+        Me.MicrosoftMMCToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_mgmt
+        Me.MicrosoftMMCToolStripMenuItem.Name = "MicrosoftMMCToolStripMenuItem"
+        Me.MicrosoftMMCToolStripMenuItem.Size = New System.Drawing.Size(181, 24)
+        Me.MicrosoftMMCToolStripMenuItem.Text = "Microsoft MMC"
+        '
+        'ComputerManagementToolStripMenuItem
+        '
+        Me.ComputerManagementToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_mgmt
+        Me.ComputerManagementToolStripMenuItem.Name = "ComputerManagementToolStripMenuItem"
+        Me.ComputerManagementToolStripMenuItem.Size = New System.Drawing.Size(236, 70)
+        Me.ComputerManagementToolStripMenuItem.Text = "Computer Management"
+        '
+        'EventViewerToolStripMenuItem
+        '
+        Me.EventViewerToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_evnt_16
+        Me.EventViewerToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.EventViewerToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.EventViewerToolStripMenuItem.Name = "EventViewerToolStripMenuItem"
+        Me.EventViewerToolStripMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.EventViewerToolStripMenuItem.Text = "Event Viewer"
+        '
+        'LocalUsersAndGroupsToolStripMenuItem
+        '
+        Me.LocalUsersAndGroupsToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_usrs
+        Me.LocalUsersAndGroupsToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.LocalUsersAndGroupsToolStripMenuItem.Name = "LocalUsersAndGroupsToolStripMenuItem"
+        Me.LocalUsersAndGroupsToolStripMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.LocalUsersAndGroupsToolStripMenuItem.Text = "Local Users and Groups"
+        '
+        'ServicesToolStripMenuItem
+        '
+        Me.ServicesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_svc_green_32
+        Me.ServicesToolStripMenuItem.Name = "ServicesToolStripMenuItem"
+        Me.ServicesToolStripMenuItem.Size = New System.Drawing.Size(189, 24)
+        Me.ServicesToolStripMenuItem.Text = "Services"
+        '
+        'SharedFoldersToolStripMenuItem
+        '
+        Me.SharedFoldersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_share_16
+        Me.SharedFoldersToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.SharedFoldersToolStripMenuItem.Name = "SharedFoldersToolStripMenuItem"
+        Me.SharedFoldersToolStripMenuItem.Size = New System.Drawing.Size(236, 70)
+        Me.SharedFoldersToolStripMenuItem.Text = "Shared Folders"
+        '
+        'RemoteControlToolStripMenuItem
+        '
+        Me.RemoteControlToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteDesktopToolStripMenuItem, Me.VNCToolStripMenuItem, Me.ZenworksToolStripMenuItem, Me.RemoteAssistanceToolStripMenuItem})
+        Me.RemoteControlToolStripMenuItem.Enabled = False
+        Me.RemoteControlToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_zen
+        Me.RemoteControlToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.RemoteControlToolStripMenuItem.Name = "RemoteControlToolStripMenuItem"
+        Me.RemoteControlToolStripMenuItem.Size = New System.Drawing.Size(181, 24)
+        Me.RemoteControlToolStripMenuItem.Text = "Remote Control"
+        '
+        'RemoteDesktopToolStripMenuItem
+        '
+        Me.RemoteDesktopToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteDesktopConnectionToolStripMenuItem, Me.RDPConsoleToolStripMenuItem, Me.EnableRDPToolStripMenuItem, Me.DisableRDPToolStripMenuItem})
+        Me.RemoteDesktopToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_rdp
+        Me.RemoteDesktopToolStripMenuItem.Name = "RemoteDesktopToolStripMenuItem"
+        Me.RemoteDesktopToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.RemoteDesktopToolStripMenuItem.Text = "Remote Desktop"
+        '
+        'RemoteDesktopConnectionToolStripMenuItem
+        '
+        Me.RemoteDesktopConnectionToolStripMenuItem.Name = "RemoteDesktopConnectionToolStripMenuItem"
+        Me.RemoteDesktopConnectionToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.RemoteDesktopConnectionToolStripMenuItem.Text = "RDP Connection"
+        '
+        'RDPConsoleToolStripMenuItem
+        '
+        Me.RDPConsoleToolStripMenuItem.Name = "RDPConsoleToolStripMenuItem"
+        Me.RDPConsoleToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.RDPConsoleToolStripMenuItem.Text = "RDP (Console)"
+        '
+        'EnableRDPToolStripMenuItem
+        '
+        Me.EnableRDPToolStripMenuItem.Enabled = False
+        Me.EnableRDPToolStripMenuItem.Name = "EnableRDPToolStripMenuItem"
+        Me.EnableRDPToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.EnableRDPToolStripMenuItem.Text = "Enable RDP"
+        '
+        'DisableRDPToolStripMenuItem
+        '
+        Me.DisableRDPToolStripMenuItem.Enabled = False
+        Me.DisableRDPToolStripMenuItem.Name = "DisableRDPToolStripMenuItem"
+        Me.DisableRDPToolStripMenuItem.Size = New System.Drawing.Size(154, 22)
+        Me.DisableRDPToolStripMenuItem.Text = "Disable RDP"
+        '
+        'VNCToolStripMenuItem
+        '
+        Me.VNCToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ConnectOnlyToolStripMenuItem, Me.InstallAndConnectToolStripMenuItem, Me.InstallAndConnectNoUserPromptToolStripMenuItem})
+        Me.VNCToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_vnc
+        Me.VNCToolStripMenuItem.Name = "VNCToolStripMenuItem"
+        Me.VNCToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.VNCToolStripMenuItem.Text = "VNC"
+        '
+        'ConnectOnlyToolStripMenuItem
+        '
+        Me.ConnectOnlyToolStripMenuItem.Name = "ConnectOnlyToolStripMenuItem"
+        Me.ConnectOnlyToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.ConnectOnlyToolStripMenuItem.Text = "Connect Only"
+        '
+        'InstallAndConnectToolStripMenuItem
+        '
+        Me.InstallAndConnectToolStripMenuItem.Name = "InstallAndConnectToolStripMenuItem"
+        Me.InstallAndConnectToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.InstallAndConnectToolStripMenuItem.Text = "Install and Connect"
+        '
+        'InstallAndConnectNoUserPromptToolStripMenuItem
+        '
+        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Name = "InstallAndConnectNoUserPromptToolStripMenuItem"
+        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Size = New System.Drawing.Size(249, 22)
+        Me.InstallAndConnectNoUserPromptToolStripMenuItem.Text = "Install and Connect - No User Prompt"
+        '
+        'ZenworksToolStripMenuItem
+        '
+        Me.ZenworksToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_zen
+        Me.ZenworksToolStripMenuItem.Name = "ZenworksToolStripMenuItem"
+        Me.ZenworksToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.ZenworksToolStripMenuItem.Text = "Zenworks"
+        '
+        'RemoteAssistanceToolStripMenuItem
+        '
+        Me.RemoteAssistanceToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.keyboard
+        Me.RemoteAssistanceToolStripMenuItem.Name = "RemoteAssistanceToolStripMenuItem"
+        Me.RemoteAssistanceToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.RemoteAssistanceToolStripMenuItem.Text = "Remote Assistance"
+        '
+        'TelnetMenu
+        '
+        Me.TelnetMenu.Enabled = False
+        Me.TelnetMenu.Image = Global.CMC.My.Resources.Resources.png_w_tlnt
+        Me.TelnetMenu.ImageTransparentColor = System.Drawing.Color.White
+        Me.TelnetMenu.Name = "TelnetMenu"
+        Me.TelnetMenu.Size = New System.Drawing.Size(181, 24)
+        Me.TelnetMenu.Text = "Telnet"
+        '
+        'MSinfoToolStripMenuItem
+        '
+        Me.MSinfoToolStripMenuItem.Enabled = False
+        Me.MSinfoToolStripMenuItem.Image = Global.CMC.My.Resources.Resources._0029
+        Me.MSinfoToolStripMenuItem.Name = "MSinfoToolStripMenuItem"
+        Me.MSinfoToolStripMenuItem.Size = New System.Drawing.Size(181, 24)
+        Me.MSinfoToolStripMenuItem.Text = "MSinfo"
+        '
+        'ShutDownMenu
+        '
+        Me.ShutDownMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.TurnOffToolStripMenuItem, Me.RestartToolStripMenuItem, Me.ForceLogoffToolStripMenuItem, Me.ForceRebootToolStripMenuItem, Me.PowerDownToolStripMenuItem, Me.ForcePowerDownToolStripMenuItem})
+        Me.ShutDownMenu.Enabled = False
+        Me.ShutDownMenu.Image = Global.CMC.My.Resources.Resources.png_w_PWR_16
+        Me.ShutDownMenu.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ShutDownMenu.ImageTransparentColor = System.Drawing.Color.White
+        Me.ShutDownMenu.Name = "ShutDownMenu"
+        Me.ShutDownMenu.Size = New System.Drawing.Size(181, 24)
+        Me.ShutDownMenu.Text = "Shutdown or Reboot"
+        '
+        'TurnOffToolStripMenuItem
+        '
+        Me.TurnOffToolStripMenuItem.Name = "TurnOffToolStripMenuItem"
+        Me.TurnOffToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.TurnOffToolStripMenuItem.Text = "Shutdown"
+        '
+        'RestartToolStripMenuItem
+        '
+        Me.RestartToolStripMenuItem.Name = "RestartToolStripMenuItem"
+        Me.RestartToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.RestartToolStripMenuItem.Text = "Reboot"
+        '
+        'ForceLogoffToolStripMenuItem
+        '
+        Me.ForceLogoffToolStripMenuItem.Name = "ForceLogoffToolStripMenuItem"
+        Me.ForceLogoffToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.ForceLogoffToolStripMenuItem.Text = "Force Logoff"
+        '
+        'ForceRebootToolStripMenuItem
+        '
+        Me.ForceRebootToolStripMenuItem.Name = "ForceRebootToolStripMenuItem"
+        Me.ForceRebootToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.ForceRebootToolStripMenuItem.Text = "Force Reboot"
+        '
+        'PowerDownToolStripMenuItem
+        '
+        Me.PowerDownToolStripMenuItem.Name = "PowerDownToolStripMenuItem"
+        Me.PowerDownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.PowerDownToolStripMenuItem.Text = "Power Down"
+        '
+        'ForcePowerDownToolStripMenuItem
+        '
+        Me.ForcePowerDownToolStripMenuItem.Name = "ForcePowerDownToolStripMenuItem"
+        Me.ForcePowerDownToolStripMenuItem.Size = New System.Drawing.Size(165, 22)
+        Me.ForcePowerDownToolStripMenuItem.Text = "Force Power Down"
+        '
+        'LogOffMenu
+        '
+        Me.LogOffMenu.Enabled = False
+        Me.LogOffMenu.Image = Global.CMC.My.Resources.Resources.png_t_userpc_16
+        Me.LogOffMenu.Name = "LogOffMenu"
+        Me.LogOffMenu.Size = New System.Drawing.Size(181, 24)
+        Me.LogOffMenu.Text = "Log Off"
+        '
+        'LockMenu
+        '
+        Me.LockMenu.Enabled = False
+        Me.LockMenu.Image = Global.CMC.My.Resources.Resources.png_t_lck
+        Me.LockMenu.Name = "LockMenu"
+        Me.LockMenu.Size = New System.Drawing.Size(181, 24)
+        Me.LockMenu.Text = "Lock Machine"
+        '
+        'NetSendMenu
+        '
+        Me.NetSendMenu.Enabled = False
+        Me.NetSendMenu.Image = Global.CMC.My.Resources.Resources.png_t_msg_16
+        Me.NetSendMenu.ImageTransparentColor = System.Drawing.Color.White
+        Me.NetSendMenu.Name = "NetSendMenu"
+        Me.NetSendMenu.Size = New System.Drawing.Size(181, 24)
+        Me.NetSendMenu.Text = "Send Message"
+        '
+        'WindRegMenuItem
+        '
+        Me.WindRegMenuItem.Enabled = False
+        Me.WindRegMenuItem.Image = Global.CMC.My.Resources.Resources.regedit
+        Me.WindRegMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.WindRegMenuItem.Name = "WindRegMenuItem"
+        Me.WindRegMenuItem.Size = New System.Drawing.Size(181, 24)
+        Me.WindRegMenuItem.Text = "windows registry editor"
+        '
+        'RemRegMenuItem
+        '
+        Me.RemRegMenuItem.Enabled = False
+        Me.RemRegMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_reg2
+        Me.RemRegMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.RemRegMenuItem.Name = "RemRegMenuItem"
+        Me.RemRegMenuItem.Size = New System.Drawing.Size(181, 24)
+        Me.RemRegMenuItem.Text = "remote registry editor"
+        '
+        'ADUserInfoToolStripMenuItem
+        '
+        Me.ADUserInfoToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.user_16x16
+        Me.ADUserInfoToolStripMenuItem.Name = "ADUserInfoToolStripMenuItem"
+        Me.ADUserInfoToolStripMenuItem.Size = New System.Drawing.Size(181, 24)
+        Me.ADUserInfoToolStripMenuItem.Text = "ad user manager"
+        '
+        'PerfMonMenu
+        '
+        Me.PerfMonMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.PerformanceMonitorToolStripMenuItem, Me.ViewRecordedDataToolStripMenuItem})
+        Me.PerfMonMenu.Image = Global.CMC.My.Resources.Resources.png_w_perf
+        Me.PerfMonMenu.ImageTransparentColor = System.Drawing.Color.White
+        Me.PerfMonMenu.Name = "PerfMonMenu"
+        Me.PerfMonMenu.Size = New System.Drawing.Size(181, 24)
+        Me.PerfMonMenu.Text = "performance monitor"
+        '
+        'PerformanceMonitorToolStripMenuItem
+        '
+        Me.PerformanceMonitorToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_w_perf
+        Me.PerformanceMonitorToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.PerformanceMonitorToolStripMenuItem.Name = "PerformanceMonitorToolStripMenuItem"
+        Me.PerformanceMonitorToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.PerformanceMonitorToolStripMenuItem.Text = "performance monitor"
+        '
+        'ViewRecordedDataToolStripMenuItem
+        '
+        Me.ViewRecordedDataToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_graph
+        Me.ViewRecordedDataToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.ViewRecordedDataToolStripMenuItem.Name = "ViewRecordedDataToolStripMenuItem"
+        Me.ViewRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(170, 22)
+        Me.ViewRecordedDataToolStripMenuItem.Text = "view recorded data"
+        '
+        'OperatingSystemToolStripMenuItem
+        '
+        Me.OperatingSystemToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_pc_16
+        Me.OperatingSystemToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.OperatingSystemToolStripMenuItem.Name = "OperatingSystemToolStripMenuItem"
+        Me.OperatingSystemToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.OperatingSystemToolStripMenuItem.Text = "Operating System"
+        '
+        'NetworkToolStripMenuItem
+        '
+        Me.NetworkToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_nwk1
+        Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
+        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.NetworkToolStripMenuItem.Text = "Network"
+        '
+        'ServicesToolStripMenuItem1
+        '
+        Me.ServicesToolStripMenuItem1.Image = Global.CMC.My.Resources.Resources.png_t_svc_green_32
+        Me.ServicesToolStripMenuItem1.Name = "ServicesToolStripMenuItem1"
+        Me.ServicesToolStripMenuItem1.Size = New System.Drawing.Size(158, 24)
+        Me.ServicesToolStripMenuItem1.Text = "Services"
+        '
+        'ProcessesToolStripMenuItem
+        '
+        Me.ProcessesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_cogB_16
+        Me.ProcessesToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ProcessesToolStripMenuItem.Name = "ProcessesToolStripMenuItem"
+        Me.ProcessesToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.ProcessesToolStripMenuItem.Text = "Processes"
+        '
+        'PrintersToolStripMenuItem
+        '
+        Me.PrintersToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.printer
+        Me.PrintersToolStripMenuItem.Name = "PrintersToolStripMenuItem"
+        Me.PrintersToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.PrintersToolStripMenuItem.Text = "Printers"
+        '
+        'MappedDrivesToolStripMenuItem
+        '
+        Me.MappedDrivesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.drive_network
+        Me.MappedDrivesToolStripMenuItem.Name = "MappedDrivesToolStripMenuItem"
+        Me.MappedDrivesToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.MappedDrivesToolStripMenuItem.Text = "Mapped Drives"
+        '
+        'SoftwareToolStripMenuItem
+        '
+        Me.SoftwareToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.package_green
+        Me.SoftwareToolStripMenuItem.Name = "SoftwareToolStripMenuItem"
+        Me.SoftwareToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.SoftwareToolStripMenuItem.Text = "Software"
+        '
+        'DeployToolStripMenuItem
+        '
+        Me.DeployToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_get
+        Me.DeployToolStripMenuItem.Name = "DeployToolStripMenuItem"
+        Me.DeployToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.DeployToolStripMenuItem.Text = "Deploy"
+        '
+        'ADUserToolStripMenuItem
+        '
+        Me.ADUserToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_usegr_16
+        Me.ADUserToolStripMenuItem.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ADUserToolStripMenuItem.Name = "ADUserToolStripMenuItem"
+        Me.ADUserToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.ADUserToolStripMenuItem.Text = "AD User"
+        '
+        'GroupPolicyToolStripMenuItem
+        '
+        Me.GroupPolicyToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page
+        Me.GroupPolicyToolStripMenuItem.Name = "GroupPolicyToolStripMenuItem"
+        Me.GroupPolicyToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.GroupPolicyToolStripMenuItem.Text = "Group Policy"
+        '
+        'MessageToolStripMenuItem
+        '
+        Me.MessageToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.comment
+        Me.MessageToolStripMenuItem.Name = "MessageToolStripMenuItem"
+        Me.MessageToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.MessageToolStripMenuItem.Text = "Message"
+        '
+        'StartupToolStripMenuItem
+        '
+        Me.StartupToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_cascade
+        Me.StartupToolStripMenuItem.Name = "StartupToolStripMenuItem"
+        Me.StartupToolStripMenuItem.Size = New System.Drawing.Size(158, 24)
+        Me.StartupToolStripMenuItem.Text = "Startup"
+        '
+        'ToolsToolStripMenuItem1
+        '
+        Me.ToolsToolStripMenuItem1.Image = Global.CMC.My.Resources.Resources.png_t_tools_16
+        Me.ToolsToolStripMenuItem1.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.ToolsToolStripMenuItem1.Name = "ToolsToolStripMenuItem1"
+        Me.ToolsToolStripMenuItem1.Size = New System.Drawing.Size(158, 24)
+        Me.ToolsToolStripMenuItem1.Text = "Tools"
+        '
+        'Prefs_Menu
+        '
+        Me.Prefs_Menu.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!, System.Drawing.FontStyle.Bold)
+        Me.Prefs_Menu.Image = Global.CMC.My.Resources.Resources.wrench
+        Me.Prefs_Menu.Name = "Prefs_Menu"
+        Me.Prefs_Menu.Size = New System.Drawing.Size(193, 22)
+        Me.Prefs_Menu.Text = "Preferences"
+        '
+        'AlwaysOnTopToolStripMenuItem
+        '
+        Me.AlwaysOnTopToolStripMenuItem.CheckOnClick = True
+        Me.AlwaysOnTopToolStripMenuItem.Font = New System.Drawing.Font("Microsoft Sans Serif", 8.0!)
+        Me.AlwaysOnTopToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.application_get
+        Me.AlwaysOnTopToolStripMenuItem.Name = "AlwaysOnTopToolStripMenuItem"
+        Me.AlwaysOnTopToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+                    Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
+        Me.AlwaysOnTopToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.AlwaysOnTopToolStripMenuItem.Text = "Always on top"
+        Me.AlwaysOnTopToolStripMenuItem.ToolTipText = "remain visible when window focus lost"
+        '
+        'MultiThreadMenuItem
+        '
+        Me.MultiThreadMenuItem.Image = Global.CMC.My.Resources.Resources.arrow_join
+        Me.MultiThreadMenuItem.Name = "MultiThreadMenuItem"
+        Me.MultiThreadMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.MultiThreadMenuItem.Text = "No Multithread"
+        '
+        'ToolbarEnabled
+        '
+        Me.ToolbarEnabled.CheckOnClick = True
+        Me.ToolbarEnabled.Image = Global.CMC.My.Resources.Resources.application_view_tile
+        Me.ToolbarEnabled.Name = "ToolbarEnabled"
+        Me.ToolbarEnabled.Size = New System.Drawing.Size(193, 22)
+        Me.ToolbarEnabled.Text = "Toolbar always enabled"
+        '
+        'ViewLogToolStripMenuItem
+        '
+        Me.ViewLogToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page
+        Me.ViewLogToolStripMenuItem.Name = "ViewLogToolStripMenuItem"
+        Me.ViewLogToolStripMenuItem.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
+                    Or System.Windows.Forms.Keys.L), System.Windows.Forms.Keys)
+        Me.ViewLogToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.ViewLogToolStripMenuItem.Text = "View Log"
+        '
+        'ClearLogToolStripMenuItem
+        '
+        Me.ClearLogToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_delete
+        Me.ClearLogToolStripMenuItem.Name = "ClearLogToolStripMenuItem"
+        Me.ClearLogToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.ClearLogToolStripMenuItem.Text = "Clear Log"
+        '
+        'ClearHistoryToolStripMenuItem
+        '
+        Me.ClearHistoryToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.page_lightning
+        Me.ClearHistoryToolStripMenuItem.Name = "ClearHistoryToolStripMenuItem"
+        Me.ClearHistoryToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.ClearHistoryToolStripMenuItem.Text = "Clear History"
+        '
+        'AboutToolStripMenuItem
+        '
+        Me.AboutToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.information
+        Me.AboutToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(111, 22)
+        Me.AboutToolStripMenuItem.Text = "&About..."
+        '
+        'DataFetchPanel
+        '
+        Me.DataFetchPanel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.DataFetchPanel.BackgroundImage = Global.CMC.My.Resources.Resources.connect1
+        Me.DataFetchPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.DataFetchPanel.Controls.Add(Me.DataFetchPanelLabel2)
+        Me.DataFetchPanel.Controls.Add(Me.DataFetchPanelLabel)
+        Me.DataFetchPanel.Location = New System.Drawing.Point(126, 56)
+        Me.DataFetchPanel.Name = "DataFetchPanel"
+        Me.DataFetchPanel.Size = New System.Drawing.Size(133, 67)
+        Me.DataFetchPanel.TabIndex = 71
+        Me.DataFetchPanel.Visible = False
+        '
+        'DataFetchPanelLabel2
+        '
+        Me.DataFetchPanelLabel2.AutoSize = True
+        Me.DataFetchPanelLabel2.BackColor = System.Drawing.Color.Transparent
+        Me.DataFetchPanelLabel2.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataFetchPanelLabel2.ForeColor = System.Drawing.Color.White
+        Me.DataFetchPanelLabel2.Location = New System.Drawing.Point(34, 35)
+        Me.DataFetchPanelLabel2.Name = "DataFetchPanelLabel2"
+        Me.DataFetchPanelLabel2.Size = New System.Drawing.Size(78, 15)
+        Me.DataFetchPanelLabel2.TabIndex = 1
+        Me.DataFetchPanelLabel2.Text = "please wait..."
+        '
+        'DataFetchPanelLabel
+        '
+        Me.DataFetchPanelLabel.AutoSize = True
+        Me.DataFetchPanelLabel.BackColor = System.Drawing.Color.Transparent
+        Me.DataFetchPanelLabel.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.DataFetchPanelLabel.ForeColor = System.Drawing.Color.White
+        Me.DataFetchPanelLabel.Location = New System.Drawing.Point(37, 15)
+        Me.DataFetchPanelLabel.Name = "DataFetchPanelLabel"
+        Me.DataFetchPanelLabel.Size = New System.Drawing.Size(67, 15)
+        Me.DataFetchPanelLabel.TabIndex = 0
+        Me.DataFetchPanelLabel.Text = "connecting"
+        '
+        'adbutton
+        '
+        Me.adbutton.Enabled = False
+        Me.adbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.adbutton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.adbutton.Image = Global.CMC.My.Resources.Resources.png_t_usegr_16
+        Me.adbutton.Location = New System.Drawing.Point(269, 101)
+        Me.adbutton.Name = "adbutton"
+        Me.adbutton.Size = New System.Drawing.Size(22, 22)
+        Me.adbutton.TabIndex = 65
+        Me.adbutton.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.adbutton, "AD User Profile")
+        Me.adbutton.UseVisualStyleBackColor = True
+        '
+        'delete_Share
+        '
+        Me.delete_Share.Enabled = False
+        Me.delete_Share.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark
+        Me.delete_Share.FlatAppearance.BorderSize = 0
+        Me.delete_Share.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Khaki
+        Me.delete_Share.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.delete_Share.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.delete_Share.Image = Global.CMC.My.Resources.Resources.folder_delete
+        Me.delete_Share.Location = New System.Drawing.Point(74, 12)
+        Me.delete_Share.Name = "delete_Share"
+        Me.delete_Share.Size = New System.Drawing.Size(18, 18)
+        Me.delete_Share.TabIndex = 3
+        Me.delete_Share.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.delete_Share, "delete selected share")
+        Me.delete_Share.UseVisualStyleBackColor = True
+        '
+        'addshare
+        '
+        Me.addshare.FlatAppearance.BorderColor = System.Drawing.SystemColors.ControlDark
+        Me.addshare.FlatAppearance.BorderSize = 0
+        Me.addshare.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Khaki
+        Me.addshare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.addshare.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.addshare.Image = Global.CMC.My.Resources.Resources.folder_add
+        Me.addshare.Location = New System.Drawing.Point(49, 12)
+        Me.addshare.Name = "addshare"
+        Me.addshare.Size = New System.Drawing.Size(18, 18)
+        Me.addshare.TabIndex = 2
+        Me.addshare.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.addshare, "add a new share")
+        Me.addshare.UseVisualStyleBackColor = True
+        '
+        'Button_openshare
+        '
+        Me.Button_openshare.Enabled = False
+        Me.Button_openshare.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.Button_openshare.Image = CType(resources.GetObject("Button_openshare.Image"), System.Drawing.Image)
+        Me.Button_openshare.Location = New System.Drawing.Point(113, 8)
+        Me.Button_openshare.Name = "Button_openshare"
+        Me.Button_openshare.Size = New System.Drawing.Size(28, 28)
+        Me.Button_openshare.TabIndex = 1
+        Me.Button_openshare.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.Button_openshare, "open selected share")
+        '
+        'nw_Wait_Panel
+        '
+        Me.nw_Wait_Panel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.nw_Wait_Panel.BackgroundImage = Global.CMC.My.Resources.Resources.png_t_nwk
+        Me.nw_Wait_Panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.nw_Wait_Panel.Controls.Add(Me.Label34)
+        Me.nw_Wait_Panel.Controls.Add(Me.Label33)
+        Me.nw_Wait_Panel.Location = New System.Drawing.Point(123, 89)
+        Me.nw_Wait_Panel.Name = "nw_Wait_Panel"
+        Me.nw_Wait_Panel.Size = New System.Drawing.Size(133, 72)
+        Me.nw_Wait_Panel.TabIndex = 72
+        Me.nw_Wait_Panel.Visible = False
+        '
+        'Label34
+        '
+        Me.Label34.AutoSize = True
+        Me.Label34.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label34.ForeColor = System.Drawing.Color.White
+        Me.Label34.Location = New System.Drawing.Point(35, 39)
+        Me.Label34.Name = "Label34"
+        Me.Label34.Size = New System.Drawing.Size(78, 15)
+        Me.Label34.TabIndex = 1
+        Me.Label34.Text = "please wait..."
+        '
+        'Label33
+        '
+        Me.Label33.AutoSize = True
+        Me.Label33.BackColor = System.Drawing.Color.Transparent
+        Me.Label33.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label33.ForeColor = System.Drawing.Color.White
+        Me.Label33.Location = New System.Drawing.Point(35, 16)
+        Me.Label33.Name = "Label33"
+        Me.Label33.Size = New System.Drawing.Size(71, 15)
+        Me.Label33.TabIndex = 0
+        Me.Label33.Text = "getting data"
+        '
+        'Panel_SvcAction
+        '
+        Me.Panel_SvcAction.BackColor = System.Drawing.SystemColors.Control
+        Me.Panel_SvcAction.BackgroundImage = Global.CMC.My.Resources.Resources.png_t_svc_green_32
+        Me.Panel_SvcAction.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.Panel_SvcAction.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Panel_SvcAction.Controls.Add(Me.ProgressBar_SvcAction)
+        Me.Panel_SvcAction.Controls.Add(Me.Label_SvcAction)
+        Me.Panel_SvcAction.Location = New System.Drawing.Point(46, 158)
+        Me.Panel_SvcAction.Name = "Panel_SvcAction"
+        Me.Panel_SvcAction.Size = New System.Drawing.Size(292, 71)
+        Me.Panel_SvcAction.TabIndex = 75
+        Me.Panel_SvcAction.Visible = False
+        '
+        'ProgressBar_SvcAction
+        '
+        Me.ProgressBar_SvcAction.ForeColor = System.Drawing.Color.DodgerBlue
+        Me.ProgressBar_SvcAction.Location = New System.Drawing.Point(39, 39)
+        Me.ProgressBar_SvcAction.Name = "ProgressBar_SvcAction"
+        Me.ProgressBar_SvcAction.Size = New System.Drawing.Size(215, 19)
+        Me.ProgressBar_SvcAction.Style = System.Windows.Forms.ProgressBarStyle.Continuous
+        Me.ProgressBar_SvcAction.TabIndex = 1
+        '
+        'Label_SvcAction
+        '
+        Me.Label_SvcAction.AutoSize = True
+        Me.Label_SvcAction.Location = New System.Drawing.Point(37, 15)
+        Me.Label_SvcAction.Name = "Label_SvcAction"
+        Me.Label_SvcAction.Size = New System.Drawing.Size(86, 13)
+        Me.Label_SvcAction.TabIndex = 0
+        Me.Label_SvcAction.Text = "Label_SvcAction"
+        '
+        'svc_wait_panel
+        '
+        Me.svc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.svc_wait_panel.BackgroundImage = Global.CMC.My.Resources.Resources.png_t_svc_green_32
+        Me.svc_wait_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.svc_wait_panel.Controls.Add(Me.Label38)
+        Me.svc_wait_panel.Location = New System.Drawing.Point(127, 104)
+        Me.svc_wait_panel.Name = "svc_wait_panel"
+        Me.svc_wait_panel.Size = New System.Drawing.Size(133, 48)
+        Me.svc_wait_panel.TabIndex = 74
+        Me.svc_wait_panel.Visible = False
+        '
+        'Label38
+        '
+        Me.Label38.AutoSize = True
+        Me.Label38.BackColor = System.Drawing.Color.Transparent
+        Me.Label38.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label38.ForeColor = System.Drawing.Color.White
+        Me.Label38.Location = New System.Drawing.Point(24, 17)
+        Me.Label38.Name = "Label38"
+        Me.Label38.Size = New System.Drawing.Size(100, 15)
+        Me.Label38.TabIndex = 0
+        Me.Label38.Text = "getting services..."
+        '
+        'mnuSvcProperties
+        '
+        Me.mnuSvcProperties.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Bold)
+        Me.mnuSvcProperties.Image = Global.CMC.My.Resources.Resources.png_t_svc_green_321
+        Me.mnuSvcProperties.ImageTransparentColor = System.Drawing.Color.White
+        Me.mnuSvcProperties.Name = "mnuSvcProperties"
+        Me.mnuSvcProperties.Size = New System.Drawing.Size(151, 22)
+        Me.mnuSvcProperties.Text = "Properties"
+        Me.mnuSvcProperties.ToolTipText = "Show extended properties"
+        '
+        'GoogleLookupToolStripMenuItem
+        '
+        Me.GoogleLookupToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.new_google
+        Me.GoogleLookupToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.GoogleLookupToolStripMenuItem.Name = "GoogleLookupToolStripMenuItem"
+        Me.GoogleLookupToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.GoogleLookupToolStripMenuItem.Text = "google lookup"
+        '
+        'DeleteServiceToolStripMenuItem
+        '
+        Me.DeleteServiceToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_delete_16
+        Me.DeleteServiceToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.White
+        Me.DeleteServiceToolStripMenuItem.Name = "DeleteServiceToolStripMenuItem"
+        Me.DeleteServiceToolStripMenuItem.Size = New System.Drawing.Size(151, 22)
+        Me.DeleteServiceToolStripMenuItem.Text = "delete service"
+        '
+        'RefreshMenu
+        '
+        Me.RefreshMenu.Image = Global.CMC.My.Resources.Resources.png_t_ref_16
+        Me.RefreshMenu.Name = "RefreshMenu"
+        Me.RefreshMenu.Size = New System.Drawing.Size(151, 22)
+        Me.RefreshMenu.Text = "refresh"
+        '
+        'proc_wait_panel
+        '
+        Me.proc_wait_panel.BackColor = System.Drawing.Color.DodgerBlue
+        Me.proc_wait_panel.BackgroundImage = Global.CMC.My.Resources.Resources.png_t_svc_32
+        Me.proc_wait_panel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None
+        Me.proc_wait_panel.Controls.Add(Me.Label36)
+        Me.proc_wait_panel.Location = New System.Drawing.Point(121, 72)
+        Me.proc_wait_panel.Name = "proc_wait_panel"
+        Me.proc_wait_panel.Size = New System.Drawing.Size(150, 48)
+        Me.proc_wait_panel.TabIndex = 75
+        Me.proc_wait_panel.Visible = False
+        '
+        'Label36
+        '
+        Me.Label36.AutoSize = True
+        Me.Label36.BackColor = System.Drawing.Color.Transparent
+        Me.Label36.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
+        Me.Label36.ForeColor = System.Drawing.Color.White
+        Me.Label36.Location = New System.Drawing.Point(25, 23)
+        Me.Label36.Name = "Label36"
+        Me.Label36.Size = New System.Drawing.Size(112, 15)
+        Me.Label36.TabIndex = 0
+        Me.Label36.Text = "getting processes..."
+        '
+        'PropertiesToolStripMenuItem
+        '
+        Me.PropertiesToolStripMenuItem.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
+        Me.PropertiesToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_cogB_161
+        Me.PropertiesToolStripMenuItem.Name = "PropertiesToolStripMenuItem"
+        Me.PropertiesToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.PropertiesToolStripMenuItem.Text = "Properties"
+        '
+        'mnuCopyPath
+        '
+        Me.mnuCopyPath.Image = Global.CMC.My.Resources.Resources.png_t_copy_16
+        Me.mnuCopyPath.Name = "mnuCopyPath"
+        Me.mnuCopyPath.Size = New System.Drawing.Size(133, 22)
+        Me.mnuCopyPath.Text = "copy path"
+        '
+        'mnuProcGoogle
+        '
+        Me.mnuProcGoogle.Image = Global.CMC.My.Resources.Resources.new_google
+        Me.mnuProcGoogle.Name = "mnuProcGoogle"
+        Me.mnuProcGoogle.Size = New System.Drawing.Size(133, 22)
+        Me.mnuProcGoogle.Text = "google..."
+        '
+        'mnuProcKill
+        '
+        Me.mnuProcKill.Image = Global.CMC.My.Resources.Resources.cancel
+        Me.mnuProcKill.ImageScaling = System.Windows.Forms.ToolStripItemImageScaling.None
+        Me.mnuProcKill.Name = "mnuProcKill"
+        Me.mnuProcKill.Size = New System.Drawing.Size(133, 22)
+        Me.mnuProcKill.Text = "kill process"
+        '
+        'RefreshToolStripMenuItem
+        '
+        Me.RefreshToolStripMenuItem.Image = Global.CMC.My.Resources.Resources.png_t_ref_16
+        Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
+        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(133, 22)
+        Me.RefreshToolStripMenuItem.Text = "refresh"
+        '
+        'btn_dsa
+        '
+        Me.btn_dsa.Enabled = False
+        Me.btn_dsa.FlatAppearance.BorderSize = 0
+        Me.btn_dsa.FlatStyle = System.Windows.Forms.FlatStyle.Flat
+        Me.btn_dsa.Image = Global.CMC.My.Resources.Resources.book_open
+        Me.btn_dsa.Location = New System.Drawing.Point(176, 23)
+        Me.btn_dsa.Name = "btn_dsa"
+        Me.btn_dsa.Size = New System.Drawing.Size(20, 20)
+        Me.btn_dsa.TabIndex = 37
+        Me.ToolTip1.SetToolTip(Me.btn_dsa, "AD Users & Computers")
+        Me.btn_dsa.UseVisualStyleBackColor = True
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.comment
+        Me.PictureBox1.Location = New System.Drawing.Point(222, 220)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(18, 18)
+        Me.PictureBox1.TabIndex = 18
+        Me.PictureBox1.TabStop = False
+        '
         'Form1
         '
         Me.AcceptButton = Me.GO_Button
         Me.AccessibleName = "computer management console"
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit
         Me.BackColor = System.Drawing.SystemColors.Control
-        Me.ClientSize = New System.Drawing.Size(397, 413)
+        Me.ClientSize = New System.Drawing.Size(397, 416)
         Me.Controls.Add(Me.Textbox_ComputerName)
         Me.Controls.Add(Me.ButtonClear)
         Me.Controls.Add(Me.computername)
@@ -6142,6 +6150,8 @@ Public Class Form1
         Me.MenuStrip1.ResumeLayout(False)
         Me.MenuStrip1.PerformLayout()
         Me.options.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
         Me.GroupBox13.ResumeLayout(False)
         Me.GroupBox13.PerformLayout()
         Me.GroupBox12.ResumeLayout(False)
@@ -6155,7 +6165,6 @@ Public Class Form1
         Me.message.PerformLayout()
         Me.GroupBox8.ResumeLayout(False)
         Me.GroupBox8.PerformLayout()
-        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.aduser.ResumeLayout(False)
         Me.adpanel.ResumeLayout(False)
         Me.adpanel.PerformLayout()
@@ -6177,29 +6186,19 @@ Public Class Form1
         Me.swContextmenu.ResumeLayout(False)
         Me.processes.ResumeLayout(False)
         Me.processes.PerformLayout()
-        Me.proc_wait_panel.ResumeLayout(False)
-        Me.proc_wait_panel.PerformLayout()
         Me.ProcContextMenu.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
         Me.GroupBox1.PerformLayout()
         Me.services.ResumeLayout(False)
         Me.services.PerformLayout()
-        Me.Panel_SvcAction.ResumeLayout(False)
-        Me.Panel_SvcAction.PerformLayout()
-        Me.svc_wait_panel.ResumeLayout(False)
-        Me.svc_wait_panel.PerformLayout()
         Me.network.ResumeLayout(False)
         Me.network.PerformLayout()
-        Me.nw_Wait_Panel.ResumeLayout(False)
-        Me.nw_Wait_Panel.PerformLayout()
         Me.GroupBox6.ResumeLayout(False)
         Me.GroupBox6.PerformLayout()
         Me.GroupBox5.ResumeLayout(False)
         Me.GroupBox5.PerformLayout()
         Me.os.ResumeLayout(False)
         Me.os.PerformLayout()
-        Me.DataFetchPanel.ResumeLayout(False)
-        Me.DataFetchPanel.PerformLayout()
         Me.Hardware.ResumeLayout(False)
         Me.Hardware.PerformLayout()
         Me.GroupBox3.ResumeLayout(False)
@@ -6225,6 +6224,17 @@ Public Class Form1
         Me.GroupBox9.PerformLayout()
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
+        Me.DataFetchPanel.ResumeLayout(False)
+        Me.DataFetchPanel.PerformLayout()
+        Me.nw_Wait_Panel.ResumeLayout(False)
+        Me.nw_Wait_Panel.PerformLayout()
+        Me.Panel_SvcAction.ResumeLayout(False)
+        Me.Panel_SvcAction.PerformLayout()
+        Me.svc_wait_panel.ResumeLayout(False)
+        Me.svc_wait_panel.PerformLayout()
+        Me.proc_wait_panel.ResumeLayout(False)
+        Me.proc_wait_panel.PerformLayout()
+        CType(Me.PictureBox1, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -6358,6 +6368,11 @@ Public Class Form1
             defPR.Checked = True
         Else
             defPR.Checked = False
+        End If
+        If My.Settings.registreditor = "remoteregistryeditor" Then
+            Me.RadioButton_remreg.Checked = True
+        Else
+            Me.RadioButton_regedit.Checked = True
         End If
 
 
@@ -6608,15 +6623,29 @@ Public Class Form1
 
         Panel2.Text = "checking network..."
 
+        ' Display the connection status notification panel.
+        Me.DataFetchPanelLabel.Text = "checking"
+        Me.DataFetchPanelLabel2.Text = "please wait..."
+        Me.DataFetchPanel.BackgroundImage = My.Resources.Resources.connect1
+        Me.DataFetchPanel.Visible = True
+        Me.DataFetchPanel.Refresh()
+
         ' ping the computer to confirm connectivity
         If Not PingClass.TryPing(PC.Name) Then
             Panel2.Text = "connection failed. check the computer is online."
             Me.GO_Button.Enabled = True
             Me.Textbox_ComputerName.Visible = False
             Me.Textbox_ComputerName.Text = String.Empty
+            Me.DataFetchPanel.Visible = False
             Me.Refresh()
             Exit Sub
         End If
+
+        ' Update the connection status notification panel.
+        Me.DataFetchPanelLabel.Text = "authenticating"
+        Me.DataFetchPanelLabel2.Text = "  please wait..."
+        Me.DataFetchPanel.BackgroundImage = My.Resources.Resources.connect2
+        Me.DataFetchPanel.Refresh()
 
         PC.IPAddress = Label_IP.Text
 
@@ -6628,13 +6657,12 @@ Public Class Form1
         ' Display the connection status notification panel.
         Me.DataFetchPanelLabel.Text = "connecting"
         Me.DataFetchPanelLabel2.Text = "please wait..."
+        Me.DataFetchPanel.BackgroundImage = My.Resources.Resources.connect3
         Me.DataFetchPanel.Visible = True
-        Me.button_image.Enabled = False
         Me.DataFetchPanel.Refresh()
 
         ButtonClear.Enabled = False
 
-        'System.Threading.Thread.Sleep(3000)
 
         Me.BackgroundWorker_OS.RunWorkerAsync()
 
@@ -6711,7 +6739,7 @@ Public Class Form1
     End Sub
     Private Sub BackgroundWorker_OS_RunWorkerCompleted(ByVal sender As Object, ByVal e As System.ComponentModel.RunWorkerCompletedEventArgs) Handles BackgroundWorker_OS.RunWorkerCompleted
 
-        If Me.DataFetchPanel.Visible = True Then Me.DataFetchPanel.Visible = False
+        Me.DataFetchPanel.Visible = False
 
         If ConnectionExists Then
 
@@ -6748,12 +6776,10 @@ Public Class Form1
     ' Display the progress.
     Private Sub BackgroundWorker_OS_ProgressChanged(ByVal sender As Object, ByVal e As System.ComponentModel.ProgressChangedEventArgs) Handles BackgroundWorker_OS.ProgressChanged
         If e.ProgressPercentage = 50 Then
-            Me.DataFetchPanelLabel.Text = "connected"
+            Me.DataFetchPanel.BackgroundImage = My.Resources.Resources.connect4
+            Me.DataFetchPanelLabel.Text = "Connected"
             Me.DataFetchPanelLabel2.Text = "getting data..."
-            Me.button_image.Enabled = True
             Me.DataFetchPanel.Refresh()
-
-            'System.Threading.Thread.Sleep(3000)
         End If
     End Sub
     Private Sub UpdateOSDisplayItems()
@@ -6813,6 +6839,8 @@ Public Class Form1
             OnlyUserToolStripMenuItem.Enabled = True
             mappeddrivesGroupBox.Text = "persistent mapped drives  [" & LCase(PC.CurrentUser) & "]"
             mappeddrivesGroupBox.Enabled = True
+            LogOffMenu.Enabled = True
+            LockMenu.Enabled = True
             If Not String.IsNullOrEmpty(PC.CurrentUserDomain) Then
                 If PC.CurrentUserDomain.ToLower <> PC.Name.ToLower Then
                     adbutton.Enabled = True
@@ -7518,6 +7546,7 @@ Public Class Form1
 
         audio_label.Visible = True
         video_label.Visible = True
+        cpu_info_lbl.Visible = True
 
         Panel2.Text = "ready"
         Me.HWButton.Enabled = True
@@ -7525,11 +7554,13 @@ Public Class Form1
     End Sub
 
     ' cpu additional info
-    Private Sub cpuBox_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles cpuBox.MouseEnter
-        If Not String.IsNullOrEmpty(cpuBox.Text) Then cpu_info_lbl.Visible = True
-    End Sub
+    'Private Sub cpuBox_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles cpuBox.MouseEnter
+    '    If Not String.IsNullOrEmpty(cpuBox.Text) Then cpu_info_lbl.Visible = True
+    'End Sub
     Private Sub cpu_info_lbl_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles cpu_info_lbl.LinkClicked
+
         Me.Cursor = Cursors.WaitCursor
+
         Try
             Dim output As String = String.Empty
             Dim m As ManagementObject
@@ -7550,21 +7581,28 @@ Public Class Form1
                 "Family: " & m("Family") & vbCrLf & _
                 "L2CacheSize: " & m("L2CacheSize") & vbCrLf & _
                 "MaxClockSpeed: " & m("MaxClockSpeed") & vbCrLf & _
-                "ProcessorId: " & m("ProcessorId") & vbCrLf & _
                 "Revision: " & m("Revision") & vbCrLf & _
                 "SocketDesignation: " & m("SocketDesignation") & vbCrLf & _
                 "Version: " & m("Version") & vbCrLf & vbCrLf
-                'If m("NumberOfCores") > 1 Then
-                '    output = m("NumberOfCores") & " Cores" & vbCr & vbCr & output
-                '    Exit For
-                'End If
-                'MsgBox(m("NumberOfCores"))
+                '                "ProcessorId: " & m("ProcessorId") & vbCrLf & _
+                Try
+                    If m("NumberOfCores") > 1 Then
+                        output = output & "Total Cores: " & m("NumberOfCores")
+                    End If
+                Catch ex As Exception
+                    'Windows keeps processor information in the Registry. For each processor present in the system there is a Registry key, called, 0, 1, etc. in
+                    Dim ProcCount As Integer = 0
+                    Dim strkeyPath As String = "HARDWARE\DESCRIPTION\System\CentralProcessor"
+                    ProcCount = RegistryKey.OpenRemoteBaseKey(RegistryHive.LocalMachine, PC.Name).OpenSubKey(strkeyPath).GetSubKeyNames.Length
+                    output = output & "Total Cores: " & ProcCount
+                End Try
+                Exit For
             Next
             MsgBox(output, MsgBoxStyle.Information, "Processor Information")
         Catch
 
         Finally
-            cpu_info_lbl.Visible = False
+            'cpu_info_lbl.Visible = False
             Me.Cursor = Cursors.Default
         End Try
 
@@ -8249,24 +8287,25 @@ Public Class Form1
             End If
 
             For Each m As ManagementObject In queryCollection
-
-                Dim dtrow As DataRow = SvcDataTable.NewRow
-                With dtrow
-                    .Item("s_DisplayName") = m("Caption").ToString()
-                    .Item("s_State") = CStr(m("state"))
-                    .Item("s_Startup") = CStr(m("startmode"))
-                    .Item("s_Name") = CStr(m("name"))
-                    .Item("s_Description") = CStr(m("Description"))
-                    .Item("s_AcceptPause") = CStr(m("AcceptPause"))
-                    .Item("s_AcceptStop") = CStr(m("AcceptStop"))
-                    .Item("s_Path") = CStr(m("PathName"))
-                    .Item("s_Account") = CStr(m("StartName"))
-                End With
-                SvcDataTable.Rows.Add(dtrow)
+                If Not String.IsNullOrEmpty(CStr(m("Caption"))) Then
+                    Dim dtrow As DataRow = SvcDataTable.NewRow
+                    With dtrow
+                        .Item("s_DisplayName") = CStr(m("Caption"))
+                        .Item("s_State") = CStr(m("state"))
+                        .Item("s_Startup") = CStr(m("startmode"))
+                        .Item("s_Name") = CStr(m("name"))
+                        .Item("s_Description") = CStr(m("Description"))
+                        .Item("s_AcceptPause") = CStr(m("AcceptPause"))
+                        .Item("s_AcceptStop") = CStr(m("AcceptStop"))
+                        .Item("s_Path") = CStr(m("PathName"))
+                        .Item("s_Account") = CStr(m("StartName"))
+                    End With
+                    SvcDataTable.Rows.Add(dtrow)
+                End If
             Next
 
         Catch ex As Exception
-            MsgBox("An error occurred loading service information: " & vbCr & ex.Message, MsgBoxStyle.Critical, "Service Info Failure")
+            MsgBox("An error occurred loading service information: " & vbCr & ex.Message, MsgBoxStyle.Critical, "Service Information Failure")
         End Try
 
     End Sub
@@ -8305,7 +8344,7 @@ Public Class Form1
 
         ' scroll through datatable rows until matching entry found
         For Each row As DataRow In Me.SvcDataTable.Rows
-            If row(0).ToString.ToLower = ServiceName.ToLower Then
+            If row(3).ToString.ToLower = ServiceName.ToLower Then
                 row.Item(Column) = NewValue
                 Exit For
             End If
@@ -8315,6 +8354,18 @@ Public Class Form1
         For Each row As ListViewItem In Me.ListView_Services.Items
             If row.SubItems(ServiceColumn.Name).Text.ToLower = ServiceName.ToLower Then
                 row.SubItems(Column).Text = NewValue
+
+                ' code to update image index according to state
+                If Column = ServiceColumn.State Then
+                    Dim imageindex As Integer = 3
+                    If row.SubItems(ServiceColumn.State).Text.ToLower = "stopped" Then imageindex = 4
+                    Dim svcItem As New ListViewItem(New String() {row.SubItems(0).Text, row.SubItems(1).Text, row.SubItems(2).Text, row.SubItems(3).Text, row.SubItems(4).Text, row.SubItems(5).Text, row.SubItems(6).Text, row.SubItems(7).Text, row.SubItems(8).Text}, imageindex)
+                    Dim rowNumber As Integer = row.Index
+                    Me.ListView_Services.Items.RemoveAt(rowNumber)
+                    Me.ListView_Services.Items.Insert(rowNumber, svcItem)
+                End If
+
+                Exit For
             End If
         Next
 
@@ -8367,6 +8418,7 @@ Public Class Form1
                   ("SELECT State FROM Win32_Service WHERE Name ='" & ServiceName & "'")
             If queryCollection Is Nothing Then
                 Me.LostConnection()
+                Return Nothing
                 Exit Function
             End If
 
@@ -8902,7 +8954,7 @@ Public Class Form1
 
         Do While Me.ProgressBar_SvcAction.Value < 100
             Me.ProgressBar_SvcAction.Increment(5)
-            System.Threading.Thread.Sleep(20)
+            System.Threading.Thread.Sleep(10)
         Loop
 
         If Not svcStatus = "Stopped" Then
@@ -9355,7 +9407,7 @@ Public Class Form1
             If row(2) Is DBNull.Value Then row(2) = 0
             If row(3) Is DBNull.Value Then row(3) = String.Empty
 
-            Dim imageindex As Integer = 1
+            Dim imageindex As Integer = 5
             If row(0).ToLower = "system" OrElse row(0).ToLower = "csrss.exe" _
                  OrElse row(0).ToLower = "system idle process" Then
                 imageindex = 0
@@ -9389,6 +9441,7 @@ Public Class Form1
             ("SELECT * FROM Win32_Process WHERE ProcessID = '" & ProcessID & "'")
         If queryCollection Is Nothing Then
             Me.LostConnection()
+            Return Nothing
             Exit Function
         End If
 
@@ -9553,6 +9606,12 @@ Public Class Form1
         'Dim pinfo As New System.Threading.Thread(AddressOf ShowProcessInfoDialog)
         'pinfo.Start()
         Me.ShowProcessInfoDialog()
+    End Sub
+    Private Sub RefreshToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RefreshToolStripMenuItem.Click
+        RefreshProcesses()
+        ' take accept function away from refresh button once run
+        ' to allow opening process props dialog with enter key.
+        Me.AcceptButton = Nothing
     End Sub
 
     ' Create New process
@@ -10636,6 +10695,7 @@ Public Class Form1
         queryCollection = wmi.wmiQuery("SELECT DeviceID FROM Win32_LogicalDisk")
         If queryCollection Is Nothing Then
             Me.LostConnection()
+            Return Nothing
             Exit Function
         End If
         For Each m In queryCollection
@@ -10828,7 +10888,7 @@ Public Class Form1
         addthisprinter.Enabled = False
         Me.sServer = ""
         Me.sPrinter = ""
-        MappedDrivesMenu.Enabled = False
+        'MappedDrivesMenu.Enabled = False
         addmappeddrive_letter.Text = ""
         addmappeddrive_path.Text = ""
         addmappeddrive_button.Enabled = False
@@ -11124,7 +11184,7 @@ Public Class Form1
 
 
         ' Get aDSPath for domain
-        Dim cd As New ADmgmt.CustomDomainInfo
+        Dim cd As New CustomDomainInfo
 
         '     if user on my domain
         If sUserNTDomain.ToLower = cmcUser.userdomain.ToLower Then
@@ -11144,10 +11204,10 @@ Public Class Form1
                     If MsgBox("Unable to communicate with domain [" & sUserNTDomain & "]" & vbCr & vbCr & _
                                       "Do you want to enter connection information?", MsgBoxStyle.YesNo, "CMC - Unknown Domain") = vbYes Then
                         'Dim di As New AddDomainInfo
-                        Dim di As New ADmgmt.AddDomainInfo
+                        Dim di As New AddDomainInfo
                         di.ShowDialog()
                         If di.DialogResult = Windows.Forms.DialogResult.OK Then
-                            cd = New ADmgmt.CustomDomainInfo
+                            cd = New CustomDomainInfo
                             If cd.Found(sUserNTDomain) Then
                                 LDAPPath = cd.DSPath
                                 If Not String.IsNullOrEmpty(cd.Username) Then
@@ -11174,10 +11234,10 @@ Public Class Form1
                 cd = Nothing
                 If MsgBox("Unable to communicate with domain [" & sUserNTDomain & "]" & vbCr & vbCr & _
                   "Do you want to enter connection information?", MsgBoxStyle.YesNo, "CMC - Unknown Domain") = vbYes Then
-                    Dim di As New ADmgmt.AddDomainInfo
+                    Dim di As New AddDomainInfo
                     di.ShowDialog()
                     If di.DialogResult = Windows.Forms.DialogResult.OK Then
-                        cd = New ADmgmt.CustomDomainInfo
+                        cd = New CustomDomainInfo
                         If cd.Found(sUserNTDomain) Then
                             LDAPPath = cd.DSPath
                             If Not String.IsNullOrEmpty(cd.Username) Then
@@ -12924,6 +12984,12 @@ Public Class Form1
             My.Settings.pr = False
         End If
 
+        If Me.RadioButton_remreg.Checked Then
+            My.Settings.registreditor = "remoteregistryeditor"
+        Else
+            My.Settings.registreditor = "regedit"
+        End If
+
 
         ' Alt User Credentials
         Registry.CurrentUser.OpenSubKey("Software\Forman", True).SetValue("Alt1", EncryptText.EncryptText(SettingAltUser.Text), RegistryValueKind.String)
@@ -13030,7 +13096,27 @@ Public Class Form1
         Panel2.Text = "opening remote registry..."
         Me.TopMost = False
 
-        WinRegEdit()
+        If RadioButton_remreg.Checked Then
+            Dim path As String = My.Application.Info.DirectoryPath.ToLower & "\remreg.exe"
+            If System.Diagnostics.Debugger.IsAttached Then
+                path = path.Replace("cmc\bin\remreg.exe", "remoteregedit\obj\debug\remreg.exe")
+            End If
+
+            If File.Exists(path) Then
+                Dim p As New Process
+                Dim psi As ProcessStartInfo = New ProcessStartInfo
+                psi.FileName = path
+                If ConnectionExists Then
+                    psi.Arguments = PC.Name
+                End If
+                p.StartInfo = psi
+                p.Start()
+            Else
+                MsgBox("File not found")
+            End If
+        Else
+            WinRegEdit()
+        End If
 
         Panel2.Text = "ready"
 
@@ -13450,7 +13536,7 @@ Public Class Form1
     Private Sub RestartToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles RestartToolStripMenuItem.Click
         RebootPC(Win32ShutdownFlag.Reboot)
     End Sub
-    Private Sub LogOffToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogOffToolStripMenuItem.Click
+    Private Sub LogOffMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles LogOffMenu.Click
         RebootPC(Win32ShutdownFlag.Logoff)
     End Sub
     Private Sub ForceLogoffToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ForceLogoffToolStripMenuItem.Click
@@ -13478,21 +13564,21 @@ Public Class Form1
         '(PC.Name, "RUNDLL32.EXE USER32.DLL,SwapMouseButton", True)
     End Sub
 
-    Private Sub ViewPrintersToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ViewPrintersToolStripMenuItem.Click
-        Tabholder1.SelectTab(printers)
-        Me.Refresh()
-        RefreshPrinters()
-    End Sub
-    Private Sub PrintServerPropertiesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintServerPropertiesToolStripMenuItem.Click
-        Shell("cmd /c rundll32 printui.dll, PrintUIEntry /s /t1 /n\\" & PC.Name, AppWinStyle.Hide, False)
-    End Sub
-    Private Sub MappedDrivesMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles MappedDrivesMenu.Click
+    'Private Sub ViewPrintersToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ViewPrintersToolStripMenuItem.Click
+    '    Tabholder1.SelectTab(printers)
+    '    Me.Refresh()
+    '    RefreshPrinters()
+    'End Sub
+    'Private Sub PrintServerPropertiesToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles PrintServerPropertiesToolStripMenuItem.Click
+    '    Shell("cmd /c rundll32 printui.dll, PrintUIEntry /s /t1 /n\\" & PC.Name, AppWinStyle.Hide, False)
+    'End Sub
+    Private Sub MappedDrivesMenu_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         Tabholder1.SelectTab(printers)
         Me.Refresh()
         mappings.Items.Clear()
         GetMappedDrives(PC.CurrentUser)
     End Sub
-    Private Sub StartUpProgramsMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles StartUpProgramsMenuItem.Click
+    Private Sub StartUpProgramsMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) 
         Tabholder1.SelectTab(startup)
         Me.Refresh()
         StartUpCommands()
@@ -13806,6 +13892,7 @@ Public Class Form1
             ("SELECT * FROM Win32_Process WHERE Caption = '" & ProcessName & "'")
         If queryCollection Is Nothing Then
             Me.LostConnection()
+            Return Nothing
             Exit Function
         End If
 
@@ -14377,8 +14464,8 @@ Public Class Form1
     End Sub
     Private Overloads Sub RunTelnet(ByVal strComputer As String)
 
-        If My.Computer.Info.OSVersion.Chars(1) = "6" Then
-            MsgBox("Telnet command is not available on Vista OS", MsgBoxStyle.Critical, "Telnet Error")
+        If My.Computer.Info.OSVersion.Chars(1) >= "6" Then
+            MsgBox("Telnet command is not available on Vista or later OS", MsgBoxStyle.Critical, "Telnet Error")
             Return
         End If
 
@@ -14644,6 +14731,7 @@ Public Class Form1
             queryCollection = wmi.wmiQuery("Select hour, minute, second from Win32_LocalTime")
             If queryCollection Is Nothing Then
                 Me.LostConnection()
+                Return Nothing
                 Exit Function
             End If
             For Each m In queryCollection
@@ -14657,6 +14745,7 @@ Public Class Form1
             queryCollection = wmi.wmiQuery("Select LocalDateTime from Win32_OperatingSystem")
             If queryCollection Is Nothing Then
                 Me.LostConnection()
+                Return Nothing
                 Exit Function
             End If
             For Each m In queryCollection
@@ -14728,6 +14817,7 @@ Public Class Form1
             MsgBox("unable to perform action")
         End Try
     End Sub
+
 
     ' File & Folder
     Private Sub openfolder(ByVal sFolder As String)
@@ -14966,8 +15056,8 @@ Public Class Form1
             OnlyUserToolStripMenuItem.Enabled = False
             NetSendMenu.Enabled = False
             LockMenu.Enabled = False
-            PrintersMenuItem.Enabled = False
-            StartUpProgramsMenuItem.Enabled = False
+            'PrintersMenuItem.Enabled = False
+            'StartUpProgramsMenuItem.Enabled = False
 
             ' disable buttons
             adbutton.Enabled = False
@@ -15027,6 +15117,8 @@ Public Class Form1
             SaveToolStripMenuItem.Enabled = False
             AppendToolStripMenuItem.Enabled = False
             ShutDownMenu.Enabled = False
+            LogOffMenu.Enabled = False
+            LockMenu.Enabled = False
 
             ' Message Tab
             NetSendTextBox.Text = ""
@@ -15087,18 +15179,12 @@ Public Class Form1
         WindRegMenuItem.Enabled = True
         RemRegMenuItem.Enabled = True
         NetSendMenu.Enabled = True
-        LockMenu.Enabled = True
         ShutDownMenu.Enabled = True
-        PrintersMenuItem.Enabled = True
-        StartUpProgramsMenuItem.Enabled = True
         MappedDrivesButton.Enabled = True
         printerRefresh.Enabled = True
         addptr.Enabled = True
         ptrrefresh.Enabled = True
-        MappedDrivesMenu.Enabled = True
         MSinfoToolStripMenuItem.Enabled = True
-        audio_label.Visible = True
-        video_label.Visible = True
         GPO_EnableItems()
     End Sub
     Private Sub CMC_CLOSE()

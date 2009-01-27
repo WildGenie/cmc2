@@ -159,7 +159,7 @@ Partial Class SvcInfo
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.Utilities_32x32
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.png_t_svc_green_32
         Me.PictureBox1.Location = New System.Drawing.Point(328, 19)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(34, 34)

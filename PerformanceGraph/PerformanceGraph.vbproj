@@ -11,7 +11,7 @@
     <RootNamespace>PerformanceGraph</RootNamespace>
     <AssemblyName>PerformanceGraph</AssemblyName>
     <MyType>WindowsForms</MyType>
-    <ApplicationIcon>chart.ico</ApplicationIcon>
+    <ApplicationIcon>perfmon.ico</ApplicationIcon>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -113,6 +113,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="chart.ico" />
+    <Content Include="perfmon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
