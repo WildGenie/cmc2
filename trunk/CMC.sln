@@ -8,8 +8,6 @@ Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "performance monitor", "perf
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "remoteregedit", "remoteregedit\remoteregedit.vbproj", "{BB7A28D1-A290-4630-96E1-FB4CDA45F486}"
 EndProject
-Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "installer", "installer\CMCInstall.vdproj", "{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}"
-EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "netlib", "netlib\netlib.vbproj", "{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}"
 EndProject
 Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "networkping", "netdetect\networkping.vbproj", "{0EB62AD9-ACED-45A0-AB3F-F03D25A583EA}"
@@ -38,10 +36,6 @@ Global
 		{BB7A28D1-A290-4630-96E1-FB4CDA45F486}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB7A28D1-A290-4630-96E1-FB4CDA45F486}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB7A28D1-A290-4630-96E1-FB4CDA45F486}.Release|Any CPU.Build.0 = Release|Any CPU
-		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Debug|Any CPU.ActiveCfg = Debug
-		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Debug|Any CPU.Build.0 = Debug
-		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Release|Any CPU.ActiveCfg = Release
-		{55DEFBF1-2377-4B79-A6BF-5FBE019A3823}.Release|Any CPU.Build.0 = Release
 		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}.Release|Any CPU.ActiveCfg = Release|Any CPU

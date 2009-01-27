@@ -20,5 +20,8 @@
     <Setting Name="softwaresource" Type="System.String" Scope="User">
       <Value Profile="(Default)">C:\</Value>
     </Setting>
+    <Setting Name="registreditor" Type="System.String" Scope="User">
+      <Value Profile="(Default)">remoteregistryeditor</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

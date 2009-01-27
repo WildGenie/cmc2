@@ -284,7 +284,7 @@ Partial Class ProcInfo
         Me.wmiCheckbox.CheckState = System.Windows.Forms.CheckState.Checked
         Me.wmiCheckbox.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.wmiCheckbox.ForeColor = System.Drawing.SystemColors.ControlDark
-        Me.wmiCheckbox.Location = New System.Drawing.Point(7, 104)
+        Me.wmiCheckbox.Location = New System.Drawing.Point(6, 80)
         Me.wmiCheckbox.Name = "wmiCheckbox"
         Me.wmiCheckbox.Size = New System.Drawing.Size(44, 17)
         Me.wmiCheckbox.TabIndex = 20
@@ -295,8 +295,8 @@ Partial Class ProcInfo
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.stats_info
-        Me.PictureBox1.Location = New System.Drawing.Point(7, 127)
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.png_t_svc_32
+        Me.PictureBox1.Location = New System.Drawing.Point(11, 120)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(38, 37)
         Me.PictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage
@@ -434,7 +434,7 @@ Partial Class ProcInfo
         Me.lblTick.AutoSize = True
         Me.lblTick.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.lblTick.ForeColor = System.Drawing.SystemColors.ControlDark
-        Me.lblTick.Location = New System.Drawing.Point(12, 423)
+        Me.lblTick.Location = New System.Drawing.Point(16, 423)
         Me.lblTick.Name = "lblTick"
         Me.lblTick.Size = New System.Drawing.Size(45, 13)
         Me.lblTick.TabIndex = 5
