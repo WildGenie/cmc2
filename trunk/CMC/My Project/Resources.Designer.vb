@@ -410,6 +410,69 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property png_16_admgr_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_16_admgr_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_16_log_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_16_log_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_16_logclear_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_16_logclear_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_28_event_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_28_event_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_28_perf_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_28_perf_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_28_rdp_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_28_rdp_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_28_reg_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_28_reg_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_28_users_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_28_users_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_28_zen_w() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_28_zen_w", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property png_graph() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("png_graph", resourceCulture)
@@ -427,6 +490,13 @@ Namespace My.Resources
         Friend ReadOnly Property png_t_arrow_101() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("png_t_arrow_101", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
+        Friend ReadOnly Property png_t_arrow_12() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_t_arrow_12", resourceCulture)
                 Return CType(obj,System.Drawing.Bitmap)
             End Get
         End Property

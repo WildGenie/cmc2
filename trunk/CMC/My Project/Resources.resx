@@ -130,6 +130,9 @@
   <data name="png_t_svc_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_svc_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="png_16_logclear_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_logclear_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\keyboard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -141,6 +144,9 @@
   </data>
   <data name="chart1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\chart1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="application_osx_terminal" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_osx_terminal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_w_evnt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_evnt.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -160,6 +166,9 @@
   <data name="png_t_cogB_161" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_cogB_161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="png_16_log_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_log_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="user-16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user-16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -178,14 +187,11 @@
   <data name="png_t_usegr_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_usegr_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\email.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_clear_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_clear_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="comment" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\comment.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="wrench_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\wrench_orange.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_w_perf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_perf.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -193,14 +199,14 @@
   <data name="user-info-16x16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\user-info-16x16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="folder_add" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\folder_add.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="connect3" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\connect3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_t_clear_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_clear_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="wrench" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\wrench.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -210,6 +216,18 @@
   </data>
   <data name="page_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_28_zen_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_zen_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_28_reg_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_reg_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_28_event_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_event_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_28_users_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_users_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="page" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -259,6 +277,9 @@
   <data name="png_t_delete_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_delete_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="page_lightning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\page_lightning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="connect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\connect2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -289,8 +310,8 @@
   <data name="group_key" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\group_key.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_w_vnc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_w_vnc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_w_evnt1" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_evnt1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -298,8 +319,11 @@
   <data name="drive_network" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\drive_network.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="printer" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\printer.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_arrow_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_arrow_12.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="email" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\email.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_procperf" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_procperf.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -313,8 +337,8 @@
   <data name="png_t_userpc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_userpc_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application_osx_terminal" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_osx_terminal.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_share_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_share_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\application_cascade.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -328,11 +352,14 @@
   <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="folder_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\folder_user.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="cmc" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\cmc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="information" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\information.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="wrench_orange" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\wrench_orange.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_copy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_copy_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -355,6 +382,9 @@
   <data name="png_t_lck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_lck.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="png_28_perf_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_perf_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="png_w_usrs_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_usrs_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -364,17 +394,17 @@
   <data name="png_w_usrs" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_usrs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="monitor_lightning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\monitor_lightning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="folder_user" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\folder_user.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_28_rdp_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_rdp_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_w_tlnt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_tlnt.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_user_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_user_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_w_vnc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_w_vnc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="0029" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\0029.ico;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -412,13 +442,13 @@
   <data name="png_w_evnt_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_evnt_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="page_lightning" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\page_lightning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="monitor_lightning" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\monitor_lightning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="monitor" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\monitor.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_t_share_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_share_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_16_admgr_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_admgr_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
