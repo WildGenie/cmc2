@@ -268,6 +268,16 @@
     <Content Include="Resources\files\winvnc\winvnc4.exe" />
     <Content Include="Resources\files\winvnc\wm_hooks.dll" />
     <Content Include="Resources\files\XZip.dll" />
+    <None Include="Resources\png_16_admgr_w.png" />
+    <None Include="Resources\png_16_logclear_w.png" />
+    <None Include="Resources\png_16_log_w.png" />
+    <None Include="Resources\png_t_arrow_12.png" />
+    <None Include="Resources\png_28_rdp_w.png" />
+    <None Include="Resources\png_28_zen_w.png" />
+    <None Include="Resources\png_28_reg_w.png" />
+    <None Include="Resources\png_28_users_w.png" />
+    <None Include="Resources\png_28_event_w.png" />
+    <None Include="Resources\png_28_perf_w.png" />
     <None Include="Resources\png_t_share_16.png" />
     <None Include="Resources\png_t_reg2.png" />
     <None Include="Resources\png_w_evnt1.png" />
