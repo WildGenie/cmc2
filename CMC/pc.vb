@@ -36,7 +36,7 @@ Public Class pc
     Private _DomainMember As Boolean
     Private _DomainName As String
     Private _64b As Boolean
-    Private _arrayListShares As ArrayList
+    'Private _arrayListShares As ArrayList
     Protected Friend GPODebugSetting As String
 
 
@@ -217,14 +217,14 @@ Public Class pc
         End Set
     End Property
 
-    Protected Friend Property ShareList() As ArrayList
-        Get
-            Return _arrayListShares
-        End Get
-        Set(ByVal value As ArrayList)
-            _arrayListShares = value
-        End Set
-    End Property
+    'Protected Friend Property ShareList() As ArrayList
+    '    Get
+    '        Return _arrayListShares
+    '    End Get
+    '    Set(ByVal value As ArrayList)
+    '        _arrayListShares = value
+    '    End Set
+    'End Property
 
     Public Sub Clear()
         Name = Nothing
@@ -248,7 +248,7 @@ Public Class pc
         _DomainRoleCode = Nothing
         _DomainMember = Nothing
         _DomainName = Nothing
-        _arrayListShares = Nothing
+        '_arrayListShares = Nothing
         TSEnabled = Nothing
         ScreenSaverActive = Nothing
     End Sub
