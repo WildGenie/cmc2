@@ -212,7 +212,6 @@ Public Class Form1
     Friend WithEvents SNoBox As System.Windows.Forms.TextBox
     Friend WithEvents chassis As System.Windows.Forms.TextBox
     Friend WithEvents GroupBox3 As System.Windows.Forms.GroupBox
-    Friend WithEvents ListBox_Shares As System.Windows.Forms.ListBox
     Friend WithEvents Button_openshare As System.Windows.Forms.Button
     Friend WithEvents Label_User As System.Windows.Forms.TextBox
     Friend WithEvents Label_Boot As System.Windows.Forms.TextBox
@@ -506,6 +505,16 @@ Public Class Form1
     Friend WithEvents RefreshToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents pName As System.Windows.Forms.DataGridViewTextBoxColumn
     Friend WithEvents pLocation As System.Windows.Forms.DataGridViewTextBoxColumn
+    Friend WithEvents disk_vis As System.Windows.Forms.TextBox
+    Friend WithEvents PicBox As System.Windows.Forms.PictureBox
+    Friend WithEvents ListView_shares As System.Windows.Forms.ListView
+    Friend WithEvents _sharename As System.Windows.Forms.ColumnHeader
+    Friend WithEvents _path As System.Windows.Forms.ColumnHeader
+    Friend WithEvents shareContextMenu As System.Windows.Forms.ContextMenuStrip
+    Friend WithEvents shareMenu_open As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents shareMenu_path As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents shareMenu_add As System.Windows.Forms.ToolStripMenuItem
+    Friend WithEvents shareMenu_delete As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents exec As System.Windows.Forms.Button
 
 
@@ -881,6 +890,8 @@ Public Class Form1
         Me.adbutton = New System.Windows.Forms.Button
         Me.ielabel = New System.Windows.Forms.Label
         Me.Hardware = New System.Windows.Forms.GroupBox
+        Me.PicBox = New System.Windows.Forms.PictureBox
+        Me.HWButton = New System.Windows.Forms.Button
         Me.audio_label = New System.Windows.Forms.LinkLabel
         Me.video_label = New System.Windows.Forms.LinkLabel
         Me.cpu_info_lbl = New System.Windows.Forms.LinkLabel
@@ -890,11 +901,13 @@ Public Class Form1
         Me.makemodel = New System.Windows.Forms.TextBox
         Me.SNoBox = New System.Windows.Forms.TextBox
         Me.chassis = New System.Windows.Forms.TextBox
-        Me.HWButton = New System.Windows.Forms.Button
+        Me.disk_vis = New System.Windows.Forms.TextBox
         Me.GroupBox3 = New System.Windows.Forms.GroupBox
+        Me.ListView_shares = New System.Windows.Forms.ListView
+        Me._sharename = New System.Windows.Forms.ColumnHeader
+        Me._path = New System.Windows.Forms.ColumnHeader
         Me.delete_Share = New System.Windows.Forms.Button
         Me.addshare = New System.Windows.Forms.Button
-        Me.ListBox_Shares = New System.Windows.Forms.ListBox
         Me.Button_openshare = New System.Windows.Forms.Button
         Me.Label_User = New System.Windows.Forms.TextBox
         Me.Label_Boot = New System.Windows.Forms.TextBox
@@ -1028,6 +1041,11 @@ Public Class Form1
         Me.Label32 = New System.Windows.Forms.Label
         Me.Textbox_ComputerName = New System.Windows.Forms.TextBox
         Me.Button1 = New System.Windows.Forms.Button
+        Me.shareContextMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.shareMenu_open = New System.Windows.Forms.ToolStripMenuItem
+        Me.shareMenu_path = New System.Windows.Forms.ToolStripMenuItem
+        Me.shareMenu_add = New System.Windows.Forms.ToolStripMenuItem
+        Me.shareMenu_delete = New System.Windows.Forms.ToolStripMenuItem
         Me.ToolStripContainer1.SuspendLayout()
         Me.svccontextmenu.SuspendLayout()
         CType(Me.Panel1, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -1070,6 +1088,7 @@ Public Class Form1
         Me.os.SuspendLayout()
         Me.DataFetchPanel.SuspendLayout()
         Me.Hardware.SuspendLayout()
+        CType(Me.PicBox, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.GroupBox3.SuspendLayout()
         Me.Tabholder1.SuspendLayout()
         Me.printers.SuspendLayout()
@@ -1085,6 +1104,7 @@ Public Class Form1
         Me.GroupBox9.SuspendLayout()
         Me.printermenu.SuspendLayout()
         Me.gpoContextMenu.SuspendLayout()
+        Me.shareContextMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'ToolStripContainer1
@@ -4543,6 +4563,7 @@ Public Class Form1
         '
         'Hardware
         '
+        Me.Hardware.Controls.Add(Me.PicBox)
         Me.Hardware.Controls.Add(Me.HWButton)
         Me.Hardware.Controls.Add(Me.audio_label)
         Me.Hardware.Controls.Add(Me.video_label)
@@ -4553,12 +4574,35 @@ Public Class Form1
         Me.Hardware.Controls.Add(Me.makemodel)
         Me.Hardware.Controls.Add(Me.SNoBox)
         Me.Hardware.Controls.Add(Me.chassis)
+        Me.Hardware.Controls.Add(Me.disk_vis)
         Me.Hardware.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.Hardware.Location = New System.Drawing.Point(130, 128)
         Me.Hardware.Name = "Hardware"
         Me.Hardware.Size = New System.Drawing.Size(248, 114)
         Me.Hardware.TabIndex = 61
         Me.Hardware.TabStop = False
+        '
+        'PicBox
+        '
+        Me.PicBox.BackColor = System.Drawing.SystemColors.Window
+        Me.PicBox.Location = New System.Drawing.Point(6, 90)
+        Me.PicBox.Name = "PicBox"
+        Me.PicBox.Size = New System.Drawing.Size(51, 14)
+        Me.PicBox.TabIndex = 71
+        Me.PicBox.TabStop = False
+        '
+        'HWButton
+        '
+        Me.HWButton.Enabled = False
+        Me.HWButton.FlatStyle = System.Windows.Forms.FlatStyle.System
+        Me.HWButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
+        Me.HWButton.Location = New System.Drawing.Point(174, 0)
+        Me.HWButton.Name = "HWButton"
+        Me.HWButton.Size = New System.Drawing.Size(65, 22)
+        Me.HWButton.TabIndex = 14
+        Me.HWButton.TabStop = False
+        Me.HWButton.Text = "Hardware"
+        Me.ToolTip1.SetToolTip(Me.HWButton, "load hardware information")
         '
         'audio_label
         '
@@ -4610,12 +4654,12 @@ Public Class Form1
         '
         Me.hdCombo.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.hdCombo.FormattingEnabled = True
-        Me.hdCombo.Location = New System.Drawing.Point(4, 86)
+        Me.hdCombo.Location = New System.Drawing.Point(62, 86)
         Me.hdCombo.Name = "hdCombo"
-        Me.hdCombo.Size = New System.Drawing.Size(242, 21)
+        Me.hdCombo.Size = New System.Drawing.Size(184, 21)
         Me.hdCombo.TabIndex = 62
         Me.hdCombo.TabStop = False
-        Me.ToolTip1.SetToolTip(Me.hdCombo, "Hard Drives")
+        Me.ToolTip1.SetToolTip(Me.hdCombo, "Logical Drives")
         '
         'cpuBox
         '
@@ -4657,10 +4701,10 @@ Public Class Form1
         '
         Me.SNoBox.BackColor = System.Drawing.SystemColors.Window
         Me.SNoBox.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
-        Me.SNoBox.Location = New System.Drawing.Point(115, 46)
+        Me.SNoBox.Location = New System.Drawing.Point(139, 46)
         Me.SNoBox.Name = "SNoBox"
         Me.SNoBox.ReadOnly = True
-        Me.SNoBox.Size = New System.Drawing.Size(131, 18)
+        Me.SNoBox.Size = New System.Drawing.Size(107, 18)
         Me.SNoBox.TabIndex = 55
         Me.SNoBox.TabStop = False
         Me.ToolTip1.SetToolTip(Me.SNoBox, "Serial Number")
@@ -4672,29 +4716,28 @@ Public Class Form1
         Me.chassis.Location = New System.Drawing.Point(4, 46)
         Me.chassis.Name = "chassis"
         Me.chassis.ReadOnly = True
-        Me.chassis.Size = New System.Drawing.Size(108, 18)
+        Me.chassis.Size = New System.Drawing.Size(132, 18)
         Me.chassis.TabIndex = 56
         Me.chassis.TabStop = False
         Me.ToolTip1.SetToolTip(Me.chassis, "Form Factor")
         '
-        'HWButton
+        'disk_vis
         '
-        Me.HWButton.Enabled = False
-        Me.HWButton.FlatStyle = System.Windows.Forms.FlatStyle.System
-        Me.HWButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.0!)
-        Me.HWButton.Location = New System.Drawing.Point(174, 0)
-        Me.HWButton.Name = "HWButton"
-        Me.HWButton.Size = New System.Drawing.Size(65, 22)
-        Me.HWButton.TabIndex = 14
-        Me.HWButton.TabStop = False
-        Me.HWButton.Text = "Hardware"
-        Me.ToolTip1.SetToolTip(Me.HWButton, "load hardware information")
+        Me.disk_vis.BackColor = System.Drawing.SystemColors.Window
+        Me.disk_vis.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.75!)
+        Me.disk_vis.Location = New System.Drawing.Point(4, 88)
+        Me.disk_vis.Name = "disk_vis"
+        Me.disk_vis.ReadOnly = True
+        Me.disk_vis.Size = New System.Drawing.Size(55, 18)
+        Me.disk_vis.TabIndex = 70
+        Me.disk_vis.TabStop = False
+        Me.ToolTip1.SetToolTip(Me.disk_vis, "Drive Utilisation")
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.ListView_shares)
         Me.GroupBox3.Controls.Add(Me.delete_Share)
         Me.GroupBox3.Controls.Add(Me.addshare)
-        Me.GroupBox3.Controls.Add(Me.ListBox_Shares)
         Me.GroupBox3.Controls.Add(Me.Button_openshare)
         Me.GroupBox3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
         Me.GroupBox3.Location = New System.Drawing.Point(3, 128)
@@ -4703,6 +4746,30 @@ Public Class Form1
         Me.GroupBox3.TabIndex = 60
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Shares"
+        '
+        'ListView_shares
+        '
+        Me.ListView_shares.Columns.AddRange(New System.Windows.Forms.ColumnHeader() {Me._sharename, Me._path})
+        Me.ListView_shares.ContextMenuStrip = Me.shareContextMenu
+        Me.ListView_shares.FullRowSelect = True
+        Me.ListView_shares.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.None
+        Me.ListView_shares.Location = New System.Drawing.Point(4, 39)
+        Me.ListView_shares.Name = "ListView_shares"
+        Me.ListView_shares.Size = New System.Drawing.Size(116, 68)
+        Me.ListView_shares.Sorting = System.Windows.Forms.SortOrder.Ascending
+        Me.ListView_shares.TabIndex = 4
+        Me.ListView_shares.UseCompatibleStateImageBehavior = False
+        Me.ListView_shares.View = System.Windows.Forms.View.Details
+        '
+        '_sharename
+        '
+        Me._sharename.Text = "name"
+        Me._sharename.Width = 92
+        '
+        '_path
+        '
+        Me._path.Text = "path"
+        Me._path.Width = 0
         '
         'delete_Share
         '
@@ -4713,7 +4780,7 @@ Public Class Form1
         Me.delete_Share.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.delete_Share.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.delete_Share.Image = CType(resources.GetObject("delete_Share.Image"), System.Drawing.Image)
-        Me.delete_Share.Location = New System.Drawing.Point(60, 14)
+        Me.delete_Share.Location = New System.Drawing.Point(59, 16)
         Me.delete_Share.Name = "delete_Share"
         Me.delete_Share.Size = New System.Drawing.Size(18, 18)
         Me.delete_Share.TabIndex = 3
@@ -4730,24 +4797,13 @@ Public Class Form1
         Me.addshare.FlatStyle = System.Windows.Forms.FlatStyle.Flat
         Me.addshare.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.75!, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.addshare.Image = CType(resources.GetObject("addshare.Image"), System.Drawing.Image)
-        Me.addshare.Location = New System.Drawing.Point(35, 14)
+        Me.addshare.Location = New System.Drawing.Point(34, 16)
         Me.addshare.Name = "addshare"
         Me.addshare.Size = New System.Drawing.Size(18, 18)
         Me.addshare.TabIndex = 2
         Me.addshare.TabStop = False
         Me.ToolTip1.SetToolTip(Me.addshare, "add a new share")
         Me.addshare.UseVisualStyleBackColor = True
-        '
-        'ListBox_Shares
-        '
-        Me.ListBox_Shares.BackColor = System.Drawing.SystemColors.Window
-        Me.ListBox_Shares.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!)
-        Me.ListBox_Shares.Location = New System.Drawing.Point(3, 39)
-        Me.ListBox_Shares.Name = "ListBox_Shares"
-        Me.ListBox_Shares.Size = New System.Drawing.Size(117, 69)
-        Me.ListBox_Shares.Sorted = True
-        Me.ListBox_Shares.TabIndex = 0
-        Me.ListBox_Shares.TabStop = False
         '
         'Button_openshare
         '
@@ -6123,6 +6179,36 @@ Public Class Form1
         Me.Button1.TabIndex = 58
         Me.Button1.UseVisualStyleBackColor = True
         '
+        'shareContextMenu
+        '
+        Me.shareContextMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.shareMenu_open, Me.shareMenu_path, Me.shareMenu_add, Me.shareMenu_delete})
+        Me.shareContextMenu.Name = "shareContextMenu"
+        Me.shareContextMenu.Size = New System.Drawing.Size(169, 114)
+        '
+        'shareMenu_open
+        '
+        Me.shareMenu_open.Name = "shareMenu_open"
+        Me.shareMenu_open.Size = New System.Drawing.Size(168, 22)
+        Me.shareMenu_open.Text = "open share"
+        '
+        'shareMenu_path
+        '
+        Me.shareMenu_path.Name = "shareMenu_path"
+        Me.shareMenu_path.Size = New System.Drawing.Size(168, 22)
+        Me.shareMenu_path.Text = "get path"
+        '
+        'shareMenu_add
+        '
+        Me.shareMenu_add.Name = "shareMenu_add"
+        Me.shareMenu_add.Size = New System.Drawing.Size(168, 22)
+        Me.shareMenu_add.Text = "add new share..."
+        '
+        'shareMenu_delete
+        '
+        Me.shareMenu_delete.Name = "shareMenu_delete"
+        Me.shareMenu_delete.Size = New System.Drawing.Size(168, 22)
+        Me.shareMenu_delete.Text = "delete share"
+        '
         'Form1
         '
         Me.AcceptButton = Me.GO_Button
@@ -6229,6 +6315,7 @@ Public Class Form1
         Me.DataFetchPanel.PerformLayout()
         Me.Hardware.ResumeLayout(False)
         Me.Hardware.PerformLayout()
+        CType(Me.PicBox, System.ComponentModel.ISupportInitialize).EndInit()
         Me.GroupBox3.ResumeLayout(False)
         Me.Tabholder1.ResumeLayout(False)
         Me.printers.ResumeLayout(False)
@@ -6252,6 +6339,7 @@ Public Class Form1
         Me.GroupBox9.PerformLayout()
         Me.printermenu.ResumeLayout(False)
         Me.gpoContextMenu.ResumeLayout(False)
+        Me.shareContextMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
         Me.PerformLayout()
 
@@ -6882,11 +6970,14 @@ Public Class Form1
         End If
 
 
-        If Not PC.ShareList Is Nothing Then
-            ListBox_Shares.Items.Clear()
-            For Each sharename As String In PC.ShareList
-                ListBox_Shares.Items.Add(sharename)
+        If Not Me.ShareDataTable Is Nothing Then
+            ListView_shares.Items.Clear()
+
+            For Each row As DataRow In ShareDataTable.Rows
+                Dim sItem As New ListViewItem(New String() {row(0), row(1)})
+                Me.ListView_shares.Items.Add(sItem)
             Next
+
             Button_openshare.Enabled = True
         Else
             Button_openshare.Enabled = False
@@ -7107,6 +7198,7 @@ Public Class Form1
     '    End Try
     'End Sub
 
+    ' show proxy info
     Private Sub ielabel_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ielabel.Click
 
         If String.IsNullOrEmpty(PC.Name) Then Exit Sub
@@ -7132,6 +7224,22 @@ Public Class Form1
         If ielabel.Text = "ie version" Then
             ie.Text = PC.IEVersion
         End If
+    End Sub
+
+    ' show computer role info
+    Private Sub Label_Ver_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label_Ver.MouseEnter
+        Try
+            Label_Ver.Text = PC.DomainRole
+            LabelV.Text = "role"
+        Catch ex As System.NullReferenceException
+        End Try
+    End Sub
+    Private Sub Label_Ver_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles Label_Ver.MouseLeave
+        Try
+            Label_Ver.Text = PC.OSVersion
+            LabelV.Text = "version"
+        Catch ex As System.NullReferenceException
+        End Try
     End Sub
 
     Private Sub GetProxy()
@@ -7197,29 +7305,51 @@ Public Class Form1
         End If
     End Sub
 
-    Private Sub ListBox_Shares_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox_Shares.MouseHover
-        Me.ToolTip1.Show("double click to open selected share", Me.ListBox_Shares)
+
+    Private Share_Name As String
+    Private share_Path As String
+    Private Sub ListView_shares_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListView_shares.MouseDoubleClick
+        If Not Me.Share_Name Is Nothing Then
+            openfolder("\\" & PC.Name & "\" & Me.Share_Name)
+        End If
     End Sub
-    Private Sub ListBox_Shares_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListBox_Shares.SelectedIndexChanged
-        If Not ListBox_Shares.SelectedItem Is Nothing Then
-            ' Dim arrShare As Array = Split(ListBox_Shares.SelectedItem, "\")
-            Dim SelShare As String = ListBox_Shares.SelectedItem.ToString.ToLower ' LCase(arrShare(3))
-            If SelShare.Length = 2 Or SelShare = "admin$" Then
+    Private Sub ListView_shares_MouseHover(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListView_shares.MouseHover
+        Me.ToolTip1.Show("double click to open selected share", Me.ListView_shares)
+    End Sub
+    Private Sub ListView_shares_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles ListView_shares.SelectedIndexChanged
+
+        ' part 1 of choosing selected item colour scheme
+        For Each item As ListViewItem In Me.ListView_shares.Items
+            item.BackColor = Color.WhiteSmoke
+            item.ForeColor = Color.Black
+        Next
+
+        If Not Me.ListView_shares.SelectedItems Is Nothing Then
+            For Each shItem As ListViewItem In Me.ListView_shares.SelectedItems
+                Me.Share_Name = shItem.SubItems(0).Text
+                Me.share_Path = shItem.SubItems(1).Text
+
+                ' part 2 of choosing selected item colour scheme
+                shItem.Selected = False
+                shItem.BackColor = ListView_SelectedItem_Colour 'Color.Firebrick 'dodgerblue
+                shItem.ForeColor = Color.White
+            Next
+
+            If Me.Share_Name.Length = 2 Or Me.Share_Name.ToLower = "admin$" Then
                 delete_Share.Enabled = False
+                Me.shareMenu_delete.Enabled = False
             Else
                 delete_Share.Enabled = True
+                Me.shareMenu_delete.Enabled = True
             End If
+
         End If
+
     End Sub
+
     Private Sub Button_openshare_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles Button_openshare.Click
-        openfolder("\\" & PC.Name & "\" & ListBox_Shares.SelectedItem)
-        WriteLog(PC.Name & " - " & ListBox_Shares.SelectedItem & " accessed")
-    End Sub
-    Private Sub ListBox_Shares_MouseDoubleClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles ListBox_Shares.MouseDoubleClick
-        If Not ListBox_Shares.SelectedItem Is Nothing Then
-            openfolder("\\" & PC.Name & "\" & ListBox_Shares.SelectedItem)
-            WriteLog(PC.Name & " - " & ListBox_Shares.SelectedItem & " accessed")
-        End If
+        openfolder("\\" & PC.Name & "\" & Me.Share_Name)
+        WriteLog(PC.Name & " - " & Me.Share_Name & " accessed")
     End Sub
     Private Sub addshare_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles addshare.Click
         Shell("SHRPUBW.EXE /s " & PC.Name, AppWinStyle.NormalFocus, True)
@@ -7249,10 +7379,30 @@ Public Class Form1
     End Sub
     Private Sub delete_Share_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles delete_Share.Click
         If MsgBox("Are you sure you want to delete" & vbCrLf & _
-                "the selected share?", 36, "DELETE " & UCase(ListBox_Shares.SelectedItem) & " ?") = MsgBoxResult.Yes Then
-            'Dim arrShare As Array = Split(ListBox_Shares.SelectedItem, "\")
-            Dim SelShare As String = ListBox_Shares.SelectedItem ' LCase(arrShare(3))
-            DeleteShare(SelShare)
+                "the selected share?", 36, "DELETE " & UCase(Me.Share_Name) & " ?") = MsgBoxResult.Yes Then
+            DeleteShare(Me.Share_Name)
+            refreshShares()
+        End If
+    End Sub
+
+    ' share context menu
+    Private Sub shareMenu_open_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles shareMenu_open.Click
+        If Not Me.Share_Name Is Nothing Then
+            openfolder("\\" & PC.Name & "\" & Me.Share_Name)
+        End If
+    End Sub
+    Private Sub shareMenu_path_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles shareMenu_path.Click
+        MsgBox(Me.share_Path)
+    End Sub
+    Private Sub shareMenu_add_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles shareMenu_add.Click
+        Shell("SHRPUBW.EXE /s " & PC.Name, AppWinStyle.NormalFocus, True)
+        'ShareDir(pc.name, "C:\Script", "Scripts", "Pete's Scripts")
+        refreshShares()
+    End Sub
+    Private Sub shareMenu_delete_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles shareMenu_delete.Click
+        If MsgBox("Are you sure you want to delete" & vbCrLf & _
+                "the selected share?", 36, "DELETE " & UCase(Me.Share_Name) & " ?") = MsgBoxResult.Yes Then
+            DeleteShare(Me.Share_Name)
             refreshShares()
         End If
     End Sub
@@ -7279,13 +7429,15 @@ Public Class Form1
     End Sub
     Private Sub refreshShares()
 
-        ListBox_Shares.Items.Clear()
+        ListView_shares.Items.Clear()
 
         GetShares()
 
-        If Not PC.ShareList Is Nothing Then
-            For Each sharename As String In PC.ShareList
-                ListBox_Shares.Items.Add(sharename.ToLower)
+        If Not Me.ShareDataTable Is Nothing Then
+
+            For Each row As DataRow In ShareDataTable.Rows
+                Dim sItem As New ListViewItem(New String() {row(0), row(1)})
+                Me.ListView_shares.Items.Add(sItem)
             Next
             Button_openshare.Enabled = True
         Else
@@ -7294,9 +7446,20 @@ Public Class Form1
 
 
     End Sub
+
+    Private ShareDataTable As DataTable
     Private Sub GetShares()
 
-        Dim ArrayListShares As New ArrayList
+        ShareDataTable = New DataTable
+
+        ShareDataTable.Columns.Add(New DataColumn("Name", GetType(String)))
+        ShareDataTable.Columns.Add(New DataColumn("Path", GetType(String)))
+
+
+
+
+
+            'Dim ArrayListShares As New ArrayList
 
         Try
             Dim sharecount As Integer = 0
@@ -7310,7 +7473,7 @@ Public Class Form1
             ' 2147483649=print queue admin
             ' 2147483650=device admin
             ' 2147483651=ipc admin
-            queryCollection = wmi.wmiQuery("SELECT name FROM Win32_Share WHERE Type <> 1 AND Type <> 2147483651 AND Type <> 2147483649")
+            queryCollection = wmi.wmiQuery("SELECT name,path FROM Win32_Share WHERE Type <> 1 AND Type <> 2147483651 AND Type <> 2147483649")
             If queryCollection Is Nothing Then
                 Me.LostConnection()
                 Exit Sub
@@ -7322,20 +7485,28 @@ Public Class Form1
                     Panel2.Text = "share limit reached"
                     Exit For
                 End If
-                ArrayListShares.Add(m("Name").ToString.ToLower)
+                'ArrayListShares.Add(m("Name").ToString.ToLower)
                 'End If
+
+                Dim dtrow As DataRow = ShareDataTable.NewRow
+                With dtrow
+                    .Item("Name") = CStr(m("Name")).ToLower
+                    .Item("Path") = CStr(m("Path")).ToLower
+                End With
+                ShareDataTable.Rows.Add(dtrow)
+
             Next
         Catch ex As Exception
         End Try
 
-        PC.ShareList = ArrayListShares
+            'PC.ShareList = ArrayListShares
 
     End Sub
 
-    Private Sub ListBox_Shares_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox_Shares.MouseEnter
-        ListBox_Shares.Focus()
+    Private Sub ListView_Shares_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListView_shares.MouseEnter
+        ListView_shares.Focus()
     End Sub
-    Private Sub ListBox_Shares_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListBox_Shares.MouseLeave
+    Private Sub ListView_Shares_MouseLeave(ByVal sender As Object, ByVal e As System.EventArgs) Handles ListView_shares.MouseLeave
         GO_Button.Focus()
     End Sub
 
@@ -7389,10 +7560,11 @@ Public Class Form1
         ie.Text = ""
         ielabel.ForeColor = System.Drawing.SystemColors.ControlText
         proxyset.Visible = False
-        ListBox_Shares.Items.Clear()
+        ListView_shares.Items.Clear()
         addshare.Enabled = False
         Label_IP.Text = ""
         delete_Share.Enabled = False
+        'Me.ShareDataTable = Nothing
     End Sub
 
 #End Region
@@ -7554,37 +7726,15 @@ Public Class Form1
         End If
         SNoBox.Text = PC.SerialNumber
 
-        RAMBox.Text = CInt(PC.PhysicalMemory / (1024 * 1024)).ToString & "MB"
+        RAMBox.Text = CInt(PC.PhysicalMemory / (1024 * 1024)).ToString & " MB"
         cpuBox.Text = PC.CPU
 
         ' Logical Drives
         For Each row As DataRow In PC.LogicalDrives.Rows
-
             Dim totalGB As Integer = CInt(row(1) / 1024)
             Dim freeGB As Double = row(2) / 1024
-
-            ' graph text
-            Dim graphtext As String = "["
-            Dim graph_bar_count As Integer = 0
-            Dim graph_empty_count As Integer = 0
-            graph_bar_count = CInt((20 * (totalGB - freeGB)) / totalGB)
-            graph_empty_count = CInt((20 - graph_bar_count) / 1.5)
-
-            For x As Integer = 0 To graph_bar_count
-                graphtext = graphtext & "¦"
-            Next
-            For y As Integer = 0 To graph_empty_count
-                graphtext = graphtext & " "
-            Next
-            graphtext = graphtext & "]"
-            ' graphtext ends
-
             Dim driveinfo As String = row(0) & " " & totalGB & " GB total, " & FormatNumber(freeGB, 2) & " GB free"
-            For z As Integer = 0 To (33 - driveinfo.Length)
-                driveinfo = driveinfo & " "
-            Next
-
-            hdCombo.Items.Add(driveinfo & graphtext)
+            hdCombo.Items.Add(driveinfo)
         Next
 
         hdCombo.SelectedIndex = 0
@@ -7604,10 +7754,48 @@ Public Class Form1
 
     End Sub
 
-    ' cpu additional info
-    'Private Sub cpuBox_MouseEnter(ByVal sender As Object, ByVal e As System.EventArgs) Handles cpuBox.MouseEnter
-    '    If Not String.IsNullOrEmpty(cpuBox.Text) Then cpu_info_lbl.Visible = True
-    'End Sub
+    ' disk utilisation graphing
+    Private Sub DiskUseVisualise(ByVal totalGB As Integer, ByVal freeGB As Integer)
+        Dim DriveUsedPercent As Integer = CInt((100 * (totalGB - freeGB)) / totalGB)
+        Me.ToolTip1.SetToolTip(Me.PicBox, "Drive Utilisation " & DriveUsedPercent & "%")
+        UpdateDiskGraph(DriveUsedPercent)
+    End Sub
+    Private Sub hdCombo_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles hdCombo.SelectedIndexChanged
+        Try
+            Dim totalGB As Integer = CInt(PC.LogicalDrives.Rows(hdCombo.SelectedIndex)(1) / 1024)
+            Dim freeGB As Double = CInt(PC.LogicalDrives.Rows(hdCombo.SelectedIndex)(2) / 1024)
+            DiskUseVisualise(totalGB, freeGB)
+        Catch ex As System.IndexOutOfRangeException
+            ' hmm must try harder - it's the wine again...
+        End Try
+    End Sub
+    Private Sub UpdateDiskGraph(ByVal FillPercent As Integer)
+
+        Dim basecolor As Color = Color.Khaki
+
+        'Create graphic to draw
+        Dim g As Drawing.Graphics
+        Dim bmp As New Bitmap(PicBox.Width, PicBox.Height)
+        g = Graphics.FromImage(bmp)
+
+        'Create path & brush for gradient
+        Dim path As New Drawing2D.GraphicsPath
+        Dim brush As New Drawing2D.LinearGradientBrush(New PointF(0, 0), New PointF(PicBox.Width, 0), basecolor, Color.FromArgb(255 / 100 * FillPercent, 255 / 100 * (100 - FillPercent), 0))
+
+        'Add Rectangle
+        path.AddRectangle(New Drawing.Rectangle(0, 0, PicBox.Width / 100 * FillPercent, PicBox.Height))
+
+        'Fill the path
+        g.FillPath(brush, path)
+
+        'Set the image to our drawn one
+        PicBox.Image = bmp
+
+        'Free resources
+        g.Dispose()
+    End Sub
+
+    ' cpu info
     Private Sub cpu_info_lbl_LinkClicked(ByVal sender As System.Object, ByVal e As System.Windows.Forms.LinkLabelLinkClickedEventArgs) Handles cpu_info_lbl.LinkClicked
 
         Me.Cursor = Cursors.WaitCursor
@@ -7776,6 +7964,8 @@ Public Class Form1
         SNoBox.Text = ""
         RAMBox.Text = ""
         cpuBox.Text = ""
+        UpdateDiskGraph(0)
+        Me.ToolTip1.SetToolTip(Me.PicBox, "Drive Utilisation")
         hdCombo.SelectedIndex = -1
         hdCombo.Items.Clear()
         hdCombo.BackColor = System.Drawing.SystemColors.Window
@@ -15974,8 +16164,6 @@ Public Class Form1
         End If
 
     End Sub
-
-
 
 End Class
 
