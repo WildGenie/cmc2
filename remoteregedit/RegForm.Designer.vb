@@ -126,94 +126,94 @@ Partial Class RegForm
         Me.TreeViewContextMenu.Name = "TreeViewContextMenu"
         Me.TreeViewContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.TreeViewContextMenu.ShowImageMargin = False
-        Me.TreeViewContextMenu.Size = New System.Drawing.Size(135, 154)
+        Me.TreeViewContextMenu.Size = New System.Drawing.Size(132, 154)
         '
         'MenuExpand
         '
         Me.MenuExpand.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.MenuExpand.Name = "MenuExpand"
-        Me.MenuExpand.Size = New System.Drawing.Size(134, 22)
+        Me.MenuExpand.Size = New System.Drawing.Size(131, 22)
         Me.MenuExpand.Text = "Expand"
         '
         'MenuNew
         '
         Me.MenuNew.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.MenuNewKey, Me.SepToolStripMenuItem, Me.MenuNewSZ, Me.MenuNewDWORD, Me.MenuNewMultiSZ, Me.MenuNewExpandSZ})
         Me.MenuNew.Name = "MenuNew"
-        Me.MenuNew.Size = New System.Drawing.Size(134, 22)
+        Me.MenuNew.Size = New System.Drawing.Size(131, 22)
         Me.MenuNew.Text = "New"
         '
         'MenuNewKey
         '
         Me.MenuNewKey.Name = "MenuNewKey"
-        Me.MenuNewKey.Size = New System.Drawing.Size(201, 22)
+        Me.MenuNewKey.Size = New System.Drawing.Size(200, 22)
         Me.MenuNewKey.Text = "Key"
         '
         'SepToolStripMenuItem
         '
         Me.SepToolStripMenuItem.Name = "SepToolStripMenuItem"
-        Me.SepToolStripMenuItem.Size = New System.Drawing.Size(198, 6)
+        Me.SepToolStripMenuItem.Size = New System.Drawing.Size(197, 6)
         '
         'MenuNewSZ
         '
         Me.MenuNewSZ.Name = "MenuNewSZ"
-        Me.MenuNewSZ.Size = New System.Drawing.Size(201, 22)
+        Me.MenuNewSZ.Size = New System.Drawing.Size(200, 22)
         Me.MenuNewSZ.Text = "String Value"
         '
         'MenuNewDWORD
         '
         Me.MenuNewDWORD.Name = "MenuNewDWORD"
-        Me.MenuNewDWORD.Size = New System.Drawing.Size(201, 22)
+        Me.MenuNewDWORD.Size = New System.Drawing.Size(200, 22)
         Me.MenuNewDWORD.Text = "Dword Value"
         '
         'MenuNewMultiSZ
         '
         Me.MenuNewMultiSZ.Name = "MenuNewMultiSZ"
-        Me.MenuNewMultiSZ.Size = New System.Drawing.Size(201, 22)
+        Me.MenuNewMultiSZ.Size = New System.Drawing.Size(200, 22)
         Me.MenuNewMultiSZ.Text = "Multi String Value"
         '
         'MenuNewExpandSZ
         '
         Me.MenuNewExpandSZ.Name = "MenuNewExpandSZ"
-        Me.MenuNewExpandSZ.Size = New System.Drawing.Size(201, 22)
+        Me.MenuNewExpandSZ.Size = New System.Drawing.Size(200, 22)
         Me.MenuNewExpandSZ.Text = "Expandable String Value"
         '
         'ToolStripSeparator6
         '
         Me.ToolStripSeparator6.Name = "ToolStripSeparator6"
-        Me.ToolStripSeparator6.Size = New System.Drawing.Size(131, 6)
+        Me.ToolStripSeparator6.Size = New System.Drawing.Size(128, 6)
         '
         'MenuDelete
         '
         Me.MenuDelete.Name = "MenuDelete"
-        Me.MenuDelete.Size = New System.Drawing.Size(134, 22)
+        Me.MenuDelete.Size = New System.Drawing.Size(131, 22)
         Me.MenuDelete.Text = "Delete"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(131, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(128, 6)
         '
         'MenuCopyKey
         '
         Me.MenuCopyKey.Name = "MenuCopyKey"
-        Me.MenuCopyKey.Size = New System.Drawing.Size(134, 22)
+        Me.MenuCopyKey.Size = New System.Drawing.Size(131, 22)
         Me.MenuCopyKey.Text = "Copy key name"
         '
         'CopyKeyPathToolStripMenuItem
         '
         Me.CopyKeyPathToolStripMenuItem.Name = "CopyKeyPathToolStripMenuItem"
-        Me.CopyKeyPathToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.CopyKeyPathToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
         Me.CopyKeyPathToolStripMenuItem.Text = "Copy key path"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(131, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(128, 6)
         '
         'ExportToolStripMenuItem
         '
         Me.ExportToolStripMenuItem.Name = "ExportToolStripMenuItem"
-        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.ExportToolStripMenuItem.Size = New System.Drawing.Size(131, 22)
         Me.ExportToolStripMenuItem.Text = "Export"
         '
         'ImageList1
@@ -268,75 +268,75 @@ Partial Class RegForm
         Me.ListViewContextMenu.Name = "ListViewContextMenu"
         Me.ListViewContextMenu.RenderMode = System.Windows.Forms.ToolStripRenderMode.System
         Me.ListViewContextMenu.ShowImageMargin = False
-        Me.ListViewContextMenu.Size = New System.Drawing.Size(140, 98)
+        Me.ListViewContextMenu.Size = New System.Drawing.Size(136, 98)
         '
         'LV_ModifyMenuItem
         '
         Me.LV_ModifyMenuItem.Font = New System.Drawing.Font("Tahoma", 8.25!, System.Drawing.FontStyle.Bold)
         Me.LV_ModifyMenuItem.Name = "LV_ModifyMenuItem"
-        Me.LV_ModifyMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.LV_ModifyMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.LV_ModifyMenuItem.Text = "Modify"
         Me.LV_ModifyMenuItem.Visible = False
         '
         'LV_Sep
         '
         Me.LV_Sep.Name = "LV_Sep"
-        Me.LV_Sep.Size = New System.Drawing.Size(136, 6)
+        Me.LV_Sep.Size = New System.Drawing.Size(132, 6)
         Me.LV_Sep.Visible = False
         '
         'LV_DeleteMenuItem
         '
         Me.LV_DeleteMenuItem.Name = "LV_DeleteMenuItem"
-        Me.LV_DeleteMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.LV_DeleteMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.LV_DeleteMenuItem.Text = "Delete"
         Me.LV_DeleteMenuItem.Visible = False
         '
         'CopyValuePathMenuItem
         '
         Me.CopyValuePathMenuItem.Name = "CopyValuePathMenuItem"
-        Me.CopyValuePathMenuItem.Size = New System.Drawing.Size(139, 22)
+        Me.CopyValuePathMenuItem.Size = New System.Drawing.Size(135, 22)
         Me.CopyValuePathMenuItem.Text = "Copy value path"
         '
         'LV_NewMenu
         '
         Me.LV_NewMenu.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyToolStripMenuItem, Me.EToolStripMenuItem, Me.LV_NewString, Me.LV_NewDWORD, Me.LV_NewMultiSZ, Me.LV_NewExpandSZ})
         Me.LV_NewMenu.Name = "LV_NewMenu"
-        Me.LV_NewMenu.Size = New System.Drawing.Size(139, 22)
+        Me.LV_NewMenu.Size = New System.Drawing.Size(135, 22)
         Me.LV_NewMenu.Text = "New"
         '
         'KeyToolStripMenuItem
         '
         Me.KeyToolStripMenuItem.Name = "KeyToolStripMenuItem"
-        Me.KeyToolStripMenuItem.Size = New System.Drawing.Size(193, 22)
+        Me.KeyToolStripMenuItem.Size = New System.Drawing.Size(190, 22)
         Me.KeyToolStripMenuItem.Text = "Key"
         '
         'EToolStripMenuItem
         '
         Me.EToolStripMenuItem.Name = "EToolStripMenuItem"
-        Me.EToolStripMenuItem.Size = New System.Drawing.Size(190, 6)
+        Me.EToolStripMenuItem.Size = New System.Drawing.Size(187, 6)
         '
         'LV_NewString
         '
         Me.LV_NewString.Name = "LV_NewString"
-        Me.LV_NewString.Size = New System.Drawing.Size(193, 22)
+        Me.LV_NewString.Size = New System.Drawing.Size(190, 22)
         Me.LV_NewString.Text = "String Value"
         '
         'LV_NewDWORD
         '
         Me.LV_NewDWORD.Name = "LV_NewDWORD"
-        Me.LV_NewDWORD.Size = New System.Drawing.Size(193, 22)
+        Me.LV_NewDWORD.Size = New System.Drawing.Size(190, 22)
         Me.LV_NewDWORD.Text = "DWORD Value"
         '
         'LV_NewMultiSZ
         '
         Me.LV_NewMultiSZ.Name = "LV_NewMultiSZ"
-        Me.LV_NewMultiSZ.Size = New System.Drawing.Size(193, 22)
+        Me.LV_NewMultiSZ.Size = New System.Drawing.Size(190, 22)
         Me.LV_NewMultiSZ.Text = "Multi String Value"
         '
         'LV_NewExpandSZ
         '
         Me.LV_NewExpandSZ.Name = "LV_NewExpandSZ"
-        Me.LV_NewExpandSZ.Size = New System.Drawing.Size(193, 22)
+        Me.LV_NewExpandSZ.Size = New System.Drawing.Size(190, 22)
         Me.LV_NewExpandSZ.Text = "Expanded String value"
         '
         'StatusStrip1
@@ -385,7 +385,7 @@ Partial Class RegForm
         '
         Me.FileToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.NewToolStripMenuItem, Me.OpenToolStripMenuItem, Me.toolStripSeparator, Me.ExportMenuItem, Me.toolStripSeparator2, Me.ExitToolStripMenuItem})
         Me.FileToolStripMenuItem.Name = "FileToolStripMenuItem"
-        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(35, 20)
+        Me.FileToolStripMenuItem.Size = New System.Drawing.Size(37, 20)
         Me.FileToolStripMenuItem.Text = "&File"
         '
         'NewToolStripMenuItem
@@ -394,7 +394,7 @@ Partial Class RegForm
         Me.NewToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.NewToolStripMenuItem.Name = "NewToolStripMenuItem"
         Me.NewToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.N), System.Windows.Forms.Keys)
-        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.NewToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.NewToolStripMenuItem.Text = "&New"
         '
         'OpenToolStripMenuItem
@@ -403,39 +403,39 @@ Partial Class RegForm
         Me.OpenToolStripMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
         Me.OpenToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.C), System.Windows.Forms.Keys)
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.OpenToolStripMenuItem.Text = "Clear"
         '
         'toolStripSeparator
         '
         Me.toolStripSeparator.Name = "toolStripSeparator"
-        Me.toolStripSeparator.Size = New System.Drawing.Size(146, 6)
+        Me.toolStripSeparator.Size = New System.Drawing.Size(140, 6)
         '
         'ExportMenuItem
         '
         Me.ExportMenuItem.Image = CType(resources.GetObject("ExportMenuItem.Image"), System.Drawing.Image)
         Me.ExportMenuItem.ImageTransparentColor = System.Drawing.Color.Magenta
         Me.ExportMenuItem.Name = "ExportMenuItem"
-        Me.ExportMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ExportMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.ExportMenuItem.Text = "Export"
         '
         'toolStripSeparator2
         '
         Me.toolStripSeparator2.Name = "toolStripSeparator2"
-        Me.toolStripSeparator2.Size = New System.Drawing.Size(146, 6)
+        Me.toolStripSeparator2.Size = New System.Drawing.Size(140, 6)
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Image = Global.RemoteRegedit.My.Resources.Resources.door_out
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(143, 22)
         Me.ExitToolStripMenuItem.Text = "E&xit"
         '
         'ToolsToolStripMenuItem
         '
         Me.ToolsToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CustomizeToolStripMenuItem, Me.OptionsToolStripMenuItem})
         Me.ToolsToolStripMenuItem.Name = "ToolsToolStripMenuItem"
-        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
+        Me.ToolsToolStripMenuItem.Size = New System.Drawing.Size(48, 20)
         Me.ToolsToolStripMenuItem.Text = "&Tools"
         '
         'CustomizeToolStripMenuItem
@@ -443,7 +443,7 @@ Partial Class RegForm
         Me.CustomizeToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.FontToolStripMenuItem, Me.FontToolStripMenuItem1})
         Me.CustomizeToolStripMenuItem.Image = Global.RemoteRegedit.My.Resources.Resources.application_form_edit
         Me.CustomizeToolStripMenuItem.Name = "CustomizeToolStripMenuItem"
-        Me.CustomizeToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.CustomizeToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.CustomizeToolStripMenuItem.Text = "&Customize"
         '
         'FontToolStripMenuItem
@@ -451,7 +451,7 @@ Partial Class RegForm
         Me.FontToolStripMenuItem.Image = Global.RemoteRegedit.My.Resources.Resources.font_add
         Me.FontToolStripMenuItem.Name = "FontToolStripMenuItem"
         Me.FontToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Up), System.Windows.Forms.Keys)
-        Me.FontToolStripMenuItem.Size = New System.Drawing.Size(173, 22)
+        Me.FontToolStripMenuItem.Size = New System.Drawing.Size(171, 22)
         Me.FontToolStripMenuItem.Text = "Font +"
         '
         'FontToolStripMenuItem1
@@ -459,28 +459,28 @@ Partial Class RegForm
         Me.FontToolStripMenuItem1.Image = Global.RemoteRegedit.My.Resources.Resources.font_delete
         Me.FontToolStripMenuItem1.Name = "FontToolStripMenuItem1"
         Me.FontToolStripMenuItem1.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Down), System.Windows.Forms.Keys)
-        Me.FontToolStripMenuItem1.Size = New System.Drawing.Size(173, 22)
+        Me.FontToolStripMenuItem1.Size = New System.Drawing.Size(171, 22)
         Me.FontToolStripMenuItem1.Text = "Font -"
         '
         'OptionsToolStripMenuItem
         '
         Me.OptionsToolStripMenuItem.Image = Global.RemoteRegedit.My.Resources.Resources.bullet_wrench
         Me.OptionsToolStripMenuItem.Name = "OptionsToolStripMenuItem"
-        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(134, 22)
+        Me.OptionsToolStripMenuItem.Size = New System.Drawing.Size(130, 22)
         Me.OptionsToolStripMenuItem.Text = "&Options"
         '
         'HelpToolStripMenuItem
         '
         Me.HelpToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.AboutToolStripMenuItem})
         Me.HelpToolStripMenuItem.Name = "HelpToolStripMenuItem"
-        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(40, 20)
+        Me.HelpToolStripMenuItem.Size = New System.Drawing.Size(44, 20)
         Me.HelpToolStripMenuItem.Text = "&Help"
         '
         'AboutToolStripMenuItem
         '
         Me.AboutToolStripMenuItem.Image = Global.RemoteRegedit.My.Resources.Resources.information
         Me.AboutToolStripMenuItem.Name = "AboutToolStripMenuItem"
-        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.AboutToolStripMenuItem.Size = New System.Drawing.Size(116, 22)
         Me.AboutToolStripMenuItem.Text = "&About..."
         '
         'ComputerNameTextBox
