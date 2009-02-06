@@ -160,6 +160,12 @@
     </Compile>
     <Compile Include="encrypt.vb" />
     <Compile Include="Impersonation.vb" />
+    <Compile Include="ShareInfo.Designer.vb">
+      <DependentUpon>ShareInfo.vb</DependentUpon>
+    </Compile>
+    <Compile Include="ShareInfo.vb">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Include="ProcInfo.Designer.vb">
       <DependentUpon>ProcInfo.vb</DependentUpon>
     </Compile>
@@ -213,27 +219,15 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </Content>
     <None Include="Resources\application_cascade.png" />
-    <None Include="Resources\application_osx_terminal.png" />
     <None Include="Resources\email.png" />
-    <None Include="Resources\drive_network.png" />
     <None Include="Resources\comment.png" />
-    <None Include="Resources\door_out.png" />
-    <None Include="Resources\application_add.png" />
-    <None Include="Resources\application_form.png" />
     <None Include="Resources\exclamation.png" />
-    <None Include="Resources\computer.png" />
-    <None Include="Resources\computer_link.png" />
     <None Include="Resources\application_get.png" />
     <None Include="Resources\arrow_join.png" />
     <None Include="Resources\application_view_tile.png" />
     <None Include="Resources\bullet_go.png" />
-    <None Include="Resources\0029.ico" />
     <None Include="Resources\book_open.png" />
     <None Include="Resources\cancel.png" />
-    <None Include="Resources\chart.png" />
-    <None Include="Resources\chart_accept.png" />
-    <None Include="Resources\chart1.png" />
-    <None Include="Resources\Dell-Display-32x32.png" />
     <None Include="Resources\connect1.png" />
     <None Include="Resources\connect2.png" />
     <None Include="Resources\connect3.png" />
@@ -255,6 +249,10 @@
       <SubType>Designer</SubType>
       <DependentUpon>AppTable.vb</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="ShareInfo.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>ShareInfo.vb</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ProcInfo.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProcInfo.vb</DependentUpon>
@@ -268,6 +266,12 @@
     <Content Include="Resources\files\winvnc\winvnc4.exe" />
     <Content Include="Resources\files\winvnc\wm_hooks.dll" />
     <Content Include="Resources\files\XZip.dll" />
+    <None Include="Resources\png_16_sw_t.png" />
+    <None Include="Resources\png_32_process2_t.png" />
+    <None Include="Resources\png_16_ptr_t.png" />
+    <None Include="Resources\png_16_telnet_t.png" />
+    <None Include="Resources\png_16_netdrv_w.png" />
+    <None Include="Resources\png_16_pin_w.png" />
     <None Include="Resources\png_16_admgr_w.png" />
     <None Include="Resources\png_16_logclear_w.png" />
     <None Include="Resources\png_16_log_w.png" />
@@ -317,37 +321,17 @@
     <None Include="Resources\png_t_nwk.png" />
     <None Include="Resources\png_w_perf.png" />
     <None Include="Resources\png_w_vnc.png" />
-    <None Include="Resources\lock.png" />
-    <None Include="Resources\user-16x16.png" />
-    <None Include="Resources\Utilities-32x32.png" />
-    <None Include="Resources\user-info-16x16.png" />
     <None Include="Resources\stop.png" />
     <None Include="Resources\play.png" />
     <None Include="Resources\pause.png" />
-    <None Include="Resources\stats_info.png" />
-    <None Include="Resources\gear.png" />
     <None Include="Resources\regedit.png" />
-    <None Include="Resources\picture_key.png" />
-    <None Include="Resources\folder_add.png" />
-    <None Include="Resources\folder_delete.png" />
-    <None Include="Resources\server.png" />
     <None Include="Resources\keyboard.png" />
-    <None Include="Resources\monitor_go.png" />
-    <None Include="Resources\monitor.png" />
-    <None Include="Resources\folder_user.png" />
-    <None Include="Resources\group.png" />
-    <None Include="Resources\page_error.png" />
     <None Include="Resources\page_lightning.png" />
-    <None Include="Resources\page_delete.png" />
-    <None Include="Resources\page.png" />
     <None Include="Resources\wrench.png" />
     <None Include="Resources\package_green.png" />
     <None Include="Resources\table.png" />
-    <None Include="Resources\table_gear.png" />
     <None Include="Resources\wrench_orange.png" />
-    <None Include="Resources\monitor_lightning.png" />
     <None Include="Resources\page_save.png" />
-    <None Include="Resources\group_key.png" />
     <None Include="Resources\printer.png" />
     <EmbeddedResource Include="Form1.en-GB.resx">
       <SubType>Designer</SubType>
@@ -397,41 +381,45 @@
   <ItemGroup>
     <PublishFile Include="changelog.txt">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="en-GB\CMC.resources">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
       <FileType>Satellite</FileType>
     </PublishFile>
     <PublishFile Include="My Project\Application.myapp">
       <Visible>False</Visible>
-      <PublishState>Exclude</PublishState>
       <Group>
       </Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Exclude</PublishState>
       <FileType>File</FileType>
     </PublishFile>
     <PublishFile Include="Resources\files\netdom.exe">
       <Visible>False</Visible>
-      <PublishState>Auto</PublishState>
       <Group>system</Group>
       <TargetPath>
       </TargetPath>
+      <PublishState>Auto</PublishState>
       <FileType>File</FileType>
     </PublishFile>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\netlib\netlib.vbproj">
+      <Project>{03D3F821-9481-4E74-9B90-4A3CEFA1F8C0}</Project>
+      <Name>netlib</Name>
+    </ProjectReference>
     <ProjectReference Include="..\PerformanceGraph\PerformanceGraph.vbproj">
       <Project>{1BF9242C-A749-4C3A-A692-C535C72EACC8}</Project>
       <Name>PerformanceGraph</Name>

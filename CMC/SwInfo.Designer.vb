@@ -33,7 +33,6 @@ Partial Class SwInfo
         Me.swuninstsilent = New System.Windows.Forms.TextBox
         Me.Label14 = New System.Windows.Forms.Label
         Me.GroupBox2 = New System.Windows.Forms.GroupBox
-        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.Label1 = New System.Windows.Forms.Label
         Me.swuninstall = New System.Windows.Forms.TextBox
         Me.swpath = New System.Windows.Forms.TextBox
@@ -48,6 +47,7 @@ Partial Class SwInfo
         Me.Label12 = New System.Windows.Forms.Label
         Me.Label13 = New System.Windows.Forms.Label
         Me.swURL = New System.Windows.Forms.LinkLabel
+        Me.PictureBox1 = New System.Windows.Forms.PictureBox
         Me.GroupBox1.SuspendLayout()
         Me.gbUninst.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
@@ -175,16 +175,6 @@ Partial Class SwInfo
         Me.GroupBox2.TabIndex = 0
         Me.GroupBox2.TabStop = False
         Me.GroupBox2.Text = "Software Properties"
-        '
-        'PictureBox1
-        '
-        Me.PictureBox1.ErrorImage = Global.CMC.My.Resources.Resources.package_green
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.package_green
-        Me.PictureBox1.Location = New System.Drawing.Point(284, 0)
-        Me.PictureBox1.Name = "PictureBox1"
-        Me.PictureBox1.Size = New System.Drawing.Size(20, 17)
-        Me.PictureBox1.TabIndex = 4
-        Me.PictureBox1.TabStop = False
         '
         'Label1
         '
@@ -321,6 +311,16 @@ Partial Class SwInfo
         Me.swURL.TabIndex = 11
         Me.swURL.TabStop = True
         Me.swURL.Text = "none"
+        '
+        'PictureBox1
+        '
+        Me.PictureBox1.ErrorImage = Nothing
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.png_16_sw_t
+        Me.PictureBox1.Location = New System.Drawing.Point(284, 0)
+        Me.PictureBox1.Name = "PictureBox1"
+        Me.PictureBox1.Size = New System.Drawing.Size(20, 19)
+        Me.PictureBox1.TabIndex = 4
+        Me.PictureBox1.TabStop = False
         '
         'SwInfo
         '

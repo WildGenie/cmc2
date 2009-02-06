@@ -182,6 +182,14 @@ Public Class ProcInfo
         End If
 
     End Sub
+
+    'Private Sub ProcInfo_Shown(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Shown
+    '    For i As Integer = 0 To 100 Step 10
+    '        Me.Opacity = i / 100
+    '        System.Threading.Thread.Sleep(10)
+    '        Me.Refresh()
+    '    Next
+    'End Sub
 End Class
 
 
