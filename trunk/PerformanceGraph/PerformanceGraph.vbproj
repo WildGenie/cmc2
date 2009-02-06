@@ -112,7 +112,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chart.ico" />
     <Content Include="perfmon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.VisualBasic.targets" />
