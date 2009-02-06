@@ -295,7 +295,7 @@ Partial Class ProcInfo
         '
         'PictureBox1
         '
-        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.png_t_svc_32
+        Me.PictureBox1.Image = Global.CMC.My.Resources.Resources.png_t_svc_green_32
         Me.PictureBox1.Location = New System.Drawing.Point(11, 120)
         Me.PictureBox1.Name = "PictureBox1"
         Me.PictureBox1.Size = New System.Drawing.Size(38, 37)
@@ -456,7 +456,7 @@ Partial Class ProcInfo
         Me.MinimizeBox = False
         Me.Name = "ProcInfo"
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.Manual
         Me.Text = "Properties"
         Me.TableLayoutPanel1.ResumeLayout(False)
         Me.GroupBox1.ResumeLayout(False)
