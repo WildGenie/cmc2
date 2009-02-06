@@ -1,3 +1,5 @@
+Imports ZedGraph
+
 Public Class PerfMonitor
 
     Private cpu, mem, MemPages, NetBytesSec, dskTime, dskReadQ, dskWriteQ, diskReadBytes, diskWriteBytes, dskTime2, dskReadQ2, dskWriteQ2, diskReadBytes2, diskWriteBytes2, dskTime3, dskReadQ3, dskWriteQ3, diskReadBytes3, diskWriteBytes3 As PerformanceCounter
@@ -74,6 +76,58 @@ Public Class PerfMonitor
 
         Me.loading = False
 
+
+
+
+        ' test
+        'ZedGraphControl1.GraphPane.CurveList = Nothing
+        Dim myPane As GraphPane = ZedGraphControl1.GraphPane
+
+        myPane.Title.Text = ""
+        myPane.XAxis.Title.IsVisible = False
+        myPane.YAxis.Title.Text = ""
+        myPane.YAxis.Title.IsVisible = False
+        myPane.Legend.Position = LegendPos.TopCenter
+        myPane.Legend.IsVisible = False
+        myPane.Legend.FontSpec.Size = 9
+
+        ' Save 60 points.  this is one minute
+        ' The RollingPointPairList is an efficient storage class that always
+        ' keeps a rolling set of point data without needing to shift any data values
+        Dim listCPU As New RollingPointPairList(60)
+        Dim listMem As New RollingPointPairList(60)
+        Dim listDsk As New RollingPointPairList(60)
+
+        ' Initially, a curve is added with no data points (list is empty)
+        ' Color is blue, and there will be no symbols
+        Dim cpucurve As LineItem = myPane.AddCurve("CPU", listCPU, Color.OrangeRed, SymbolType.None)
+        Dim memcurve As LineItem = myPane.AddCurve("Mem", listMem, Color.DodgerBlue, SymbolType.None)
+        Dim dskcurve As LineItem = myPane.AddCurve("Disk", listDsk, Color.YellowGreen, SymbolType.None)
+
+        ' Just manually control the X axis range so it scrolls continuously
+        ' instead of discrete step-sized jumps
+        myPane.XAxis.Scale.Min = 0
+        myPane.XAxis.Scale.Max = HorizontalScaleSeconds
+        myPane.XAxis.Scale.MinorStep = 1
+        myPane.XAxis.Scale.MajorStep = 5
+        myPane.XAxis.MinorTic.Size = 0
+
+        'myPane.XAxis.Type = AxisType.Date
+        'myPane.XAxis.Scale.Format = "HH:mm:ss"
+
+        'myPane.XAxis.Scale.FontSpec.Size = 20
+        myPane.YAxis.Scale.FontSpec.Size = 15
+        ' hide x scale numbers 
+        myPane.XAxis.Scale.IsVisible = False
+
+        If Me.FixedVerticalScale Then
+            myPane.YAxis.Scale.Min = 0
+            myPane.YAxis.Scale.Max = 100
+        End If
+
+        ' Scale the axes
+        ZedGraphControl1.AxisChange()
+
     End Sub
     Private Sub btnStop_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStop.Click
         If Me.Recording Then
@@ -102,15 +156,16 @@ Public Class PerfMonitor
         End If
 
         ' custom colours
-        Dim cpucolor As Color = Color.FromArgb(0, 255, 0)
-        Dim memColor As Color = Color.FromArgb(0, 255, 0) 'Color.RoyalBlue
-        Dim dskColor As Color = Color.FromArgb(0, 255, 0)
+        Dim cpucolor As Color = Color.Orange 'FromRGB(0, 255, 0)
+        Dim memColor As Color = Color.DodgerBlue 'FromArgb(0, 255, 0) 'Color.RoyalBlue
+        Dim dskColor As Color = Color.YellowGreen 'FromArgb(0, 255, 0)
 
         Dim cpuvalue As Byte
         Try
             cpuvalue = cpu.NextValue
             labelCPU.Text = cpuvalue & "%"
             UpdatePercentGraph(cpuvalue, Pic1, cpucolor)
+
         Catch ex As Exception
             PerfMonTimer.Stop()
             PerfMonTimer.Enabled = False
@@ -159,6 +214,10 @@ Public Class PerfMonitor
 
             UpdatePercentGraph(dsktimeValue, Pic3, dskColor)
         End If
+
+
+        ' test
+        UpdateRealTimeGraph(cpuvalue, memValue, dsktimeValue)
 
         Dim dsktimeValue2 As Integer
         Dim ReadQ2 As Single
@@ -304,6 +363,8 @@ Public Class PerfMonitor
 
         'Free resources
         g.Dispose()
+
+
     End Sub
     Private Sub Pic3_DoubleClick(ByVal sender As Object, ByVal e As System.EventArgs) Handles Pic3.DoubleClick
 
@@ -554,7 +615,7 @@ Public Class PerfMonitor
     ''' <remarks></remarks>
     Private Sub PerfMonitor_Resize(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Resize
 
-        Dim overallWidth As Integer = Panel2.Width
+        Dim overallWidth As Integer = 156 ' Panel2.Width
         Dim PicCount As Integer = 3
         Dim borderSize As Integer = 10
         Dim widthAvailablePerPic = (overallWidth - 1 * borderSize) / PicCount
@@ -579,6 +640,13 @@ Public Class PerfMonitor
         Pic1.Height = PicHeight
         Pic2.Height = PicHeight
         Pic3.Height = PicHeight
+
+
+        'Me.PanelGraph.Width = Me.Width - 8
+        'Me.PanelGraph.Height = Me.Panel2.Height - 25
+        Me.PanelGraph.Width = Me.Width - 170
+        Me.PanelGraph.Height = Me.Panel2.Height - 25
+        Me.PanelGraph.Location = New System.Drawing.Point(156, 0)
 
     End Sub
 
@@ -710,6 +778,93 @@ Public Class PerfMonitor
     Private Sub OpenRecordedDataToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles OpenRecordedDataToolStripMenuItem.Click
         Dim g As New PerformanceGraph.FmGraph
         g.Show()
+    End Sub
+
+
+
+    'test real-time graph
+
+    Private HorizontalScaleSeconds As Integer = 60
+    Private FixedVerticalScale As Boolean = True
+
+    Private Sub BtnGraphSwap_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles BtnGraphSwap.Click
+        If Me.PanelGraph.Visible Then
+            Me.PanelGraph.Visible = False
+            Me.Width = 164
+            Me.BtnGraphSwap.Image = My.Resources.png_16_graph_t
+        Else
+            Me.PanelGraph.Visible = True
+            If Me.Width < 500 Then Me.Width = 500
+            Me.BtnGraphSwap.Image = My.Resources.png_16_barchart_t
+        End If
+    End Sub
+
+    Dim counter As Integer
+    Private Sub UpdateRealTimeGraph(ByVal cpupercent As Double, ByVal mempercent As Double, ByVal DskPercent As Double)
+
+
+        ' Make sure that the curvelist has at least one curve
+        If ZedGraphControl1.GraphPane.CurveList.Count <= 0 Then Return
+
+
+
+        ' Get the first CurveItem in the graph
+        Dim cpucurve As LineItem = ZedGraphControl1.GraphPane.CurveList("CPU")
+        If cpucurve Is Nothing Then Return
+
+        cpucurve.Line.IsSmooth = True
+        cpucurve.Line.SmoothTension = 0.3
+        cpucurve.Line.Width = 1.5
+        cpucurve.Line.IsAntiAlias = True
+
+        ' Get the Memory CurveItem in the graph
+        Dim Memcurve As LineItem = ZedGraphControl1.GraphPane.CurveList("Mem")
+        If Memcurve Is Nothing Then Return
+
+        Memcurve.Line.IsSmooth = True
+        Memcurve.Line.SmoothTension = 0.2
+        Memcurve.Line.Width = 1.5
+        Memcurve.Line.IsAntiAlias = True
+
+        ' Get the Disk CurveItem in the graph
+        Dim Dskcurve As LineItem = ZedGraphControl1.GraphPane.CurveList("Disk")
+        If Dskcurve Is Nothing Then Return
+
+        Dskcurve.Line.IsSmooth = True
+        Dskcurve.Line.SmoothTension = 0.3
+        Dskcurve.Line.Width = 2
+        Dskcurve.Line.IsAntiAlias = True
+
+
+
+        ' Get the PointPairList
+        Dim CPUlist As IPointListEdit = cpucurve.Points
+        If CPUlist Is Nothing Then Return
+        Dim Memlist As IPointListEdit = Memcurve.Points
+        If Memlist Is Nothing Then Return
+        Dim Dsklist As IPointListEdit = Dskcurve.Points
+        If Dsklist Is Nothing Then Return
+
+        ' Time is measured in seconds
+        Dim time As Double = TimeValue.Value
+        counter = counter + time
+
+        CPUlist.Add(counter, cpupercent)
+        Memlist.Add(counter, mempercent)
+        Dsklist.Add(counter, DskPercent)
+
+        ' Keep the X scale at a rolling 60 second interval, with one
+        ' major step between the max X value and the end of the axis
+        Dim xScale As Scale = ZedGraphControl1.GraphPane.XAxis.Scale
+        If counter > xScale.Max - xScale.MajorStep Then
+            xScale.Max = counter + xScale.MajorStep
+            xScale.Min = xScale.Max - HorizontalScaleSeconds
+        End If
+
+        ' Make sure the Y axis is rescaled to accommodate actual data
+        ZedGraphControl1.AxisChange()
+        ' Force a redraw
+        ZedGraphControl1.Invalidate()
     End Sub
 
 End Class

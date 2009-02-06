@@ -56,7 +56,7 @@ Partial Class splashscreen1
         Me.Button1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom
         Me.Button1.FlatAppearance.BorderSize = 0
         Me.Button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat
-        Me.Button1.Location = New System.Drawing.Point(71, 12)
+        Me.Button1.Location = New System.Drawing.Point(68, 12)
         Me.Button1.Name = "Button1"
         Me.Button1.Size = New System.Drawing.Size(49, 36)
         Me.Button1.TabIndex = 2
