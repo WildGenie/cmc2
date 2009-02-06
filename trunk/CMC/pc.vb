@@ -71,6 +71,8 @@ Public Class pc
     Public Property DomainRole() As String
         Get
             Select Case _DomainRoleCode
+                Case Nothing
+                    Return Nothing
                 Case 0
                     Return "Standalone Workstation"
                 Case 1
