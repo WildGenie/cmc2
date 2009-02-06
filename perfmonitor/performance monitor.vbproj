@@ -36,6 +36,10 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Management" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="ZedGraph, Version=5.1.2.878, Culture=neutral, PublicKeyToken=02a83cbd123fcd60, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\PerformanceGraph\ZedGraph.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Import Include="Microsoft.VisualBasic" />
@@ -126,8 +130,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="chart.ico" />
     <Content Include="perfmonitor.ico" />
+    <None Include="Resources\png_16_graph_t.png" />
+    <None Include="Resources\png_16_barchart_t.png" />
     <None Include="Resources\png_perf.png" />
     <None Include="Resources\png_w_perf.png" />
     <None Include="Resources\chart.png" />

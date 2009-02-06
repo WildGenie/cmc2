@@ -25,12 +25,10 @@ Partial Class PerfMonitor
         Me.components = New System.ComponentModel.Container
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(PerfMonitor))
         Me.PerfMonTimer = New System.Windows.Forms.Timer(Me.components)
-        Me.Pic1 = New System.Windows.Forms.PictureBox
         Me.labelCPU = New System.Windows.Forms.Label
         Me.btnStart = New System.Windows.Forms.Button
         Me.btnStop = New System.Windows.Forms.Button
         Me.computername = New System.Windows.Forms.TextBox
-        Me.Pic2 = New System.Windows.Forms.PictureBox
         Me.LabelMem = New System.Windows.Forms.Label
         Me.Panel1 = New System.Windows.Forms.Panel
         Me.btnTogglePanel = New System.Windows.Forms.Button
@@ -42,39 +40,35 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem
         Me.ExitToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem
         Me.Panel2 = New System.Windows.Forms.Panel
+        Me.PanelGraph = New System.Windows.Forms.Panel
+        Me.ZedGraphControl1 = New ZedGraph.ZedGraphControl
         Me.Panel3 = New System.Windows.Forms.Panel
+        Me.BtnGraphSwap = New System.Windows.Forms.Button
         Me.RecordingStatusLabel = New System.Windows.Forms.Label
         Me.RecordingButton = New System.Windows.Forms.Button
         Me.LabelDisk = New System.Windows.Forms.Label
         Me.Pic3 = New System.Windows.Forms.PictureBox
+        Me.Pic1 = New System.Windows.Forms.PictureBox
+        Me.Pic2 = New System.Windows.Forms.PictureBox
         Me.LabelPic3 = New System.Windows.Forms.Label
         Me.labelPic1 = New System.Windows.Forms.Label
         Me.LabelPic2 = New System.Windows.Forms.Label
         Me.ImageList1 = New System.Windows.Forms.ImageList(Me.components)
         Me.ToolTip1 = New System.Windows.Forms.ToolTip(Me.components)
-        CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
-        CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.Panel1.SuspendLayout()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.MenuStrip2.SuspendLayout()
         Me.Panel2.SuspendLayout()
+        Me.PanelGraph.SuspendLayout()
         Me.Panel3.SuspendLayout()
         CType(Me.Pic3, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Pic1, System.ComponentModel.ISupportInitialize).BeginInit()
+        CType(Me.Pic2, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'PerfMonTimer
         '
         Me.PerfMonTimer.Interval = 1000
-        '
-        'Pic1
-        '
-        Me.Pic1.BackColor = System.Drawing.Color.LightGray
-        Me.Pic1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Pic1.Location = New System.Drawing.Point(15, 25)
-        Me.Pic1.Name = "Pic1"
-        Me.Pic1.Size = New System.Drawing.Size(30, 150)
-        Me.Pic1.TabIndex = 1
-        Me.Pic1.TabStop = False
         '
         'labelCPU
         '
@@ -114,16 +108,6 @@ Partial Class PerfMonitor
         Me.computername.Name = "computername"
         Me.computername.Size = New System.Drawing.Size(122, 20)
         Me.computername.TabIndex = 5
-        '
-        'Pic2
-        '
-        Me.Pic2.BackColor = System.Drawing.Color.LightGray
-        Me.Pic2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.Pic2.Location = New System.Drawing.Point(57, 25)
-        Me.Pic2.Name = "Pic2"
-        Me.Pic2.Size = New System.Drawing.Size(34, 150)
-        Me.Pic2.TabIndex = 6
-        Me.Pic2.TabStop = False
         '
         'LabelMem
         '
@@ -197,10 +181,10 @@ Partial Class PerfMonitor
         '
         'OpenRecordedDataToolStripMenuItem
         '
-        Me.OpenRecordedDataToolStripMenuItem.Image = Global.PerfMonitor.My.Resources.Resources.chart
+        Me.OpenRecordedDataToolStripMenuItem.Image = Global.PerfMonitor.My.Resources.Resources.png_w_perf
         Me.OpenRecordedDataToolStripMenuItem.Name = "OpenRecordedDataToolStripMenuItem"
         Me.OpenRecordedDataToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.O), System.Windows.Forms.Keys)
-        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.OpenRecordedDataToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
         Me.OpenRecordedDataToolStripMenuItem.Text = "open recorded data"
         '
         'AlwaysOnTopToolStripMenuItem1
@@ -209,18 +193,19 @@ Partial Class PerfMonitor
         Me.AlwaysOnTopToolStripMenuItem1.Name = "AlwaysOnTopToolStripMenuItem1"
         Me.AlwaysOnTopToolStripMenuItem1.ShortcutKeys = CType(((System.Windows.Forms.Keys.Control Or System.Windows.Forms.Keys.Alt) _
                     Or System.Windows.Forms.Keys.T), System.Windows.Forms.Keys)
-        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(206, 22)
+        Me.AlwaysOnTopToolStripMenuItem1.Size = New System.Drawing.Size(203, 22)
         Me.AlwaysOnTopToolStripMenuItem1.Text = "always on top"
         '
         'ExitToolStripMenuItem
         '
         Me.ExitToolStripMenuItem.Name = "ExitToolStripMenuItem"
         Me.ExitToolStripMenuItem.ShortcutKeys = CType((System.Windows.Forms.Keys.Alt Or System.Windows.Forms.Keys.F4), System.Windows.Forms.Keys)
-        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(206, 22)
+        Me.ExitToolStripMenuItem.Size = New System.Drawing.Size(203, 22)
         Me.ExitToolStripMenuItem.Text = "exit"
         '
         'Panel2
         '
+        Me.Panel2.Controls.Add(Me.PanelGraph)
         Me.Panel2.Controls.Add(Me.Panel3)
         Me.Panel2.Controls.Add(Me.LabelDisk)
         Me.Panel2.Controls.Add(Me.Pic3)
@@ -237,8 +222,34 @@ Partial Class PerfMonitor
         Me.Panel2.Size = New System.Drawing.Size(156, 215)
         Me.Panel2.TabIndex = 10
         '
+        'PanelGraph
+        '
+        Me.PanelGraph.Controls.Add(Me.ZedGraphControl1)
+        Me.PanelGraph.Location = New System.Drawing.Point(31, 9)
+        Me.PanelGraph.Name = "PanelGraph"
+        Me.PanelGraph.Size = New System.Drawing.Size(98, 41)
+        Me.PanelGraph.TabIndex = 16
+        Me.PanelGraph.Visible = False
+        '
+        'ZedGraphControl1
+        '
+        Me.ZedGraphControl1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.ZedGraphControl1.IsEnableHZoom = False
+        Me.ZedGraphControl1.Location = New System.Drawing.Point(0, 0)
+        Me.ZedGraphControl1.Name = "ZedGraphControl1"
+        Me.ZedGraphControl1.ScrollGrace = 0
+        Me.ZedGraphControl1.ScrollMaxX = 0
+        Me.ZedGraphControl1.ScrollMaxY = 0
+        Me.ZedGraphControl1.ScrollMaxY2 = 0
+        Me.ZedGraphControl1.ScrollMinX = 0
+        Me.ZedGraphControl1.ScrollMinY = 0
+        Me.ZedGraphControl1.ScrollMinY2 = 0
+        Me.ZedGraphControl1.Size = New System.Drawing.Size(98, 41)
+        Me.ZedGraphControl1.TabIndex = 0
+        '
         'Panel3
         '
+        Me.Panel3.Controls.Add(Me.BtnGraphSwap)
         Me.Panel3.Controls.Add(Me.RecordingStatusLabel)
         Me.Panel3.Controls.Add(Me.RecordingButton)
         Me.Panel3.Dock = System.Windows.Forms.DockStyle.Bottom
@@ -247,12 +258,24 @@ Partial Class PerfMonitor
         Me.Panel3.Size = New System.Drawing.Size(156, 20)
         Me.Panel3.TabIndex = 15
         '
+        'BtnGraphSwap
+        '
+        Me.BtnGraphSwap.Dock = System.Windows.Forms.DockStyle.Left
+        Me.BtnGraphSwap.FlatStyle = System.Windows.Forms.FlatStyle.Popup
+        Me.BtnGraphSwap.Image = Global.PerfMonitor.My.Resources.Resources.png_16_graph_t
+        Me.BtnGraphSwap.Location = New System.Drawing.Point(0, 0)
+        Me.BtnGraphSwap.Name = "BtnGraphSwap"
+        Me.BtnGraphSwap.Size = New System.Drawing.Size(20, 20)
+        Me.BtnGraphSwap.TabIndex = 17
+        Me.ToolTip1.SetToolTip(Me.BtnGraphSwap, "switch between bar and graph representations")
+        Me.BtnGraphSwap.UseVisualStyleBackColor = True
+        '
         'RecordingStatusLabel
         '
         Me.RecordingStatusLabel.AutoSize = True
         Me.RecordingStatusLabel.Font = New System.Drawing.Font("Arial", 7.0!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RecordingStatusLabel.ForeColor = System.Drawing.Color.IndianRed
-        Me.RecordingStatusLabel.Location = New System.Drawing.Point(87, 4)
+        Me.RecordingStatusLabel.Location = New System.Drawing.Point(104, 4)
         Me.RecordingStatusLabel.Name = "RecordingStatusLabel"
         Me.RecordingStatusLabel.Size = New System.Drawing.Size(51, 13)
         Me.RecordingStatusLabel.TabIndex = 11
@@ -265,13 +288,13 @@ Partial Class PerfMonitor
         Me.RecordingButton.FlatAppearance.BorderSize = 0
         Me.RecordingButton.Font = New System.Drawing.Font("Microsoft Sans Serif", 6.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
         Me.RecordingButton.ImageIndex = 4
-        Me.RecordingButton.Location = New System.Drawing.Point(1, 0)
+        Me.RecordingButton.Location = New System.Drawing.Point(21, 1)
         Me.RecordingButton.Name = "RecordingButton"
         Me.RecordingButton.Size = New System.Drawing.Size(75, 20)
         Me.RecordingButton.TabIndex = 12
         Me.RecordingButton.TabStop = False
         Me.RecordingButton.Text = "start recording"
-        Me.ToolTip1.SetToolTip(Me.RecordingButton, "start recording")
+        Me.ToolTip1.SetToolTip(Me.RecordingButton, "select counters to monitor and record")
         Me.RecordingButton.UseVisualStyleBackColor = True
         '
         'LabelDisk
@@ -295,11 +318,31 @@ Partial Class PerfMonitor
         Me.Pic3.TabStop = False
         Me.ToolTip1.SetToolTip(Me.Pic3, "Double click to select instance")
         '
+        'Pic1
+        '
+        Me.Pic1.BackColor = System.Drawing.Color.LightGray
+        Me.Pic1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Pic1.Location = New System.Drawing.Point(15, 25)
+        Me.Pic1.Name = "Pic1"
+        Me.Pic1.Size = New System.Drawing.Size(30, 150)
+        Me.Pic1.TabIndex = 1
+        Me.Pic1.TabStop = False
+        '
+        'Pic2
+        '
+        Me.Pic2.BackColor = System.Drawing.Color.LightGray
+        Me.Pic2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.Pic2.Location = New System.Drawing.Point(57, 25)
+        Me.Pic2.Name = "Pic2"
+        Me.Pic2.Size = New System.Drawing.Size(34, 150)
+        Me.Pic2.TabIndex = 6
+        Me.Pic2.TabStop = False
+        '
         'LabelPic3
         '
         Me.LabelPic3.AutoSize = True
         Me.LabelPic3.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.LabelPic3.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.LabelPic3.ForeColor = System.Drawing.Color.OliveDrab
         Me.LabelPic3.Location = New System.Drawing.Point(104, 176)
         Me.LabelPic3.Name = "LabelPic3"
         Me.LabelPic3.Size = New System.Drawing.Size(25, 13)
@@ -310,7 +353,7 @@ Partial Class PerfMonitor
         '
         Me.labelPic1.AutoSize = True
         Me.labelPic1.Font = New System.Drawing.Font("Microsoft Sans Serif", 7.5!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(0, Byte))
-        Me.labelPic1.ForeColor = System.Drawing.Color.RoyalBlue
+        Me.labelPic1.ForeColor = System.Drawing.Color.DarkGoldenrod
         Me.labelPic1.Location = New System.Drawing.Point(18, 176)
         Me.labelPic1.Name = "labelPic1"
         Me.labelPic1.Size = New System.Drawing.Size(24, 13)
@@ -351,8 +394,6 @@ Partial Class PerfMonitor
         Me.MinimumSize = New System.Drawing.Size(164, 110)
         Me.Name = "PerfMonitor"
         Me.Text = "PerfMonitor"
-        CType(Me.Pic1, System.ComponentModel.ISupportInitialize).EndInit()
-        CType(Me.Pic2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.Panel1.ResumeLayout(False)
         Me.Panel1.PerformLayout()
         CType(Me.TimeValue, System.ComponentModel.ISupportInitialize).EndInit()
@@ -360,9 +401,12 @@ Partial Class PerfMonitor
         Me.MenuStrip2.PerformLayout()
         Me.Panel2.ResumeLayout(False)
         Me.Panel2.PerformLayout()
+        Me.PanelGraph.ResumeLayout(False)
         Me.Panel3.ResumeLayout(False)
         Me.Panel3.PerformLayout()
         CType(Me.Pic3, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Pic1, System.ComponentModel.ISupportInitialize).EndInit()
+        CType(Me.Pic2, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -394,5 +438,8 @@ Partial Class PerfMonitor
     Friend WithEvents OpenRecordedDataToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents ExitToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents TimeValue As System.Windows.Forms.NumericUpDown
+    Friend WithEvents BtnGraphSwap As System.Windows.Forms.Button
+    Friend WithEvents PanelGraph As System.Windows.Forms.Panel
+    Friend WithEvents ZedGraphControl1 As ZedGraph.ZedGraphControl
 
 End Class
