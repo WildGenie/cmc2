@@ -219,13 +219,9 @@
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </Content>
     <None Include="Resources\application_cascade.png" />
-    <None Include="Resources\email.png" />
-    <None Include="Resources\comment.png" />
-    <None Include="Resources\exclamation.png" />
     <None Include="Resources\application_get.png" />
     <None Include="Resources\arrow_join.png" />
     <None Include="Resources\application_view_tile.png" />
-    <None Include="Resources\bullet_go.png" />
     <None Include="Resources\book_open.png" />
     <None Include="Resources\cancel.png" />
     <None Include="Resources\connect1.png" />
@@ -256,9 +252,6 @@
     <EmbeddedResource Include="ProcInfo.resx">
       <SubType>Designer</SubType>
       <DependentUpon>ProcInfo.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Resources\files\cmc.ico">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </EmbeddedResource>
     <Content Include="Resources\files\regx3.dll" />
     <Content Include="Resources\files\vncviewer.exe" />
@@ -305,20 +298,16 @@
     <None Include="Resources\png_t_cogB_16.png" />
     <None Include="Resources\png_w_tlnt.png" />
     <None Include="Resources\png_w_usrs.png" />
-    <None Include="Resources\png_w_evnt.png" />
     <None Include="Resources\png_w_mgmt.png" />
     <None Include="Resources\png_w_rdp.png" />
     <None Include="Resources\png_w_zen.png" />
     <None Include="Resources\png_w_reg2.png" />
     <None Include="Resources\png_graph.png" />
-    <None Include="Resources\png_t_procperf.png" />
     <None Include="Resources\png_t_usegr_16.png" />
     <None Include="Resources\new_google.png" />
     <None Include="Resources\png_t_user_16.png" />
-    <None Include="Resources\png_w_usrs_32.png" />
     <None Include="Resources\png_t_svc_32.png" />
     <None Include="Resources\png_t_svc_green_32.png" />
-    <None Include="Resources\png_t_nwk.png" />
     <None Include="Resources\png_w_perf.png" />
     <None Include="Resources\png_w_vnc.png" />
     <None Include="Resources\stop.png" />
@@ -327,12 +316,7 @@
     <None Include="Resources\regedit.png" />
     <None Include="Resources\keyboard.png" />
     <None Include="Resources\page_lightning.png" />
-    <None Include="Resources\wrench.png" />
-    <None Include="Resources\package_green.png" />
-    <None Include="Resources\table.png" />
-    <None Include="Resources\wrench_orange.png" />
     <None Include="Resources\page_save.png" />
-    <None Include="Resources\printer.png" />
     <EmbeddedResource Include="Form1.en-GB.resx">
       <SubType>Designer</SubType>
       <DependentUpon>Form1.vb</DependentUpon>
