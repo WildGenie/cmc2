@@ -9,6 +9,7 @@ Public Class wmiConnection
     Private mConnectionResult As String
 
     Public Shared wmiScope As Management.ManagementScope
+    Public Shared ieScope As Management.ManagementScope
     Public Shared RegScope As Management.ManagementScope
     Private mUsername As String
     Private mPassword As String
@@ -63,6 +64,10 @@ Public Class wmiConnection
                        strComputer & "\root\cimv2", wmiConnectionOptions)
             wmiScope.Connect()
 
+            ieScope = New Management.ManagementScope("\\" & _
+                       strComputer & "\root\cimv2\Applications\MicrosoftIE", wmiConnectionOptions)
+            ieScope.Connect()
+
             RegScope = New Management.ManagementScope("\\" & _
                        strComputer & "\root\default:StdRegProv", wmiConnectionOptions)
             RegScope.Connect()
@@ -115,9 +120,26 @@ Public Class wmiConnection
             queryCollection = searcher.Get()
             Return queryCollection
         Catch
-            'MsgBox("Not Connected")
-            'Form1.LostConnection()
-            'Form1.ClearBoxes()
+            Dim queryCollection As Management.ManagementObjectCollection = Nothing
+            Return queryCollection
+        End Try
+
+    End Function
+    Public Function ieQuery(ByVal QueryString As String) As Management.ManagementObjectCollection
+
+        If wmiScope.IsConnected = False Then
+            wmiScope.Connect()
+        End If
+
+        Try
+            Dim query As Management.ObjectQuery
+            query = New Management.ObjectQuery(QueryString)
+            Dim searcher As Management.ManagementObjectSearcher
+            searcher = New Management.ManagementObjectSearcher(ieScope, query)
+            Dim queryCollection As Management.ManagementObjectCollection
+            queryCollection = searcher.Get()
+            Return queryCollection
+        Catch
             Dim queryCollection As Management.ManagementObjectCollection = Nothing
             Return queryCollection
         End Try

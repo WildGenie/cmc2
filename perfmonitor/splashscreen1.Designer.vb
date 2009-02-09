@@ -74,8 +74,10 @@ Partial Class splashscreen1
         Me.MaximizeBox = False
         Me.MinimizeBox = False
         Me.Name = "splashscreen1"
+        Me.ShowIcon = False
         Me.ShowInTaskbar = False
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
+        Me.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
         Me.Text = "Performance Monitor"
         Me.ResumeLayout(False)
         Me.PerformLayout()

@@ -131,6 +131,7 @@
   <ItemGroup>
     <Content Include="reg.ico" />
     <Content Include="remreg.ico" />
+    <None Include="Resources\png_16_reg_t.png" />
     <None Include="Resources\information.png" />
     <None Include="Resources\font_add.png" />
     <None Include="Resources\door_out.png" />
