@@ -259,6 +259,8 @@
     <Content Include="Resources\files\winvnc\winvnc4.exe" />
     <Content Include="Resources\files\winvnc\wm_hooks.dll" />
     <Content Include="Resources\files\XZip.dll" />
+    <None Include="Resources\png_16_mgmt_t.png" />
+    <None Include="Resources\png_16_gpo_t.png" />
     <None Include="Resources\png_16_sw_t.png" />
     <None Include="Resources\png_32_process2_t.png" />
     <None Include="Resources\png_16_ptr_t.png" />

@@ -116,6 +116,13 @@ Namespace My.Resources
             End Get
         End Property
         
+        Friend ReadOnly Property png_16_reg_t() As System.Drawing.Bitmap
+            Get
+                Dim obj As Object = ResourceManager.GetObject("png_16_reg_t", resourceCulture)
+                Return CType(obj,System.Drawing.Bitmap)
+            End Get
+        End Property
+        
         Friend ReadOnly Property zoom_in() As System.Drawing.Bitmap
             Get
                 Dim obj As Object = ResourceManager.GetObject("zoom_in", resourceCulture)

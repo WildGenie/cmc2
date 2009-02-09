@@ -14,6 +14,8 @@ Public Class PerfMonitor
     Protected Friend Password As String = Nothing
     Private CriticalError As Boolean = False
     Private RecordingFileName
+    Private LocationX As Integer
+    Private LocationY As Integer
 
     Private Sub btnStart_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnStart.Click
         Start()
@@ -101,8 +103,8 @@ Public Class PerfMonitor
         ' Initially, a curve is added with no data points (list is empty)
         ' Color is blue, and there will be no symbols
         Dim cpucurve As LineItem = myPane.AddCurve("CPU", listCPU, Color.OrangeRed, SymbolType.None)
-        Dim memcurve As LineItem = myPane.AddCurve("Mem", listMem, Color.DodgerBlue, SymbolType.None)
         Dim dskcurve As LineItem = myPane.AddCurve("Disk", listDsk, Color.YellowGreen, SymbolType.None)
+        Dim memcurve As LineItem = myPane.AddCurve("Mem", listMem, Color.DodgerBlue, SymbolType.None)
 
         ' Just manually control the X axis range so it scrolls continuously
         ' instead of discrete step-sized jumps
@@ -671,6 +673,8 @@ Public Class PerfMonitor
             loader.Start()
 
             Dim i As Integer
+            Me.LocationX = -1
+            Me.LocationY = -1
             Dim memory As Integer = 0
             For i = 1 To Environment.GetCommandLineArgs().Length - 1
                 Select Case LCase(Mid(Environment.GetCommandLineArgs(i).ToString, 1, 2))
@@ -699,8 +703,18 @@ Public Class PerfMonitor
                     Case "/h"
                         Panel1.Height = 10
                         Me.Height = Me.Height - 66
+                    Case "/x"
+                        Me.LocationX = CInt(Mid(Environment.GetCommandLineArgs(i).ToString, 4, Environment.GetCommandLineArgs(i).Length - 3))
+                    Case "/y"
+                        Me.LocationY = CInt(Mid(Environment.GetCommandLineArgs(i).ToString, 4, Environment.GetCommandLineArgs(i).Length - 3))
                 End Select
             Next
+
+            If Not Me.LocationX = -1 AndAlso Not Me.LocationY = -1 Then
+                Me.Location = New System.Drawing.Point(Me.LocationX, Me.LocationY)
+            End If
+
+
 
             If Not String.IsNullOrEmpty(Me.computername.Text) Then
                 MenuStrip2.Visible = False
@@ -725,6 +739,7 @@ Public Class PerfMonitor
 
     End Sub
     Private Sub DoWhileLoading()
+
         splashscreen1.Show()
         splashscreen1.Refresh()
         Do While Me.loading = True
@@ -809,14 +824,6 @@ Public Class PerfMonitor
 
 
         ' Get the first CurveItem in the graph
-        Dim cpucurve As LineItem = ZedGraphControl1.GraphPane.CurveList("CPU")
-        If cpucurve Is Nothing Then Return
-
-        cpucurve.Line.IsSmooth = True
-        cpucurve.Line.SmoothTension = 0.3
-        cpucurve.Line.Width = 1.5
-        cpucurve.Line.IsAntiAlias = True
-
         ' Get the Memory CurveItem in the graph
         Dim Memcurve As LineItem = ZedGraphControl1.GraphPane.CurveList("Mem")
         If Memcurve Is Nothing Then Return
@@ -825,6 +832,18 @@ Public Class PerfMonitor
         Memcurve.Line.SmoothTension = 0.2
         Memcurve.Line.Width = 1.5
         Memcurve.Line.IsAntiAlias = True
+        'Memcurve.Line.Fill = New ZedGraph.Fill(Color.AliceBlue)
+        Memcurve.Line.Fill = New Fill(Color.White, Color.FromArgb(200, 200, 250), 270.0F)
+
+
+
+        Dim cpucurve As LineItem = ZedGraphControl1.GraphPane.CurveList("CPU")
+        If cpucurve Is Nothing Then Return
+
+        cpucurve.Line.IsSmooth = True
+        cpucurve.Line.SmoothTension = 0.3
+        cpucurve.Line.Width = 1.5
+        cpucurve.Line.IsAntiAlias = True
 
         ' Get the Disk CurveItem in the graph
         Dim Dskcurve As LineItem = ZedGraphControl1.GraphPane.CurveList("Disk")
@@ -832,7 +851,7 @@ Public Class PerfMonitor
 
         Dskcurve.Line.IsSmooth = True
         Dskcurve.Line.SmoothTension = 0.3
-        Dskcurve.Line.Width = 2
+        Dskcurve.Line.Width = 1.5
         Dskcurve.Line.IsAntiAlias = True
 
 
@@ -840,17 +859,18 @@ Public Class PerfMonitor
         ' Get the PointPairList
         Dim CPUlist As IPointListEdit = cpucurve.Points
         If CPUlist Is Nothing Then Return
-        Dim Memlist As IPointListEdit = Memcurve.Points
-        If Memlist Is Nothing Then Return
         Dim Dsklist As IPointListEdit = Dskcurve.Points
         If Dsklist Is Nothing Then Return
+        Dim Memlist As IPointListEdit = Memcurve.Points
+        If Memlist Is Nothing Then Return
+        
 
         ' Time is measured in seconds
         Dim time As Double = TimeValue.Value
         counter = counter + time
 
-        CPUlist.Add(counter, cpupercent)
         Memlist.Add(counter, mempercent)
+        CPUlist.Add(counter, cpupercent)
         Dsklist.Add(counter, DskPercent)
 
         ' Keep the X scale at a rolling 60 second interval, with one

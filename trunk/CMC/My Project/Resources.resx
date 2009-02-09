@@ -118,32 +118,26 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
-  <data name="png_16_logclear_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_16_logclear_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_cogB_161" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_cogB_161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_w_rdp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_w_rdp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_t_clear_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_clear_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="application_view_tile" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_view_tile.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_w_evnt_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_w_evnt_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_t_tools_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_tools_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="connect1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connect1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="page_lightning" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_lightning.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="arrow_join" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\arrow_join.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_delete_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_delete_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_28_perf_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_28_perf_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_t_cogB_161" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_cogB_161.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_ref_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_ref_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -151,17 +145,17 @@
   <data name="png_16_log_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_16_log_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_t_svc_green_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_svc_green_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_16_logclear_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_logclear_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="book_open" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\book_open.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_16_netdrv_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_16_netdrv_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_16_sw_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_sw_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_w_vnc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_w_vnc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_nwk1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_nwk1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_16_admgr_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_16_admgr_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -169,8 +163,11 @@
   <data name="png_t_svc_green_321" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_svc_green_321.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_16_ptr_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_16_ptr_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_w_usrs" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_w_usrs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_w_zen" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_w_zen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_28_event_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_28_event_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -178,17 +175,14 @@
   <data name="png_t_svc_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_svc_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application_view_tile" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_view_tile.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\application_cascade.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="page_save" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\page_save.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="application_cascade" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\application_cascade.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_t_copy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_copy_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_pc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_pc_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_16_telnet_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_16_telnet_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -199,17 +193,14 @@
   <data name="png_t_cogB_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_cogB_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="connect4" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\connect4.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_16_ptr_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_ptr_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_t_nwk1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_nwk1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_copy_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_copy_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_28_reg_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_28_reg_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="connect1" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\connect1.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_w_rdp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_w_rdp.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_lck" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_lck.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -217,38 +208,41 @@
   <data name="png_t_arrow_12" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_arrow_12.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_28_rdp_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_rdp_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_w_evnt_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_w_evnt_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="play" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\play.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="connect3" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\connect3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_28_users_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_users_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="regedit" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\regedit.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_t_delete_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_delete_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_16_netdrv_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_netdrv_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_w_usrs" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_w_usrs.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="connect4" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connect4.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_t_userpc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_userpc_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_clear_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_clear_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_user_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_user_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="pause" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\pause.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_t_userpc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_userpc_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_graph" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_graph.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_w_zen" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_w_zen.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="png_16_gpo_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_gpo_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_w_PWR_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_PWR_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -262,8 +256,11 @@
   <data name="png_w_reg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_reg2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\keyboard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="arrow_join" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\arrow_join.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_t_svc_green_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_svc_green_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_t_msg_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_msg_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -277,37 +274,46 @@
   <data name="png_t_share_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_share_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="png_w_vnc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_w_vnc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="png_t_usersG_32" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_t_usersG_32.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_t_pc_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_pc_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="cmc" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\cmc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_28_users_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_28_users_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_t_reg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_t_reg2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="png_28_rdp_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_28_rdp_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_w_mgmt" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_w_mgmt.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="connect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\connect2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="cmc" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cmc.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_t_tools_16" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_tools_16.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="_stop" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\stop.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="cancel" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\cancel.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_t_reg2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_t_reg2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="png_28_zen_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\png_28_zen_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="png_16_sw_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\png_16_sw_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="connect2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connect2.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_28_reg_w" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_28_reg_w.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="connect3" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\connect3.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="keyboard" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\keyboard.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="png_16_mgmt_t" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\png_16_mgmt_t.png;System.Drawing.Bitmap, System.Drawing, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
